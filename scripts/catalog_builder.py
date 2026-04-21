@@ -26,7 +26,20 @@ def get_org_repos():
     while True:
         url = f"https://api.github.com/orgs/{GITHUB_ORG}/repos"
         response = requests.get(url, headers=HEADERS, params={"page": page, "per_page": 100})
+
+        # Check for API errors before processing
+        if response.status_code != 200:
+            print(f"ERROR: GitHub API error: {response.status_code}")
+            print(f"   Response: {response.json()}")
+            print(f"   Org name used: {GITHUB_ORG}")
+            break
+
         data = response.json()
+
+        # Check data is actually a list
+        if not isinstance(data, list):
+            print(f"ERROR: Unexpected API response format: {data}")
+            break
 
         if not data:
             break
