@@ -14,7 +14,7 @@ python scripts/fetch_skills.py --id YOUR-SKILL-ID
 Each entry in `catalog.json` follows this schema:
 ```json
   {
-      "skill_id": "COURSE-ID-SKILL-NAME",
+      "skill_id": "SKILL-NAME",
       "name": "Human Readable Name",
       "tags": ["topic1", "topic2"],
       "python_entry": "logic.py",
