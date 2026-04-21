@@ -1,0 +1,51 @@
+name: Build Skills Catalog
+
+on:
+  # Runs on a schedule — rebuilds catalog every day at midnight
+  schedule:
+    - cron: '0 0 * * *'
+  # Can also be triggered manually
+  workflow_dispatch:
+  # Runs whenever catalog.json or scripts are updated
+  push:
+    paths:
+      - 'catalog.json'
+      - 'scripts/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: Rebuild catalog.json
+
+    steps:
+      # Step 1: Check out the registry repo
+      - name: Checkout skills-registry
+        uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      # Step 2: Set up Python
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      # Step 3: Install dependencies
+      - name: Install dependencies
+        run: pip install python-frontmatter requests
+
+      # Step 4: Run the catalog builder
+      - name: Build catalog
+        run: python scripts/catalog_builder.py
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_ORG: ${{ secrets.ORG_NAME }}
+
+      # Step 5: Commit the updated catalog.json
+      - name: Commit updated catalog
+        run: |
+          git config --global user.name "catalog-bot"
+          git config --global user.email "catalog-bot@skills-registry"
+          git add catalog.json
+          git diff --staged --quiet || git commit -m "Auto-update catalog.json"
+          git push
