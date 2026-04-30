@@ -33,21 +33,25 @@ jobs:
           python-version: '3.11'
 
       # Step 3: Install dependencies
+      # The new builder inlines its frontmatter parser, so it only needs PyYAML
+      # for metadata.yaml + frontmatter parsing, plus requests for the GitHub API.
       - name: Install dependencies
-        run: pip install python-frontmatter requests
+        run: pip install pyyaml requests
 
       # Step 4: Run the catalog builder
+      # Outputs catalog.json and a human-readable build_report.md (status by repo,
+      # itemized validation issues per skill).
       - name: Build catalog
-        run: python scripts/catalog_builder.py
+        run: python scripts/catalog_builder.py --output catalog.json --report build_report.md
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_ORG: ${{ secrets.ORG_NAME }}
 
-      # Step 5: Commit the updated catalog.json
+      # Step 5: Commit the updated catalog.json + build report
       - name: Commit updated catalog
         run: |
           git config --global user.name "catalog-bot"
           git config --global user.email "catalog-bot@skills-registry"
-          git add catalog.json
-          git diff --staged --quiet || git commit -m "Auto-update catalog.json"
+          git add catalog.json build_report.md
+          git diff --staged --quiet || git commit -m "Auto-update catalog.json + build_report.md"
           git push
