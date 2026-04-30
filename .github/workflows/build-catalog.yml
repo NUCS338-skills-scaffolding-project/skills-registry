@@ -24,7 +24,7 @@ jobs:
       - name: Checkout skills-registry
         uses: actions/checkout@v4
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ github.repository_owner }}
 
       # Step 2: Set up Python
       - name: Set up Python
@@ -45,7 +45,7 @@ jobs:
         run: python scripts/catalog_builder.py --output catalog.json --report build_report.md
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_ORG: ${{ secrets.ORG_NAME }}
+          GITHUB_ORG: ${{ github.repository_owner }}
 
       # Step 5: Commit the updated catalog.json + build report
       - name: Commit updated catalog
