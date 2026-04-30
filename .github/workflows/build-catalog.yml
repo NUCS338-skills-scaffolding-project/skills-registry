@@ -19,13 +19,15 @@ jobs:
   build:
     runs-on: ubuntu-latest
     name: Rebuild catalog.json
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
     steps:
       # Step 1: Check out the registry repo
       - name: Checkout skills-registry
         uses: actions/checkout@v4
         with:
-          token: ${{ github.repository_owner }}
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       # Step 2: Set up Python
       - name: Set up Python
