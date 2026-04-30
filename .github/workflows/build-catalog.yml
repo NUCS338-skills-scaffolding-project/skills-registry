@@ -12,6 +12,9 @@ on:
       - 'catalog.json'
       - 'scripts/**'
 
+permissions:
+  contents: write       # read for checkout, write for the auto-commit step
+
 jobs:
   build:
     runs-on: ubuntu-latest
