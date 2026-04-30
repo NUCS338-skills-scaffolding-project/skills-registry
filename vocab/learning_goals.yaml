@@ -1,0 +1,216 @@
+# Mentora — Learning Goals Vocabulary (v0.1)
+#
+# This file is the controlled vocabulary used by the `learning_goal_tags` field
+# in every skill's `skills.md` header. The orchestrator matches an assignment's
+# declared learning goals to skills via this vocabulary.
+#
+# How to use:
+#   In your skills.md frontmatter:
+#     learning_goal_tags:
+#       - "construct-arguments"
+#       - "engage-objections"
+#   Pick 1–4 ids from this file that genuinely describe what your skill helps
+#   the student do.
+#
+# How to add a new tag:
+#   1. Open a PR adding it to the appropriate category below.
+#   2. Include: id (kebab-case), description (one sentence, student-as-subject),
+#      domains (cs / humanities / both), related_skills (skills that target it).
+#   3. Discuss in the project channel before merging — the vocab grows slowly.
+#
+# Conventions:
+#   - id is kebab-case, lowercase, present-tense verb phrase
+#   - description is one sentence, framed as "Student can ..."
+#   - domains is a list, subset of [cs, humanities]
+#   - related_skills are skill_ids drawn from the masterlist; informational only
+
+version: "0.1.0"
+
+learning_goals:
+
+  # =========================================================================
+  # Problem comprehension — understanding what's being asked
+  # =========================================================================
+
+  restate-the-problem:
+    description: "Student can paraphrase a prompt or problem in their own words."
+    domains: [cs, humanities]
+    related_skills: [restate_the_problem, ask_for_paraphrase]
+
+  extract-requirements:
+    description: "Student can list what an assignment or problem demands as deliverables and constraints."
+    domains: [cs, humanities]
+    related_skills: [extract_requirements, identify_deliverables]
+
+  bound-scope:
+    description: "Student can constrain work to what's actually required, avoiding overengineering."
+    domains: [cs, humanities]
+    related_skills: [bound_scope]
+
+  detect-ambiguity:
+    description: "Student can recognize when an instruction or claim is unclear and call it out."
+    domains: [cs, humanities]
+    related_skills: [detect_ambiguity]
+
+  # =========================================================================
+  # Reading & evidence — comprehension of source material
+  # =========================================================================
+
+  identify-evidence:
+    description: "Student can find passages, quotes, or sources that bear on a claim."
+    domains: [humanities]
+    related_skills: [passage_identification]
+
+  interpret-evidence:
+    description: "Student can explain what a piece of evidence shows or implies, beyond surface meaning."
+    domains: [humanities]
+    related_skills: [evidence_interpretation, key_idea_extraction]
+
+  decompose-arguments:
+    description: "Student can break an argument into its constituent claims, premises, and evidence."
+    domains: [humanities]
+    related_skills: [argument_decomposition]
+
+  # =========================================================================
+  # Argument construction — building defensible positions
+  # =========================================================================
+
+  construct-arguments:
+    description: "Student can build a defensible position with claim plus reasoning plus evidence."
+    domains: [humanities]
+    related_skills: [intro_paragraph, idea_organizer]
+
+  engage-objections:
+    description: "Student can entertain and respond to counter-views genuinely, not dismissively."
+    domains: [humanities]
+    related_skills: [counterview_consideration, counter_example]
+
+  verify-claims:
+    description: "Student can check claims against evidence and identify unsupported assertions."
+    domains: [cs, humanities]
+    related_skills: [claim_verification]
+
+  surface-assumptions:
+    description: "Student can identify hidden premises in their own or others' reasoning."
+    domains: [cs, humanities]
+    related_skills: [assumption_surfacing]
+
+  evaluate-reasoning:
+    description: "Student can check the logical structure of an argument for validity and consistency."
+    domains: [cs, humanities]
+    related_skills: [reasoning_evaluation, logical_flow_testing]
+
+  # =========================================================================
+  # Writing craft — paragraph- and essay-level structure
+  # =========================================================================
+
+  structure-paragraphs:
+    description: "Student can organize a paragraph around a single purpose with a clear topic sentence."
+    domains: [humanities]
+    related_skills: [paragraph_purpose_check, intro_paragraph]
+
+  ensure-cohesion:
+    description: "Student can keep ideas flowing across paragraphs without abrupt jumps."
+    domains: [humanities]
+    related_skills: [cohesion_strengthening]
+
+  place-evidence:
+    description: "Student can place evidence where it does the most argumentative work."
+    domains: [humanities]
+    related_skills: [evidence_placement_review]
+
+  # =========================================================================
+  # Problem-solving & design — CS-side analytical moves
+  # =========================================================================
+
+  decompose-problems:
+    description: "Student can break a problem into smaller subproblems with clear interfaces."
+    domains: [cs]
+    related_skills: [decompose_the_problem]
+
+  specify-io:
+    description: "Student can define inputs, outputs, and edge cases for a function or system precisely."
+    domains: [cs]
+    related_skills: [identify_inputs, identify_outputs, decide_return_behavior, identify_valid_vs_invalid_input, build_examples_from_spec]
+
+  choose-data-structures:
+    description: "Student can pick appropriate data representations for the problem and justify the choice."
+    domains: [cs]
+    related_skills: [choose_data_representation]
+
+  compare-strategies:
+    description: "Student can evaluate alternative algorithms or approaches and pick one with justification."
+    domains: [cs]
+    related_skills: [compare_algorithm_strategies, compare_bruteforce_and_improved_approaches]
+
+  recognize-patterns:
+    description: "Student can match a problem to a known solution pattern."
+    domains: [cs]
+    related_skills: [recognize_patterns]
+
+  identify-invariants:
+    description: "Student can identify what stays true throughout a process, loop, or data structure."
+    domains: [cs]
+    related_skills: [identify_invariants]
+
+  # =========================================================================
+  # Implementation & verification — building and checking code
+  # =========================================================================
+
+  trace-execution:
+    description: "Student can walk through code or an algorithm step-by-step, predicting state changes."
+    domains: [cs]
+    related_skills: [trace_an_algo, trace_state_changes, execution_trace]
+
+  handle-edge-cases:
+    description: "Student can reason about and produce tests for boundary and edge cases."
+    domains: [cs]
+    related_skills: [explain_edge_cases, explain_boundary_values, turn_edge_cases_into_tests]
+
+  design-test-plans:
+    description: "Student can write tests that genuinely exercise a specification, not just happy paths."
+    domains: [cs]
+    related_skills: [build_a_unit_test_plan, derive_tests_from_requirements, derive_tests_from_bugs]
+
+  debug-systematically:
+    description: "Student can isolate, reproduce, and narrow the location of bugs methodically."
+    domains: [cs]
+    related_skills: [interpret_error_messages, reproduce_a_bug_conceptually, narrow_the_bug_location, generate_minimal_failing_example, compare_expected_vs_actual]
+
+  analyze-complexity:
+    description: "Student can reason about time and space costs of an algorithm or data structure."
+    domains: [cs]
+    related_skills: [explain_complexity, critique_complexity_analysis]
+
+  # =========================================================================
+  # Code quality & critique — judging existing code
+  # =========================================================================
+
+  evaluate-readability:
+    description: "Student can judge whether code is clear and identify specific clarity problems."
+    domains: [cs]
+    related_skills: [evaluate_readability_on_code, critique_pseudocode, critique_code_conceptually]
+
+  evaluate-modularity:
+    description: "Student can judge separation of concerns and identify code that should be factored."
+    domains: [cs]
+    related_skills: [evaluate_modularity_for_code, separate_Logic_from_I/O, explain_function_responsibilities]
+
+  # =========================================================================
+  # Pedagogy / metacognition — cross-domain learning support
+  # =========================================================================
+
+  reflect-on-progress:
+    description: "Student can summarize what they've learned, what they've accomplished, and what's still unclear."
+    domains: [cs, humanities]
+    related_skills: [summarize_progress, validate_partial_progress]
+
+  request-targeted-help:
+    description: "Student can ask for the kind of help they actually need (a concept, a hint, an example) rather than asking for the answer."
+    domains: [cs, humanities]
+    related_skills: [convert_request_into_safe_help_mode, redirect_direct-solution_requests]
+
+  manage-effort:
+    description: "Student can stay engaged through difficulty and recognize productive struggle versus when to seek help."
+    domains: [cs, humanities]
+    related_skills: [normalize_struggle]

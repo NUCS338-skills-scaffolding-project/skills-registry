@@ -1,0 +1,711 @@
+[
+    {
+        "skill_id": "nautilus-architecture-tutor",
+        "name": "Nautilus Architecture Tutor",
+        "skill_type": "instructional",
+        "tags": [
+            "cs343",
+            "nautilus",
+            "architecture",
+            "guide"
+        ],
+        "python_entry": "logic.py",
+        "source_repo": "cs-343-skills",
+        "source_path": "skills/architecture-tutor/skills.md",
+        "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs-343-skills/tree/main/skills/architecture-tutor/skills.md"
+    },
+    {
+        "skill_id": "c-debugger",
+        "name": "C Debugging Skill",
+        "skill_type": "code",
+        "tags": [
+            "cs343",
+            "c",
+            "coding"
+        ],
+        "python_entry": "logic.py",
+        "source_repo": "cs-343-skills",
+        "source_path": "skills/c-debugger/skills.md",
+        "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs-343-skills/tree/main/skills/c-debugger/skills.md"
+    },
+    {
+        "skill_id": "hand-calculation-tutor",
+        "name": "Hand Calculation Tutor",
+        "skill_type": "instructional",
+        "tags": [
+            "cs343",
+            "calculation",
+            "writing",
+            "tutor"
+        ],
+        "python_entry": "logic.py",
+        "source_repo": "cs-343-skills",
+        "source_path": "skills/hand-calculation-tutor/skills.md",
+        "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs-343-skills/tree/main/skills/hand-calculation-tutor/skills.md"
+    },
+    {
+        "skill_id": "prerequisite-guide",
+        "name": "Course Prerequisite Review",
+        "skill_type": "instructional",
+        "tags": [
+            "cs343",
+            "prerequisite",
+            "writing",
+            "tutor",
+            "review"
+        ],
+        "python_entry": "logic.py",
+        "source_repo": "cs-343-skills",
+        "source_path": "skills/prerequisite-guide/skills.md",
+        "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs-343-skills/tree/main/skills/prerequisite-guide/skills.md"
+    },
+    {
+        "skill_id": "vocabulary-tutor",
+        "name": "Vocabulary Review",
+        "skill_type": "instructional",
+        "tags": [
+            "cs343",
+            "vocabulary",
+            "writing",
+            "tutor",
+            "review"
+        ],
+        "python_entry": "logic.py",
+        "source_repo": "cs-343-skills",
+        "source_path": "skills/vocabulary-tutor/skills.md",
+        "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs-343-skills/tree/main/skills/vocabulary-tutor/skills.md"
+    },
+    {
+        "skill_id": "assumption-validation-skill",
+        "name": "Assumption Validation Skill",
+        "skill_type": "instructional",
+        "tags": [
+            "history",
+            "argument",
+            "assumptions",
+            "revision",
+            "evidence"
+        ],
+        "python_entry": "logic.py",
+        "source_repo": "history-315-skills",
+        "source_path": "skills/assumption-validation-skill/skills.md",
+        "source_url": "https://github.com/NUCS338-skills-scaffolding-project/history-315-skills/tree/main/skills/assumption-validation-skill/skills.md"
+    },
+    {
+        "skill_id": "causal-chains-skill",
+        "name": "Causal Chains Skill",
+        "skill_type": "instructional",
+        "tags": [
+            "history",
+            "causation",
+            "contextualization",
+            "analysis"
+        ],
+        "python_entry": "logic.py",
+        "source_repo": "history-315-skills",
+        "source_path": "skills/causal-chains-skill/skills.md",
+        "source_url": "https://github.com/NUCS338-skills-scaffolding-project/history-315-skills/tree/main/skills/causal-chains-skill/skills.md"
+    },
+    {
+        "skill_id": "cause-effect-between-events-skill",
+        "name": "Cause-Effect Between Events Skill",
+        "skill_type": "instructional",
+        "tags": [
+            "humanities",
+            "cause-effect",
+            "contextualization",
+            "events",
+            "analysis"
+        ],
+        "python_entry": "logic.py",
+        "source_repo": "history-315-skills",
+        "source_path": "skills/cause-effect-between-events-skill/skills.md",
+        "source_url": "https://github.com/NUCS338-skills-scaffolding-project/history-315-skills/tree/main/skills/cause-effect-between-events-skill/skills.md"
+    },
+    {
+        "skill_id": "decomposing-questions-skill",
+        "name": "Decomposing Questions Skill",
+        "skill_type": "instructional",
+        "tags": [
+            "history",
+            "question-analysis",
+            "prewriting",
+            "reading-comprehension"
+        ],
+        "python_entry": "logic.py",
+        "source_repo": "history-315-skills",
+        "source_path": "skills/decomposing-questions-skill/skills.md",
+        "source_url": "https://github.com/NUCS338-skills-scaffolding-project/history-315-skills/tree/main/skills/decomposing-questions-skill/skills.md"
+    },
+    {
+        "skill_id": "skill-name",
+        "name": "Human Readable Name",
+        "skill_type": "instructional",
+        "tags": [
+            "topic1",
+            "topic2"
+        ],
+        "python_entry": "logic.py",
+        "source_repo": "history-315-skills",
+        "source_path": "skills/example-skill/skills.md",
+        "source_url": "https://github.com/NUCS338-skills-scaffolding-project/history-315-skills/tree/main/skills/example-skill/skills.md"
+    },
+    {
+        "skill_id": "identify-misconceptions-skill",
+        "name": "Identify Misconceptions Skill",
+        "skill_type": "instructional",
+        "tags": [
+            "teaching",
+            "pedagogy",
+            "misconceptions",
+            "critical-thinking",
+            "correction"
+        ],
+        "python_entry": "logic.py",
+        "source_repo": "history-315-skills",
+        "source_path": "skills/identify-misconceptions-skill/skills.md",
+        "source_url": "https://github.com/NUCS338-skills-scaffolding-project/history-315-skills/tree/main/skills/identify-misconceptions-skill/skills.md"
+    },
+    {
+        "skill_id": "learning-objective-comparison-skill",
+        "name": "Learning Objective Comparison Skill",
+        "skill_type": "instructional",
+        "tags": [
+            "course-infrastructure",
+            "learning-objectives",
+            "alignment",
+            "assignment-design"
+        ],
+        "python_entry": "logic.py",
+        "source_repo": "history-315-skills",
+        "source_path": "skills/learning-objective-comparison-skill/skills.md",
+        "source_url": "https://github.com/NUCS338-skills-scaffolding-project/history-315-skills/tree/main/skills/learning-objective-comparison-skill/skills.md"
+    },
+    {
+        "skill_id": "lecture-ingestion-skill",
+        "name": "Lecture Ingestion Skill",
+        "skill_type": "instructional",
+        "tags": [
+            "course-infrastructure",
+            "lectures",
+            "timeline",
+            "indexing",
+            "context"
+        ],
+        "python_entry": "logic.py",
+        "source_repo": "history-315-skills",
+        "source_path": "skills/lecture-ingestion-skill/skills.md",
+        "source_url": "https://github.com/NUCS338-skills-scaffolding-project/history-315-skills/tree/main/skills/lecture-ingestion-skill/skills.md"
+    },
+    {
+        "skill_id": "reading-connector-skill",
+        "name": "Reading Connector Skill",
+        "skill_type": "instructional",
+        "tags": [
+            "course-infrastructure",
+            "readings",
+            "thematic-mapping",
+            "lectures",
+            "context"
+        ],
+        "python_entry": "logic.py",
+        "source_repo": "history-315-skills",
+        "source_path": "skills/reading-connector-skill/skills.md",
+        "source_url": "https://github.com/NUCS338-skills-scaffolding-project/history-315-skills/tree/main/skills/reading-connector-skill/skills.md"
+    },
+    {
+        "skill_id": "rubric-feedback-skill",
+        "name": "Rubric Feedback Skill",
+        "skill_type": "instructional",
+        "tags": [
+            "rubric",
+            "instructor-feedback",
+            "assignment-design",
+            "clarity"
+        ],
+        "python_entry": "logic.py",
+        "source_repo": "history-315-skills",
+        "source_path": "skills/rubric-feedback-skill/skills.md",
+        "source_url": "https://github.com/NUCS338-skills-scaffolding-project/history-315-skills/tree/main/skills/rubric-feedback-skill/skills.md"
+    },
+    {
+        "skill_id": "rubric-validation-skill",
+        "name": "Rubric Validation Skill",
+        "skill_type": "instructional",
+        "tags": [
+            "rubric",
+            "revision",
+            "above-and-beyond",
+            "writing-quality"
+        ],
+        "python_entry": "logic.py",
+        "source_repo": "history-315-skills",
+        "source_path": "skills/rubric-validation-skill/skills.md",
+        "source_url": "https://github.com/NUCS338-skills-scaffolding-project/history-315-skills/tree/main/skills/rubric-validation-skill/skills.md"
+    },
+    {
+        "skill_id": "compare-algorithm-strategies",
+        "name": "Compare Algorithm Strategies",
+        "skill_type": "instructional",
+        "tags": [
+            "algorithms",
+            "planning",
+            "understanding",
+            "comparison"
+        ],
+        "python_entry": "logic.py",
+        "source_repo": "cs-348-skills",
+        "source_path": "skills/compare-algorithm-strategies/skills.md",
+        "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs-348-skills/tree/main/skills/compare-algorithm-strategies/skills.md"
+    },
+    {
+        "skill_id": "decompose-the-problem",
+        "name": "Decompose the Problem",
+        "skill_type": "instructional",
+        "tags": [
+            "problem-solving",
+            "lab0",
+            "sorting",
+            "statistics"
+        ],
+        "python_entry": "logic.py",
+        "source_repo": "cs-348-skills",
+        "source_path": "skills/decompose-the-problem/skills.md",
+        "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs-348-skills/tree/main/skills/decompose-the-problem/skills.md"
+    },
+    {
+        "skill_id": "skill-name",
+        "name": "Human Readable Name",
+        "skill_type": "instructional",
+        "tags": [
+            "topic1",
+            "topic2"
+        ],
+        "python_entry": "logic.py",
+        "source_repo": "cs-348-skills",
+        "source_path": "skills/example-skill/skills.md",
+        "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs-348-skills/tree/main/skills/example-skill/skills.md"
+    },
+    {
+        "skill_id": "explain-edge-cases",
+        "name": "Explain Edge Cases",
+        "skill_type": "instructional",
+        "tags": [
+            "testing",
+            "edge-cases",
+            "debugging"
+        ],
+        "python_entry": "logic.py",
+        "source_repo": "cs-348-skills",
+        "source_path": "skills/explain-edge-cases/skills.md",
+        "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs-348-skills/tree/main/skills/explain-edge-cases/skills.md"
+    },
+    {
+        "skill_id": "redirect-direct-solution-requests",
+        "name": "Redirect Direct Solution Requests",
+        "skill_type": "instructional",
+        "tags": [
+            "socratic",
+            "lab0",
+            "code-requests",
+            "redirection"
+        ],
+        "python_entry": "logic.py",
+        "source_repo": "cs-348-skills",
+        "source_path": "skills/redirect-direct-solution-requests/skills.md",
+        "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs-348-skills/tree/main/skills/redirect-direct-solution-requests/skills.md"
+    },
+    {
+        "skill_id": "trace-an-algo",
+        "name": "Trace an Algorithm",
+        "skill_type": "instructional",
+        "tags": [
+            "algorithms",
+            "planning",
+            "understanding"
+        ],
+        "python_entry": "logic.py",
+        "source_repo": "cs-348-skills",
+        "source_path": "skills/trace-an-algo/skills.md",
+        "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs-348-skills/tree/main/skills/trace-an-algo/skills.md"
+    },
+    {
+        "skill_id": "ask-for-example",
+        "name": "Ask for Example",
+        "skill_type": "instructional",
+        "tags": [
+            "pedagogy",
+            "abstract-thinking",
+            "concrete-reasoning",
+            "Socratic"
+        ],
+        "python_entry": "logic.py",
+        "source_repo": "jour-201-1-skills",
+        "source_path": "skills/ask-for-example/skills.md",
+        "source_url": "https://github.com/NUCS338-skills-scaffolding-project/jour-201-1-skills/tree/main/skills/ask-for-example/skills.md"
+    },
+    {
+        "skill_id": "depth-of-interviewing",
+        "name": "Depth of Interviewing",
+        "skill_type": "instructional",
+        "tags": [
+            "journalism",
+            "interviewing",
+            "open-ended-questions",
+            "listening",
+            "quotes"
+        ],
+        "python_entry": "logic.py",
+        "source_repo": "jour-201-1-skills",
+        "source_path": "skills/depth-of-interviewing/skills.md",
+        "source_url": "https://github.com/NUCS338-skills-scaffolding-project/jour-201-1-skills/tree/main/skills/depth-of-interviewing/skills.md"
+    },
+    {
+        "skill_id": "skill-name",
+        "name": "Human Readable Name",
+        "skill_type": "instructional",
+        "tags": [
+            "topic1",
+            "topic2"
+        ],
+        "python_entry": "logic.py",
+        "source_repo": "jour-201-1-skills",
+        "source_path": "skills/example-skill/skills.md",
+        "source_url": "https://github.com/NUCS338-skills-scaffolding-project/jour-201-1-skills/tree/main/skills/example-skill/skills.md"
+    },
+    {
+        "skill_id": "give-structural-hint",
+        "name": "Give Structural Hint",
+        "skill_type": "instructional",
+        "tags": [
+            "pedagogy",
+            "structure",
+            "decomposition",
+            "overwhelmed",
+            "scaffolding"
+        ],
+        "python_entry": "logic.py",
+        "source_repo": "jour-201-1-skills",
+        "source_path": "skills/give-structural-hint/skills.md",
+        "source_url": "https://github.com/NUCS338-skills-scaffolding-project/jour-201-1-skills/tree/main/skills/give-structural-hint/skills.md"
+    },
+    {
+        "skill_id": "news-judgement",
+        "name": "News Judgement",
+        "skill_type": "instructional",
+        "tags": [
+            "journalism",
+            "newsworthiness",
+            "story-angle",
+            "5W1H",
+            "reporting"
+        ],
+        "python_entry": "logic.py",
+        "source_repo": "jour-201-1-skills",
+        "source_path": "skills/news-judgement/skills.md",
+        "source_url": "https://github.com/NUCS338-skills-scaffolding-project/jour-201-1-skills/tree/main/skills/news-judgement/skills.md"
+    },
+    {
+        "skill_id": "paragraph-purpose-check",
+        "name": "Paragraph Purpose Check",
+        "skill_type": "instructional",
+        "tags": [
+            "essay-writing",
+            "structure",
+            "argumentation",
+            "paragraphs"
+        ],
+        "python_entry": "logic.py",
+        "source_repo": "jour-201-1-skills",
+        "source_path": "skills/paragraph-purpose-check/skills.md",
+        "source_url": "https://github.com/NUCS338-skills-scaffolding-project/jour-201-1-skills/tree/main/skills/paragraph-purpose-check/skills.md"
+    },
+    {
+        "skill_id": "argument-decomposition",
+        "name": "Argument Decomposition",
+        "skill_type": "instructional",
+        "tags": [
+            "reading",
+            "argumentation",
+            "analysis"
+        ],
+        "python_entry": "logic.py",
+        "source_repo": "poli_sci-210-skills",
+        "source_path": "skills/argument-decomposition/skills.md",
+        "source_url": "https://github.com/NUCS338-skills-scaffolding-project/poli_sci-210-skills/tree/main/skills/argument-decomposition/skills.md"
+    },
+    {
+        "skill_id": "cohesion-strengthening",
+        "name": "Cohesion Strengthening",
+        "skill_type": "instructional",
+        "tags": [
+            "writing",
+            "transitions",
+            "cohesion"
+        ],
+        "python_entry": "logic.py",
+        "source_repo": "poli_sci-210-skills",
+        "source_path": "skills/cohesion-strengthening/skills.md",
+        "source_url": "https://github.com/NUCS338-skills-scaffolding-project/poli_sci-210-skills/tree/main/skills/cohesion-strengthening/skills.md"
+    },
+    {
+        "skill_id": "compare-two-readings",
+        "name": "Compare Two Readings",
+        "skill_type": "instructional",
+        "tags": [
+            "reading",
+            "synthesis"
+        ],
+        "python_entry": "logic.py",
+        "source_repo": "poli_sci-210-skills",
+        "source_path": "skills/compare-two-readings/skills.md",
+        "source_url": "https://github.com/NUCS338-skills-scaffolding-project/poli_sci-210-skills/tree/main/skills/compare-two-readings/skills.md"
+    },
+    {
+        "skill_id": "connect-concept-to-example",
+        "name": "Connect Concept to Example",
+        "skill_type": "instructional",
+        "tags": [
+            "concepts",
+            "application"
+        ],
+        "python_entry": "logic.py",
+        "source_repo": "poli_sci-210-skills",
+        "source_path": "skills/connect-concept-to-example/skills.md",
+        "source_url": "https://github.com/NUCS338-skills-scaffolding-project/poli_sci-210-skills/tree/main/skills/connect-concept-to-example/skills.md"
+    },
+    {
+        "skill_id": "evaluate-source-credibility",
+        "name": "Evaluate Source Credibility",
+        "skill_type": "instructional",
+        "tags": [
+            "research",
+            "critique"
+        ],
+        "python_entry": "logic.py",
+        "source_repo": "poli_sci-210-skills",
+        "source_path": "skills/evaluate-source-credibility/skills.md",
+        "source_url": "https://github.com/NUCS338-skills-scaffolding-project/poli_sci-210-skills/tree/main/skills/evaluate-source-credibility/skills.md"
+    },
+    {
+        "skill_id": "evidence-placement-review",
+        "name": "Evidence Placement Review",
+        "skill_type": "instructional",
+        "tags": [
+            "writing",
+            "evidence",
+            "structure"
+        ],
+        "python_entry": "logic.py",
+        "source_repo": "poli_sci-210-skills",
+        "source_path": "skills/evidence-placement-review/skills.md",
+        "source_url": "https://github.com/NUCS338-skills-scaffolding-project/poli_sci-210-skills/tree/main/skills/evidence-placement-review/skills.md"
+    },
+    {
+        "skill_id": "skill-name",
+        "name": "Human Readable Name",
+        "skill_type": "instructional",
+        "tags": [
+            "topic1",
+            "topic2"
+        ],
+        "python_entry": "logic.py",
+        "source_repo": "poli_sci-210-skills",
+        "source_path": "skills/example-skill/skills.md",
+        "source_url": "https://github.com/NUCS338-skills-scaffolding-project/poli_sci-210-skills/tree/main/skills/example-skill/skills.md"
+    },
+    {
+        "skill_id": "explain-back-check",
+        "name": "Explain-Back Check",
+        "skill_type": "instructional",
+        "tags": [
+            "concepts",
+            "metacognition"
+        ],
+        "python_entry": "logic.py",
+        "source_repo": "poli_sci-210-skills",
+        "source_path": "skills/explain-back-check/skills.md",
+        "source_url": "https://github.com/NUCS338-skills-scaffolding-project/poli_sci-210-skills/tree/main/skills/explain-back-check/skills.md"
+    },
+    {
+        "skill_id": "generate-study-questions",
+        "name": "Generate Study Questions",
+        "skill_type": "instructional",
+        "tags": [
+            "quiz-prep",
+            "practice"
+        ],
+        "python_entry": "logic.py",
+        "source_repo": "poli_sci-210-skills",
+        "source_path": "skills/generate-study-questions/skills.md",
+        "source_url": "https://github.com/NUCS338-skills-scaffolding-project/poli_sci-210-skills/tree/main/skills/generate-study-questions/skills.md"
+    },
+    {
+        "skill_id": "logical-flow-testing",
+        "name": "Logical Flow Testing",
+        "skill_type": "instructional",
+        "tags": [
+            "writing",
+            "argumentation",
+            "structure"
+        ],
+        "python_entry": "logic.py",
+        "source_repo": "poli_sci-210-skills",
+        "source_path": "skills/logical-flow-testing/skills.md",
+        "source_url": "https://github.com/NUCS338-skills-scaffolding-project/poli_sci-210-skills/tree/main/skills/logical-flow-testing/skills.md"
+    },
+    {
+        "skill_id": "reading-comprehension-check",
+        "name": "Reading Comprehension Check",
+        "skill_type": "instructional",
+        "tags": [
+            "reading",
+            "comprehension"
+        ],
+        "python_entry": "logic.py",
+        "source_repo": "poli_sci-210-skills",
+        "source_path": "skills/reading-comprehension-check/skills.md",
+        "source_url": "https://github.com/NUCS338-skills-scaffolding-project/poli_sci-210-skills/tree/main/skills/reading-comprehension-check/skills.md"
+    },
+    {
+        "skill_id": "reasoning-evaluation",
+        "name": "Reasoning Evaluation",
+        "skill_type": "instructional",
+        "tags": [
+            "writing",
+            "argumentation",
+            "reasoning"
+        ],
+        "python_entry": "logic.py",
+        "source_repo": "poli_sci-210-skills",
+        "source_path": "skills/reasoning-evaluation/skills.md",
+        "source_url": "https://github.com/NUCS338-skills-scaffolding-project/poli_sci-210-skills/tree/main/skills/reasoning-evaluation/skills.md"
+    },
+    {
+        "skill_id": "reflect-on-ai-response",
+        "name": "Reflect on AI Response",
+        "skill_type": "instructional",
+        "tags": [
+            "ai-literacy",
+            "critique"
+        ],
+        "python_entry": "logic.py",
+        "source_repo": "poli_sci-210-skills",
+        "source_path": "skills/reflect-on-ai-response/skills.md",
+        "source_url": "https://github.com/NUCS338-skills-scaffolding-project/poli_sci-210-skills/tree/main/skills/reflect-on-ai-response/skills.md"
+    },
+    {
+        "skill_id": "scaffold-written-assignment",
+        "name": "Scaffold Written Assignment",
+        "skill_type": "instructional",
+        "tags": [
+            "writing",
+            "scaffolding"
+        ],
+        "python_entry": "logic.py",
+        "source_repo": "poli_sci-210-skills",
+        "source_path": "skills/scaffold-written-assignment/skills.md",
+        "source_url": "https://github.com/NUCS338-skills-scaffolding-project/poli_sci-210-skills/tree/main/skills/scaffold-written-assignment/skills.md"
+    },
+    {
+        "skill_id": "tie-reading-to-course",
+        "name": "Tie Reading to Course",
+        "skill_type": "instructional",
+        "tags": [
+            "reading",
+            "synthesis",
+            "metacognition"
+        ],
+        "python_entry": "logic.py",
+        "source_repo": "poli_sci-210-skills",
+        "source_path": "skills/tie-reading-to-course/skills.md",
+        "source_url": "https://github.com/NUCS338-skills-scaffolding-project/poli_sci-210-skills/tree/main/skills/tie-reading-to-course/skills.md"
+    },
+    {
+        "skill_id": "choose-data-representation",
+        "name": "Choose Data Representation",
+        "skill_type": "code",
+        "tags": [
+            "data-structure",
+            "representation",
+            "modeling",
+            "design"
+        ],
+        "python_entry": "logic.py",
+        "source_repo": "cs-214-skills",
+        "source_path": "skills/choose-data-representation/skills.md",
+        "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs-214-skills/tree/main/skills/choose-data-representation/skills.md"
+    },
+    {
+        "skill_id": "skill-name",
+        "name": "Human Readable Name",
+        "skill_type": "instructional",
+        "tags": [
+            "topic1",
+            "topic2"
+        ],
+        "python_entry": "logic.py",
+        "source_repo": "cs-214-skills",
+        "source_path": "skills/example-skill/skills.md",
+        "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs-214-skills/tree/main/skills/example-skill/skills.md"
+    },
+    {
+        "skill_id": "identify-outputs",
+        "name": "Identify Outputs",
+        "skill_type": "code",
+        "tags": [
+            "output",
+            "result",
+            "format"
+        ],
+        "python_entry": "logic.py",
+        "source_repo": "cs-214-skills",
+        "source_path": "skills/identify-outputs/skills.md",
+        "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs-214-skills/tree/main/skills/identify-outputs/skills.md"
+    },
+    {
+        "skill_id": "interpret-error-messages",
+        "name": "Interpret Error Messages",
+        "skill_type": "code",
+        "tags": [
+            "debugging",
+            "errors",
+            "data-structures",
+            "algorithms"
+        ],
+        "python_entry": "logic.py",
+        "source_repo": "cs-214-skills",
+        "source_path": "skills/interpret-error-messages/skills.md",
+        "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs-214-skills/tree/main/skills/interpret-error-messages/skills.md"
+    },
+    {
+        "skill_id": "trace-state-changes",
+        "name": "Trace State Changes",
+        "skill_type": "code",
+        "tags": [
+            "debugging",
+            "tracing",
+            "state",
+            "variables"
+        ],
+        "python_entry": "logic.py",
+        "source_repo": "cs-214-skills",
+        "source_path": "skills/trace-state-changes/skills.md",
+        "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs-214-skills/tree/main/skills/trace-state-changes/skills.md"
+    },
+    {
+        "skill_id": "turn-edge-cases-into-tests",
+        "name": "Turn Edge Cases into Tests",
+        "skill_type": "code",
+        "tags": [
+            "testing",
+            "edge-cases",
+            "robustness",
+            "verification"
+        ],
+        "python_entry": "logic.py",
+        "source_repo": "cs-214-skills",
+        "source_path": "skills/turn-edge-cases-into-tests/skills.md",
+        "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs-214-skills/tree/main/skills/turn-edge-cases-into-tests/skills.md"
+    }
+]
