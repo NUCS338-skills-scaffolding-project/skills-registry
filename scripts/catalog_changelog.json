@@ -1,0 +1,20 @@
+{
+  "generated_at": "2026-05-01T23:28:48.904319+00:00",
+  "previous_hash": "9b5000576912eb5b",
+  "current_hash": "dfb331496f8a48a5",
+  "added": [],
+  "removed": [],
+  "changed": [
+    {
+      "skill_id": "skill-name",
+      "changes": {
+        "status": {
+          "from": "stub",
+          "to": "broken"
+        }
+      }
+    }
+  ],
+  "unchanged_count": 58,
+  "summary": "1 changed"
+}

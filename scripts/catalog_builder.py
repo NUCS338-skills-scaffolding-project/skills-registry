@@ -4,7 +4,7 @@ catalog_builder.py — Mentora skills-registry catalog builder
 
 Walks team repos (locally or via the GitHub API), reads each skills.md,
 parses frontmatter and body sections, validates against the v1 contract,
-and writes catalog.json + a human-readable build report.
+and writes catalog.json + a human-readable build report + a changelog.
 
 See Mentora-Orchestrator-Catalog-Contract-v0.1.md for the full schema.
 
@@ -18,17 +18,21 @@ Usage:
   python catalog_builder.py
   python catalog_builder.py --local /path/to/parent/dir
   python catalog_builder.py --local . --output catalog.json --report build_report.md
+  python catalog_builder.py --strict          # exit 1 if any skill is broken
+  python catalog_builder.py --changelog catalog_changelog.json
 """
 
 from __future__ import annotations
 
 import argparse
 import base64
+import hashlib
 import json
 import os
 import re
 import sys
-from dataclasses import dataclass, field, asdict
+from dataclasses import dataclass, field
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Callable, Optional
 
@@ -63,6 +67,12 @@ VALID_COURSE_TYPES = {"cs", "humanities"}
 SKILL_ID_MAX_LEN = 18
 SKIP_REPOS = {"skills-registry", "skill-standard-template"}
 
+# Catalog schema version — bump according to SCHEMA_COMPAT.md policy:
+#   - Patch: new optional output fields added (backwards-compatible)
+#   - Minor: existing fields renamed (deprecated old name kept for 1 release cycle)
+#   - Major: breaking change — orchestrator must be updated before deploying new registry
+CATALOG_SCHEMA_VERSION = "1.0.0"
+
 INSTRUCTIONAL_BODY_SECTIONS = {
     "description", "when_to_trigger", "tutor_stance", "flow",
     "safe_output_types", "must_avoid", "example_exchange",
@@ -70,6 +80,12 @@ INSTRUCTIONAL_BODY_SECTIONS = {
 CODE_BODY_SECTIONS = {
     "description", "when_to_trigger", "inputs", "outputs", "usage", "notes",
 }
+
+# Fields compared when computing the changelog between two catalog builds
+CHANGELOG_TRACKED_FIELDS = [
+    "status", "version", "name", "skill_type", "stance",
+    "owner_team", "owner_contact", "source_repo",
+]
 
 
 # ---------------------------------------------------------------------------
@@ -175,7 +191,7 @@ def _normalize_heading(h: str) -> str:
     return h.strip("_")
 
 def parse_body_sections(body: str) -> dict:
-    """Split markdown body into sections by ## headings. Returns dict of normalized-key -> raw text."""
+    """Split markdown body into sections by ## headings."""
     sections, current_key, lines = {}, None, []
     for line in body.splitlines():
         m = re.match(r"^##\s+(.+?)\s*$", line)
@@ -213,7 +229,7 @@ def parse_flow(text: str) -> list:
     return steps
 
 def parse_bullet_list(text: str) -> list:
-    """Parse bullet markdown into a list of strings; fall back to paragraph splits."""
+    """Parse bullet markdown into a list of strings."""
     if not text:
         return []
     items = [m.group(1).strip()
@@ -259,7 +275,6 @@ def load_skill_from_path(repo: RepoHandle, skills_md_path: str) -> Optional[dict
         skill["usage_example"] = sections.get("usage") or None
         skill["code_notes"] = sections.get("notes") or None
 
-    # Preserve any extra sections (so nothing is silently dropped)
     known = INSTRUCTIONAL_BODY_SECTIONS | CODE_BODY_SECTIONS
     extras = {k: v for k, v in sections.items() if k not in known}
     if extras:
@@ -290,7 +305,6 @@ def validate_skill(skill: dict) -> tuple:
 
     skill_type = skill.get("skill_type")
 
-    # Frontmatter — required for any ready skill
     if not skill.get("skill_id"):
         issues.append(Issue("error", "skill_id", "missing"))
     if not skill.get("name"):
@@ -313,7 +327,6 @@ def validate_skill(skill: dict) -> tuple:
         issues.append(Issue("warning", "learning_goal_tags",
                              "missing — strongly recommended for orchestrator routing"))
 
-    # Per-type
     if skill_type == "instructional":
         if skill.get("stance") not in VALID_STANCES:
             issues.append(Issue("error", "stance", f"must be one of {sorted(VALID_STANCES)}"))
@@ -344,7 +357,6 @@ def validate_skill(skill: dict) -> tuple:
             if not skill.get(fld):
                 issues.append(Issue("error", label, f"missing — {msg}"))
 
-    # Naming conventions (warn-only)
     sid = skill.get("skill_id") or ""
     if len(sid) > SKILL_ID_MAX_LEN:
         issues.append(Issue("warning", "skill_id",
@@ -354,7 +366,6 @@ def validate_skill(skill: dict) -> tuple:
         issues.append(Issue("warning", "name",
                              "ends with 'Skill' — drop the suffix per Team-Guide §7"))
 
-    # Status decision
     has_errors = any(i.severity == "error" for i in issues)
     if not has_errors:
         return "ready", None, issues
@@ -365,16 +376,20 @@ def validate_skill(skill: dict) -> tuple:
 
 
 # ---------------------------------------------------------------------------
-# Build pass
+# Build pass — with skill_id uniqueness enforcement (B2.3)
 # ---------------------------------------------------------------------------
 
 @dataclass
 class BuildResult:
     catalog: list = field(default_factory=list)
     issues_by_skill: dict = field(default_factory=dict)
+    duplicate_rejections: list = field(default_factory=list)
+
 
 def build_catalog(repos: list) -> BuildResult:
     result = BuildResult()
+    seen_ids: dict[str, str] = {}  # skill_id → first source_repo that claimed it
+
     for repo in repos:
         meta = {}
         meta_text = repo.read("metadata.yaml")
@@ -398,7 +413,39 @@ def build_catalog(repos: list) -> BuildResult:
             skill["owner_team"] = owner_team
             skill["owner_contact"] = owner_contact
 
-            # Code-skill logic.py existence
+            # ── B2.3: skill_id uniqueness enforcement ──────────────────────
+            # First repo to register a slug wins; the second is rejected with
+            # a clear error message surfaced both to stderr and the build report.
+            skill_id = skill.get("skill_id", "")
+            if skill_id and skill_id in seen_ids:
+                first_repo = seen_ids[skill_id]
+                dup_msg = (
+                    f"skill_id '{skill_id}' is already claimed by repo '{first_repo}'. "
+                    f"Repo '{repo.name}' is rejected. "
+                    f"Rename this skill or coordinate with the '{first_repo}' team."
+                )
+                dup_issue = Issue("error", "skill_id", dup_msg)
+                skill["status"] = "broken"
+                skill["status_reason"] = dup_msg
+                result.catalog.append(skill)
+                result.issues_by_skill[f"{repo.name}/{path}"] = [dup_issue]
+                result.duplicate_rejections.append({
+                    "skill_id": skill_id,
+                    "rejected_repo": repo.name,
+                    "rejected_path": path,
+                    "first_claimed_by": first_repo,
+                })
+                print(
+                    f"  ERROR: duplicate skill_id '{skill_id}' — "
+                    f"'{repo.name}' rejected (first claimed by '{first_repo}')",
+                    file=sys.stderr,
+                )
+                continue  # skip normal validation; slug is already taken
+            if skill_id:
+                seen_ids[skill_id] = repo.name
+            # ── end uniqueness block ────────────────────────────────────────
+
+            # Code-skill: logic.py must exist
             extra_issue = None
             if skill.get("skill_type") == "code":
                 py_entry = skill.get("python_entry") or "logic.py"
@@ -418,7 +465,83 @@ def build_catalog(repos: list) -> BuildResult:
             skill["status_reason"] = reason
             result.catalog.append(skill)
             result.issues_by_skill[f"{repo.name}/{path}"] = issues
+
     return result
+
+
+# ---------------------------------------------------------------------------
+# Changelog — diff between two catalog builds (B2.4)
+# ---------------------------------------------------------------------------
+
+def _catalog_hash(catalog: list) -> str:
+    """Stable SHA-256 hash of a catalog for cache-invalidation ETags."""
+    serialised = json.dumps(
+        sorted(catalog, key=lambda s: s.get("skill_id", "")),
+        sort_keys=True, default=str,
+    ).encode()
+    return hashlib.sha256(serialised).hexdigest()[:16]
+
+
+def compute_changelog(old_catalog: list, new_catalog: list) -> dict:
+    """
+    Compute a structured diff between two catalog snapshots.
+
+    The orchestrator consumes catalog_changelog.json on startup or after a
+    registry_dispatch refresh to selectively invalidate its in-memory cache
+    rather than evicting everything on every rebuild.
+
+    Returns a dict:
+      generated_at     ISO-8601 timestamp of this build
+      previous_hash    short hash of the prior catalog (ETag / cache-bust key)
+      current_hash     short hash of the new catalog
+      added            list of skill_ids new in this build
+      removed          list of skill_ids that were present and are now gone
+      changed          list of {skill_id, changes: {field: {from, to}}}
+      unchanged_count  number of skills with no tracked-field changes
+      summary          human-readable one-liner, e.g. "2 added, 1 changed"
+    """
+    old_map = {s["skill_id"]: s for s in old_catalog if s.get("skill_id")}
+    new_map = {s["skill_id"]: s for s in new_catalog if s.get("skill_id")}
+
+    added = sorted(sid for sid in new_map if sid not in old_map)
+    removed = sorted(sid for sid in old_map if sid not in new_map)
+    changed = []
+    unchanged_count = 0
+
+    for sid in sorted(new_map):
+        if sid not in old_map:
+            continue
+        diffs: dict[str, dict] = {}
+        for f in CHANGELOG_TRACKED_FIELDS:
+            old_val = old_map[sid].get(f)
+            new_val = new_map[sid].get(f)
+            if old_val != new_val:
+                diffs[f] = {"from": old_val, "to": new_val}
+        if diffs:
+            changed.append({"skill_id": sid, "changes": diffs})
+        else:
+            unchanged_count += 1
+
+    parts = []
+    if added:
+        parts.append(f"{len(added)} added")
+    if removed:
+        parts.append(f"{len(removed)} removed")
+    if changed:
+        parts.append(f"{len(changed)} changed")
+    if not parts:
+        parts.append("no changes")
+
+    return {
+        "generated_at": datetime.now(timezone.utc).isoformat(),
+        "previous_hash": _catalog_hash(old_catalog),
+        "current_hash": _catalog_hash(new_catalog),
+        "added": added,
+        "removed": removed,
+        "changed": changed,
+        "unchanged_count": unchanged_count,
+        "summary": ", ".join(parts),
+    }
 
 
 # ---------------------------------------------------------------------------
@@ -429,12 +552,31 @@ def render_report(result: BuildResult) -> str:
     lines = ["# Catalog build report", ""]
     counts = {"ready": 0, "stub": 0, "broken": 0}
     for s in result.catalog:
-        counts[s.get("status", "broken")] = counts.get(s.get("status", "broken"), 0) + 1
+        st = s.get("status", "broken")
+        counts[st] = counts.get(st, 0) + 1
     lines.append(
         f"**Total skills:** {len(result.catalog)}  ·  "
         f"ready: {counts['ready']}, stub: {counts['stub']}, broken: {counts['broken']}"
     )
     lines.append("")
+
+    # ── Duplicate rejections callout ─────────────────────────────────────
+    if result.duplicate_rejections:
+        lines += ["## ⚠ Duplicate skill_id rejections", ""]
+        lines.append(
+            "The following skills were **rejected** because their `skill_id` was already "
+            "claimed by another repo. First-claimer wins; the rejected team must rename "
+            "their skill or coordinate with the first claimant."
+        )
+        lines.append("")
+        lines.append("| Rejected repo | `skill_id` | First claimed by |")
+        lines.append("|---|---|---|")
+        for rej in result.duplicate_rejections:
+            lines.append(
+                f"| `{rej['rejected_repo']}` | `{rej['skill_id']}` "
+                f"| `{rej['first_claimed_by']}` |"
+            )
+        lines.append("")
 
     by_repo = {}
     for s in result.catalog:
@@ -485,6 +627,22 @@ def main() -> int:
     ap.add_argument("--local", help="Path to a local directory whose subdirs are team repos")
     ap.add_argument("--output", default="catalog.json", help="Catalog output path")
     ap.add_argument("--report", default="build_report.md", help="Build report output path")
+    ap.add_argument(
+        "--changelog", default="catalog_changelog.json",
+        help="Changelog output path (diff between previous and new catalog)",
+    )
+    ap.add_argument(
+        "--meta", default="catalog_meta.json",
+        help="Catalog metadata output path (schema version, build timestamp, skill counts)",
+    )
+    ap.add_argument(
+        "--strict", action="store_true",
+        help=(
+            "Exit with status 1 if any skill has status 'broken'. "
+            "Enabled automatically on repository_dispatch triggers in CI. "
+            "Use when a team push should be gated on a clean build."
+        ),
+    )
     args = ap.parse_args()
 
     if args.local:
@@ -504,16 +662,78 @@ def main() -> int:
         repos = discover_github_repos(org, token)
 
     print(f"Found {len(repos)} team repo(s)")
+
+    # ── Load previous catalog for changelog computation ────────────────────
+    old_catalog: list = []
+    output_path = Path(args.output)
+    if output_path.exists():
+        try:
+            old_catalog = json.loads(output_path.read_text(encoding="utf-8"))
+            print(f"Loaded previous catalog ({len(old_catalog)} entries) for changelog diff")
+        except Exception as exc:
+            print(f"Warning: could not load previous catalog for diff: {exc}", file=sys.stderr)
+
+    # ── Build ──────────────────────────────────────────────────────────────
     result = build_catalog(repos)
     print(f"Built catalog with {len(result.catalog)} skills")
 
-    Path(args.output).write_text(
-        json.dumps(clean_catalog(result.catalog), indent=2), encoding="utf-8"
-    )
+    cleaned = clean_catalog(result.catalog)
+
+    # ── Write outputs ──────────────────────────────────────────────────────
+    output_path.write_text(json.dumps(cleaned, indent=2), encoding="utf-8")
     print(f"Wrote {args.output}")
 
     Path(args.report).write_text(render_report(result), encoding="utf-8")
     print(f"Wrote {args.report}")
+
+    # ── Write catalog metadata (schema version + build info) ───────────────
+    counts = {"ready": 0, "stub": 0, "broken": 0}
+    for s in cleaned:
+        counts[s.get("status", "broken")] = counts.get(s.get("status", "broken"), 0) + 1
+    meta = {
+        "schema_version": CATALOG_SCHEMA_VERSION,
+        "generated_at": datetime.now(timezone.utc).isoformat(),
+        "catalog_hash": _catalog_hash(cleaned),
+        "total_skills": len(cleaned),
+        "by_status": counts,
+    }
+    Path(args.meta).write_text(json.dumps(meta, indent=2), encoding="utf-8")
+    print(f"Wrote {args.meta}  (schema_version={CATALOG_SCHEMA_VERSION})")
+
+    changelog = compute_changelog(old_catalog, cleaned)
+    Path(args.changelog).write_text(json.dumps(changelog, indent=2), encoding="utf-8")
+    print(f"Wrote {args.changelog}  ({changelog['summary']})")
+
+    # ── Duplicate summary to stderr ────────────────────────────────────────
+    if result.duplicate_rejections:
+        print(
+            f"\nERROR: {len(result.duplicate_rejections)} duplicate skill_id rejection(s):",
+            file=sys.stderr,
+        )
+        for rej in result.duplicate_rejections:
+            print(
+                f"  skill_id='{rej['skill_id']}': "
+                f"'{rej['rejected_repo']}' rejected "
+                f"(first claimed by '{rej['first_claimed_by']}')",
+                file=sys.stderr,
+            )
+
+    # ── B2.2: strict mode exit code ────────────────────────────────────────
+    if args.strict:
+        broken = [s for s in result.catalog if s.get("status") == "broken"]
+        if broken:
+            print(
+                f"\nSTRICT MODE: {len(broken)} broken skill(s) found — exiting with status 1.",
+                file=sys.stderr,
+            )
+            for s in broken:
+                print(
+                    f"  {s.get('source_repo', '?')}/{s.get('source_path', '?')}: "
+                    f"{s.get('status_reason', 'validation failed')}",
+                    file=sys.stderr,
+                )
+            return 1
+
     return 0
 
 

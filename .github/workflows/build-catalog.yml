@@ -1,60 +1,110 @@
 name: Build Skills Catalog
 
 on:
-  # Runs on a schedule — rebuilds catalog every day at midnight
+  # Daily rebuild at midnight UTC — safety net catch-all
   schedule:
     - cron: '0 0 * * *'
-  # Can also be triggered manually
+
+  # Manual trigger from the GitHub UI; optionally run in strict mode
   workflow_dispatch:
-  # Runs whenever catalog.json or scripts are updated
+    inputs:
+      strict:
+        description: 'Fail the build if any skill is broken (strict mode)'
+        required: false
+        default: 'false'
+        type: choice
+        options: ['true', 'false']
+
+  # Self-triggered: re-run when the builder script or vocab changes
   push:
     paths:
-      - 'catalog.json'
       - 'scripts/**'
+      - 'vocab/**'
+
+  # Webhook trigger: team repos call this via a repository_dispatch event
+  # after pushing skills. The event type must be exactly "skills-updated".
+  #
+  # Team repos fire it with a POST to:
+  #   https://api.github.com/repos/<ORG>/skills-registry/dispatches
+  # Body:
+  #   {"event_type": "skills-updated", "client_payload": {"repo": "<team-repo>", "ref": "<git-ref>"}}
+  #
+  # See skill-standard-template/.github/workflows/notify-registry.yml for
+  # the ready-made workflow that does this automatically on push to skills/**.
+  repository_dispatch:
+    types: [skills-updated]
 
 permissions:
-  contents: write       # read for checkout, write for the auto-commit step
+  contents: write       # checkout (read) + auto-commit (write)
 
 jobs:
   build:
     runs-on: ubuntu-latest
     name: Rebuild catalog.json
-    env:
-      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
     steps:
-      # Step 1: Check out the registry repo
+      # ── Traceability: log what triggered this run ─────────────────────────
+      - name: Log trigger source
+        run: |
+          echo "Triggered by: ${{ github.event_name }}"
+          if [ "${{ github.event_name }}" = "repository_dispatch" ]; then
+            echo "  repo:   ${{ github.event.client_payload.repo }}"
+            echo "  ref:    ${{ github.event.client_payload.ref }}"
+            echo "  sender: ${{ github.event.client_payload.sender }}"
+          fi
+
+      # ── Checkout ──────────────────────────────────────────────────────────
       - name: Checkout skills-registry
         uses: actions/checkout@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      # Step 2: Set up Python
+      # ── Python ────────────────────────────────────────────────────────────
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
-      # Step 3: Install dependencies
-      # The new builder inlines its frontmatter parser, so it only needs PyYAML
-      # for metadata.yaml + frontmatter parsing, plus requests for the GitHub API.
       - name: Install dependencies
         run: pip install pyyaml requests
 
-      # Step 4: Run the catalog builder
-      # Outputs catalog.json and a human-readable build_report.md (status by repo,
-      # itemized validation issues per skill).
+      # ── Build ─────────────────────────────────────────────────────────────
+      # strict mode: exit 1 if any skill is broken. Enabled:
+      #   - always on repository_dispatch (team-triggered rebuilds must be clean)
+      #   - when workflow_dispatch input is 'true'
+      #   - never on schedule/push (those are background safety-net runs)
+      - name: Determine strict flag
+        id: strict
+        run: |
+          STRICT="false"
+          if [ "${{ github.event_name }}" = "repository_dispatch" ]; then
+            STRICT="true"
+          elif [ "${{ github.event.inputs.strict }}" = "true" ]; then
+            STRICT="true"
+          fi
+          echo "strict=$STRICT" >> "$GITHUB_OUTPUT"
+
       - name: Build catalog
-        run: python scripts/catalog_builder.py --output catalog.json --report build_report.md
+        run: |
+          STRICT_FLAG=""
+          if [ "${{ steps.strict.outputs.strict }}" = "true" ]; then
+            STRICT_FLAG="--strict"
+          fi
+          python scripts/catalog_builder.py \
+            --output catalog.json \
+            --report build_report.md \
+            --changelog catalog_changelog.json \
+            $STRICT_FLAG
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_ORG: ${{ github.repository_owner }}
 
-      # Step 5: Commit the updated catalog.json + build report
-      - name: Commit updated catalog
+      # ── Commit ────────────────────────────────────────────────────────────
+      - name: Commit updated catalog artifacts
         run: |
           git config --global user.name "catalog-bot"
           git config --global user.email "catalog-bot@skills-registry"
-          git add catalog.json build_report.md
-          git diff --staged --quiet || git commit -m "Auto-update catalog.json + build_report.md"
+          git add catalog.json build_report.md catalog_changelog.json
+          git diff --staged --quiet || git commit -m \
+            "chore: rebuild catalog [trigger=${{ github.event_name }}]"
           git push
