@@ -1154,8 +1154,8 @@
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs-348-skills/tree/main/skills/example-skill/skills.md",
     "owner_team": "CS-348",
     "owner_contact": "",
-    "status": "stub",
-    "status_reason": "missing or empty (must be subset of cs/humanities); must be one of ['hint', 'meta', 'reframe', 'socratic']"
+    "status": "broken",
+    "status_reason": "skill_id 'skill-name' is already claimed by repo 'history-315-skills'. Repo 'cs-348-skills' is rejected. Rename this skill or coordinate with the 'history-315-skills' team."
   },
   {
     "skill_id": "explain-edge-cases",
@@ -1503,8 +1503,8 @@
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/jour-201-1-skills/tree/main/skills/example-skill/skills.md",
     "owner_team": "JOUR-201-1",
     "owner_contact": "karacho2025@u.northwestern.edu",
-    "status": "stub",
-    "status_reason": "missing or empty (must be subset of cs/humanities); must be one of ['hint', 'meta', 'reframe', 'socratic']"
+    "status": "broken",
+    "status_reason": "skill_id 'skill-name' is already claimed by repo 'history-315-skills'. Repo 'jour-201-1-skills' is rejected. Rename this skill or coordinate with the 'history-315-skills' team."
   },
   {
     "skill_id": "give-structural-hint",
@@ -2603,8 +2603,8 @@
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/poli_sci-210-skills/tree/main/skills/example-skill/skills.md",
     "owner_team": "POLISCI-210",
     "owner_contact": "bryanmurray2026@u.northwestern.edu",
-    "status": "stub",
-    "status_reason": "missing or empty (must be subset of cs/humanities); must be one of ['hint', 'meta', 'reframe', 'socratic']"
+    "status": "broken",
+    "status_reason": "skill_id 'skill-name' is already claimed by repo 'history-315-skills'. Repo 'poli_sci-210-skills' is rejected. Rename this skill or coordinate with the 'history-315-skills' team."
   },
   {
     "skill_id": "explain-back-check",
@@ -4104,8 +4104,8 @@
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs-214-skills/tree/main/skills/example-skill/skills.md",
     "owner_team": "CS-214",
     "owner_contact": "",
-    "status": "stub",
-    "status_reason": "missing or empty (must be subset of cs/humanities); must be one of ['hint', 'meta', 'reframe', 'socratic']"
+    "status": "broken",
+    "status_reason": "skill_id 'skill-name' is already claimed by repo 'history-315-skills'. Repo 'cs-214-skills' is rejected. Rename this skill or coordinate with the 'history-315-skills' team."
   },
   {
     "skill_id": "identify-outputs",

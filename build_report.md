@@ -1,17 +1,28 @@
 # Catalog build report
 
-**Total skills:** 63  ·  ready: 0, stub: 63, broken: 0
+**Total skills:** 63  ·  ready: 0, stub: 59, broken: 4
+
+## ⚠ Duplicate skill_id rejections
+
+The following skills were **rejected** because their `skill_id` was already claimed by another repo. First-claimer wins; the rejected team must rename their skill or coordinate with the first claimant.
+
+| Rejected repo | `skill_id` | First claimed by |
+|---|---|---|
+| `cs-348-skills` | `skill-name` | `history-315-skills` |
+| `jour-201-1-skills` | `skill-name` | `history-315-skills` |
+| `poli_sci-210-skills` | `skill-name` | `history-315-skills` |
+| `cs-214-skills` | `skill-name` | `history-315-skills` |
 
 ## By repo
 
 | Repo | Total | Ready | Stub | Broken |
 |------|------:|------:|-----:|-------:|
-| `cs-214-skills` | 6 | 0 | 6 | 0 |
+| `cs-214-skills` | 6 | 0 | 5 | 1 |
 | `cs-343-skills` | 5 | 0 | 5 | 0 |
-| `cs-348-skills` | 6 | 0 | 6 | 0 |
+| `cs-348-skills` | 6 | 0 | 5 | 1 |
 | `history-315-skills` | 11 | 0 | 11 | 0 |
-| `jour-201-1-skills` | 6 | 0 | 6 | 0 |
-| `poli_sci-210-skills` | 29 | 0 | 29 | 0 |
+| `jour-201-1-skills` | 6 | 0 | 5 | 1 |
+| `poli_sci-210-skills` | 29 | 0 | 28 | 1 |
 
 ## Issues
 
@@ -21,9 +32,7 @@
 - **warn** [`skill_id`] length 26 > 18 chars — see Team-Guide §7
 
 ### `cs-214-skills/skills/example-skill/skills.md`
-- **ERROR** [`course_types`] missing or empty (must be subset of cs/humanities)
-- **warn** [`learning_goal_tags`] missing — strongly recommended for orchestrator routing
-- **ERROR** [`stance`] must be one of ['hint', 'meta', 'reframe', 'socratic']
+- **ERROR** [`skill_id`] skill_id 'skill-name' is already claimed by repo 'history-315-skills'. Repo 'cs-214-skills' is rejected. Rename this skill or coordinate with the 'history-315-skills' team.
 
 ### `cs-214-skills/skills/identify-outputs/skills.md`
 - **ERROR** [`course_types`] missing or empty (must be subset of cs/humanities)
@@ -84,9 +93,7 @@
 - **warn** [`skill_id`] length 21 > 18 chars — see Team-Guide §7
 
 ### `cs-348-skills/skills/example-skill/skills.md`
-- **ERROR** [`course_types`] missing or empty (must be subset of cs/humanities)
-- **warn** [`learning_goal_tags`] missing — strongly recommended for orchestrator routing
-- **ERROR** [`stance`] must be one of ['hint', 'meta', 'reframe', 'socratic']
+- **ERROR** [`skill_id`] skill_id 'skill-name' is already claimed by repo 'history-315-skills'. Repo 'cs-348-skills' is rejected. Rename this skill or coordinate with the 'history-315-skills' team.
 
 ### `cs-348-skills/skills/explain-edge-cases/skills.md`
 - **ERROR** [`course_types`] missing or empty (must be subset of cs/humanities)
@@ -191,9 +198,7 @@
 - **warn** [`skill_id`] length 21 > 18 chars — see Team-Guide §7
 
 ### `jour-201-1-skills/skills/example-skill/skills.md`
-- **ERROR** [`course_types`] missing or empty (must be subset of cs/humanities)
-- **warn** [`learning_goal_tags`] missing — strongly recommended for orchestrator routing
-- **ERROR** [`stance`] must be one of ['hint', 'meta', 'reframe', 'socratic']
+- **ERROR** [`skill_id`] skill_id 'skill-name' is already claimed by repo 'history-315-skills'. Repo 'jour-201-1-skills' is rejected. Rename this skill or coordinate with the 'history-315-skills' team.
 
 ### `jour-201-1-skills/skills/give-structural-hint/skills.md`
 - **ERROR** [`course_types`] missing or empty (must be subset of cs/humanities)
@@ -271,9 +276,7 @@
 - **warn** [`skill_id`] length 25 > 18 chars — see Team-Guide §7
 
 ### `poli_sci-210-skills/skills/example-skill/skills.md`
-- **ERROR** [`course_types`] missing or empty (must be subset of cs/humanities)
-- **warn** [`learning_goal_tags`] missing — strongly recommended for orchestrator routing
-- **ERROR** [`stance`] must be one of ['hint', 'meta', 'reframe', 'socratic']
+- **ERROR** [`skill_id`] skill_id 'skill-name' is already claimed by repo 'history-315-skills'. Repo 'poli_sci-210-skills' is rejected. Rename this skill or coordinate with the 'history-315-skills' team.
 
 ### `poli_sci-210-skills/skills/explain-back-check/skills.md`
 - **ERROR** [`course_types`] missing or empty (must be subset of cs/humanities)
