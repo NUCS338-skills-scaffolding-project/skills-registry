@@ -1,312 +1,5 @@
 [
   {
-    "skill_id": "debug-first-step",
-    "name": "Debug First Step",
-    "skill_type": "instructional",
-    "stance": "hint",
-    "status": "ready",
-    "tags": [
-      "debugging",
-      "cs",
-      "systematic",
-      "bugs",
-      "errors",
-      "error",
-      "bug",
-      "compile",
-      "runtime",
-      "code"
-    ],
-    "course_types": [
-      "cs"
-    ],
-    "learning_goal_tags": [
-      "debug-systematically",
-      "trace-execution"
-    ],
-    "trigger_signals": [
-      "student-has-compile-error",
-      "student-jumping-to-rewrite",
-      "student-googling-error",
-      "student-has-runtime-error",
-      "student-output-wrong"
-    ],
-    "chip_icon": "\ud83d\udc1b",
-    "version": "0.1.0",
-    "description": "Gives students a concrete directional hint for their first move when they encounter a bug. Rather than letting students thrash \u2014 randomly modifying code, Googling the error message wholesale, or considering a full rewrite \u2014 this skill surfaces the one action most likely to isolate the problem: reading and localizing the error before touching anything.",
-    "trigger_summary": "Student has an error (compile, runtime, or wrong output). Student's first instinct is to rewrite. Student is searching for the error message without reading it first. Student says they can't find the bug.",
-    "tutor_stance_rules": [
-      "Give one clear first-action hint \u2014 don't leave the student with only a question when they are genuinely stuck",
-      "The hint should point at process (what to do next), never at the solution (what the bug is)",
-      "After giving the hint, ask the student what they find \u2014 keep them in the driver's seat",
-      "Never diagnose the bug for the student; the hint opens the door, the student walks through",
-      "If the student has already done the hinted step, acknowledge it and give the next systematic step"
-    ],
-    "flow": [
-      {
-        "step": 1,
-        "title": "Read the error exactly",
-        "description": "Prompt the student to read the full error message out loud or paste it. Ask: 'What does the error say, word for word?'"
-      },
-      {
-        "step": 2,
-        "title": "Locate the line",
-        "description": "If the error gives a line number or traceback, direct the student there. Ask what that line does."
-      },
-      {
-        "step": 3,
-        "title": "Form a hypothesis before touching code",
-        "description": "Ask the student: 'What do you think is wrong on that line?' Even a wrong hypothesis is more productive than a random edit."
-      },
-      {
-        "step": 4,
-        "title": "Make one change and re-run",
-        "description": "Suggest the student make one targeted change based on the hypothesis, then re-run. Ask them to predict what will happen."
-      }
-    ],
-    "safe_outputs": [
-      "A single concrete next-action hint",
-      "Questions that prompt the student to look at a specific place",
-      "'What do you predict will happen?' prompts before a run"
-    ],
-    "must_avoid": [
-      "Diagnosing the bug or pointing to the exact cause",
-      "Giving multiple steps at once",
-      "Suggesting a rewrite before the bug is isolated"
-    ],
-    "example_exchange": "> **Student:** \"My code doesn't work. I've been looking at it for 20 minutes. Should I just start over?\"\n>\n> **Tutor:** \"Hold off on the rewrite for now. First step: paste the exact error message here. We'll read what it's actually telling us before we change anything.\"",
-    "source_repo": "skills-orchestrator",
-    "owner_team": "CS338"
-  },
-  {
-    "skill_id": "bound-scope",
-    "name": "Bound Scope",
-    "skill_type": "instructional",
-    "stance": "socratic",
-    "status": "ready",
-    "tags": [
-      "scope",
-      "requirements",
-      "overengineering",
-      "planning",
-      "assignment",
-      "features",
-      "prompt"
-    ],
-    "course_types": [
-      "cs",
-      "humanities"
-    ],
-    "learning_goal_tags": [
-      "bound-scope",
-      "extract-requirements"
-    ],
-    "trigger_signals": [
-      "student-adding-unasked-features",
-      "student-gold-plating",
-      "student-overengineering",
-      "student-expanding-scope"
-    ],
-    "chip_icon": "\ud83d\udd0d",
-    "version": "0.1.0",
-    "description": "Helps the student stay within the boundaries of what the assignment or problem actually asks for. When a student begins adding features, optimizations, or considerations that go beyond the stated requirements, this skill surfaces the mismatch through targeted questions rather than direct correction.",
-    "trigger_summary": "Student lists features not mentioned in the prompt. Student proposes a solution more complex than required. Student asks whether to add something clearly outside assignment scope.",
-    "tutor_stance_rules": [
-      "Never tell the student their idea is bad or wrong \u2014 redirect with curiosity",
-      "Always ask the student to re-read the relevant part of the prompt before evaluating the extra feature",
-      "Surface the mismatch as a question: 'The prompt says X \u2014 where does it mention Y?'",
-      "Do not say 'you're overengineering this' \u2014 that is a conclusion the student must reach themselves",
-      "If the student insists a feature is required, ask them to point to where in the prompt it says so"
-    ],
-    "flow": [
-      {
-        "step": 1,
-        "title": "Anchor to the prompt",
-        "description": "Ask the student to state, in their own words, exactly what the assignment is asking them to produce."
-      },
-      {
-        "step": 2,
-        "title": "Surface the mismatch",
-        "description": "Name the specific extra element and ask which part of the prompt calls for it. Keep the question neutral."
-      },
-      {
-        "step": 3,
-        "title": "Let the student decide",
-        "description": "After the mismatch is visible, ask the student what they want to do: scope it out or make a case for why it's needed."
-      },
-      {
-        "step": 4,
-        "title": "Confirm the revised plan",
-        "description": "Once the student has scoped their plan, briefly confirm what they're committing to and ask what the first step is."
-      }
-    ],
-    "safe_outputs": [
-      "Questions that reference specific language from the prompt",
-      "Neutral observations",
-      "Invitations to re-read the prompt"
-    ],
-    "must_avoid": [
-      "Telling the student the extra feature is a bad idea on its merits",
-      "Solving the scoping decision for them by saying 'just do the minimum'"
-    ],
-    "example_exchange": "> **Student:** \"I'm going to implement the sort function, add a GUI, and maybe a database.\"\n>\n> **Tutor:** \"What does the assignment prompt say the deliverable actually is?\"",
-    "source_repo": "skills-orchestrator",
-    "owner_team": "CS338"
-  },
-  {
-    "skill_id": "normalize-struggle",
-    "name": "Normalize Struggle",
-    "skill_type": "instructional",
-    "stance": "meta",
-    "status": "ready",
-    "tags": [
-      "metacognition",
-      "frustration",
-      "persistence",
-      "wellbeing",
-      "stuck",
-      "help",
-      "give",
-      "up",
-      "hard",
-      "struggle"
-    ],
-    "course_types": [
-      "cs",
-      "humanities"
-    ],
-    "learning_goal_tags": [
-      "manage-effort",
-      "reflect-on-progress"
-    ],
-    "trigger_signals": [
-      "student-says-give-up",
-      "student-expresses-frustration",
-      "student-says-too-hard",
-      "student-extended-silence",
-      "student-requests-answer-directly"
-    ],
-    "chip_icon": "\ud83d\udcaa",
-    "version": "0.1.0",
-    "description": "Resets a student's emotional state when frustration, self-doubt, or learned helplessness threatens to end the learning conversation. Rather than bypassing the difficulty by giving an answer, this skill shifts the frame of the conversation \u2014 validating the struggle, naming it as normal, and redirecting back to productive engagement with one small concrete action.",
-    "trigger_summary": "Student explicitly says they want to give up. Student expresses sustained frustration. Student makes repeated requests for the direct answer. Student's tone shifts from engaged to defeated.",
-    "tutor_stance_rules": [
-      "Acknowledge what the student said before redirecting \u2014 do not skip past the emotion",
-      "Keep the acknowledgment brief and non-clinical: one sentence, then a reframe",
-      "Do not say 'don't worry' or 'it's easy' \u2014 both are dismissive",
-      "Do not give the answer to relieve the student's frustration",
-      "Offer one tiny, achievable next action that makes progress feel possible"
-    ],
-    "flow": [
-      {
-        "step": 1,
-        "title": "Acknowledge, briefly",
-        "description": "Name what the student said without amplifying it. One sentence, then pause."
-      },
-      {
-        "step": 2,
-        "title": "Normalize",
-        "description": "Tell the student that struggle at this point is expected. Specific is better than generic."
-      },
-      {
-        "step": 3,
-        "title": "Zoom out on progress",
-        "description": "Ask the student what they've already figured out. Even partial progress is real progress."
-      },
-      {
-        "step": 4,
-        "title": "Offer one small action",
-        "description": "Give one tiny, concrete next move to break the paralysis, not solve the problem."
-      }
-    ],
-    "safe_outputs": [
-      "A single acknowledgment sentence",
-      "Normalizing statements grounded in specifics",
-      "Questions that surface what the student has already accomplished",
-      "One small, concrete, immediately actionable suggestion"
-    ],
-    "must_avoid": [
-      "Giving the answer to end the discomfort",
-      "Dismissive reassurance",
-      "Multiple action items",
-      "Lengthy pep talks"
-    ],
-    "example_exchange": "> **Student:** \"I've been stuck for an hour. I literally can't do this. Can you just tell me the answer?\"\n>\n> **Tutor:** \"An hour on a hard problem is rough \u2014 I hear you. What have you figured out so far, even partially?\"",
-    "source_repo": "skills-orchestrator",
-    "owner_team": "CS338"
-  },
-  {
-    "skill_id": "rubric-scorer",
-    "name": "Rubric Scorer",
-    "skill_type": "code",
-    "status": "ready",
-    "tags": [
-      "rubric",
-      "scoring",
-      "feedback",
-      "assessment",
-      "writing",
-      "cs",
-      "draft",
-      "essay",
-      "criteria"
-    ],
-    "course_types": [
-      "cs",
-      "humanities"
-    ],
-    "learning_goal_tags": [
-      "verify-claims",
-      "evaluate-reasoning"
-    ],
-    "trigger_signals": [
-      "student-submitted-draft",
-      "student-requesting-feedback",
-      "rubric-check-needed"
-    ],
-    "chip_icon": "\ud83d\udccb",
-    "version": "0.1.0",
-    "python_entry": "logic.py",
-    "description": "Given a piece of student text and a list of rubric criteria, scores which criteria are demonstrably met and which are missing. Returns a structured result with met/missed lists, a 0-1 score, and a short summary.",
-    "source_repo": "skills-orchestrator",
-    "owner_team": "CS338"
-  },
-  {
-    "skill_id": "edge-case-gen",
-    "name": "Edge Case Generator",
-    "skill_type": "code",
-    "status": "ready",
-    "tags": [
-      "testing",
-      "edge-cases",
-      "cs",
-      "unit-tests",
-      "verification",
-      "test",
-      "cases",
-      "pipeline"
-    ],
-    "course_types": [
-      "cs"
-    ],
-    "learning_goal_tags": [
-      "handle-edge-cases",
-      "design-test-plans"
-    ],
-    "trigger_signals": [
-      "student-writing-tests",
-      "student-missing-edge-cases",
-      "student-only-happy-path",
-      "student-needs-test-ideas"
-    ],
-    "chip_icon": "\ud83e\uddea",
-    "version": "0.1.0",
-    "python_entry": "logic.py",
-    "description": "Given a Python function signature and optional docstring, generates a structured list of edge cases worth testing. Uses heuristic rules to surface boundary values, empty inputs, type extremes, and error-producing inputs.",
-    "source_repo": "skills-orchestrator",
-    "owner_team": "CS338"
-  },
-  {
     "skill_id": "nautilus-architecture-tutor",
     "name": "Nautilus Architecture Tutor",
     "skill_type": "instructional",
@@ -980,6 +673,76 @@
     "status_reason": "missing or empty (must be subset of cs/humanities); must be one of ['hint', 'meta', 'reframe', 'socratic']"
   },
   {
+    "skill_id": "ask-debug-aloud",
+    "name": "Ask Student to Debug Aloud",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "course_types": [
+      "cs"
+    ],
+    "learning_goal_tags": [
+      "debug-systematically",
+      "trace-execution",
+      "evaluate-reasoning"
+    ],
+    "trigger_signals": [
+      "my code has a bug and I don't know where it is",
+      "this isn't working and I don't know why",
+      "I'm getting wrong output but I can't figure out what's wrong"
+    ],
+    "description": "When a student reports a bug, this skill asks them to narrate their debugging process out loud before any code is examined.\nBy walking through what they expected, what actually happened, and what they've already ruled out, students often locate the bug themselves \u2014 and build the habit of systematic debugging along the way.",
+    "trigger_summary": "- Student says their code has a bug or isn't working\n- Student is getting wrong output or failing test cases and doesn't know why\n- Student is stuck on a bug and jumps straight to \"can you help me find it\"\n\n---",
+    "tutor_stance_rules": [
+      "The tutor does not look at the code and find the bug. It does not run the code mentally and report back. It does not ask \"can you paste your code?\" as the opening move.\nThe tutor only asks one question at a time. Each question is designed to get the student to narrow the problem space themselves \u2014 not to collect information for the tutor to diagnose."
+    ],
+    "flow": [
+      {
+        "step": 1,
+        "title": "Ask what they expected",
+        "description": "Before anything else, ask the student what they expected the code to do \u2014 not what it did, but what they thought it would do. This anchors the conversation in their mental model rather than the symptom."
+      },
+      {
+        "step": 2,
+        "title": "Ask what actually happened",
+        "description": "Once the student has stated their expectation, ask what the code actually did or returned instead. The student has now articulated a discrepancy, which is the real starting point for debugging."
+      },
+      {
+        "step": 3,
+        "title": "Ask what they've already checked",
+        "description": "Ask the student what they've already tried or ruled out. This prevents re-covering ground, reveals how systematic their process has been, and nudges them toward thinking about what's left to check."
+      },
+      {
+        "step": 4,
+        "title": "Narrow with one targeted question",
+        "description": "Based on what the student has described, ask a question that points toward one specific place in their reasoning \u2014 not in the code, but in their understanding of what should happen. For example: \"given what you said about how BFS expands nodes, at what point would the path length go wrong?\""
+      }
+    ],
+    "safe_outputs": [
+      "Questions asking the student to state their expectation before describing the bug",
+      "Questions asking the student to describe the difference between expected and actual behavior",
+      "Questions asking what the student has already ruled out",
+      "Narrow questions that ask the student to locate the discrepancy in their own reasoning"
+    ],
+    "must_avoid": [
+      "Asking to see the code as the first or second move",
+      "Identifying or naming the bug at any point",
+      "Running through the code mentally and reporting what's wrong",
+      "Asking more than one question at a time",
+      "Suggesting what to check without the student having narrowed it down first"
+    ],
+    "example_exchange": "> **Student:** \"My value iteration isn't converging right \u2014 the values are wrong and I don't know what's happening.\"\n>\n> **Tutor:** \"Okay, before we look at anything \u2014 what did you expect the values to look like after the first full iteration?\"\n\n> **Student:** \"I thought the states near the goal would get higher values first, and it would spread backward.\"\n>\n> **Tutor:** \"Got it. And what are you actually seeing \u2014 are the values not spreading, spreading in the wrong direction, or something else?\"\n\n> **Student:** \"They're spreading but way too slowly, and some states aren't updating at all.\"\n>\n> **Tutor:** \"Interesting. Have you checked whether every state is actually being visited during each iteration, or is it possible some are getting skipped?\"",
+    "extra_sections": {
+      "skill_type": "- **Type:** instructional\n- **Course Focus:** CS"
+    },
+    "source_repo": "cs-348-skills",
+    "source_path": "skills/ask-debug-aloud/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs-348-skills/tree/main/skills/ask-debug-aloud/skills.md",
+    "owner_team": "CS-348",
+    "owner_contact": "",
+    "status": "stub",
+    "status_reason": "missing or empty"
+  },
+  {
     "skill_id": "compare-algorithm-strategies",
     "name": "Compare Algorithm Strategies",
     "skill_type": "instructional",
@@ -1037,16 +800,97 @@
     "status_reason": "missing or empty (must be subset of cs/humanities); must be one of ['hint', 'meta', 'reframe', 'socratic']"
   },
   {
-    "skill_id": "decompose-the-problem",
+    "skill_id": "crit-code-concept",
+    "name": "Critique Code Conceptually",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "course_types": [
+      "cs"
+    ],
+    "learning_goal_tags": [
+      "trace-execution",
+      "identify-invariants",
+      "surface-assumptions"
+    ],
+    "trigger_signals": [
+      "my code works but I don't know why",
+      "it passes the tests but I'm not sure what this part is doing",
+      "code is correct but the logic is unclear to me"
+    ],
+    "description": "When a student's code runs correctly but they can't explain why, this skill pushes past the working result and asks the student to articulate what each piece actually does.\nThe goal is to catch shallow pattern-matching \u2014 where the student got the right answer by imitation \u2014 and build real understanding of the algorithm.",
+    "trigger_summary": "- Student shares working code but says they're not sure why it works\n- Student can't explain what a specific part of their code is doing or what it returns\n- Student says something like \"I just followed the pattern\" or \"I copied the structure from class\"\n\n---",
+    "tutor_stance_rules": [
+      "The tutor does not praise the result or treat \"it works\" as the end goal. A working implementation with no conceptual understanding is not a success \u2014 it's a starting point.\nEvery response is a question that makes the student reason through one specific piece of their code: a return value, a loop condition, a data structure choice.\nNever suggest that the code needs to be changed. The goal is understanding, not improvement."
+    ],
+    "flow": [
+      {
+        "step": 1,
+        "title": "Don't acknowledge correctness as the goal",
+        "description": "Skip \"great, it works!\" entirely. Treat the working code as the baseline and move straight to understanding.\nPick the most conceptually loaded part of the student's code \u2014 a loop, a recursive call, a pruning condition \u2014 and ask the student to explain it."
+      },
+      {
+        "step": 2,
+        "title": "Ask one narrow question about what that part does",
+        "description": "Not \"explain your whole solution\" \u2014 that's too broad. Ask something specific: what does this function return when the board is full? what is this list tracking as you go through the loop?\nThe question should be answerable by reading the code, but only if the student genuinely understands it."
+      },
+      {
+        "step": 3,
+        "title": "Follow up based on the answer",
+        "description": "If the student answers correctly, move to the next conceptually important piece and ask the same kind of question.\nIf the student hesitates or gives a vague answer, ask a smaller version of the same question: \"okay, what does it return on just this one case?\" Don't move on until the student can explain it."
+      },
+      {
+        "step": 4,
+        "title": "Surface the invariant or principle behind the piece",
+        "description": "Once the student can explain what the code does, ask why it has to work that way \u2014 what would break if this part were different? This is where shallow pattern-matching gets exposed."
+      }
+    ],
+    "safe_outputs": [
+      "Questions asking the student to explain what a specific line, variable, or block does",
+      "Questions asking what the code would return or do on a concrete small example",
+      "Questions asking what would break if a specific piece were removed or changed",
+      "Reflective questions connecting the code to the algorithm's definition"
+    ],
+    "must_avoid": [
+      "Praising the result (\"nice, it passes!\")",
+      "Pointing out any bugs or suggesting any changes to the code",
+      "Explaining what the code does on the student's behalf",
+      "Asking the student to explain their entire solution at once",
+      "Moving to the next piece before the student can explain the current one"
+    ],
+    "example_exchange": "> **Student:** \"My minimax works, I think \u2014 it passes the basic tests. But I'm not totally sure what the base case is actually doing.\"\n>\n> **Tutor:** \"Let's look at that. When your base case fires, what value does it return \u2014 and what does that value represent to the node one level up in the tree?\"\n\n> **Student:** \"Uhh... it returns like, a score? I think it's positive if X wins.\"\n>\n> **Tutor:** \"Right, it's a score. So from the perspective of the maximizing player who's about to receive that value \u2014 what are they going to do with it?\"",
+    "extra_sections": {
+      "skill_type": "- **Type:** instructional\n- **Course Focus:** CS"
+    },
+    "source_repo": "cs-348-skills",
+    "source_path": "skills/crit-code-concept/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs-348-skills/tree/main/skills/crit-code-concept/skills.md",
+    "owner_team": "CS-348",
+    "owner_contact": "",
+    "status": "stub",
+    "status_reason": "missing or empty"
+  },
+  {
+    "skill_id": "decompose-the-prob",
     "name": "Decompose the Problem",
     "skill_type": "instructional",
+    "stance": "socratic",
+    "course_types": [
+      "cs"
+    ],
     "tags": [
       "problem-solving",
-      "lab0",
-      "sorting",
-      "statistics"
+      "problem-decomposition"
     ],
-    "python_entry": "logic.py",
+    "learning_goal_tags": [
+      "decompose-problems",
+      "restate-the-problem",
+      "extract-requirements"
+    ],
+    "trigger_signals": [
+      "student says 'I don't know where to start'",
+      "student expresses overwhelm or says 'this is too much'",
+      "student asks what to do first without having attempted a breakdown"
+    ],
     "description": "Guides an overwhelmed student to break the `order(data, stats)` function into\nsmaller sub-problems by asking targeted questions rather than listing the steps.\nThe tutor never names the sub-problems \u2014 questions lead the student to discover them.",
     "trigger_summary": "- Student says \"I don't know where to start\"\n- Student says \"this is too much\" or expresses general overwhelm\n- Student asks \"what should I do first?\" without having attempted any breakdown\n- Student has read the spec but cannot identify a first action",
     "tutor_stance_rules": [
@@ -1091,8 +935,8 @@
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs-348-skills/tree/main/skills/decompose-the-problem/skills.md",
     "owner_team": "CS-348",
     "owner_contact": "",
-    "status": "stub",
-    "status_reason": "missing or empty (must be subset of cs/humanities); must be one of ['hint', 'meta', 'reframe', 'socratic']"
+    "status": "ready",
+    "status_reason": null
   },
   {
     "skill_id": "example-code",
@@ -1251,16 +1095,26 @@
     "status_reason": "missing or empty (must be subset of cs/humanities); must be one of ['hint', 'meta', 'reframe', 'socratic']"
   },
   {
-    "skill_id": "redirect-direct-solution-requests",
+    "skill_id": "redirect-direct",
     "name": "Redirect Direct Solution Requests",
     "skill_type": "instructional",
+    "stance": "meta",
+    "course_types": [
+      "cs"
+    ],
     "tags": [
-      "socratic",
-      "lab0",
       "code-requests",
       "redirection"
     ],
-    "python_entry": "logic.py",
+    "learning_goal_tags": [
+      "request-targeted-help",
+      "manage-effort"
+    ],
+    "trigger_signals": [
+      "student asks tutor to write or complete code",
+      "student says 'just show me' or 'what's the answer'",
+      "student pastes code and asks for a fix without context"
+    ],
     "description": "Handles students who ask the tutor to write, finish, or show them the answer\nto a coding problem. Responds warmly with a Socratic question tied to what\nthe student asked about. Never refuses coldly and never produces any code.",
     "trigger_summary": "- Student says \"write this for me\" or \"just write the code\"\n- Student says \"finish this function\" or \"complete this for me\"\n- Student says \"can you just show me\" or \"just show me how\"\n- Student asks \"what's the answer?\" or \"what should I return here?\"\n- Student pastes code and says \"fix it\" without describing what is wrong",
     "tutor_stance_rules": [
@@ -1302,8 +1156,8 @@
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs-348-skills/tree/main/skills/redirect-direct-solution-requests/skills.md",
     "owner_team": "CS-348",
     "owner_contact": "",
-    "status": "stub",
-    "status_reason": "missing or empty (must be subset of cs/humanities); must be one of ['hint', 'meta', 'reframe', 'socratic']"
+    "status": "ready",
+    "status_reason": null
   },
   {
     "skill_id": "trace-an-algo",
