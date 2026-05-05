@@ -1,5 +1,312 @@
 [
   {
+    "skill_id": "debug-first-step",
+    "name": "Debug First Step",
+    "skill_type": "instructional",
+    "stance": "hint",
+    "status": "ready",
+    "tags": [
+      "debugging",
+      "cs",
+      "systematic",
+      "bugs",
+      "errors",
+      "error",
+      "bug",
+      "compile",
+      "runtime",
+      "code"
+    ],
+    "course_types": [
+      "cs"
+    ],
+    "learning_goal_tags": [
+      "debug-systematically",
+      "trace-execution"
+    ],
+    "trigger_signals": [
+      "student-has-compile-error",
+      "student-jumping-to-rewrite",
+      "student-googling-error",
+      "student-has-runtime-error",
+      "student-output-wrong"
+    ],
+    "chip_icon": "\ud83d\udc1b",
+    "version": "0.1.0",
+    "description": "Gives students a concrete directional hint for their first move when they encounter a bug. Rather than letting students thrash \u2014 randomly modifying code, Googling the error message wholesale, or considering a full rewrite \u2014 this skill surfaces the one action most likely to isolate the problem: reading and localizing the error before touching anything.",
+    "trigger_summary": "Student has an error (compile, runtime, or wrong output). Student's first instinct is to rewrite. Student is searching for the error message without reading it first. Student says they can't find the bug.",
+    "tutor_stance_rules": [
+      "Give one clear first-action hint \u2014 don't leave the student with only a question when they are genuinely stuck",
+      "The hint should point at process (what to do next), never at the solution (what the bug is)",
+      "After giving the hint, ask the student what they find \u2014 keep them in the driver's seat",
+      "Never diagnose the bug for the student; the hint opens the door, the student walks through",
+      "If the student has already done the hinted step, acknowledge it and give the next systematic step"
+    ],
+    "flow": [
+      {
+        "step": 1,
+        "title": "Read the error exactly",
+        "description": "Prompt the student to read the full error message out loud or paste it. Ask: 'What does the error say, word for word?'"
+      },
+      {
+        "step": 2,
+        "title": "Locate the line",
+        "description": "If the error gives a line number or traceback, direct the student there. Ask what that line does."
+      },
+      {
+        "step": 3,
+        "title": "Form a hypothesis before touching code",
+        "description": "Ask the student: 'What do you think is wrong on that line?' Even a wrong hypothesis is more productive than a random edit."
+      },
+      {
+        "step": 4,
+        "title": "Make one change and re-run",
+        "description": "Suggest the student make one targeted change based on the hypothesis, then re-run. Ask them to predict what will happen."
+      }
+    ],
+    "safe_outputs": [
+      "A single concrete next-action hint",
+      "Questions that prompt the student to look at a specific place",
+      "'What do you predict will happen?' prompts before a run"
+    ],
+    "must_avoid": [
+      "Diagnosing the bug or pointing to the exact cause",
+      "Giving multiple steps at once",
+      "Suggesting a rewrite before the bug is isolated"
+    ],
+    "example_exchange": "> **Student:** \"My code doesn't work. I've been looking at it for 20 minutes. Should I just start over?\"\n>\n> **Tutor:** \"Hold off on the rewrite for now. First step: paste the exact error message here. We'll read what it's actually telling us before we change anything.\"",
+    "source_repo": "skills-orchestrator",
+    "owner_team": "CS338"
+  },
+  {
+    "skill_id": "bound-scope",
+    "name": "Bound Scope",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "status": "ready",
+    "tags": [
+      "scope",
+      "requirements",
+      "overengineering",
+      "planning",
+      "assignment",
+      "features",
+      "prompt"
+    ],
+    "course_types": [
+      "cs",
+      "humanities"
+    ],
+    "learning_goal_tags": [
+      "bound-scope",
+      "extract-requirements"
+    ],
+    "trigger_signals": [
+      "student-adding-unasked-features",
+      "student-gold-plating",
+      "student-overengineering",
+      "student-expanding-scope"
+    ],
+    "chip_icon": "\ud83d\udd0d",
+    "version": "0.1.0",
+    "description": "Helps the student stay within the boundaries of what the assignment or problem actually asks for. When a student begins adding features, optimizations, or considerations that go beyond the stated requirements, this skill surfaces the mismatch through targeted questions rather than direct correction.",
+    "trigger_summary": "Student lists features not mentioned in the prompt. Student proposes a solution more complex than required. Student asks whether to add something clearly outside assignment scope.",
+    "tutor_stance_rules": [
+      "Never tell the student their idea is bad or wrong \u2014 redirect with curiosity",
+      "Always ask the student to re-read the relevant part of the prompt before evaluating the extra feature",
+      "Surface the mismatch as a question: 'The prompt says X \u2014 where does it mention Y?'",
+      "Do not say 'you're overengineering this' \u2014 that is a conclusion the student must reach themselves",
+      "If the student insists a feature is required, ask them to point to where in the prompt it says so"
+    ],
+    "flow": [
+      {
+        "step": 1,
+        "title": "Anchor to the prompt",
+        "description": "Ask the student to state, in their own words, exactly what the assignment is asking them to produce."
+      },
+      {
+        "step": 2,
+        "title": "Surface the mismatch",
+        "description": "Name the specific extra element and ask which part of the prompt calls for it. Keep the question neutral."
+      },
+      {
+        "step": 3,
+        "title": "Let the student decide",
+        "description": "After the mismatch is visible, ask the student what they want to do: scope it out or make a case for why it's needed."
+      },
+      {
+        "step": 4,
+        "title": "Confirm the revised plan",
+        "description": "Once the student has scoped their plan, briefly confirm what they're committing to and ask what the first step is."
+      }
+    ],
+    "safe_outputs": [
+      "Questions that reference specific language from the prompt",
+      "Neutral observations",
+      "Invitations to re-read the prompt"
+    ],
+    "must_avoid": [
+      "Telling the student the extra feature is a bad idea on its merits",
+      "Solving the scoping decision for them by saying 'just do the minimum'"
+    ],
+    "example_exchange": "> **Student:** \"I'm going to implement the sort function, add a GUI, and maybe a database.\"\n>\n> **Tutor:** \"What does the assignment prompt say the deliverable actually is?\"",
+    "source_repo": "skills-orchestrator",
+    "owner_team": "CS338"
+  },
+  {
+    "skill_id": "normalize-struggle",
+    "name": "Normalize Struggle",
+    "skill_type": "instructional",
+    "stance": "meta",
+    "status": "ready",
+    "tags": [
+      "metacognition",
+      "frustration",
+      "persistence",
+      "wellbeing",
+      "stuck",
+      "help",
+      "give",
+      "up",
+      "hard",
+      "struggle"
+    ],
+    "course_types": [
+      "cs",
+      "humanities"
+    ],
+    "learning_goal_tags": [
+      "manage-effort",
+      "reflect-on-progress"
+    ],
+    "trigger_signals": [
+      "student-says-give-up",
+      "student-expresses-frustration",
+      "student-says-too-hard",
+      "student-extended-silence",
+      "student-requests-answer-directly"
+    ],
+    "chip_icon": "\ud83d\udcaa",
+    "version": "0.1.0",
+    "description": "Resets a student's emotional state when frustration, self-doubt, or learned helplessness threatens to end the learning conversation. Rather than bypassing the difficulty by giving an answer, this skill shifts the frame of the conversation \u2014 validating the struggle, naming it as normal, and redirecting back to productive engagement with one small concrete action.",
+    "trigger_summary": "Student explicitly says they want to give up. Student expresses sustained frustration. Student makes repeated requests for the direct answer. Student's tone shifts from engaged to defeated.",
+    "tutor_stance_rules": [
+      "Acknowledge what the student said before redirecting \u2014 do not skip past the emotion",
+      "Keep the acknowledgment brief and non-clinical: one sentence, then a reframe",
+      "Do not say 'don't worry' or 'it's easy' \u2014 both are dismissive",
+      "Do not give the answer to relieve the student's frustration",
+      "Offer one tiny, achievable next action that makes progress feel possible"
+    ],
+    "flow": [
+      {
+        "step": 1,
+        "title": "Acknowledge, briefly",
+        "description": "Name what the student said without amplifying it. One sentence, then pause."
+      },
+      {
+        "step": 2,
+        "title": "Normalize",
+        "description": "Tell the student that struggle at this point is expected. Specific is better than generic."
+      },
+      {
+        "step": 3,
+        "title": "Zoom out on progress",
+        "description": "Ask the student what they've already figured out. Even partial progress is real progress."
+      },
+      {
+        "step": 4,
+        "title": "Offer one small action",
+        "description": "Give one tiny, concrete next move to break the paralysis, not solve the problem."
+      }
+    ],
+    "safe_outputs": [
+      "A single acknowledgment sentence",
+      "Normalizing statements grounded in specifics",
+      "Questions that surface what the student has already accomplished",
+      "One small, concrete, immediately actionable suggestion"
+    ],
+    "must_avoid": [
+      "Giving the answer to end the discomfort",
+      "Dismissive reassurance",
+      "Multiple action items",
+      "Lengthy pep talks"
+    ],
+    "example_exchange": "> **Student:** \"I've been stuck for an hour. I literally can't do this. Can you just tell me the answer?\"\n>\n> **Tutor:** \"An hour on a hard problem is rough \u2014 I hear you. What have you figured out so far, even partially?\"",
+    "source_repo": "skills-orchestrator",
+    "owner_team": "CS338"
+  },
+  {
+    "skill_id": "rubric-scorer",
+    "name": "Rubric Scorer",
+    "skill_type": "code",
+    "status": "ready",
+    "tags": [
+      "rubric",
+      "scoring",
+      "feedback",
+      "assessment",
+      "writing",
+      "cs",
+      "draft",
+      "essay",
+      "criteria"
+    ],
+    "course_types": [
+      "cs",
+      "humanities"
+    ],
+    "learning_goal_tags": [
+      "verify-claims",
+      "evaluate-reasoning"
+    ],
+    "trigger_signals": [
+      "student-submitted-draft",
+      "student-requesting-feedback",
+      "rubric-check-needed"
+    ],
+    "chip_icon": "\ud83d\udccb",
+    "version": "0.1.0",
+    "python_entry": "logic.py",
+    "description": "Given a piece of student text and a list of rubric criteria, scores which criteria are demonstrably met and which are missing. Returns a structured result with met/missed lists, a 0-1 score, and a short summary.",
+    "source_repo": "skills-orchestrator",
+    "owner_team": "CS338"
+  },
+  {
+    "skill_id": "edge-case-gen",
+    "name": "Edge Case Generator",
+    "skill_type": "code",
+    "status": "ready",
+    "tags": [
+      "testing",
+      "edge-cases",
+      "cs",
+      "unit-tests",
+      "verification",
+      "test",
+      "cases",
+      "pipeline"
+    ],
+    "course_types": [
+      "cs"
+    ],
+    "learning_goal_tags": [
+      "handle-edge-cases",
+      "design-test-plans"
+    ],
+    "trigger_signals": [
+      "student-writing-tests",
+      "student-missing-edge-cases",
+      "student-only-happy-path",
+      "student-needs-test-ideas"
+    ],
+    "chip_icon": "\ud83e\uddea",
+    "version": "0.1.0",
+    "python_entry": "logic.py",
+    "description": "Given a Python function signature and optional docstring, generates a structured list of edge cases worth testing. Uses heuristic rules to surface boundary values, empty inputs, type extremes, and error-producing inputs.",
+    "source_repo": "skills-orchestrator",
+    "owner_team": "CS338"
+  },
+  {
     "skill_id": "nautilus-architecture-tutor",
     "name": "Nautilus Architecture Tutor",
     "skill_type": "instructional",
