@@ -1,10 +1,48 @@
 {
-  "generated_at": "2026-05-06T01:30:21.214352+00:00",
+  "generated_at": "2026-05-06T03:16:47.548289+00:00",
   "previous_hash": "07b7bd282450a304",
-  "current_hash": "07b7bd282450a304",
-  "added": [],
-  "removed": [],
-  "changed": [],
-  "unchanged_count": 72,
-  "summary": "no changes"
+  "current_hash": "a9822eb9c255cbbe",
+  "added": [
+    "compare-algorithms",
+    "crit-pseudocode",
+    "identify-inputs"
+  ],
+  "removed": [
+    "compare-algorithm-strategies"
+  ],
+  "changed": [
+    {
+      "skill_id": "ask-debug-aloud",
+      "changes": {
+        "status": {
+          "from": "stub",
+          "to": "ready"
+        }
+      }
+    },
+    {
+      "skill_id": "crit-code-concept",
+      "changes": {
+        "status": {
+          "from": "stub",
+          "to": "ready"
+        }
+      }
+    },
+    {
+      "skill_id": "trace-an-algo",
+      "changes": {
+        "status": {
+          "from": "stub",
+          "to": "ready"
+        },
+        "stance": {
+          "from": null,
+          "to": "socratic"
+        }
+      }
+    }
+  ],
+  "unchanged_count": 68,
+  "summary": "3 added, 1 removed, 3 changed"
 }
