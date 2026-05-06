@@ -18,6 +18,20 @@ Usage:
   python catalog_builder.py
   python catalog_builder.py --local /path/to/parent/dir
   python catalog_builder.py --local . --output catalog.json --report build_report.md
+
+⚠️  WARNING — --local mode REPLACES catalog.json entirely.
+   It only includes skills found in the local sibling repos.
+   This means all 70+ skills from GitHub team repos will be lost.
+
+   Use --local only for:
+     - Debugging the catalog builder script itself
+     - Fully offline environments where GitHub is not reachable
+
+   For day-to-day skill development:
+     1. Keep the existing catalog.json (committed to git, has all team skills)
+     2. Edit your skills.md and push to your team repo
+     3. Hit POST /registry/refresh on the orchestrator to reload the catalog
+        curl -X POST http://localhost:8080/registry/refresh
   python catalog_builder.py --strict          # exit 1 if any skill is broken
   python catalog_builder.py --changelog catalog_changelog.json
 """

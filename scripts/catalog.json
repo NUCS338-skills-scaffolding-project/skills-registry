@@ -677,6 +677,11 @@
     "name": "Ask Student to Debug Aloud",
     "skill_type": "instructional",
     "stance": "socratic",
+    "tags": [
+      "debugging",
+      "problem solving",
+      "coding"
+    ],
     "course_types": [
       "cs"
     ],
@@ -739,21 +744,27 @@
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs-348-skills/tree/main/skills/ask-debug-aloud/skills.md",
     "owner_team": "CS-348",
     "owner_contact": "",
-    "status": "stub",
-    "status_reason": "missing or empty"
+    "status": "ready",
+    "status_reason": null
   },
   {
-    "skill_id": "compare-algorithm-strategies",
+    "skill_id": "compare-algorithms",
     "name": "Compare Algorithm Strategies",
     "skill_type": "instructional",
+    "stance": "socratic",
     "tags": [
       "algorithms",
       "planning",
       "understanding",
       "comparison"
     ],
-    "python_entry": "logic.py",
-    "description": "Guides the student through a structured discussion of possible solution families for a given\nassignment, one strategy at a time. The agent generates strategies informed by the assignment\nand learning goals, then logic.py manages progress through them and summarizes understanding\nat the end.",
+    "course_types": [
+      "cs"
+    ],
+    "learning_goal_tags": [
+      "compare-strategies"
+    ],
+    "description": "Guides the student through a structured discussion of possible solution families for a given\nassignment, one strategy at a time. The agent generates strategies informed by the assignment\nand learning goals. Once the student has thought through 2\u20133 strategies, ask them to pick one\nand give a summary of the strategies and their pros/cons.",
     "trigger_summary": "- Student asks how to approach a problem\n- Student wants to know what strategies exist for a given assignment\n- Student is unsure which algorithmic approach to use\n- Student wants to understand tradeoffs between different solutions\n\n---",
     "tutor_stance_rules": [
       "Never reveal tradeoffs before the student has reasoned about them. Discuss one strategy at a\ntime \u2014 do not introduce the next until the current one is resolved. Use your own judgment to\nevaluate whether the student understands each strategy. If learning goals were inferred, be\ntransparent about that and invite the student to correct them."
@@ -762,17 +773,17 @@
       {
         "step": 1,
         "title": "Load Context",
-        "description": "If a learning goals file has been provided, read it before proceeding. Set `inferred` to False.\nIf not, ask the student to describe the assignment, then use your judgment to infer what\nconcepts the course is likely targeting. State your inferred learning goals clearly and ask\nthe student to confirm or correct them before proceeding. Set `inferred` to True."
+        "description": "If a learning goals file has been provided, read it before proceeding.\nIf not, ask the student to describe the assignment, then use your judgment to infer what\nconcepts the course is likely targeting. State your inferred learning goals clearly and ask\nthe student to confirm or correct them before proceeding."
       },
       {
         "step": 2,
         "title": "Discuss Strategies One at a Time",
-        "description": "Use your judgment to identify a relevant strategy family for this assignment and learning goals.\nIntroduce it to the student with a Socratic opening question \u2014 do not describe it fully upfront.\n\nAs the student responds:\n- If they understood it \u2192 confirm their reasoning, then ask them to reason about the tradeoffs\n  before revealing them. Only share tradeoffs after the student has had a chance to think.\n- If they missed it \u2192 use your own judgment to give a hint based on the strategy. Do not\n  reveal tradeoffs yet. Ask them to try again.\n\nOnce the discussion on a strategy is resolved, call `logic.py: run()` with:\n- `action`: \"record_result\"\n- `session_id`: a unique ID for this session (same ID for all calls)\n- `strategy`: a dict with:\n  - `id`: unique identifier e.g. \"strategy_1\"\n  - `name`: name of the strategy e.g. \"Brute Force\"\n  - `tradeoffs`: time/space complexity and when it applies\n  - `understood`: True if the student understood it, False if not\n- `learning_goals`: the confirmed or inferred learning goals (first call only)\n- `inferred`: True if goals were inferred, False if loaded from file (first call only)\n\nThen use your judgment to decide whether another strategy is worth discussing given the\nassignment and learning goals. If yes, repeat Step 2. If no, move to Step 3."
+        "description": "Use your judgment to identify a relevant strategy family for this assignment and learning goals.\nIntroduce it to the student with a Socratic opening question \u2014 do not describe it fully upfront.\n\nAs the student responds:\n- If they understood it \u2192 confirm their reasoning, then ask them to reason about the tradeoffs\n  before revealing them.\n  - If their tradeoff reasoning is correct \u2192 confirm and move on.\n  - If they miss a tradeoff \u2192 give a single targeted hint and ask them to try again. Only\n    share the tradeoff directly after a genuine attempt.\n- If they missed the strategy \u2192 give a hint based on the strategy. Do not reveal tradeoffs\n  yet. Ask them to try again.\n\nAim to cover 2\u20133 strategies total. After each one, use your judgment to decide whether\nanother is worth discussing. If yes, repeat Step 2. If no, move to Step 3."
       },
       {
         "step": 3,
         "title": "Compare and Summarize",
-        "description": "Ask the student to compare the strategies they have discussed \u2014 which would they choose for\nthis assignment and why, and what tradeoffs are they accepting?\n\nThen call `logic.py: run()` with:\n- `action`: \"summarize\"\n- `session_id`: your session ID\n\nUse `result.understood` to acknowledge what the student grasped well.\nUse `result.gaps` to tell the student which strategies and tradeoffs to review.\nIf `result.goals_caveat` is not null, share it with the student \u2014 be transparent that\nthe learning goals were inferred and may not perfectly reflect the course's intentions."
+        "description": "Ask the student to compare the strategies they have discussed \u2014 which would they choose for\nthis assignment and why, and what tradeoffs are they accepting? Ask them to commit to a choice\nbefore moving on. Then present a tradeoff matrix summarizing all strategies discussed.\n\nReflect on which strategies the student understood and which they struggled with.\nAcknowledge what they grasped well, and name any strategies or tradeoffs they should\nreview. If learning goals were inferred, be transparent that they may not perfectly\nreflect the course's intentions and invite the student to revisit them."
       }
     ],
     "safe_outputs": [
@@ -781,29 +792,34 @@
       "Tradeoff matrix",
       "Confirmations or hints based on your own judgment",
       "A final comparison question before summarizing",
-      "A summary based on logic.py summarize output"
+      "A closing summary reflecting on the strategies discussed"
     ],
     "must_avoid": [
       "Revealing tradeoffs before the student has reasoned about them",
       "Introducing a new strategy before the current one is resolved",
       "Skipping the learning goals step",
-      "Forgetting to call record_result after each strategy is discussed",
       "Claiming certainty about learning goals when they were inferred"
     ],
-    "example_exchange": "> **Student:** \"I need to write a function that finds two numbers that sum to a target.\n> Where do I even start?\"\n>\n> **Tutor:** *(loads learning goals, decides to start with brute force)*\n> \"Let's think through the possible approaches. If you had to solve this without worrying\n> about efficiency at all, what would you do?\"\n\n> **Student:** \"I guess I'd just check every pair of numbers?\"\n>\n> **Tutor:** \"Exactly. Before I tell you how that performs, what do you think the cost of\n> checking every pair might be for a large array?\"\n\n> **Student:** \"It would get really slow\"\n>\n> **Tutor:** *(student understood it, calls record_result with understood: True)*\n> \"Right \u2014 it's O(n\u00b2) time. Now, is there anything you could do to the array first that\n> might make the problem easier to solve?\"",
+    "example_exchange": "> **Student:** \"I need to write a function that finds two numbers that sum to a target.\n> Where do I even start?\"\n>\n> **Tutor:** *(loads learning goals, decides to start with brute force)*\n> \"Let's think through the possible approaches. If you had to solve this without worrying\n> about efficiency at all, what would you do?\"\n\n> **Student:** \"I guess I'd just check every pair of numbers?\"\n>\n> **Tutor:** \"Exactly. Before I tell you how that performs, what do you think the cost of\n> checking every pair might be for a large array?\"\n\n> **Student:** \"It would get really slow\"\n>\n> **Tutor:** *(student understood it)*\n> \"Right \u2014 it's O(n\u00b2) time. Now, is there anything you could do to the array first that\n> might make the problem easier to solve?\"",
     "source_repo": "cs-348-skills",
     "source_path": "skills/compare-algorithm-strategies/skills.md",
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs-348-skills/tree/main/skills/compare-algorithm-strategies/skills.md",
     "owner_team": "CS-348",
     "owner_contact": "",
-    "status": "stub",
-    "status_reason": "missing or empty (must be subset of cs/humanities); must be one of ['hint', 'meta', 'reframe', 'socratic']"
+    "status": "ready",
+    "status_reason": null
   },
   {
     "skill_id": "crit-code-concept",
     "name": "Critique Code Conceptually",
     "skill_type": "instructional",
     "stance": "socratic",
+    "tags": [
+      "understanding",
+      "code review",
+      "coding",
+      "critique"
+    ],
     "course_types": [
       "cs"
     ],
@@ -866,8 +882,79 @@
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs-348-skills/tree/main/skills/crit-code-concept/skills.md",
     "owner_team": "CS-348",
     "owner_contact": "",
-    "status": "stub",
-    "status_reason": "missing or empty"
+    "status": "ready",
+    "status_reason": null
+  },
+  {
+    "skill_id": "crit-pseudocode",
+    "name": "Critique Pseudocode",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "tags": [
+      "pseudocode",
+      "design",
+      "clarity",
+      "correctness"
+    ],
+    "course_types": [
+      "cs"
+    ],
+    "learning_goal_tags": [
+      "evaluate-readability"
+    ],
+    "description": "Evaluates student pseudocode for clarity, correctness, and maintainability against the\nassignment. Rather than fixing problems directly, the tutor surfaces gaps through questions\nand guides the student to revise their own work.",
+    "trigger_summary": "- Student provides pseudocode for an assignment\n- Student asks whether their pseudocode is correct or complete\n- Student wants feedback on their algorithmic plan before implementing it",
+    "tutor_stance_rules": [
+      "Never translate pseudocode to real code. Never rewrite the pseudocode for the student.\nSurface one issue at a time and ask the student to reason about it before moving on.\nIf the pseudocode has genuine strengths, name them \u2014 then turn to the gaps."
+    ],
+    "flow": [
+      {
+        "step": 1,
+        "title": "Understand the Assignment",
+        "description": "Confirm what the assignment is asking. If the student hasn't provided it, ask. Use it as\nthe benchmark for evaluating the pseudocode."
+      },
+      {
+        "step": 2,
+        "title": "Identify Strengths",
+        "description": "Read the pseudocode and identify what the student got right \u2014 correct logic, good\nstructure, clear naming, appropriate level of abstraction. Briefly name these before\nraising any concerns. This is not filler; it anchors the student's understanding of\nwhat to preserve."
+      },
+      {
+        "step": 3,
+        "title": "Surface Gaps One at a Time",
+        "description": "For each issue you identify (correctness, clarity, or maintainability), ask a question\nthat leads the student to notice it themselves. Do not list all issues at once. Wait for\nthe student to respond before raising the next one.\n\nTypes of gaps to look for:\n- **Correctness**: missing edge cases, incorrect logic, wrong termination conditions\n- **Clarity**: ambiguous steps, undefined variables, unclear control flow\n- **Maintainability**: overly complex steps that could be simplified, poor naming"
+      },
+      {
+        "step": 4,
+        "title": "Prompt Revision",
+        "description": "Once a gap is acknowledged, ask the student how they would revise that part. Do not\nsuggest the fix. If their revision introduces a new problem, address that next."
+      },
+      {
+        "step": 5,
+        "title": "Wrap Up",
+        "description": "When the major gaps have been addressed, ask the student to summarize what they changed\nand why. Confirm whether the revised pseudocode now matches the assignment requirements."
+      }
+    ],
+    "safe_outputs": [
+      "Named strengths from the pseudocode",
+      "Questions that lead the student to notice a gap",
+      "Clarifying questions about what a step is intended to do",
+      "Revision prompts (\"how would you change that part?\")",
+      "Confirmation that a revision addresses the concern"
+    ],
+    "must_avoid": [
+      "Translating pseudocode to real code",
+      "Rewriting any part of the pseudocode for the student",
+      "Listing all gaps at once before the student has had a chance to respond",
+      "Moving on before the student has acknowledged and addressed the current gap"
+    ],
+    "example_exchange": "> **Student:** \"Here's my pseudocode for binary search: [pseudocode]\"\n>\n> **Tutor:** \"Your loop structure is clear and the midpoint calculation looks right.\n> One thing I want to ask about \u2014 what happens when the target isn't in the array?\n> Walk me through what your loop does in that case.\"\n\n> **Student:** \"Oh... it might loop forever.\"\n>\n> **Tutor:** \"Right. How would you change the pseudocode to handle that?\"\n\n> **Student:** \"I'd add a condition to stop when low > high.\"\n>\n> **Tutor:** \"Good. Does that condition belong inside the loop or as the loop's exit\n> condition? What's the difference?\"",
+    "source_repo": "cs-348-skills",
+    "source_path": "skills/critique-pseudocode/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs-348-skills/tree/main/skills/critique-pseudocode/skills.md",
+    "owner_team": "CS-348",
+    "owner_contact": "",
+    "status": "ready",
+    "status_reason": null
   },
   {
     "skill_id": "decompose-the-prob",
@@ -1041,12 +1128,18 @@
     "skill_id": "explain-edge-cases",
     "name": "Explain Edge Cases",
     "skill_type": "instructional",
+    "stance": "socratic",
     "tags": [
       "testing",
       "edge-cases",
       "debugging"
     ],
-    "python_entry": "logic.py",
+    "course_types": [
+      "cs"
+    ],
+    "learning_goal_tags": [
+      "handle-edge-cases"
+    ],
     "description": "Helps students identify boundary and unusual inputs that can break their implementation.\nThe tutor surfaces categories of edge cases instead of fixing the code.",
     "trigger_summary": "- Student has implemented a solution but only tested normal cases\n- Student asks \u201cwhy is this failing?\u201d without considering edge inputs\n- Student assumes their code works after limited testing\n- Student does not mention boundary conditions",
     "tutor_stance_rules": [
@@ -1091,8 +1184,73 @@
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs-348-skills/tree/main/skills/explain-edge-cases/skills.md",
     "owner_team": "CS-348",
     "owner_contact": "",
-    "status": "stub",
-    "status_reason": "missing or empty (must be subset of cs/humanities); must be one of ['hint', 'meta', 'reframe', 'socratic']"
+    "status": "ready",
+    "status_reason": null
+  },
+  {
+    "skill_id": "identify-inputs",
+    "name": "Identify Inputs",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "tags": [
+      "problem-decomposition",
+      "inputs",
+      "parameters",
+      "design"
+    ],
+    "course_types": [
+      "cs"
+    ],
+    "learning_goal_tags": [
+      "specify-io"
+    ],
+    "description": "Guides the student through clarifying what information enters their program or function.\nRather than providing an input inventory, the tutor asks questions that help the student\nderive it themselves from the assignment and any provided examples.",
+    "trigger_summary": "- Student is about to start coding without having identified what their function receives\n- Student is unclear about what the inputs to their program or function should be\n- Student asks \"what parameters do I need?\" or \"what does my function take in?\"\n\n---",
+    "tutor_stance_rules": [
+      "Never give the student a list of inputs or a function signature. Ask questions that lead\nthem to derive each input from the assignment themselves. If the assignment restricts what\nyou can reveal about the interface, stay at the conceptual level \u2014 discuss what information\nis needed without specifying types, names, or signatures."
+    ],
+    "flow": [
+      {
+        "step": 1,
+        "title": "Ground in the Assignment",
+        "description": "Make sure the student has read the assignment and understands what the program or function\nis supposed to do. If they haven't articulated the goal yet, ask them to before moving on."
+      },
+      {
+        "step": 2,
+        "title": "Elicit Inputs Through Questions",
+        "description": "Ask the student what information the function would need to do its job. Use the assignment\nand any provided examples as anchors:\n- \"What does this example give you to start with?\"\n- \"Is there anything the function needs to know that isn't computed inside it?\"\n- \"Could this work without knowing X \u2014 or does it need it?\"\n\nWork through one input at a time. After each one the student identifies, ask whether there\nare others before moving on."
+      },
+      {
+        "step": 3,
+        "title": "Check for Missing Inputs",
+        "description": "Once the student believes they have a complete list, probe for gaps:\n- Are there edge cases in the assignment that would require additional information?\n- Do any of the provided examples reveal an input the student hasn't accounted for?\n\nIf the student is missing something, ask a question that points toward it without naming it."
+      },
+      {
+        "step": 4,
+        "title": "Consolidate",
+        "description": "Ask the student to state the full input inventory in their own words \u2014 what each input\nrepresents and why the function needs it. Confirm their understanding is accurate before\nending the skill."
+      }
+    ],
+    "safe_outputs": [
+      "Questions that lead the student to identify an input themselves",
+      "Pointers to specific parts of the assignment or examples that imply an input",
+      "Conceptual discussion of what information the function depends on",
+      "Confirmation that the student's input inventory is complete and accurate"
+    ],
+    "must_avoid": [
+      "Giving the student a list of inputs directly",
+      "Providing a function signature if the assignment restricts it",
+      "Naming a missing input before the student has had a genuine attempt to find it",
+      "Discussing implementation or output before inputs are fully resolved"
+    ],
+    "example_exchange": "> **Student:** \"I'm not sure what parameters my function needs.\"\n>\n> **Tutor:** \"Let's figure it out from the assignment. What is your function supposed to\n> produce \u2014 what's the end result it needs to return?\"\n\n> **Student:** \"It returns the shortest path between two nodes.\"\n>\n> **Tutor:** \"So to find a path between two nodes, what does the function need to know\n> at minimum?\"\n\n> **Student:** \"The two nodes?\"\n>\n> **Tutor:** \"Right. And what does it search through to find a path between them \u2014 does\n> it have everything it needs with just the two nodes?\"\n\n> **Student:** \"Oh, it also needs the graph.\"\n>\n> **Tutor:** \"Exactly. Anything else the assignment specifies it should take in?\"",
+    "source_repo": "cs-348-skills",
+    "source_path": "skills/identify_inputs/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs-348-skills/tree/main/skills/identify_inputs/skills.md",
+    "owner_team": "CS-348",
+    "owner_contact": "",
+    "status": "ready",
+    "status_reason": null
   },
   {
     "skill_id": "redirect-direct",
@@ -1160,19 +1318,90 @@
     "status_reason": null
   },
   {
+    "skill_id": "restate-the-problem",
+    "name": "Restate the Problem",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "tags": [
+      "comprehension",
+      "problem-decomposition",
+      "planning"
+    ],
+    "course_types": [
+      "cs",
+      "humanities"
+    ],
+    "learning_goal_tags": [
+      "restate-the-problem"
+    ],
+    "description": "Helps the student paraphrase the assignment in their own words to confirm they understand\nwhat is being asked before they begin working. Surfaces misreadings and gaps in\ncomprehension early, without moving toward a solution.",
+    "trigger_summary": "- Student seems unsure what the assignment is asking\n- Student's response suggests they may have misread or skipped part of the prompt\n- Student jumps toward a solution before demonstrating understanding of the problem\n- Student asks \"what is this asking?\" or \"what do I need to do?\"\n\n---",
+    "tutor_stance_rules": [
+      "Never restate the problem for the student. Never give an example paraphrase. Ask questions\nthat lead the student to produce an accurate restatement themselves. Stay on this step\nuntil the student can articulate the goal, inputs, outputs, and any constraints correctly.\nDo not move toward a solution until understanding is confirmed."
+    ],
+    "flow": [
+      {
+        "step": 1,
+        "title": "Ask for a Paraphrase",
+        "description": "Ask the student to put the assignment in their own words. Be explicit that you're not\nlooking for a solution yet \u2014 just their understanding of what is being asked."
+      },
+      {
+        "step": 2,
+        "title": "Probe for Gaps",
+        "description": "Listen for anything missing or imprecise in the paraphrase. Address one gap at a time:\n- Point to the specific part of the assignment that the paraphrase misses or distorts\n- Ask the student what that part says and what it means \u2014 don't correct it yourself\n- Wait for the student to revise before raising the next concern\n\nA complete paraphrase should cover:\n- What the program or function is supposed to produce\n- What information it is given to work with\n- Any constraints or special cases mentioned in the assignment"
+      },
+      {
+        "step": 3,
+        "title": "Offer a Clarification Checklist",
+        "description": "Once the student has made an attempt, offer a short checklist of what a complete\nrestatement covers (goal, inputs, output, constraints) and ask which parts they feel\nless confident about. Use their answer to focus the next probing question."
+      },
+      {
+        "step": 4,
+        "title": "Confirm Understanding",
+        "description": "When the paraphrase accurately reflects the assignment, briefly affirm it. Then ask the\nstudent what they would do first \u2014 do not suggest a next step yourself."
+      }
+    ],
+    "safe_outputs": [
+      "Open questions about what the assignment is asking",
+      "Pointers to specific phrases in the assignment text",
+      "A clarification checklist (goal, inputs, output, constraints)",
+      "Brief affirmations once the paraphrase is accurate"
+    ],
+    "must_avoid": [
+      "Restating the problem for the student",
+      "Giving an example paraphrase",
+      "Solving or hinting at a solution before understanding is confirmed",
+      "Moving on before the student has demonstrated accurate comprehension"
+    ],
+    "example_exchange": "> **Student:** \"I think I just need to write a sort function?\"\n>\n> **Tutor:** \"Let's make sure before you start. Can you tell me in your own words what\n> the assignment is asking you to produce \u2014 what goes in and what comes out?\"\n\n> **Student:** \"It takes a list and returns it sorted.\"\n>\n> **Tutor:** \"Good start. Does the assignment say anything about how the list should be\n> sorted, or are there any constraints on how you do it?\"\n\n> **Student:** \"Oh, it says I can't use built-in sort functions.\"\n>\n> **Tutor:** \"Right \u2014 that's an important constraint. Anything else in the prompt you\n> haven't accounted for yet?\"",
+    "source_repo": "cs-348-skills",
+    "source_path": "skills/restate-the-problem/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs-348-skills/tree/main/skills/restate-the-problem/skills.md",
+    "owner_team": "CS-348",
+    "owner_contact": "",
+    "status": "ready",
+    "status_reason": null
+  },
+  {
     "skill_id": "trace-an-algo",
     "name": "Trace an Algorithm",
     "skill_type": "instructional",
+    "stance": "socratic",
     "tags": [
       "algorithms",
       "planning",
       "understanding"
     ],
-    "python_entry": "logic.py",
-    "description": "This skill should help students understand algorithms better by walking through an example step-by-step.\nPauses after each step to ask the student to predict what happens next, then uses logic.py to\ncheck their prediction before revealing the answer.",
+    "course_types": [
+      "cs"
+    ],
+    "learning_goal_tags": [
+      "trace-execution"
+    ],
+    "description": "This skill helps students understand algorithms by walking through a concrete example\nstep-by-step. After showing each state, the tutor pauses and asks the student to predict\nwhat happens next \u2014 never confirming or denying until the student has made a genuine attempt.",
     "trigger_summary": "- Student asks how an algorithm works\n- Student is confused about an algorithm's output for a given input\n- Student's output does not match the expected output and the student does not understand why\n- Student asks to trace through an example\n\n---\n<!-- FOR INSTRUCTIONAL SKILLS: Complete this section -->",
     "tutor_stance_rules": [
-      "Never reveal the next step before the student has made a prediction. Use your own judgment\nto evaluate whether the student's prediction captures the key concept \u2014 logic.py tells you\nwhat to listen for. If they miss it, give only the remediation hint from logic.py. Do not\nreveal the answer even if the student asks directly."
+      "Never reveal the next step before the student has made a prediction. Use your own judgment\nto decide whether the student's response captures the key concept for that step. If they\nmiss it, give only a targeted hint \u2014 do not give the answer, even if the student asks\ndirectly. One step at a time, always."
     ],
     "flow": [
       {
@@ -1182,25 +1411,26 @@
       },
       {
         "step": 2,
-        "title": "Generate and Register the Trace",
-        "description": "Use your judgment to generate a list of steps for the algorithm on the given input.\nFor each step produce:\n- `id`: a unique step identifier e.g. \"step_1\"\n- `state`: the full state of the algorithm at this point\n- `concept`: the key thing the student should identify at this step\n- `what_to_listen_for`: how to judge whether the student got it\n- `remediation_hint`: what to say if they miss it\n\nThen call `logic.py: run()` with:\n- `action`: \"register_trace\"\n- `session_id`: a unique ID for this session\n- `steps`: the list of steps you generated\n\nStore the `session_id` \u2014 you will need it for all subsequent calls."
+        "title": "Generate the Trace",
+        "description": "Use your judgment to generate the full sequence of steps for the algorithm on the given\ninput. For each step, note the algorithm's state, the key concept the student should\nidentify, and a hint you could give if they miss it.\n\nKeep this trace internal \u2014 do not share the full step list with the student."
       },
       {
         "step": 3,
         "title": "Step-by-Step Trace",
-        "description": "For each step, call `logic.py: run()` with:\n- `action`: \"get_step\"\n- `session_id`: your session ID\n- `step_index`: the current step index starting at 0\n\nDisplay `result.state` to the student and ask them to predict what happens next.\n\nWhen the student responds, use `result.what_to_listen_for` to judge their prediction:\n- If they got it \u2192 confirm and move to the next step. If `result.is_last_step` is true, go to Step 4.\n- If they missed it \u2192 use your own judgment to give a hint based on `result.concept` and `result.what_to_listen_for`. Do not reveal the state. Do not give the answer directly. Ask them to try again."
+        "description": "For each step, show the current algorithm state and ask the student to predict what happens next.\n\nWhen the student responds:\n- If they got it \u2192 confirm and move to the next step. If this is the last step, go to Step 4.\n- If they missed it \u2192 give a single targeted hint toward the key concept. Do not reveal the\n  next state. Do not give the answer directly. Ask them to try again."
       },
       {
         "step": 4,
         "title": "Wrap Up",
-        "description": "Call `logic.py: run()` with:\n- `action`: \"summarize\"\n- `session_id`: your session ID\n- `steps_passed`: list of step IDs the student got correct\n- `step_failed`: the step ID where they struggled most, or null if all passed\n\nUse `result.gap` to tell the student what concept to review, and `result.strengths` to\nacknowledge what they understood well. Ask the student to summarize the full trace in\ntheir own words before ending the session."
+        "description": "Reflect on which steps the student got correct and which step they struggled with most\n(if any). Use that to tell the student what concept to review, and acknowledge what they\nunderstood well. Ask the student to summarize the full trace in their own words before\nending the session."
       }
     ],
     "safe_outputs": [
-      "Current state snapshots from logic.py",
-      "Confirmations or hints based on what_to_listen_for",
+      "Current state snapshots for the step being discussed",
+      "Confirmations that the student's prediction was correct",
+      "Single targeted hints toward the key concept for the current step",
       "Questions prompting the student to predict the next step",
-      "A final summary based on logic.py summarize output"
+      "A final summary prompt asking the student to recap the full trace"
     ],
     "must_avoid": [
       "Revealing the next state before the student has predicted it",
@@ -1208,7 +1438,7 @@
       "Revealing more than one step at a time",
       "Dumping the full trace upfront"
     ],
-    "example_exchange": "> **Student:** \"Can you trace bubble sort on [4, 2, 7, 1]?\"\n>\n> **Tutor:** *(generates steps, calls logic.py register_trace, stores session_id)*\n> \"Here's our starting state: [4, 2, 7, 1]. What do you think happens in the first step?\"\n\n> **Student:** \"I think 4 and 2 get compared and swapped\"\n>\n> **Tutor:** *(calls get_step, checks prediction against what_to_listen_for, student got it)*\n> \"Exactly right \u2014 4 and 2 are swapped. Our array is now [2, 4, 7, 1]. What happens next?\"\n\n> **Student:** \"I don't know\"\n>\n> **Tutor:** *(student missed it, uses concept as hint)* \"Think about what the algorithm\n> is doing to the next pair of elements. What are they, and what needs to happen to them?\"",
+    "example_exchange": "> **Student:** \"Can you trace bubble sort on [4, 2, 7, 1]?\"\n>\n> **Tutor:** *(generates steps internally, keeps trace private)*\n> \"Here's our starting state: [4, 2, 7, 1]. What do you think happens in the first step?\"\n\n> **Student:** \"I think 4 and 2 get compared and swapped\"\n>\n> **Tutor:** *(student got it)*\n> \"Exactly right \u2014 4 and 2 are swapped. Our array is now [2, 4, 7, 1]. What happens next?\"\n\n> **Student:** \"I don't know\"\n>\n> **Tutor:** *(student missed it, gives a targeted hint)* \"Think about what the algorithm\n> is doing to the next pair of elements. What are they, and what needs to happen to them?\"",
     "extra_sections": {
       "skill_type": "- **Type:** instructional\n- **Course Focus:** CS"
     },
@@ -1217,8 +1447,8 @@
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs-348-skills/tree/main/skills/trace-an-algo/skills.md",
     "owner_team": "CS-348",
     "owner_contact": "",
-    "status": "stub",
-    "status_reason": "missing or empty (must be subset of cs/humanities); must be one of ['hint', 'meta', 'reframe', 'socratic']"
+    "status": "ready",
+    "status_reason": null
   },
   {
     "skill_id": "ask-for-example",
@@ -5203,6 +5433,48 @@
     "status_reason": null
   },
   {
+    "skill_id": "ask-invariant",
+    "name": "Ask for Invariant",
+    "skill_type": "code",
+    "stance": "socratic",
+    "tags": [
+      "correctness",
+      "invariants",
+      "reasoning",
+      "loops"
+    ],
+    "course_types": [
+      "cs"
+    ],
+    "learning_goal_tags": [
+      "identify-invariants",
+      "evaluate-reasoning"
+    ],
+    "trigger_signals": [
+      "loop-correctness",
+      "recursive-reasoning",
+      "data-structure-invariant"
+    ],
+    "python_entry": "logic.py",
+    "version": "0.1.0",
+    "description": "Supports correctness reasoning by prompting students to name what should remain true\nas a loop, recursive call, or data structure operation progresses. The tutor asks for\nthe student's own invariant instead of supplying a formal proof.",
+    "trigger_summary": "- Student is working with a loop and asks whether it is correct\n- Student is reasoning about recursion or repeated state changes\n- Student has a data structure operation that must preserve a property\n- Student has an informal idea but has not stated what stays true\n- Student asks why an algorithm works, not just how to code it",
+    "inputs_schema_text": "The `run` function in `logic.py` expects a dictionary with the following keys:\n\n| Key | Type | Description |\n|-----|------|-------------|\n| `message` | `str` | The student's question or idea about a loop, recursion, or data structure |\n| `student_idea` | `str` | Optional short summary of the student's current idea |",
+    "outputs_schema_text": "Returns a dictionary with:\n\n| Key | Type | Description |\n|-----|------|-------------|\n| `prompt` | `str` | A tutor-style invariant prompt |",
+    "usage_example": "```python\nfrom logic import run\n\nresult = run({\n    \"student_idea\": \"I keep a running count while scanning the list.\"\n})\nprint(result)\n```",
+    "code_notes": "- Pair this skill with Trace State Changes when the student needs to test their invariant on a small input.\n- Works best once the student has a proposed loop, recursive structure, or update operation.",
+    "extra_sections": {
+      "skill_type": "- **Type:** code\n- **Course Focus:** CS"
+    },
+    "source_repo": "cs-214-skills",
+    "source_path": "skills/ask-invariant/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs-214-skills/tree/main/skills/ask-invariant/skills.md",
+    "owner_team": "CS-214",
+    "owner_contact": "",
+    "status": "ready",
+    "status_reason": null
+  },
+  {
     "skill_id": "data-rep-choice",
     "name": "Choose Data Representation",
     "skill_type": "code",
@@ -5239,6 +5511,49 @@
     "source_repo": "cs-214-skills",
     "source_path": "skills/data-rep-choice/skills.md",
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs-214-skills/tree/main/skills/data-rep-choice/skills.md",
+    "owner_team": "CS-214",
+    "owner_contact": "",
+    "status": "ready",
+    "status_reason": null
+  },
+  {
+    "skill_id": "detect-ambiguity",
+    "name": "Detect Ambiguity",
+    "skill_type": "code",
+    "stance": "socratic",
+    "tags": [
+      "requirements",
+      "ambiguity",
+      "specification",
+      "clarification"
+    ],
+    "course_types": [
+      "cs"
+    ],
+    "learning_goal_tags": [
+      "detect-ambiguity",
+      "extract-requirements",
+      "specify-io"
+    ],
+    "trigger_signals": [
+      "vague-assignment",
+      "unclear-requirement",
+      "needs-clarification"
+    ],
+    "python_entry": "logic.py",
+    "version": "0.1.0",
+    "description": "Helps students spot unclear wording in an assignment prompt before they turn guesses\ninto implementation decisions. The tutor surfaces ambiguity and helps the student\nform a precise instructor question without inventing assumptions as facts.",
+    "trigger_summary": "- Assignment text contains vague words like \"handle,\" \"reasonable,\" or \"efficient\"\n- Student is unsure what input or output behavior is required\n- Student asks whether an interpretation of the prompt is allowed\n- Prompt omits edge case behavior or error handling expectations\n- Student is about to make an assumption that affects correctness",
+    "inputs_schema_text": "The `run` function in `logic.py` expects a dictionary with the following keys:\n\n| Key | Type | Description |\n|-----|------|-------------|\n| `message` | `str` | The student's question about the assignment |\n| `assignment_text` | `str` | Optional assignment prompt or excerpt |",
+    "outputs_schema_text": "Returns a dictionary with:\n\n| Key | Type | Description |\n|-----|------|-------------|\n| `prompt` | `str` | A tutor-style ambiguity prompt or suggested clarification question |",
+    "usage_example": "```python\nfrom logic import run\n\nresult = run({\n    \"assignment_text\": \"Your function should handle invalid inputs reasonably.\"\n})\nprint(result)\n```",
+    "code_notes": "- Pair this skill with Identify Outputs when the ambiguity concerns return values or printed output.\n- Works best when the student provides the exact assignment wording.",
+    "extra_sections": {
+      "skill_type": "- **Type:** code\n- **Course Focus:** CS"
+    },
+    "source_repo": "cs-214-skills",
+    "source_path": "skills/detect-ambiguity/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs-214-skills/tree/main/skills/detect-ambiguity/skills.md",
     "owner_team": "CS-214",
     "owner_contact": "",
     "status": "ready",
@@ -5384,6 +5699,49 @@
     "status_reason": "skill_id 'example-skill' is already claimed by repo 'cs-348-skills'. Repo 'cs-214-skills' is rejected. Rename this skill or coordinate with the 'cs-348-skills' team."
   },
   {
+    "skill_id": "identify-inv",
+    "name": "Identify Invariants",
+    "skill_type": "code",
+    "stance": "socratic",
+    "tags": [
+      "invariants",
+      "loops",
+      "data-structures",
+      "correctness"
+    ],
+    "course_types": [
+      "cs"
+    ],
+    "learning_goal_tags": [
+      "identify-invariants",
+      "trace-execution",
+      "evaluate-reasoning"
+    ],
+    "trigger_signals": [
+      "loop-invariant",
+      "structure-property",
+      "correctness-check"
+    ],
+    "python_entry": "logic.py",
+    "version": "0.1.0",
+    "description": "Helps students state what must remain true while they work with loops, recursion,\nor mutable data structures. The tutor turns the student's current design into\ninvariant prompts and lightweight correctness checks without completing a formal proof.",
+    "trigger_summary": "- Student is designing or debugging a loop\n- Student is maintaining a data structure across updates\n- Student asks whether an algorithm is correct\n- Student needs to reason about recursive progress\n- Student has a topic area but has not identified the property that must be preserved",
+    "inputs_schema_text": "The `run` function in `logic.py` expects a dictionary with the following keys:\n\n| Key | Type | Description |\n|-----|------|-------------|\n| `message` | `str` | The student's question about correctness, loops, or data structures |\n| `current_design` | `str` | Optional description of the student's design |\n| `topic_area` | `str` | Optional topic area such as loops, recursion, trees, or graphs |",
+    "outputs_schema_text": "Returns a dictionary with:\n\n| Key | Type | Description |\n|-----|------|-------------|\n| `prompt` | `str` | A tutor-style prompt for identifying or checking an invariant |",
+    "usage_example": "```python\nfrom logic import run\n\nresult = run({\n    \"current_design\": \"Use two pointers that move inward while scanning a sorted list.\",\n    \"topic_area\": \"loops\"\n})\nprint(result)\n```",
+    "code_notes": "- Pair this skill with Ask for Invariant when the student needs a single focused prompt.\n- Pair this skill with Trace State Changes when the student needs to test an invariant on concrete state.",
+    "extra_sections": {
+      "skill_type": "- **Type:** code\n- **Course Focus:** CS"
+    },
+    "source_repo": "cs-214-skills",
+    "source_path": "skills/identify-inv/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs-214-skills/tree/main/skills/identify-inv/skills.md",
+    "owner_team": "CS-214",
+    "owner_contact": "",
+    "status": "ready",
+    "status_reason": null
+  },
+  {
     "skill_id": "identify-outputs",
     "name": "Identify Outputs",
     "skill_type": "code",
@@ -5419,6 +5777,49 @@
     "source_repo": "cs-214-skills",
     "source_path": "skills/identify-outputs/skills.md",
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs-214-skills/tree/main/skills/identify-outputs/skills.md",
+    "owner_team": "CS-214",
+    "owner_contact": "",
+    "status": "ready",
+    "status_reason": null
+  },
+  {
+    "skill_id": "return-behavior",
+    "name": "Decide Return Behavior",
+    "skill_type": "code",
+    "stance": "socratic",
+    "tags": [
+      "functions",
+      "return-values",
+      "side-effects",
+      "interfaces"
+    ],
+    "course_types": [
+      "cs"
+    ],
+    "learning_goal_tags": [
+      "specify-io",
+      "evaluate-modularity",
+      "extract-requirements"
+    ],
+    "trigger_signals": [
+      "print-vs-return",
+      "side-effect-confusion",
+      "function-contract"
+    ],
+    "python_entry": "logic.py",
+    "version": "0.1.0",
+    "description": "Helps students choose between returning a value and producing side effects such as\nprinting or mutating data. The tutor grounds the choice in the assignment wording\nand the student's current design without writing a prohibited final function contract.",
+    "trigger_summary": "- Student mixes printing and returning in the same function\n- Student asks whether a function should print, return, or modify something\n- Assignment wording is unclear about function output\n- Student's tests fail because the function prints instead of returning\n- Student is designing helper functions and unsure what each should produce",
+    "inputs_schema_text": "The `run` function in `logic.py` expects a dictionary with the following keys:\n\n| Key | Type | Description |\n|-----|------|-------------|\n| `message` | `str` | The student's question about returning, printing, or side effects |\n| `assignment` | `str` | Optional assignment wording |\n| `current_design` | `str` | Optional summary of the student's current function design |",
+    "outputs_schema_text": "Returns a dictionary with:\n\n| Key | Type | Description |\n|-----|------|-------------|\n| `prompt` | `str` | A tutor-style prompt or tradeoff explanation about function behavior |",
+    "usage_example": "```python\nfrom logic import run\n\nresult = run({\n    \"message\": \"My function prints the answer but the test says it got None.\"\n})\nprint(result)\n```",
+    "code_notes": "- Pair this skill with Detect Ambiguity when the assignment does not clearly say what behavior is expected.\n- Pair this skill with Identify Outputs when the student needs to name the expected result precisely.",
+    "extra_sections": {
+      "skill_type": "- **Type:** code\n- **Course Focus:** CS"
+    },
+    "source_repo": "cs-214-skills",
+    "source_path": "skills/return-behavior/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs-214-skills/tree/main/skills/return-behavior/skills.md",
     "owner_team": "CS-214",
     "owner_contact": "",
     "status": "ready",
@@ -5461,6 +5862,49 @@
     "source_repo": "cs-214-skills",
     "source_path": "skills/trace-state/skills.md",
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs-214-skills/tree/main/skills/trace-state/skills.md",
+    "owner_team": "CS-214",
+    "owner_contact": "",
+    "status": "ready",
+    "status_reason": null
+  },
+  {
+    "skill_id": "unit-test-plan",
+    "name": "Build a Unit Test Plan",
+    "skill_type": "code",
+    "stance": "socratic",
+    "tags": [
+      "testing",
+      "unit-tests",
+      "test-plan",
+      "verification"
+    ],
+    "course_types": [
+      "cs"
+    ],
+    "learning_goal_tags": [
+      "design-test-plans",
+      "handle-edge-cases",
+      "specify-io"
+    ],
+    "trigger_signals": [
+      "how-to-test",
+      "test-strategy",
+      "missing-test-plan"
+    ],
+    "python_entry": "logic.py",
+    "version": "0.1.0",
+    "description": "Creates a structured testing strategy by helping students identify behavior categories,\nrepresentative cases, and expected outcomes. The tutor can produce a test matrix or\ncase list, but it does not implement a full test suite for the student.",
+    "trigger_summary": "- Student asks how to test their function or program\n- Student has code or pseudocode but no testing strategy\n- Student only tests happy paths\n- Student needs to turn assignment requirements into test cases\n- Student asks whether their planned tests are enough",
+    "inputs_schema_text": "The `run` function in `logic.py` expects a dictionary with the following keys:\n\n| Key | Type | Description |\n|-----|------|-------------|\n| `message` | `str` | The student's question about testing |\n| `assignment` | `str` | Optional assignment wording or requirements |\n| `student_code` | `str` | Optional code or pseudocode summary |",
+    "outputs_schema_text": "Returns a dictionary with:\n\n| Key | Type | Description |\n|-----|------|-------------|\n| `prompt` | `str` | A tutor-style prompt for building a unit test plan |",
+    "usage_example": "```python\nfrom logic import run\n\nresult = run({\n    \"message\": \"How should I test my function that parses a score string?\"\n})\nprint(result)\n```",
+    "code_notes": "- Pair this skill with Edge Case Tests when the student needs deeper help finding boundary and special cases.\n- Pair this skill with Detect Ambiguity if the assignment does not define expected behavior for a case.",
+    "extra_sections": {
+      "skill_type": "- **Type:** code\n- **Course Focus:** CS"
+    },
+    "source_repo": "cs-214-skills",
+    "source_path": "skills/unit-test-plan/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs-214-skills/tree/main/skills/unit-test-plan/skills.md",
     "owner_team": "CS-214",
     "owner_contact": "",
     "status": "ready",

@@ -1,6 +1,6 @@
 # Catalog build report
 
-**Total skills:** 74  ·  ready: 48, stub: 24, broken: 2
+**Total skills:** 82  ·  ready: 61, stub: 19, broken: 2
 
 ## ⚠ Duplicate skill_id rejections
 
@@ -15,16 +15,22 @@ The following skills were **rejected** because their `skill_id` was already clai
 
 | Repo | Total | Ready | Stub | Broken |
 |------|------:|------:|-----:|-------:|
-| `cs-214-skills` | 6 | 5 | 0 | 1 |
+| `cs-214-skills` | 11 | 10 | 0 | 1 |
 | `cs-343-skills` | 5 | 0 | 5 | 0 |
-| `cs-348-skills` | 9 | 4 | 5 | 0 |
+| `cs-348-skills` | 12 | 12 | 0 | 0 |
 | `history-315-skills` | 6 | 0 | 6 | 0 |
 | `jour-201-1-skills` | 6 | 0 | 6 | 0 |
 | `poli_sci-210-skills` | 42 | 39 | 2 | 1 |
 
 ## Issues
 
+### `cs-214-skills/skills/ask-invariant/skills.md`
+- **warn** [`stance`] stance is for instructional skills only; remove for code
+
 ### `cs-214-skills/skills/data-rep-choice/skills.md`
+- **warn** [`stance`] stance is for instructional skills only; remove for code
+
+### `cs-214-skills/skills/detect-ambiguity/skills.md`
 - **warn** [`stance`] stance is for instructional skills only; remove for code
 
 ### `cs-214-skills/skills/edge-case-tests/skills.md`
@@ -36,10 +42,19 @@ The following skills were **rejected** because their `skill_id` was already clai
 ### `cs-214-skills/skills/example-skill/skills.md`
 - **ERROR** [`skill_id`] skill_id 'example-skill' is already claimed by repo 'cs-348-skills'. Repo 'cs-214-skills' is rejected. Rename this skill or coordinate with the 'cs-348-skills' team.
 
+### `cs-214-skills/skills/identify-inv/skills.md`
+- **warn** [`stance`] stance is for instructional skills only; remove for code
+
 ### `cs-214-skills/skills/identify-outputs/skills.md`
 - **warn** [`stance`] stance is for instructional skills only; remove for code
 
+### `cs-214-skills/skills/return-behavior/skills.md`
+- **warn** [`stance`] stance is for instructional skills only; remove for code
+
 ### `cs-214-skills/skills/trace-state/skills.md`
+- **warn** [`stance`] stance is for instructional skills only; remove for code
+
+### `cs-214-skills/skills/unit-test-plan/skills.md`
 - **warn** [`stance`] stance is for instructional skills only; remove for code
 
 ### `cs-343-skills/skills/architecture-tutor/skills.md`
@@ -69,27 +84,8 @@ The following skills were **rejected** because their `skill_id` was already clai
 - **warn** [`learning_goal_tags`] missing — strongly recommended for orchestrator routing
 - **ERROR** [`stance`] must be one of ['hint', 'meta', 'reframe', 'socratic']
 
-### `cs-348-skills/skills/ask-debug-aloud/skills.md`
-- **ERROR** [`tags`] missing or empty
-
-### `cs-348-skills/skills/compare-algorithm-strategies/skills.md`
-- **ERROR** [`course_types`] missing or empty (must be subset of cs/humanities)
-- **warn** [`learning_goal_tags`] missing — strongly recommended for orchestrator routing
-- **ERROR** [`stance`] must be one of ['hint', 'meta', 'reframe', 'socratic']
-- **warn** [`skill_id`] length 28 > 18 chars — see Team-Guide §7
-
-### `cs-348-skills/skills/crit-code-concept/skills.md`
-- **ERROR** [`tags`] missing or empty
-
-### `cs-348-skills/skills/explain-edge-cases/skills.md`
-- **ERROR** [`course_types`] missing or empty (must be subset of cs/humanities)
-- **warn** [`learning_goal_tags`] missing — strongly recommended for orchestrator routing
-- **ERROR** [`stance`] must be one of ['hint', 'meta', 'reframe', 'socratic']
-
-### `cs-348-skills/skills/trace-an-algo/skills.md`
-- **ERROR** [`course_types`] missing or empty (must be subset of cs/humanities)
-- **warn** [`learning_goal_tags`] missing — strongly recommended for orchestrator routing
-- **ERROR** [`stance`] must be one of ['hint', 'meta', 'reframe', 'socratic']
+### `cs-348-skills/skills/restate-the-problem/skills.md`
+- **warn** [`skill_id`] length 19 > 18 chars — see Team-Guide §7
 
 ### `history-315-skills/skills/causal-chains-skill/skills.md`
 - **ERROR** [`course_types`] missing or empty (must be subset of cs/humanities)
