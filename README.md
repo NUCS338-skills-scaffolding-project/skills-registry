@@ -121,6 +121,63 @@ The registry uses **flat JSON** (`catalog.json`) as its storage format. This is 
 
 ---
 
+## Testing your skills locally (without pushing to git)
+
+You can add your skills to the local catalog and test them in the orchestrator without committing or pushing anything. This is the recommended workflow while actively developing a skill.
+
+### Folder layout
+
+Clone all repos into the same parent folder — the catalog builder treats each subfolder as a team repo:
+
+```
+mentora/                        ← parent folder (name doesn't matter)
+├── skills-registry/            ← this repo
+├── skills-orchestrator/
+├── skills-ui/
+└── your-team-repo/             ← your skills live here
+    ├── metadata.yaml
+    └── skills/
+        └── your-skill/
+            └── skills.md
+```
+
+### Rebuild the catalog
+
+From inside the `skills-registry` folder, run:
+
+```bash
+python scripts/catalog_builder.py --local ..
+```
+
+`..` points at the parent folder — the builder scans every sibling repo, finds your `skills/*/skills.md` files, validates them, and writes the updated `catalog.json` here.
+
+Check `build_report.md` immediately after to see your skill's status and any validation errors:
+
+```bash
+cat build_report.md
+```
+
+### Tell the orchestrator to reload
+
+The orchestrator caches the catalog in memory. After rebuilding, trigger a reload without restarting:
+
+```bash
+curl -X POST http://localhost:8080/registry/refresh \
+  -H "Authorization: Bearer changeme-dev-token"
+```
+
+Your updated skills are now live. Open the UI and test.
+
+### Iteration loop
+
+```
+edit skills.md  →  python scripts/catalog_builder.py --local ..  →  curl .../registry/refresh  →  test in UI
+```
+
+No push required at any step. Push to git when the skill is ready and you want it in the shared catalog.
+
+---
+
 ## Building the catalog locally
 
 ```bash

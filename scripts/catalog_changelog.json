@@ -1,10 +1,195 @@
 {
-  "generated_at": "2026-05-03T21:50:13.497980+00:00",
+  "generated_at": "2026-05-05T19:27:19.727910+00:00",
   "previous_hash": "dfb331496f8a48a5",
-  "current_hash": "dfb331496f8a48a5",
-  "added": [],
-  "removed": [],
-  "changed": [],
-  "unchanged_count": 59,
-  "summary": "no changes"
+  "current_hash": "07b7bd282450a304",
+  "added": [
+    "adjust-to-level",
+    "ai-explain",
+    "ai-memo",
+    "alt-designs",
+    "ask-debug-aloud",
+    "ask-prediction",
+    "author-choices",
+    "cohesion-check",
+    "comp-check",
+    "compare-readings",
+    "concept-example",
+    "concept-hint",
+    "counter-example",
+    "crit-code-concept",
+    "critique-design",
+    "data-rep-choice",
+    "decompose-arg",
+    "decompose-the-prob",
+    "edge-case-tests",
+    "error-messages",
+    "eval-ai-response",
+    "evidence-placement",
+    "example-code",
+    "example-skill",
+    "flow-check",
+    "frame-hypothesis",
+    "inference-threats",
+    "map-design",
+    "method-align",
+    "op-check",
+    "orient-paper",
+    "pick-week-concept",
+    "play-reviewer",
+    "quiz-prep",
+    "quiz-triage",
+    "reasoning-check",
+    "redirect-direct",
+    "reframe-trace",
+    "scaffold-writing",
+    "scope-check",
+    "session-reflect",
+    "source-credibility",
+    "stat-intuition",
+    "tie-to-course",
+    "trace-evidence",
+    "trace-state"
+  ],
+  "removed": [
+    "alternative-design-brainstorm",
+    "argument-decomposition",
+    "assumption-validation-skill",
+    "choose-data-representation",
+    "cohesion-strengthening",
+    "compare-two-readings",
+    "connect-concept-to-example",
+    "critique-research-design",
+    "decompose-the-problem",
+    "decomposing-questions-skill",
+    "evaluate-source-credibility",
+    "evidence-placement-review",
+    "extract-research-design",
+    "generate-study-questions",
+    "inference-threat-spotting",
+    "interpret-error-messages",
+    "investigate-reading",
+    "logical-flow-testing",
+    "method-week-alignment",
+    "operationalization-check",
+    "probe-author-choices",
+    "reading-comprehension-check",
+    "reasoning-evaluation",
+    "redirect-direct-solution-requests",
+    "reflect-on-ai-response",
+    "rubric-feedback-skill",
+    "rubric-validation-skill",
+    "scaffold-written-assignment",
+    "scope-conditions-check",
+    "tie-reading-to-course",
+    "trace-claim-to-evidence",
+    "trace-state-changes",
+    "turn-edge-cases-into-tests"
+  ],
+  "changed": [
+    {
+      "skill_id": "analyze-writing",
+      "changes": {
+        "status": {
+          "from": "stub",
+          "to": "ready"
+        },
+        "stance": {
+          "from": null,
+          "to": "meta"
+        }
+      }
+    },
+    {
+      "skill_id": "design-skeleton",
+      "changes": {
+        "status": {
+          "from": "stub",
+          "to": "ready"
+        },
+        "stance": {
+          "from": null,
+          "to": "socratic"
+        }
+      }
+    },
+    {
+      "skill_id": "explain-back-check",
+      "changes": {
+        "status": {
+          "from": "stub",
+          "to": "ready"
+        },
+        "stance": {
+          "from": null,
+          "to": "socratic"
+        }
+      }
+    },
+    {
+      "skill_id": "first-pass-orient",
+      "changes": {
+        "status": {
+          "from": "stub",
+          "to": "ready"
+        },
+        "stance": {
+          "from": null,
+          "to": "socratic"
+        }
+      }
+    },
+    {
+      "skill_id": "form-critique",
+      "changes": {
+        "status": {
+          "from": "stub",
+          "to": "ready"
+        },
+        "stance": {
+          "from": null,
+          "to": "meta"
+        }
+      }
+    },
+    {
+      "skill_id": "identify-outputs",
+      "changes": {
+        "status": {
+          "from": "stub",
+          "to": "ready"
+        },
+        "version": {
+          "from": null,
+          "to": "0.1.0"
+        },
+        "stance": {
+          "from": null,
+          "to": "socratic"
+        }
+      }
+    },
+    {
+      "skill_id": "skill-name",
+      "changes": {
+        "stance": {
+          "from": null,
+          "to": "socratic"
+        },
+        "owner_team": {
+          "from": "CS-214",
+          "to": "POLISCI-210"
+        },
+        "owner_contact": {
+          "from": "",
+          "to": "bryanmurray2026@u.northwestern.edu"
+        },
+        "source_repo": {
+          "from": "cs-214-skills",
+          "to": "poli_sci-210-skills"
+        }
+      }
+    }
+  ],
+  "unchanged_count": 19,
+  "summary": "46 added, 33 removed, 7 changed"
 }
