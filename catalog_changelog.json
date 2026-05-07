@@ -1,0 +1,228 @@
+{
+  "generated_at": "2026-05-07T01:49:17.647823+00:00",
+  "previous_hash": "35100d6cee446d48",
+  "current_hash": "6d350296940b79d4",
+  "added": [
+    "affirm-progress",
+    "ask-for-decomposition",
+    "ask-for-paraphrase",
+    "asm-translation",
+    "bound-scope",
+    "cache-optimized-code",
+    "causal-chains",
+    "claim-verification",
+    "connect-prior-knowledge",
+    "contrastive-hint",
+    "converge_ideas",
+    "convert_request_into_safe_help_mode",
+    "counter_example",
+    "counterview-prompt",
+    "cross-event-cause",
+    "debug-first-step",
+    "dx-prereq-gaps",
+    "edge-case-gen",
+    "escalate-hint-lvl",
+    "evaluate-readability-on-code",
+    "evidence-interpret",
+    "examples-from-spec",
+    "execution-trace",
+    "experience_connect",
+    "explain-after-hint",
+    "explanation-nautilus-architecture",
+    "extract-requirements",
+    "fade-support",
+    "give-a-nudge",
+    "id-misconception",
+    "idea_organizer",
+    "identify-key-idea",
+    "lecture-ingestion",
+    "map_to_learning_goals",
+    "next-step-nudge",
+    "normalize-struggle",
+    "obj-alignment",
+    "pick-one-gap",
+    "prompt-reflection",
+    "reading-connector",
+    "reading_discussor",
+    "reframe-with-analogy",
+    "reframe_with_analogy",
+    "repair-miscon",
+    "rubric-scorer",
+    "select-passage",
+    "sequence-concepts",
+    "session-opener",
+    "specifier",
+    "stack-visualizer",
+    "summarize-progress",
+    "surface-assumption",
+    "validate-prereqs"
+  ],
+  "removed": [
+    "causal-chains-skill",
+    "cause-effect-between-events-skill",
+    "identify-misconceptions-skill",
+    "learning-objective-comparison-skill",
+    "lecture-ingestion-skill",
+    "reading-connector-skill"
+  ],
+  "changed": [
+    {
+      "skill_id": "ask-invariant",
+      "changes": {
+        "skill_type": {
+          "from": "code",
+          "to": "instructional"
+        }
+      }
+    },
+    {
+      "skill_id": "c-debugger",
+      "changes": {
+        "status": {
+          "from": "stub",
+          "to": "broken"
+        },
+        "version": {
+          "from": null,
+          "to": "0.1.0"
+        },
+        "name": {
+          "from": "C Debugging Skill",
+          "to": "C Debugger"
+        },
+        "owner_team": {
+          "from": "CS-343",
+          "to": "CS-213"
+        },
+        "owner_contact": {
+          "from": "admin@example.com",
+          "to": "nikos@northwestern.edu"
+        },
+        "source_repo": {
+          "from": "cs-343-skills",
+          "to": "CS-213-skills"
+        }
+      }
+    },
+    {
+      "skill_id": "data-rep-choice",
+      "changes": {
+        "skill_type": {
+          "from": "code",
+          "to": "instructional"
+        },
+        "stance": {
+          "from": "socratic",
+          "to": "hint"
+        }
+      }
+    },
+    {
+      "skill_id": "detect-ambiguity",
+      "changes": {
+        "skill_type": {
+          "from": "code",
+          "to": "instructional"
+        }
+      }
+    },
+    {
+      "skill_id": "edge-case-tests",
+      "changes": {
+        "stance": {
+          "from": "socratic",
+          "to": null
+        }
+      }
+    },
+    {
+      "skill_id": "error-messages",
+      "changes": {
+        "stance": {
+          "from": "hint",
+          "to": null
+        }
+      }
+    },
+    {
+      "skill_id": "example-skill",
+      "changes": {
+        "name": {
+          "from": "Example Identify Outputs",
+          "to": "Example: Restate the Problem"
+        },
+        "owner_team": {
+          "from": "CS-214",
+          "to": "CS-213"
+        },
+        "owner_contact": {
+          "from": "",
+          "to": "nikos@northwestern.edu"
+        },
+        "source_repo": {
+          "from": "cs-214-skills",
+          "to": "CS-213-skills"
+        }
+      }
+    },
+    {
+      "skill_id": "identify-inv",
+      "changes": {
+        "skill_type": {
+          "from": "code",
+          "to": "instructional"
+        }
+      }
+    },
+    {
+      "skill_id": "identify-outputs",
+      "changes": {
+        "stance": {
+          "from": "socratic",
+          "to": null
+        }
+      }
+    },
+    {
+      "skill_id": "return-behavior",
+      "changes": {
+        "skill_type": {
+          "from": "code",
+          "to": "instructional"
+        },
+        "stance": {
+          "from": "socratic",
+          "to": "hint"
+        }
+      }
+    },
+    {
+      "skill_id": "trace-state",
+      "changes": {
+        "skill_type": {
+          "from": "code",
+          "to": "instructional"
+        },
+        "stance": {
+          "from": "socratic",
+          "to": "reframe"
+        }
+      }
+    },
+    {
+      "skill_id": "unit-test-plan",
+      "changes": {
+        "skill_type": {
+          "from": "code",
+          "to": "instructional"
+        },
+        "stance": {
+          "from": "socratic",
+          "to": "hint"
+        }
+      }
+    }
+  ],
+  "unchanged_count": 62,
+  "summary": "53 added, 6 removed, 12 changed"
+}
