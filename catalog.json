@@ -7705,6 +7705,220 @@
     "status_reason": null
   },
   {
+    "skill_id": "analyze-dist",
+    "name": "Analyze Distribution",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "tags": [
+      "phonology",
+      "phonemic-analysis",
+      "distributional-analysis",
+      "allophone",
+      "allomorph",
+      "methodology",
+      "ling250"
+    ],
+    "course_types": [
+      "humanities"
+    ],
+    "learning_goal_tags": [
+      "interpret-evidence",
+      "decompose-arguments",
+      "identify-evidence",
+      "surface-assumptions"
+    ],
+    "trigger_signals": [
+      "student-shown-language-data",
+      "student-asks-phonemic-status",
+      "student-asks-allophone-status",
+      "student-must-classify-phoneme-vs-allophone",
+      "student-asks-how-to-analyze-data",
+      "student-uncertain-about-distribution",
+      "data-shown-with-two-target-sounds",
+      "wrong-answer-from-incomplete-environment-listing"
+    ],
+    "version": "0.1.0",
+    "python_entry": "logic.py",
+    "description": "Walks the student through the five-step distributional analysis methodology\nthat runs through phonemic analysis (HW4), allomorph selection (HW4 + HW5),\nand syllable-conditioned alternations (HW5). Given a dataset of forms\ncontaining two target sounds (or two allomorphs of a morpheme), the skill\nscaffolds the procedure: look for minimal pairs, list environments, classify\nthe distribution, check phonetic similarity, choose the underlying\nrepresentation by simplicity. The student does the analysis; the skill\nprovides scaffolding prompts, catches common errors, and surfaces parallel\nproblems when stuck. Stateless \u2014 the orchestrator tracks which step the\nstudent is on.",
+    "trigger_summary": "### Fires when:\n- Student is given linguistic data (forms in IPA from any language) and\n  must determine the phonemic status of two sounds\n- Student must determine which allomorph of a morpheme appears in what\n  context\n- Student must identify a phonological rule from a paradigm of alternations\n- Student says things like \"are these phonemes or allophones?\", \"how do\n  I figure out the rule?\", \"what's the underlying form?\", or shows data\n  and asks for help analyzing it\n- Wrong answer reveals incomplete environment listing or jumped-to-\n  conclusion analysis\n\n### Does NOT fire when:\n- Student is on a transcription question with no analysis to do (HW1/HW2\n  territory)\n- Student is reading a spectrogram (use `read-acoustic-trace`)\n- Student needs help identifying a single natural class (use\n  `id-natural-class`)\n- Student has already done the analysis and just needs to formalize the\n  rule (use `write-phon-rule`)\n- Student's confusion is about what two sounds *sound* like, not how\n  they distribute (use `contrastive-hint`)\n\n### Boundary cases:\n- **Student names two sounds but no data given**: ambiguous between this\n  skill and `contrastive-hint`. If the student is asking about\n  classification (\"are X and Y allophones?\") and the assignment is\n  HW4/HW5, prefer this skill. If they're asking about feature differences\n  (\"how is X different from Y?\"), prefer contrastive-hint.\n- **Student stuck on a single step**: this skill scaffolds the whole\n  procedure but each step has its own hint ladder. Re-call the skill\n  with the relevant `current_step` to get step-specific scaffolding.\n- **Student tries to apply English categorizations to non-English data**:\n  fire alongside `repair-miscon` for the [i]/[\u026a] cross-linguistic\n  projection error.",
+    "tutor_stance_rules": [
+      "Methodological discipline. The student does the analysis; the skill",
+      "Each language stands on its own. Don't appeal to English categorizations",
+      "Insist on completeness. The discipline of writing out *every* environment",
+      "Phonetic similarity is required, not optional. Even with complementary",
+      "Two URs analyzed in parallel, not in sequence. When choosing UR by"
+    ],
+    "flow": [
+      {
+        "step": 1,
+        "title": "Frame the question",
+        "description": "Confirm the student knows the trinary choice they're determining: separate\nphonemes, allophones of one phoneme, or free variation. If they don't know,\nredirect to `validate-prereqs` for a phonemic-principle refresher before\ncontinuing."
+      },
+      {
+        "step": 2,
+        "title": "Look for minimal pairs",
+        "description": "Ask: \"Can you find a pair of words in the data that differ ONLY in [X]\nvs [Y]?\" If yes \u2192 strong evidence for separate phonemes. If no \u2192 \"Absence\nof minimal pairs is not proof of allophony \u2014 let's check distribution.\"\nMove to Step 3."
+      },
+      {
+        "step": 3,
+        "title": "List environments",
+        "description": "Have the student list every left-and-right environment where each sound\nappears. Insist on completeness \u2014 every form, both contexts. This is the\ndiscipline that catches the analysis."
+      },
+      {
+        "step": 4,
+        "title": "Classify distribution",
+        "description": "Ask: \"Looking at your two lists, is there ANY context where both [X] and\n[Y] appear?\" Yes \u2192 overlapping \u2192 separate phonemes. No \u2192 complementary\n\u2192 likely allophones. Proceed to Step 4b."
+      },
+      {
+        "step": 5,
+        "title": "Step 4b \u2014 Phonetic similarity check",
+        "description": "Critical: complementary distribution alone is NOT sufficient. Ask \"What\nfeatures do [X] and [Y] share?\" If they share most features (place, manner,\nvoicing for consonants), proceed to Step 5. If they're radically different\n(English [h]/[\u014b] case), they're separate phonemes despite complementary\ndistribution."
+      },
+      {
+        "step": 5,
+        "title": "Choose UR + write rule",
+        "description": "For allophones: ask the student to consider both candidate URs in parallel.\n\"If [X] is the UR, what rule(s) would you need? Now if [Y] is the UR,\nwhat rule(s) would you need?\" The simpler analysis wins. Hand off to\n`write-phon-rule` if the student needs help with formal notation."
+      }
+    ],
+    "safe_outputs": [
+      "Scaffolding prompts that ask the student to produce the next analytical",
+      "Acknowledgments of student progress at each step (\"right, that's",
+      "Redirects when the student skips ahead (\"hold on \u2014 have you listed",
+      "Pointers to parallel problems from the EXAMPLE_DATASETS catalog when",
+      "Step-specific hints from the HINT_LADDERS at increasing levels of",
+      "Transition lines when handing off to a partner skill (\"now that you've"
+    ],
+    "must_avoid": [
+      "Performing the analysis for the student (the central failure mode)",
+      "Classifying the sounds (phonemes vs allophones) before the student has",
+      "Naming the natural class of the conditioning environment (that's",
+      "Writing the formal rule notation (that's `write-phon-rule`'s job)",
+      "Appealing to English categorizations to settle non-English data",
+      "Accepting partial environment lists \u2014 students who skip environments",
+      "Proposing the UR before both candidates have been compared",
+      "Skipping the phonetic similarity check after complementary distribution",
+      "Continuing to scaffold when the student is fundamentally missing a",
+      "Mixing slashes and brackets in modeled examples (the level distinction"
+    ],
+    "example_exchange": "> **Student:** I have data from a language with [b] and [\u03b2]. Are they the\n> same phoneme or different phonemes?\n>\n> **Tutor:** Good question. Before we look at the data, what are we trying\n> to figure out \u2014 separate phonemes, allophones of one phoneme, or free\n> variation?\n>\n> **Student:** Phonemes vs allophones I think.\n>\n> **Tutor:** Right. Step one \u2014 can you find a pair of words in your data\n> that differ ONLY in [b] vs [\u03b2]?\n>\n> **Student:** I see [bino] \"wine\" and [la\u03b2a] \"lava\"... but those are\n> different words about different things.\n>\n> **Tutor:** Those aren't a minimal pair \u2014 they don't share most of their\n> structure. That's okay; absence of minimal pairs isn't proof of allophony.\n> Let's list contexts. Start with [b]: in your data, what sound comes\n> before and after each [b]?\n>\n> **Student:** [b] is at the start of *bino* and *bonito*. There's [m]\n> before [b] in *ambos*.\n>\n> **Tutor:** Good. So [b] appears word-initially and after [m]. Now do\n> the same for [\u03b2]: where does it appear?\n>\n> **Student:** [\u03b2] is between two vowels in *la\u03b2a* and *sa\u03b2er*.\n>\n> **Tutor:** So [b] in some contexts, [\u03b2] in others. Look at your two\n> lists side by side. Are there any contexts where BOTH [b] and [\u03b2]\n> appear?\n>\n> **Student:** No, they're in different positions every time.\n>\n> **Tutor:** Right \u2014 that's complementary distribution. One more check\n> before we conclude allophones: are [b] and [\u03b2] phonetically similar?\n> What features do they share?",
+    "extra_sections": {
+      "disambiguation_from_other_skills": "- `contrastive-hint` produces a *contrast* between two sounds \u2014\n  what features distinguish them. **This skill** scaffolds *analysis*\n  of how two sounds *distribute* across data.\n- `id-natural-class` identifies the natural class of a set of sounds.\n  **This skill** identifies the *distributional pattern* of two sounds\n  in data; it may *use* `id-natural-class` for the conditioning\n  environment in the rule.\n- `write-phon-rule` formalizes a known alternation in formal notation.\n  **This skill** runs *upstream* of that \u2014 figuring out whether there\n  IS an alternation to formalize.\n- `repair-miscon` fires when the student's reasoning is caught on a\n  cataloged misconception (e.g., projecting English [i]/[\u026a] phonemic\n  status onto another language). **This skill** assumes the student's\n  conceptual model is intact and just needs methodological scaffolding.\n- `dx-prereq-gaps` fires when scaffolding isn't landing because the\n  student lacks the phonemic principle itself. **This skill** assumes\n  the principle is understood and helps the student apply it.",
+      "inputs_expected_by_logic_py": "- `target_sounds` (list of str, optional): the IPA symbols under analysis,\n  e.g. `[\"b\", \"\u03b2\"]`\n- `current_step` (int, optional): which diagnostic step the student is on\n  (1-5, or \"4b\"). 0 or absent means the skill defaults to Step 1.\n- `student_response` (str, optional): the student's most recent utterance,\n  used by the orchestrator to detect when to advance steps or trigger\n  error catches",
+      "outputs_returned_by_logic_py": "A dict:\n- `flow` (list): the 6 diagnostic steps with tutor prompts and advance\n  conditions\n- `hint_ladders` (dict): keyed by step name, each value is a 3-level hint\n  progression\n- `common_errors` (list): cataloged error patterns with trigger phrases\n  and redirect responses\n- `example_datasets` (dict): 5 canonical analyses (Spanish, Korean,\n  Hindi, English h-\u014b, Cree) for parallel-problem suggestion\n- `tutor_reminders` (list): high-priority stance reminders for the\n  orchestrator's prompt assembly",
+      "notes_for_reusers": "This skill is the workhorse for HW4 and HW5 phonemic-analysis questions.\nIt pairs upstream of `id-natural-class` (when the conditioning environment\nneeds class identification), `write-phon-rule` (when the analysis is done\nand the student needs formal notation), and `probe-min-pair` (when minimal\npair reasoning is the focus).\n\nThe `EXAMPLE_DATASETS` catalog is intentionally short \u2014 full\ncross-linguistic data lives in `utils/language_datasets.py`. The skill's\nlocal copy is for portability if utils aren't loaded."
+    },
+    "source_repo": "ling-250-skills",
+    "source_path": "skills/analyze-dist/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/ling-250-skills/tree/main/skills/analyze-dist/skills.md",
+    "owner_team": "LING-250",
+    "owner_contact": "lucilleoh@u.northwestern.edu",
+    "status": "ready",
+    "status_reason": null
+  },
+  {
+    "skill_id": "apply-phon-rule",
+    "name": "Apply Phonological Rule",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "tags": [
+      "phonology",
+      "phonological-rules",
+      "derivation",
+      "forward-application",
+      "methodology",
+      "ling250"
+    ],
+    "course_types": [
+      "humanities"
+    ],
+    "learning_goal_tags": [
+      "extract-requirements",
+      "verify-claims",
+      "surface-assumptions"
+    ],
+    "trigger_signals": [
+      "student-given-ur-and-rule",
+      "student-asks-how-to-apply-rule",
+      "student-stuck-deriving-surface-form",
+      "wrong-answer-applies-rule-where-environment-doesnt-match",
+      "wrong-answer-fails-to-apply-rule-where-environment-matches",
+      "student-confuses-rule-reading-with-rule-application",
+      "student-asks-what-rule-produces"
+    ],
+    "chip_icon": "\u25b6\ufe0f",
+    "version": "0.1.0",
+    "python_entry": "logic.py",
+    "description": "Scaffolds applying a given phonological rule forward \u2014 deriving the\nsurface form from an underlying representation. The student is given a\nUR (e.g., `/apa/`) and a rule (e.g., `/p/ \u2192 [b] / V __ V`) and must\nproduce the surface form (`[aba]`). Forward derivation is mechanical\nonce the student understands rule-reading: parse the rule (target,\nresult, environment), scan the UR for environment matches, apply the\nchange at each match. Tested explicitly on Midterm 2 (review problems\nC2-C3) but rarely on HW4. Stateless \u2014 the orchestrator tracks which\nstep the student is on and which loci have been checked.",
+    "trigger_summary": "### Fires when:\n- Student is given a UR and a rule and must derive the surface form\n- Student attempts to apply a rule and gets the wrong answer\n- Student asks \"how do I use this rule?\" or \"what does this rule\n  produce on /X/?\"\n- Student applies the rule incorrectly (in the wrong context, or fails\n  to apply where the context matches)\n- Student treats rule-application as the same operation as rule-reading\n\n### Does NOT fire when:\n- Student is writing a rule from observed data (use `write-phon-rule` \u2014\n  the inverse operation)\n- Student is doing distributional analysis (use `analyze-dist`)\n- Student is identifying a natural class (use `id-natural-class`)\n- Student is on a transcription question (HW1/HW2)\n\n### Boundary cases:\n- **Multiple rule applications in one form**: scan left-to-right and\n  apply the rule at every matching context. Example: rule `/p/ \u2192 [b] /\n  V _ V` applied to `/apapa/` yields `[ababa]`, not `[abapa]` \u2014 both\n  /p/'s match the environment.\n- **Rule order matters**: when two rules interact, the order can change\n  the output. This skill handles single-rule application. For ordered\n  rule sets, scaffold each rule application in turn.\n- **Rule doesn't apply at all**: if the UR doesn't match the rule's\n  environment anywhere, the surface form equals the UR. Students\n  sometimes try to \"force\" rule application \u2014 redirect.",
+    "tutor_stance_rules": [
+      "The student does the derivation. The skill scaffolds the procedure.",
+      "Application is mechanical, not creative. Given a UR and a rule, the",
+      "Read every rule completely before applying. Target \u2192 result, then",
+      "Scan every position. Don't stop at the first match \u2014 there may be",
+      "Match the environment exactly. If the rule says `V __ V`, both",
+      "If no locus matches, the rule doesn't apply. Surface = UR."
+    ],
+    "flow": [
+      {
+        "step": 1,
+        "title": "Parse the rule",
+        "description": "Read the rule into its three parts: target (what gets transformed),\nresult (what it becomes), environment (where the change happens). Have\nthe student identify each part out loud."
+      },
+      {
+        "step": 2,
+        "title": "Scan the UR for the target",
+        "description": "Find every position where the target sound appears in the UR. Mark each\nas a candidate locus. (Rules can apply multiple times in one form.)"
+      },
+      {
+        "step": 3,
+        "title": "Check the environment at each locus",
+        "description": "At each candidate position, check whether the environment matches.\nWalk through left context and right context separately. If any part\nof the environment doesn't match, the rule doesn't apply at that locus."
+      },
+      {
+        "step": 4,
+        "title": "Apply the change at matching loci",
+        "description": "At every locus where the environment matches, replace the target with\nthe result. Loci where the environment doesn't match stay unchanged."
+      },
+      {
+        "step": 5,
+        "title": "Output the surface form",
+        "description": "Read the resulting form. This is the surface representation. Use brackets\n`[X]` for the surface form, slashes `/X/` for the original UR."
+      }
+    ],
+    "safe_outputs": [
+      "Rule-parsing prompts (\"read the rule out loud \u2014 what's the target?",
+      "Locus-finding prompts (\"scan the UR \u2014 where does the target appear?\")",
+      "Environment-checking prompts (\"at this locus, what's to the left? Is",
+      "Application acknowledgments (\"right, the environment matches here, so",
+      "Non-application acknowledgments (\"the environment doesn't match here,",
+      "Verification prompts after derivation (\"read the surface form back \u2014",
+      "Redirects when the student tries to force application or misses a"
+    ],
+    "must_avoid": [
+      "Deriving the surface form for the student",
+      "Glossing over the environment check (\"yeah it'll apply\" without",
+      "Letting the student stop at the first match when multiple loci exist",
+      "Letting the student apply a rule whose environment doesn't actually",
+      "Mixing the slashes/brackets convention in modeled examples",
+      "Treating multi-rule alternations as if a single rule covers everything \u2014",
+      "Continuing rule-application scaffolding when the student doesn't"
+    ],
+    "example_exchange": "> **Student:** I have the rule /p/ \u2192 [b] / V __ V. The UR is /apapa/.\n> What's the surface form?\n>\n> **Tutor:** Let's apply it together. First, read the rule out loud.\n> What's the target?\n>\n> **Student:** /p/.\n>\n> **Tutor:** And what does it become?\n>\n> **Student:** [b].\n>\n> **Tutor:** And the environment?\n>\n> **Student:** Between two vowels.\n>\n> **Tutor:** Good. Now scan the UR /apapa/. Where does /p/ appear?\n>\n> **Student:** Position 2 and position 4.\n>\n> **Tutor:** Two loci. Let's check the environment at each. Locus 1 \u2014\n> what's to the left of the first /p/? What's to the right?\n>\n> **Student:** [a] on the left, [a] on the right.\n>\n> **Tutor:** Both vowels?\n>\n> **Student:** Yes.\n>\n> **Tutor:** So the environment matches. /p/ becomes [b] there. Now\n> locus 2 \u2014 same check. What's left and right of the second /p/?\n>\n> **Student:** [a] on both sides too.\n>\n> **Tutor:** Both match. So both /p/'s become [b]. What's the surface\n> form?\n>\n> **Student:** [ababa].\n>\n> **Tutor:** Right. Don't forget the brackets \u2014 surface forms use\n> brackets, underlying forms use slashes.",
+    "extra_sections": {
+      "disambiguation_from_other_skills": "- `write-phon-rule` writes a rule from observed data. **This skill**\n  applies a given rule forward to derive surface from UR. They're\n  inverse operations.\n- `analyze-dist` runs the upstream distributional analysis. **This\n  skill** is downstream of any analysis \u2014 the rule is already known.\n- `id-natural-class` identifies the natural class of a set of sounds.\n  **This skill** uses class memberships when checking whether a context\n  matches a feature-based environment, but doesn't identify them.\n- `repair-miscon` fires on cataloged misconceptions like \"rule reading\n  is the same as rule application\" or \"rules apply randomly.\" **This\n  skill** assumes the student understands rules are deterministic\n  symbolic mappings.",
+      "inputs_expected_by_logic_py": "- `rule` (str, optional): the phonological rule in standard notation,\n  e.g. `\"/p/ \u2192 [b] / V __ V\"`\n- `ur` (str, optional): the underlying representation, e.g. `\"/apapa/\"`\n- `current_step` (int, optional): which step the student is on (1-5).\n  0 or absent defaults to Step 1.\n- `loci_checked` (list of int, optional): positions in the UR already\n  evaluated, used by orchestrator for multi-locus scaffolding",
+      "outputs_returned_by_logic_py": "A dict:\n- `flow` (list): the 5 flow steps with tutor prompts\n- `parsing_template` (dict): the structure for parsing a rule into\n  target, result, and environment components\n- `hint_ladders` (dict): per-step hint progressions\n- `common_errors` (list): cataloged error patterns with redirects\n- `example_derivations` (list): canonical UR + rule \u2192 surface\n  derivations for parallel examples\n- `tutor_reminders` (list): high-priority stance reminders",
+      "notes_for_reusers": "This skill complements `write-phon-rule` \u2014 together they cover both\ndirections of rule operation. Forward application is tested on Midterm 2\n(review problems C2-C3) and occasionally embedded in HW4 questions\nthat ask \"what would this rule produce?\"\n\nThe example derivations include cases where the rule applies once,\napplies multiple times, and doesn't apply at all. Use these to\nscaffold the student through edge cases that feel surprising.\n\nFor ordered rule sets (rare in LING 250 but appears in advanced phonology),\napply each rule in turn \u2014 this skill scaffolds one rule at a time."
+    },
+    "source_repo": "ling-250-skills",
+    "source_path": "skills/apply-phon-rule/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/ling-250-skills/tree/main/skills/apply-phon-rule/skills.md",
+    "owner_team": "LING-250",
+    "owner_contact": "lucilleoh@u.northwestern.edu",
+    "status": "ready",
+    "status_reason": null
+  },
+  {
     "skill_id": "contrastive-hint",
     "name": "Give Contrastive Hint",
     "skill_type": "instructional",
@@ -7982,6 +8196,518 @@
     "status_reason": null
   },
   {
+    "skill_id": "id-natural-class",
+    "name": "Identify Natural Class",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "tags": [
+      "phonology",
+      "phonetics",
+      "natural-class",
+      "features",
+      "methodology",
+      "ling250"
+    ],
+    "course_types": [
+      "humanities"
+    ],
+    "learning_goal_tags": [
+      "interpret-evidence",
+      "surface-assumptions",
+      "decompose-arguments"
+    ],
+    "trigger_signals": [
+      "student-asks-what-features-unite-set",
+      "student-picks-too-broad-class",
+      "student-cant-name-shared-feature",
+      "wrong-answer-uses-non-exhaustive-class",
+      "student-confuses-natural-class-with-arbitrary-list",
+      "student-asks-if-set-is-natural-class",
+      "student-cant-describe-class-with-features"
+    ],
+    "chip_icon": "\ud83c\udfaf",
+    "version": "0.1.0",
+    "python_entry": "logic.py",
+    "description": "Scaffolds identifying the **narrowest exhaustive natural class** of a\nset of sounds \u2014 the smallest feature-defined group that includes every\nsound in the set AND excludes every sound that's not in the set. A\nnatural class isn't just \"sounds that share a feature\"; it's \"sounds\nthat share a feature, and ALL sounds with that feature are in the set.\"\nThe skill guides the student through listing the sounds, identifying\nshared features (place, manner, voicing for consonants; height, backness,\nrounding, tense for vowels), and testing exhaustiveness. Used by HW4\nrule writing and HW5 Part B (Maltese coronals). Stateless \u2014 the\norchestrator tracks the current step.",
+    "trigger_summary": "### Fires when:\n- Student is given a set of sounds and asked to name the natural class\n  uniting them\n- Student writes a phonological rule whose environment is a list of\n  segments where a feature-class would be more accurate\n- Student picks a class that includes the targets but is too broad\n  (e.g., \"sonorants\" when the data is just coronals)\n- Student claims a set IS a natural class without demonstrating the\n  feature relationship\n- Student claims a set is NOT a natural class without checking all\n  features\n- Wrong answer reveals a non-exhaustive class (covers the targets but\n  also covers other sounds that aren't in the data)\n\n### Does NOT fire when:\n- Student is doing distributional analysis (use `analyze-dist`)\n- Student is constructing a rule but already knows the natural class\n  (use `write-phon-rule`)\n- Student is contrasting two sounds (use `contrastive-hint`)\n- Student is on a transcription question (HW1/HW2)\n\n### Boundary cases:\n- **Multiple valid natural classes**: a set can sometimes be described\n  by more than one class. The narrowest exhaustive one is the right\n  answer. E.g., {p, t, k} can be \"voiceless stops\" (narrowest) or\n  \"voiceless obstruents\" (too broad \u2014 includes voiceless fricatives).\n- **Sounds that aren't a natural class**: not every set is a natural\n  class. {p, l, w} share no exhaustive feature description. The skill\n  scaffolds the testing; the answer can legitimately be \"this isn't a\n  natural class.\"\n- **Vowels vs consonants**: the feature dimensions are different\n  (height/backness/rounding for vowels; place/manner/voicing for\n  consonants). Make sure the student knows which inventory they're\n  working with.",
+    "tutor_stance_rules": [
+      "The student identifies the class. The skill scaffolds the procedure:",
+      "Narrowness matters. The right answer is the smallest exhaustive class.",
+      "Exhaustiveness matters more. A class that includes the targets but",
+      "The exhaustiveness test is the key move: \"is there any sound in the",
+      "A natural class must (1) share features and (2) exhaust the"
+    ],
+    "flow": [
+      {
+        "step": 1,
+        "title": "List the sounds",
+        "description": "Have the student write out the sounds in the set explicitly. This is\nbasic but essential \u2014 students sometimes try to identify a class without\nfully recording what's in it."
+      },
+      {
+        "step": 2,
+        "title": "Identify shared features",
+        "description": "Walk through feature dimensions one at a time. For consonants: place,\nmanner, voicing. For vowels: height, backness, rounding, tense/lax. At\neach dimension, ask: \"Are all the sounds in the set the same on this\nfeature? If yes, what value?\""
+      },
+      {
+        "step": 3,
+        "title": "Compose the candidate class description",
+        "description": "Combine the shared features into a class description. Examples:\n- All voiceless + all stops \u2192 \"voiceless stops\"\n- All coronal \u2192 \"coronals\"\n- All high + all front \u2192 \"high front vowels\"\n- All back + all rounded \u2192 \"back rounded vowels\""
+      },
+      {
+        "step": 4,
+        "title": "Test exhaustiveness",
+        "description": "The critical step. Ask: \"Are there any sounds in the language that\nshare these features but are NOT in your set?\" If yes, the class is\ntoo broad \u2014 back to Step 2 to find a narrower description. If no, the\nclass is exhaustive and you're done."
+      },
+      {
+        "step": 5,
+        "title": "Confirm narrowness",
+        "description": "If multiple feature combinations describe the set exhaustively, pick\nthe narrowest one. Wider features are less informative. Example: if\n{m, n, \u014b} could be \"nasals\" OR \"voiced sounds,\" \"nasals\" wins because\nit's tighter."
+      }
+    ],
+    "safe_outputs": [
+      "Listing prompts (\"write out the sounds you're trying to classify\")",
+      "Feature-dimension prompts (\"are they all the same on voicing? on",
+      "Composition prompts (\"so they share [feature1] and [feature2] \u2014 what",
+      "Exhaustiveness-test prompts (\"any other sounds in the language that",
+      "Narrowness checks (\"is there a tighter description?\")",
+      "Acknowledgments when the class is correct",
+      "Redirects when the class is too broad or non-exhaustive"
+    ],
+    "must_avoid": [
+      "Naming the natural class for the student",
+      "Accepting \"they share a feature\" without checking exhaustiveness",
+      "Letting \"voiced consonants\" or \"obstruents\" stand when a tighter",
+      "Treating any list of sounds as a natural class without the feature",
+      "Skipping the exhaustiveness check on what looks like an obvious case",
+      "Continuing the natural-class scaffolding when the student is"
+    ],
+    "example_exchange": "> **Student:** For HW5 question 11, the sounds in Part B are /t, d, s,\n> n/. What's the natural class?\n>\n> **Tutor:** Let's find out. First, write them out and walk through\n> the feature dimensions. For consonants, the dimensions are place,\n> manner, and voicing. Start with place \u2014 what's the place of /t/?\n>\n> **Student:** Alveolar.\n>\n> **Tutor:** /d/?\n>\n> **Student:** Alveolar.\n>\n> **Tutor:** /s/? /n/?\n>\n> **Student:** Both alveolar.\n>\n> **Tutor:** Great \u2014 they all share place. What about manner?\n>\n> **Student:** /t/ and /d/ are stops, /s/ is a fricative, /n/ is a\n> nasal. Different.\n>\n> **Tutor:** So manner doesn't unite them. What about voicing?\n>\n> **Student:** /t/ and /s/ are voiceless, /d/ and /n/ are voiced.\n> Mixed.\n>\n> **Tutor:** So voicing doesn't unite them either. The only feature\n> they share is place \u2014 alveolar. So the candidate is \"alveolars.\"\n> Now test exhaustiveness: are there any other alveolars in English?\n>\n> **Student:** [l]?\n>\n> **Tutor:** Right. /l/ is alveolar but it's not in your set. So\n> \"alveolar\" is too broad. What's narrower? Look at /t, d, s, n/ vs\n> /l/ \u2014 what feature does /l/ have that the others don't?\n>\n> **Student:** /l/ is a lateral approximant.\n>\n> **Tutor:** Right. What's the broader feature for the others \u2014\n> coronal, alveolar minus the lateral approximants?\n>\n> **Student:** ... I'm not sure.\n>\n> **Tutor:** Try this: in the consonant chart, /t, d, s, n/ all sit on\n> the alveolar column. What grouping covers them but excludes /l/ and\n> the post-alveolars? Hint \u2014 coronal is the place class, and there's\n> a feature that distinguishes lateral from non-lateral.\n>\n> **Student:** Coronals \u2014 but non-lateral?\n>\n> **Tutor:** Right. The narrowest exhaustive class for /t, d, s, n/ in\n> English is \"coronals\" (some textbooks use \"central coronals\" or just\n> \"coronals\" since lateral is a separate feature). For the LING 250\n> intent, \"coronals\" is the expected answer.",
+    "extra_sections": {
+      "disambiguation_from_other_skills": "- `analyze-dist` runs full distributional analysis. **This skill** is\n  one operation that may be called inside that flow when the\n  conditioning environment needs class-naming.\n- `write-phon-rule` formalizes a rule. **This skill** identifies the\n  class for the rule's environment. They chain \u2014 the user typically\n  calls this skill while writing a rule.\n- `contrastive-hint` distinguishes two specific sounds by feature.\n  **This skill** finds shared features across a set of sounds.\n- `repair-miscon` fires on misconceptions like \"wider class is always\n  better\" or \"any list of sounds is a natural class.\" **This skill**\n  scaffolds the methodology; pair with repair-miscon when the student\n  has the wrong belief.\n- `validate-prereqs` covers IPA feature recall. **This skill** assumes\n  the student knows feature dimensions; if they don't, hand off.",
+      "inputs_expected_by_logic_py": "- `sounds` (list of str, optional): the IPA symbols in the set, e.g.\n  `[\"t\", \"d\", \"s\", \"n\"]`\n- `inventory_type` (str, optional): \"consonants\" or \"vowels\", determines\n  which feature dimensions to check\n- `current_step` (int, optional): which step the student is on (1-5).\n  0 or absent defaults to Step 1.\n- `proposed_class` (str, optional): the student's candidate class label,\n  used for exhaustiveness testing",
+      "outputs_returned_by_logic_py": "A dict:\n- `flow` (list): the 5 flow steps with tutor prompts\n- `feature_dimensions` (dict): the feature dimensions for consonants\n  and vowels\n- `hint_ladders` (dict): per-step hint progressions\n- `common_errors` (list): cataloged error patterns with redirects\n- `example_classes` (list): canonical natural-class identifications\n  with full reasoning\n- `tutor_reminders` (list): high-priority stance reminders",
+      "notes_for_reusers": "This skill is the heart of HW5 Part B (Maltese coronal assimilation,\nQ11) and embedded in many HW4 rule-writing questions. It also surfaces\nin HW2 Q1-Q6 (multi-select feature identification \u2014 \"find all the high\nvowels\") which is functionally a natural-class identification task at\nthe segment-list level.\n\nThe exhaustiveness test is the move students miss most often. Spend\ntime there. A common failure pattern: student picks a feature that's\ncorrect for the set but is also true of other sounds in the language \u2014\n\"too broad.\"\n\nThe example_classes catalog shows working through cases of varying\ndifficulty \u2014 from the obvious (high front vowels) to the nuanced\n(coronals minus laterals)."
+    },
+    "source_repo": "ling-250-skills",
+    "source_path": "skills/id-natural-class/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/ling-250-skills/tree/main/skills/id-natural-class/skills.md",
+    "owner_team": "LING-250",
+    "owner_contact": "lucilleoh@u.northwestern.edu",
+    "status": "ready",
+    "status_reason": null
+  },
+  {
+    "skill_id": "interpret-spectrum",
+    "name": "Interpret Spectrum",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "tags": [
+      "phonetics",
+      "acoustics",
+      "spectrum",
+      "harmonics",
+      "formants",
+      "source-filter",
+      "f0",
+      "ling250"
+    ],
+    "course_types": [
+      "humanities"
+    ],
+    "learning_goal_tags": [
+      "identify-evidence",
+      "interpret-evidence",
+      "surface-assumptions"
+    ],
+    "trigger_signals": [
+      "student-confuses-f0-and-f1",
+      "student-cant-find-f0-from-spectrum",
+      "student-confuses-harmonics-with-formants",
+      "student-cant-locate-formant-peaks",
+      "wrong-answer-conflates-source-and-filter",
+      "student-asks-how-to-find-f0",
+      "student-asks-difference-between-spectrum-and-spectrogram"
+    ],
+    "chip_icon": "\u303d\ufe0f",
+    "version": "0.1.0",
+    "python_entry": "logic.py",
+    "description": "Scaffolds reading a spectral slice (amplitude over frequency at one\nmoment in time) \u2014 finding F0 from the spacing of harmonics, locating\nformant peaks (the spectral envelope's high points), and maintaining\nthe source-filter distinction (harmonics come from the source / vocal\nfolds; formants come from the filter / vocal tract shape). Targets\nHW3 Q7-Q15 (the spectrum-reading sequence) and any source-filter\nquestion on midterm 1. Stateless \u2014 the orchestrator tracks which\nquantity the student is finding.",
+    "trigger_summary": "### Fires when:\n- Student is given a spectral slice and asked to find F0 or formants\n- Student confuses F0 with F1 (the two are completely different\n  quantities at different scales)\n- Student treats harmonic peaks as formants (or vice versa)\n- Student can't locate formant peaks\n- Wrong answer conflates source (vocal fold vibration) with filter\n  (vocal tract shape)\n- Student asks \"how do I find F0 from this?\"\n- Student asks \"what's the difference between a spectrum and a\n  spectrogram?\"\n\n### Does NOT fire when:\n- Student is reading a waveform (use `read-waveform`)\n- Student is reading a spectrogram (use `read-spectrogram`)\n- Student is on a transcription question without spectral data\n- Student is doing distributional analysis (use `analyze-dist`)\n\n### Boundary cases:\n- **Speaker variation**: F0 is determined by speaker (typical female\n  ~200 Hz, typical male ~120 Hz, typical child ~300 Hz). Formants are\n  also speaker-dependent in absolute terms but follow more constrained\n  patterns. Don't expect cross-speaker constancy.\n- **F0 from harmonic spacing vs. directly visible**: F0 is the\n  spacing between adjacent harmonics, not a single labeled peak. The\n  lowest harmonic IS at F0, but reading harmonic SPACING is the more\n  reliable method.\n- **Formant tracking errors**: spectral analyzers sometimes mislabel\n  formants. Cross-check by visual inspection \u2014 formants are SLOWLY\n  varying envelope peaks, not narrow spikes.",
+    "tutor_stance_rules": [
+      "The student reads the spectrum. The skill scaffolds: identify axes,",
+      "Source vs filter is the core distinction. The vocal folds (source)",
+      "F0 is found from harmonic spacing, not from a single peak. Adjacent",
+      "Formants are envelope peaks. They sit ON the harmonics, but they're",
+      "F0 (~100-300 Hz) and F1 (~300-900 Hz) are at different scales. They"
+    ],
+    "flow": [
+      {
+        "step": 1,
+        "title": "Identify axes",
+        "description": "Confirm: x-axis is frequency (Hz), y-axis is amplitude (dB). The\nspectrum is a vertical \"slice\" through one instant of a spectrogram."
+      },
+      {
+        "step": 2,
+        "title": "Identify the harmonic structure",
+        "description": "Count the regularly spaced peaks (the \"comb\" of vertical lines). They\nare harmonics \u2014 integer multiples of F0. Spacing tells you F0."
+      },
+      {
+        "step": 3,
+        "title": "Find F0 from harmonic spacing",
+        "description": "Measure the spacing between adjacent harmonics. That spacing IS F0.\nExample: harmonics at 100, 200, 300, 400 Hz \u2192 F0 = 100 Hz. The lowest\nharmonic is at F0 (the fundamental)."
+      },
+      {
+        "step": 4,
+        "title": "Identify formant peaks",
+        "description": "The spectral ENVELOPE (the smooth curve over the harmonic spikes) has\npeaks. These peaks are formants. Find the envelope's high points \u2014\nthey don't have to land on any single harmonic."
+      },
+      {
+        "step": 5,
+        "title": "Map to vowel features",
+        "description": "Apply formant-to-feature mappings: F1\u2194height (INVERSE), F2\u2194backness.\nUse the values from Step 4. (Same mappings as `read-spectrogram`.)"
+      }
+    ],
+    "safe_outputs": [
+      "Axis-identification prompts (\"what's on the x-axis here? the y-axis?\")",
+      "Harmonic-counting prompts (\"how many regularly spaced peaks do you",
+      "Spacing-measurement prompts (\"the harmonics are at 200, 400, 600 Hz",
+      "F0-derivation prompts (\"the spacing IS F0 \u2014 what's the answer?\")",
+      "Envelope-finding prompts (\"now ignore the individual peaks and look",
+      "Source-vs-filter clarifications when the student conflates them",
+      "Acknowledgments when the student locates F0 and formants correctly",
+      "Redirects when the student treats F0 and F1 as the same thing"
+    ],
+    "must_avoid": [
+      "Reading the spectrum for the student",
+      "Naming F0 directly without walking through harmonic spacing",
+      "Letting F0/F1 conflation slide",
+      "Treating individual harmonic peaks as formants",
+      "Skipping the source-filter distinction when the student conflates them",
+      "Mixing spectrum reading with spectrogram reading (different",
+      "Continuing spectrum-reading scaffolding when the student doesn't"
+    ],
+    "example_exchange": "> **Student:** I have a spectrum from HW3 Q9 and the question asks for\n> F0. I see peaks at 200, 400, 600, 800, 1000 Hz. What's F0?\n>\n> **Tutor:** Good \u2014 you have the harmonic series. F0 isn't any single\n> peak; it's the SPACING between harmonics. What's the spacing?\n>\n> **Student:** 200 Hz between each.\n>\n> **Tutor:** That spacing IS F0. F0 = 200 Hz. The lowest harmonic is\n> also at 200 Hz (the fundamental), but in general you read F0 from\n> the spacing \u2014 more reliable when the lowest harmonic is faint or\n> the spectrum doesn't start at 0 Hz.\n>\n> **Student:** OK. The next question asks for F1. F1 is just F0, right?\n>\n> **Tutor:** Big trap to avoid. F0 and F1 are completely different.\n> F0 is the rate of vocal fold vibration (source \u2014 what we perceive as\n> pitch). F1 is the lowest formant \u2014 a resonance of the vocal tract\n> shape (filter). They're at different scales: F0 is around 200 Hz\n> here; F1 is more like 300-900 Hz depending on the vowel.\n>\n> **Student:** So how do I find F1 on this spectrum?\n>\n> **Tutor:** Look at the SHAPE of the spectrum, not individual peaks.\n> The harmonics are spikes, but the overall ENVELOPE \u2014 the curve\n> connecting the high points \u2014 has bumps. Those bumps are formants.\n> F1 is the lowest envelope bump.",
+    "extra_sections": {
+      "disambiguation_from_other_skills": "- `read-spectrogram` reads frequency over time. **This skill** reads\n  amplitude over frequency at one instant \u2014 a different representation.\n  Use spectrogram for time-varying analysis; spectrum for steady-state\n  spectral content.\n- `read-waveform` reads amplitude over time. **This skill** reads\n  amplitude over frequency. Different axes.\n- `repair-miscon` fires on misconceptions like \"F0 and F1 are the same\"\n  or \"harmonics ARE formants.\" **This skill** assumes the source-filter\n  framework is intact; pair with repair-miscon when the conceptual\n  model is broken.\n- `validate-prereqs` covers source-filter theory at a conceptual level.\n  **This skill** assumes the student knows what source and filter are\n  separately, and helps them apply that knowledge to a specific spectrum.",
+      "inputs_expected_by_logic_py": "- `spectrum_image` (str, optional): reference to a spectrum image\n- `target_quantity` (str, optional): \"f0\", \"f1\", \"f2\", \"vowel_id\"\n- `harmonic_frequencies` (list of int, optional): frequencies of\n  visible harmonic peaks\n- `current_step` (int, optional): which step the student is on. 0 or\n  absent defaults to Step 1.",
+      "outputs_returned_by_logic_py": "A dict:\n- `flow` (list): the 5 flow steps\n- `axes` (dict): spectrum axis conventions\n- `source_filter` (dict): theoretical framework distinguishing source\n  (harmonics, F0) from filter (formants, vocal tract resonances)\n- `f0_ranges_hz` (dict): typical F0 ranges by speaker type\n- `hint_ladders` (dict): per-step hint progressions\n- `common_errors` (list): cataloged error patterns with redirects\n- `tutor_reminders` (list): high-priority stance reminders",
+      "notes_for_reusers": "This skill targets HW3 Q7-Q15 (spectrum-reading sequence) and\nembedded source-filter questions on midterm 1. The single most-confused\ndistinction in the course is F0 vs F1 \u2014 students often think they're\nthe same quantity. Always reinforce the source-filter framework.\n\nThe harmonic spacing technique for F0 is more reliable than reading\nthe lowest harmonic directly, because spectra sometimes start above\n0 Hz or the lowest harmonic can be faint. Teach the spacing method.\n\nFor multi-instant analysis, hand off to `read-spectrogram` (which is\nliterally a stack of spectra over time)."
+    },
+    "source_repo": "ling-250-skills",
+    "source_path": "skills/interpret-spectrum/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/ling-250-skills/tree/main/skills/interpret-spectrum/skills.md",
+    "owner_team": "LING-250",
+    "owner_contact": "lucilleoh@u.northwestern.edu",
+    "status": "ready",
+    "status_reason": null
+  },
+  {
+    "skill_id": "probe-min-pair",
+    "name": "Probe Minimal Pair",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "tags": [
+      "phonology",
+      "minimal-pair",
+      "phonemic-analysis",
+      "evidence",
+      "ling250"
+    ],
+    "course_types": [
+      "humanities"
+    ],
+    "learning_goal_tags": [
+      "identify-evidence",
+      "interpret-evidence",
+      "verify-claims"
+    ],
+    "trigger_signals": [
+      "student-asks-what-is-minimal-pair",
+      "student-claims-no-minimal-pair-found",
+      "student-confuses-minimal-pair-with-similar-pair",
+      "student-asks-if-pair-is-minimal",
+      "wrong-answer-conflates-near-miss-with-minimal-pair",
+      "student-asks-what-minimal-pair-proves"
+    ],
+    "chip_icon": "\ud83d\udd17",
+    "version": "0.1.0",
+    "python_entry": "logic.py",
+    "description": "Helps the student find, evaluate, or construct minimal pairs as evidence\nfor phonemic contrast. A minimal pair is two words that share every sound\nand syllable position except for one sound \u2014 the contrast at that one\nposition is direct evidence that the two sounds are separate phonemes in\nthe language. The skill scaffolds three operations: testing whether a\ncandidate pair counts (criteria check), finding minimal pairs in given\ndata, and interpreting what their presence or absence means for phonemic\nstatus. Stateless \u2014 the orchestrator tracks which operation the student\nis on.",
+    "trigger_summary": "### Fires when:\n- Student asks \"what is a minimal pair?\" or asks for a definition\n- Student claims they can't find a minimal pair in given data\n- Student claims absence of a minimal pair proves allophony (it doesn't)\n- Student asks whether a candidate pair (e.g., *bear* / *fair*) qualifies\n- Student needs help constructing a minimal pair from the data they have\n- Wrong answer treats a near-miss (e.g., *cat* / *cap*, which differs in\n  the final segment too) as a minimal pair without checking criteria\n\n### Does NOT fire when:\n- Student is doing the full distributional analysis (use `analyze-dist`;\n  minimal-pair search is one step within that flow)\n- Student is identifying feature differences between two sounds\n  (`contrastive-hint`)\n- Student is reading a spectrogram (`read-spectrogram`)\n- Student already has clear evidence and just needs to formalize a rule\n  (`write-phon-rule`)\n\n### Boundary cases:\n- **Student claims absence of minimal pair = allophones**: this is a\n  cataloged misconception. Fire alongside `repair-miscon` so the\n  orchestrator can address the underlying belief.\n- **Cross-linguistic data**: minimal pairs in non-English data have the\n  same status as minimal pairs in English. Don't let the student's\n  English intuitions override the target language's evidence.\n- **Near-miss pairs** (e.g., *bear* / *fair* \u2014 differ in initial AND\n  final segment): these are NOT minimal pairs. The skill's flow\n  explicitly tests this.",
+    "tutor_stance_rules": [
+      "The student does the comparing. The tutor asks them to walk through",
+      "Absence of a minimal pair is not proof of anything. Always redirect",
+      "Minimal pairs are the cleanest evidence type, but not the only one.",
+      "Each language stands on its own. A minimal pair in Hindi proves"
+    ],
+    "flow": [
+      {
+        "step": 1,
+        "title": "Establish the criteria",
+        "description": "If the student doesn't already know, scaffold the definition: a minimal\npair is two words of equal length where every sound is identical except\nfor one sound at one position, and the two words have different meanings.\nHave the student state these criteria back before moving on."
+      },
+      {
+        "step": 2,
+        "title": "Test a candidate pair",
+        "description": "Given two candidate words, walk the student through segment-by-segment\ncomparison. At each position, ask: \"Is the sound at this position the\nsame in both words?\" Count the differences. One difference + different\nmeanings = minimal pair. Zero or multiple differences = not a minimal\npair."
+      },
+      {
+        "step": 3,
+        "title": "Search given data for minimal pairs",
+        "description": "If the student has a dataset and is looking for minimal pairs containing\ntwo target sounds, scaffold the search: \"Pick a word with [X]. Now look\nfor a word in the data that has the same length and structure, with [Y]\nwhere [X] was. Found one?\""
+      },
+      {
+        "step": 4,
+        "title": "Interpret the result",
+        "description": "- **Found a minimal pair**: separate phonemes in this language.\n- **Found no minimal pair after exhaustive search**: inconclusive.\n  Move to distributional analysis (hand off to `analyze-dist`).\n- **Found a near-miss**: the candidates aren't a minimal pair, but the\n  fact that they differ in two positions doesn't disqualify the sounds\n  from being phonemes \u2014 keep searching."
+      },
+      {
+        "step": 5,
+        "title": "Construct minimal pairs from the data",
+        "description": "If the student is asked to provide a minimal pair (HW1/HW2 territory),\nscaffold construction: pick a word with one of the target sounds,\nsubstitute the other target sound at that position, ask whether the\nresult is a real word in the language."
+      }
+    ],
+    "safe_outputs": [
+      "Definitional scaffolding when the student doesn't know what a minimal",
+      "Segment-by-segment comparison prompts (\"at position 1, what sound is",
+      "Search prompts (\"which word in your data has the same structure but",
+      "Interpretation prompts (\"you found a minimal pair \u2014 what does that",
+      "Acknowledgments of correct identification or correct rejection",
+      "Redirects when the student misclassifies near-misses as minimal pairs",
+      "Transitions to `analyze-dist` when minimal pair search is exhausted"
+    ],
+    "must_avoid": [
+      "Naming whether a candidate pair is a minimal pair before the student",
+      "Telling the student that absence of a minimal pair proves anything",
+      "Pulling minimal pairs from outside the given data when the question",
+      "Accepting \"*bear* and *fair* differ in one sound\" without questioning",
+      "Treating English minimal pairs as evidence about non-English data",
+      "Continuing minimal-pair search when distributional analysis is the"
+    ],
+    "example_exchange": "> **Student:** Are *think* and *sink* a minimal pair for [\u03b8] and [s]?\n>\n> **Tutor:** Good candidate. Let's test it. Walk through position by\n> position \u2014 what's the first sound in *think*?\n>\n> **Student:** [\u03b8].\n>\n> **Tutor:** And in *sink*?\n>\n> **Student:** [s].\n>\n> **Tutor:** Different at position 1, good. Position 2?\n>\n> **Student:** [\u026a] in both.\n>\n> **Tutor:** Same. Position 3?\n>\n> **Student:** [\u014b] in both.\n>\n> **Tutor:** Same. Position 4?\n>\n> **Student:** [k] in both.\n>\n> **Tutor:** Same. So total differences across all positions: how many?\n>\n> **Student:** Just one \u2014 at position 1.\n>\n> **Tutor:** And the words have different meanings?\n>\n> **Student:** Yes.\n>\n> **Tutor:** Then this is a minimal pair. What does it tell us about [\u03b8]\n> and [s] in English?\n>\n> **Student:** They're different phonemes?\n>\n> **Tutor:** Right \u2014 separate phonemes, because swapping one for the\n> other changes the word's identity.",
+    "extra_sections": {
+      "disambiguation_from_other_skills": "- `analyze-dist` runs the full five-step phonemic analysis, of which\n  minimal pair search is Step 2. **This skill** zooms in specifically\n  on minimal pair reasoning when that's the focus of the question or\n  the source of confusion.\n- `contrastive-hint` produces a feature contrast between two sounds \u2014\n  what makes them different phonetically. **This skill** is about\n  whether two sounds are phonemes by testing word-level evidence, not\n  about how they differ articulatorily.\n- `repair-miscon` fires on the cataloged misconception \"no minimal\n  pair = allophones.\" **This skill** scaffolds the search and\n  evaluation; pair them when the student has the wrong belief.\n- `write-phon-rule` formalizes alternations once analysis is done.\n  **This skill** runs upstream of that.",
+      "inputs_expected_by_logic_py": "- `target_sounds` (list of str, optional): the two IPA symbols, e.g.\n  `[\"\u03b8\", \"s\"]`\n- `candidate_pair` (tuple of str, optional): two words being tested,\n  e.g. `(\"think\", \"sink\")`\n- `dataset` (list of dict, optional): forms in the language being\n  analyzed, used for minimal-pair search\n- `current_step` (int, optional): which step of the flow the student\n  is on (1-5). 0 or absent defaults to Step 1.",
+      "outputs_returned_by_logic_py": "A dict:\n- `flow` (list): the 5 flow steps with tutor prompts\n- `criteria` (list): the three minimal-pair criteria as plain-language\n  checks\n- `hint_ladders` (dict): per-step hint progressions for stuck students\n- `common_errors` (list): cataloged error patterns with redirects\n- `tutor_reminders` (list): high-priority stance reminders",
+      "notes_for_reusers": "This skill is the focused complement to `analyze-dist`. Use it when\nminimal-pair reasoning IS the question (HW1/HW2 transcription tasks,\nQuiz 4 phonemic-status questions) and analyze-dist when the full\nmethodology is needed. The skills can also chain: if minimal-pair\nsearch comes up empty, transition to analyze-dist.\n\nThe criteria are language-agnostic. The same three checks apply whether\nthe student is working with English, Hindi, Korean, or made-up data.\nThe example datasets in `utils/language_datasets.py` provide many\nlanguage-specific minimal pair examples for the orchestrator to draw\non when scaffolding searches."
+    },
+    "source_repo": "ling-250-skills",
+    "source_path": "skills/probe-min-pair/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/ling-250-skills/tree/main/skills/probe-min-pair/skills.md",
+    "owner_team": "LING-250",
+    "owner_contact": "lucilleoh@u.northwestern.edu",
+    "status": "ready",
+    "status_reason": null
+  },
+  {
+    "skill_id": "read-spectrogram",
+    "name": "Read Spectrogram",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "tags": [
+      "phonetics",
+      "acoustics",
+      "spectrogram",
+      "formants",
+      "transitions",
+      "place-of-articulation",
+      "ling250"
+    ],
+    "course_types": [
+      "humanities"
+    ],
+    "learning_goal_tags": [
+      "identify-evidence",
+      "interpret-evidence",
+      "decompose-arguments"
+    ],
+    "trigger_signals": [
+      "student-cant-read-spectrogram",
+      "student-cant-locate-formants",
+      "wrong-answer-inverts-f1-height",
+      "student-asks-which-spectrogram-matches",
+      "student-cant-identify-place-from-transitions",
+      "student-asks-how-to-find-f1-f2",
+      "student-confuses-darkness-with-frequency"
+    ],
+    "chip_icon": "\ud83d\udcca",
+    "version": "0.1.0",
+    "python_entry": "logic.py",
+    "description": "Scaffolds reading a spectrogram (frequency over time, with darkness\nindicating amplitude) \u2014 locating formants F1 and F2, mapping them to\nvowel features (F1\u2194height, F2\u2194backness, both INVERSE for height),\nidentifying consonant signatures (stops, fricatives, nasals,\nsonorants), and reading formant transitions for stop place of\narticulation. Targets HW3 Q4-Q5 (axes/terminology), Q16\n(spectrogram-to-phrase matching, 6 points, the highest-weighted HW3\nquestion), and any spectrogram-based midterm 1 question. Stateless \u2014\nthe orchestrator tracks which task the student is on.",
+    "trigger_summary": "### Fires when:\n- Student is given a spectrogram and asked to identify what it shows\n- Student asks \"where's F1 / F2?\"\n- Student inverts F1\u2194height (says \"high vowels have high F1\")\n- Student is matching spectrograms to phrases (HW3 Q16 task)\n- Student can't identify consonant place from formant transitions\n- Wrong answer reads spectrogram axes incorrectly (darkness as\n  frequency, etc.)\n- Student needs help locating consonant signatures (stops,\n  fricatives, nasals)\n\n### Does NOT fire when:\n- Student is reading a waveform (use `read-waveform`)\n- Student is reading a spectral slice (use `interpret-spectrum`)\n- Student is on a transcription question without a spectrogram image\n  (HW1/HW2)\n- Student is doing distributional analysis (use `analyze-dist`)\n\n### Boundary cases:\n- **Multiple spectrograms shown for matching**: walk through each one\n  separately to identify features (vowels, consonants, transitions),\n  then ask the student to match to phrases by feature density and\n  pattern.\n- **Cross-speaker comparisons**: different speakers produce different\n  absolute formant values for \"the same\" vowel. Compare within-speaker\n  patterns or formant-relative-to-formant ratios, not absolute Hz\n  values.\n- **Praat formant tracker overlay**: if the student is in Praat with\n  the formant tracker on, warn that the tracker can mislabel \u2014\n  always cross-check by visual inspection.",
+    "tutor_stance_rules": [
+      "The student reads the spectrogram. The skill scaffolds: identify",
+      "F1 \u2194 height (INVERSE: high vowel = LOW F1). F2 \u2194 backness (front",
+      "Count formants from the bottom up. F1 is the lowest, then F2, F3, etc.",
+      "Darkness = amplitude. Frequency is on the y-axis. Darkness shows how",
+      "For consonant place, read the FORMANT TRANSITIONS of the adjacent",
+      "Identify segment categories before specific sounds. \"This is a"
+    ],
+    "flow": [
+      {
+        "step": 1,
+        "title": "Identify axes",
+        "description": "Confirm: x-axis is time (seconds), y-axis is frequency (Hz, low at\nbottom and high at top), darkness = amplitude (intensity at that\nfrequency at that time)."
+      },
+      {
+        "step": 2,
+        "title": "Locate formants",
+        "description": "For vowel regions, identify the dark horizontal bands. The lowest is\nF1, then F2, then F3. Count from the bottom. F1 is usually below\n1000 Hz; F2 is between F1 and ~3000 Hz."
+      },
+      {
+        "step": 3,
+        "title": "Map formants to vowel features",
+        "description": "F1 \u2194 height (INVERSE: low F1 = high vowel; high F1 = low vowel). F2\n\u2194 backness (high F2 = front vowel; low F2 = back vowel). Apply the\ninverse for height carefully \u2014 it's the most-confused mapping."
+      },
+      {
+        "step": 4,
+        "title": "Identify consonant signatures",
+        "description": "- Stops: silence in the closure, vertical spike at burst, possibly\n  aspiration noise after\n- Fricatives: random aperiodic noise, varying frequency concentration\n  by place ([s, z]: high-frequency 5000-6000 Hz; [\u0283, \u0292]: 2500 Hz;\n  [f, v, \u03b8, \u00f0]: diffuse; [h]: tracks adjacent vowel formants)\n- Nasals: abrupt amplitude drop at nasal onset; nasal formants ~200\n  and ~2000 Hz\n- Sonorants: vowel-like formants but lower amplitude; [l] has low F2;\n  [\u0279] has very low F3 (the diagnostic for English r); [w], [j] like\n  [u] and [i]"
+      },
+      {
+        "step": 5,
+        "title": "Read formant transitions for stop place of articulation",
+        "description": "For stops, the place is read from the ADJACENT VOWEL'S formant\ntransitions:\n- Labial (/p, b, m/): all formant edges point DOWN going into the\n  consonant (closure lowers all resonances)\n- Alveolar (/t, d, n/): F2 points UP toward ~1700 Hz (the alveolar\n  locus)\n- Velar (/k, g, \u014b/): F2 and F3 converge ('velar pinch')"
+      }
+    ],
+    "safe_outputs": [
+      "Axis-identification prompts (\"what's on the y-axis? what does",
+      "Formant-locating prompts (\"can you find the lowest dark band? that's",
+      "Feature-mapping prompts (\"F1 is at about 700 Hz here \u2014 high or low?",
+      "Consonant-category prompts (\"at this region, do you see silence?",
+      "Place-from-transition prompts (\"look at how F2 moves into the",
+      "Acknowledgments and corrections of inversion errors",
+      "Transitions to `interpret-spectrum` if the student wants to verify"
+    ],
+    "must_avoid": [
+      "Reading the spectrogram for the student",
+      "Naming the vowel before walking through F1 and F2",
+      "Letting F1\u2194backness or F1\u2194height-direct stand without correction",
+      "Reading consonant place from the consonant itself instead of from",
+      "Treating absolute formant Hz values as cross-speaker constants",
+      "Mixing waveform and spectrogram reading (different representations)",
+      "Reading darkness as frequency or vice versa",
+      "Continuing spectrogram scaffolding when the student lacks vocabulary"
+    ],
+    "example_exchange": "> **Student:** I'm looking at a spectrogram of a vowel. There's a dark\n> band around 300 Hz and another around 2200 Hz. What vowel is this?\n>\n> **Tutor:** Let's work through it. First, those two bands \u2014 which is\n> F1 and which is F2?\n>\n> **Student:** F1 is the lower one, so 300 Hz. F2 is 2200 Hz.\n>\n> **Tutor:** Right. Now, what does F1 of 300 Hz tell you about height?\n>\n> **Student:** Low F1 means... low vowel?\n>\n> **Tutor:** Careful \u2014 F1\u2194height is INVERSE. Low F1 means HIGH vowel\n> (small mouth opening, larger pharynx). High F1 means LOW vowel.\n>\n> **Student:** So 300 Hz F1 = high vowel.\n>\n> **Tutor:** Right. And F2 of 2200 Hz?\n>\n> **Student:** High F2 = front vowel?\n>\n> **Tutor:** Right. So you have a high front vowel. What two English\n> vowels are high front?\n>\n> **Student:** [i] and [\u026a].\n>\n> **Tutor:** Right. F1 of 300 Hz is at the lower end of the high range,\n> which fits [i] (which is the higher of the two). [\u026a] would have\n> slightly higher F1 (because it's slightly less high). So this is\n> probably [i].",
+    "extra_sections": {
+      "disambiguation_from_other_skills": "- `read-waveform` reads amplitude over time. **This skill** reads\n  frequency over time. Different axes, different cues.\n- `interpret-spectrum` reads amplitude over frequency at one moment\n  (a vertical slice). **This skill** reads time-varying frequency\n  patterns.\n- `id-natural-class` identifies natural classes of sounds. **This\n  skill** reads acoustic data; doesn't classify abstract groups.\n- `repair-miscon` fires on misconceptions like \"F1 is backness\" or\n  \"high vowels have high F1.\" **This skill** assumes the student has\n  the correct mappings or refers to repair-miscon to fix them.",
+      "inputs_expected_by_logic_py": "- `spectrogram_image` (str, optional): reference to the spectrogram\n  being shown\n- `target_word_or_phrase` (str, optional): what the spectrogram is of\n- `task` (str, optional): \"vowel_id\", \"consonant_id\", \"phrase_match\",\n  \"place_from_transition\"\n- `current_step` (int, optional): which step the student is on. 0 or\n  absent defaults to Step 1.",
+      "outputs_returned_by_logic_py": "A dict:\n- `flow` (list): the 5 flow steps\n- `axes` (dict): spectrogram axis conventions\n- `formant_to_feature` (dict): F1\u2194height inverse, F2\u2194backness mappings\n- `consonant_signatures` (dict): visual cues per consonant category\n- `formant_transitions_by_place` (dict): place diagnostics\n- `hint_ladders` (dict): per-step hint progressions\n- `common_errors` (list): cataloged error patterns with redirects\n- `tutor_reminders` (list): high-priority stance reminders",
+      "notes_for_reusers": "This skill is the heaviest acoustic-interpretation skill \u2014 HW3 Q16\nalone is 6 points (highest single question in HW3). Spectrogram\nreading shows up on midterm 1 too.\n\nThe F1\u2194height INVERSE is the single most-confused mapping in the\ncourse. Students inherit the wrong mnemonic (\"high vowel, high F1\")\nand the inverse direction needs deliberate repair. Pair with\nrepair-miscon when the student persists in the wrong direction.\n\nThe formant transitions catalog is the central reference for\nconsonant place. Many students don't know that consonant place is read\nfrom the adjacent vowel's transitions; teaching this explicitly is a\ncore function of the skill."
+    },
+    "source_repo": "ling-250-skills",
+    "source_path": "skills/read-spectogram/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/ling-250-skills/tree/main/skills/read-spectogram/skills.md",
+    "owner_team": "LING-250",
+    "owner_contact": "lucilleoh@u.northwestern.edu",
+    "status": "ready",
+    "status_reason": null
+  },
+  {
+    "skill_id": "read-waveform",
+    "name": "Read Waveform",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "tags": [
+      "phonetics",
+      "acoustics",
+      "waveform",
+      "segment-boundaries",
+      "vot",
+      "ling250"
+    ],
+    "course_types": [
+      "humanities"
+    ],
+    "learning_goal_tags": [
+      "identify-evidence",
+      "interpret-evidence",
+      "decompose-arguments"
+    ],
+    "trigger_signals": [
+      "student-cant-mark-segment-boundary",
+      "student-asks-where-segment-starts",
+      "student-confuses-stop-phases",
+      "student-cant-locate-vot",
+      "wrong-answer-misreads-amplitude-as-segment-edge",
+      "student-asks-how-to-read-waveform",
+      "student-cant-tell-voiced-from-voiceless-on-waveform"
+    ],
+    "chip_icon": "\u3030\ufe0f",
+    "version": "0.1.0",
+    "python_entry": "logic.py",
+    "description": "Scaffolds reading a waveform (amplitude over time) \u2014 locating segment\nboundaries, identifying voiced vs voiceless regions by periodicity,\nrecognizing the three-phase anatomy of stop consonants (closure \u2192 burst\n\u2192 release/aspiration), and measuring VOT. Targets HW3 Q18 specifically\n(14 sub-questions, weighted at 14 points), plus midterm 1 acoustic\ndescription questions. Stateless \u2014 the orchestrator tracks which task\nthe student is on (segmentation, VOT measurement, voicing identification).",
+    "trigger_summary": "### Fires when:\n- Student is asked to mark segment boundaries on a waveform\n- Student asks \"where does this segment start/end?\"\n- Student can't distinguish closure from release on a stop\n- Student needs to locate VOT or measure it\n- Wrong answer treats amplitude changes as segment boundaries without\n  considering segment type\n- Student can't tell voiced from voiceless regions visually\n- Student asks \"how do I read this waveform?\"\n\n### Does NOT fire when:\n- Student is reading a spectrogram (use `read-spectrogram`)\n- Student is reading a spectral slice (use `interpret-spectrum`)\n- Student is on a transcription question without a waveform image\n  (HW1/HW2)\n- Student is doing distributional analysis (use `analyze-dist`)\n\n### Boundary cases:\n- **Two waveforms shown for comparison**: walk through each separately,\n  then ask the student to compare. Don't try to read both simultaneously.\n- **Word/phrase-level segmentation**: at the level of fluent speech,\n  word boundaries are perceptual not acoustic \u2014 there's no clear visual\n  cue between most consecutive words. Students who try to mark word\n  boundaries on a waveform often get confused. Redirect: \"you're\n  marking segment boundaries, not word boundaries \u2014 they're different.\"\n- **Sonorant-vowel transitions**: approximants and nasals blur into\n  adjacent vowels in the waveform. The skill scaffolds finding the\n  best edge but acknowledges that some boundaries are inherently fuzzy.",
+    "tutor_stance_rules": [
+      "The student finds the boundary. The skill scaffolds the visual cues:",
+      "Type of segment dictates the cue. A stop has a silent closure phase;",
+      "Periodicity = voicing. A periodic (regular wave-cycle pattern)",
+      "Stops have three phases. Closure (silence) \u2192 burst (vertical spike)",
+      "Don't confuse amplitude changes with segment boundaries. A loud-to-quiet"
+    ],
+    "flow": [
+      {
+        "step": 1,
+        "title": "Identify axes",
+        "description": "Confirm the student knows: x-axis is time (left to right), y-axis is\namplitude (positive and negative around zero). Each cycle of the\nwaveform is one period of vocal fold vibration if periodic."
+      },
+      {
+        "step": 2,
+        "title": "Identify the segment type at each region",
+        "description": "Walk through the waveform region by region. At each region, ask:\n- Periodic, high amplitude \u2192 vowel\n- Periodic, lower amplitude \u2192 sonorant consonant (nasal, liquid, glide)\n- Aperiodic noise \u2192 voiceless fricative (or stop release/aspiration)\n- Silence (no amplitude) \u2192 stop closure\n- Periodic + aperiodic \u2192 voiced fricative"
+      },
+      {
+        "step": 3,
+        "title": "Locate stop phases",
+        "description": "For stops specifically, identify:\n- Closure: a silent gap (or near-silent, depending on voicing)\n- Burst: a sudden vertical spike at the moment of release\n- Aspiration: aperiodic noise after the burst, before voicing\n  resumes (only for aspirated stops)"
+      },
+      {
+        "step": 4,
+        "title": "Mark segment boundaries",
+        "description": "The boundary between two segments is where the visual cue changes.\n- Vowel \u2192 stop: where the periodic pattern stops and silence/closure begins\n- Stop \u2192 vowel: where the burst happens, OR where periodic vowel\n  amplitude resumes (depends on aspiration)\n- Vowel \u2192 fricative: where periodic pattern transitions to aperiodic\n  noise\n- Sonorant \u2192 vowel: amplitude increases; periodicity continues. This\n  edge is fuzzy."
+      },
+      {
+        "step": 5,
+        "title": "Measure VOT (if asked)",
+        "description": "For VOT specifically:\n- Find the burst (vertical spike)\n- Find the start of vowel voicing (where regular periodic cycles\n  resume)\n- Measure the time interval between them\n- Positive (long-lag) = aspirated voiceless\n- Zero / short-lag = unaspirated (English voiced word-initial, OR\n  voiceless after [s])\n- Negative = prevoiced (rare in English word-initial; common\n  intervocalically and in Spanish)"
+      }
+    ],
+    "safe_outputs": [
+      "Axis-identification prompts (\"what's on the x-axis here? the y-axis?\")",
+      "Region-classification prompts (\"at this point in the waveform, is the",
+      "Phase-identification prompts for stops (\"can you find the closure?",
+      "Boundary-marking prompts (\"at what point does the pattern change",
+      "VOT-measurement prompts (\"where's the burst? where does voicing",
+      "Acknowledgments when the student correctly identifies a feature",
+      "Redirects when the student treats amplitude changes as boundaries"
+    ],
+    "must_avoid": [
+      "Reading the waveform for the student",
+      "Marking segment boundaries on behalf of the student",
+      "Measuring VOT for the student",
+      "Letting the student call any amplitude change a segment boundary",
+      "Skipping the periodicity check when classifying a region",
+      "Treating word boundaries as acoustic events on a waveform of fluent",
+      "Continuing waveform-reading scaffolding when the student lacks the",
+      "Mixing waveform reading with spectrogram reading \u2014 they're different"
+    ],
+    "example_exchange": "> **Student:** I'm on HW3 Q18 and I need to mark where [s] ends and\n> [t] begins in *stop*. The waveform shows [s] then [t] then a vowel.\n> Where's the boundary?\n>\n> **Tutor:** Let's work through it visually. First, what does an [s]\n> look like on a waveform \u2014 periodic or aperiodic? High or low\n> amplitude?\n>\n> **Student:** Aperiodic, kind of medium amplitude \u2014 it's friction\n> noise.\n>\n> **Tutor:** Right. And what does a [t] look like, specifically the\n> closure phase before the release?\n>\n> **Student:** Silent? Like, no amplitude.\n>\n> **Tutor:** Exactly \u2014 closure is a silent gap. So the boundary\n> between [s] and [t] is where the aperiodic noise of [s] stops and\n> the silence of [t]'s closure begins. Look at the waveform: where\n> does the medium-amplitude noise transition into a flat line?\n>\n> **Student:** I see a place around 0.4 seconds where the noise drops\n> off and there's basically nothing.\n>\n> **Tutor:** That's your boundary. The end of [s] / start of [t]'s\n> closure phase.",
+    "extra_sections": {
+      "disambiguation_from_other_skills": "- `read-spectrogram` reads frequency over time with formants and\n  consonant signatures. **This skill** reads amplitude over time \u2014\n  different visual representation, different cues.\n- `interpret-spectrum` reads amplitude over frequency at one moment.\n  **This skill** reads amplitude over time. Different axes.\n- `analyze-dist` does distributional analysis on phonological data.\n  **This skill** is about acoustic interpretation, not pattern analysis.\n- `repair-miscon` fires on misconceptions like \"voiceless fricatives\n  have no waveform\" or \"amplitude changes are segment boundaries.\"\n  **This skill** assumes the student understands the basic acoustic\n  vocabulary.",
+      "inputs_expected_by_logic_py": "- `waveform_image` (str, optional): reference to a waveform image being\n  shown to the student\n- `target_word` (str, optional): the word being analyzed (e.g.,\n  \"stop\", \"cat\", \"boy\")\n- `task` (str, optional): which task \u2014 \"segmentation\",\n  \"vot_measurement\", \"voicing_id\", \"stop_phases\"\n- `current_step` (int, optional): which step of the flow the student\n  is on. 0 or absent defaults to Step 1.",
+      "outputs_returned_by_logic_py": "A dict:\n- `flow` (list): the 5 flow steps with tutor prompts\n- `segment_signatures` (dict): visual cues per segment type\n- `vot_categories` (dict): VOT range definitions and English distribution\n- `hint_ladders` (dict): per-step hint progressions\n- `common_errors` (list): cataloged error patterns with redirects\n- `tutor_reminders` (list): high-priority stance reminders",
+      "notes_for_reusers": "This skill targets HW3 Q18 directly (14 sub-questions on segment\nboundaries, weighted heaviest in HW3). It also covers VOT measurement\nwhich appears on midterm 1 acoustic-description questions.\n\nThe segment_signatures catalog is the central reference. Each segment\ntype has distinct visual cues; the orchestrator can match the student's\ntarget to the right cue when scaffolding.\n\nFor boundary-marking on fluent speech (phrases like *cats and dogs*),\nsome boundaries are inherently fuzzy. Don't force precision; the skill\nexplicitly acknowledges sonorant-vowel transitions can't be sharply\nmarked."
+    },
+    "source_repo": "ling-250-skills",
+    "source_path": "skills/read-waveform/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/ling-250-skills/tree/main/skills/read-waveform/skills.md",
+    "owner_team": "LING-250",
+    "owner_contact": "lucilleoh@u.northwestern.edu",
+    "status": "ready",
+    "status_reason": null
+  },
+  {
     "skill_id": "repair-miscon",
     "name": "Repair Misconceptions",
     "stance": "reframe",
@@ -8069,6 +8795,109 @@
     "status_reason": null
   },
   {
+    "skill_id": "syllabify-word",
+    "name": "Syllabify Word",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "tags": [
+      "phonology",
+      "syllable-structure",
+      "mop",
+      "sonority",
+      "phonotactics",
+      "ling250"
+    ],
+    "course_types": [
+      "humanities"
+    ],
+    "learning_goal_tags": [
+      "extract-requirements",
+      "verify-claims",
+      "decompose-arguments"
+    ],
+    "trigger_signals": [
+      "student-asks-how-to-syllabify",
+      "student-applies-mop-without-phonotactic-check",
+      "student-counts-letters-not-vowels",
+      "student-cant-place-cluster-in-onset-or-coda",
+      "wrong-answer-creates-illegal-onset",
+      "student-asks-where-syllable-boundary-is",
+      "student-confuses-spelling-with-syllabification"
+    ],
+    "chip_icon": "\ud83d\udcd1",
+    "version": "0.1.0",
+    "python_entry": "logic.py",
+    "description": "Scaffolds dividing a word into syllables using two principles: the\n**Maximum Onset Principle** (MOP \u2014 assign as many consonants to the\nfollowing onset as possible) and **phonotactic legality** (the resulting\nonsets and codas must be permissible in the language). The skill walks\nthe student through counting syllables (= counting vowels), placing\nintervocalic consonants by MOP, and checking that the proposed onsets\nare legal English onsets via the Sonority Sequencing Principle (SSP).\nTargets HW5 Q16 (English syllabification, 8 points). Stateless \u2014 the\norchestrator tracks which step the student is on.",
+    "trigger_summary": "### Fires when:\n- Student is asked to syllabify a word (e.g., *aluminum*, *constraint*,\n  *atlas*)\n- Student asks \"how do I syllabify this?\"\n- Student applies MOP without checking phonotactic legality (creates\n  illegal onsets like *.tla.*)\n- Student counts letters or syllables incorrectly (e.g., 4 syllables\n  for *aluminum* which has 4 vowel sounds)\n- Student gives onset or coda assignment that's clearly wrong by SSP\n- Wrong answer reveals confusion between spelling and pronunciation\n  (e.g., counting silent letters)\n- Student can't place a consonant cluster in onset vs coda\n\n### Does NOT fire when:\n- Student is doing distributional analysis (use `analyze-dist`)\n- Student is on a transcription question without syllabification\n  (HW1/HW2)\n- Student is identifying a natural class (use `id-natural-class`)\n- Student is reading acoustic data (use the read-* skills)\n\n### Boundary cases:\n- **Ambisyllabic consonants**: in some words (e.g., *better*), a\n  consonant arguably belongs to both syllables. For LING 250 purposes,\n  apply MOP and assign to the onset of the following syllable.\n- **Stress-conditioned syllabification**: stress can sometimes shift\n  syllabification. The HW5 problems don't test this \u2014 use MOP and\n  phonotactics, ignore stress.\n- **Loanwords with non-English clusters**: words like *psychology*\n  have spelling-only consonant clusters that aren't pronounced. Always\n  syllabify based on PRONUNCIATION (the phonemic form), not spelling.",
+    "tutor_stance_rules": [
+      "The student syllabifies. The skill scaffolds the procedure: count,",
+      "Vowels count syllables. Each vowel SOUND (not vowel letter) is one",
+      "MOP assigns intervocalic consonants. Push as many consonants into",
+      "Phonotactics is the gatekeeper. *atlas* \u2192 *.at.las.* not *.a.tlas.*",
+      "SSP is the filter. Legal onsets rise in sonority from edge to nucleus.",
+      "Always work from the phonemic form, not spelling. *Psychology* is"
+    ],
+    "flow": [
+      {
+        "step": 1,
+        "title": "Convert spelling to phonemic form",
+        "description": "Make sure the student is working with phonemic representation, not\nspelling. /sa\u026a\u02c8k\u0251l\u0259d\u0292i/ for *psychology*, not the orthographic form.\nSilent letters don't count."
+      },
+      {
+        "step": 2,
+        "title": "Count syllables (= count vowel nuclei)",
+        "description": "The number of syllables equals the number of vowel sounds in the\nphonemic form. Diphthongs count as one nucleus."
+      },
+      {
+        "step": 3,
+        "title": "Place intervocalic consonants by MOP",
+        "description": "For each block of consonants between two vowels, push as many as\npossible into the FOLLOWING syllable's onset. Remaining consonants\ngo to the preceding syllable's coda."
+      },
+      {
+        "step": 4,
+        "title": "Check phonotactic legality of onsets",
+        "description": "For each proposed onset, verify it's a legal English onset:\n- Single C: always legal\n- CC: must rise in sonority (e.g., /pl/, /tr/, /sm/) AND be in the\n  English-licensed list. */tl/, */dl/, */pw/, */mr/* are NOT legal\n- CCC: must start with /s/, then voiceless stop, then sonorant\n  (/spl, str, skr, spr/, etc.)\n- If the proposed onset is illegal, move one consonant back to the\n  previous coda."
+      },
+      {
+        "step": 5,
+        "title": "Verify with SSP",
+        "description": "The Sonority Sequencing Principle: sonority rises from syllable edge\nto nucleus, then falls. Walk through each syllable: does sonority\nrise across the onset? Fall across the coda? If not, re-check."
+      }
+    ],
+    "safe_outputs": [
+      "Phonemic-conversion prompts (\"what's the phonemic form? we don't",
+      "Vowel-counting prompts (\"how many vowel SOUNDS are in /aluminum/?\")",
+      "MOP application prompts (\"between these two vowels, how many",
+      "Legality-check prompts (\"is /tl/ a legal English onset? When did",
+      "SSP verification prompts (\"walk through the sonority of this onset",
+      "Acknowledgments and corrections",
+      "Redirects when spelling and pronunciation diverge"
+    ],
+    "must_avoid": [
+      "Syllabifying for the student",
+      "Counting orthographic vowels instead of phonemic vowels (silent",
+      "Letting MOP override phonotactic legality",
+      "Skipping the legality check (it's the difference between a 50% and",
+      "Treating diphthongs as two syllables",
+      "Letting spelling-induced syllabification stand (e.g., *fa-ther*",
+      "Continuing syllabification scaffolding when the student doesn't know"
+    ],
+    "example_exchange": "> **Student:** How do I syllabify *aluminum*?\n>\n> **Tutor:** Let's start with the phonemic form. How is *aluminum*\n> pronounced?\n>\n> **Student:** /\u0259\u02c8lu\u02d0m\u026an\u0259m/.\n>\n> **Tutor:** Good. Now count the vowel sounds \u2014 that's the number of\n> syllables.\n>\n> **Student:** /\u0259/, /u\u02d0/, /\u026a/, /\u0259/. Four.\n>\n> **Tutor:** Right, four syllables. Now place the consonants between\n> vowels using MOP. Between /\u0259/ and /u\u02d0/, what consonant is there?\n>\n> **Student:** /l/.\n>\n> **Tutor:** One consonant \u2014 push it into the following onset. So we\n> have /\u0259.lu\u02d0/ so far. Between /u\u02d0/ and /\u026a/?\n>\n> **Student:** /m/.\n>\n> **Tutor:** Push /m/ to the next onset: /\u0259.lu\u02d0.m\u026a/. Between /\u026a/ and\n> the final /\u0259/?\n>\n> **Student:** /n/.\n>\n> **Tutor:** Same \u2014 push to next onset: /\u0259.lu\u02d0.m\u026a.n\u0259m/.\n>\n> **Student:** Wait, where did the last /m/ go?\n>\n> **Tutor:** It's the coda of the last syllable \u2014 there's no following\n> vowel for it to be the onset of, so it must be the coda. Final\n> answer: /\u0259.lu\u02d0.m\u026a.n\u0259m/. Now check phonotactic legality. Are /l/, /m/,\n> /n/ all legal English onsets?\n>\n> **Student:** Yeah, all single consonants are legal.\n>\n> **Tutor:** Right. Done.",
+    "extra_sections": {
+      "disambiguation_from_other_skills": "- `id-natural-class` identifies feature-based groups of sounds. **This\n  skill** divides words into syllables \u2014 different operation.\n- `analyze-dist` does distributional analysis. **This skill** is about\n  syllable structure, not phonemic status.\n- `apply-phon-rule` derives surface forms from URs. **This skill** is\n  about syllable boundaries within a single form.\n- `validate-prereqs` covers basic syllable structure (onset, nucleus,\n  coda definitions, sonority hierarchy). **This skill** assumes those\n  are known and helps apply MOP and SSP.\n- `repair-miscon` fires on misconceptions like \"syllabification follows\n  spelling\" or \"MOP always wins over phonotactics.\" **This skill**\n  scaffolds the procedure; pair with repair-miscon when the conceptual\n  model is wrong.",
+      "inputs_expected_by_logic_py": "- `word_phonemic` (str, optional): the phonemic form, e.g.\n  `\"/\u0259\u02c8lu\u02d0m\u026an\u0259m/\"`\n- `word_orthographic` (str, optional): the spelled form for reference\n- `current_step` (int, optional): which step the student is on. 0 or\n  absent defaults to Step 1.\n- `proposed_syllabification` (str, optional): the student's attempt\n  for verification feedback",
+      "outputs_returned_by_logic_py": "A dict:\n- `flow` (list): the 5 flow steps with tutor prompts\n- `mop` (dict): Maximum Onset Principle definition + procedure\n- `english_onsets` (dict): legal English onsets categorized by length\n  and structure\n- `english_codas` (dict): legal English codas\n- `sonority_hierarchy` (list): the standard sonority ranking\n- `hint_ladders` (dict): per-step hint progressions\n- `common_errors` (list): cataloged error patterns with redirects\n- `example_syllabifications` (list): worked examples of varying\n  difficulty\n- `tutor_reminders` (list): high-priority stance reminders",
+      "notes_for_reusers": "This skill targets HW5 Q16 (8 points) directly. Syllabification also\nappears as a sub-task in some allomorph-conditioning rules in HW5\n(e.g., when stress-related allomorphs depend on syllable structure).\n\nThe English onsets/codas catalogs are rule-based but include the most\ncommon edge cases. /tl/ and /dl/ are particularly tricky \u2014 students\nthink they're legal because of words like *atlas* and *paddle*, but\nthose words are syllabified */\u00e6t.l\u0259s/* and */p\u00e6.dl\u0329/* (or\n*/p\u00e6d.l\u0329/*) precisely BECAUSE the cluster doesn't form a legal onset.\n\nThe example syllabifications include the HW5 problem set words:\n*pumpkin, atlas, constraint, athletic, photograph, restaurant,\ndistract, monstrous*. Each shows the MOP + legality interaction."
+    },
+    "source_repo": "ling-250-skills",
+    "source_path": "skills/syllabify-word/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/ling-250-skills/tree/main/skills/syllabify-word/skills.md",
+    "owner_team": "LING-250",
+    "owner_contact": "lucilleoh@u.northwestern.edu",
+    "status": "ready",
+    "status_reason": null
+  },
+  {
     "skill_id": "validate-prereqs",
     "name": "Validate Pre-Knowledge",
     "skill_type": "instructional",
@@ -8148,8 +8977,109 @@
       "notes_for_reusers": "The `PROBES` catalog is HW1-specific (Days 1-3). To add a probe,\nextend the catalog with: a `probe` question, a list of `key_concepts`\n(each with name/synonyms/description), an `example_strong` answer, and\n`related_concepts` tags. The skill deliberately does NOT score answers\n\u2014 scoring is the orchestrator's job, because natural-language\njudgment is what LLMs are good at and rigid substring matching would\nwrongly penalize students who use novel but correct vocabulary."
     },
     "source_repo": "ling-250-skills",
-    "source_path": "skills/validate-prereq/skills.md",
-    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/ling-250-skills/tree/main/skills/validate-prereq/skills.md",
+    "source_path": "skills/validate-prereqs/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/ling-250-skills/tree/main/skills/validate-prereqs/skills.md",
+    "owner_team": "LING-250",
+    "owner_contact": "lucilleoh@u.northwestern.edu",
+    "status": "ready",
+    "status_reason": null
+  },
+  {
+    "skill_id": "write-phon-rule",
+    "name": "Write Phonological Rule",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "tags": [
+      "phonology",
+      "phonological-rules",
+      "formal-notation",
+      "natural-classes",
+      "methodology",
+      "ling250"
+    ],
+    "course_types": [
+      "humanities"
+    ],
+    "learning_goal_tags": [
+      "construct-arguments",
+      "extract-requirements",
+      "verify-claims"
+    ],
+    "trigger_signals": [
+      "student-cant-formalize-rule",
+      "student-mixes-slashes-and-brackets",
+      "student-lists-segments-instead-of-features",
+      "student-asks-how-to-write-rule",
+      "wrong-answer-rule-misses-natural-class",
+      "wrong-answer-rule-includes-extra-context",
+      "student-asks-what-to-put-in-environment"
+    ],
+    "chip_icon": "\u270f\ufe0f",
+    "version": "0.1.0",
+    "python_entry": "logic.py",
+    "description": "Scaffolds writing a phonological alternation in formal notation:\n`/A/ \u2192 [B] / X __ Y`. The student has typically completed distributional\nanalysis (via `analyze-dist`) and identified an alternation, and now\nneeds to formalize it \u2014 including expressing the conditioning environment\nin natural-class features rather than listing specific segments. The\nskill walks the student through four parts: target (what changes), result\n(what it becomes), environment (where the change occurs), and the\nslashes/brackets distinction that maintains the underlying-vs-surface\nlevel. Stateless \u2014 the orchestrator tracks which part the student is on.",
+    "trigger_summary": "### Fires when:\n- Student has identified an alternation pattern and is asked to express\n  it as a formal rule\n- Student writes a rule that lists specific segments where natural-class\n  features should be used\n- Student mixes slashes and brackets (e.g., `/X/ \u2192 /Y/ / __ [Z]/`)\n- Student asks \"how do I write this as a rule?\"\n- Student writes a rule whose environment is missing a relevant context\n  or includes irrelevant ones\n- Wrong answer reveals environment is too narrow or too broad\n\n### Does NOT fire when:\n- Student is still doing distributional analysis (use `analyze-dist`)\n- Student is given a rule and asked to apply it forward (use\n  `apply-phon-rule`)\n- Student is identifying the natural class of a set of sounds (use\n  `id-natural-class`; this skill *uses* that internally)\n- Student is on a transcription question (HW1/HW2)\n\n### Boundary cases:\n- **Student wants to use individual segments in environment**: this is\n  a teachable moment, not a hard error. Walk them through\n  feature-generalization with `id-natural-class` as a sub-task.\n- **Student writes a rule that captures the data exactly but is overly\n  specific**: ask \"could the rule be simpler? Are there sounds in the\n  environment that could be grouped together?\"\n- **Multi-rule alternations**: some alternations require ordered rules\n  (e.g., English plural). The student should write each rule separately\n  and consider order if relevant.",
+    "tutor_stance_rules": [
+      "The student writes the rule. The skill scaffolds piece by piece: what",
+      "Notation discipline matters. `/X/` is the underlying form (the",
+      "Natural classes, not segment lists. If the environment includes",
+      "The narrowest exhaustive class is the right answer for the environment.",
+      "Stay anchored to the data. The rule must derive every surface form in"
+    ],
+    "flow": [
+      {
+        "step": 1,
+        "title": "Identify the target",
+        "description": "What sound changes? This is the `/A/` slot. It's the underlying form\nthat the rule will transform. Ask: \"Which sound is being affected \u2014 what's\nthe input to the rule?\""
+      },
+      {
+        "step": 2,
+        "title": "Identify the result",
+        "description": "What does the target become on the surface? This is the `[B]` slot. Ask:\n\"When the rule applies, what does [A] turn into?\""
+      },
+      {
+        "step": 3,
+        "title": "Identify the environment",
+        "description": "Where does the change happen? Walk through the contexts in the data:\n\"In every form where [A] becomes [B], what's to the left? What's to the\nright?\" Identify left context, right context, word boundaries."
+      },
+      {
+        "step": 4,
+        "title": "Generalize the environment using natural classes",
+        "description": "The contexts identified in Step 3 are concrete sounds. Now generalize:\n\"What do all the left contexts have in common? Can we describe them\nusing one feature or class?\" Hand off to `id-natural-class` if the\nstudent needs scaffolding here. Common environments: `V _ V`, `[+voice] _`,\n`__ #`, `[+nasal] __`."
+      },
+      {
+        "step": 5,
+        "title": "Notation check",
+        "description": "Verify slashes vs brackets. The target and result use different notations:\ntarget is `/A/` (underlying), result is `[B]` (surface). Environment uses\nbrackets for natural classes (`[+voice]`) and `#` for word boundary, `__`\nfor the position of the target. Walk through each piece of the student's\nrule and confirm the conventions are followed."
+      }
+    ],
+    "safe_outputs": [
+      "Scaffolding prompts at each part of the rule (target, result,",
+      "Acknowledgments when a piece is correct (\"right, the target is /p/\")",
+      "Redirects when the student lists segments where features are needed",
+      "Notation-correction prompts (\"you wrote `/[X]/` \u2014 what's the",
+      "Pointers to `id-natural-class` when the environment needs class",
+      "Verification prompts after the rule is written (\"does your rule"
+    ],
+    "must_avoid": [
+      "Writing the rule for the student",
+      "Naming the natural class of the environment before the student has",
+      "Accepting `/[b/d/g]/` or any segment list when feature-based",
+      "Letting slashes/brackets confusion slide",
+      "Skipping the verification step (does the rule cover the data without",
+      "Listing specific sounds in the environment when the student has",
+      "Continuing rule-writing scaffolding when the student is fundamentally"
+    ],
+    "example_exchange": "> **Student:** I figured out that Spanish [b] becomes [\u03b2] between vowels.\n> How do I write that as a rule?\n>\n> **Tutor:** Good \u2014 you've done the analysis. Let's formalize it. First,\n> what's changing? In your rule, what's the target sound?\n>\n> **Student:** /b/.\n>\n> **Tutor:** Slashes or brackets \u2014 which one for the target?\n>\n> **Student:** Slashes, because it's the underlying form.\n>\n> **Tutor:** Right. And the result \u2014 what does /b/ turn into?\n>\n> **Student:** [\u03b2].\n>\n> **Tutor:** Brackets, because it's the surface form. Now the\n> environment. In your data, what's to the left of [\u03b2]? And to the\n> right?\n>\n> **Student:** Vowels on both sides.\n>\n> **Tutor:** So the environment is \"between vowels.\" How would you\n> notate that?\n>\n> **Student:** V __ V?\n>\n> **Tutor:** That's the standard convention. Put it all together.\n>\n> **Student:** /b/ \u2192 [\u03b2] / V __ V.\n>\n> **Tutor:** Perfect. One last check \u2014 does this rule cover every [\u03b2]\n> in your data? And does it produce any [\u03b2]s where the data has [b]?",
+    "extra_sections": {
+      "disambiguation_from_other_skills": "- `analyze-dist` runs the upstream methodology (find the alternation,\n  identify the conditioning). **This skill** assumes the alternation is\n  identified and helps formalize it.\n- `apply-phon-rule` runs the rule forward (UR + rule \u2192 surface).\n  **This skill** writes the rule from observed alternations. They're\n  inverse operations.\n- `id-natural-class` identifies the narrowest exhaustive class for a\n  set of sounds. **This skill** uses that operation when generalizing\n  the environment in Step 4.\n- `repair-miscon` fires on cataloged misconceptions like \"rules are\n  about physical articulation\" or \"wider class is always better.\"\n  **This skill** assumes the conceptual model is intact.",
+      "inputs_expected_by_logic_py": "- `target_sound` (str, optional): the underlying form being transformed\n- `result_sound` (str, optional): the surface realization\n- `dataset` (list of dict, optional): forms in the language being\n  analyzed\n- `current_step` (int, optional): which step the student is on (1-5).\n  0 or absent defaults to Step 1.\n- `student_rule_attempt` (str, optional): the student's rule-writing\n  attempt for verification feedback",
+      "outputs_returned_by_logic_py": "A dict:\n- `flow` (list): the 5 flow steps with tutor prompts\n- `notation_reference` (dict): formal notation conventions (slashes,\n  brackets, environment marks, common abbreviations)\n- `hint_ladders` (dict): per-step hint progressions\n- `common_errors` (list): cataloged error patterns with redirects\n- `example_rules` (list): canonical phonological rules for parallel\n  examples\n- `tutor_reminders` (list): high-priority stance reminders",
+      "notes_for_reusers": "This skill pairs tightly with `analyze-dist` (upstream) and\n`id-natural-class` (concurrent for the environment). Together they\nimplement HW4's core operation: data \u2192 analysis \u2192 formal rule.\n\nThe notation reference includes the most common environment patterns\n(intervocalic, word-final, after-nasal, etc.). The orchestrator can\nuse these as parallel examples when the student is stuck on environment\ngeneralization.\n\nFor multi-rule alternations like English plural [-z]/[-s]/[-\u0259z], this\nskill scaffolds each rule separately. Rule ordering is out of scope \u2014\ntreat that as a separate question if it arises."
+    },
+    "source_repo": "ling-250-skills",
+    "source_path": "skills/write-phon-rule/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/ling-250-skills/tree/main/skills/write-phon-rule/skills.md",
     "owner_team": "LING-250",
     "owner_contact": "lucilleoh@u.northwestern.edu",
     "status": "ready",

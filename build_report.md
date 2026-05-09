@@ -1,6 +1,6 @@
 # Catalog build report
 
-**Total skills:** 133  ·  ready: 115, stub: 12, broken: 6
+**Total skills:** 142  ·  ready: 124, stub: 12, broken: 6
 
 ## ⚠ Duplicate skill_id rejections
 
@@ -27,7 +27,7 @@ The following skills were **rejected** because their `skill_id` was already clai
 | `cs338-skills` | 6 | 6 | 0 | 0 |
 | `history-315-skills` | 9 | 9 | 0 | 0 |
 | `jour-201-1-skills` | 6 | 0 | 5 | 1 |
-| `ling-250-skills` | 5 | 5 | 0 | 0 |
+| `ling-250-skills` | 14 | 14 | 0 | 0 |
 | `phil-219-skills` | 11 | 11 | 0 | 0 |
 | `poli_sci-210-skills` | 42 | 39 | 2 | 1 |
 

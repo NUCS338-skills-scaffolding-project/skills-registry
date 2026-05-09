@@ -1,10 +1,20 @@
 {
-  "generated_at": "2026-05-08T01:52:52.373802+00:00",
+  "generated_at": "2026-05-09T01:48:01.281871+00:00",
   "previous_hash": "6d350296940b79d4",
-  "current_hash": "6d350296940b79d4",
-  "added": [],
+  "current_hash": "0a5ea275e3ada24b",
+  "added": [
+    "analyze-dist",
+    "apply-phon-rule",
+    "id-natural-class",
+    "interpret-spectrum",
+    "probe-min-pair",
+    "read-spectrogram",
+    "read-waveform",
+    "syllabify-word",
+    "write-phon-rule"
+  ],
   "removed": [],
   "changed": [],
   "unchanged_count": 127,
-  "summary": "no changes"
+  "summary": "9 added"
 }
