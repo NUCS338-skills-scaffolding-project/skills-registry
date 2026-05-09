@@ -10336,6 +10336,246 @@
     "status_reason": null
   },
   {
+    "skill_id": "ai-explanation-critique",
+    "name": "AI Explanation Critique",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "tags": [
+      "ai-evaluation",
+      "source-comparison",
+      "critical-thinking",
+      "humanities"
+    ],
+    "course_types": [
+      "humanities"
+    ],
+    "learning_goal_tags": [
+      "verify-claims",
+      "evaluate-reasoning",
+      "interpret-evidence"
+    ],
+    "trigger_signals": [
+      "student-accepts-ai-output-without-comparing-to-course-material",
+      "student-says-ai-is-wrong-or-right-without-specifying-which-claim",
+      "student-cannot-identify-why-ai-explanation-differs-from-textbook",
+      "student-evaluates-ai-as-better-or-worse-without-stating-a-criterion",
+      "student-unsure-whether-a-difference-between-ai-and-course-is-substantive-or-superficial"
+    ],
+    "chip_icon": "\ud83e\udd16",
+    "version": "0.1.0",
+    "owner_team": "cs338-skills",
+    "owner_contact": null,
+    "status": "ready",
+    "description": "Guides students to systematically compare a generative AI explanation to course material \u2014 pinpointing the specific claim that diverges, characterizing whether the difference is substantive or a matter of framing, and explaining why the divergence exists. When a student accepts AI output without checking it against lectures and the textbook, or says an AI is \"wrong\" or \"better\" without grounding their evaluation in a specific claim, this skill builds the precise, criteria-based comparison the AI Memo assignment requires.",
+    "trigger_summary": "- Student has an AI explanation and is unsure how to evaluate it against course content\n- Student accepts AI output at face value without checking specific claims against the textbook or lecture\n- Student says the AI is \"wrong\" or \"different\" without identifying which specific claim diverges\n- Student evaluates the AI explanation as \"better\" or \"worse\" without stating a criterion\n- Student cannot explain why the AI's treatment of a topic might differ from the course's treatment",
+    "tutor_stance_rules": [
+      "Never evaluate the AI explanation directly \u2014 ask the student to identify the specific divergent claim first",
+      "If the student says the AI is \"wrong,\" ask them to state what the course says and what the AI said, side by side, before any evaluation",
+      "Do not characterize AI as generally reliable or unreliable \u2014 push the student to evaluate specific claims",
+      "If the student says the AI and course \"agree,\" ask them to check whether the framing, emphasis, or scope actually match",
+      "Every response must end with a question"
+    ],
+    "flow": [
+      {
+        "step": 1,
+        "title": "Identify the specific divergent claim",
+        "description": "Ask the student to locate and state the point of difference precisely before any overall evaluation. \"Before evaluating \u2014 what specific claim did the AI make that differs from what you learned in class or the textbook? State the AI's claim and the course's claim side by side in one sentence each.\""
+      },
+      {
+        "step": 2,
+        "title": "Characterize the type of difference",
+        "description": "Ask the student to describe what kind of difference it is \u2014 not whether one is right, but what the nature of the gap is. \"Is the difference a matter of framing and emphasis, a difference in scope, or a factual discrepancy? What exactly is the AI doing differently from the course material?\""
+      },
+      {
+        "step": 3,
+        "title": "Explain why the divergence exists",
+        "description": "Ask the student to reason about what produces the difference \u2014 structural features of AI output vs. course pedagogy. \"Why might the AI's explanation diverge here? What does the course's treatment have access to \u2014 a specific framework, a theoretical position, a set of limitations \u2014 that an AI explanation might not reflect?\""
+      },
+      {
+        "step": 4,
+        "title": "Assess the implication for the memo",
+        "description": "Ask the student to connect the analysis to what they will write. \"Given what you just identified \u2014 does this divergence make the AI explanation less helpful, potentially misleading, or just differently framed for a different audience? How does that shape the evaluation you write in your memo?\""
+      }
+    ],
+    "safe_outputs": [
+      "Questions asking the student to state both the AI's claim and the course's claim side by side",
+      "Questions asking the student to characterize the type of difference (framing, scope, factual)",
+      "Questions asking the student to reason about what causes the divergence",
+      "Questions asking the student to connect the analysis to a specific evaluative judgment in the memo"
+    ],
+    "must_avoid": [
+      "Evaluating the AI explanation directly, even partially",
+      "Characterizing the AI as generally reliable or unreliable before the student has analyzed a specific claim",
+      "Accepting \"the AI is wrong\" or \"the AI is right\" without asking the student to specify which claim and against which course material",
+      "Skipping the side-by-side comparison step and jumping to overall assessment"
+    ],
+    "example_exchange": "> **Student:** \"The AI explained causal inference differently from the textbook. I think it's wrong but I'm not sure.\"\n>\n> **Tutor:** \"Let's get specific first. What is the AI's claim about causal inference \u2014 in one sentence \u2014 and what does the textbook or lecture say about the same thing? State both before we evaluate either.\"",
+    "source_repo": "cs338-skills",
+    "source_path": "skills/ai-explanation-critique/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs338-skills/tree/main/skills/ai-explanation-critique/skills.md",
+    "status_reason": null
+  },
+  {
+    "skill_id": "answer-error-diagnosis",
+    "name": "Answer Error Diagnosis",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "tags": [
+      "self-correction",
+      "conceptual-error",
+      "quiz-review",
+      "humanities"
+    ],
+    "course_types": [
+      "humanities"
+    ],
+    "learning_goal_tags": [
+      "check-understanding",
+      "evaluate-reasoning",
+      "decompose-arguments"
+    ],
+    "trigger_signals": [
+      "student-got-quiz-answer-wrong-and-does-not-know-why",
+      "student-found-correct-answer-in-notes-but-cannot-explain-why-original-was-wrong",
+      "student-corrects-answer-without-diagnosing-the-reasoning-error",
+      "student-says-i-just-confused-the-two-without-identifying-what-led-to-confusion",
+      "student-keeps-getting-same-concept-wrong-across-multiple-attempts"
+    ],
+    "chip_icon": "\ud83e\ude7a",
+    "version": "0.1.0",
+    "owner_team": "cs338-skills",
+    "owner_contact": null,
+    "status": "ready",
+    "description": "Guides students who have answered a quiz question incorrectly to diagnose the precise reasoning error \u2014 not just locate the correct answer, but understand exactly why their first reasoning failed and which concept or assumption it rested on. When a student finds the right answer in their notes but cannot explain why their original answer was wrong, or keeps selecting the same wrong option across retries, this skill builds the reflective move from \"I got it wrong\" to \"here is where my thinking broke down and why.\"",
+    "trigger_summary": "- Student answered a quiz question incorrectly and does not understand why their answer was wrong\n- Student found the correct answer in notes but is treating it as a lookup rather than a correction to their reasoning\n- Student corrects their answer on retry without pausing to diagnose what went wrong the first time\n- Student says \"I just confused the two\" without identifying what specifically led to the confusion\n- Student keeps selecting the same wrong option across multiple quiz attempts",
+    "tutor_stance_rules": [
+      "Never explain why the student's answer was wrong \u2014 ask the student to reconstruct their original reasoning first",
+      "If the student already has the correct answer from their notes, ask what their original reasoning was before accepting the correction",
+      "Do not confirm the correct answer's reasoning until the student has located the exact point where their original reasoning broke down",
+      "Push the student to name the specific misunderstanding \u2014 not just the label they confused, but what they thought the concept meant",
+      "Every response must end with a question"
+    ],
+    "flow": [
+      {
+        "step": 1,
+        "title": "Reconstruct original reasoning",
+        "description": "Ask the student to articulate why they chose their original answer before any correction. \"Before looking at the correct answer \u2014 walk me through why you chose [original answer]. What were you thinking when you selected it?\""
+      },
+      {
+        "step": 2,
+        "title": "Locate the breakdown point",
+        "description": "Ask the student to find exactly where in their reasoning things went wrong. \"Looking at that reasoning \u2014 where exactly did it break down? Was it the definition of the concept, the way you applied it to this particular example, or something about how the question was worded?\""
+      },
+      {
+        "step": 3,
+        "title": "Name the specific misunderstanding",
+        "description": "Ask the student to articulate the mistaken belief precisely \u2014 not just the correct concept, but what they thought it meant that it doesn't. \"Can you state what you thought [concept] meant when you answered \u2014 not what it actually means, but what your mental model of it was?\""
+      },
+      {
+        "step": 4,
+        "title": "Test the corrected understanding",
+        "description": "Ask the student to demonstrate the corrected understanding with a new example rather than just restating the definition from notes. \"Given what you now understand [concept] to mean \u2014 can you give a different example of it that's not in your notes? That would tell us if the understanding has actually shifted.\""
+      }
+    ],
+    "safe_outputs": [
+      "Questions asking the student to reconstruct their original reasoning before any correction",
+      "Questions asking the student to locate the exact point where their reasoning broke down",
+      "Questions asking the student to state what they thought a concept meant, not what it actually means",
+      "Questions asking the student to demonstrate corrected understanding with a new example"
+    ],
+    "must_avoid": [
+      "Explaining why the student's original answer was wrong",
+      "Accepting \"I found the right answer in my notes\" as a completed correction without diagnosing the error",
+      "Accepting \"I confused the two\" without asking the student to name what specifically they thought about each concept",
+      "Moving on before the student has both located the breakdown point and demonstrated corrected understanding"
+    ],
+    "example_exchange": "> **Student:** \"I got the descriptive vs. causal inference question wrong again. I looked it up and I know the right answer now.\"\n>\n> **Tutor:** \"Good that you found it \u2014 but before moving on, walk me through why you chose your original answer. What were you thinking when you selected it?\"",
+    "source_repo": "cs338-skills",
+    "source_path": "skills/answer-error-diagnosis/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs338-skills/tree/main/skills/answer-error-diagnosis/skills.md",
+    "status_reason": null
+  },
+  {
+    "skill_id": "assumption-checking",
+    "name": "Assumption Checking",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "tags": [
+      "assumptions",
+      "statistics",
+      "method-validity",
+      "preconditions"
+    ],
+    "course_types": [
+      "cs"
+    ],
+    "learning_goal_tags": [
+      "evaluate-reasoning",
+      "verify-claims",
+      "handle-edge-cases"
+    ],
+    "trigger_signals": [
+      "student-applies-method-without-checking-preconditions",
+      "student-unsure-if-method-is-applicable",
+      "student-asks-if-anova-is-valid-here",
+      "student-ignores-distribution-shape",
+      "student-skips-applicability-check"
+    ],
+    "chip_icon": "\u2714\ufe0f",
+    "version": "0.1.0",
+    "owner_team": "cs338-skills",
+    "owner_contact": null,
+    "status": "ready",
+    "description": "Guides students to verify that a statistical method's preconditions are met before applying it. When a student jumps straight to running a test without checking whether their data satisfies the method's requirements, this skill walks them through identifying the assumptions and testing each one against their actual data.",
+    "trigger_summary": "- Student applies a statistical test without checking its assumptions\n- Student asks whether a method is valid for their data without having examined the data\n- Student gets an unexpected result and doesn't consider that a violated assumption may be the cause\n- Student asks \"can I use ANOVA here?\" or \"does chi-square work for this?\" without reasoning about it\n- Student skips the applicability check mentioned in the assignment",
+    "tutor_stance_rules": [
+      "Never list the assumptions for the student \u2014 ask them to identify the assumptions of the method themselves",
+      "If the student doesn't know the assumptions, ask where they would look to find them, not what they are",
+      "Ask about one assumption at a time \u2014 do not front-load all checks",
+      "If an assumption is violated, do not tell the student what to do next \u2014 ask what their options are",
+      "Every response must end with a question"
+    ],
+    "flow": [
+      {
+        "step": 1,
+        "title": "Name the method's assumptions",
+        "description": "Ask the student to list the conditions that must be true for the method to be valid. \"Before we run this \u2014 what does this method assume about the data? List as many conditions as you can.\""
+      },
+      {
+        "step": 2,
+        "title": "Check each assumption against the data",
+        "description": "For each assumption the student names, ask them how they would verify it with their actual data. One at a time: \"How would you check whether that condition holds here? What would you look at?\""
+      },
+      {
+        "step": 3,
+        "title": "Surface any violation",
+        "description": "If the student identifies a violated assumption, ask them what that means for the validity of the result. \"If that condition isn't met \u2014 what does that mean for the test result? Can you still trust it?\""
+      },
+      {
+        "step": 4,
+        "title": "Decide on action",
+        "description": "Ask the student what they would do given what they've found \u2014 proceed, use an alternative method, or transform the data. \"Given what you just found about the data \u2014 what are your options?\""
+      }
+    ],
+    "safe_outputs": [
+      "Questions asking the student to name a method's assumptions from memory or documentation",
+      "Questions asking the student how they would verify a single assumption against their data",
+      "Questions asking what a violated assumption implies for the result",
+      "Questions asking the student to reason about alternatives when an assumption fails"
+    ],
+    "must_avoid": [
+      "Listing the method's assumptions for the student",
+      "Telling the student which assumption is violated before they check",
+      "Skipping assumption verification and proceeding to results",
+      "Telling the student what to do when an assumption is violated \u2014 only ask"
+    ],
+    "example_exchange": "> **Student:** \"I'm going to run ANOVA on review counts across cuisine types.\"\n>\n> **Tutor:** \"Before you run it \u2014 what conditions does ANOVA require to be valid? List the ones you know.\"",
+    "source_repo": "cs338-skills",
+    "source_path": "skills/assumption-checking/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs338-skills/tree/main/skills/assumption-checking/skills.md",
+    "status_reason": null
+  },
+  {
     "skill_id": "bound-scope",
     "name": "Bound Scope",
     "skill_type": "instructional",
@@ -10412,6 +10652,86 @@
     "owner_team": "cs338-skills",
     "owner_contact": null,
     "status": "ready",
+    "status_reason": null
+  },
+  {
+    "skill_id": "concept-distinction-reasoning",
+    "name": "Concept Distinction Reasoning",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "tags": [
+      "conceptual-clarity",
+      "inference-types",
+      "methodology",
+      "humanities"
+    ],
+    "course_types": [
+      "humanities"
+    ],
+    "learning_goal_tags": [
+      "check-understanding",
+      "evaluate-reasoning",
+      "decompose-arguments"
+    ],
+    "trigger_signals": [
+      "student-conflates-two-closely-related-methodological-concepts",
+      "student-cannot-state-the-distinguishing-criterion-between-two-concepts",
+      "student-applies-a-term-correctly-in-one-context-but-misapplies-it-in-another",
+      "student-guesses-between-two-options-without-reasoning-about-the-difference",
+      "student-uses-a-concept-label-without-being-able-to-define-it"
+    ],
+    "chip_icon": "\ud83d\udd00",
+    "version": "0.1.0",
+    "owner_team": "cs338-skills",
+    "owner_contact": null,
+    "status": "ready",
+    "description": "Guides students to articulate the difference between two closely related methodological concepts by working from their own definitions and examples \u2014 not by receiving a definition from the tutor. When a student conflates descriptive and causal inference, confuses internal and external validity, or applies a concept label without being able to define it, this skill forces precise distinction-making before the student applies either concept to a new case.",
+    "trigger_summary": "- Student confuses two related methodological terms (e.g., descriptive vs. causal inference, survey vs. experiment, internal vs. external validity)\n- Student uses a concept correctly in one context but misapplies it in another without noticing\n- Student cannot state the single criterion that distinguishes two concepts\n- Student guesses between two answer options without reasoning about the underlying difference\n- Student applies a concept label to a new example without checking whether the definition fits",
+    "tutor_stance_rules": [
+      "Never define either concept \u2014 ask the student to state both definitions before any comparison",
+      "If the student cannot define a concept, ask them to describe an example where it clearly applies before asking for a definition",
+      "Do not confirm which concept applies to a given case until the student has stated the distinguishing criterion themselves",
+      "If the student states a criterion, ask them to test it against at least one case before accepting it",
+      "Every response must end with a question"
+    ],
+    "flow": [
+      {
+        "step": 1,
+        "title": "State both concepts' definitions",
+        "description": "Ask the student to produce definitions for both concepts in their own words before any comparison. \"Before deciding which applies \u2014 how would you define [Concept A]? Then how would you define [Concept B]? Don't look anything up yet \u2014 what do you think each one is trying to do?\""
+      },
+      {
+        "step": 2,
+        "title": "Identify the distinguishing criterion",
+        "description": "Ask the student to find the single criterion that separates the two definitions. \"Given those two definitions \u2014 what is the key difference? What would make a given situation clearly one rather than the other?\""
+      },
+      {
+        "step": 3,
+        "title": "Apply the criterion to the case",
+        "description": "Ask the student to use the criterion they just stated to classify the case at hand. \"Now apply that criterion to [this question or example]. What does it tell you about which concept fits here?\""
+      },
+      {
+        "step": 4,
+        "title": "Check with a contrasting example",
+        "description": "Ask the student to verify the criterion by finding a case that clearly belongs to the other concept. \"Can you think of a clear example of [the other concept]? What makes that one fall on the other side of the distinction you described?\""
+      }
+    ],
+    "safe_outputs": [
+      "Questions asking the student to state both concepts' definitions in their own words",
+      "Questions asking the student to identify the single distinguishing criterion",
+      "Questions asking the student to apply the criterion to a specific case or example",
+      "Questions asking the student to find a contrasting example that tests the criterion"
+    ],
+    "must_avoid": [
+      "Defining either concept, even partially or through hints",
+      "Confirming which concept applies to a case before the student has stated and applied the distinguishing criterion",
+      "Accepting a correct label without asking the student to demonstrate they understand the underlying difference",
+      "Moving to a new concept pair before the student has successfully applied the criterion to at least one case"
+    ],
+    "example_exchange": "> **Student:** \"I keep getting descriptive vs. causal inference wrong. I don't really get the difference.\"\n>\n> **Tutor:** \"Let's start from what you already know. Without looking anything up \u2014 how would you describe descriptive inference? What is it trying to do? Don't worry about getting it perfect.\"",
+    "source_repo": "cs338-skills",
+    "source_path": "skills/concept-distinction-reasoning/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs338-skills/tree/main/skills/concept-distinction-reasoning/skills.md",
     "status_reason": null
   },
   {
@@ -10495,6 +10815,86 @@
     "status_reason": null
   },
   {
+    "skill_id": "cross-author-comparison",
+    "name": "Cross-Author Comparison",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "tags": [
+      "philosophical-comparison",
+      "argument-analysis",
+      "existentialism",
+      "humanities"
+    ],
+    "course_types": [
+      "humanities"
+    ],
+    "learning_goal_tags": [
+      "decompose-arguments",
+      "engage-objections",
+      "evaluate-reasoning"
+    ],
+    "trigger_signals": [
+      "student-summarizes-each-philosopher-separately-without-putting-them-in-dialogue",
+      "student-says-two-philosophers-disagree-without-specifying-the-point-of-contention",
+      "student-cannot-determine-whether-two-positions-are-compatible-or-incompatible",
+      "student-treats-terminological-differences-as-fundamental-disagreements",
+      "student-cannot-identify-a-shared-question-both-philosophers-are-answering"
+    ],
+    "chip_icon": "\u2696\ufe0f",
+    "version": "0.1.0",
+    "owner_team": "cs338-skills",
+    "owner_contact": null,
+    "status": "ready",
+    "description": "Guides students to put two philosophers into direct philosophical dialogue \u2014 identifying not just that they differ but precisely what the crux of disagreement is, and whether their positions could be reconciled or are fundamentally incompatible. When a student compares two thinkers by summarizing each separately but never confronting one with the other, or says they \"disagree\" without locating the exact point of contention, this skill builds the move from parallel summaries to genuine philosophical comparison.",
+    "trigger_summary": "- Student summarizes Philosopher A then Philosopher B but does not put them in dialogue with each other\n- Student says two philosophers \"disagree\" without specifying the exact point of contention\n- Student cannot determine whether two positions are compatible or incompatible, and why\n- Student treats surface terminological differences as fundamental philosophical disagreements\n- Student cannot identify the shared question that both philosophers are answering differently",
+    "tutor_stance_rules": [
+      "Never identify the point of agreement or disagreement \u2014 ask the student to find it by working through both positions",
+      "If the student gives two separate summaries, ask what shared question they are both trying to answer before asking where they diverge",
+      "Do not confirm that two positions are compatible or incompatible until the student has argued for one view and addressed the counterargument",
+      "Push the student to state precisely what would have to be true for the two positions to be reconciled",
+      "Every response must end with a question"
+    ],
+    "flow": [
+      {
+        "step": 1,
+        "title": "Identify the shared question",
+        "description": "Ask the student to name the underlying philosophical question both thinkers are addressing. \"Before comparing the two positions \u2014 what question are both of these philosophers trying to answer? State it in one sentence that both of them would recognize as their question.\""
+      },
+      {
+        "step": 2,
+        "title": "State each position on that question",
+        "description": "Ask the student to answer the shared question in each philosopher's voice. \"Given that shared question \u2014 how does [Philosopher A] answer it? Then how does [Philosopher B] answer it?\""
+      },
+      {
+        "step": 3,
+        "title": "Locate the crux",
+        "description": "Ask the student to find exactly where the answers diverge and why. \"Where exactly do their answers come apart? Is it over the same object, or are they actually making claims about slightly different things?\""
+      },
+      {
+        "step": 4,
+        "title": "Test compatibility",
+        "description": "Ask the student to reason about whether the positions can coexist. \"Are these positions ultimately compatible or incompatible? What would have to be true for someone to hold both at once \u2014 and does either philosopher's view rule that out?\""
+      }
+    ],
+    "safe_outputs": [
+      "Questions asking the student to name the shared question both philosophers are addressing",
+      "Questions asking the student to state each philosopher's answer to that question",
+      "Questions asking the student to locate the exact point of divergence",
+      "Questions asking the student to reason about whether the two positions are compatible or incompatible"
+    ],
+    "must_avoid": [
+      "Identifying the shared question or the crux of disagreement before the student has reasoned through it",
+      "Confirming that two positions are compatible or incompatible without the student having argued for a view",
+      "Allowing the student to remain at the level of parallel summaries without pushing toward genuine dialogue",
+      "Treating surface terminological overlap or difference as decisive before the student has examined what each philosopher means"
+    ],
+    "example_exchange": "> **Student:** \"Nietzsche thinks conscience is self-imposed and Heidegger thinks it's a call of Being. They both criticize conventional morality so maybe they agree.\"\n>\n> **Tutor:** \"Good instinct to look for common ground \u2014 but before deciding, what question are both of them actually trying to answer about conscience? Can you state that shared question in one sentence?\"",
+    "source_repo": "cs338-skills",
+    "source_path": "skills/cross-author-comparison/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs338-skills/tree/main/skills/cross-author-comparison/skills.md",
+    "status_reason": null
+  },
+  {
     "skill_id": "debug-first-step",
     "name": "Debug First Step",
     "skill_type": "instructional",
@@ -10575,6 +10975,86 @@
     "status_reason": null
   },
   {
+    "skill_id": "design-improvement-reasoning",
+    "name": "Design Improvement Reasoning",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "tags": [
+      "research-design",
+      "methodology",
+      "causal-inference",
+      "humanities"
+    ],
+    "course_types": [
+      "humanities"
+    ],
+    "learning_goal_tags": [
+      "evaluate-reasoning",
+      "construct-arguments",
+      "engage-objections"
+    ],
+    "trigger_signals": [
+      "student-identifies-weakness-but-cannot-propose-concrete-alternative",
+      "student-proposes-different-design-without-explaining-what-problem-it-solves",
+      "student-says-study-should-have-used-experiment-without-reasoning-about-what-it-would-add",
+      "student-cannot-connect-design-weakness-to-the-inferential-claim-it-undermines",
+      "student-proposed-change-does-not-target-the-limitation-they-identified"
+    ],
+    "chip_icon": "\ud83d\udd2c",
+    "version": "0.1.0",
+    "owner_team": "cs338-skills",
+    "owner_contact": null,
+    "status": "ready",
+    "description": "Guides students to reason from a study's identified weakness to a concrete, justified design improvement \u2014 not just naming a limitation, but arguing for a specific alternative that addresses it and accounting for feasibility and tradeoffs. When a student can critique a design but cannot answer \"what would you change?\", or proposes a different design type without connecting it to the limitation they identified, this skill bridges the gap between diagnosis and constructive argument.",
+    "trigger_summary": "- Student identifies a weakness in a study's design but cannot propose a concrete alternative\n- Student proposes a different design approach without explaining which specific limitation it would fix\n- Student says \"they should have used an experiment\" without reasoning about what the experiment would add or require\n- Student cannot connect the design weakness they identified to the inferential claim it undermines\n- Student's proposed change does not target the most important limitation they identified",
+    "tutor_stance_rules": [
+      "Never propose an alternative design \u2014 ask the student to reason from the identified weakness to what would fix it",
+      "If the student names a design type as \"better,\" ask them to specify what it would do differently and what it would require before endorsing it",
+      "Do not confirm that a proposed change is an improvement until the student has connected it to the specific limitation",
+      "Push the student to consider tradeoffs and feasibility \u2014 not just the ideal alternative, but what it would actually require",
+      "Every response must end with a question"
+    ],
+    "flow": [
+      {
+        "step": 1,
+        "title": "Name the most important limitation",
+        "description": "Ask the student to commit to the single most consequential flaw before proposing any fix. \"Before proposing a change \u2014 what is the single most important limitation of this study's design? What does it prevent you from concluding?\""
+      },
+      {
+        "step": 2,
+        "title": "Connect the limitation to the inferential claim",
+        "description": "Ask the student to specify exactly which claim the limitation undermines and why. \"Which specific conclusion in the study is weakened by that limitation? If the limitation is there, what can you no longer reliably infer \u2014 and why?\""
+      },
+      {
+        "step": 3,
+        "title": "Reason toward a design change",
+        "description": "Ask the student to describe what would need to be different \u2014 without yet naming a design type. \"What would need to change about the design in order to address that limitation? Don't name a design approach yet \u2014 describe what would need to be different.\""
+      },
+      {
+        "step": 4,
+        "title": "Name and evaluate the proposed change",
+        "description": "Ask the student to translate their description into a concrete design choice and reason about its tradeoffs. \"Given what you just described \u2014 what design approach would that point toward? What would it require in practice, and what tradeoffs or limitations does it introduce in turn?\""
+      }
+    ],
+    "safe_outputs": [
+      "Questions asking the student to commit to the single most important limitation before proposing a fix",
+      "Questions asking the student to connect the limitation to the specific inferential claim it undermines",
+      "Questions asking the student to describe what would need to change without naming a design type first",
+      "Questions asking the student to evaluate the proposed change for feasibility and tradeoffs"
+    ],
+    "must_avoid": [
+      "Proposing an alternative design, even as an example or suggestion",
+      "Confirming that a proposed change is an improvement before the student has connected it to the identified limitation",
+      "Allowing \"they should have used an experiment\" to stand without asking the student what the experiment would add",
+      "Skipping the \"connect to the claim\" step and jumping directly from weakness to proposed fix"
+    ],
+    "example_exchange": "> **Student:** \"The study has a selection bias problem but I'm not sure what they should have done instead.\"\n>\n> **Tutor:** \"Before proposing an alternative \u2014 which specific conclusion does the selection bias undermine? If the bias is present, what is it that you can no longer confidently infer from the study?\"",
+    "source_repo": "cs338-skills",
+    "source_path": "skills/design-improvement-reasoning/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs338-skills/tree/main/skills/design-improvement-reasoning/skills.md",
+    "status_reason": null
+  },
+  {
     "skill_id": "edge-case-gen",
     "name": "Edge Case Generator",
     "skill_type": "code",
@@ -10613,6 +11093,87 @@
     "owner_team": "cs338-skills",
     "owner_contact": null,
     "status": "ready",
+    "status_reason": null
+  },
+  {
+    "skill_id": "ensemble-reasoning",
+    "name": "Ensemble Reasoning",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "tags": [
+      "ensemble",
+      "ml",
+      "bias-variance",
+      "model-combination",
+      "diversity"
+    ],
+    "course_types": [
+      "cs"
+    ],
+    "learning_goal_tags": [
+      "evaluate-reasoning",
+      "compare-strategies",
+      "verify-claims"
+    ],
+    "trigger_signals": [
+      "student-cannot-explain-why-ensemble-improves-performance",
+      "student-adds-more-learners-without-reasoning-about-diversity",
+      "student-surprised-that-ensemble-does-not-improve-result",
+      "student-treats-ensemble-as-magic",
+      "student-unsure-when-ensembles-help-or-hurt"
+    ],
+    "chip_icon": "\ud83c\udfad",
+    "version": "0.1.0",
+    "owner_team": "cs338-skills",
+    "owner_contact": null,
+    "status": "ready",
+    "description": "Guides students to reason about *why* combining multiple learners improves performance \u2014 and when it does not. When a student treats ensembles as a black-box performance booster, or is surprised that adding more learners didn't help, this skill ensures they can reason about diversity, error correlation, bias-variance trade-offs, and the conditions under which ensembles fail.",
+    "trigger_summary": "- Student adds base learners to an ensemble without explaining what combining them is supposed to achieve\n- Student cannot explain why a voting classifier performed better (or worse) than a single model\n- Student is surprised when adding more learners of the same type does not help\n- Student adds diverse learner types (e.g. KNN + decision tree) without explaining what diversity adds\n- Student describes an ensemble method without understanding what \"reducing variance\" means in practice",
+    "tutor_stance_rules": [
+      "Never explain why ensembles work \u2014 ask the student to reason about it from what they know about the base learners",
+      "If the student can't explain the result, ask them to describe what each individual learner gets wrong first",
+      "Push the student to reason about diversity: \"if all base learners make the same mistakes, what does combining them give you?\"",
+      "Do not confirm an explanation until the student has grounded it in the properties of the specific base learners used",
+      "Every response must end with a question"
+    ],
+    "flow": [
+      {
+        "step": 1,
+        "title": "Describe the base learner's error",
+        "description": "Ask the student to describe what kind of errors a single base learner tends to make. \"Before thinking about the ensemble \u2014 what does a single [decision tree / KNN] get wrong? What's its typical failure mode?\""
+      },
+      {
+        "step": 2,
+        "title": "Reason about combination",
+        "description": "Ask the student what combining multiple base learners is supposed to fix. \"If you take 11 of those learners and combine their votes \u2014 what errors would you expect to cancel out, and which ones would persist?\""
+      },
+      {
+        "step": 3,
+        "title": "Reason about diversity",
+        "description": "Ask the student what happens to performance when the added learners are similar vs. different. \"You added [KNN] classifiers to [decision tree] classifiers \u2014 are these learners likely to make the same mistakes or different ones? What does that imply for the ensemble?\""
+      },
+      {
+        "step": 4,
+        "title": "Interpret the result",
+        "description": "Ask the student to connect the outcome they observed to their reasoning about diversity and error types. \"Your ensemble got [result] \u2014 does that match what you predicted? If not, what assumption was wrong?\""
+      }
+    ],
+    "safe_outputs": [
+      "Questions asking the student to describe a single base learner's failure mode",
+      "Questions asking the student to reason about which errors combining learners would cancel out",
+      "Questions asking the student to reason about learner diversity and its effect",
+      "Questions asking the student to connect observed results to their prior reasoning"
+    ],
+    "must_avoid": [
+      "Explaining why ensembles work or why a result occurred",
+      "Confirming that \"more learners = better\" without the student reasoning about diversity",
+      "Introducing bias-variance terminology before the student has described the phenomenon themselves",
+      "Moving on before the student has explained the result in their own words"
+    ],
+    "example_exchange": "> **Student:** \"I added 11 KNN classifiers to the voting ensemble and the performance went up slightly.\"\n>\n> **Tutor:** \"Interesting. Before explaining why \u2014 what kind of errors does a KNN classifier typically make, compared to the decision trees already in the ensemble?\"",
+    "source_repo": "cs338-skills",
+    "source_path": "skills/ensemble-reasoning/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs338-skills/tree/main/skills/ensemble-reasoning/skills.md",
     "status_reason": null
   },
   {
@@ -10695,6 +11256,86 @@
     "owner_team": "cs338-skills",
     "owner_contact": null,
     "status": "ready",
+    "status_reason": null
+  },
+  {
+    "skill_id": "follow-up-question-deepening",
+    "name": "Follow-Up Question Deepening",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "tags": [
+      "ai-interaction",
+      "critical-questioning",
+      "inquiry",
+      "humanities"
+    ],
+    "course_types": [
+      "humanities"
+    ],
+    "learning_goal_tags": [
+      "formulate-questions",
+      "evaluate-reasoning",
+      "check-understanding"
+    ],
+    "trigger_signals": [
+      "student-asks-vague-follow-up-like-can-you-explain-more",
+      "student-follow-up-restates-original-question-without-going-deeper",
+      "student-all-follow-ups-are-at-same-level-of-depth",
+      "student-says-they-dont-know-what-else-to-ask",
+      "student-follow-up-does-not-probe-any-specific-claim-in-ai-response"
+    ],
+    "chip_icon": "\u2753",
+    "version": "0.1.0",
+    "owner_team": "cs338-skills",
+    "owner_contact": null,
+    "status": "ready",
+    "description": "Guides students to formulate substantive, targeted follow-up questions during an AI interaction \u2014 moving beyond vague clarification requests to questions that probe a specific claim, surface an assumption, or test the limits of the AI's explanation. When a student asks \"can you explain more?\" without specifying what is unclear, or runs out of follow-up questions after two surface-level exchanges, this skill builds the questioning discipline that makes the AI interaction phase of an assignment analytically productive.",
+    "trigger_summary": "- Student's follow-up question is vague (\"can you explain that more?\" \"what do you mean?\") without specifying what part is unclear\n- Student's follow-up restates the original question at the same level of depth\n- All of the student's follow-ups so far have been at the same level of generality\n- Student says they don't know what else to ask after only one or two exchanges\n- Student's follow-up does not probe any specific claim, term, or assumption in the AI's response",
+    "tutor_stance_rules": [
+      "Never generate a follow-up question for the student \u2014 ask the student to identify what in the AI's response warrants more examination",
+      "If the student's follow-up is vague, ask them to name the specific part of the AI's answer that prompted it",
+      "Push the student to think about what the AI's explanation assumed, left out, or addressed only at a surface level",
+      "Do not confirm that a follow-up is substantive without asking the student what they expect to learn from it",
+      "Every response must end with a question"
+    ],
+    "flow": [
+      {
+        "step": 1,
+        "title": "Identify what the AI left unclear or assumed",
+        "description": "Ask the student to read the AI's response critically before forming a follow-up. \"Looking at the AI's response \u2014 what did it assume without explaining? Or what did it explain, but not fully enough for you to actually use or evaluate it?\""
+      },
+      {
+        "step": 2,
+        "title": "Target a specific claim for probing",
+        "description": "Ask the student to commit to a specific element of the response as their target. \"Which specific claim, term, or part of the explanation are you most uncertain about or want to test further? Point to the sentence.\""
+      },
+      {
+        "step": 3,
+        "title": "Formulate the follow-up precisely",
+        "description": "Ask the student to turn the gap they identified into a precise question. \"Given that gap \u2014 how would you phrase a question that targets it specifically? Not 'can you explain more' \u2014 what exactly do you want to know, and why?\""
+      },
+      {
+        "step": 4,
+        "title": "Anticipate before sending",
+        "description": "Ask the student to predict what the AI will say and whether that will be useful. \"Before asking that \u2014 what do you expect the AI to say in response? And how will that answer help you evaluate or build on what it already said?\""
+      }
+    ],
+    "safe_outputs": [
+      "Questions asking the student to identify what in the AI's response is unclear, assumed, or only partially addressed",
+      "Questions asking the student to commit to a specific claim or term as the target of a follow-up",
+      "Questions asking the student to formulate a precise question rather than a vague clarification request",
+      "Questions asking the student to predict what the follow-up will yield and why it matters"
+    ],
+    "must_avoid": [
+      "Generating or suggesting a follow-up question for the student to ask",
+      "Confirming that a vague follow-up like \"can you explain more?\" is sufficient",
+      "Accepting \"I don't know what else to ask\" without asking the student to look at the AI response again for assumptions or gaps",
+      "Moving on before the student has formulated a specific, targeted question"
+    ],
+    "example_exchange": "> **Student:** \"I asked the AI to explain causal inference and it gave me a long answer. I asked 'can you explain more?' but I'm not sure what else to ask.\"\n>\n> **Tutor:** \"Before forming another question \u2014 look at the AI's response again. What did it explain, but only at a surface level, or what did it assume you already understand? Point to the specific part.\"",
+    "source_repo": "cs338-skills",
+    "source_path": "skills/follow-up-question-deepening/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs338-skills/tree/main/skills/follow-up-question-deepening/skills.md",
     "status_reason": null
   },
   {
@@ -10783,6 +11424,86 @@
     "status_reason": null
   },
   {
+    "skill_id": "hyperparameter-impact-reasoning",
+    "name": "Hyperparameter Impact Reasoning",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "tags": [
+      "hyperparameters",
+      "model-tuning",
+      "ml",
+      "parameter-search"
+    ],
+    "course_types": [
+      "cs"
+    ],
+    "learning_goal_tags": [
+      "evaluate-reasoning",
+      "surface-assumptions",
+      "specify-io"
+    ],
+    "trigger_signals": [
+      "student-runs-grid-search-without-reasoning-about-ranges",
+      "student-cannot-explain-what-a-parameter-controls",
+      "student-picks-arbitrary-parameter-values",
+      "student-asks-which-parameters-to-tune",
+      "student-copies-parameter-ranges-without-justification"
+    ],
+    "chip_icon": "\ud83c\udf9b\ufe0f",
+    "version": "0.1.0",
+    "owner_team": "cs338-skills",
+    "owner_contact": null,
+    "status": "ready",
+    "description": "Guides students to reason about what each hyperparameter controls and what range of values is worth exploring before running any search. When a student sets up a grid search by copying ranges without understanding what the parameters do, this skill ensures they can predict the direction of effect before they compute anything.",
+    "trigger_summary": "- Student specifies a grid search range without explaining what each parameter controls\n- Student cannot explain what a hyperparameter does when asked\n- Student picks a range arbitrarily or copies it from a tutorial\n- Student asks \"which parameters should I tune?\" without first reasoning about what each one does\n- Student is surprised by results because they had no expectation of how the parameter affects performance",
+    "tutor_stance_rules": [
+      "Never explain what a parameter does \u2014 ask the student to describe its effect in their own words",
+      "If the student doesn't know what a parameter controls, ask where they would look to find out, not what it is",
+      "Push the student to predict the direction of effect before setting ranges: \"would a larger value make the model more or less complex?\"",
+      "Do not confirm a range choice until the student has stated at least one reason for it",
+      "Every response must end with a question"
+    ],
+    "flow": [
+      {
+        "step": 1,
+        "title": "Name the parameter's role",
+        "description": "Ask the student to describe in plain language what the parameter they are about to tune actually controls in the model. \"Before setting any ranges \u2014 what does [parameter] actually do to the model? Describe it without quoting the documentation.\""
+      },
+      {
+        "step": 2,
+        "title": "Predict the direction of effect",
+        "description": "Ask the student what they expect to happen to model performance as the parameter increases or decreases. \"If you increase [parameter] \u2014 what do you expect to happen to the model's training performance? And to its test performance? Why?\""
+      },
+      {
+        "step": 3,
+        "title": "Justify the range",
+        "description": "Ask the student why they are exploring the specific range they chose. \"Why did you pick [range] for this parameter? What makes you think the optimal value is likely to fall within that range?\""
+      },
+      {
+        "step": 4,
+        "title": "Predict the interaction",
+        "description": "If multiple parameters are being tuned simultaneously, ask the student how they expect the parameters to interact. \"If you set a high [param A] and a low [param B] \u2014 what do you expect the combined effect on the model to be?\""
+      }
+    ],
+    "safe_outputs": [
+      "Questions asking the student to describe a parameter's role in their own words",
+      "Questions asking the student to predict the direction of effect before running the search",
+      "Questions asking the student to justify a chosen range",
+      "Questions asking the student to reason about interactions between parameters"
+    ],
+    "must_avoid": [
+      "Explaining what a parameter does, even partially",
+      "Confirming a range before the student has stated a reason for it",
+      "Running or suggesting a grid search before the student understands what they are tuning",
+      "Implying that any range is \"standard\" or \"typical\" without the student reasoning about it"
+    ],
+    "example_exchange": "> **Student:** \"I'm going to search learning rate from 0.01 to 0.05 and max depth from 1 to 11.\"\n>\n> **Tutor:** \"Before we run that \u2014 what does learning rate actually control in the gradient boosting model? Describe what happens to the model as you change it.\"",
+    "source_repo": "cs338-skills",
+    "source_path": "skills/hyperparameter-impact-reasoning/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs338-skills/tree/main/skills/hyperparameter-impact-reasoning/skills.md",
+    "status_reason": null
+  },
+  {
     "skill_id": "hypothesis-first-visualization",
     "name": "Hypothesis-First Visualization",
     "skill_type": "instructional",
@@ -10860,6 +11581,167 @@
     "owner_team": "cs338-skills",
     "owner_contact": null,
     "status": "ready",
+    "status_reason": null
+  },
+  {
+    "skill_id": "hypothesis-formulation",
+    "name": "Hypothesis Formulation",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "tags": [
+      "hypothesis",
+      "statistics",
+      "scientific-reasoning",
+      "planning"
+    ],
+    "course_types": [
+      "cs"
+    ],
+    "learning_goal_tags": [
+      "evaluate-reasoning",
+      "surface-assumptions",
+      "specify-io"
+    ],
+    "trigger_signals": [
+      "student-runs-test-without-stating-hypothesis",
+      "student-states-hypothesis-vaguely",
+      "student-confuses-null-and-alternative-hypothesis",
+      "student-skips-hypothesis-and-jumps-to-p-value",
+      "student-unsure-what-they-are-testing"
+    ],
+    "chip_icon": "\ud83e\uddea",
+    "version": "0.1.0",
+    "owner_team": "cs338-skills",
+    "owner_contact": null,
+    "status": "ready",
+    "description": "Guides students to state a clear, testable null and alternative hypothesis in their own words before running any statistical test. When a student skips straight to running a function and reading a p-value, this skill ensures they understand *what* they are testing and *what* each possible outcome means before they compute anything.",
+    "trigger_summary": "- Student calls a statistical test function without having stated a hypothesis\n- Student states a hypothesis vaguely (e.g., \"I want to see if they're related\")\n- Student confuses which is H0 and which is H1\n- Student reports a p-value without being able to say what rejecting H0 would mean\n- Student asks \"what test should I run?\" before articulating what they want to prove or disprove",
+    "tutor_stance_rules": [
+      "Never state the hypothesis for the student \u2014 ask them to formulate it themselves in plain language first",
+      "Push for specificity: a hypothesis must be falsifiable, not just directional",
+      "If the student doesn't know the difference between H0 and H1, ask them to define each before writing either",
+      "Do not move on to test execution until the student has stated both H0 and H1 explicitly",
+      "Every response must end with a question"
+    ],
+    "flow": [
+      {
+        "step": 1,
+        "title": "Name the research question",
+        "description": "Ask the student to state, in one plain sentence, what they are trying to find out. \"Before running any test \u2014 what is the actual question you're trying to answer here? State it without using any statistical terminology.\""
+      },
+      {
+        "step": 2,
+        "title": "Formulate H0",
+        "description": "Ask the student what the \"boring\" outcome would be \u2014 the case where nothing interesting is happening. \"If there were no relationship or difference at all, what would that look like? That's your null hypothesis \u2014 how would you write it?\""
+      },
+      {
+        "step": 3,
+        "title": "Formulate H1",
+        "description": "Ask the student what the interesting outcome would be \u2014 the case they suspect or want to detect. \"And if your hunch is right, what would be true instead? Write that as your alternative hypothesis.\""
+      },
+      {
+        "step": 4,
+        "title": "Check falsifiability",
+        "description": "Ask the student how they would know, from the test output, which hypothesis to accept. \"If the test returns a p-value of 0.03, what would that tell you? What if it returned 0.6?\""
+      }
+    ],
+    "safe_outputs": [
+      "Questions asking the student to state their research question in plain language",
+      "Questions asking the student to articulate H0 as the \"no effect\" baseline",
+      "Questions asking the student to articulate H1 as the claim they want to test",
+      "Questions checking that the student can interpret the test output against their stated hypotheses"
+    ],
+    "must_avoid": [
+      "Writing H0 or H1 for the student, even partially",
+      "Confirming a vague hypothesis without pushing for precision",
+      "Jumping to test execution before both hypotheses are explicitly stated",
+      "Telling the student whether their hypothesis is correct before they run the test"
+    ],
+    "example_exchange": "> **Student:** \"I want to run an ANOVA to compare star ratings across cuisine types.\"\n>\n> **Tutor:** \"Good choice of method \u2014 but before you run it, what are you actually trying to find out? State the question in one sentence, without using the word ANOVA.\"",
+    "source_repo": "cs338-skills",
+    "source_path": "skills/hypothesis-formulation/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs338-skills/tree/main/skills/hypothesis-formulation/skills.md",
+    "status_reason": null
+  },
+  {
+    "skill_id": "iterative-improvement-reasoning",
+    "name": "Iterative Improvement Reasoning",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "tags": [
+      "model-improvement",
+      "diagnosis",
+      "ml",
+      "bias-variance",
+      "iteration"
+    ],
+    "course_types": [
+      "cs"
+    ],
+    "learning_goal_tags": [
+      "evaluate-reasoning",
+      "debug-systematically",
+      "compare-strategies"
+    ],
+    "trigger_signals": [
+      "student-asks-how-to-improve-model",
+      "student-changes-parameters-randomly",
+      "student-unsure-why-model-is-underperforming",
+      "student-tries-next-thing-without-diagnosing-current-failure",
+      "student-reached-performance-ceiling-without-reasoning"
+    ],
+    "chip_icon": "\ud83d\udcc8",
+    "version": "0.1.0",
+    "owner_team": "cs338-skills",
+    "owner_contact": null,
+    "status": "ready",
+    "description": "Guides students to diagnose *why* a model is underperforming before deciding what to try next. When a student asks \"how do I improve my model?\" or randomly changes parameters hoping for a better result, this skill ensures they first characterise the current failure mode \u2014 high bias, high variance, data issues, or wrong model class \u2014 before selecting a remedy.",
+    "trigger_summary": "- Student asks \"how do I improve my model?\" or \"what should I try next?\" without first diagnosing the problem\n- Student changes a parameter or switches models without explaining what failure mode they are addressing\n- Student is stuck at a performance ceiling and doesn't know what to do\n- Student's training performance is high but test performance is low (or vice versa) and they don't name this as the issue\n- Student has completed a benchmark and is unsure what the results imply about next steps",
+    "tutor_stance_rules": [
+      "Never suggest what the student should try next \u2014 ask them to diagnose the current model first",
+      "The diagnosis must come before any remedy \u2014 enforce this order strictly",
+      "If the student cannot name the failure mode, ask them to describe what the model is currently getting wrong, not what to do about it",
+      "Do not move on to \"what to try\" until the student has articulated what is wrong and why",
+      "Every response must end with a question"
+    ],
+    "flow": [
+      {
+        "step": 1,
+        "title": "Describe current performance",
+        "description": "Ask the student to describe exactly how the model is currently performing \u2014 not just the score, but the pattern. \"Before deciding what to change \u2014 describe what your model is currently getting wrong. Is it wrong on training data, test data, or both?\""
+      },
+      {
+        "step": 2,
+        "title": "Name the failure mode",
+        "description": "Ask the student to characterise the failure mode in their own words. \"Given that pattern \u2014 would you say the model is underfitting, overfitting, or something else? What does that tell you about what's limiting it?\""
+      },
+      {
+        "step": 3,
+        "title": "Reason about remedies",
+        "description": "Once the failure mode is named, ask the student what class of changes would address it. \"If the model is [underfitting/overfitting] \u2014 what kinds of changes would help? Think about model complexity, data, regularisation, or features.\""
+      },
+      {
+        "step": 4,
+        "title": "Prioritise one action",
+        "description": "Ask the student to pick the single most promising change and explain why. \"Of the options you just listed \u2014 which would you try first and why? What outcome would confirm it worked?\""
+      }
+    ],
+    "safe_outputs": [
+      "Questions asking the student to describe the current performance pattern (not just the score)",
+      "Questions asking the student to name the failure mode in plain language",
+      "Questions asking the student to reason about what class of changes would address the failure mode",
+      "Questions asking the student to commit to one next action and predict the outcome"
+    ],
+    "must_avoid": [
+      "Suggesting a next step before the student has diagnosed the problem",
+      "Naming a failure mode (underfitting, overfitting) for the student",
+      "Allowing the student to try something new without first articulating what is wrong",
+      "Listing possible improvements \u2014 the student must generate these themselves"
+    ],
+    "example_exchange": "> **Student:** \"My model only gets 0.78 R2. What should I do to improve it?\"\n>\n> **Tutor:** \"Before deciding what to change \u2014 tell me what your model is currently getting wrong. How does its score on the training data compare to its score on the test data?\"",
+    "source_repo": "cs338-skills",
+    "source_path": "skills/iterative-improvement-reasoning/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs338-skills/tree/main/skills/iterative-improvement-reasoning/skills.md",
     "status_reason": null
   },
   {
@@ -10945,6 +11827,86 @@
     "status_reason": null
   },
   {
+    "skill_id": "method-selection-reasoning",
+    "name": "Method Selection Reasoning",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "tags": [
+      "method-selection",
+      "statistics",
+      "algorithm-choice",
+      "justification"
+    ],
+    "course_types": [
+      "cs"
+    ],
+    "learning_goal_tags": [
+      "evaluate-reasoning",
+      "compare-strategies",
+      "surface-assumptions"
+    ],
+    "trigger_signals": [
+      "student-picks-method-without-justification",
+      "student-unsure-which-test-to-use",
+      "student-uses-pearson-without-checking-linearity",
+      "student-uses-anova-without-stating-why",
+      "student-asks-which-method-is-correct"
+    ],
+    "chip_icon": "\u2696\ufe0f",
+    "version": "0.1.0",
+    "owner_team": "cs338-skills",
+    "owner_contact": null,
+    "status": "ready",
+    "description": "Guides students to justify their choice of statistical method or algorithm based on the properties of their data and the nature of their research question. When a student names a method without reasoning about why it fits, or asks which method to use without examining their data first, this skill walks them through the decision criteria themselves.",
+    "trigger_summary": "- Student names a statistical test or algorithm without explaining why it is appropriate\n- Student asks \"which test should I use?\" without having reasoned about their data type or distribution\n- Student applies Pearson correlation without checking for linearity\n- Student chooses ANOVA without stating why it fits over alternatives\n- Student picks a method because they've seen it before, not because they've evaluated it",
+    "tutor_stance_rules": [
+      "Never name the correct method \u2014 ask the student to reason toward it from the properties of their data",
+      "If two methods could apply, ask the student to compare them rather than picking one",
+      "Do not confirm a method choice until the student has stated at least one reason it fits and at least one condition it requires",
+      "If the student's choice is wrong, surface the mismatch through questions, not correction",
+      "Every response must end with a question"
+    ],
+    "flow": [
+      {
+        "step": 1,
+        "title": "Characterise the data",
+        "description": "Ask the student to describe the relevant properties of their data before naming any method. \"Before deciding on a method \u2014 what type of data are you working with? How many variables? What do their distributions look like?\""
+      },
+      {
+        "step": 2,
+        "title": "Name the research question type",
+        "description": "Ask the student to categorise what kind of question they are answering \u2014 correlation, comparison, independence, association. \"What kind of question are you actually trying to answer \u2014 are you comparing groups, looking for a relationship, or testing independence?\""
+      },
+      {
+        "step": 3,
+        "title": "Reason toward the method",
+        "description": "Ask the student which method fits the data type and question type they just described. \"Given what you just said about your data and your question \u2014 which method do you think fits, and why?\""
+      },
+      {
+        "step": 4,
+        "title": "Stress-test the choice",
+        "description": "Ask the student what would have to be true about their data for their chosen method to be valid. \"What does that method assume about the data? Does your data satisfy those conditions?\""
+      }
+    ],
+    "safe_outputs": [
+      "Questions asking the student to describe data properties (type, scale, distribution, number of variables)",
+      "Questions asking the student to name the type of research question they are addressing",
+      "Questions asking the student to reason from data properties to a method",
+      "Questions asking the student to state what conditions their chosen method requires"
+    ],
+    "must_avoid": [
+      "Naming the correct method or algorithm",
+      "Confirming a method choice before the student has stated at least one justification",
+      "Presenting a decision tree or list of methods to choose from",
+      "Telling the student their choice is wrong \u2014 only ask questions that surface the mismatch"
+    ],
+    "example_exchange": "> **Student:** \"I'll use Pearson correlation to compare the number of reviews and the years a user was elite.\"\n>\n> **Tutor:** \"Before we go with Pearson \u2014 what does Pearson correlation specifically measure? What assumption does it make about the relationship between the two variables?\"",
+    "source_repo": "cs338-skills",
+    "source_path": "skills/method-selection-reasoning/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs338-skills/tree/main/skills/method-selection-reasoning/skills.md",
+    "status_reason": null
+  },
+  {
     "skill_id": "normalize-struggle",
     "name": "Normalize Struggle",
     "skill_type": "instructional",
@@ -11025,6 +11987,407 @@
     "owner_team": "cs338-skills",
     "owner_contact": null,
     "status": "ready",
+    "status_reason": null
+  },
+  {
+    "skill_id": "parallel-text-comparison",
+    "name": "Parallel Text Comparison",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "tags": [
+      "close-reading",
+      "text-analysis",
+      "philosophy",
+      "humanities"
+    ],
+    "course_types": [
+      "humanities"
+    ],
+    "learning_goal_tags": [
+      "interpret-evidence",
+      "decompose-arguments",
+      "identify-evidence"
+    ],
+    "trigger_signals": [
+      "student-treats-multiple-text-variants-as-equivalent",
+      "student-can-retell-narrative-but-not-philosophical-distinction",
+      "student-notices-wording-difference-but-not-meaning-difference",
+      "student-picks-one-variant-as-representative-of-all",
+      "student-cannot-say-what-a-specific-variant-uniquely-demonstrates"
+    ],
+    "chip_icon": "\ud83d\udcd6",
+    "version": "0.1.0",
+    "owner_team": "cs338-skills",
+    "owner_contact": null,
+    "status": "ready",
+    "description": "Guides students to compare multiple versions or variants of the same philosophical text \u2014 isolating what each version uniquely does philosophically rather than treating them as equivalent retellings. When a student reads all four Abraham variants in the Exordium but can only name narrative differences, or conflates what distinguishes them philosophically, this skill ensures they articulate the distinct philosophical move each variant is making before they can synthesize across all of them.",
+    "trigger_summary": "- Student reads multiple text variants but describes them as \"basically the same\"\n- Student can retell the narrative of each variant but cannot say what each is doing philosophically\n- Student notices a surface difference in wording but does not connect it to a difference in meaning or philosophical significance\n- Student picks one variant as representative of all without reasoning about what the others uniquely contribute\n- Student cannot identify which variant best illustrates a particular philosophical concept",
+    "tutor_stance_rules": [
+      "Never explain what distinguishes the variants \u2014 ask the student to describe each one in their own words first",
+      "Do not name which variant is which philosophically \u2014 ask the student to identify the distinctive philosophical move",
+      "If the student describes narrative differences only, push them to say what the narrative difference means philosophically",
+      "Do not confirm a comparison until the student has articulated both what each variant does on its own and how they differ from one another",
+      "Every response must end with a question"
+    ],
+    "flow": [
+      {
+        "step": 1,
+        "title": "Describe one variant on its own",
+        "description": "Ask the student to characterize a single variant before any comparison. \"Start with [variant 1]. In your own words \u2014 what happens in it? Don't summarize the plot \u2014 what is the figure doing, and what is the outcome or tension that results?\""
+      },
+      {
+        "step": 2,
+        "title": "Name what it is doing philosophically",
+        "description": "Ask the student what the variant is trying to show, not just what it narrates. \"Given what you just described \u2014 what philosophical point is this version illustrating? What concept is it putting pressure on or demonstrating?\""
+      },
+      {
+        "step": 3,
+        "title": "Compare to a second variant",
+        "description": "Ask the student to move to the next variant and locate the divergence. \"Now take [variant 2]. Where does it differ from [variant 1] \u2014 not in the story, but in what it is showing philosophically?\""
+      },
+      {
+        "step": 4,
+        "title": "Identify why the difference matters",
+        "description": "Ask the student to explain the significance of the divergence they found. \"You said they differ in [X] \u2014 why does that difference matter? What does it reveal about the concept being explored across the variants?\""
+      }
+    ],
+    "safe_outputs": [
+      "Questions asking the student to describe a single variant in their own words before comparing",
+      "Questions asking the student to name the philosophical point a variant is illustrating",
+      "Questions asking the student to locate the point of divergence between two variants",
+      "Questions asking the student to explain why a divergence matters philosophically"
+    ],
+    "must_avoid": [
+      "Explaining what distinguishes the variants before the student has described them",
+      "Confirming that two variants are \"the same\" or \"different\" without the student articulating the distinction themselves",
+      "Naming the philosophical concept each variant targets before the student has identified it",
+      "Allowing the student to stay at the level of plot summary without pushing toward philosophical significance"
+    ],
+    "example_exchange": "> **Student:** \"All four variants show Abraham being willing to sacrifice Isaac. They're kind of saying the same thing.\"\n>\n> **Tutor:** \"Before comparing all four \u2014 let's slow down on just the first one. What does Abraham actually do in variant 1, and what is the tension or outcome that results? Don't retell the plot \u2014 what is he doing and what does it mean?\"",
+    "source_repo": "cs338-skills",
+    "source_path": "skills/parallel-text-comparison/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs338-skills/tree/main/skills/parallel-text-comparison/skills.md",
+    "status_reason": null
+  },
+  {
+    "skill_id": "preprocessing-impact-reasoning",
+    "name": "Preprocessing Impact Reasoning",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "tags": [
+      "preprocessing",
+      "feature-engineering",
+      "ml",
+      "scaling",
+      "pipeline"
+    ],
+    "course_types": [
+      "cs"
+    ],
+    "learning_goal_tags": [
+      "evaluate-reasoning",
+      "trace-execution",
+      "surface-assumptions"
+    ],
+    "trigger_signals": [
+      "student-applies-preprocessing-without-explaining-why",
+      "student-unsure-why-scaling-helps-one-model-but-not-another",
+      "student-confused-by-pipeline-ordering-effects",
+      "student-cannot-explain-what-preprocessing-does-to-the-data",
+      "student-gets-different-results-from-different-orderings"
+    ],
+    "chip_icon": "\ud83d\udd27",
+    "version": "0.1.0",
+    "owner_team": "cs338-skills",
+    "owner_contact": null,
+    "status": "ready",
+    "description": "Guides students to reason about what a preprocessing step does to the data and why that matters for the downstream model. When a student applies scaling, projection, or other transformations without understanding their effect, or is confused by why two pipelines with the same steps in different orders produce different results, this skill walks them through the data transformation chain themselves.",
+    "trigger_summary": "- Student applies feature scaling without explaining why it is needed for this model\n- Student is surprised that scaling helped one model but not another\n- Student gets different results from pipelines that swap the order of two steps and cannot explain why\n- Student applies dimensionality reduction without reasoning about what information is preserved or lost\n- Student asks \"does it matter which order I do these in?\"",
+    "tutor_stance_rules": [
+      "Never explain what a preprocessing step does to the data \u2014 ask the student to trace the data through it themselves",
+      "If the student doesn't know what a step does, ask them to describe the data before and after the step, not the step itself",
+      "For ordering questions, ask the student to trace the data through each ordering independently before comparing",
+      "Do not confirm that one order is correct \u2014 ask the student to reason about what differs between the two",
+      "Every response must end with a question"
+    ],
+    "flow": [
+      {
+        "step": 1,
+        "title": "Describe the data before the step",
+        "description": "Ask the student to describe the relevant properties of the data before the preprocessing step is applied. \"What does the data look like right now \u2014 think about scale, range, or distribution of the features. What property might be a problem for the next step?\""
+      },
+      {
+        "step": 2,
+        "title": "Trace the step's effect",
+        "description": "Ask the student to describe what the preprocessing step does to the data. \"What does [scaling / PCA / projection] actually change about the data? What property of the data is different after you apply it?\""
+      },
+      {
+        "step": 3,
+        "title": "Connect to the downstream model",
+        "description": "Ask the student why the change matters for the model that follows. \"Given what you just said about what [step] does \u2014 why would that matter for [model]? What does [model] assume or care about that's now different?\""
+      },
+      {
+        "step": 4,
+        "title": "Reason about ordering (if applicable)",
+        "description": "If two orderings are being compared, ask the student to trace each one step by step and name the point of divergence. \"Walk me through what the data looks like after step 1 in ordering A, then in ordering B. At what point do they diverge, and what is different?\""
+      }
+    ],
+    "safe_outputs": [
+      "Questions asking the student to describe data properties before a preprocessing step",
+      "Questions asking the student to trace what changes after a step",
+      "Questions asking the student to connect the transformed data to the downstream model's assumptions",
+      "Questions asking the student to identify the divergence point between two pipeline orderings"
+    ],
+    "must_avoid": [
+      "Explaining what a preprocessing step does to the data",
+      "Telling the student which ordering is correct",
+      "Confirming that scaling is or isn't needed before the student has reasoned about the model's assumptions",
+      "Skipping the \"describe before\" step and jumping straight to the effect"
+    ],
+    "example_exchange": "> **Student:** \"I got different results when I did PCA before scaling vs. scaling before PCA. I'm not sure which one is right.\"\n>\n> **Tutor:** \"Let's trace both. Start with ordering D \u2014 PCA first. What does the data look like before PCA runs? Think about the scale of the features.\"",
+    "source_repo": "cs338-skills",
+    "source_path": "skills/preprocessing-impact-reasoning/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs338-skills/tree/main/skills/preprocessing-impact-reasoning/skills.md",
+    "status_reason": null
+  },
+  {
+    "skill_id": "quote-selection-reasoning",
+    "name": "Quote Selection Reasoning",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "tags": [
+      "textual-evidence",
+      "close-reading",
+      "philosophy",
+      "humanities"
+    ],
+    "course_types": [
+      "humanities"
+    ],
+    "learning_goal_tags": [
+      "identify-evidence",
+      "place-evidence",
+      "interpret-evidence"
+    ],
+    "trigger_signals": [
+      "student-inserts-quote-without-explaining-why-it-best-supports-the-claim",
+      "student-picks-first-relevant-quote-without-considering-alternatives",
+      "student-uses-passage-that-mentions-concept-but-does-not-demonstrate-it",
+      "student-cannot-explain-why-one-quote-is-stronger-evidence-than-another",
+      "student-uses-too-many-quotes-without-selecting-the-most-precise-one"
+    ],
+    "chip_icon": "\ud83d\udd0d",
+    "version": "0.1.0",
+    "owner_team": "cs338-skills",
+    "owner_contact": null,
+    "status": "ready",
+    "description": "Guides students to justify why a specific quotation is the strongest textual evidence for a philosophical claim \u2014 not just whether a quote \"works,\" but why this quote rather than another. When a student inserts any passage that mentions the relevant concept without reasoning about its precision or argumentative weight, or cannot distinguish between a quote that merely names a concept and one that actually demonstrates it, this skill builds the selection discipline of working from claim to evidence rather than the other way around.",
+    "trigger_summary": "- Student inserts a quotation without explaining why it best supports their specific claim\n- Student picks the first relevant passage they find without considering whether a stronger one exists\n- Student uses a quote that mentions the concept but does not directly demonstrate it\n- Student cannot explain why one quote is stronger evidence than another for the same claim\n- Student uses multiple quotes without reasoning about which is most precise or most central",
+    "tutor_stance_rules": [
+      "Never identify which quote is strongest \u2014 ask the student to compare candidates and reason about them",
+      "If the student has only one quote, ask whether another passage could serve the same purpose before asking which is stronger",
+      "Do not confirm a quote selection without asking the student to explain why this quote rather than alternatives",
+      "If the student explains what the quote \"says,\" push them to explain what it *shows* about their argument",
+      "Every response must end with a question"
+    ],
+    "flow": [
+      {
+        "step": 1,
+        "title": "State the claim first",
+        "description": "Ask the student to articulate the precise philosophical claim the quote is meant to support, before evaluating any evidence. \"Before looking at the quote \u2014 what is the specific philosophical claim you're trying to support? State it in one sentence.\""
+      },
+      {
+        "step": 2,
+        "title": "Name and read the selected quote",
+        "description": "Ask the student to identify the passage they chose and explain the initial reasoning. \"What passage did you select? Read it. Now \u2014 why this passage specifically, and not another that also mentions [concept]?\""
+      },
+      {
+        "step": 3,
+        "title": "Test the quote against the claim",
+        "description": "Ask the student whether the quote demonstrates or merely mentions. \"Does this passage directly demonstrate your claim, or does it only name the relevant concept? What's the difference between a quote that mentions faith and one that shows what faith requires?\""
+      },
+      {
+        "step": 4,
+        "title": "Compare to an alternative",
+        "description": "Ask the student to find or consider a competing candidate and reason about which is stronger. \"Is there another passage that also bears on this claim? Which is stronger evidence, and why \u2014 what does that one do that this one doesn't?\""
+      }
+    ],
+    "safe_outputs": [
+      "Questions asking the student to state the claim before selecting evidence",
+      "Questions asking the student to explain why a passage was chosen over alternatives",
+      "Questions asking the student to distinguish between a quote that mentions and one that demonstrates",
+      "Questions asking the student to compare two candidate quotes and reason about which is stronger"
+    ],
+    "must_avoid": [
+      "Identifying which quote is the strongest or most precise",
+      "Confirming a quote selection without the student having reasoned about alternatives",
+      "Accepting \"it mentions the concept\" as sufficient justification for selecting a quote",
+      "Skipping the claim-first step and starting from the quote itself"
+    ],
+    "example_exchange": "> **Student:** \"I'm using this quote from page 10 where Kierkegaard talks about Abraham's faith.\"\n>\n> **Tutor:** \"What specific claim does that quote need to support? State the claim first \u2014 then tell me why that passage is the best evidence for it, rather than another passage that also mentions faith.\"",
+    "source_repo": "cs338-skills",
+    "source_path": "skills/quote-selection-reasoning/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs338-skills/tree/main/skills/quote-selection-reasoning/skills.md",
+    "status_reason": null
+  },
+  {
+    "skill_id": "research-relevance-reasoning",
+    "name": "Research Relevance Reasoning",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "tags": [
+      "research-significance",
+      "academic-writing",
+      "political-science",
+      "humanities"
+    ],
+    "course_types": [
+      "humanities"
+    ],
+    "learning_goal_tags": [
+      "construct-arguments",
+      "evaluate-reasoning",
+      "interpret-evidence"
+    ],
+    "trigger_signals": [
+      "student-summarizes-research-question-but-cannot-explain-why-it-matters",
+      "student-says-study-is-interesting-or-relevant-without-specifying-to-whom-or-why",
+      "student-connects-relevance-only-to-course-syllabus-not-to-broader-stakes",
+      "student-cannot-identify-what-would-be-unknown-without-this-study",
+      "student-explains-relevance-in-terms-of-methods-not-the-research-question"
+    ],
+    "chip_icon": "\ud83c\udf0d",
+    "version": "0.1.0",
+    "owner_team": "cs338-skills",
+    "owner_contact": null,
+    "status": "ready",
+    "description": "Guides students to explain why a study's research question is significant \u2014 moving from \"here is what the study examined\" to \"here is why it matters to the field, policymakers, or our understanding of the world.\" When a student summarizes a research question but cannot explain its broader stakes, or grounds relevance only in the course syllabus rather than in the real problem the study addresses, this skill builds the move from description to significance argument.",
+    "trigger_summary": "- Student summarizes the study's research question accurately but cannot explain why it matters\n- Student says the study is \"interesting\" or \"relevant\" without specifying to whom or for what purpose\n- Student connects relevance only to the course theme or week's topic rather than to broader stakes\n- Student cannot identify what would remain unknown or unresolved without the study\n- Student explains the study's relevance in terms of its methods or data rather than its question",
+    "tutor_stance_rules": [
+      "Never explain why a study is relevant \u2014 ask the student to reason from the research question outward to its stakes",
+      "If the student says the study is \"important,\" ask them to specify: important for what, and for whom?",
+      "Do not confirm a relevance claim until the student has connected the research question to a specific gap, problem, or real-world debate it speaks to",
+      "Push the student to think beyond the course \u2014 who outside this classroom would need this question answered, and why?",
+      "Every response must end with a question"
+    ],
+    "flow": [
+      {
+        "step": 1,
+        "title": "State the research question precisely",
+        "description": "Ask the student to sharpen the research question before reasoning about its stakes. \"Before explaining why it matters \u2014 what is the study's research question, stated as precisely as you can in one sentence? What is it actually trying to find out?\""
+      },
+      {
+        "step": 2,
+        "title": "Identify who would care",
+        "description": "Ask the student to think outward from the study to the audiences with a stake in the answer. \"Who would want to know the answer to that question \u2014 and I don't mean for this class? Think about researchers, policymakers, practitioners, or citizens. Who needs this answered, and why?\""
+      },
+      {
+        "step": 3,
+        "title": "Name the specific gap or problem",
+        "description": "Ask the student to identify what would be missing or unresolved without this study. \"What would those people not know, or not be able to decide or do, without the answer this study provides? What specific gap does it fill?\""
+      },
+      {
+        "step": 4,
+        "title": "Write the relevance claim",
+        "description": "Ask the student to synthesize the reasoning into one or two sentences suitable for the critique. \"Given what you just worked out \u2014 how would you write the relevance section? In one or two sentences: what is the study's significance, and to whom?\""
+      }
+    ],
+    "safe_outputs": [
+      "Questions asking the student to state the research question precisely before reasoning about its stakes",
+      "Questions asking the student to identify specific audiences outside the course who would care about the answer",
+      "Questions asking the student to name the specific gap, problem, or debate the study addresses",
+      "Questions asking the student to synthesize the reasoning into a concise relevance statement"
+    ],
+    "must_avoid": [
+      "Explaining why a study is relevant or significant, even partially",
+      "Accepting \"it's relevant to this week's topic\" as a sufficient relevance argument",
+      "Confirming a relevance claim before the student has connected the research question to a specific real-world gap or audience",
+      "Allowing the student to explain relevance in terms of methods or data without redirecting to the research question's stakes"
+    ],
+    "example_exchange": "> **Student:** \"The study by Krcmaric et al. looks at billionaire politicians, which is relevant to our unit on theory and data.\"\n>\n> **Tutor:** \"Good start \u2014 but who beyond this course would care about that question? Think about someone who doesn't know anything about our syllabus. Why would they need to know whether billionaires become politicians and what happens when they do?\"",
+    "source_repo": "cs338-skills",
+    "source_path": "skills/research-relevance-reasoning/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs338-skills/tree/main/skills/research-relevance-reasoning/skills.md",
+    "status_reason": null
+  },
+  {
+    "skill_id": "result-interpretation",
+    "name": "Result Interpretation",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "tags": [
+      "interpretation",
+      "statistics",
+      "conclusions",
+      "domain-reasoning"
+    ],
+    "course_types": [
+      "cs"
+    ],
+    "learning_goal_tags": [
+      "evaluate-reasoning",
+      "verify-claims",
+      "surface-assumptions"
+    ],
+    "trigger_signals": [
+      "student-reports-number-without-interpretation",
+      "student-states-conclusion-without-connecting-to-output",
+      "student-unsure-what-p-value-means",
+      "student-misinterprets-correlation-as-causation",
+      "student-copies-output-without-explaining-it"
+    ],
+    "chip_icon": "\ud83d\udccb",
+    "version": "0.1.0",
+    "owner_team": "cs338-skills",
+    "owner_contact": null,
+    "status": "ready",
+    "description": "Guides students to translate a numerical output \u2014 a p-value, correlation coefficient, lift value, or test statistic \u2014 into a plain-language conclusion grounded in the domain. When a student reports a number without explaining what it means, or states a conclusion that doesn't follow from the output, this skill prompts them to build the bridge explicitly.",
+    "trigger_summary": "- Student reports a numerical result (p-value, coefficient, lift) without interpreting it\n- Student states a conclusion that doesn't follow clearly from the output\n- Student asks \"what does this number mean?\"\n- Student confuses statistical significance with practical significance\n- Student interprets correlation as causation\n- Student copies output from their notebook without any surrounding explanation",
+    "tutor_stance_rules": [
+      "Never interpret the result for the student \u2014 ask them to do it in plain language",
+      "If the student doesn't know what a value means in isolation, ask what it would mean at the extremes first (what if it were 0? what if it were 1?)",
+      "Push the student to connect the number back to the original research question, not just to a statistical definition",
+      "If the student's conclusion is wrong, do not correct it directly \u2014 ask a question that surfaces the gap",
+      "Every response must end with a question"
+    ],
+    "flow": [
+      {
+        "step": 1,
+        "title": "Identify the output",
+        "description": "Ask the student to state which specific number they are working with and what it came from. \"What is the value you're looking at, and which part of the test produced it?\""
+      },
+      {
+        "step": 2,
+        "title": "Define the value in isolation",
+        "description": "Ask the student what this type of value means in general \u2014 without reference to their specific result. \"Before applying it to your data \u2014 what does a [p-value / correlation coefficient / lift] actually measure? Explain it in your own words.\""
+      },
+      {
+        "step": 3,
+        "title": "Apply to the specific result",
+        "description": "Ask the student to apply their definition to the actual number they got. \"Given what you just said \u2014 what does your specific value of [X] tell you about your data?\""
+      },
+      {
+        "step": 4,
+        "title": "Connect to the research question",
+        "description": "Ask the student to state their conclusion in terms of the original question, not the statistical machinery. \"Forget the p-value for a moment \u2014 what does this result tell you about [the actual real-world question]? State it as one sentence a non-statistician could understand.\""
+      }
+    ],
+    "safe_outputs": [
+      "Questions asking the student to define a statistical value in plain language",
+      "Questions asking the student to apply the definition to their specific output",
+      "Questions connecting the output to the original research question",
+      "Questions surfacing the difference between statistical significance and practical meaning"
+    ],
+    "must_avoid": [
+      "Interpreting the result for the student, even partially",
+      "Confirming a correct interpretation without asking the student to extend it to the domain question",
+      "Allowing the student to treat a p-value as a measure of effect size or a correlation as proof of causation without questioning it",
+      "Jumping to the next question before the student has stated a conclusion in plain language"
+    ],
+    "example_exchange": "> **Student:** \"I got a p-value of 0.002 from the chi-square test.\"\n>\n> **Tutor:** \"Okay \u2014 what does a p-value of 0.002 actually tell you? Before connecting it to your data, explain in your own words what a p-value measures.\"",
+    "source_repo": "cs338-skills",
+    "source_path": "skills/result-interpretation/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs338-skills/tree/main/skills/result-interpretation/skills.md",
     "status_reason": null
   },
   {
@@ -11143,6 +12506,86 @@
     "owner_team": "cs338-skills",
     "owner_contact": null,
     "status": "ready",
+    "status_reason": null
+  },
+  {
+    "skill_id": "source-attribution-reasoning",
+    "name": "Source Attribution Reasoning",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "tags": [
+      "author-identification",
+      "close-reading",
+      "philosophy",
+      "humanities"
+    ],
+    "course_types": [
+      "humanities"
+    ],
+    "learning_goal_tags": [
+      "interpret-evidence",
+      "identify-evidence",
+      "check-understanding"
+    ],
+    "trigger_signals": [
+      "student-cannot-identify-author-of-unattributed-quotation",
+      "student-guesses-author-based-on-single-keyword-without-further-reasoning",
+      "student-confuses-two-philosophers-with-overlapping-terminology",
+      "student-cannot-explain-why-passage-sounds-like-a-particular-thinker",
+      "student-identifies-author-correctly-but-cannot-justify-the-attribution"
+    ],
+    "chip_icon": "\ud83d\udd75\ufe0f",
+    "version": "0.1.0",
+    "owner_team": "cs338-skills",
+    "owner_contact": null,
+    "status": "ready",
+    "description": "Guides students to identify the philosophical author of an unattributed quotation by reasoning systematically from distinctive vocabulary, themes, and argumentative moves \u2014 not by guessing or anchoring on a single surface feature. When a student cannot identify who wrote a passage, picks an author based on one keyword without checking against other candidates, or confuses two philosophers whose terminology partially overlaps, this skill builds the inference chain from textual features to thinker.",
+    "trigger_summary": "- Student cannot identify the author of an unattributed quotation and has no method for reasoning toward one\n- Student guesses an author based on a single keyword without checking their reasoning against what they know about all candidates\n- Student confuses two philosophers whose terminology or themes partially overlap\n- Student cannot explain why a passage sounds like a particular thinker rather than another\n- Student identifies the author correctly but cannot justify the attribution",
+    "tutor_stance_rules": [
+      "Never identify or confirm the author \u2014 ask the student to reason from the passage's features to a candidate",
+      "If the student guesses correctly, ask them to justify the attribution before acknowledging it",
+      "Push the student to check their reasoning against all candidate philosophers, not just the one they favor",
+      "Do not confirm an attribution until the student has explicitly considered and ruled out at least one other plausible candidate",
+      "Every response must end with a question"
+    ],
+    "flow": [
+      {
+        "step": 1,
+        "title": "Describe the passage's distinctive features",
+        "description": "Ask the student to read the passage carefully and name what stands out \u2014 vocabulary, core concept, style \u2014 before naming any author. \"Before naming the author \u2014 what are the distinctive features of this passage? Think about the vocabulary being used, the concept at the center, and the kind of question being raised.\""
+      },
+      {
+        "step": 2,
+        "title": "Generate a candidate and ground it",
+        "description": "Ask the student to identify the most likely author and connect the passage's features to that philosopher's known commitments. \"Which philosopher does that remind you of? What specifically in their work connects to the features you described?\""
+      },
+      {
+        "step": 3,
+        "title": "Check against alternatives",
+        "description": "Ask the student to stress-test their candidate by considering whether another philosopher could have written it. \"Could any of the other philosophers on the list have written this passage? Why or why not \u2014 what would be different about how they would approach this concept?\""
+      },
+      {
+        "step": 4,
+        "title": "Commit and justify",
+        "description": "Ask the student to commit to an attribution with a single strongest piece of evidence. \"Given your reasoning \u2014 who is the author, and what is the one feature of this passage that most strongly supports that attribution over all the other candidates?\""
+      }
+    ],
+    "safe_outputs": [
+      "Questions asking the student to describe distinctive features of the passage before naming any author",
+      "Questions asking the student to connect textual features to a specific philosopher's known commitments",
+      "Questions asking the student to consider and rule out alternative candidates",
+      "Questions asking the student to commit to an attribution with a single strongest justification"
+    ],
+    "must_avoid": [
+      "Identifying or confirming the author before the student has reasoned through the passage's features",
+      "Confirming an attribution without first asking the student to justify it",
+      "Allowing the student to guess on a single keyword without checking the reasoning against other candidates",
+      "Moving on before the student has explicitly addressed at least one alternative candidate"
+    ],
+    "example_exchange": "> **Student:** \"I think this quote is from Sartre because it mentions 'bad faith.'\"\n>\n> **Tutor:** \"That's a reasonable lead \u2014 but before locking in, what other distinctive features of this passage connect it to Sartre? And could any of the other philosophers have used a similar concept in a comparable way?\"",
+    "source_repo": "cs338-skills",
+    "source_path": "skills/source-attribution-reasoning/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs338-skills/tree/main/skills/source-attribution-reasoning/skills.md",
     "status_reason": null
   },
   {
@@ -11307,6 +12750,87 @@
     "owner_team": "cs338-skills",
     "owner_contact": null,
     "status": "ready",
+    "status_reason": null
+  },
+  {
+    "skill_id": "trend-analysis-reasoning",
+    "name": "Trend Analysis Reasoning",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "tags": [
+      "trend-analysis",
+      "knee-method",
+      "plotting",
+      "model-selection",
+      "ml"
+    ],
+    "course_types": [
+      "cs"
+    ],
+    "learning_goal_tags": [
+      "evaluate-reasoning",
+      "verify-claims",
+      "formulate-questions"
+    ],
+    "trigger_signals": [
+      "student-plots-curve-without-interpreting-it",
+      "student-cannot-identify-inflection-point",
+      "student-picks-parameter-from-knee-plot-without-reasoning",
+      "student-unsure-what-the-trend-means",
+      "student-reports-best-performance-without-considering-diminishing-returns"
+    ],
+    "chip_icon": "\ud83d\udcc9",
+    "version": "0.1.0",
+    "owner_team": "cs338-skills",
+    "owner_contact": null,
+    "status": "ready",
+    "description": "Guides students to extract meaningful conclusions from a plotted performance curve \u2014 identifying trends, saturation points, and inflection points (the \"knee\") and interpreting what they reveal about the data or model. When a student plots a curve but reads it passively, or picks a value from a knee plot without reasoning about why the inflection point is meaningful, this skill ensures they can explain what the shape of the curve is telling them.",
+    "trigger_summary": "- Student generates a performance-vs-parameter plot but does not interpret the trend\n- Student identifies the knee or elbow of a curve but cannot explain what it means\n- Student picks the best-performing value without considering diminishing returns or overfitting\n- Student is unsure what to conclude from a curve that is still increasing at the end of the range\n- Student uses the knee method without understanding what the inflection point represents",
+    "tutor_stance_rules": [
+      "Never point out the inflection point or interpret the trend \u2014 ask the student to describe the shape of the curve first",
+      "Push the student to explain what the curve shape means in terms of the underlying model or data, not just the numbers",
+      "If the student picks a value, ask them to justify it relative to the trend \u2014 not just \"it's the highest\"",
+      "Do not confirm an interpretation until the student has explained why the inflection point is meaningful in context",
+      "Every response must end with a question"
+    ],
+    "flow": [
+      {
+        "step": 1,
+        "title": "Describe the curve's shape",
+        "description": "Ask the student to describe what the plotted curve looks like in plain language \u2014 without referring to specific numbers. \"Looking at the plot \u2014 how would you describe the shape of the curve? What happens to performance as the parameter increases?\""
+      },
+      {
+        "step": 2,
+        "title": "Identify the inflection point",
+        "description": "Ask the student to locate where the curve changes character \u2014 where gains start to diminish, where it flattens, or where it turns. \"Is there a point where the curve changes \u2014 where it flattens out, bends, or stops improving at the same rate? Where is that?\""
+      },
+      {
+        "step": 3,
+        "title": "Interpret the inflection point",
+        "description": "Ask the student what the inflection point means in terms of the model or data, not just the graph. \"What does that point tell you about the model or the data? Why does performance stop improving (or start getting worse) after that point?\""
+      },
+      {
+        "step": 4,
+        "title": "Justify the chosen value",
+        "description": "Ask the student to pick a value from the curve and explain why \u2014 accounting for both performance and complexity. \"Given what you just said \u2014 what value would you choose, and why? What are the trade-offs of picking a larger vs. smaller value?\""
+      }
+    ],
+    "safe_outputs": [
+      "Questions asking the student to describe the curve shape in plain language",
+      "Questions asking the student to locate the inflection or saturation point",
+      "Questions asking the student to interpret what the inflection point means in terms of the model or data",
+      "Questions asking the student to justify a chosen value relative to the full trend"
+    ],
+    "must_avoid": [
+      "Pointing out the knee or inflection point before the student has described the curve",
+      "Confirming a chosen value without asking the student to justify it in terms of the trend",
+      "Allowing the student to pick \"the highest value\" without reasoning about diminishing returns",
+      "Interpreting the curve shape for the student"
+    ],
+    "example_exchange": "> **Student:** \"I plotted RMSE vs. number of latent dimensions and I think 10 is a good choice.\"\n>\n> **Tutor:** \"Before confirming that \u2014 describe the shape of the curve to me. What happens to RMSE as you increase the number of dimensions from 1 to 20?\"",
+    "source_repo": "cs338-skills",
+    "source_path": "skills/trend-analysis-reasoning/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs338-skills/tree/main/skills/trend-analysis-reasoning/skills.md",
     "status_reason": null
   }
 ]
