@@ -1,51 +1,5 @@
 [
   {
-    "skill_id": "nautilus-architecture-tutor",
-    "name": "Nautilus Architecture Tutor",
-    "skill_type": "instructional",
-    "tags": [
-      "cs343",
-      "nautilus",
-      "architecture",
-      "guide"
-    ],
-    "python_entry": "logic.py",
-    "description": "What does this skill do? Keep it to 2-3 sentences.\nThis will appear in the shared catalog so make it clear and concise.",
-    "trigger_summary": "- Trigger condition 1\n- Trigger condition 2\n- Trigger condition 3\n\n---\n<!-- FOR INSTRUCTIONAL SKILLS: Complete this section -->",
-    "tutor_stance_rules": [
-      "Describe the non-negotiable rules for how the tutor should behave."
-    ],
-    "flow": [
-      {
-        "step": 1,
-        "title": "Step Title",
-        "description": "Describe what to do in this step."
-      },
-      {
-        "step": 2,
-        "title": "Step Title",
-        "description": "Describe what to do in this step."
-      }
-    ],
-    "safe_outputs": [
-      "What the tutor IS allowed to produce."
-    ],
-    "must_avoid": [
-      "What the tutor must NEVER do."
-    ],
-    "example_exchange": "> **Student:** \"Example student message\"\n>\n> **Tutor:** \"Example tutor response\"\n\n---\n<!-- FOR CODE SKILLS: Complete this section -->",
-    "extra_sections": {
-      "skill_type": "- **Type:** instructional OR code\n- **Course Focus:** Humanities OR CS OR Both"
-    },
-    "source_repo": "cs-343-skills",
-    "source_path": "skills/architecture-tutor/skills.md",
-    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs-343-skills/tree/main/skills/architecture-tutor/skills.md",
-    "owner_team": "CS-343",
-    "owner_contact": "admin@example.com",
-    "status": "stub",
-    "status_reason": "missing or empty (must be subset of cs/humanities); must be one of ['hint', 'meta', 'reframe', 'socratic']"
-  },
-  {
     "skill_id": "ask-for-decomposition",
     "name": "Ask for Decomposition",
     "skill_type": "instructional",
@@ -111,33 +65,6 @@
     "owner_contact": "admin@example.com",
     "status": "ready",
     "status_reason": null
-  },
-  {
-    "skill_id": "c-debugger",
-    "name": "C Debugging Skill",
-    "skill_type": "code",
-    "tags": [
-      "cs343",
-      "c",
-      "coding"
-    ],
-    "python_entry": "logic.py",
-    "description": "What does this skill do? Keep it to 2-3 sentences.\nThis will appear in the shared catalog so make it clear and concise.",
-    "trigger_summary": "- Trigger condition 1\n- Trigger condition 2\n- Trigger condition 3\n\n---\n<!-- FOR INSTRUCTIONAL SKILLS: Complete this section -->",
-    "inputs_schema_text": "Describe what inputs the logic.py function expects.",
-    "outputs_schema_text": "Describe what the function returns.",
-    "usage_example": "```python\nfrom logic import run\nresult = run({\"key\": \"value\"})\nprint(result)\n```",
-    "code_notes": "Any additional notes for teams importing this skill.",
-    "extra_sections": {
-      "skill_type": "- **Type:** instructional OR code\n- **Course Focus:** Humanities OR CS OR Both"
-    },
-    "source_repo": "cs-343-skills",
-    "source_path": "skills/c-debugger/skills.md",
-    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs-343-skills/tree/main/skills/c-debugger/skills.md",
-    "owner_team": "CS-343",
-    "owner_contact": "admin@example.com",
-    "status": "stub",
-    "status_reason": "missing or empty (must be subset of cs/humanities)"
   },
   {
     "skill_id": "connect-prior-knowledge",
@@ -270,6 +197,75 @@
     "source_repo": "cs-343-skills",
     "source_path": "skills/evaluate_readability_on_code/skills.md",
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs-343-skills/tree/main/skills/evaluate_readability_on_code/skills.md",
+    "owner_team": "CS-343",
+    "owner_contact": "admin@example.com",
+    "status": "ready",
+    "status_reason": null
+  },
+  {
+    "skill_id": "explain-function-responsibilities",
+    "name": "Explain Function Responsibilities",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "tags": [
+      "modularity",
+      "decomposition",
+      "code-quality",
+      "tutor"
+    ],
+    "course_types": [
+      "cs"
+    ],
+    "learning_goal_tags": [
+      "evaluate-modularity",
+      "decompose-problems"
+    ],
+    "trigger_signals": [
+      "monolithic-function",
+      "mixed-responsibilities",
+      "unclear-separation-of-concerns"
+    ],
+    "description": "Helps students define clear module boundaries and reason about what each\nfunction should handle. When a student writes large monolithic code \u2014 functions\nthat read input, process data, and produce output all in one block \u2014 this skill\nguides them to identify where responsibilities overlap and how to split them,\nwithout prescribing the exact decomposition.",
+    "trigger_summary": "- Student writes a single function that handles more than one distinct concern\n  (e.g., parsing + computation + output in one block).\n- Student asks why their code is hard to test or reuse.\n- Student's function exceeds a length where a single responsibility is no\n  longer obvious.\n\n---",
+    "tutor_stance_rules": [
+      "NEVER decompose the function for the student or name the functions they should\ncreate. Instead, ask the student to describe what each part of their code does\nin plain English, then ask whether those descriptions belong together. Every\nresponse MUST end with a question. The student must arrive at the boundary\nthemselves."
+    ],
+    "flow": [
+      {
+        "step": 1,
+        "title": "Surface the responsibilities",
+        "description": "Ask the student to walk through their function and describe, in one sentence\nper section, what each chunk of code is doing. Do not group sections for them."
+      },
+      {
+        "step": 2,
+        "title": "Name the tension",
+        "description": "Once the student has listed the responsibilities, ask whether a single function\nname could honestly describe all of them. Let the student notice the mismatch."
+      },
+      {
+        "step": 3,
+        "title": "Prompt decomposition",
+        "description": "Ask the student which responsibility feels most separate from the others, and\nwhat a caller of this function would need to know about all its behavior. Do\nnot suggest specific function names or boundaries."
+      }
+    ],
+    "safe_outputs": [
+      "Questions asking the student to describe what a section of code does.",
+      "Questions asking whether a single name covers everything the function does.",
+      "Questions about what a caller would need to know.",
+      "Responsibility split prompts that the student fills in themselves."
+    ],
+    "must_avoid": [
+      "Naming the functions the student should create.",
+      "Providing an exact decomposition or refactored version of their code.",
+      "Telling the student how many functions they should have.",
+      "Rewriting any code."
+    ],
+    "example_exchange": "> **Student:** \"Here's my `run()` function \u2014 it's getting long but I don't\n> know how to break it up.\"\n>\n> **Tutor:** \"Walk me through it section by section \u2014 what is each chunk\n> doing? Try to describe each one in a single sentence.\"",
+    "extra_sections": {
+      "skill_type": "- **Type:** code\n- **Course Focus:** CS343"
+    },
+    "source_repo": "cs-343-skills",
+    "source_path": "skills/explain_function_responsibilities/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs-343-skills/tree/main/skills/explain_function_responsibilities/skills.md",
     "owner_team": "CS-343",
     "owner_contact": "admin@example.com",
     "status": "ready",
@@ -411,144 +407,78 @@
     "status_reason": null
   },
   {
-    "skill_id": "hand-calculation-tutor",
-    "name": "Hand Calculation Tutor",
+    "skill_id": "narrow-the-bug-location",
+    "name": "Narrow the Bug Location",
     "skill_type": "instructional",
+    "stance": "socratic",
     "tags": [
-      "cs343",
-      "calculation",
-      "writing",
+      "debugging",
+      "divide-and-conquer",
+      "code-quality",
       "tutor"
     ],
-    "python_entry": "logic.py",
-    "description": "What does this skill do? Keep it to 2-3 sentences.\nThis will appear in the shared catalog so make it clear and concise.",
-    "trigger_summary": "- Trigger condition 1\n- Trigger condition 2\n- Trigger condition 3\n\n---\n<!-- FOR INSTRUCTIONAL SKILLS: Complete this section -->",
+    "course_types": [
+      "cs"
+    ],
+    "learning_goal_tags": [
+      "debug-systematically",
+      "trace-execution"
+    ],
+    "trigger_signals": [
+      "large-codebase",
+      "unclear-bug-cause",
+      "bug-location-unknown"
+    ],
+    "description": "Guides students through divide-and-conquer debugging \u2014 systematically\nisolating which part of a large codebase or unclear execution path contains\nthe fault. Rather than scanning line-by-line or guessing, the student learns\nto cut the search space in half at each step until the bug site is pinpointed.",
+    "trigger_summary": "- Student is facing a bug in a large codebase and doesn't know where to look.\n- Student describes unexpected behavior but cannot identify which component\n  is responsible.\n- Student's debugging is unfocused \u2014 checking random lines rather than\n  narrowing systematically.\n\n---",
     "tutor_stance_rules": [
-      "Describe the non-negotiable rules for how the tutor should behave."
+      "NEVER point to the bug location or generate a line-by-line fix. Instead, ask\nthe student to describe the boundary between code they trust and code they\nhaven't verified. Every response MUST end with a question that halves the\nremaining suspect region. The student must do the narrowing."
     ],
     "flow": [
       {
         "step": 1,
-        "title": "Step Title",
-        "description": "Describe what to do in this step."
+        "title": "Establish symptoms",
+        "description": "Ask the student to describe exactly what they observe (error message, wrong\noutput, crash) and what they expected. Do not interpret the symptoms for them."
       },
       {
         "step": 2,
-        "title": "Step Title",
-        "description": "Describe what to do in this step."
-      }
-    ],
-    "safe_outputs": [
-      "What the tutor IS allowed to produce."
-    ],
-    "must_avoid": [
-      "What the tutor must NEVER do."
-    ],
-    "example_exchange": "> **Student:** \"Example student message\"\n>\n> **Tutor:** \"Example tutor response\"\n\n---\n<!-- FOR CODE SKILLS: Complete this section -->",
-    "extra_sections": {
-      "skill_type": "- **Type:** instructional OR code\n- **Course Focus:** Humanities OR CS OR Both"
-    },
-    "source_repo": "cs-343-skills",
-    "source_path": "skills/hand-calculation-tutor/skills.md",
-    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs-343-skills/tree/main/skills/hand-calculation-tutor/skills.md",
-    "owner_team": "CS-343",
-    "owner_contact": "admin@example.com",
-    "status": "stub",
-    "status_reason": "missing or empty (must be subset of cs/humanities); must be one of ['hint', 'meta', 'reframe', 'socratic']"
-  },
-  {
-    "skill_id": "prerequisite-guide",
-    "name": "Course Prerequisite Review",
-    "skill_type": "instructional",
-    "tags": [
-      "cs343",
-      "prerequisite",
-      "writing",
-      "tutor",
-      "review"
-    ],
-    "python_entry": "logic.py",
-    "description": "What does this skill do? Keep it to 2-3 sentences.\nThis will appear in the shared catalog so make it clear and concise.",
-    "trigger_summary": "- Trigger condition 1\n- Trigger condition 2\n- Trigger condition 3\n\n---\n<!-- FOR INSTRUCTIONAL SKILLS: Complete this section -->",
-    "tutor_stance_rules": [
-      "Describe the non-negotiable rules for how the tutor should behave."
-    ],
-    "flow": [
-      {
-        "step": 1,
-        "title": "Step Title",
-        "description": "Describe what to do in this step."
+        "title": "Identify trusted vs. untrusted code",
+        "description": "Ask the student where in the execution path they are confident the state is\nstill correct. Prompt them to pick a midpoint between that known-good location\nand the point of failure."
       },
       {
-        "step": 2,
-        "title": "Step Title",
-        "description": "Describe what to do in this step."
-      }
-    ],
-    "safe_outputs": [
-      "What the tutor IS allowed to produce."
-    ],
-    "must_avoid": [
-      "What the tutor must NEVER do."
-    ],
-    "example_exchange": "> **Student:** \"Example student message\"\n>\n> **Tutor:** \"Example tutor response\"\n\n---\n<!-- FOR CODE SKILLS: Complete this section -->",
-    "extra_sections": {
-      "skill_type": "- **Type:** instructional OR code\n- **Course Focus:** Humanities OR CS OR Both"
-    },
-    "source_repo": "cs-343-skills",
-    "source_path": "skills/prerequisite-guide/skills.md",
-    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs-343-skills/tree/main/skills/prerequisite-guide/skills.md",
-    "owner_team": "CS-343",
-    "owner_contact": "admin@example.com",
-    "status": "stub",
-    "status_reason": "missing or empty (must be subset of cs/humanities); must be one of ['hint', 'meta', 'reframe', 'socratic']"
-  },
-  {
-    "skill_id": "vocabulary-tutor",
-    "name": "Vocabulary Review",
-    "skill_type": "instructional",
-    "tags": [
-      "cs343",
-      "vocabulary",
-      "writing",
-      "tutor",
-      "review"
-    ],
-    "python_entry": "logic.py",
-    "description": "What does this skill do? Keep it to 2-3 sentences.\nThis will appear in the shared catalog so make it clear and concise.",
-    "trigger_summary": "- Trigger condition 1\n- Trigger condition 2\n- Trigger condition 3\n\n---\n<!-- FOR INSTRUCTIONAL SKILLS: Complete this section -->",
-    "tutor_stance_rules": [
-      "Describe the non-negotiable rules for how the tutor should behave."
-    ],
-    "flow": [
-      {
-        "step": 1,
-        "title": "Step Title",
-        "description": "Describe what to do in this step."
+        "step": 3,
+        "title": "Propose a probe",
+        "description": "Ask the student what they could check at that midpoint to determine whether\nthe bug is before or after it. Do not suggest the specific check \u2014 ask what\ninformation would help them decide."
       },
       {
-        "step": 2,
-        "title": "Step Title",
-        "description": "Describe what to do in this step."
+        "step": 4,
+        "title": "Iterate",
+        "description": "After the student reports what they found, ask them to apply the same logic\nto the new, smaller suspect region. Repeat until the student identifies the\nfaulty site themselves."
       }
     ],
     "safe_outputs": [
-      "What the tutor IS allowed to produce."
+      "Questions asking the student to describe their error symptoms precisely.",
+      "Localization questions that prompt the student to pick a midpoint to inspect.",
+      "Questions about what probe or check would let the student eliminate half",
+      "A debugging plan framed as questions the student should answer, not steps"
     ],
     "must_avoid": [
-      "What the tutor must NEVER do."
+      "Pointing to the bug location.",
+      "Generating a line-by-line fix or corrected code.",
+      "Reading through the student's code and listing possible fault sites.",
+      "Suggesting specific variable names, line numbers, or print statements."
     ],
-    "example_exchange": "> **Student:** \"Example student message\"\n>\n> **Tutor:** \"Example tutor response\"\n\n---\n<!-- FOR CODE SKILLS: Complete this section -->",
+    "example_exchange": "> **Student:** \"My program crashes somewhere but I have no idea where \u2014\n> the stack trace isn't helpful.\"\n>\n> **Tutor:** \"Let's narrow it down. At what point in the program's execution\n> are you confident everything is still working correctly?\"",
     "extra_sections": {
-      "skill_type": "- **Type:** instructional OR code\n- **Course Focus:** Humanities OR CS OR Both"
+      "skill_type": "- **Type:** code\n- **Course Focus:** CS343"
     },
     "source_repo": "cs-343-skills",
-    "source_path": "skills/vocabulary-tutor/skills.md",
-    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs-343-skills/tree/main/skills/vocabulary-tutor/skills.md",
+    "source_path": "skills/narrow_the_bug_location/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs-343-skills/tree/main/skills/narrow_the_bug_location/skills.md",
     "owner_team": "CS-343",
     "owner_contact": "admin@example.com",
-    "status": "stub",
-    "status_reason": "missing or empty (must be subset of cs/humanities); must be one of ['hint', 'meta', 'reframe', 'socratic']"
+    "status": "ready",
+    "status_reason": null
   },
   {
     "skill_id": "affirm-progress",
@@ -9913,8 +9843,8 @@
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/CS-213-skills/tree/main/skills/c-debugging/skills.md",
     "owner_team": "CS-213",
     "owner_contact": "nikos@northwestern.edu",
-    "status": "broken",
-    "status_reason": "skill_id 'c-debugger' is already claimed by repo 'cs-343-skills'. Repo 'CS-213-skills' is rejected. Rename this skill or coordinate with the 'cs-343-skills' team."
+    "status": "ready",
+    "status_reason": null
   },
   {
     "skill_id": "cache-optimized-code",
@@ -10485,6 +10415,86 @@
     "status_reason": null
   },
   {
+    "skill_id": "constraint-reasoning",
+    "name": "Constraint Reasoning",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "tags": [
+      "constraints",
+      "domain-knowledge",
+      "validation",
+      "data-quality",
+      "reasoning"
+    ],
+    "course_types": [
+      "cs"
+    ],
+    "learning_goal_tags": [
+      "evaluate-reasoning",
+      "surface-assumptions",
+      "verify-claims"
+    ],
+    "trigger_signals": [
+      "student-accepts-value-without-questioning",
+      "student-skips-domain-validation",
+      "student-treats-all-values-as-equally-valid",
+      "student-unsure-what-counts-as-wrong"
+    ],
+    "chip_icon": "\ud83d\udcd0",
+    "version": "0.1.0",
+    "description": "Prompts students to define what values are *valid* for a given field, concept, or system \u2014 based on domain rules \u2014 before accepting or rejecting data at face value. When a student encounters unexpected values but doesn't think to question whether they are even possible, this skill helps them reason from domain constraints rather than from the data alone.",
+    "trigger_summary": "- Student encounters a suspicious value but does not question whether it is plausible in the real world\n- Student focuses on what the data *says* without considering what the data *should* say\n- Student is unsure whether a value is dirty or just unusual\n- Student asks \"is this value wrong?\" without first establishing what \"right\" looks like\n- Student cleans data mechanically (e.g., removing nulls) without reasoning about valid ranges or formats",
+    "tutor_stance_rules": [
+      "Never state what the valid range or constraint is \u2014 ask the student to derive it from their domain knowledge",
+      "Distinguish between syntactic validity (correct type/format) and semantic validity (plausible in the real world)",
+      "If the student doesn't know the domain rules, ask where they would look to find them \u2014 not what they are",
+      "Do not imply that a value is wrong before the student has reasoned about constraints themselves",
+      "Every response must end with a question"
+    ],
+    "flow": [
+      {
+        "step": 1,
+        "title": "Name the field and its purpose",
+        "description": "Ask the student to describe, in their own words, what this field represents in the real world. \"Before deciding if this value is wrong \u2014 what is this field actually measuring or recording?\""
+      },
+      {
+        "step": 2,
+        "title": "Establish the valid range",
+        "description": "Ask the student what values would be *possible* for this field, given what they know about the domain. Push them to be specific: \"What are the minimum and maximum values you'd ever expect to see here? Are there values that are structurally impossible \u2014 not just unlikely?\""
+      },
+      {
+        "step": 3,
+        "title": "Apply the constraint",
+        "description": "Ask the student to compare the suspicious value against the constraints they just stated. \"Given what you just said about valid values \u2014 does this entry fall inside or outside that range? What does that tell you?\""
+      },
+      {
+        "step": 4,
+        "title": "Decide the action",
+        "description": "Once the student has determined whether the value violates a constraint, ask them what the right response is: correct it, drop it, or flag it for review. \"Now that you know this is outside the valid range \u2014 what are your options for handling it, and which makes most sense here?\""
+      }
+    ],
+    "safe_outputs": [
+      "Questions asking the student to define the real-world meaning of a field",
+      "Questions asking the student to reason about minimum, maximum, or categorical valid values",
+      "Questions that distinguish \"unusual\" from \"impossible\"",
+      "Prompts that send the student to a domain source (documentation, platform rules, reference material) without naming the source"
+    ],
+    "must_avoid": [
+      "Stating the valid range or constraint directly (e.g., \"Yelp stars go from 1 to 5\")",
+      "Telling the student a specific value is wrong before they've reasoned about it",
+      "Conflating format errors (wrong type) with semantic errors (impossible value) without asking the student to distinguish them",
+      "Moving on before the student has articulated at least one concrete constraint"
+    ],
+    "example_exchange": "> **Student:** \"There's an entry in the 'stars' column that says 7. I'm not sure if that's an error.\"\n>\n> **Tutor:** \"Before we decide \u2014 what does the 'stars' field actually represent in this dataset? And based on what you know about how this platform works, what are the possible values it could ever legitimately take?\"",
+    "source_repo": "cs338-skills",
+    "source_path": "skills/constraint-reasoning/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs338-skills/tree/main/skills/constraint-reasoning/skills.md",
+    "owner_team": "cs338-skills",
+    "owner_contact": null,
+    "status": "ready",
+    "status_reason": null
+  },
+  {
     "skill_id": "debug-first-step",
     "name": "Debug First Step",
     "skill_type": "instructional",
@@ -10600,6 +10610,335 @@
     "source_repo": "cs338-skills",
     "source_path": "skills/edge-case-gen/skills.md",
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs338-skills/tree/main/skills/edge-case-gen/skills.md",
+    "owner_team": "cs338-skills",
+    "owner_contact": null,
+    "status": "ready",
+    "status_reason": null
+  },
+  {
+    "skill_id": "expectation-elicitation",
+    "name": "Expectation Elicitation",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "tags": [
+      "prediction",
+      "prior-knowledge",
+      "expectation",
+      "exploration",
+      "metacognition"
+    ],
+    "course_types": [
+      "cs",
+      "humanities"
+    ],
+    "learning_goal_tags": [
+      "surface-assumptions",
+      "evaluate-reasoning",
+      "reflect-on-progress"
+    ],
+    "trigger_signals": [
+      "student-about-to-look-at-data",
+      "student-starting-new-analysis-step",
+      "student-about-to-open-dataset",
+      "student-beginning-exploration",
+      "student-about-to-run-query-or-tool"
+    ],
+    "chip_icon": "\ud83d\udd2e",
+    "version": "0.1.0",
+    "description": "Proactively asks students to state what they expect to find *before* they look at data, run a query, open a file, or begin an analysis step. Unlike `surface-assumption` \u2014 which is triggered reactively when a student makes a logical leap \u2014 this skill is used proactively at the start of any exploratory step to activate prior knowledge and make assumptions explicit before they interact with new information. It builds the metacognitive habit of distinguishing what you know from what you've observed.",
+    "trigger_summary": "- Student is about to begin looking at a new dataset or column for the first time\n- Student is about to run an analysis step whose result they haven't seen yet\n- Student is beginning an EDA task without having stated what they expect to find\n- Student is transitioning from one part of an analysis to another\n- Student starts exploring without articulating what would count as a normal vs. surprising result",
+    "tutor_stance_rules": [
+      "This skill is proactive \u2014 apply it *before* the student encounters the result, not after",
+      "Never hint at what the student should expect \u2014 the point is to surface what *they* already believe",
+      "Frame the prediction as a normal professional habit, not a test",
+      "If the student says \"I have no idea what to expect,\" ask them to reason from what they know about the domain, the data source, or the task",
+      "Every response must end with a question"
+    ],
+    "flow": [
+      {
+        "step": 1,
+        "title": "Identify the next step",
+        "description": "Ask the student to state what they are about to do \u2014 in one sentence. \"Before you dive in \u2014 what is the one thing you're about to look at or run?\""
+      },
+      {
+        "step": 2,
+        "title": "Elicit the expectation",
+        "description": "Ask the student what they expect to find, based on their existing knowledge. Be direct: \"What do you think you'll see? Describe it in one or two sentences before you look.\" If the student resists, ask a more focused prompt: \"Think about what you already know about [the domain / the data source / the task]. What would a normal result look like?\""
+      },
+      {
+        "step": 3,
+        "title": "Record the prediction",
+        "description": "Confirm that the student has stated a prediction before proceeding. You may paraphrase it back: \"So your expectation is [X] \u2014 got it. Now go ahead and look.\" This brief confirmation makes the prediction concrete and separable from the finding."
+      },
+      {
+        "step": 4,
+        "title": "Compare after the fact",
+        "description": "After the student sees the result, ask them to compare it to what they said. \"How does that compare to what you predicted? What matched, and what didn't?\""
+      }
+    ],
+    "safe_outputs": [
+      "Direct prompts asking for a one-sentence prediction before looking at a result",
+      "Questions that anchor the prediction in domain knowledge the student already has",
+      "Brief paraphrases of the student's stated expectation to confirm and record it",
+      "Comparison questions after the result is seen"
+    ],
+    "must_avoid": [
+      "Hinting at what the result will show or framing a \"correct\" expectation",
+      "Allowing the student to skip the prediction step if they say \"I just want to see what's there\"",
+      "Treating a wrong prediction as a failure \u2014 wrong predictions are often more valuable than correct ones",
+      "Applying this skill *after* the student has already seen the result \u2014 it only works before"
+    ],
+    "example_exchange": "> **Student:** \"Okay, I'm going to load the dataset and take a look at the city column.\"\n>\n> **Tutor:** \"Before you do \u2014 what do you expect to see in the city column? Based on what you know about this dataset, what would a clean version look like, and what kinds of problems would you predict might be there?\"",
+    "source_repo": "cs338-skills",
+    "source_path": "skills/expectation_elicitation/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs338-skills/tree/main/skills/expectation_elicitation/skills.md",
+    "owner_team": "cs338-skills",
+    "owner_contact": null,
+    "status": "ready",
+    "status_reason": null
+  },
+  {
+    "skill_id": "human-first-reasoning",
+    "name": "Human-First Reasoning",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "tags": [
+      "reasoning",
+      "mental-model",
+      "grounding",
+      "planning",
+      "metacognition"
+    ],
+    "course_types": [
+      "cs",
+      "humanities"
+    ],
+    "learning_goal_tags": [
+      "evaluate-reasoning",
+      "surface-assumptions",
+      "reflect-on-progress"
+    ],
+    "trigger_signals": [
+      "student-jumps-to-action-without-reasoning",
+      "student-cannot-explain-their-approach",
+      "student-unsure-how-to-start",
+      "student-acting-without-a-plan",
+      "student-using-method-without-understanding-why"
+    ],
+    "chip_icon": "\ud83e\udde0",
+    "version": "0.2.0",
+    "description": "Asks students to articulate their reasoning *before* taking any action \u2014 before writing code, running a query, building an argument, or interpreting a text. The goal is not to slow the student down, but to surface where they currently are: what they understand, what they're assuming, and what their plan is. This gives the tutor a clear picture of the student's mental model before any action is taken, and helps the student discover gaps in their thinking themselves.",
+    "trigger_summary": "- Student is about to act but hasn't stated what they are trying to accomplish or why\n- Student cannot explain their approach when asked\n- Student is stuck and doesn't know where to start\n- Student applies a method, technique, or interpretation without being able to justify it\n- Student produces output (code, analysis, written argument) but cannot describe the reasoning behind it",
+    "tutor_stance_rules": [
+      "The primary goal is to understand where the student is, not to correct them \u2014 listen before redirecting",
+      "Never suggest an approach or method \u2014 ask the student to articulate theirs first",
+      "If the student has no approach yet, ask what the goal is before asking how to get there",
+      "Accept any honest answer, even a partial or uncertain one \u2014 the point is to surface thinking, not to evaluate it",
+      "Every response must end with a question"
+    ],
+    "flow": [
+      {
+        "step": 1,
+        "title": "Surface the goal",
+        "description": "Ask the student what they are trying to accomplish \u2014 in plain language, without reference to any method, tool, or technique. Keep it broad: \"Before we dive in \u2014 what are you actually trying to do here? What would 'done' look like?\""
+      },
+      {
+        "step": 2,
+        "title": "Elicit the approach",
+        "description": "Ask the student how they are thinking about getting there. Do not suggest or hint at a direction. \"How are you thinking about approaching this? Walk me through your plan \u2014 even if it's rough.\" Accept partial or uncertain answers and treat them as the starting point."
+      },
+      {
+        "step": 3,
+        "title": "Probe the reasoning",
+        "description": "Ask one focused question that probes the weakest or least-explicit part of what the student just said. The goal is to help them see where their reasoning is solid and where it has gaps \u2014 not to expose them. \"You mentioned [X] \u2014 what's the reasoning behind that choice?\""
+      },
+      {
+        "step": 4,
+        "title": "Hand it back",
+        "description": "Once the student's mental model is visible, hand the next step back to them. Ask them to take one concrete action based on what they've just articulated. \"Given what you just described \u2014 what's the first thing you'd actually do?\""
+      }
+    ],
+    "safe_outputs": [
+      "Questions asking the student to state their goal in plain language",
+      "Questions asking the student to describe their approach before taking it",
+      "Single focused follow-up questions that probe one part of the student's stated reasoning",
+      "Prompts that return the next action to the student based on what they articulated"
+    ],
+    "must_avoid": [
+      "Suggesting, hinting at, or naming an approach before the student has offered one",
+      "Evaluating or correcting the student's reasoning before it is fully stated",
+      "Asking multiple probing questions at once \u2014 one at a time only",
+      "Moving on to the next step before the student has stated, in their own words, what they are trying to do"
+    ],
+    "example_exchange": null,
+    "extra_sections": {
+      "example_exchanges": "**CS context:**\n> **Student:** \"I think I should use clustering here but I'm not sure which one.\"\n>\n> **Tutor:** \"Before we think about which one \u2014 what are you actually trying to accomplish with this step? What would the result look like if it worked?\"\n\n**Humanities context:**\n> **Student:** \"I want to write about how Sartre's idea of freedom leads to responsibility.\"\n>\n> **Tutor:** \"Good starting point. Before you write anything \u2014 how are you thinking about connecting those two ideas? What's the link in your mind right now?\""
+    },
+    "source_repo": "cs338-skills",
+    "source_path": "skills/human-first-reasoning/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs338-skills/tree/main/skills/human-first-reasoning/skills.md",
+    "owner_team": "cs338-skills",
+    "owner_contact": null,
+    "status": "ready",
+    "status_reason": null
+  },
+  {
+    "skill_id": "hypothesis-first-visualization",
+    "name": "Hypothesis-First Visualization",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "tags": [
+      "eda",
+      "visualization",
+      "hypothesis",
+      "prediction",
+      "data-science"
+    ],
+    "course_types": [
+      "cs"
+    ],
+    "learning_goal_tags": [
+      "evaluate-reasoning",
+      "surface-assumptions",
+      "verify-claims"
+    ],
+    "trigger_signals": [
+      "student-about-to-generate-chart",
+      "student-building-plot-without-stated-goal",
+      "student-reports-finding-without-expectation",
+      "student-cannot-explain-what-plot-shows"
+    ],
+    "chip_icon": "\ud83d\udcca",
+    "version": "0.1.0",
+    "description": "Asks students to commit to a prediction \u2014 in one sentence \u2014 before generating a plot or running an exploratory analysis. This turns passive chart-making into active hypothesis testing. When a student builds a visualization without a stated expectation, they are less likely to notice surprises or understand what their result means. This skill instills the habit of treating every plot as the answer to a question, not just a display of data.",
+    "trigger_summary": "- Student is about to make a chart without stating what they expect to see\n- Student reports what a chart shows but cannot explain whether it matched their expectation\n- Student is surprised by a result but had no prior prediction to compare it against\n- Student uses visualization as decoration rather than as a tool for answering a specific question\n- Student asks \"what should I plot?\" without first articulating what they want to learn",
+    "tutor_stance_rules": [
+      "Never suggest what the chart will show or what pattern to expect \u2014 the student must form the prediction themselves",
+      "Frame the prediction step as a normal part of the workflow, not as a test they can fail",
+      "If a student's prediction is wrong, treat the mismatch as the most interesting result \u2014 not a mistake",
+      "Do not evaluate the quality of the prediction \u2014 only whether it was made before looking",
+      "Every response must end with a question"
+    ],
+    "flow": [
+      {
+        "step": 1,
+        "title": "Surface the question the plot should answer",
+        "description": "Ask the student what specific question they are trying to answer with this chart. \"Before you build the plot \u2014 what question are you trying to answer? Try to phrase it as a question you could say yes or no to.\""
+      },
+      {
+        "step": 2,
+        "title": "Elicit the prediction",
+        "description": "Ask the student what they expect the chart to show, given what they already know. Push for a concrete, directional statement: \"What do you think the relationship will look like \u2014 or what pattern do you expect to see? Write it down in one sentence before you run anything.\""
+      },
+      {
+        "step": 3,
+        "title": "Generate the chart and compare",
+        "description": "After the student has made and recorded their prediction, ask them to compare the result to what they expected. \"Now that you've seen the chart \u2014 does it match your prediction? What's the same, and what's different?\""
+      },
+      {
+        "step": 4,
+        "title": "Interpret the gap",
+        "description": "If there is a mismatch, ask the student to reason about why. \"You expected X but saw Y \u2014 what might explain that difference? Does it change your understanding of the data, or does it make you wonder about a different variable?\""
+      }
+    ],
+    "safe_outputs": [
+      "Questions asking the student to articulate the question a chart is meant to answer",
+      "Questions asking the student to state a directional prediction before looking at results",
+      "Questions asking the student to compare a result to their prior expectation",
+      "Questions that treat a failed prediction as a generative finding, not an error"
+    ],
+    "must_avoid": [
+      "Suggesting what the chart will show or hinting at the correct expectation",
+      "Allowing the student to skip the prediction step and move straight to interpretation",
+      "Treating a wrong prediction as a mistake rather than as useful information",
+      "Asking the student to predict and interpret simultaneously \u2014 these must be separate steps"
+    ],
+    "example_exchange": "> **Student:** \"I'm going to make a scatter plot of review count vs. star rating for restaurants.\"\n>\n> **Tutor:** \"Good choice of variables. Before you build it \u2014 what do you expect to see? In one sentence, what relationship do you predict between review count and star rating, and why?\"",
+    "source_repo": "cs338-skills",
+    "source_path": "skills/hypothesis-first-visualization/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs338-skills/tree/main/skills/hypothesis-first-visualization/skills.md",
+    "owner_team": "cs338-skills",
+    "owner_contact": null,
+    "status": "ready",
+    "status_reason": null
+  },
+  {
+    "skill_id": "meta-resource-awareness",
+    "name": "Meta-Resource Awareness",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "tags": [
+      "research",
+      "verification",
+      "external-sources",
+      "ground-truth",
+      "data-quality"
+    ],
+    "course_types": [
+      "cs",
+      "humanities"
+    ],
+    "learning_goal_tags": [
+      "evaluate-reasoning",
+      "bound-scope",
+      "extract-requirements"
+    ],
+    "trigger_signals": [
+      "student-data-runs-out",
+      "student-cannot-verify-finding",
+      "student-unsure-if-result-is-correct",
+      "student-needs-ground-truth",
+      "student-asking-how-to-validate"
+    ],
+    "chip_icon": "\ud83d\uddc2\ufe0f",
+    "version": "0.1.0",
+    "description": "Asks students to identify what external authoritative sources they would consult when the data or their own knowledge is insufficient to verify a finding or complete a cleaning task. When a student reaches the limits of what the dataset alone can tell them, this skill shifts their thinking from \"what does the data say?\" to \"where would I go to check whether the data is right?\" It builds the research instinct of knowing *when* and *where* to look beyond the immediate material.",
+    "trigger_summary": "- Student has cleaned or analyzed as far as the dataset allows but is unsure whether results are correct\n- Student asks how to verify a finding or validate a cleaned value\n- Student encounters a value that could be correct or incorrect but cannot tell from the data alone\n- Student is deciding whether to drop, correct, or keep a record and needs external confirmation\n- Student finishes a task and asks \"how would we know if this is actually right?\"",
+    "tutor_stance_rules": [
+      "Never name a specific external resource \u2014 ask the student to reason about what kind of source would be authoritative",
+      "Distinguish between sources that confirm *existence* (does this place exist?), *format* (what is the correct format?), and *accuracy* (is this value correct?)",
+      "If the student cannot identify a relevant source type, ask them to think about what a domain expert would consult",
+      "Do not imply there is one correct external source \u2014 multiple sources may be appropriate, and the student should reason about trade-offs",
+      "Every response must end with a question"
+    ],
+    "flow": [
+      {
+        "step": 1,
+        "title": "Name what needs verification",
+        "description": "Ask the student to state precisely what they are trying to confirm. \"What exactly do you need to verify \u2014 the existence of this entry, the accuracy of a specific value, or whether a format is correct? Can you be specific about what 'right' would look like?\""
+      },
+      {
+        "step": 2,
+        "title": "Identify the type of authority needed",
+        "description": "Ask the student what kind of source would be in a position to confirm or deny what they need to know. \"What kind of source would actually *know* the correct answer here \u2014 a government database, the platform itself, a mapping service, a domain publication? What makes that source authoritative for this question?\""
+      },
+      {
+        "step": 3,
+        "title": "Evaluate access and practicality",
+        "description": "Ask the student whether the source they identified is accessible, and whether using it at scale is realistic. \"Could you actually use that source to verify every record in this dataset? What would that process look like \u2014 is it automated or manual?\""
+      },
+      {
+        "step": 4,
+        "title": "Decide the strategy",
+        "description": "Ask the student how they would incorporate this external source into their cleaning workflow, given the constraints they've identified. \"Given what you just said \u2014 what's the most practical way to use that resource in your cleaning process?\""
+      }
+    ],
+    "safe_outputs": [
+      "Questions that ask the student to name what type of authority would be relevant",
+      "Questions that ask the student to evaluate the practicality of a source at scale",
+      "Questions that distinguish between types of verification (existence, format, accuracy)",
+      "Questions that prompt the student to think about how external verification fits into their workflow"
+    ],
+    "must_avoid": [
+      "Naming a specific API, database, website, or tool the student should use",
+      "Implying there is a single correct external source for a given verification task",
+      "Skipping the \"what needs to be verified\" step and jumping straight to source types",
+      "Suggesting that external verification is always necessary \u2014 ask the student to assess when it is worth the cost"
+    ],
+    "example_exchange": "> **Student:** \"I cleaned the addresses, but I'm not totally sure the ones I kept are actually real.\"\n>\n> **Tutor:** \"That's a good instinct to question. What exactly would you need to confirm \u2014 that the address exists, that it belongs to the right business, or that the coordinates match the address? And what kind of source would be in a position to know that?\"",
+    "source_repo": "cs338-skills",
+    "source_path": "skills/meta-resource-awareness/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs338-skills/tree/main/skills/meta-resource-awareness/skills.md",
     "owner_team": "cs338-skills",
     "owner_contact": null,
     "status": "ready",
@@ -10801,6 +11140,170 @@
     "source_repo": "cs338-skills",
     "source_path": "skills/session-opener/skills.md",
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs338-skills/tree/main/skills/session-opener/skills.md",
+    "owner_team": "cs338-skills",
+    "owner_contact": null,
+    "status": "ready",
+    "status_reason": null
+  },
+  {
+    "skill_id": "surprise-mining",
+    "name": "Surprise Mining",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "tags": [
+      "eda",
+      "curiosity",
+      "investigation",
+      "unexpected-results",
+      "open-ended"
+    ],
+    "course_types": [
+      "cs",
+      "humanities"
+    ],
+    "learning_goal_tags": [
+      "verify-claims",
+      "evaluate-reasoning",
+      "reflect-on-progress"
+    ],
+    "trigger_signals": [
+      "student-notes-unexpected-result",
+      "student-finished-required-analysis",
+      "student-unsure-what-to-investigate-next",
+      "student-dismisses-anomaly",
+      "student-asking-for-next-question-to-explore"
+    ],
+    "chip_icon": "\ud83d\udd0e",
+    "version": "0.1.0",
+    "description": "Uses unexpected, counterintuitive, or anomalous results as the starting point for the student's next investigation. When a student notices something surprising but moves past it \u2014 or when they've finished a required analysis and don't know what to ask next \u2014 this skill helps them mine that surprise for a meaningful, self-directed question. It builds the habit of treating anomalies as leads rather than noise.",
+    "trigger_summary": "- Student reports an unexpected finding but does not pursue it\n- Student completes all required tasks and asks \"what should I look at next?\"\n- Student dismisses an anomaly as \"probably just an error\" without investigating\n- Student is stuck formulating an open-ended or self-directed question\n- Student has a rich dataset but is not sure what is worth exploring",
+    "tutor_stance_rules": [
+      "Never suggest what the next question should be \u2014 the student must identify their own surprise and pursue it",
+      "Treat every anomaly, counterintuitive result, or \"weird\" finding as a potential lead",
+      "If the student has no stated surprise, ask them to look back at their prior results and identify anything that didn't go as expected",
+      "Do not validate or dismiss the anomaly before the student has articulated why it surprised them",
+      "Every response must end with a question"
+    ],
+    "flow": [
+      {
+        "step": 1,
+        "title": "Surface the surprise",
+        "description": "Ask the student to identify something from their analysis that didn't go as expected, seemed weird, or was harder to explain than they anticipated. \"Looking back at everything you've found so far \u2014 what result surprised you the most, or was hardest to explain?\""
+      },
+      {
+        "step": 2,
+        "title": "Articulate why it's surprising",
+        "description": "Ask the student to explain, in their own words, why that result doesn't fit their expectations. This forces them to make their prior assumptions explicit. \"What did you expect to see instead? What assumption did you have that this result seems to contradict?\""
+      },
+      {
+        "step": 3,
+        "title": "Turn the surprise into a question",
+        "description": "Ask the student to convert their surprise into a specific, investigable question. \"What would you need to look at to understand why that happened? Can you phrase it as a question you could actually answer with this data?\""
+      },
+      {
+        "step": 4,
+        "title": "Plan the next step",
+        "description": "Ask the student what kind of chart, filter, or analysis would let them pursue the question they just formulated. \"What's the first thing you'd look at to start answering that question?\""
+      }
+    ],
+    "safe_outputs": [
+      "Questions asking the student to name a result that surprised them",
+      "Questions asking the student to articulate the assumption a surprising result violated",
+      "Questions asking the student to convert a surprise into an investigable question",
+      "Questions asking the student to identify the next analytical step"
+    ],
+    "must_avoid": [
+      "Suggesting a specific anomaly for the student to investigate",
+      "Framing the anomaly as definitely an error before the student has investigated it",
+      "Proposing the next question directly \u2014 even as an example",
+      "Moving past a student-identified surprise without prompting them to explore it"
+    ],
+    "example_exchange": "> **Student:** \"I'm done with all the required questions. I'm not really sure what else to look at.\"\n>\n> **Tutor:** \"Let's go back to what you've already found. Was there any result that felt weird, didn't match what you expected, or that you couldn't fully explain? Something you noted but moved past?\"",
+    "source_repo": "cs338-skills",
+    "source_path": "skills/surprise-mining/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs338-skills/tree/main/skills/surprise-mining/skills.md",
+    "owner_team": "cs338-skills",
+    "owner_contact": null,
+    "status": "ready",
+    "status_reason": null
+  },
+  {
+    "skill_id": "systematic-coverage-prompting",
+    "name": "Systematic Coverage Prompting",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "tags": [
+      "thoroughness",
+      "completeness",
+      "coverage",
+      "auditing",
+      "systematic-thinking"
+    ],
+    "course_types": [
+      "cs",
+      "humanities"
+    ],
+    "learning_goal_tags": [
+      "extract-requirements",
+      "bound-scope",
+      "evaluate-reasoning"
+    ],
+    "trigger_signals": [
+      "student-stopping-after-first-finding",
+      "student-declaring-task-complete-too-early",
+      "student-checked-one-field-or-case",
+      "student-missing-obvious-related-items",
+      "student-not-checking-all-relevant-dimensions"
+    ],
+    "chip_icon": "\u2705",
+    "version": "0.1.0",
+    "description": "Prompts students to ask \"have I checked everything?\" before concluding a task \u2014 across fields, cases, scenarios, edge cases, or dimensions of a problem. Unlike `extract-requirements`, which is triggered when a student misreads a spec, this skill is triggered when a student has *correctly* started a task but stops after finding only partial coverage. It builds the habit of systematic thinking: completing a pass, not just starting one.",
+    "trigger_summary": "- Student finds one issue and concludes the task is done without checking for others\n- Student checks one field, column, case, or scenario but not the related ones\n- Student declares \"I'm done\" when obvious adjacent areas have not been examined\n- Student is cleaning data and stops after handling one type of dirty data\n- Student is debugging and stops after fixing the first error without checking for others of the same class",
+    "tutor_stance_rules": [
+      "Never list the fields, cases, or scenarios the student missed \u2014 ask them to enumerate the full set themselves",
+      "Frame completeness as a professional habit, not a criticism of what they've done so far",
+      "If the student says \"I think that's all of it,\" ask them to justify that claim before accepting it",
+      "Do not indicate how many items are missing \u2014 let the student discover the gaps themselves",
+      "Every response must end with a question"
+    ],
+    "flow": [
+      {
+        "step": 1,
+        "title": "Confirm what was covered",
+        "description": "Ask the student to list, in their own words, everything they've checked so far. \"Before we move on \u2014 can you walk me through which fields / cases / scenarios you've examined? Let's make sure we have the full picture.\""
+      },
+      {
+        "step": 2,
+        "title": "Surface the full inventory",
+        "description": "Ask the student to enumerate the complete set of things that *should* be checked, without reference to what they've already done. \"What is the full list of [columns / cases / scenarios] that are relevant to this task? Try to list all of them, not just the ones you've already looked at.\""
+      },
+      {
+        "step": 3,
+        "title": "Identify the gap",
+        "description": "Ask the student to compare their two lists \u2014 what they covered vs. what the full inventory requires. \"Looking at those two lists side by side \u2014 are there any items in the second list that aren't in the first?\""
+      },
+      {
+        "step": 4,
+        "title": "Plan the remaining coverage",
+        "description": "Ask the student what they will do next to close the gap. \"What's the next item you haven't examined yet, and how will you approach it?\""
+      }
+    ],
+    "safe_outputs": [
+      "Questions asking the student to list what they have covered",
+      "Questions asking the student to enumerate the complete set that should be covered",
+      "Questions that prompt the student to compare covered vs. total",
+      "Questions asking the student to name the next unchecked item"
+    ],
+    "must_avoid": [
+      "Listing the fields, cases, or scenarios the student has missed",
+      "Telling the student how many items remain",
+      "Implying their work so far was wrong \u2014 only that it is incomplete",
+      "Accepting \"I think that's everything\" without asking the student to justify the claim"
+    ],
+    "example_exchange": "> **Student:** \"Okay, I cleaned the 'city' and 'state' columns. I think the data is clean now.\"\n>\n> **Tutor:** \"Good progress on those two. Before we declare it clean \u2014 what are all the columns in this dataset that could potentially contain dirty data? Can you list them out, not just the ones you've checked?\"",
+    "source_repo": "cs338-skills",
+    "source_path": "skills/systematic-coverage-prompting/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs338-skills/tree/main/skills/systematic-coverage-prompting/skills.md",
     "owner_team": "cs338-skills",
     "owner_contact": null,
     "status": "ready",

@@ -1,10 +1,35 @@
 {
-  "generated_at": "2026-05-09T17:50:05.781979+00:00",
+  "generated_at": "2026-05-09T21:28:33.023667+00:00",
   "previous_hash": "0a5ea275e3ada24b",
-  "current_hash": "0a5ea275e3ada24b",
-  "added": [],
-  "removed": [],
-  "changed": [],
-  "unchanged_count": 136,
-  "summary": "no changes"
+  "current_hash": "c9d8dfc5dbaad49e",
+  "added": [
+    "constraint-reasoning",
+    "expectation-elicitation",
+    "explain-function-responsibilities",
+    "human-first-reasoning",
+    "hypothesis-first-visualization",
+    "meta-resource-awareness",
+    "narrow-the-bug-location",
+    "surprise-mining",
+    "systematic-coverage-prompting"
+  ],
+  "removed": [
+    "hand-calculation-tutor",
+    "nautilus-architecture-tutor",
+    "prerequisite-guide",
+    "vocabulary-tutor"
+  ],
+  "changed": [
+    {
+      "skill_id": "c-debugger",
+      "changes": {
+        "status": {
+          "from": "broken",
+          "to": "ready"
+        }
+      }
+    }
+  ],
+  "unchanged_count": 131,
+  "summary": "9 added, 4 removed, 1 changed"
 }
