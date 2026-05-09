@@ -52,6 +52,16 @@ learning_goals:
     domains: [cs, humanities]
     related_skills: [detect_ambiguity]
 
+  check-understanding:
+    description: "Student can demonstrate comprehension of a concept, hint, or explanation in their own words."
+    domains: [cs, humanities]
+    related_skills: [explain_after_hint, ask_for_paraphrase, constraint_reasoning]
+
+  formulate-questions:
+    description: "Student can generate a specific, investigable question from data, results, or anomalies."
+    domains: [cs, humanities]
+    related_skills: [surprise_mining, hypothesis_first_visualization]
+
   # =========================================================================
   # Reading & evidence — comprehension of source material
   # =========================================================================
