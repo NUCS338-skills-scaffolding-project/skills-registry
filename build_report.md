@@ -1,6 +1,6 @@
 # Catalog build report
 
-**Total skills:** 165  ·  ready: 153, stub: 7, broken: 5
+**Total skills:** 166  ·  ready: 153, stub: 8, broken: 5
 
 ## ⚠ Duplicate skill_id rejections
 
@@ -28,7 +28,7 @@ The following skills were **rejected** because their `skill_id` was already clai
 | `jour-201-1-skills` | 6 | 0 | 5 | 1 |
 | `ling-250-skills` | 14 | 14 | 0 | 0 |
 | `phil-219-skills` | 11 | 11 | 0 | 0 |
-| `poli_sci-210-skills` | 42 | 39 | 2 | 1 |
+| `poli_sci-210-skills` | 43 | 39 | 3 | 1 |
 
 ## Issues
 
@@ -189,6 +189,11 @@ The following skills were **rejected** because their `skill_id` was already clai
 
 ### `poli_sci-210-skills/skills/example-skill/skills.md`
 - **ERROR** [`skill_id`] skill_id 'skill-name' is already claimed by repo 'phil-219-skills'. Repo 'poli_sci-210-skills' is rejected. Rename this skill or coordinate with the 'phil-219-skills' team.
+
+### `poli_sci-210-skills/skills/extract-syllabus/skills.md`
+- **warn** [`learning_goal_tags`] missing — strongly recommended for orchestrator routing
+- **ERROR** [`when_to_trigger`] missing — add `## When to Trigger` section
+- **ERROR** [`usage`] missing — add `## Usage` section
 
 ### `poli_sci-210-skills/skills/play-reviewer/skills.md`
 - **ERROR** [`tutor_stance`] missing — add a `## Tutor Stance` section with rules
