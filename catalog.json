@@ -547,61 +547,14 @@
     "status_reason": null
   },
   {
-    "skill_id": "explain-after-hint",
-    "name": "Explain After Hint",
-    "skill_type": "instructional",
-    "stance": "socratic",
-    "tags": [
-      "understanding"
-    ],
-    "course_types": [
-      "humanities"
-    ],
-    "learning_goal_tags": [
-      "check-understanding"
-    ],
-    "trigger_signals": [
-      "tutor-gives-hint"
-    ],
-    "description": "Prompts student to explain the new information after they ask for and are given a hint by the tutor.",
-    "trigger_summary": "- When student asks for and subsequently receives a hint from the tutor\n- When student does not already demonstrate and understanding of the hint",
-    "tutor_stance_rules": [
-      "The tutor's role is only to ask the student to explain their understanding of the hint after the tutor gives a hint."
-    ],
-    "flow": [
-      {
-        "step": 1,
-        "title": "Judge Response",
-        "description": "After giving a hint, the tutor examines the student's response to see if they demonstrate a sufficient understanding of the hint"
-      },
-      {
-        "step": 2,
-        "title": "Confirmation",
-        "description": "If there is not sufficient evidence, tutor should ask student to explain the reasoning behind the hint"
-      }
-    ],
-    "safe_outputs": [
-      "A question or prompt asking the student to explain the hint"
-    ],
-    "must_avoid": [
-      "Do not indicate a lack of belief that the student understands the hint. \nDo not explain the hint to the student."
-    ],
-    "example_exchange": "> **Student:** \u201cI don\u2019t understand what the mad man means when he says \u2018God is dead\u2019.\u201d\n>\n> **Tutor:** \u201cFor a hint: the mad man later mentions that humans are the ones who killed God. What could humans have done that could be considered \u2018killing God\u2019?\u201d\n>\n> **Student:** \u201cI get it now! So that\u2019s why he said that!\u201d\n>\n> **Tutor:** \u201cGreat! Can you explain the link between human beings and the death of God?\u201d",
-    "source_repo": "phil-219-skills",
-    "source_path": "skills/ask-for-explanation-after-hint/skills.md",
-    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/phil-219-skills/tree/main/skills/ask-for-explanation-after-hint/skills.md",
-    "owner_team": "phil-219-skills",
-    "owner_contact": null,
-    "status": "ready",
-    "status_reason": null
-  },
-  {
     "skill_id": "ask-for-paraphrase",
-    "name": "Ask-For-Paraphrase",
+    "name": "Ask for Paraphrase",
     "skill_type": "instructional",
     "stance": "socratic",
     "tags": [
-      "understanding"
+      "understanding",
+      "paraphrase",
+      "comprehension-check"
     ],
     "course_types": [
       "humanities"
@@ -610,101 +563,53 @@
       "check-understanding"
     ],
     "trigger_signals": [
-      "student-declares-understanding"
+      "student-declares-understanding",
+      "post-hint-confirmation",
+      "post-discussion-closure"
     ],
-    "description": "Prompts students to paraphrase the text or idea in their own words to check their understanding.",
-    "trigger_summary": "- When student declares understanding of an idea after being given a hint\n- When student declares understanding of an idea after a long conversation",
+    "chip_icon": "\ud83d\udde3\ufe0f",
+    "version": "0.1.0",
+    "python_entry": "logic.py",
+    "description": "Prompts students to paraphrase or summarize an idea in their own words after they indicate understanding, in order to verify comprehension without re-teaching or re-explaining the content.",
+    "trigger_summary": "- The student explicitly declares understanding of a concept after a hint or explanation\n- The student signals closure after a longer conceptual discussion\n- The student\u2019s understanding has not yet been demonstrated through their own articulation",
     "tutor_stance_rules": [
-      "Tutor\u2019s role is only to ask the student to paraphrase an idea after declaring their understanding. This should only occur if the student\u2019s messages do not indicate a sufficient understanding."
+      "You are neutral, supportive, and non-evaluative.",
+      "Your role is only to prompt articulation \u2014 not to judge correctness or express doubt. You assume good faith understanding and simply ask the student to express it in their own words.",
+      "You do not re-teach or restate the idea."
     ],
     "flow": [
       {
         "step": 1,
-        "title": "Identify",
-        "description": "Tutor identifies a claim that student understands a concept thoroughly"
+        "title": "Identify Claim of Understanding",
+        "description": "Notice when the student signals that they understand a concept or idea."
       },
       {
         "step": 2,
-        "title": "Judge",
-        "description": "Tutor judges whether student\u2019s recent messages have provided sufficient evidence to show student fully understands the idea"
+        "title": "Check Evidence",
+        "description": "Review whether the student has already demonstrated understanding through explanation, reasoning, or application.\n\nIf they have not, proceed to Step 3."
       },
       {
         "step": 3,
-        "title": "Confirmation",
-        "description": "If there is not sufficient evidence, tutor should ask student to describe the idea comprehensively in their own words"
+        "title": "Prompt Paraphrase",
+        "description": "Ask the student to restate or summarize the idea in their own words. The prompt should be concise, singular, and focused on restatement, not expansion"
       }
     ],
     "safe_outputs": [
-      "A question or prompt asking the student to summarize/paraphrase the idea"
+      "A request to summarize the idea in the student\u2019s own words",
+      "A prompt asking the student to restate the concept briefly",
+      "A question asking what the idea means in their interpretation"
     ],
     "must_avoid": [
-      "Do not indicate a lack of belief that the student understands the idea. \nDo not explain the idea to the student."
+      "NEVER explain or re-explain the idea",
+      "NEVER introduce new information or clarification",
+      "NEVER signal disbelief or skepticism (\u201cAre you sure you understand?\u201d)",
+      "NEVER over-validate before checking comprehension",
+      "NEVER ask multiple questions at once"
     ],
-    "example_exchange": "> **Student:** \u201cI don\u2019t understand what the mad man means when he says \u2018God is dead\u2019.\u201d\n>\n> **Tutor:** \u201cTry looking at the excerpt as a whole. What else does the mad man say that might explain his words?\u201d\n>\n> **Student:** \u201cI get it now! So that\u2019s why he said that!\u201d\n>\n> **Tutor:** \u201cGreat! Can you summarize the mad man\u2019s meaning quickly?\u201d",
+    "example_exchange": "Student: \u201cI don\u2019t understand what the mad man means when he says \u2018God is dead\u2019.\u201d\n\nTutor: \u201cTry looking at the excerpt as a whole. Is there something else the mad man might have said that could explain his words?\u201d\n\nStudent: \u201cI think I understand now! So that\u2019s why he said that!\u201d\n\nTutor: \u201cGreat! Can you summarize the mad man\u2019s meaning quickly?\u201d",
     "source_repo": "phil-219-skills",
     "source_path": "skills/ask-for-paraphrase/skills.md",
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/phil-219-skills/tree/main/skills/ask-for-paraphrase/skills.md",
-    "owner_team": "phil-219-skills",
-    "owner_contact": null,
-    "status": "ready",
-    "status_reason": null
-  },
-  {
-    "skill_id": "surface-assumption",
-    "name": "Assumption Surfacing",
-    "skill_type": "instructional",
-    "stance": "socratic",
-    "tags": [
-      "identification",
-      "argument"
-    ],
-    "course_types": [
-      "humanities"
-    ],
-    "learning_goal_tags": [
-      "surface-assumptions"
-    ],
-    "trigger_signals": [
-      "student-defending-first-position",
-      "student-making-logical-leap"
-    ],
-    "description": "Helps students slow down when they make an unjustified leap in logic by pausing them and requiring them to articulate the reasoning or assumptions hidden in that gap.",
-    "trigger_summary": "- The student is outlining an argument (in conversation or in writing) and a noticeable, significant gap in logic occurs. A significant gap is a relationship where the cause and effect do not seem related, or could be argued against.",
-    "tutor_stance_rules": [
-      "You must be firm in requiring the student to explain or acknowledge the gap, but never aggressive. Maintain a neutral tone regardless of whether the student\u2019s assumptions are correct or incorrect. Your goal is awareness, not judgment."
-    ],
-    "flow": [
-      {
-        "step": 1,
-        "title": "Flag the Gap",
-        "description": "Stop the student and point out where the gap in their logic exists. Ask them to explain their thinking at that specific point."
-      },
-      {
-        "step": 2,
-        "title": "Evaluate Knowledge",
-        "description": "Determine from the student's response whether they didn't fully think it through, or had sound reasoning but just didn't explain it. If the latter, acknowledge the response and move on."
-      },
-      {
-        "step": 3,
-        "title": "Support or Redirect",
-        "description": "If the student cannot explain the gap, guide them with questions that help bridge it. If the gap cannot be bridged, suggest alternative lines of reasoning for them to consider."
-      }
-    ],
-    "safe_outputs": [
-      "Questions asking the student to identify and explain assumptions in their reasoning.",
-      "Prompts that help to guide the student to resolve the logical gap on their own.",
-      "Suggestions of alternative lines of thought if the current reasoning cannot be justified.",
-      "If the student demonstrates clear and accurate understanding at any point, confirm it and ask if they would like to continue."
-    ],
-    "must_avoid": [
-      "NEVER immediately declare that an assumption is wrong.",
-      "NEVER explain the assumption or fill the logical gap for the student.",
-      "NEVER judge the student\u2019s reasoning as good or bad \u2014 focus on getting them to articulate it."
-    ],
-    "example_exchange": "Student: \u201cIn Sartre\u2019s The Look, he gives an example of a man peering through a keyhole who later feels shame after realizing he is being observed. Therefore, his line \u2018hell is other people\u2019 is because our interactions prevent us from doing what we want to do.\u201d\n\nTutor: \u201cYou\u2019ve made an interesting connection, but let\u2019s slow down. Can you elaborate on why Sartre thinks shame prevents us from doing what we want to do? And how does not being able to do what we want become \u2018hell\u2019?\u201d",
-    "source_repo": "phil-219-skills",
-    "source_path": "skills/assumption-surfacing/skills.md",
-    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/phil-219-skills/tree/main/skills/assumption-surfacing/skills.md",
     "owner_team": "phil-219-skills",
     "owner_contact": null,
     "status": "ready",
@@ -773,15 +678,84 @@
     ],
     "example_exchange": "Student: \u201cI think Sartre is arguing that we are completely free and nothing constrains our choices.\u201d\n\nTutor: \u201cWhat in the text led you to that interpretation? Can you point to a specific sentence?\u201d\n\nStudent: \u201cHe says \u2018man is condemned to be free\u2019 \u2014 that sounds like total freedom.\u201d\n\nTutor: \u201cInteresting. In that same section, is there any language that could suggest a limitation or complication to that idea? What might \u2018condemned\u2019 imply?\u201d\n\nStudent: \u201cMaybe that freedom isn\u2019t entirely positive \u2014 it comes with burden.\u201d\n\nTutor: \u201cGood. How might someone who disagrees with your original reading interpret \u2018condemned to be free\u2019 differently?\u201d\n\nStudent: \u201cThey might say Sartre is emphasizing the weight of responsibility, not celebrating unlimited freedom.\u201d\n\nTutor: \u201cGiven that, how would you refine your original interpretation?\u201d",
     "source_repo": "phil-219-skills",
-    "source_path": "skills/counterview-consideration/skills.md",
-    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/phil-219-skills/tree/main/skills/counterview-consideration/skills.md",
+    "source_path": "skills/counterview-prompt/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/phil-219-skills/tree/main/skills/counterview-prompt/skills.md",
     "owner_team": "phil-219-skills",
     "owner_contact": null,
     "status": "ready",
     "status_reason": null
   },
   {
-    "skill_id": "evidence-interpret",
+    "skill_id": "explain-after-hint",
+    "name": "Ask for Explanation After Hint",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "tags": [
+      "understanding",
+      "reflection",
+      "articulation"
+    ],
+    "course_types": [
+      "humanities"
+    ],
+    "learning_goal_tags": [
+      "check-understanding",
+      "articulate-reasoning"
+    ],
+    "trigger_signals": [
+      "student-acknowledged-hint",
+      "student-claimed-understanding",
+      "understanding-not-yet-demonstrated"
+    ],
+    "chip_icon": "\ud83d\udcac",
+    "version": "0.1.0",
+    "python_entry": "logic.py",
+    "description": "Helps students consolidate understanding after receiving a hint by prompting them to explain, interpret, or apply the idea in their own words before moving forward.",
+    "trigger_summary": "- A hint has already been provided by the tutor.\n- The student acknowledges the hint without explaining it.\n- The student says they understand, but has not yet demonstrated reasoning, interpretation, or application.",
+    "tutor_stance_rules": [
+      "You are collaborative, curious, and non-evaluative. You do not sound skeptical or distrustful of the student. You are not testing them \u2014 you are helping them externalize and stabilize their understanding through explanation.",
+      "You avoid repeating, expanding, or deepening the original hint while checking understanding."
+    ],
+    "flow": [
+      {
+        "step": 1,
+        "title": "Assess Understanding",
+        "description": "Look at the student's response after the hint. Determine whether they have already demonstrated understanding through: explanation, interpretation, reasoning, application. Brief acknowledgments like \u201cOh, I get it now\u201d or \u201cThat makes sense\u201d are not enough on their own."
+      },
+      {
+        "step": 2,
+        "title": "Prompt Student Articulation",
+        "description": "If understanding is not yet visible, ask the student to explain the hint in their own words or connect it to the broader idea. Keep the prompt short, singularly focused, and open-ended."
+      },
+      {
+        "step": 3,
+        "title": "Continue Normally",
+        "description": "Once the student demonstrates understanding, continue the discussion without repeatedly checking comprehension."
+      }
+    ],
+    "safe_outputs": [
+      "A concise request for the student to explain the hint in their own words.",
+      "A question asking how the hint changes the student's interpretation.",
+      "A prompt asking the student to connect the hint to the broader concept or argument."
+    ],
+    "must_avoid": [
+      "NEVER re-explain the hint while checking understanding.",
+      "NEVER expand the hint into a full answer.",
+      "NEVER stack multiple layered questions together.",
+      "NEVER sound doubtful, suspicious, or corrective.",
+      "NEVER continue checking understanding after it has already been demonstrated."
+    ],
+    "example_exchange": "Student: \u201cI don\u2019t understand what the mad man means when he says \u2018God is dead\u2019.\u201d\n\nTutor: \u201cFor a hint: the mad man later mentions that humans are the ones who killed God. What could humans have done that could be considered \u2018killing God\u2019?\u201d\n\nStudent: \"I get it now! So that's why he said that!\"\n\nTutor: \"What connection do you think he's making between human beings and the 'death of God'?\"",
+    "source_repo": "phil-219-skills",
+    "source_path": "skills/explain-after-hint/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/phil-219-skills/tree/main/skills/explain-after-hint/skills.md",
+    "owner_team": "phil-219-skills",
+    "owner_contact": null,
+    "status": "ready",
+    "status_reason": null
+  },
+  {
+    "skill_id": "interpret-evidence",
     "name": "Evidence Interpretation",
     "skill_type": "instructional",
     "stance": "socratic",
@@ -836,59 +810,8 @@
     ],
     "example_exchange": "Student: \"Hobbes says life in the state of nature is 'solitary, poor, nasty, brutish, and short.' This proves that people need a strong government.\"\n\nTutor: \"Let's slow down. In your own words, what is Hobbes describing when he uses those five adjectives?\"\n\nStudent: \"He's describing what life would be like without any authority \u2014 everyone would be miserable and at risk.\"\n\nTutor: \"Good. Now, your claim is that this 'proves' people need a strong government. What step connects a description of life without authority to the need for a strong government specifically?\"",
     "source_repo": "phil-219-skills",
-    "source_path": "skills/evidence-interpretation/skills.md",
-    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/phil-219-skills/tree/main/skills/evidence-interpretation/skills.md",
-    "owner_team": "phil-219-skills",
-    "owner_contact": null,
-    "status": "ready",
-    "status_reason": null
-  },
-  {
-    "skill_id": "skill-name",
-    "name": "Human Readable Name",
-    "skill_type": "instructional",
-    "stance": "socratic",
-    "tags": [
-      "topic1",
-      "topic2"
-    ],
-    "course_types": [
-      "humanities"
-    ],
-    "learning_goal_tags": [
-      "example-goal"
-    ],
-    "python_entry": "logic.py",
-    "description": "What does this skill do? Keep it to 2-3 sentences.\nThis will appear in the shared catalog so make it clear and concise.",
-    "trigger_summary": "- Trigger condition 1\n- Trigger condition 2\n- Trigger condition 3\n\n---\n<!-- FOR INSTRUCTIONAL SKILLS: Complete this section -->",
-    "tutor_stance_rules": [
-      "Describe the non-negotiable rules for how the tutor should behave."
-    ],
-    "flow": [
-      {
-        "step": 1,
-        "title": "Step Title",
-        "description": "Describe what to do in this step."
-      },
-      {
-        "step": 2,
-        "title": "Step Title",
-        "description": "Describe what to do in this step."
-      }
-    ],
-    "safe_outputs": [
-      "What the tutor IS allowed to produce."
-    ],
-    "must_avoid": [
-      "What the tutor must NEVER do."
-    ],
-    "example_exchange": "> **Student:** \"Example student message\"\n>\n> **Tutor:** \"Example tutor response\"\n\n---\n<!-- FOR CODE SKILLS: Complete this section -->",
-    "extra_sections": {
-      "skill_type": "- **Type:** instructional OR code\n- **Course Focus:** Humanities OR CS OR Both"
-    },
-    "source_repo": "phil-219-skills",
-    "source_path": "skills/example-skill/skills.md",
-    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/phil-219-skills/tree/main/skills/example-skill/skills.md",
+    "source_path": "skills/interpret-evidence/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/phil-219-skills/tree/main/skills/interpret-evidence/skills.md",
     "owner_team": "phil-219-skills",
     "owner_contact": null,
     "status": "ready",
@@ -914,101 +837,52 @@
     "chip_icon": "\ud83d\udca1",
     "version": "0.2.0",
     "python_entry": "logic.py",
-    "description": "Guides students to identify the central claim or main idea of a passage through targeted, sequential questioning rather than stating the idea directly.",
+    "description": "Guides students to identify the central claim or main idea of a passage through targeted, sequential questioning rather than stating the idea directly. The student must work through the passage piece by piece before being asked to synthesize.",
     "trigger_summary": "- The student provides a text and asks what it means or what the main idea is.\n- The student asks for elaboration on a specified area of the text.",
     "tutor_stance_rules": [
-      "You must internally comprehend the text and identify its main idea, but you must never state it directly. Your only role is to ask a sequence of focused questions that lead the student to arrive at the main idea themselves."
+      "You have read the passage and identified the main idea internally. You will never share it. Your entire job is to ask questions \u2014 one at a time \u2014 that move the student toward the answer themselves.",
+      "If the student asks you to just tell them the answer, do not. Redirect with another question. If the student says they are stuck, pick a specific sentence from the text and ask what the author means by it. Never give in, no matter how many times the student asks.",
+      "You do not move to synthesis until the student has responded to at least two or three specific questions about the passage. Synthesis is earned, not given."
     ],
     "flow": [
       {
         "step": 1,
-        "title": "Comprehend",
-        "description": "Internally read and understand the presented text. Identify the central claim or key idea. Do not share this with the student."
+        "title": "Comprehend (internal only)",
+        "description": "Read and understand the passage. Identify the central claim. Do not share this with the student under any circumstances."
       },
       {
         "step": 2,
-        "title": "Guided Questioning",
-        "description": "Ask the student one question at a time, each targeting a critical sentence or concept in the text. Guide them through the passage piece by piece so that they build understanding incrementally."
+        "title": "Open with a Specific Question",
+        "description": "Pick the most important or puzzling sentence in the passage. Ask the student what they think the author means by that specific sentence. Do not summarize or explain the passage first."
       },
       {
         "step": 3,
-        "title": "Synthesis",
-        "description": "Once the student has worked through the key parts, ask them to piece their understanding together and articulate the main idea of the passage in their own words."
+        "title": "Probe and Build",
+        "description": "Based on the student\u2019s response, ask a follow-up question about a different sentence or idea in the passage. Continue asking one question at a time. Each question should build on the student\u2019s previous answer and move them closer to the central claim.\n\nDo not move to Step 4 until the student has engaged with at least two or three specific parts of the passage."
+      },
+      {
+        "step": 4,
+        "title": "Prompt Synthesis",
+        "description": "Once the student has worked through enough of the passage, ask them to put it together: \"Based on what you\u2019ve said, what would you say is the main idea of this passage?\" Do not answer this for them \u2014 wait for their response."
       }
     ],
     "safe_outputs": [
-      "Open-ended questions about specific sentences or concepts in the text.",
-      "Prompts asking the student to restate, clarify, or connect ideas.",
-      "Encouragement and redirection (e.g., \"Good \u2014 now consider this part...\").",
-      "If the student demonstrates clear and accurate understanding at any point, confirm it and ask if they would like to continue."
+      "A question about a specific sentence or phrase in the passage.",
+      "A follow-up question that builds on the student\u2019s previous answer.",
+      "A redirect when the student asks for the answer directly (\"Let\u2019s look at this part first...\").",
+      "A synthesis prompt only after the student has engaged with multiple parts of the passage."
     ],
     "must_avoid": [
-      "NEVER state the main idea or central claim of the text.",
-      "NEVER explain what a passage means.",
-      "NEVER give direct answers \u2014 only direction, questions, and encouragement."
+      "NEVER state the main idea or central claim, even partially or as a hint.",
+      "NEVER explain what the passage means.",
+      "NEVER jump to the synthesis question before the student has worked through at least two specific questions.",
+      "NEVER give in when the student asks you to just tell them \u2014 always redirect to a specific sentence.",
+      "NEVER ask multiple questions at once."
     ],
-    "example_exchange": "Student: \"Please tell me what is the main idea of this text: {text}\"\n\nTutor: \"Let\u2019s work through it together. First, what does it mean when the author says: \u2018{sentence}\u2019?\"\n\nStudent: \"It means {student\u2019s understanding}.\"\n\nTutor: \"Good. Now look at this next critical part: \u2018{sentence}.\u2019 What is the author getting at here?\"\n\nStudent: \"{student\u2019s understanding}\"\n\nTutor: \"Nice. Now, piecing those ideas together, what would you say is the main idea of this passage?\"",
+    "example_exchange": "Student: \"What is the main idea of this passage?\"\n\nTutor: \"Let\u2019s work through it together. What do you think the author means when they say: \u2018{specific sentence from text}\u2019?\"\n\nStudent: \"I think they mean {student\u2019s understanding}.\"\n\nTutor: \"Good. Now look at this part: \u2018{next sentence}.\u2019 What is the author getting at here?\"\n\nStudent: \"{student\u2019s understanding}\"\n\nTutor: \"You\u2019re building something here. Based on what you\u2019ve said about those two parts, what would you say the passage is ultimately arguing?\"",
     "source_repo": "phil-219-skills",
     "source_path": "skills/key-idea/skills.md",
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/phil-219-skills/tree/main/skills/key-idea/skills.md",
-    "owner_team": "phil-219-skills",
-    "owner_contact": null,
-    "status": "ready",
-    "status_reason": null
-  },
-  {
-    "skill_id": "select-passage",
-    "name": "Select Passage",
-    "skill_type": "instructional",
-    "stance": "meta",
-    "tags": [
-      "identifying",
-      "reading"
-    ],
-    "course_types": [
-      "humanities"
-    ],
-    "learning_goal_tags": [
-      "identify-evidence"
-    ],
-    "description": "Locates the relevant passage in the course text when a student names what they are confused about, and returns the excerpt to them without interpretation or commentary.",
-    "trigger_summary": "- The student mentions they do not understand a concept, phrase, or idea in the reading.\n- The student is not asking about a passage that has already been surfaced through this skill.",
-    "tutor_stance_rules": [
-      "Act immediately. The student\u2019s message already contains enough information to locate the relevant passage. Go find it and return it. Only ask a clarifying question if the student\u2019s message is so vague that there is genuinely no way to locate any passage \u2014 this should be rare."
-    ],
-    "flow": [
-      {
-        "step": 1,
-        "title": "Locate the Passage",
-        "description": "Read the student\u2019s message. Identify the concept, phrase, or idea they mentioned. Find the passage in the uploaded text where that idea is introduced or discussed. Do not ask the student where their confusion is \u2014 they already told you."
-      },
-      {
-        "step": 2,
-        "title": "Present the Passage",
-        "description": "Return a short excerpt (1\u20135 paragraphs) that directly addresses the student\u2019s confusion. Name where it appears (e.g., chapter, section, aphorism number). If the concept spans a large portion of the text, point the student to the specific section rather than quoting the whole thing."
-      },
-      {
-        "step": 3,
-        "title": "Hand It Back",
-        "description": "After presenting the passage, say one sentence inviting the student to read it and flag what is still unclear. Do not add interpretation or commentary."
-      }
-    ],
-    "safe_outputs": [
-      "A located excerpt from the course text (1\u20135 paragraphs), with a brief note of where it appears.",
-      "A pointer to a broader section if the idea cannot be captured in a short excerpt.",
-      "A single follow-up sentence asking the student what remains unclear after reading.",
-      "A clarifying question only if the student\u2019s message contains no identifiable concept to search for."
-    ],
-    "must_avoid": [
-      "NEVER ask the student to identify or locate their own confusion \u2014 they already did.",
-      "NEVER explain or interpret the passage you present.",
-      "NEVER provide direct insight on the reading or the author\u2019s meaning.",
-      "NEVER do anything beyond locating the passage and returning it."
-    ],
-    "example_exchange": "Student: \u201cI am confused about when Nietzsche says \u2018God is dead\u2019 \u2014 what does that mean?\u201d\n\nTutor: \u201cNietzsche\u2019s proclamation that \u2018God is dead\u2019 appears in Aphorism 125. Here is the relevant passage: {text}. Read through it carefully and let me know which specific parts are still unclear.\u201d",
-    "source_repo": "phil-219-skills",
-    "source_path": "skills/passage-identification/skills.md",
-    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/phil-219-skills/tree/main/skills/passage-identification/skills.md",
     "owner_team": "phil-219-skills",
     "owner_contact": null,
     "status": "ready",
@@ -1081,6 +955,64 @@
     "status_reason": null
   },
   {
+    "skill_id": "select-passage",
+    "name": "Passage Identification",
+    "skill_type": "instructional",
+    "stance": "meta",
+    "tags": [
+      "identifying",
+      "reading"
+    ],
+    "course_types": [
+      "humanities"
+    ],
+    "learning_goal_tags": [
+      "identify-evidence"
+    ],
+    "description": "Locates the relevant passage in the course text when a student names what they are confused about, and returns the excerpt to them without interpretation or commentary.",
+    "trigger_summary": "- The student mentions they do not understand a concept, phrase, or idea in the reading.\n- The student is not asking about a passage that has already been surfaced through this skill.",
+    "tutor_stance_rules": [
+      "Act immediately. The student\u2019s message already contains enough information to locate the relevant passage. Go find it and return it. Only ask a clarifying question if the student\u2019s message is so vague that there is genuinely no way to locate any passage \u2014 this should be rare."
+    ],
+    "flow": [
+      {
+        "step": 1,
+        "title": "Locate the Passage",
+        "description": "Read the student\u2019s message. Identify the concept, phrase, or idea they mentioned. Find the passage in the uploaded text where that idea is introduced or discussed. Do not ask the student where their confusion is \u2014 they already told you."
+      },
+      {
+        "step": 2,
+        "title": "Present the Passage",
+        "description": "Return a short excerpt (1\u20135 paragraphs) that directly addresses the student\u2019s confusion. Name where it appears (e.g., chapter, section, aphorism number). If the concept spans a large portion of the text, point the student to the specific section rather than quoting the whole thing."
+      },
+      {
+        "step": 3,
+        "title": "Hand It Back",
+        "description": "After presenting the passage, say one sentence inviting the student to read it and flag what is still unclear. Do not add interpretation or commentary."
+      }
+    ],
+    "safe_outputs": [
+      "A located excerpt from the course text (1\u20135 paragraphs), with a brief note of where it appears.",
+      "A pointer to a broader section if the idea cannot be captured in a short excerpt.",
+      "A single follow-up sentence asking the student what remains unclear after reading.",
+      "A clarifying question only if the student\u2019s message contains no identifiable concept to search for."
+    ],
+    "must_avoid": [
+      "NEVER ask the student to identify or locate their own confusion \u2014 they already did.",
+      "NEVER explain or interpret the passage you present.",
+      "NEVER provide direct insight on the reading or the author\u2019s meaning.",
+      "NEVER do anything beyond locating the passage and returning it."
+    ],
+    "example_exchange": "Student: \u201cI am confused about when Nietzsche says \u2018God is dead\u2019 \u2014 what does that mean?\u201d\n\nTutor: \u201cNietzsche\u2019s proclamation that \u2018God is dead\u2019 appears in Aphorism 125. Here is the relevant passage: {text}. Read through it carefully and let me know which specific parts are still unclear.\u201d",
+    "source_repo": "phil-219-skills",
+    "source_path": "skills/select-passage/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/phil-219-skills/tree/main/skills/select-passage/skills.md",
+    "owner_team": "phil-219-skills",
+    "owner_contact": null,
+    "status": "ready",
+    "status_reason": null
+  },
+  {
     "skill_id": "summarize-progress",
     "name": "Summarize Progress",
     "skill_type": "instructional",
@@ -1141,6 +1073,142 @@
     "source_repo": "phil-219-skills",
     "source_path": "skills/summarize-progress/skills.md",
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/phil-219-skills/tree/main/skills/summarize-progress/skills.md",
+    "owner_team": "phil-219-skills",
+    "owner_contact": null,
+    "status": "ready",
+    "status_reason": null
+  },
+  {
+    "skill_id": "tradeoff-analysis",
+    "name": "Ask for Tradeoff Analysis",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "tags": [
+      "argument",
+      "critical-thinking",
+      "judgment",
+      "design"
+    ],
+    "course_types": [
+      "humanities"
+    ],
+    "learning_goal_tags": [
+      "construct-arguments",
+      "evaluate-options"
+    ],
+    "trigger_signals": [
+      "multiple-valid-approaches",
+      "student-comparing-options",
+      "student-defending-single-approach"
+    ],
+    "chip_icon": "\u2696\ufe0f",
+    "version": "0.1.0",
+    "description": "Encourages students to reason through competing valid approaches by articulating the tradeoffs between them. The goal is to develop judgment \u2014 the ability to weigh costs and benefits \u2014 rather than to arrive at one declared answer.",
+    "trigger_summary": "- The student is choosing between multiple approaches that each have legitimate merit\n- The student defends a single approach without acknowledging alternatives\n- The student asks which of two or more options is better without attempting to compare them",
+    "tutor_stance_rules": [
+      "You are neutral across all candidate approaches. You do not favor or dismiss any option. Your role is to surface the dimensions along which approaches differ and prompt the student to reason through those dimensions themselves.",
+      "You never declare one approach correct. You never resolve the tension for the student."
+    ],
+    "flow": [
+      {
+        "step": 1,
+        "title": "Identify the Candidates",
+        "description": "Confirm which approaches the student is considering. If they have named only one, ask whether they have considered alternatives before proceeding."
+      },
+      {
+        "step": 2,
+        "title": "Surface a Dimension",
+        "description": "Ask the student to identify one dimension along which the approaches differ \u2014 for example, scope, precision, risk, reversibility, or cost."
+      },
+      {
+        "step": 3,
+        "title": "Probe the Tradeoff",
+        "description": "For each candidate approach, ask the student what is gained and what is given up along that dimension. Take one dimension at a time."
+      },
+      {
+        "step": 4,
+        "title": "Prompt a Reasoned Position",
+        "description": "Once the student has worked through at least one dimension, ask them which approach they would choose given those tradeoffs \u2014 and why."
+      }
+    ],
+    "safe_outputs": [
+      "A compare-and-contrast prompt asking the student to weigh two or more approaches",
+      "A question asking what is gained or lost by choosing one approach over another",
+      "A question asking the student to name the dimension along which the approaches differ",
+      "A prompt asking the student to state a reasoned preference after working through the tradeoffs"
+    ],
+    "must_avoid": [
+      "NEVER declare one approach correct or superior without the student's own reasoning",
+      "NEVER resolve the tradeoff for the student",
+      "NEVER introduce a new approach the student has not considered unless they are stuck",
+      "NEVER ask multiple comparison questions at once \u2014 take one dimension at a time",
+      "NEVER evaluate the student's final choice as right or wrong"
+    ],
+    "example_exchange": "Student: \"I think Sartre's concept of radical freedom is a better explanation of human agency than Heidegger's thrownness.\"\n\nTutor: \"Both are genuine positions. Let's slow down on the comparison. What does Sartre's account let you explain that Heidegger's does not?\"\n\nStudent: \"Sartre makes room for full responsibility \u2014 you can't blame your situation.\"\n\nTutor: \"And what does Heidegger's account of thrownness let you explain that Sartre's might struggle with?\"\n\nStudent: \"I guess Heidegger acknowledges that we don't choose our starting point \u2014 our culture, language, history.\"\n\nTutor: \"Given that tradeoff \u2014 full responsibility versus situated starting point \u2014 which framework would you choose for the argument you are building, and why?\"",
+    "source_repo": "phil-219-skills",
+    "source_path": "skills/tradeoff-analysis/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/phil-219-skills/tree/main/skills/tradeoff-analysis/skills.md",
+    "owner_team": "phil-219-skills",
+    "owner_contact": null,
+    "status": "ready",
+    "status_reason": null
+  },
+  {
+    "skill_id": "uncover-assumption",
+    "name": "Assumption Surfacing",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "tags": [
+      "identification",
+      "argument"
+    ],
+    "course_types": [
+      "humanities"
+    ],
+    "learning_goal_tags": [
+      "surface-assumptions"
+    ],
+    "trigger_signals": [
+      "student-defending-first-position",
+      "student-making-logical-leap"
+    ],
+    "description": "Helps students slow down when they make an unjustified leap in logic by pausing them and requiring them to articulate the reasoning or assumptions hidden in that gap.",
+    "trigger_summary": "- The student is outlining an argument (in conversation or in writing) and a noticeable, significant gap in logic occurs. A significant gap is a relationship where the cause and effect do not seem related, or could be argued against.",
+    "tutor_stance_rules": [
+      "You must be firm in requiring the student to explain or acknowledge the gap, but never aggressive. Maintain a neutral tone regardless of whether the student\u2019s assumptions are correct or incorrect. Your goal is awareness, not judgment."
+    ],
+    "flow": [
+      {
+        "step": 1,
+        "title": "Flag the Gap",
+        "description": "Stop the student and point out where the gap in their logic exists. Ask them to explain their thinking at that specific point."
+      },
+      {
+        "step": 2,
+        "title": "Evaluate Knowledge",
+        "description": "Determine from the student's response whether they didn't fully think it through, or had sound reasoning but just didn't explain it. If the latter, acknowledge the response and move on."
+      },
+      {
+        "step": 3,
+        "title": "Support or Redirect",
+        "description": "If the student cannot explain the gap, guide them with questions that help bridge it. If the gap cannot be bridged, suggest alternative lines of reasoning for them to consider."
+      }
+    ],
+    "safe_outputs": [
+      "Questions asking the student to identify and explain assumptions in their reasoning.",
+      "Prompts that help to guide the student to resolve the logical gap on their own.",
+      "Suggestions of alternative lines of thought if the current reasoning cannot be justified.",
+      "If the student demonstrates clear and accurate understanding at any point, confirm it and ask if they would like to continue."
+    ],
+    "must_avoid": [
+      "NEVER immediately declare that an assumption is wrong.",
+      "NEVER explain the assumption or fill the logical gap for the student.",
+      "NEVER judge the student\u2019s reasoning as good or bad \u2014 focus on getting them to articulate it."
+    ],
+    "example_exchange": "Student: \u201cIn Sartre\u2019s The Look, he gives an example of a man peering through a keyhole who later feels shame after realizing he is being observed. Therefore, his line \u2018hell is other people\u2019 is because our interactions prevent us from doing what we want to do.\u201d\n\nTutor: \u201cYou\u2019ve made an interesting connection, but let\u2019s slow down. Can you elaborate on why Sartre thinks shame prevents us from doing what we want to do? And how does not being able to do what we want become \u2018hell\u2019?\u201d",
+    "source_repo": "phil-219-skills",
+    "source_path": "skills/uncover-assumption/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/phil-219-skills/tree/main/skills/uncover-assumption/skills.md",
     "owner_team": "phil-219-skills",
     "owner_contact": null,
     "status": "ready",
@@ -2884,8 +2952,8 @@
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/jour-201-1-skills/tree/main/skills/example-skill/skills.md",
     "owner_team": "JOUR-201-1",
     "owner_contact": "karacho2025@u.northwestern.edu",
-    "status": "broken",
-    "status_reason": "skill_id 'skill-name' is already claimed by repo 'phil-219-skills'. Repo 'jour-201-1-skills' is rejected. Rename this skill or coordinate with the 'phil-219-skills' team."
+    "status": "stub",
+    "status_reason": "missing or empty (must be subset of cs/humanities); must be one of ['hint', 'meta', 'reframe', 'socratic']"
   },
   {
     "skill_id": "give-structural-hint",
@@ -5663,7 +5731,7 @@
     "owner_team": "POLISCI-210",
     "owner_contact": "bryanmurray2026@u.northwestern.edu",
     "status": "broken",
-    "status_reason": "skill_id 'skill-name' is already claimed by repo 'phil-219-skills'. Repo 'poli_sci-210-skills' is rejected. Rename this skill or coordinate with the 'phil-219-skills' team."
+    "status_reason": "skill_id 'skill-name' is already claimed by repo 'jour-201-1-skills'. Repo 'poli_sci-210-skills' is rejected. Rename this skill or coordinate with the 'jour-201-1-skills' team."
   },
   {
     "skill_id": "explain-back-check",
@@ -8570,6 +8638,111 @@
     "owner_contact": "lucilleoh@u.northwestern.edu",
     "status": "ready",
     "status_reason": null
+  },
+  {
+    "skill_id": "read-spectrogram",
+    "name": "Read Spectrogram",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "tags": [
+      "phonetics",
+      "acoustics",
+      "spectrogram",
+      "formants",
+      "transitions",
+      "place-of-articulation",
+      "ling250"
+    ],
+    "course_types": [
+      "humanities"
+    ],
+    "learning_goal_tags": [
+      "identify-evidence",
+      "interpret-evidence",
+      "decompose-arguments"
+    ],
+    "trigger_signals": [
+      "student-cant-read-spectrogram",
+      "student-cant-locate-formants",
+      "wrong-answer-inverts-f1-height",
+      "student-asks-which-spectrogram-matches",
+      "student-cant-identify-place-from-transitions",
+      "student-asks-how-to-find-f1-f2",
+      "student-confuses-darkness-with-frequency"
+    ],
+    "chip_icon": "\ud83d\udcca",
+    "version": "0.1.0",
+    "python_entry": "logic.py",
+    "description": "Scaffolds reading a spectrogram (frequency over time, with darkness\nindicating amplitude) \u2014 locating formants F1 and F2, mapping them to\nvowel features (F1\u2194height, F2\u2194backness, both INVERSE for height),\nidentifying consonant signatures (stops, fricatives, nasals,\nsonorants), and reading formant transitions for stop place of\narticulation. Targets HW3 Q4-Q5 (axes/terminology), Q16\n(spectrogram-to-phrase matching, 6 points, the highest-weighted HW3\nquestion), and any spectrogram-based midterm 1 question. Stateless \u2014\nthe orchestrator tracks which task the student is on.",
+    "trigger_summary": "### Fires when:\n- Student is given a spectrogram and asked to identify what it shows\n- Student asks \"where's F1 / F2?\"\n- Student inverts F1\u2194height (says \"high vowels have high F1\")\n- Student is matching spectrograms to phrases (HW3 Q16 task)\n- Student can't identify consonant place from formant transitions\n- Wrong answer reads spectrogram axes incorrectly (darkness as\n  frequency, etc.)\n- Student needs help locating consonant signatures (stops,\n  fricatives, nasals)\n\n### Does NOT fire when:\n- Student is reading a waveform (use `read-waveform`)\n- Student is reading a spectral slice (use `interpret-spectrum`)\n- Student is on a transcription question without a spectrogram image\n  (HW1/HW2)\n- Student is doing distributional analysis (use `analyze-dist`)\n\n### Boundary cases:\n- **Multiple spectrograms shown for matching**: walk through each one\n  separately to identify features (vowels, consonants, transitions),\n  then ask the student to match to phrases by feature density and\n  pattern.\n- **Cross-speaker comparisons**: different speakers produce different\n  absolute formant values for \"the same\" vowel. Compare within-speaker\n  patterns or formant-relative-to-formant ratios, not absolute Hz\n  values.\n- **Praat formant tracker overlay**: if the student is in Praat with\n  the formant tracker on, warn that the tracker can mislabel \u2014\n  always cross-check by visual inspection.",
+    "tutor_stance_rules": [
+      "The student reads the spectrogram. The skill scaffolds: identify",
+      "F1 \u2194 height (INVERSE: high vowel = LOW F1). F2 \u2194 backness (front",
+      "Count formants from the bottom up. F1 is the lowest, then F2, F3, etc.",
+      "Darkness = amplitude. Frequency is on the y-axis. Darkness shows how",
+      "For consonant place, read the FORMANT TRANSITIONS of the adjacent",
+      "Identify segment categories before specific sounds. \"This is a"
+    ],
+    "flow": [
+      {
+        "step": 1,
+        "title": "Identify axes",
+        "description": "Confirm: x-axis is time (seconds), y-axis is frequency (Hz, low at\nbottom and high at top), darkness = amplitude (intensity at that\nfrequency at that time)."
+      },
+      {
+        "step": 2,
+        "title": "Locate formants",
+        "description": "For vowel regions, identify the dark horizontal bands. The lowest is\nF1, then F2, then F3. Count from the bottom. F1 is usually below\n1000 Hz; F2 is between F1 and ~3000 Hz."
+      },
+      {
+        "step": 3,
+        "title": "Map formants to vowel features",
+        "description": "F1 \u2194 height (INVERSE: low F1 = high vowel; high F1 = low vowel). F2\n\u2194 backness (high F2 = front vowel; low F2 = back vowel). Apply the\ninverse for height carefully \u2014 it's the most-confused mapping."
+      },
+      {
+        "step": 4,
+        "title": "Identify consonant signatures",
+        "description": "- Stops: silence in the closure, vertical spike at burst, possibly\n  aspiration noise after\n- Fricatives: random aperiodic noise, varying frequency concentration\n  by place ([s, z]: high-frequency 5000-6000 Hz; [\u0283, \u0292]: 2500 Hz;\n  [f, v, \u03b8, \u00f0]: diffuse; [h]: tracks adjacent vowel formants)\n- Nasals: abrupt amplitude drop at nasal onset; nasal formants ~200\n  and ~2000 Hz\n- Sonorants: vowel-like formants but lower amplitude; [l] has low F2;\n  [\u0279] has very low F3 (the diagnostic for English r); [w], [j] like\n  [u] and [i]"
+      },
+      {
+        "step": 5,
+        "title": "Read formant transitions for stop place of articulation",
+        "description": "For stops, the place is read from the ADJACENT VOWEL'S formant\ntransitions:\n- Labial (/p, b, m/): all formant edges point DOWN going into the\n  consonant (closure lowers all resonances)\n- Alveolar (/t, d, n/): F2 points UP toward ~1700 Hz (the alveolar\n  locus)\n- Velar (/k, g, \u014b/): F2 and F3 converge ('velar pinch')"
+      }
+    ],
+    "safe_outputs": [
+      "Axis-identification prompts (\"what's on the y-axis? what does",
+      "Formant-locating prompts (\"can you find the lowest dark band? that's",
+      "Feature-mapping prompts (\"F1 is at about 700 Hz here \u2014 high or low?",
+      "Consonant-category prompts (\"at this region, do you see silence?",
+      "Place-from-transition prompts (\"look at how F2 moves into the",
+      "Acknowledgments and corrections of inversion errors",
+      "Transitions to `interpret-spectrum` if the student wants to verify"
+    ],
+    "must_avoid": [
+      "Reading the spectrogram for the student",
+      "Naming the vowel before walking through F1 and F2",
+      "Letting F1\u2194backness or F1\u2194height-direct stand without correction",
+      "Reading consonant place from the consonant itself instead of from",
+      "Treating absolute formant Hz values as cross-speaker constants",
+      "Mixing waveform and spectrogram reading (different representations)",
+      "Reading darkness as frequency or vice versa",
+      "Continuing spectrogram scaffolding when the student lacks vocabulary"
+    ],
+    "example_exchange": "> **Student:** I'm looking at a spectrogram of a vowel. There's a dark\n> band around 300 Hz and another around 2200 Hz. What vowel is this?\n>\n> **Tutor:** Let's work through it. First, those two bands \u2014 which is\n> F1 and which is F2?\n>\n> **Student:** F1 is the lower one, so 300 Hz. F2 is 2200 Hz.\n>\n> **Tutor:** Right. Now, what does F1 of 300 Hz tell you about height?\n>\n> **Student:** Low F1 means... low vowel?\n>\n> **Tutor:** Careful \u2014 F1\u2194height is INVERSE. Low F1 means HIGH vowel\n> (small mouth opening, larger pharynx). High F1 means LOW vowel.\n>\n> **Student:** So 300 Hz F1 = high vowel.\n>\n> **Tutor:** Right. And F2 of 2200 Hz?\n>\n> **Student:** High F2 = front vowel?\n>\n> **Tutor:** Right. So you have a high front vowel. What two English\n> vowels are high front?\n>\n> **Student:** [i] and [\u026a].\n>\n> **Tutor:** Right. F1 of 300 Hz is at the lower end of the high range,\n> which fits [i] (which is the higher of the two). [\u026a] would have\n> slightly higher F1 (because it's slightly less high). So this is\n> probably [i].",
+    "extra_sections": {
+      "disambiguation_from_other_skills": "- `read-waveform` reads amplitude over time. **This skill** reads\n  frequency over time. Different axes, different cues.\n- `interpret-spectrum` reads amplitude over frequency at one moment\n  (a vertical slice). **This skill** reads time-varying frequency\n  patterns.\n- `id-natural-class` identifies natural classes of sounds. **This\n  skill** reads acoustic data; doesn't classify abstract groups.\n- `repair-miscon` fires on misconceptions like \"F1 is backness\" or\n  \"high vowels have high F1.\" **This skill** assumes the student has\n  the correct mappings or refers to repair-miscon to fix them.",
+      "inputs_expected_by_logic_py": "- `spectrogram_image` (str, optional): reference to the spectrogram\n  being shown\n- `target_word_or_phrase` (str, optional): what the spectrogram is of\n- `task` (str, optional): \"vowel_id\", \"consonant_id\", \"phrase_match\",\n  \"place_from_transition\"\n- `current_step` (int, optional): which step the student is on. 0 or\n  absent defaults to Step 1.",
+      "outputs_returned_by_logic_py": "A dict:\n- `flow` (list): the 5 flow steps\n- `axes` (dict): spectrogram axis conventions\n- `formant_to_feature` (dict): F1\u2194height inverse, F2\u2194backness mappings\n- `consonant_signatures` (dict): visual cues per consonant category\n- `formant_transitions_by_place` (dict): place diagnostics\n- `hint_ladders` (dict): per-step hint progressions\n- `common_errors` (list): cataloged error patterns with redirects\n- `tutor_reminders` (list): high-priority stance reminders",
+      "notes_for_reusers": "This skill is the heaviest acoustic-interpretation skill \u2014 HW3 Q16\nalone is 6 points (highest single question in HW3). Spectrogram\nreading shows up on midterm 1 too.\n\nThe F1\u2194height INVERSE is the single most-confused mapping in the\ncourse. Students inherit the wrong mnemonic (\"high vowel, high F1\")\nand the inverse direction needs deliberate repair. Pair with\nrepair-miscon when the student persists in the wrong direction.\n\nThe formant transitions catalog is the central reference for\nconsonant place. Many students don't know that consonant place is read\nfrom the adjacent vowel's transitions; teaching this explicitly is a\ncore function of the skill."
+    },
+    "source_repo": "ling-250-skills",
+    "source_path": "skills/read-spectrogram/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/ling-250-skills/tree/main/skills/read-spectrogram/skills.md",
+    "owner_team": "LING-250",
+    "owner_contact": "lucilleoh@u.northwestern.edu",
+    "status": "broken",
+    "status_reason": "skill_id 'read-spectrogram' is already claimed by repo 'ling-250-skills'. Repo 'ling-250-skills' is rejected. Rename this skill or coordinate with the 'ling-250-skills' team."
   },
   {
     "skill_id": "read-waveform",

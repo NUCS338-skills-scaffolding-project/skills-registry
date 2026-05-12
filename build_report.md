@@ -1,6 +1,6 @@
 # Catalog build report
 
-**Total skills:** 166  ·  ready: 153, stub: 8, broken: 5
+**Total skills:** 167  ·  ready: 153, stub: 9, broken: 5
 
 ## ⚠ Duplicate skill_id rejections
 
@@ -8,9 +8,9 @@ The following skills were **rejected** because their `skill_id` was already clai
 
 | Rejected repo | `skill_id` | First claimed by |
 |---|---|---|
-| `jour-201-1-skills` | `skill-name` | `phil-219-skills` |
 | `asian_am-225-skills` | `example-skill` | `cs-348-skills` |
-| `poli_sci-210-skills` | `skill-name` | `phil-219-skills` |
+| `poli_sci-210-skills` | `skill-name` | `jour-201-1-skills` |
+| `ling-250-skills` | `read-spectrogram` | `ling-250-skills` |
 | `cs-214-skills` | `example-skill` | `cs-348-skills` |
 | `CS-213-skills` | `example-skill` | `cs-348-skills` |
 
@@ -25,8 +25,8 @@ The following skills were **rejected** because their `skill_id` was already clai
 | `cs-348-skills` | 12 | 12 | 0 | 0 |
 | `cs338-skills` | 32 | 32 | 0 | 0 |
 | `history-315-skills` | 9 | 9 | 0 | 0 |
-| `jour-201-1-skills` | 6 | 0 | 5 | 1 |
-| `ling-250-skills` | 14 | 14 | 0 | 0 |
+| `jour-201-1-skills` | 6 | 0 | 6 | 0 |
+| `ling-250-skills` | 15 | 14 | 0 | 1 |
 | `phil-219-skills` | 11 | 11 | 0 | 0 |
 | `poli_sci-210-skills` | 43 | 39 | 3 | 1 |
 
@@ -165,7 +165,9 @@ The following skills were **rejected** because their `skill_id` was already clai
 - **warn** [`skill_id`] length 21 > 18 chars — see Team-Guide §7
 
 ### `jour-201-1-skills/skills/example-skill/skills.md`
-- **ERROR** [`skill_id`] skill_id 'skill-name' is already claimed by repo 'phil-219-skills'. Repo 'jour-201-1-skills' is rejected. Rename this skill or coordinate with the 'phil-219-skills' team.
+- **ERROR** [`course_types`] missing or empty (must be subset of cs/humanities)
+- **warn** [`learning_goal_tags`] missing — strongly recommended for orchestrator routing
+- **ERROR** [`stance`] must be one of ['hint', 'meta', 'reframe', 'socratic']
 
 ### `jour-201-1-skills/skills/give-structural-hint/skills.md`
 - **ERROR** [`course_types`] missing or empty (must be subset of cs/humanities)
@@ -184,11 +186,14 @@ The following skills were **rejected** because their `skill_id` was already clai
 - **ERROR** [`stance`] must be one of ['hint', 'meta', 'reframe', 'socratic']
 - **warn** [`skill_id`] length 23 > 18 chars — see Team-Guide §7
 
+### `ling-250-skills/skills/read-spectrogram/skills.md`
+- **ERROR** [`skill_id`] skill_id 'read-spectrogram' is already claimed by repo 'ling-250-skills'. Repo 'ling-250-skills' is rejected. Rename this skill or coordinate with the 'ling-250-skills' team.
+
 ### `poli_sci-210-skills/skills/ai-explain/skills.md`
 - **ERROR** [`tutor_stance`] missing — add a `## Tutor Stance` section with rules
 
 ### `poli_sci-210-skills/skills/example-skill/skills.md`
-- **ERROR** [`skill_id`] skill_id 'skill-name' is already claimed by repo 'phil-219-skills'. Repo 'poli_sci-210-skills' is rejected. Rename this skill or coordinate with the 'phil-219-skills' team.
+- **ERROR** [`skill_id`] skill_id 'skill-name' is already claimed by repo 'jour-201-1-skills'. Repo 'poli_sci-210-skills' is rejected. Rename this skill or coordinate with the 'jour-201-1-skills' team.
 
 ### `poli_sci-210-skills/skills/extract-syllabus/skills.md`
 - **warn** [`learning_goal_tags`] missing — strongly recommended for orchestrator routing
