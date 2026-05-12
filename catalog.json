@@ -8632,117 +8632,12 @@
       "notes_for_reusers": "This skill is the heaviest acoustic-interpretation skill \u2014 HW3 Q16\nalone is 6 points (highest single question in HW3). Spectrogram\nreading shows up on midterm 1 too.\n\nThe F1\u2194height INVERSE is the single most-confused mapping in the\ncourse. Students inherit the wrong mnemonic (\"high vowel, high F1\")\nand the inverse direction needs deliberate repair. Pair with\nrepair-miscon when the student persists in the wrong direction.\n\nThe formant transitions catalog is the central reference for\nconsonant place. Many students don't know that consonant place is read\nfrom the adjacent vowel's transitions; teaching this explicitly is a\ncore function of the skill."
     },
     "source_repo": "ling-250-skills",
-    "source_path": "skills/read-spectogram/skills.md",
-    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/ling-250-skills/tree/main/skills/read-spectogram/skills.md",
-    "owner_team": "LING-250",
-    "owner_contact": "lucilleoh@u.northwestern.edu",
-    "status": "ready",
-    "status_reason": null
-  },
-  {
-    "skill_id": "read-spectrogram",
-    "name": "Read Spectrogram",
-    "skill_type": "instructional",
-    "stance": "socratic",
-    "tags": [
-      "phonetics",
-      "acoustics",
-      "spectrogram",
-      "formants",
-      "transitions",
-      "place-of-articulation",
-      "ling250"
-    ],
-    "course_types": [
-      "humanities"
-    ],
-    "learning_goal_tags": [
-      "identify-evidence",
-      "interpret-evidence",
-      "decompose-arguments"
-    ],
-    "trigger_signals": [
-      "student-cant-read-spectrogram",
-      "student-cant-locate-formants",
-      "wrong-answer-inverts-f1-height",
-      "student-asks-which-spectrogram-matches",
-      "student-cant-identify-place-from-transitions",
-      "student-asks-how-to-find-f1-f2",
-      "student-confuses-darkness-with-frequency"
-    ],
-    "chip_icon": "\ud83d\udcca",
-    "version": "0.1.0",
-    "python_entry": "logic.py",
-    "description": "Scaffolds reading a spectrogram (frequency over time, with darkness\nindicating amplitude) \u2014 locating formants F1 and F2, mapping them to\nvowel features (F1\u2194height, F2\u2194backness, both INVERSE for height),\nidentifying consonant signatures (stops, fricatives, nasals,\nsonorants), and reading formant transitions for stop place of\narticulation. Targets HW3 Q4-Q5 (axes/terminology), Q16\n(spectrogram-to-phrase matching, 6 points, the highest-weighted HW3\nquestion), and any spectrogram-based midterm 1 question. Stateless \u2014\nthe orchestrator tracks which task the student is on.",
-    "trigger_summary": "### Fires when:\n- Student is given a spectrogram and asked to identify what it shows\n- Student asks \"where's F1 / F2?\"\n- Student inverts F1\u2194height (says \"high vowels have high F1\")\n- Student is matching spectrograms to phrases (HW3 Q16 task)\n- Student can't identify consonant place from formant transitions\n- Wrong answer reads spectrogram axes incorrectly (darkness as\n  frequency, etc.)\n- Student needs help locating consonant signatures (stops,\n  fricatives, nasals)\n\n### Does NOT fire when:\n- Student is reading a waveform (use `read-waveform`)\n- Student is reading a spectral slice (use `interpret-spectrum`)\n- Student is on a transcription question without a spectrogram image\n  (HW1/HW2)\n- Student is doing distributional analysis (use `analyze-dist`)\n\n### Boundary cases:\n- **Multiple spectrograms shown for matching**: walk through each one\n  separately to identify features (vowels, consonants, transitions),\n  then ask the student to match to phrases by feature density and\n  pattern.\n- **Cross-speaker comparisons**: different speakers produce different\n  absolute formant values for \"the same\" vowel. Compare within-speaker\n  patterns or formant-relative-to-formant ratios, not absolute Hz\n  values.\n- **Praat formant tracker overlay**: if the student is in Praat with\n  the formant tracker on, warn that the tracker can mislabel \u2014\n  always cross-check by visual inspection.",
-    "tutor_stance_rules": [
-      "The student reads the spectrogram. The skill scaffolds: identify",
-      "F1 \u2194 height (INVERSE: high vowel = LOW F1). F2 \u2194 backness (front",
-      "Count formants from the bottom up. F1 is the lowest, then F2, F3, etc.",
-      "Darkness = amplitude. Frequency is on the y-axis. Darkness shows how",
-      "For consonant place, read the FORMANT TRANSITIONS of the adjacent",
-      "Identify segment categories before specific sounds. \"This is a"
-    ],
-    "flow": [
-      {
-        "step": 1,
-        "title": "Identify axes",
-        "description": "Confirm: x-axis is time (seconds), y-axis is frequency (Hz, low at\nbottom and high at top), darkness = amplitude (intensity at that\nfrequency at that time)."
-      },
-      {
-        "step": 2,
-        "title": "Locate formants",
-        "description": "For vowel regions, identify the dark horizontal bands. The lowest is\nF1, then F2, then F3. Count from the bottom. F1 is usually below\n1000 Hz; F2 is between F1 and ~3000 Hz."
-      },
-      {
-        "step": 3,
-        "title": "Map formants to vowel features",
-        "description": "F1 \u2194 height (INVERSE: low F1 = high vowel; high F1 = low vowel). F2\n\u2194 backness (high F2 = front vowel; low F2 = back vowel). Apply the\ninverse for height carefully \u2014 it's the most-confused mapping."
-      },
-      {
-        "step": 4,
-        "title": "Identify consonant signatures",
-        "description": "- Stops: silence in the closure, vertical spike at burst, possibly\n  aspiration noise after\n- Fricatives: random aperiodic noise, varying frequency concentration\n  by place ([s, z]: high-frequency 5000-6000 Hz; [\u0283, \u0292]: 2500 Hz;\n  [f, v, \u03b8, \u00f0]: diffuse; [h]: tracks adjacent vowel formants)\n- Nasals: abrupt amplitude drop at nasal onset; nasal formants ~200\n  and ~2000 Hz\n- Sonorants: vowel-like formants but lower amplitude; [l] has low F2;\n  [\u0279] has very low F3 (the diagnostic for English r); [w], [j] like\n  [u] and [i]"
-      },
-      {
-        "step": 5,
-        "title": "Read formant transitions for stop place of articulation",
-        "description": "For stops, the place is read from the ADJACENT VOWEL'S formant\ntransitions:\n- Labial (/p, b, m/): all formant edges point DOWN going into the\n  consonant (closure lowers all resonances)\n- Alveolar (/t, d, n/): F2 points UP toward ~1700 Hz (the alveolar\n  locus)\n- Velar (/k, g, \u014b/): F2 and F3 converge ('velar pinch')"
-      }
-    ],
-    "safe_outputs": [
-      "Axis-identification prompts (\"what's on the y-axis? what does",
-      "Formant-locating prompts (\"can you find the lowest dark band? that's",
-      "Feature-mapping prompts (\"F1 is at about 700 Hz here \u2014 high or low?",
-      "Consonant-category prompts (\"at this region, do you see silence?",
-      "Place-from-transition prompts (\"look at how F2 moves into the",
-      "Acknowledgments and corrections of inversion errors",
-      "Transitions to `interpret-spectrum` if the student wants to verify"
-    ],
-    "must_avoid": [
-      "Reading the spectrogram for the student",
-      "Naming the vowel before walking through F1 and F2",
-      "Letting F1\u2194backness or F1\u2194height-direct stand without correction",
-      "Reading consonant place from the consonant itself instead of from",
-      "Treating absolute formant Hz values as cross-speaker constants",
-      "Mixing waveform and spectrogram reading (different representations)",
-      "Reading darkness as frequency or vice versa",
-      "Continuing spectrogram scaffolding when the student lacks vocabulary"
-    ],
-    "example_exchange": "> **Student:** I'm looking at a spectrogram of a vowel. There's a dark\n> band around 300 Hz and another around 2200 Hz. What vowel is this?\n>\n> **Tutor:** Let's work through it. First, those two bands \u2014 which is\n> F1 and which is F2?\n>\n> **Student:** F1 is the lower one, so 300 Hz. F2 is 2200 Hz.\n>\n> **Tutor:** Right. Now, what does F1 of 300 Hz tell you about height?\n>\n> **Student:** Low F1 means... low vowel?\n>\n> **Tutor:** Careful \u2014 F1\u2194height is INVERSE. Low F1 means HIGH vowel\n> (small mouth opening, larger pharynx). High F1 means LOW vowel.\n>\n> **Student:** So 300 Hz F1 = high vowel.\n>\n> **Tutor:** Right. And F2 of 2200 Hz?\n>\n> **Student:** High F2 = front vowel?\n>\n> **Tutor:** Right. So you have a high front vowel. What two English\n> vowels are high front?\n>\n> **Student:** [i] and [\u026a].\n>\n> **Tutor:** Right. F1 of 300 Hz is at the lower end of the high range,\n> which fits [i] (which is the higher of the two). [\u026a] would have\n> slightly higher F1 (because it's slightly less high). So this is\n> probably [i].",
-    "extra_sections": {
-      "disambiguation_from_other_skills": "- `read-waveform` reads amplitude over time. **This skill** reads\n  frequency over time. Different axes, different cues.\n- `interpret-spectrum` reads amplitude over frequency at one moment\n  (a vertical slice). **This skill** reads time-varying frequency\n  patterns.\n- `id-natural-class` identifies natural classes of sounds. **This\n  skill** reads acoustic data; doesn't classify abstract groups.\n- `repair-miscon` fires on misconceptions like \"F1 is backness\" or\n  \"high vowels have high F1.\" **This skill** assumes the student has\n  the correct mappings or refers to repair-miscon to fix them.",
-      "inputs_expected_by_logic_py": "- `spectrogram_image` (str, optional): reference to the spectrogram\n  being shown\n- `target_word_or_phrase` (str, optional): what the spectrogram is of\n- `task` (str, optional): \"vowel_id\", \"consonant_id\", \"phrase_match\",\n  \"place_from_transition\"\n- `current_step` (int, optional): which step the student is on. 0 or\n  absent defaults to Step 1.",
-      "outputs_returned_by_logic_py": "A dict:\n- `flow` (list): the 5 flow steps\n- `axes` (dict): spectrogram axis conventions\n- `formant_to_feature` (dict): F1\u2194height inverse, F2\u2194backness mappings\n- `consonant_signatures` (dict): visual cues per consonant category\n- `formant_transitions_by_place` (dict): place diagnostics\n- `hint_ladders` (dict): per-step hint progressions\n- `common_errors` (list): cataloged error patterns with redirects\n- `tutor_reminders` (list): high-priority stance reminders",
-      "notes_for_reusers": "This skill is the heaviest acoustic-interpretation skill \u2014 HW3 Q16\nalone is 6 points (highest single question in HW3). Spectrogram\nreading shows up on midterm 1 too.\n\nThe F1\u2194height INVERSE is the single most-confused mapping in the\ncourse. Students inherit the wrong mnemonic (\"high vowel, high F1\")\nand the inverse direction needs deliberate repair. Pair with\nrepair-miscon when the student persists in the wrong direction.\n\nThe formant transitions catalog is the central reference for\nconsonant place. Many students don't know that consonant place is read\nfrom the adjacent vowel's transitions; teaching this explicitly is a\ncore function of the skill."
-    },
-    "source_repo": "ling-250-skills",
     "source_path": "skills/read-spectrogram/skills.md",
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/ling-250-skills/tree/main/skills/read-spectrogram/skills.md",
     "owner_team": "LING-250",
     "owner_contact": "lucilleoh@u.northwestern.edu",
-    "status": "broken",
-    "status_reason": "skill_id 'read-spectrogram' is already claimed by repo 'ling-250-skills'. Repo 'ling-250-skills' is rejected. Rename this skill or coordinate with the 'ling-250-skills' team."
+    "status": "ready",
+    "status_reason": null
   },
   {
     "skill_id": "read-waveform",
@@ -10626,6 +10521,87 @@
     "status_reason": null
   },
   {
+    "skill_id": "analytical-question-formulation",
+    "name": "Analytical Question Formulation",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "tags": [
+      "discussion",
+      "question-design",
+      "analysis",
+      "humanities"
+    ],
+    "course_types": [
+      "humanities"
+    ],
+    "learning_goal_tags": [
+      "formulate-questions",
+      "evaluate-reasoning",
+      "check-understanding"
+    ],
+    "trigger_signals": [
+      "student-writes-a-question-that-asks-for-personal-opinion-rather-than-analysis-of-the-text",
+      "student-writes-a-yes-no-or-factual-lookup-question",
+      "student-cannot-distinguish-between-an-analytical-question-and-an-opinion-question",
+      "student-writes-a-question-that-could-be-answered-without-engaging-with-the-reading",
+      "student-asks-about-personal-experience-rather-than-about-the-reading-argument",
+      "student-interview-question-invites-biography-rather-than-substantive-content-about-the-topic"
+    ],
+    "chip_icon": "\u2753",
+    "version": "0.1.0",
+    "owner_team": "cs338-skills",
+    "owner_contact": null,
+    "status": "ready",
+    "description": "Guides students to write questions that require their audience \u2014 peers in a discussion or a guest speaker \u2014 to analyze, interpret, or reason about a topic rather than share opinions, recall facts, or answer yes/no. When a student drafts \"What do you think about immigration?\" (opinion), \"When did the Civil Rights Act pass?\" (factual lookup), or \"Have you ever experienced discrimination?\" (biographical), this skill redirects them to questions that force engagement with a specific argument, mechanism, or tension in the material.",
+    "trigger_summary": "- Student writes a discussion question that invites personal opinion rather than analysis of specific content\n- Student writes a yes/no question or a factual question with a single lookup answer\n- Student cannot explain the difference between asking for someone's opinion and asking them to analyze an argument\n- Student writes a question that peers could answer without having done the reading\n- Student writes interview questions for a guest speaker that invite biography or resume rather than substantive engagement with the topic\n- Student's questions are all at the same depth \u2014 none push beyond initial answers",
+    "tutor_stance_rules": [
+      "Never rewrite the student's question \u2014 ask the student to diagnose what their question is asking for and then revise it",
+      "If the student cannot distinguish opinion from analysis, ask them what a peer would need to do to answer the question \u2014 recall a belief, or reason through an argument",
+      "Do not confirm a question as analytical without asking whether a peer who skipped the reading could answer it",
+      "Push the student to anchor every question to a specific claim, mechanism, or tension in the source material",
+      "Every response must end with a question"
+    ],
+    "flow": [
+      {
+        "step": 1,
+        "title": "Diagnose what the question asks for",
+        "description": "Ask the student to identify what kind of response their question invites before revising anything. \"Read your question back \u2014 what would someone need to do to answer it? Would they need to recall a personal belief, look up a fact, or actually reason through something from the reading?\""
+      },
+      {
+        "step": 2,
+        "title": "Identify the analytical target",
+        "description": "Ask the student to name the specific claim, argument, or tension in the material that they want to probe. \"What is the specific argument or idea from the reading that you want people to grapple with? Name it before writing the question \u2014 what are you trying to get people to think harder about?\""
+      },
+      {
+        "step": 3,
+        "title": "Draft an analysis-requiring question",
+        "description": "Ask the student to rewrite the question so it requires engagement with the specific target they identified. \"Given that specific argument \u2014 what question would force someone to actually analyze it rather than react to it? What would they need to explain, compare, or evaluate?\""
+      },
+      {
+        "step": 4,
+        "title": "Test the question",
+        "description": "Ask the student to check whether their revised question could be answered without engaging with the material. \"Could a peer who didn't do the reading answer your question? If yes \u2014 what would you need to add or change to make the reading essential for answering it?\""
+      }
+    ],
+    "safe_outputs": [
+      "Questions asking the student to identify what type of response their draft question invites",
+      "Questions asking the student to name the specific claim or tension in the material they want to probe",
+      "Questions asking the student to rewrite toward analysis rather than opinion or recall",
+      "Questions asking the student to test whether their question requires engagement with the source material"
+    ],
+    "must_avoid": [
+      "Rewriting the student's question for them",
+      "Confirming a question is analytical without asking whether it requires the reading",
+      "Accepting \"it's more specific now\" as sufficient without testing the reading-dependence",
+      "Providing a model analytical question even as an example \u2014 always ask the student to generate it"
+    ],
+    "example_exchange": "> **Student:** \"I wrote: 'What do you think is the biggest challenge facing Asian Americans today?' \u2014 is that a good discussion question?\"\n>\n> **Tutor:** \"Let's check what it asks for \u2014 what would a peer need to do to answer that question? Would they need to engage with anything from the reading, or could they answer from their own opinion alone?\"",
+    "source_repo": "cs338-skills",
+    "source_path": "skills/analytical-question-formulation/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs338-skills/tree/main/skills/analytical-question-formulation/skills.md",
+    "status_reason": null
+  },
+  {
     "skill_id": "answer-error-diagnosis",
     "name": "Answer Error Diagnosis",
     "skill_type": "instructional",
@@ -10633,16 +10609,16 @@
     "tags": [
       "self-correction",
       "conceptual-error",
-      "quiz-review",
-      "humanities"
+      "quiz-review"
     ],
     "course_types": [
+      "cs",
       "humanities"
     ],
     "learning_goal_tags": [
       "check-understanding",
       "evaluate-reasoning",
-      "decompose-arguments"
+      "surface-assumptions"
     ],
     "trigger_signals": [
       "student-got-quiz-answer-wrong-and-does-not-know-why",
@@ -10703,6 +10679,81 @@
     "source_repo": "cs338-skills",
     "source_path": "skills/answer-error-diagnosis/skills.md",
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs338-skills/tree/main/skills/answer-error-diagnosis/skills.md",
+    "status_reason": null
+  },
+  {
+    "skill_id": "assembly-trace-reasoning",
+    "name": "Assembly Trace Reasoning",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "tags": [
+      "x86-assembly",
+      "reverse-engineering",
+      "cs"
+    ],
+    "course_types": [
+      "cs"
+    ],
+    "learning_goal_tags": [
+      "trace-execution",
+      "evaluate-reasoning",
+      "check-understanding"
+    ],
+    "trigger_signals": [
+      "student-cannot-identify-what-a-sequence-of-instructions-computes-as-a-whole",
+      "student-reads-individual-instructions-correctly-but-cannot-connect-them-into-a-c-expression",
+      "student-confuses-what-a-register-holds-before-an-instruction-with-what-it-holds-after",
+      "student-names-a-register-state-mid-trace-incorrectly-without-checking-the-preceding-instruction",
+      "student-guesses-the-c-expression-from-context-rather-than-tracing-register-state-forward",
+      "student-cannot-identify-which-pattern-a-sequence-of-shifts-or-compares-implements"
+    ],
+    "chip_icon": "\u2699\ufe0f",
+    "version": "0.2.0",
+    "owner_team": "cs338-skills",
+    "owner_contact": null,
+    "status": "ready",
+    "description": "Guides students to read a sequence of x86-64 instructions and reconstruct the equivalent C expression by tracing register state one instruction at a time \u2014 deriving what each register holds after every operation, then naming the accumulated expression. When a student cannot identify what a sequence computes, reads instructions in isolation without building a chain, or guesses the C from the code's shape rather than from the register trace, this skill enforces a disciplined forward trace from first instruction to final expression.\n\n> **Note on scope:** This skill covers instruction-level tracing and C synthesis only. For reasoning about argument register placement, register-size type inference, or stack spillage under the System V ABI, use `calling-convention-reasoning` instead.",
+    "trigger_summary": "- Student cannot identify what a sequence of assembly instructions computes as a whole\n- Student reads individual instructions correctly but cannot connect them into a full C expression\n- Student states what a register holds before an instruction rather than after it executes\n- Student names a register value mid-trace without tracing through all preceding instructions\n- Student guesses the C expression from context or function name rather than from the traced register state\n- Student cannot identify the C construct a recognizable instruction pattern (shift-by-1 = \u00d72, `cmovg` = conditional max) implements",
+    "tutor_stance_rules": [
+      "Never state what a register holds after any instruction \u2014 ask the student to derive it from the instruction's semantics",
+      "If the student skips ahead to the final expression without completing the trace, redirect them to the first unresolved instruction",
+      "Do not confirm a C expression without asking the student to justify it from the instruction chain",
+      "If the student's trace diverges, ask what the immediately preceding instruction put into the register in question before looking at the current one",
+      "Every response must end with a question"
+    ],
+    "flow": [
+      {
+        "step": 1,
+        "title": "Trace one instruction at a time",
+        "description": "Ask the student to derive the destination register's value after each instruction, working strictly in order. \"Starting from the register state you have so far \u2014 what does [instruction] do to [source register/immediate]? What is now in [destination register] after this instruction executes?\""
+      },
+      {
+        "step": 2,
+        "title": "Build the accumulated expression",
+        "description": "After each instruction, ask the student to name the expression built up so far before moving to the next one. \"Given what you've traced \u2014 what expression does [destination register] hold at this point in the sequence? Write it out in terms of the original inputs before moving to the next instruction.\""
+      },
+      {
+        "step": 3,
+        "title": "Recognize instruction patterns",
+        "description": "When the trace involves a recognizable idiom (shift, conditional move, multiply-via-lea), ask the student to name the C construct before accepting the expression. \"You have a left-shift-by-1 on this value \u2014 what arithmetic operation is a left shift by N equivalent to? How does that change the expression you wrote?\""
+      }
+    ],
+    "safe_outputs": [
+      "Questions asking what a specific register holds after a specific instruction executes",
+      "Questions asking the student to write out the accumulated C expression at each trace step",
+      "Questions asking the student to name the C construct an instruction idiom (shift, cmov, lea-multiply) implements",
+      "Questions redirecting the student to the last unresolved instruction when they skip ahead"
+    ],
+    "must_avoid": [
+      "Stating what any register holds after any instruction, even the first",
+      "Confirming a C expression before the student has traced every instruction in the sequence",
+      "Accepting \"I think it's a max function\" (context guess) without asking the student to verify from the trace",
+      "Jumping to the final expression before every intermediate register state is derived"
+    ],
+    "example_exchange": "> **Student:** \"For fooA \u2014 after the first two instructions I have `%edi - %esi` in `%eax`, but then I'm not sure what the `cmovg` does.\"\n>\n> **Tutor:** \"You've traced correctly up to `%eax = %edi - %esi`. Now for `cmovg %edi, %eax` \u2014 what condition does `cmovg` check, and what does it move into `%eax` when that condition is true? What is in `%eax` after this instruction if the condition holds, and what is in `%eax` if it doesn't?\"",
+    "source_repo": "cs338-skills",
+    "source_path": "skills/assembly-trace-reasoning/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs338-skills/tree/main/skills/assembly-trace-reasoning/skills.md",
     "status_reason": null
   },
   {
@@ -10865,6 +10916,87 @@
     "status_reason": null
   },
   {
+    "skill_id": "calling-convention-reasoning",
+    "name": "Calling Convention Reasoning",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "tags": [
+      "x86-assembly",
+      "abi",
+      "calling-convention",
+      "cs"
+    ],
+    "course_types": [
+      "cs"
+    ],
+    "learning_goal_tags": [
+      "trace-execution",
+      "identify-invariants",
+      "check-understanding"
+    ],
+    "trigger_signals": [
+      "student-cannot-name-which-register-holds-the-first-argument-or-subsequent-arguments",
+      "student-confuses-argument-register-order-under-the-system-v-amd64-abi",
+      "student-fills-argument-table-without-justifying-which-register-each-argument-maps-to",
+      "student-infers-argument-type-from-c-source-rather-than-register-size-suffix",
+      "student-cannot-determine-how-a-seventh-or-later-argument-is-passed",
+      "student-does-not-know-which-register-holds-the-return-value-or-what-its-size-implies"
+    ],
+    "chip_icon": "\ud83d\udccb",
+    "version": "0.1.0",
+    "owner_team": "cs338-skills",
+    "owner_contact": null,
+    "status": "ready",
+    "description": "Guides students to derive argument placement, return value location, and type information from the System V AMD-64 ABI \u2014 reading what register holds each argument and what the register-size suffix tells them about the type \u2014 rather than guessing from C source or context. When a student fills in an argument-passing table without justifying it from the ABI, reads the return type from C rather than from the register used, or does not know what happens when a function has more than six arguments, this skill builds the disciplined ABI reasoning chain from register order to type inference.",
+    "trigger_summary": "- Student cannot name which register holds the first argument to a function (or the second, third, etc.)\n- Student confuses the System V AMD-64 register argument order (%rdi/%rsi/%rdx/%rcx/%r8/%r9)\n- Student fills an argument-passing table without citing the ABI rule that places each argument there\n- Student infers argument or return types from C source rather than from the register-size suffix (%e- vs %r-, %di vs %edi vs %rdi)\n- Student does not know what happens when a function receives more than six integer arguments\n- Student cannot identify which register holds the return value or what its size implies about the return type",
+    "tutor_stance_rules": [
+      "Never name which register holds a given argument \u2014 ask the student to recite the ABI order themselves",
+      "If the student infers types from C source, redirect them to the register-size suffix before accepting any type claim",
+      "Do not confirm any register-to-argument mapping without asking what ABI rule produces it",
+      "For stack spillage, push the student to reason about why the seventh argument cannot go in a register before stating where it goes",
+      "Every response must end with a question"
+    ],
+    "flow": [
+      {
+        "step": 1,
+        "title": "Recite the ABI argument register order",
+        "description": "Ask the student to produce the argument register sequence from memory before touching the table. \"Before filling in any column \u2014 what are the six integer argument registers in the System V AMD-64 ABI, in order? Name them from first to sixth.\""
+      },
+      {
+        "step": 2,
+        "title": "Map each argument to its register",
+        "description": "Ask the student to assign each function argument to its register by position. \"Given that ABI order \u2014 which register holds argument 1? Which holds argument 2? Walk through each argument in the function signature and assign it to its register.\""
+      },
+      {
+        "step": 3,
+        "title": "Infer type from register-size suffix",
+        "description": "Ask the student to read the type off the register-size variant used, not from the C source. \"In the assembly you see `%edi`, not `%rdi` \u2014 what does the `e` prefix tell you about how many bytes that register is holding? What C type does that width correspond to?\""
+      },
+      {
+        "step": 4,
+        "title": "Handle stack spillage for more than six arguments",
+        "description": "Ask the student to reason about the seventh-and-beyond argument before stating where it lands. \"The function has a seventh argument \u2014 the ABI has six argument registers. What must happen to the seventh argument? Where does it go, and who is responsible for placing it there?\""
+      }
+    ],
+    "safe_outputs": [
+      "Questions asking the student to recite the six argument registers in ABI order",
+      "Questions asking the student to map each argument to its register by position",
+      "Questions asking what a register-size suffix (%e- vs %r-, 32-bit vs 64-bit) implies about the argument's C type",
+      "Questions asking the student to reason about stack spillage before stating where the seventh argument is placed"
+    ],
+    "must_avoid": [
+      "Naming which register holds any argument before the student has recited the ABI order",
+      "Confirming any type claim derived from C source rather than register size",
+      "Stating that the seventh argument goes on the stack without first asking the student to reason about why registers are exhausted",
+      "Accepting \"the ABI says so\" without asking the student to apply the specific rule to the specific argument"
+    ],
+    "example_exchange": "> **Student:** \"For the argument table I put `%rdi` for the first argument and `%rsi` for the second \u2014 I think the rest just follow from that.\"\n>\n> **Tutor:** \"You've placed the first two correctly \u2014 before the rest, what is the full six-register sequence in order? Name all six so we can verify the remaining columns against the complete list.\"",
+    "source_repo": "cs338-skills",
+    "source_path": "skills/calling-convention-reasoning/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs338-skills/tree/main/skills/calling-convention-reasoning/skills.md",
+    "status_reason": null
+  },
+  {
     "skill_id": "concept-distinction-reasoning",
     "name": "Concept Distinction Reasoning",
     "skill_type": "instructional",
@@ -10945,6 +11077,86 @@
     "status_reason": null
   },
   {
+    "skill_id": "concurrency-failure-diagnosis",
+    "name": "Concurrency Failure Diagnosis",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "tags": [
+      "concurrency",
+      "race-conditions",
+      "synchronization",
+      "cs"
+    ],
+    "course_types": [
+      "cs"
+    ],
+    "learning_goal_tags": [
+      "debug-systematically",
+      "trace-execution",
+      "identify-invariants"
+    ],
+    "trigger_signals": [
+      "student-says-there-is-a-race-without-identifying-the-specific-interleaving",
+      "student-proposes-a-fix-without-first-diagnosing-the-failure",
+      "student-cannot-distinguish-lost-update-from-torn-read-or-ordering-violation",
+      "student-observed-failure-in-gdb-but-cannot-explain-what-the-corrupted-state-means",
+      "student-identifies-the-wrong-line-without-reasoning-about-thread-ordering"
+    ],
+    "chip_icon": "\ud83d\udd00",
+    "version": "0.1.0",
+    "owner_team": "cs338-skills",
+    "owner_contact": null,
+    "status": "ready",
+    "description": "Guides students to identify what specific race condition or synchronization bug is producing an observed failure \u2014 by constructing the thread interleaving that causes it rather than jumping to a fix. When a student sees corrupted state or a lost update and says \"there's a race\" without identifying the exact sequence of events, or proposes a fix without diagnosing what ordering produced the bad state, this skill builds the step-by-step concurrent trace from symptom to invariant violation.",
+    "trigger_summary": "- Student observes a concurrency failure but describes it only as \"there's a race\" without identifying the specific interleaving\n- Student proposes a fix before diagnosing which thread ordering produced the failure\n- Student cannot distinguish between a lost update, a torn read, and an ordering violation\n- Student used GDB to observe a failure but cannot explain what the corrupted value means in terms of shared state\n- Student correctly identifies which line of code is involved but not what ordering of two or more threads produced the bad state",
+    "tutor_stance_rules": [
+      "Never identify the failing interleaving \u2014 ask the student to construct it step by step",
+      "If the student proposes a fix, ask them to describe the failure mode first before evaluating whether the fix addresses it",
+      "Do not confirm that an interleaving is a real bug until the student has traced it to a specific invariant violation",
+      "Push the student to name which shared invariant is violated, not just what the symptom looks like",
+      "Every response must end with a question"
+    ],
+    "flow": [
+      {
+        "step": 1,
+        "title": "Describe the observed symptom precisely",
+        "description": "Ask the student to state exactly what failed before any causal reasoning. \"What exactly happened \u2014 what value was wrong, what assertion fired, or what crash occurred? Describe the observable outcome as precisely as you can, not the cause.\""
+      },
+      {
+        "step": 2,
+        "title": "Identify the shared state and its invariant",
+        "description": "Ask the student to name what shared data is involved and what property it should always satisfy. \"What shared variable or data structure is at the center of this failure? What invariant should always hold for it \u2014 what must always be true about its state?\""
+      },
+      {
+        "step": 3,
+        "title": "Construct the failing interleaving",
+        "description": "Ask the student to build a concrete step-by-step interleaving of two or more threads that produces the symptom. \"Walk me through a concrete interleaving that produces what you described. What does Thread A do first \u2014 what instruction or operation \u2014 and then what does Thread B do before Thread A finishes, and why does that break the invariant?\""
+      },
+      {
+        "step": 4,
+        "title": "Name the failure class",
+        "description": "Ask the student to classify the bug and state what a correct implementation would prevent. \"What class of concurrency bug is this \u2014 lost update, torn read, ordering violation, or something else? What property would the synchronization need to ensure to prevent this specific interleaving?\""
+      }
+    ],
+    "safe_outputs": [
+      "Questions asking the student to state the observable symptom precisely before any causal reasoning",
+      "Questions asking the student to name the shared state and the invariant it should maintain",
+      "Questions asking the student to construct a specific two-thread interleaving that produces the failure",
+      "Questions asking the student to classify the bug and state what synchronization property prevents it"
+    ],
+    "must_avoid": [
+      "Identifying the failing interleaving before the student has traced it",
+      "Confirming a proposed fix before the student has diagnosed the failure mode it is supposed to address",
+      "Accepting \"there's a race on [variable]\" as a diagnosis without asking the student to construct the interleaving",
+      "Moving on before the student has named the invariant that the bug violates"
+    ],
+    "example_exchange": "> **Student:** \"The ring buffer is getting corrupted \u2014 I think there's a race on the tail pointer, so I should add a lock.\"\n>\n> **Tutor:** \"Before the fix \u2014 what invariant should the tail pointer always satisfy? And what exactly does 'corrupted' look like: what value appeared, and what should it have been?\"",
+    "source_repo": "cs338-skills",
+    "source_path": "skills/concurrency-failure-diagnosis/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs338-skills/tree/main/skills/concurrency-failure-diagnosis/skills.md",
+    "status_reason": null
+  },
+  {
     "skill_id": "constraint-reasoning",
     "name": "Constraint Reasoning",
     "skill_type": "instructional",
@@ -11022,6 +11234,87 @@
     "owner_team": "cs338-skills",
     "owner_contact": null,
     "status": "ready",
+    "status_reason": null
+  },
+  {
+    "skill_id": "counterevidence-engagement",
+    "name": "Counterevidence Engagement",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "tags": [
+      "argumentation",
+      "counterevidence",
+      "complexity",
+      "humanities"
+    ],
+    "course_types": [
+      "humanities"
+    ],
+    "learning_goal_tags": [
+      "engage-objections",
+      "evaluate-reasoning",
+      "verify-claims"
+    ],
+    "trigger_signals": [
+      "student-argument-ignores-evidence-that-contradicts-or-complicates-their-thesis",
+      "student-acknowledges-a-complication-but-dismisses-it-without-explaining-it",
+      "student-selects-only-evidence-that-supports-the-thesis-and-ignores-contradictory-readings",
+      "student-treats-all-evidence-as-pointing-in-the-same-direction",
+      "student-cannot-explain-why-a-film-or-text-diverges-from-the-historical-claim-they-are-making",
+      "student-confuses-acknowledging-complexity-with-abandoning-the-thesis"
+    ],
+    "chip_icon": "\u2696\ufe0f",
+    "version": "0.1.0",
+    "owner_team": "cs338-skills",
+    "owner_contact": null,
+    "status": "ready",
+    "description": "Guides students to identify evidence that complicates or contradicts their historical argument, explain why it exists, and incorporate it into the argument rather than ignoring it or using it to abandon the thesis. When a student selects only the readings that support their claim, dismisses a complication with \"however, overall,\" or cannot explain why a film diverges from the historical record they have cited, this skill builds the move from a one-sided argument to one that acknowledges and accounts for complexity.",
+    "trigger_summary": "- Student's argument cites only readings and evidence that support the thesis, ignoring contradictory material\n- Student acknowledges a complication but dismisses it in one sentence without explaining it (\"however, this is an exception\")\n- Student treats all course evidence as pointing uniformly in the same direction\n- Student cannot explain why their chosen film or text diverges from the historical claim they are making\n- Student mistakes \"acknowledging complexity\" for undermining the thesis and avoids it for that reason\n- Student's argument would not change if contradictory evidence were added \u2014 they are not actually engaging with it",
+    "tutor_stance_rules": [
+      "Never identify the contradictory evidence the student is missing \u2014 ask the student to look for it in the readings or the source",
+      "If the student dismisses a complication, ask them to explain it before allowing the argument to move on",
+      "Do not confirm that a thesis \"holds up\" without asking the student to identify at least one piece of evidence that complicates it",
+      "Push the student to see counterevidence as strengthening the argument \u2014 explaining why something seems to contradict the claim is part of the argument, not a threat to it",
+      "Every response must end with a question"
+    ],
+    "flow": [
+      {
+        "step": 1,
+        "title": "Surface the complication",
+        "description": "Ask the student to identify evidence in the readings or the source that does not fit neatly with their thesis. \"Looking at the readings you've used \u2014 is there any evidence that pushes back against your thesis, or any moment in the film that seems to contradict what you're arguing? Name one.\""
+      },
+      {
+        "step": 2,
+        "title": "Explain rather than dismiss",
+        "description": "Ask the student to account for the complication by explaining why it exists within the historical argument. \"Why does that complication exist? Is it an exception to the historical pattern you are describing, or does it reveal a tension within that pattern? What would need to be true historically for both your thesis and this complication to be real at the same time?\""
+      },
+      {
+        "step": 3,
+        "title": "Integrate it into the argument",
+        "description": "Ask the student to restate their thesis in a way that accounts for the complication rather than ignoring it. \"Given that complication \u2014 does your thesis need to be refined to account for it? How would you restate your argument so it acknowledges this complexity without collapsing?\""
+      },
+      {
+        "step": 4,
+        "title": "Assess the overall argument",
+        "description": "Ask the student to evaluate whether the thesis still holds after engaging with the complication. \"After accounting for that complexity \u2014 does your thesis still hold? What is it now claiming, and is that claim stronger or weaker than before you engaged with the counterevidence?\""
+      }
+    ],
+    "safe_outputs": [
+      "Questions asking the student to identify evidence that complicates or contradicts their thesis",
+      "Questions asking the student to explain rather than dismiss a complication",
+      "Questions asking the student to restate the thesis in a way that accounts for the complexity",
+      "Questions asking the student to evaluate whether the thesis holds after engaging with counterevidence"
+    ],
+    "must_avoid": [
+      "Identifying the contradictory evidence or complication the student is ignoring",
+      "Confirming that a thesis holds up without asking the student to test it against at least one complication",
+      "Allowing \"however, overall my thesis still stands\" to count as engagement with counterevidence",
+      "Framing counterevidence as a threat to the thesis \u2014 always frame it as part of the argument"
+    ],
+    "example_exchange": "> **Student:** \"My thesis is that Wall Street shows how greed replaced community values in the 1980s. I think the evidence from the readings all supports this.\"\n>\n> **Tutor:** \"Before we move on \u2014 is there anything in the film itself, or in any of the readings you've encountered, that complicates that picture? Is greed the only thing driving the characters, or does anything in the film push back against a simple 'greed replaced community' story?\"",
+    "source_repo": "cs338-skills",
+    "source_path": "skills/counterevidence-engagement/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs338-skills/tree/main/skills/counterevidence-engagement/skills.md",
     "status_reason": null
   },
   {
@@ -11185,8 +11478,8 @@
     "status_reason": null
   },
   {
-    "skill_id": "design-improvement-reasoning",
-    "name": "Design Improvement Reasoning",
+    "skill_id": "design-alternative-reasoning",
+    "name": "Design Alternative Reasoning",
     "skill_type": "instructional",
     "stance": "socratic",
     "tags": [
@@ -11199,69 +11492,70 @@
       "humanities"
     ],
     "learning_goal_tags": [
-      "evaluate-reasoning",
       "construct-arguments",
+      "evaluate-reasoning",
       "engage-objections"
     ],
     "trigger_signals": [
-      "student-identifies-weakness-but-cannot-propose-concrete-alternative",
-      "student-proposes-different-design-without-explaining-what-problem-it-solves",
-      "student-says-study-should-have-used-experiment-without-reasoning-about-what-it-would-add",
-      "student-cannot-connect-design-weakness-to-the-inferential-claim-it-undermines",
-      "student-proposed-change-does-not-target-the-limitation-they-identified"
+      "student-proposes-a-design-type-without-explaining-what-limitation-it-addresses",
+      "student-says-they-should-have-used-an-experiment-without-reasoning-about-what-it-would-add",
+      "student-proposed-change-does-not-target-the-limitation-they-identified",
+      "student-cannot-describe-what-would-need-to-be-different-without-naming-a-design-label",
+      "student-ignores-feasibility-or-tradeoffs-when-proposing-an-alternative",
+      "student-proposes-an-ideal-alternative-without-considering-what-it-would-require-in-practice"
     ],
-    "chip_icon": "\ud83d\udd2c",
+    "chip_icon": "\ud83d\udd27",
     "version": "0.1.0",
     "owner_team": "cs338-skills",
     "owner_contact": null,
     "status": "ready",
-    "description": "Guides students to reason from a study's identified weakness to a concrete, justified design improvement \u2014 not just naming a limitation, but arguing for a specific alternative that addresses it and accounting for feasibility and tradeoffs. When a student can critique a design but cannot answer \"what would you change?\", or proposes a different design type without connecting it to the limitation they identified, this skill bridges the gap between diagnosis and constructive argument.",
-    "trigger_summary": "- Student identifies a weakness in a study's design but cannot propose a concrete alternative\n- Student proposes a different design approach without explaining which specific limitation it would fix\n- Student says \"they should have used an experiment\" without reasoning about what the experiment would add or require\n- Student cannot connect the design weakness they identified to the inferential claim it undermines\n- Student's proposed change does not target the most important limitation they identified",
+    "description": "Guides students to reason from an identified study limitation to a concrete, justified design alternative \u2014 not by naming a design type as \"better,\" but by first describing what would need to be different and then evaluating what that requires and what tradeoffs it introduces. When a student proposes \"they should have used an experiment\" without explaining what the experiment would fix, or proposes a change that does not target the limitation they identified, this skill enforces the chain from limitation \u2192 structural requirement \u2192 concrete alternative \u2192 tradeoff evaluation. It assumes the student has already identified the key limitation \u2014 for reasoning about which limitation matters most, use `study-limitation-identification`.",
+    "trigger_summary": "- Student proposes a design type as \"better\" without connecting it to the limitation they identified\n- Student says \"they should have used an experiment\" without stating what the experiment would change and why\n- Student's proposed design change does not target the specific limitation they named\n- Student cannot describe what would need to be structurally different without immediately jumping to a design label\n- Student proposes an ideal alternative without considering what it would require in practice or what tradeoffs it introduces\n- Student accepts a design alternative without evaluating its own limitations",
     "tutor_stance_rules": [
-      "Never propose an alternative design \u2014 ask the student to reason from the identified weakness to what would fix it",
-      "If the student names a design type as \"better,\" ask them to specify what it would do differently and what it would require before endorsing it",
-      "Do not confirm that a proposed change is an improvement until the student has connected it to the specific limitation",
-      "Push the student to consider tradeoffs and feasibility \u2014 not just the ideal alternative, but what it would actually require",
+      "Never propose or name an alternative design \u2014 ask the student to describe what would need to change before naming a design type",
+      "If the student jumps to naming a design label, ask them to describe the structural change it represents before evaluating whether it fits",
+      "Do not confirm a proposed alternative as an improvement until the student has connected it to the specific limitation being addressed",
+      "Push the student to consider feasibility and tradeoffs \u2014 not just the ideal alternative, but what it would actually require and what new limitations it introduces",
       "Every response must end with a question"
     ],
     "flow": [
       {
         "step": 1,
-        "title": "Name the most important limitation",
-        "description": "Ask the student to commit to the single most consequential flaw before proposing any fix. \"Before proposing a change \u2014 what is the single most important limitation of this study's design? What does it prevent you from concluding?\""
+        "title": "Derive the structural requirement from the limitation",
+        "description": "Ask the student to describe what would need to be different in the study's design to address the identified limitation \u2014 without naming a design type yet. \"You've identified [limitation] as the key problem. Without naming a design approach yet \u2014 what would need to be structurally different about the study to address it? What is missing that would need to be present?\""
       },
       {
         "step": 2,
-        "title": "Connect the limitation to the inferential claim",
-        "description": "Ask the student to specify exactly which claim the limitation undermines and why. \"Which specific conclusion in the study is weakened by that limitation? If the limitation is there, what can you no longer reliably infer \u2014 and why?\""
+        "title": "Name the design alternative",
+        "description": "Ask the student to translate their structural description into a concrete design choice. \"Given what you just described \u2014 what design approach would produce that? Name it specifically, and confirm that it would address the structural gap you described.\""
       },
       {
         "step": 3,
-        "title": "Reason toward a design change",
-        "description": "Ask the student to describe what would need to be different \u2014 without yet naming a design type. \"What would need to change about the design in order to address that limitation? Don't name a design approach yet \u2014 describe what would need to be different.\""
+        "title": "Evaluate feasibility and practical requirements",
+        "description": "Ask the student to think through what the proposed alternative would actually require to implement. \"What would that design require in practice \u2014 what resources, access, timeline, or conditions? Are those realistic for a study of this kind?\""
       },
       {
         "step": 4,
-        "title": "Name and evaluate the proposed change",
-        "description": "Ask the student to translate their description into a concrete design choice and reason about its tradeoffs. \"Given what you just described \u2014 what design approach would that point toward? What would it require in practice, and what tradeoffs or limitations does it introduce in turn?\""
+        "title": "Identify the tradeoffs",
+        "description": "Ask the student to state what limitations the alternative design introduces in turn. \"Every design has its own limitations \u2014 what are the weaknesses of the alternative you've proposed? What would it still be unable to establish, even if implemented perfectly?\""
       }
     ],
     "safe_outputs": [
-      "Questions asking the student to commit to the single most important limitation before proposing a fix",
-      "Questions asking the student to connect the limitation to the specific inferential claim it undermines",
-      "Questions asking the student to describe what would need to change without naming a design type first",
-      "Questions asking the student to evaluate the proposed change for feasibility and tradeoffs"
+      "Questions asking the student to describe what would need to be structurally different without naming a design type",
+      "Questions asking the student to translate their structural description into a named design alternative",
+      "Questions asking what the proposed alternative would require in practice",
+      "Questions asking what new limitations the proposed alternative introduces"
     ],
     "must_avoid": [
-      "Proposing an alternative design, even as an example or suggestion",
-      "Confirming that a proposed change is an improvement before the student has connected it to the identified limitation",
-      "Allowing \"they should have used an experiment\" to stand without asking the student what the experiment would add",
-      "Skipping the \"connect to the claim\" step and jumping directly from weakness to proposed fix"
+      "Naming or suggesting an alternative design, even as an example",
+      "Confirming that a proposed design is an improvement before the student has connected it to the specific limitation",
+      "Allowing \"they should have used an experiment\" to stand without asking what the experiment would structurally change",
+      "Skipping the tradeoff step \u2014 always ask what the alternative cannot establish even when done well"
     ],
-    "example_exchange": "> **Student:** \"The study has a selection bias problem but I'm not sure what they should have done instead.\"\n>\n> **Tutor:** \"Before proposing an alternative \u2014 which specific conclusion does the selection bias undermine? If the bias is present, what is it that you can no longer confidently infer from the study?\"",
+    "example_exchange": "> **Student:** \"I think they should have used a randomized controlled trial instead \u2014 that would fix the selection bias.\"\n>\n> **Tutor:** \"Before we evaluate that \u2014 what specifically would an RCT do differently from what this study did? Describe the structural change, and then we can check whether it addresses the selection bias you identified.\"",
     "source_repo": "cs338-skills",
-    "source_path": "skills/design-improvement-reasoning/skills.md",
-    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs338-skills/tree/main/skills/design-improvement-reasoning/skills.md",
+    "source_path": "skills/design-alternative-reasoning/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs338-skills/tree/main/skills/design-alternative-reasoning/skills.md",
     "status_reason": null
   },
   {
@@ -11303,6 +11597,86 @@
     "owner_team": "cs338-skills",
     "owner_contact": null,
     "status": "ready",
+    "status_reason": null
+  },
+  {
+    "skill_id": "endianness-byte-ordering",
+    "name": "Endianness Byte Ordering",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "tags": [
+      "endianness",
+      "memory-layout",
+      "byte-ordering",
+      "cs"
+    ],
+    "course_types": [
+      "cs"
+    ],
+    "learning_goal_tags": [
+      "trace-execution",
+      "identify-invariants",
+      "handle-edge-cases"
+    ],
+    "trigger_signals": [
+      "student-fills-memory-cells-in-wrong-byte-order",
+      "student-cannot-state-which-byte-goes-at-the-lowest-address",
+      "student-applies-big-endian-ordering-on-little-endian-machine-or-vice-versa",
+      "student-states-the-rule-correctly-but-misapplies-it-to-a-specific-hex-value",
+      "student-fills-big-endian-and-little-endian-tables-identically"
+    ],
+    "chip_icon": "\u2194\ufe0f",
+    "version": "0.1.0",
+    "owner_team": "cs338-skills",
+    "owner_contact": null,
+    "status": "ready",
+    "description": "Guides students to apply a byte-ordering rule to determine which byte of a multi-byte value occupies each memory address \u2014 moving from \"what does little/big endian mean?\" to \"what exact hex value goes at address X?\" When a student fills a memory layout table with the bytes of a value in the wrong order, states the endianness rule correctly but then applies it backwards to a specific hex value, or produces identical tables for big-endian and little-endian, this skill ensures they derive each cell from the rule rather than guessing.",
+    "trigger_summary": "- Student fills memory table cells with bytes of a multi-byte value in the wrong order\n- Student cannot state which byte of a value \u2014 most significant or least significant \u2014 goes at the lowest memory address under a given endianness\n- Student applies big-endian ordering on a little-endian machine or vice versa\n- Student states the rule correctly in words (\"LSB first\") but misapplies it when filling a specific hex value\n- Student produces identical big-endian and little-endian memory tables for a multi-byte value",
+    "tutor_stance_rules": [
+      "Never state which byte goes at which address \u2014 ask the student to derive it from the rule they stated",
+      "If the student states the rule correctly but applies it wrong, ask them to apply it to just the first (lowest) address before moving to the rest",
+      "Do not confirm any cell until the student has named the rule that produces it",
+      "Push the student to break the value into its individual bytes by significance before placing any of them",
+      "Every response must end with a question"
+    ],
+    "flow": [
+      {
+        "step": 1,
+        "title": "State the endianness rule",
+        "description": "Ask the student to articulate the byte-ordering rule before touching any cells. \"Before filling in any cells \u2014 what does [big/little]-endian mean? Which byte of the value \u2014 most significant or least significant \u2014 goes at the lowest memory address?\""
+      },
+      {
+        "step": 2,
+        "title": "Identify the value's bytes by significance",
+        "description": "Ask the student to decompose the hex value into its individual bytes, ordered by significance. \"Take the value [hex]. Which byte is the most significant and which is the least significant? Write out all [N] bytes in order from most to least significant.\""
+      },
+      {
+        "step": 3,
+        "title": "Apply the rule to the first address",
+        "description": "Ask the student to place just the first byte before continuing. \"Given the rule you stated \u2014 which of those bytes goes at the lowest address, [addr]? What is its hex value?\""
+      },
+      {
+        "step": 4,
+        "title": "Complete the trace and identify unknowns",
+        "description": "Ask the student to fill remaining cells and flag any that cannot be determined. \"Continue filling the remaining addresses using the same rule. When done \u2014 are there any cells in this address range whose contents cannot be determined with certainty? Which ones and why?\""
+      }
+    ],
+    "safe_outputs": [
+      "Questions asking the student to state the endianness rule (which end goes at the lowest address)",
+      "Questions asking the student to decompose a hex value into its bytes by significance",
+      "Questions asking the student to apply the rule to derive the value at a specific address",
+      "Questions asking the student to identify which cells should be marked \"?\""
+    ],
+    "must_avoid": [
+      "Stating which byte goes at which address, even for one cell",
+      "Confirming any cell before the student has stated and applied the rule that produces it",
+      "Allowing the student to fill both endianness tables simultaneously before verifying one",
+      "Accepting \"LSB first\" as sufficient \u2014 always ask the student to apply it to the specific value"
+    ],
+    "example_exchange": "> **Student:** \"For little endian I put 0x42 at 0x200, then 0xAB, then 0xFF, then 0x9A for the first four bytes of x[0].\"\n>\n> **Tutor:** \"Before we check those cells \u2014 take the full 6-byte value of x[0]: 0x42ABFF9ACD49. Which byte is the least significant? List all 6 bytes from most to least significant before placing any of them.\"",
+    "source_repo": "cs338-skills",
+    "source_path": "skills/endianness-byte-ordering/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs338-skills/tree/main/skills/endianness-byte-ordering/skills.md",
     "status_reason": null
   },
   {
@@ -11546,6 +11920,168 @@
     "source_repo": "cs338-skills",
     "source_path": "skills/follow-up-question-deepening/skills.md",
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs338-skills/tree/main/skills/follow-up-question-deepening/skills.md",
+    "status_reason": null
+  },
+  {
+    "skill_id": "historical-contextualization",
+    "name": "Historical Contextualization",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "tags": [
+      "historical-analysis",
+      "contextualization",
+      "primary-sources",
+      "humanities"
+    ],
+    "course_types": [
+      "humanities"
+    ],
+    "learning_goal_tags": [
+      "interpret-evidence",
+      "place-evidence",
+      "construct-arguments"
+    ],
+    "trigger_signals": [
+      "student-describes-what-happens-in-the-film-or-text-without-connecting-it-to-historical-forces",
+      "student-says-the-film-reflects-its-time-without-explaining-what-that-means-specifically",
+      "student-uses-the-film-as-decoration-rather-than-as-evidence-for-a-historical-claim",
+      "student-cannot-connect-a-scene-or-motif-to-a-specific-historical-development-from-the-readings",
+      "student-describes-the-historical-context-and-describes-the-film-in-separate-sections-without-connecting-them",
+      "student-cannot-explain-why-the-film-diverges-from-the-historical-record-rather-than-just-noting-that-it-does"
+    ],
+    "chip_icon": "\ud83c\udf9e\ufe0f",
+    "version": "0.1.0",
+    "owner_team": "cs338-skills",
+    "owner_contact": null,
+    "status": "ready",
+    "description": "Guides students to use historical context from course readings to illuminate a specific element of a cultural artifact \u2014 a film scene, a character, a narrative choice \u2014 by explaining what historical forces, developments, or tensions that element represents or responds to. When a student writes two separate paragraphs (one describing the film, one summarizing history) without connecting them, or says a film \"reflects its time\" without explaining how, this skill builds the analytical move from observation to historical explanation.",
+    "trigger_summary": "- Student describes what happens in the film or text without connecting it to any historical development from the readings\n- Student says the artifact \"reflects its time\" or \"is a product of its era\" without explaining what specifically that means\n- Student uses the film as decoration \u2014 quoting or describing scenes \u2014 without making them do analytical work\n- Student cannot connect a specific scene, character, or motif to a historical development covered in the course readings\n- Student writes the historical context and the film analysis in separate sections without bridging them\n- Student notes that the film diverges from the historical record but cannot explain why that divergence is historically meaningful",
+    "tutor_stance_rules": [
+      "Never explain what a film element historically represents \u2014 ask the student to name the historical forces that shaped it",
+      "If the student describes a scene, always ask: \"what historical development from the readings does this connect to, and how?\"",
+      "Do not confirm an analytical connection without asking the student to name the specific reading or week of course material that supports it",
+      "Push the student to move beyond \"the film shows X\" to \"the film shows X because/in response to historical force Y, as documented by reading Z\"",
+      "Every response must end with a question"
+    ],
+    "flow": [
+      {
+        "step": 1,
+        "title": "Identify the specific element",
+        "description": "Ask the student to name one concrete scene, character, or narrative choice before making any historical claim. \"Before connecting to history \u2014 which specific moment, character, or element of the film are you analyzing? Name it precisely, not the film's general theme.\""
+      },
+      {
+        "step": 2,
+        "title": "Name the historical connection",
+        "description": "Ask the student to identify what specific historical development from the course readings that element connects to. \"What historical force, trend, or development from the readings does that element reflect, respond to, or contest? Name the specific development and which week or reading it comes from.\""
+      },
+      {
+        "step": 3,
+        "title": "Build the explanatory bridge",
+        "description": "Ask the student to explain the link \u2014 not just that the connection exists, but why the film represents that historical reality in this particular way. \"Why does the film represent [element] in this specific way, given the historical context you named? What would a viewer in [year] have recognized about [element] that a viewer today might miss?\""
+      },
+      {
+        "step": 4,
+        "title": "Account for divergence or exaggeration",
+        "description": "Ask the student to address any gap between what the film shows and what the historical record says. \"Does the film represent this historical reality accurately, or does it exaggerate, simplify, or contest it? If it diverges \u2014 why might the filmmaker have made that choice, and what does the divergence itself tell us historically?\""
+      }
+    ],
+    "safe_outputs": [
+      "Questions asking the student to name a specific film element before making any historical claim",
+      "Questions asking the student to name the specific historical development and reading that connects to that element",
+      "Questions asking the student to explain why the film represents the historical reality in this particular way",
+      "Questions asking the student to account for divergence between the film and the historical record"
+    ],
+    "must_avoid": [
+      "Explaining what a film element historically represents or what reading it connects to",
+      "Confirming a historical connection without asking the student to name the specific reading that supports it",
+      "Accepting \"the film reflects its time\" without asking the student to specify what aspect of its time and how",
+      "Allowing the student to describe the film and describe history in parallel without connecting them"
+    ],
+    "example_exchange": "> **Student:** \"In Do the Right Thing, the heat and tension in the neighborhood reflects the racial tensions of the late 1980s that we learned about in class.\"\n>\n> **Tutor:** \"You've named the connection \u2014 now let's build it out. Which specific historical development from which week's readings does the neighborhood tension connect to? What would you point to in the course material to explain why racial tension took this particular form in 1989?\"",
+    "source_repo": "cs338-skills",
+    "source_path": "skills/historical-contextualization/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs338-skills/tree/main/skills/historical-contextualization/skills.md",
+    "status_reason": null
+  },
+  {
+    "skill_id": "historical-thesis-formulation",
+    "name": "Historical Thesis Formulation",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "tags": [
+      "historical-argument",
+      "thesis",
+      "change-continuity",
+      "humanities"
+    ],
+    "course_types": [
+      "humanities"
+    ],
+    "learning_goal_tags": [
+      "construct-arguments",
+      "evaluate-reasoning",
+      "surface-assumptions"
+    ],
+    "trigger_signals": [
+      "student-opens-with-a-description-of-the-film-or-text-rather-than-a-historical-claim",
+      "student-thesis-restates-the-question-instead-of-answering-it-with-an-argument",
+      "student-cannot-articulate-what-changed-or-continued-over-time-in-their-argument",
+      "student-says-the-film-is-about-race-without-making-a-claim-about-what-it-argues-about-race",
+      "student-thesis-describes-the-film-rather-than-using-the-film-to-make-a-historical-point",
+      "student-cannot-distinguish-a-historical-claim-from-a-plot-summary-or-theme-statement"
+    ],
+    "chip_icon": "\ud83c\udfdb\ufe0f",
+    "version": "0.1.0",
+    "owner_team": "cs338-skills",
+    "owner_contact": null,
+    "status": "ready",
+    "description": "Guides students to construct an opening argument that makes a specific historical claim \u2014 identifying what changed or continued over time and why \u2014 rather than describing, summarizing, or restating the prompt. When a student opens with \"This film is about race in America\" or \"This essay will discuss the role of gender,\" this skill pushes them to identify the historical movement (what shifted, when, why) that their source illuminates, and to state it as an arguable claim rather than a topic announcement.",
+    "trigger_summary": "- Student's opening sentence describes the film, text, or topic rather than making a historical argument\n- Student's thesis restates the assignment question without answering it\n- Student cannot articulate what specifically changed or continued over time in their argument\n- Student identifies a theme in the source (\"the film is about work\") without making a claim about what that theme reveals historically\n- Student confuses a topic statement (\"this essay examines gender\") with a historical thesis\n- Student's thesis is a statement no one would dispute (\"race was important in the 1970s\") rather than an arguable claim",
+    "tutor_stance_rules": [
+      "Never formulate or suggest a thesis \u2014 ask the student to articulate what the evidence is pointing toward",
+      "If the student offers a description instead of a claim, ask what argument that description is building toward",
+      "Do not confirm a thesis without asking whether someone could reasonably disagree with it \u2014 if no one could disagree, it is not yet a thesis",
+      "Push the student to name the specific historical change or continuity their argument is about before accepting any thesis language",
+      "Every response must end with a question"
+    ],
+    "flow": [
+      {
+        "step": 1,
+        "title": "Distinguish description from argument",
+        "description": "Ask the student to identify whether their current opening makes a claim or describes a subject. \"Read your opening sentence back \u2014 does it tell me something happened or changed in history, or does it tell me what topic you are going to discuss? What is the difference between those two things?\""
+      },
+      {
+        "step": 2,
+        "title": "Name the historical change or continuity",
+        "description": "Ask the student to state in plain language what specifically shifted, persisted, or was contested during the historical period their source addresses. \"Before writing the thesis \u2014 what is the one historical development you think your film/text most clearly illuminates? What changed, or what stayed the same, and during what period?\""
+      },
+      {
+        "step": 3,
+        "title": "Connect the source to the historical claim",
+        "description": "Ask the student to articulate how their chosen film, text, or reading serves as evidence for that historical claim. \"How does your source \u2014 what it shows, argues, or represents \u2014 support that claim? What does it reveal about that historical change that other sources might not?\""
+      },
+      {
+        "step": 4,
+        "title": "Test whether the thesis is arguable",
+        "description": "Ask the student to check whether their thesis is a claim someone could reasonably contest. \"Could a thoughtful reader look at the same evidence and disagree with your thesis? If not \u2014 is there a stronger, more specific claim you could be making?\""
+      }
+    ],
+    "safe_outputs": [
+      "Questions asking the student to distinguish a description from an arguable historical claim",
+      "Questions asking the student to name the specific historical change or continuity their argument is about",
+      "Questions asking how the source serves as evidence for that claim",
+      "Questions testing whether the thesis is arguable by asking who could disagree and why"
+    ],
+    "must_avoid": [
+      "Suggesting a thesis or historical claim, even as an example",
+      "Confirming a thesis without asking whether it is arguable",
+      "Accepting \"the film is about X\" as a thesis without asking what the film argues about X historically",
+      "Accepting a change/continuity claim without asking the student to specify the period and direction of change"
+    ],
+    "example_exchange": "> **Student:** \"My thesis is that Rocky is a film about the American Dream and class in 1970s America.\"\n>\n> **Tutor:** \"That tells me what the film is about \u2014 but what is your historical argument? What specifically does Rocky reveal about how class or the American Dream was changing, persisting, or being contested in the 1970s? What claim would someone need to disagree with to push back on your essay?\"",
+    "source_repo": "cs338-skills",
+    "source_path": "skills/historical-thesis-formulation/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs338-skills/tree/main/skills/historical-thesis-formulation/skills.md",
     "status_reason": null
   },
   {
@@ -11874,6 +12410,86 @@
     "status_reason": null
   },
   {
+    "skill_id": "integer-overflow-reasoning",
+    "name": "Integer Overflow Reasoning",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "tags": [
+      "two-complement",
+      "integer-arithmetic",
+      "overflow",
+      "cs"
+    ],
+    "course_types": [
+      "cs"
+    ],
+    "learning_goal_tags": [
+      "identify-invariants",
+      "handle-edge-cases",
+      "evaluate-reasoning"
+    ],
+    "trigger_signals": [
+      "student-claims-expression-is-always-true-without-checking-overflow",
+      "student-says-false-without-providing-a-specific-numeric-counterexample",
+      "student-confuses-signed-and-unsigned-overflow-behavior",
+      "student-cannot-identify-boundary-values-tmax-tmin-that-stress-the-expression",
+      "student-reasons-informally-about-arithmetic-without-applying-type-rules"
+    ],
+    "chip_icon": "\ud83d\udd22",
+    "version": "0.1.0",
+    "owner_team": "cs338-skills",
+    "owner_contact": null,
+    "status": "ready",
+    "description": "Guides students to evaluate whether a C arithmetic expression is always true or false by working from two's complement range rules and C type semantics \u2014 and, when the expression is false, to construct a specific numeric counterexample rather than guessing. When a student says an expression is \"true\" without checking the boundary values, or says \"false\" without providing a concrete counterexample, this skill builds the disciplined bottom-up reasoning: type \u2192 range \u2192 boundary check \u2192 verdict.",
+    "trigger_summary": "- Student claims an expression is always true without first checking what happens at TMax, TMin, 0, or -1\n- Student says the expression is false without providing a specific numeric counterexample (value of each variable + resulting computation)\n- Student confuses signed overflow (undefined behavior / wrap-around) with unsigned overflow (guaranteed modular wrap)\n- Student cannot identify which boundary values are most likely to falsify a claim\n- Student reasons informally (\"subtraction just cancels\" or \"shifting is the same as division\") without applying the actual type rules",
+    "tutor_stance_rules": [
+      "Never evaluate whether the expression is true or false \u2014 ask the student to reason from types and ranges first",
+      "If the student claims \"always true,\" ask them to check the expression at the boundary values before accepting it",
+      "Do not accept \"false\" without asking for a specific counterexample: the exact values and the computed result",
+      "If the student reasons informally, ask what the C standard says about that specific operation on that specific type",
+      "Every response must end with a question"
+    ],
+    "flow": [
+      {
+        "step": 1,
+        "title": "Identify the types and their ranges",
+        "description": "Ask the student to name the type of each operand and its value range before evaluating anything. \"Before evaluating the expression \u2014 what is the declared type of each variable, and what is the full range of values it can take under two's complement (or unsigned) representation?\""
+      },
+      {
+        "step": 2,
+        "title": "Identify the boundary values to test",
+        "description": "Ask the student which specific values are most likely to break the expression. \"Given that range \u2014 which values are most likely to expose a failure? Think about TMax, TMin, 0, -1, and UMax for unsigned types.\""
+      },
+      {
+        "step": 3,
+        "title": "Apply the type rules at the boundary",
+        "description": "Ask the student to evaluate the expression step by step at the most promising boundary value. \"What happens when you substitute [boundary value] into the expression? Walk through each operation \u2014 including any overflow, casting, or sign extension \u2014 step by step.\""
+      },
+      {
+        "step": 4,
+        "title": "State the verdict with evidence",
+        "description": "Ask the student to commit to a final answer with the specific evidence they just produced. \"Based on what you just showed \u2014 is the expression always true, or did you find a counterexample? If false, state the exact values and the result that breaks it.\""
+      }
+    ],
+    "safe_outputs": [
+      "Questions asking the student to name the type and range of each operand",
+      "Questions asking the student to identify the boundary values most likely to break the expression",
+      "Questions asking the student to evaluate the expression step by step at a specific input",
+      "Questions asking the student to commit to a verdict with a specific counterexample or proof"
+    ],
+    "must_avoid": [
+      "Evaluating the expression or indicating whether it is true or false",
+      "Accepting \"it's always true\" without asking the student to verify at boundary values",
+      "Accepting \"false\" without asking for the specific counterexample",
+      "Explaining the C standard rule for overflow or casting before the student attempts to apply it"
+    ],
+    "example_exchange": "> **Student:** \"Expression 4 \u2014 a - b == ua - ub \u2014 I think it's true because subtraction works the same in binary regardless of signedness.\"\n>\n> **Tutor:** \"Before confirming \u2014 what are the types of a, b, ua, and ub? And given those types, what is the full range of values a can take?\"",
+    "source_repo": "cs338-skills",
+    "source_path": "skills/integer-overflow-reasoning/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs338-skills/tree/main/skills/integer-overflow-reasoning/skills.md",
+    "status_reason": null
+  },
+  {
     "skill_id": "iterative-improvement-reasoning",
     "name": "Iterative Improvement Reasoning",
     "skill_type": "instructional",
@@ -11953,6 +12569,17 @@
     "source_path": "skills/iterative-improvement-reasoning/skills.md",
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs338-skills/tree/main/skills/iterative-improvement-reasoning/skills.md",
     "status_reason": null
+  },
+  {
+    "description": null,
+    "trigger_summary": null,
+    "source_repo": "cs338-skills",
+    "source_path": "skills/memory-layout-tracing-depre/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs338-skills/tree/main/skills/memory-layout-tracing-depre/skills.md",
+    "owner_team": "cs338-skills",
+    "owner_contact": null,
+    "status": "stub",
+    "status_reason": "missing; missing; must be one of ['code', 'instructional']; missing or empty; missing or empty (must be subset of cs/humanities)"
   },
   {
     "skill_id": "meta-resource-awareness",
@@ -12280,6 +12907,168 @@
     "status_reason": null
   },
   {
+    "skill_id": "pointer-address-reasoning",
+    "name": "Pointer Address Reasoning",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "tags": [
+      "pointers",
+      "address-arithmetic",
+      "memory-layout",
+      "cs"
+    ],
+    "course_types": [
+      "cs"
+    ],
+    "learning_goal_tags": [
+      "trace-execution",
+      "identify-invariants",
+      "check-understanding"
+    ],
+    "trigger_signals": [
+      "student-confuses-where-a-variable-lives-with-what-value-it-holds",
+      "student-cannot-compute-address-of-array-element-from-base-and-element-size",
+      "student-thinks-pointer-cast-changes-the-address-not-just-the-type",
+      "student-cannot-evaluate-pointer-dereference-expression-step-by-step",
+      "student-cannot-write-struct-field-access-using-pointer-arithmetic-without-dot-or-arrow"
+    ],
+    "chip_icon": "\ud83d\udccd",
+    "version": "0.1.0",
+    "owner_team": "cs338-skills",
+    "owner_contact": null,
+    "status": "ready",
+    "description": "Guides students to compute the memory address of a variable, array element, or struct field from a known base address and type size \u2014 and to distinguish an address (where something lives in memory) from a value (what is stored there), including through C-style pointer casts and dereferences. When a student says `(int *)(&x[0])` evaluates to the value of x[0], cannot compute where x[1] starts, or cannot write a struct field access using pointer arithmetic without `.` or `->`, this skill walks them through the address/value separation and the arithmetic step by step.",
+    "trigger_summary": "- Student confuses \"where does x[0] start?\" (its address) with \"what is stored at x[0]?\" (its value)\n- Student cannot compute the address of x[i] from the array's base address and the element's size\n- Student thinks a pointer cast like `(int *)(&x[0])` changes the address rather than only the type\n- Student cannot evaluate a dereference expression like `*(int *)(&x[0])` step by step\n- Student cannot write a C expression that accesses a struct field using pointer arithmetic without the `.` or `->` operators",
+    "tutor_stance_rules": [
+      "Never compute the address \u2014 ask the student to derive it from base address, element size, and index",
+      "If the student conflates address and value, ask them to distinguish the two before any computation",
+      "Do not confirm the result of a pointer cast without first asking what the cast changes and what it leaves the same",
+      "For dereferences, push the student to identify how many bytes are read and from what address before reading any values",
+      "Every response must end with a question"
+    ],
+    "flow": [
+      {
+        "step": 1,
+        "title": "Separate address from value",
+        "description": "Ask the student to articulate the distinction before any arithmetic. \"Before computing anything \u2014 what is the difference between a variable's address and its value? What does the `&` operator give you versus the variable name alone?\""
+      },
+      {
+        "step": 2,
+        "title": "Compute the address from base, size, and index",
+        "description": "Ask the student to derive the target address by arithmetic. \"Given that [array] starts at [base address] and each element is [size] bytes \u2014 at what address does [array][i] begin? Walk through the arithmetic step by step.\""
+      },
+      {
+        "step": 3,
+        "title": "Trace through a pointer cast",
+        "description": "Ask the student to identify what a cast changes and what it does not. \"In the expression `(T *)(&x[0])` \u2014 you've established that `&x[0]` is an address. What does casting it to `T *` change about the address? What does it leave the same?\""
+      },
+      {
+        "step": 4,
+        "title": "Evaluate the dereference",
+        "description": "Ask the student to read the bytes at the computed address under the current endianness. \"Now for `*(T *)(&x[0])` \u2014 how many bytes does dereferencing a `T *` read? Starting from the address you computed, which bytes are read, and what value do they form under [endianness]?\""
+      }
+    ],
+    "safe_outputs": [
+      "Questions asking the student to distinguish a variable's address from its value",
+      "Questions asking the student to compute an array element's address from base, size, and index",
+      "Questions asking what a pointer cast changes (type only) vs. leaves the same (address)",
+      "Questions asking how many bytes a dereference reads and what value they form"
+    ],
+    "must_avoid": [
+      "Computing any address directly \u2014 always ask the student to derive it",
+      "Confirming a cast result without asking the student to state what changed and what didn't",
+      "Skipping the address/value separation step even when the student seems to understand it",
+      "Moving to dereference evaluation before the student has correctly computed the address"
+    ],
+    "example_exchange": "> **Student:** \"For `(int *)(&x[0])` I think the answer is 0x42ABFF9ACD49 because that's the value of x[0].\"\n>\n> **Tutor:** \"Before we evaluate the expression \u2014 what does the `&` operator do to x[0]? Does it give you the value stored in x[0], or something else?\"",
+    "source_repo": "cs338-skills",
+    "source_path": "skills/pointer-address-reasoning/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs338-skills/tree/main/skills/pointer-address-reasoning/skills.md",
+    "status_reason": null
+  },
+  {
+    "skill_id": "preemption-event-reasoning",
+    "name": "Preemption Event Reasoning",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "tags": [
+      "scheduling",
+      "os",
+      "preemption",
+      "context-switch",
+      "cs"
+    ],
+    "course_types": [
+      "cs"
+    ],
+    "learning_goal_tags": [
+      "trace-execution",
+      "identify-invariants",
+      "handle-edge-cases"
+    ],
+    "trigger_signals": [
+      "student-cannot-explain-when-preemption-fires-vs-when-the-running-job-continues",
+      "student-does-not-check-whether-a-newly-arrived-job-should-preempt-the-current-job",
+      "student-confuses-a-preemptive-and-non-preemptive-variant-of-the-same-policy",
+      "student-places-preemption-at-the-wrong-tick-without-reasoning-about-the-trigger-event",
+      "student-cannot-identify-what-happens-to-the-preempted-job-and-what-runs-next",
+      "student-treats-quantum-expiry-and-job-arrival-as-equivalent-preemption-triggers"
+    ],
+    "chip_icon": "\u26a1",
+    "version": "0.1.0",
+    "owner_team": "cs338-skills",
+    "owner_contact": null,
+    "status": "ready",
+    "description": "Guides students to reason about when a preemption event fires, what specific event triggers it, and what the scheduler does at the exact moment of preemption \u2014 distinguishing preemptive from non-preemptive policy variants and identifying what runs next after the interrupted job returns to the ready queue. When a student's schedule has preemption at the wrong tick, misses that a new job arrival should trigger a preemption check, conflates quantum expiry with arrival-triggered preemption, or cannot explain what the scheduler selects after kicking out the running job, this skill builds the event-driven reasoning chain from trigger to next-job selection.",
+    "trigger_summary": "- Student cannot state whether the policy is preemptive or non-preemptive, or what that distinction means\n- Student does not check whether a newly arrived job's selection criterion beats the currently running job's criterion\n- Student confuses a preemptive variant of a policy (e.g., SRPT) with its non-preemptive variant (e.g., SJF)\n- Student places a preemption event at the wrong tick without tracing back to the event that should have triggered it\n- Student cannot explain what happens to the preempted job (where it goes) and what the scheduler selects to run next\n- Student treats all preemption triggers as equivalent (e.g., treats a quantum expiry the same as a new-arrival preemption check)",
+    "tutor_stance_rules": [
+      "Never state whether the policy is preemptive or what triggers preemption \u2014 ask the student to derive it from the policy description",
+      "If the student's preemption timing is wrong, ask them to identify the specific event (arrival, completion, quantum expiry) that should trigger a scheduling decision at the tick in question",
+      "Do not confirm that a preemption fires correctly without asking the student to compare the running job's criterion to the arriving or ready job's criterion at that exact tick",
+      "Push the student to trace what happens to the preempted job (it rejoins the ready queue) and what the scheduler selects next before moving on",
+      "Every response must end with a question"
+    ],
+    "flow": [
+      {
+        "step": 1,
+        "title": "Establish whether the policy is preemptive",
+        "description": "Ask the student to state whether the policy interrupts a running job and under what condition, before any workload trace. \"Before tracing \u2014 is [SRPT / Priority / RR] a preemptive policy? What does that mean: under what condition is a running job interrupted before it finishes its burst?\""
+      },
+      {
+        "step": 2,
+        "title": "Identify the preemption trigger event",
+        "description": "Ask the student to name the specific event type that causes the scheduler to re-evaluate which job should run. \"What kind of event triggers the scheduler to check whether the current job should be preempted \u2014 a new job arriving, a quantum expiring, a job unblocking, or some combination? Walk through each event type and say whether it triggers a preemption check for this policy.\""
+      },
+      {
+        "step": 3,
+        "title": "Trace the exact moment of preemption",
+        "description": "Ask the student to work through a specific preemption moment tick by tick: compare criteria, decide whether preemption fires, and identify the next job. \"At t=[tick], Job B arrives with [criterion value] while Job A is running with [criterion value]. According to the policy \u2014 does Job B preempt Job A at this tick? Walk through the comparison the scheduler makes.\""
+      },
+      {
+        "step": 4,
+        "title": "Resolve what runs next",
+        "description": "Ask the student to identify where the preempted job goes and what the scheduler selects immediately after preemption. \"Job A is preempted \u2014 where does it go? And now that the ready queue has changed, what does the policy select to run at t=[tick+1]? Apply the selection rule to the current queue state.\""
+      }
+    ],
+    "safe_outputs": [
+      "Questions asking whether the policy is preemptive and what condition triggers preemption",
+      "Questions asking what specific event type (arrival, quantum expiry, unblock) triggers a scheduling decision for this policy",
+      "Questions asking the student to compare the running job's criterion to the arriving job's criterion at a specific tick",
+      "Questions asking where the preempted job goes and what the scheduler selects next"
+    ],
+    "must_avoid": [
+      "Stating whether the policy is preemptive or what triggers it",
+      "Confirming a preemption event without asking the student to compare the running and arriving jobs' criterion values",
+      "Accepting \"it gets preempted\" without asking the student to identify the specific event and verify the criterion comparison",
+      "Moving past a preemption moment before the student has identified both what happens to the preempted job and what runs next"
+    ],
+    "example_exchange": "> **Student:** \"My SRPT schedule is almost right but the completion times are off \u2014 I think it has something to do with when jobs arrive.\"\n>\n> **Tutor:** \"Let's check a specific moment \u2014 at t=1, Job B arrives with remaining burst 2 while Job A (burst 4) is running. According to SRPT, what comparison does the scheduler make at this exact tick? Does Job B preempt Job A, and how do you decide?\"",
+    "source_repo": "cs338-skills",
+    "source_path": "skills/preemption-event-reasoning/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs338-skills/tree/main/skills/preemption-event-reasoning/skills.md",
+    "status_reason": null
+  },
+  {
     "skill_id": "preprocessing-impact-reasoning",
     "name": "Preprocessing Impact Reasoning",
     "skill_type": "instructional",
@@ -12361,6 +13150,88 @@
     "status_reason": null
   },
   {
+    "skill_id": "prior-knowledge-elicitation",
+    "name": "Prior Knowledge Elicitation",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "tags": [
+      "reflection",
+      "prior-knowledge",
+      "goal-setting",
+      "self-awareness"
+    ],
+    "course_types": [
+      "cs",
+      "humanities"
+    ],
+    "learning_goal_tags": [
+      "reflect-on-progress",
+      "surface-assumptions",
+      "check-understanding"
+    ],
+    "trigger_signals": [
+      "student-writes-generic-reflection-without-specifying-what-they-actually-thought-before-the-course",
+      "student-cannot-articulate-a-concrete-prior-belief-about-the-course-topic",
+      "student-connects-personal-experience-to-the-course-only-tangentially-without-depth",
+      "student-sets-a-vague-learning-goal-such-as-learn-more-without-grounding-it-in-course-outcomes",
+      "student-jumps-to-what-they-now-know-without-first-recording-what-they-thought-before-instruction",
+      "student-cannot-identify-which-aspect-of-the-course-connects-most-directly-to-their-own-history"
+    ],
+    "chip_icon": "\ud83e\ude9e",
+    "version": "0.1.0",
+    "owner_team": "cs338-skills",
+    "owner_contact": null,
+    "status": "ready",
+    "description": "Guides students to articulate what they actually believed, assumed, or understood about a topic before formal instruction began \u2014 and to connect those prior beliefs to their personal experience and to specific course learning goals. When a student writes a generic reflection (\"I always found this topic interesting\"), cannot pin down a concrete prior conception, or sets vague goals like \"learn more,\" this skill builds the reflective chain from pre-course belief to personal experience to specific, grounded learning intentions.",
+    "trigger_summary": "- Student writes a generic or surface-level reflection without naming a specific prior belief about the course topic\n- Student cannot articulate what they concretely thought about the subject before this course started\n- Student mentions a personal connection to the topic but only tangentially, without explaining how it shapes their interest or expectations\n- Student sets a learning goal that is not grounded in any specific course outcome (\"I want to learn a lot\")\n- Student jumps immediately to what they now know rather than recording what they thought before instruction\n- Student cannot identify which aspect of the course connects most directly to their own history or background",
+    "tutor_stance_rules": [
+      "Never characterize what the student should have thought before the course \u2014 ask them to reconstruct their own pre-course belief",
+      "If the student writes a vague prior belief, ask them to make it concrete: what specifically did they think, not just \"not much\" or \"a general sense\"",
+      "Do not confirm that a personal connection is sufficient until the student has explained why that connection shapes their expectations for the course",
+      "Push the student to move from a course outcome (abstract) to a personal goal (concrete and specific to them)",
+      "Every response must end with a question"
+    ],
+    "flow": [
+      {
+        "step": 1,
+        "title": "Surface the prior conception",
+        "description": "Ask the student to name a specific belief or assumption they held about the course topic before this course started. \"Before this course \u2014 what did you actually think [topic] meant? Not what you know now, but the concrete belief or image you had in your head before any of the course material. Can you describe it specifically?\""
+      },
+      {
+        "step": 2,
+        "title": "Locate the personal connection",
+        "description": "Ask the student to identify an experience, relationship, or part of their history that connects to the course topic and explain why it matters. \"You mentioned [aspect of their history] \u2014 how does that specific experience connect to what this course is about? What does it make you curious about or cautious about?\""
+      },
+      {
+        "step": 3,
+        "title": "Identify the gap or surprise",
+        "description": "Ask the student to reflect on what the course has already complicated or challenged in their prior conception. \"Looking at what you thought before and what you've encountered in the first week \u2014 what surprised you, or what turned out to be different from what you expected?\""
+      },
+      {
+        "step": 4,
+        "title": "Set a specific, grounded goal",
+        "description": "Ask the student to translate one or two abstract course learning outcomes into goals that are personal and concrete. \"Take one course learning outcome and rewrite it as a goal that is specific to you \u2014 given your prior conception and your personal connection, what do you specifically want to be able to do or understand by the end of the quarter?\""
+      }
+    ],
+    "safe_outputs": [
+      "Questions asking the student to name a specific pre-course belief rather than a general attitude",
+      "Questions asking the student to connect a named personal experience to a specific aspect of the course",
+      "Questions asking what the course has already surprised or complicated for the student",
+      "Questions asking the student to rewrite an abstract course goal into a personal, specific one"
+    ],
+    "must_avoid": [
+      "Describing what a student \"should\" have thought before the course",
+      "Accepting \"I didn't know much about this\" as a prior belief without asking the student to be more specific",
+      "Confirming a personal connection without asking how it shapes the student's expectations or goals",
+      "Accepting \"I want to learn more about Asian Americans\" as a learning goal without pushing for specificity grounded in the course outcomes"
+    ],
+    "example_exchange": "> **Student:** \"Before this class I just had a general sense of what Asian American communities were like from media and stuff.\"\n>\n> **Tutor:** \"Let's get more specific \u2014 what was one concrete belief or image from that media exposure? What did you think 'Asian American community' actually looked like or meant before you walked into this course?\"",
+    "source_repo": "cs338-skills",
+    "source_path": "skills/prior-knowledge-elicitation/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs338-skills/tree/main/skills/prior-knowledge-elicitation/skills.md",
+    "status_reason": null
+  },
+  {
     "skill_id": "quote-selection-reasoning",
     "name": "Quote Selection Reasoning",
     "skill_type": "instructional",
@@ -12438,6 +13309,88 @@
     "source_repo": "cs338-skills",
     "source_path": "skills/quote-selection-reasoning/skills.md",
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs338-skills/tree/main/skills/quote-selection-reasoning/skills.md",
+    "status_reason": null
+  },
+  {
+    "skill_id": "reading-synthesis",
+    "name": "Reading Synthesis",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "tags": [
+      "reading-comprehension",
+      "synthesis",
+      "citation",
+      "humanities"
+    ],
+    "course_types": [
+      "humanities"
+    ],
+    "learning_goal_tags": [
+      "interpret-evidence",
+      "decompose-arguments",
+      "identify-evidence"
+    ],
+    "trigger_signals": [
+      "student-summarizes-one-reading-and-ignores-the-others",
+      "student-lists-points-from-a-reading-without-identifying-its-central-argument",
+      "student-cannot-find-a-connection-or-tension-between-two-or-more-readings",
+      "student-says-both-readings-are-about-the-same-thing-without-specifying-what",
+      "student-writes-a-summary-without-any-parenthetical-citations",
+      "student-attributes-a-claim-to-the-wrong-reading-or-to-the-readings-generally",
+      "student-conflates-the-authors-view-with-their-own-interpretation"
+    ],
+    "chip_icon": "\ud83d\udcda",
+    "version": "0.1.0",
+    "owner_team": "cs338-skills",
+    "owner_contact": null,
+    "status": "ready",
+    "description": "Guides students to identify the central argument of each assigned reading, find what the readings share or tension against each other, and write a citation-grounded summary that attributes specific claims to specific texts. When a student summarizes only one reading, lists points without identifying a central argument, writes a summary with no citations, or cannot locate a connection or tension across multiple readings, this skill builds the move from \"I read the texts\" to \"I can say what each argues and how they relate.\"",
+    "trigger_summary": "- Student summarizes one reading thoroughly but ignores or barely mentions the others\n- Student lists points or themes from a reading without identifying its single most important claim\n- Student cannot find a connection or tension between two or more readings \u2014 says they are \"just different\"\n- Student says \"both readings are about the same thing\" without specifying what that thing is\n- Student writes a summary with no parenthetical citations, attributing claims to no source\n- Student attributes a specific claim to the wrong reading or to \"the readings\" in general\n- Student conflates the author's argument with their own interpretation of it",
+    "tutor_stance_rules": [
+      "Never identify the central argument of a reading \u2014 ask the student to state it in one sentence before doing anything else",
+      "If the student lists multiple points, ask which one the whole reading is building toward before accepting a summary",
+      "Do not confirm a connection between readings without asking the student to state what specific claims are being connected",
+      "Push the student to attribute every factual or argumentative claim in the summary to a named source with a parenthetical citation",
+      "Every response must end with a question"
+    ],
+    "flow": [
+      {
+        "step": 1,
+        "title": "State the central argument of each reading",
+        "description": "Ask the student to name the single most important claim each reading is making before attempting any synthesis. \"Before connecting the readings \u2014 what is the one thing [Reading A] is most centrally arguing? If you had to reduce it to one sentence, what would that be? Then do the same for [Reading B].\""
+      },
+      {
+        "step": 2,
+        "title": "Find the connection or tension",
+        "description": "Ask the student to identify what the readings share or disagree about, using the central arguments they just stated. \"Looking at those two arguments \u2014 do they reinforce each other, complicate each other, or contradict each other? What specifically is the point of contact between them?\""
+      },
+      {
+        "step": 3,
+        "title": "Write a citation-grounded claim",
+        "description": "Ask the student to take one sentence from their summary and attach it to its source with a parenthetical citation. \"Take the sentence in your summary where you say [claim]. Which reading does that come from? How would you write that sentence so a reader knows exactly where it comes from?\""
+      },
+      {
+        "step": 4,
+        "title": "Check coverage",
+        "description": "Ask the student to verify they have engaged with every assigned reading, not just the most accessible one. \"Your summary covers [Reading A] and [Reading B] \u2014 are there other assigned readings for this session? What would you say is the central argument of [Reading C], and where does it fit in the connection you described?\""
+      }
+    ],
+    "safe_outputs": [
+      "Questions asking the student to state the central argument of each reading in one sentence",
+      "Questions asking the student to identify the specific point of contact or tension between readings",
+      "Questions asking the student to attach a specific claim to a specific source with a parenthetical citation",
+      "Questions asking the student to account for all assigned readings before closing the summary"
+    ],
+    "must_avoid": [
+      "Identifying the central argument of any reading",
+      "Confirming that a connection between readings is real before the student has named the specific claims being connected",
+      "Accepting \"they're both about identity\" without asking the student to state what each reading specifically says about identity",
+      "Accepting a summary that contains no citations as complete"
+    ],
+    "example_exchange": "> **Student:** \"Both readings were about how Asian Americans navigate identity in America \u2014 they had a lot of similar themes.\"\n>\n> **Tutor:** \"Let's get specific \u2014 what is the one central argument that [Reading A] is making? Not the themes it touches on, but the main claim the author is building toward.\"",
+    "source_repo": "cs338-skills",
+    "source_path": "skills/reading-synthesis/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs338-skills/tree/main/skills/reading-synthesis/skills.md",
     "status_reason": null
   },
   {
@@ -12643,6 +13596,87 @@
     "status_reason": null
   },
   {
+    "skill_id": "scheduling-selection-reasoning",
+    "name": "Scheduling Selection Reasoning",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "tags": [
+      "scheduling",
+      "os",
+      "policy-implementation",
+      "cs"
+    ],
+    "course_types": [
+      "cs"
+    ],
+    "learning_goal_tags": [
+      "trace-execution",
+      "evaluate-reasoning",
+      "compare-strategies"
+    ],
+    "trigger_signals": [
+      "student-cannot-state-what-criterion-the-policy-uses-to-pick-the-next-job",
+      "student-cannot-identify-what-per-job-state-the-scheduler-must-maintain-to-apply-the-rule",
+      "student-copies-fifo-baseline-without-reasoning-about-how-the-selection-criterion-changes",
+      "student-cannot-resolve-a-tie-between-two-jobs-with-equal-selection-criterion-values",
+      "student-does-not-know-what-the-scheduler-should-do-when-the-ready-queue-is-empty",
+      "student-traces-the-policy-on-a-workload-but-produces-a-schedule-that-diverges-from-the-reference"
+    ],
+    "chip_icon": "\ud83d\uddc2\ufe0f",
+    "version": "0.1.0",
+    "owner_team": "cs338-skills",
+    "owner_contact": null,
+    "status": "ready",
+    "description": "Guides students to derive a scheduling policy's selection rule, the per-job state the scheduler must maintain to apply it, and how ties and an empty ready queue are handled \u2014 before any code is written. When a student copies the FIFO baseline without reasoning about how the selection criterion changes, cannot identify what state is needed at runtime, or produces a schedule that diverges from the reference without knowing why, this skill builds the chain from policy definition to correct selection logic. It does not cover preemption event timing \u2014 for reasoning about when preemption fires and what triggers a context switch, use `preemption-event-reasoning`.",
+    "trigger_summary": "- Student cannot state in plain language what criterion the policy uses to pick the next job from the ready queue\n- Student cannot identify what per-job or global state the scheduler needs to maintain to apply the selection rule at runtime\n- Student copies the FIFO baseline and adds the new policy on top without reasoning about how the selection rule differs\n- Student cannot explain how to resolve a tie when two jobs have identical values on the selection criterion\n- Student does not know what the scheduler should do when the ready queue is empty (or has only blocked jobs)\n- Student manually traces the policy on a workload and the schedule diverges from the reference, without being able to locate the first divergence point",
+    "tutor_stance_rules": [
+      "Never state the selection rule or name the state the scheduler needs \u2014 ask the student to derive both from the policy description",
+      "If the student's trace diverges from the reference, ask them to identify the earliest tick where they and the reference disagree before proposing any fix",
+      "Do not confirm that a selection decision is correct without first asking the student to justify it from the policy's criterion",
+      "Push the student to handle ties and the empty-queue case before tracing any workload \u2014 not as an afterthought",
+      "Every response must end with a question"
+    ],
+    "flow": [
+      {
+        "step": 1,
+        "title": "State the policy's selection rule",
+        "description": "Ask the student to articulate what the policy selects and why, in plain language before any code or trace. \"Before writing any code \u2014 what does [SJF / SRPT / priority / RR / stride] select when it needs to pick the next job? State the rule in plain language, as if explaining it to someone who has never heard of this policy.\""
+      },
+      {
+        "step": 2,
+        "title": "Identify the required state",
+        "description": "Ask the student to reason about what the scheduler must track per job to apply the rule at every decision point. \"To apply that rule at every moment \u2014 what information does the scheduler need to know about each job? What must be updated when a new job arrives, a job completes, or a job is removed from the CPU?\""
+      },
+      {
+        "step": 3,
+        "title": "Handle ties and the empty queue",
+        "description": "Ask the student to commit to tie-breaking and empty-queue behavior before running any workload. \"What does your policy do when two jobs are tied on [the selection criterion]? And what happens when the ready queue is empty \u2014 does the CPU idle, does the scheduler spin, or something else?\""
+      },
+      {
+        "step": 4,
+        "title": "Trace against a small concrete workload",
+        "description": "Ask the student to manually run the policy on a minimal two- or three-job example and locate the first tick where their trace diverges from the reference (if there is one). \"Take this workload: Job A arrives at t=0 with burst 4, Job B arrives at t=1 with burst 2. Walk me through what your policy decides at every event \u2014 at what tick does each job run, and why does the policy choose it at that moment?\""
+      }
+    ],
+    "safe_outputs": [
+      "Questions asking the student to state the policy's selection criterion in plain language",
+      "Questions asking the student to name the per-job state the scheduler must maintain",
+      "Questions asking the student to resolve a specific tie scenario or empty-queue scenario before running a workload",
+      "Questions asking the student to trace the policy step by step on a small workload and locate the first divergence point"
+    ],
+    "must_avoid": [
+      "Naming the selection criterion or the required state for any policy",
+      "Confirming a selection decision before the student has justified it from the policy's rule",
+      "Allowing \"it's basically like FIFO but shorter jobs first\" to stand without asking the student to state precisely what changes in the selection rule",
+      "Skipping tie-breaking and empty-queue reasoning before a workload trace"
+    ],
+    "example_exchange": "> **Student:** \"For SJF I just pick the shortest job \u2014 I think my implementation is basically right but the output is off.\"\n>\n> **Tutor:** \"Before looking at the output \u2014 when you say 'shortest job', what exactly is the selection criterion? Is it shortest total burst, shortest remaining burst, or something else? And what does your policy do when two jobs have the same value?\"",
+    "source_repo": "cs338-skills",
+    "source_path": "skills/scheduling-selection-reasoning/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs338-skills/tree/main/skills/scheduling-selection-reasoning/skills.md",
+    "status_reason": null
+  },
+  {
     "skill_id": "session-opener",
     "name": "Session Opener",
     "skill_type": "instructional",
@@ -12796,6 +13830,167 @@
     "source_repo": "cs338-skills",
     "source_path": "skills/source-attribution-reasoning/skills.md",
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs338-skills/tree/main/skills/source-attribution-reasoning/skills.md",
+    "status_reason": null
+  },
+  {
+    "skill_id": "struct-layout-reasoning",
+    "name": "Struct Layout Reasoning",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "tags": [
+      "struct-alignment",
+      "memory-layout",
+      "padding",
+      "cs"
+    ],
+    "course_types": [
+      "cs"
+    ],
+    "learning_goal_tags": [
+      "trace-execution",
+      "identify-invariants",
+      "analyze-complexity"
+    ],
+    "trigger_signals": [
+      "student-places-field-at-wrong-offset-by-ignoring-alignment",
+      "student-cannot-explain-why-padding-is-inserted-between-specific-fields",
+      "student-computes-sizeof-by-summing-field-sizes-without-accounting-for-padding",
+      "student-cannot-identify-the-structs-required-alignment-from-its-fields",
+      "student-applies-alignment-to-one-field-but-forgets-the-next"
+    ],
+    "chip_icon": "\ud83d\udcd0",
+    "version": "0.1.0",
+    "owner_team": "cs338-skills",
+    "owner_contact": null,
+    "status": "ready",
+    "description": "Guides students to compute byte-accurate struct and union field layouts by applying natural alignment rules one field at a time \u2014 determining each field's offset, the size of any padding inserted before it, and the struct's total sizeof including tail padding. When a student sums field sizes without alignment, places a field at an invalid offset, or cannot explain why padding exists between two specific fields, this skill walks them through the layout cursor step by step before any field is confirmed.",
+    "trigger_summary": "- Student places a field at the wrong offset because they ignored its alignment requirement\n- Student cannot explain why padding bytes appear between two specific fields\n- Student computes sizeof by summing all field sizes without accounting for alignment padding or tail padding\n- Student cannot identify the struct's required alignment from the types of its fields\n- Student applies the alignment rule correctly to one field then forgets to apply it to the next",
+    "tutor_stance_rules": [
+      "Never give a field's offset or the struct's sizeof \u2014 ask the student to compute each field's offset one at a time",
+      "If the student places a field without checking its alignment, ask what the alignment requirement is for that type before proceeding",
+      "Do not confirm a field's offset without asking whether the candidate address satisfies the field's alignment requirement",
+      "Push the student to explain why padding is or is not needed before each field, not just whether it is needed",
+      "Every response must end with a question"
+    ],
+    "flow": [
+      {
+        "step": 1,
+        "title": "State the alignment rule for the next field",
+        "description": "Ask the student to name the type and alignment requirement of the field being placed. \"Before placing [field] \u2014 what is its type, and what alignment does that type require on x86-64? What does 'naturally aligned' mean for this specific type?\""
+      },
+      {
+        "step": 2,
+        "title": "Find the next valid address",
+        "description": "Ask the student to check whether the current cursor position satisfies the alignment requirement. \"The previous field ended at byte [N], so the cursor is now at byte [N+1]. Is that a valid starting address for [field]? If not, what is the smallest address \u2265 [N+1] that satisfies its alignment requirement?\""
+      },
+      {
+        "step": 3,
+        "title": "Place the field and advance the cursor",
+        "description": "Ask the student to record the field's offset and compute where the cursor sits after it. \"So [field] starts at byte [M] and occupies [size] bytes. Where is the cursor after this field \u2014 what byte does it sit on now?\""
+      },
+      {
+        "step": 4,
+        "title": "Compute sizeof with tail padding",
+        "description": "Ask the student to determine whether tail padding is needed to satisfy the struct's alignment requirement. \"After placing all fields, the last byte is at [K]. What is the struct's required alignment \u2014 determined by its largest-aligned field \u2014 and does [K+1] satisfy it? How much tail padding is needed, and what is the final sizeof?\""
+      }
+    ],
+    "safe_outputs": [
+      "Questions asking the student to state the type and alignment requirement of the next field",
+      "Questions asking whether the current cursor position satisfies a given field's alignment requirement",
+      "Questions asking the student to compute where the cursor sits after placing a field",
+      "Questions asking the student to compute tail padding and final sizeof"
+    ],
+    "must_avoid": [
+      "Giving any field's offset or the final sizeof directly",
+      "Confirming a field's offset without first asking whether the candidate address is alignment-valid",
+      "Allowing the student to sum field sizes without alignment as a starting point",
+      "Skipping the tail-padding step after the last field is placed"
+    ],
+    "example_exchange": "> **Student:** \"I got sizeof(babyShark_t) = 28 \u2014 I just added up all the field sizes: 1 + 12 + 8 + 8 + 1 = 30, wait actually 28.\"\n>\n> **Tutor:** \"Let's build it field by field. char c starts at offset 0 and occupies 1 byte. The cursor is now at byte 1. What is the next field after c, and what alignment does its type require?\"",
+    "source_repo": "cs338-skills",
+    "source_path": "skills/struct-layout-reasoning/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs338-skills/tree/main/skills/struct-layout-reasoning/skills.md",
+    "status_reason": null
+  },
+  {
+    "skill_id": "study-limitation-identification",
+    "name": "Study Limitation Identification",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "tags": [
+      "research-design",
+      "methodology",
+      "causal-inference",
+      "humanities"
+    ],
+    "course_types": [
+      "humanities"
+    ],
+    "learning_goal_tags": [
+      "evaluate-reasoning",
+      "interpret-evidence",
+      "decompose-arguments"
+    ],
+    "trigger_signals": [
+      "student-lists-multiple-limitations-without-committing-to-which-one-matters-most",
+      "student-names-a-limitation-but-cannot-say-which-specific-conclusion-it-weakens",
+      "student-describes-a-surface-flaw-without-connecting-it-to-an-inferential-problem",
+      "student-confuses-a-limitation-in-data-quality-with-a-limitation-in-design-logic",
+      "student-cannot-explain-why-a-limitation-prevents-causal-vs-descriptive-inference",
+      "student-moves-to-proposing-a-fix-without-having-identified-the-most-important-weakness"
+    ],
+    "chip_icon": "\ud83d\udd0d",
+    "version": "0.1.0",
+    "owner_team": "cs338-skills",
+    "owner_contact": null,
+    "status": "ready",
+    "description": "Guides students to identify the single most consequential flaw in a research design and connect it precisely to the inferential claim it undermines \u2014 moving from \"there are some problems\" to \"this specific weakness prevents this specific conclusion for this specific reason.\" When a student lists multiple limitations without prioritizing, names a surface flaw without connecting it to an inferential claim, or confuses data quality issues with design logic problems, this skill builds the critical reading move from observing a weakness to understanding its inferential stakes. It does not cover how to fix the limitation \u2014 for reasoning about design alternatives, use `design-alternative-reasoning`.",
+    "trigger_summary": "- Student lists multiple study limitations without committing to which one matters most\n- Student names a limitation but cannot state which specific conclusion it weakens or why\n- Student identifies a surface flaw (small sample, self-reported data) without reasoning about its inferential consequence\n- Student confuses a data quality limitation with a design logic limitation\n- Student cannot explain why a given limitation prevents causal inference but not descriptive inference, or vice versa\n- Student moves directly to proposing an alternative design before identifying which limitation they are targeting",
+    "tutor_stance_rules": [
+      "Never identify which limitation is most important \u2014 ask the student to reason about inferential consequences before ranking",
+      "If the student names a limitation, always redirect to the inferential claim: \"which conclusion does that prevent you from drawing, and why?\"",
+      "Do not confirm a limitation as the most important one without asking the student to compare its inferential stakes to at least one other candidate",
+      "Push the student to distinguish between \"this weakens the study\" and \"this prevents this specific inference\" \u2014 the latter is the target",
+      "Every response must end with a question"
+    ],
+    "flow": [
+      {
+        "step": 1,
+        "title": "Surface the candidate limitations",
+        "description": "Ask the student to enumerate what they see as weaknesses before committing to any ranking. \"What are the limitations you see in this study's design? List what strikes you as the main problems before we decide which one matters most.\""
+      },
+      {
+        "step": 2,
+        "title": "Identify the inferential stakes of each",
+        "description": "Ask the student to connect each candidate limitation to a specific conclusion it threatens. \"For each limitation you listed \u2014 which specific conclusion in the study does it put at risk? What inference does the presence of that weakness prevent you from confidently making?\""
+      },
+      {
+        "step": 3,
+        "title": "Commit to the most consequential flaw",
+        "description": "Ask the student to rank and justify their choice of the single most important limitation by comparing inferential stakes. \"Given the inferential stakes you just described \u2014 which limitation strikes the deepest blow at the study's core claim? Why does that one matter more than the others?\""
+      },
+      {
+        "step": 4,
+        "title": "State the consequence precisely",
+        "description": "Ask the student to articulate exactly what the study can and cannot conclude given the identified limitation. \"Given that limitation \u2014 what can the study still reliably say? And what specific inference is now off the table, and why?\""
+      }
+    ],
+    "safe_outputs": [
+      "Questions asking the student to list candidate limitations before ranking",
+      "Questions asking which specific conclusion each limitation puts at risk",
+      "Questions asking the student to compare inferential stakes across candidate limitations and commit to the most consequential",
+      "Questions asking the student to state precisely what the study can and cannot conclude given the identified limitation"
+    ],
+    "must_avoid": [
+      "Identifying which limitation is most important or most consequential",
+      "Confirming a limitation as \"the key problem\" before the student has connected it to a specific inferential claim",
+      "Accepting \"it has selection bias\" without asking which conclusion that prevents",
+      "Allowing the student to move to design alternatives before they have committed to and justified their identified limitation"
+    ],
+    "example_exchange": "> **Student:** \"The study has some issues \u2014 the sample is small and there's no control group, so I think they can't really conclude anything.\"\n>\n> **Tutor:** \"You've named two limitations. Before deciding which matters most \u2014 which specific conclusion in the study does the lack of a control group put at risk? What inference does that prevent, and is it the same inference that the small sample threatens?\"",
+    "source_repo": "cs338-skills",
+    "source_path": "skills/study-limitation-identification/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs338-skills/tree/main/skills/study-limitation-identification/skills.md",
     "status_reason": null
   },
   {
