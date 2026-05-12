@@ -1,6 +1,6 @@
 # Catalog build report
 
-**Total skills:** 183  ·  ready: 169, stub: 10, broken: 4
+**Total skills:** 190  ·  ready: 177, stub: 9, broken: 4
 
 ## ⚠ Duplicate skill_id rejections
 
@@ -22,7 +22,7 @@ The following skills were **rejected** because their `skill_id` was already clai
 | `cs-214-skills` | 11 | 10 | 0 | 1 |
 | `cs-343-skills` | 7 | 7 | 0 | 0 |
 | `cs-348-skills` | 12 | 12 | 0 | 0 |
-| `cs338-skills` | 49 | 48 | 1 | 0 |
+| `cs338-skills` | 56 | 56 | 0 | 0 |
 | `history-315-skills` | 9 | 9 | 0 | 0 |
 | `jour-201-1-skills` | 6 | 0 | 6 | 0 |
 | `ling-250-skills` | 14 | 14 | 0 | 0 |
@@ -146,22 +146,29 @@ The following skills were **rejected** because their `skill_id` was already clai
 ### `cs338-skills/skills/integer-overflow-reasoning/skills.md`
 - **warn** [`skill_id`] length 26 > 18 chars — see Team-Guide §7
 
+### `cs338-skills/skills/interview-preparation/skills.md`
+- **warn** [`skill_id`] length 21 > 18 chars — see Team-Guide §7
+
 ### `cs338-skills/skills/iterative-improvement-reasoning/skills.md`
 - **warn** [`skill_id`] length 31 > 18 chars — see Team-Guide §7
 
-### `cs338-skills/skills/memory-layout-tracing-depre/skills.md`
-- **ERROR** [`skill_id`] missing
-- **ERROR** [`name`] missing
-- **ERROR** [`skill_type`] must be one of ['code', 'instructional']
-- **ERROR** [`tags`] missing or empty
-- **ERROR** [`course_types`] missing or empty (must be subset of cs/humanities)
-- **warn** [`learning_goal_tags`] missing — strongly recommended for orchestrator routing
+### `cs338-skills/skills/journalistic-lede-writing/skills.md`
+- **warn** [`skill_id`] length 25 > 18 chars — see Team-Guide §7
 
 ### `cs338-skills/skills/meta-resource-awareness/skills.md`
 - **warn** [`skill_id`] length 23 > 18 chars — see Team-Guide §7
 
 ### `cs338-skills/skills/method-selection-reasoning/skills.md`
 - **warn** [`skill_id`] length 26 > 18 chars — see Team-Guide §7
+
+### `cs338-skills/skills/multi-source-portrait-building/skills.md`
+- **warn** [`skill_id`] length 30 > 18 chars — see Team-Guide §7
+
+### `cs338-skills/skills/nut-graph-construction/skills.md`
+- **warn** [`skill_id`] length 22 > 18 chars — see Team-Guide §7
+
+### `cs338-skills/skills/observation-integration/skills.md`
+- **warn** [`skill_id`] length 23 > 18 chars — see Team-Guide §7
 
 ### `cs338-skills/skills/parallel-text-comparison/skills.md`
 - **warn** [`skill_id`] length 24 > 18 chars — see Team-Guide §7
@@ -190,8 +197,14 @@ The following skills were **rejected** because their `skill_id` was already clai
 ### `cs338-skills/skills/scheduling-selection-reasoning/skills.md`
 - **warn** [`skill_id`] length 30 > 18 chars — see Team-Guide §7
 
+### `cs338-skills/skills/show-dont-tell-journalism/skills.md`
+- **warn** [`skill_id`] length 25 > 18 chars — see Team-Guide §7
+
 ### `cs338-skills/skills/source-attribution-reasoning/skills.md`
 - **warn** [`skill_id`] length 28 > 18 chars — see Team-Guide §7
+
+### `cs338-skills/skills/story-angle-development/skills.md`
+- **warn** [`skill_id`] length 23 > 18 chars — see Team-Guide §7
 
 ### `cs338-skills/skills/struct-layout-reasoning/skills.md`
 - **warn** [`skill_id`] length 23 > 18 chars — see Team-Guide §7

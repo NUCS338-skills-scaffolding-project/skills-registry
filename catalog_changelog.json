@@ -1,40 +1,19 @@
 {
-  "generated_at": "2026-05-12T16:20:04.252614+00:00",
-  "previous_hash": "b7cc1e0d57861d56",
-  "current_hash": "f06e3c3d607e5d4e",
+  "generated_at": "2026-05-12T23:42:13.003187+00:00",
+  "previous_hash": "f06e3c3d607e5d4e",
+  "current_hash": "226abdb5f6810ca5",
   "added": [
-    "analytical-question-formulation",
-    "assembly-trace-reasoning",
-    "calling-convention-reasoning",
-    "concurrency-failure-diagnosis",
-    "counterevidence-engagement",
-    "design-alternative-reasoning",
-    "endianness-byte-ordering",
-    "historical-contextualization",
-    "historical-thesis-formulation",
-    "integer-overflow-reasoning",
-    "pointer-address-reasoning",
-    "preemption-event-reasoning",
-    "prior-knowledge-elicitation",
-    "reading-synthesis",
-    "scheduling-selection-reasoning",
-    "struct-layout-reasoning",
-    "study-limitation-identification"
+    "interview-preparation",
+    "journalistic-lede-writing",
+    "multi-source-portrait-building",
+    "nut-graph-construction",
+    "observation-integration",
+    "quote-selection",
+    "show-dont-tell-journalism",
+    "story-angle-development"
   ],
-  "removed": [
-    "design-improvement-reasoning"
-  ],
-  "changed": [
-    {
-      "skill_id": "read-spectrogram",
-      "changes": {
-        "status": {
-          "from": "broken",
-          "to": "ready"
-        }
-      }
-    }
-  ],
-  "unchanged_count": 160,
-  "summary": "17 added, 1 removed, 1 changed"
+  "removed": [],
+  "changed": [],
+  "unchanged_count": 178,
+  "summary": "8 added"
 }

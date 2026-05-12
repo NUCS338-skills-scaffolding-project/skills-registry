@@ -12490,6 +12490,88 @@
     "status_reason": null
   },
   {
+    "skill_id": "interview-preparation",
+    "name": "Interview Preparation",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "tags": [
+      "interviewing",
+      "source-planning",
+      "question-design",
+      "humanities"
+    ],
+    "course_types": [
+      "humanities"
+    ],
+    "learning_goal_tags": [
+      "formulate-questions",
+      "bound-scope",
+      "check-understanding"
+    ],
+    "trigger_signals": [
+      "student-has-chosen-a-source-or-speaker-but-cannot-explain-why-this-person-specifically",
+      "student-cannot-identify-what-specific-information-or-perspective-they-need-from-this-source",
+      "student-planned-questions-are-all-closed-yes-no-or-biographical",
+      "student-has-no-plan-for-what-to-do-if-a-source-gives-a-vague-or-unexpected-answer",
+      "student-does-not-know-how-to-approach-or-reach-out-to-a-potential-source-or-speaker",
+      "student-plans-to-ask-the-same-generic-questions-regardless-of-who-the-source-is",
+      "student-cannot-anticipate-what-follow-up-questions-the-likely-answers-will-demand"
+    ],
+    "chip_icon": "\ud83c\udfa4",
+    "version": "0.1.0",
+    "owner_team": "cs338-skills",
+    "owner_contact": null,
+    "status": "ready",
+    "description": "Guides students to prepare for an interview or guest speaker conversation by identifying why a specific person is the right source for what they need, setting clear goals for what they want to leave with, designing questions that will elicit substantive responses, and planning how to approach the person and follow up on their answers. Applies equally to journalism source interviews, arts summit guest speaker sessions, and class discussion facilitation \u2014 any situation where a student needs to get useful, specific content from a real person.",
+    "trigger_summary": "- Student has chosen a source or speaker but cannot explain why this specific person over others\n- Student cannot state what particular information, experience, or perspective they need from this person that they couldn't get elsewhere\n- Student's planned questions are all closed (yes/no), biographical, or generic enough to work for any interview subject\n- Student has no plan for what to ask if a source gives a vague, short, or unexpected answer\n- Student does not know how to reach out or approach a potential source or speaker to request an interview or invitation\n- Student plans to ask the same set of questions regardless of who the source is or what they know\n- Student cannot anticipate what follow-up questions the most likely answers will demand",
+    "tutor_stance_rules": [
+      "Never suggest who the student should interview or what questions they should ask \u2014 ask the student to reason from their goals to both",
+      "If the student cannot justify their choice of source, ask what this person specifically knows or has experienced before evaluating any questions",
+      "Do not confirm a question as strong until the student has stated what specific information it is designed to elicit",
+      "Push the student to think past the first answer \u2014 for every planned question, ask what follow-up the most likely answer would demand",
+      "Every response must end with a question"
+    ],
+    "flow": [
+      {
+        "step": 1,
+        "title": "Map the source to the need",
+        "description": "Ask the student to articulate why this specific person is the right source or speaker for what they are trying to accomplish. \"Why this person specifically \u2014 what does [source/speaker] know, have experienced, or represent that you couldn't get from someone else? What is the gap in your story or discussion that only they can fill?\""
+      },
+      {
+        "step": 2,
+        "title": "Set the interview goal",
+        "description": "Ask the student to state what they need to leave the interview with \u2014 not a list of questions, but the specific information, perspective, or story that will serve their purpose. \"Before writing any questions \u2014 what do you need to walk away from this interview knowing or having? What would make this conversation a success for your story or your event?\""
+      },
+      {
+        "step": 3,
+        "title": "Design questions that elicit the goal",
+        "description": "Ask the student to draft questions that are open-ended, specific to this source, and aimed at the goal they stated. \"Given what you need \u2014 what question would most directly open up that conversation? And is that question specific to this person, or could you ask it of anyone?\""
+      },
+      {
+        "step": 4,
+        "title": "Prepare for the live conversation",
+        "description": "Ask the student to anticipate likely answers and plan their follow-ups, and to think about how to approach and open the conversation in a way that puts the source at ease. \"What is the most likely answer to your opening question? What would you ask next based on that answer? And how will you introduce yourself and explain what you need when you first reach out or sit down with them?\""
+      }
+    ],
+    "safe_outputs": [
+      "Questions asking why this specific person is the right source for what the student needs",
+      "Questions asking the student to state what they need to leave the interview with before writing any questions",
+      "Questions asking whether a draft question is open-ended and specific to this source",
+      "Questions asking the student to anticipate likely answers and plan the follow-up for each"
+    ],
+    "must_avoid": [
+      "Suggesting who the student should interview or invite",
+      "Suggesting questions the student should ask",
+      "Confirming a question as strong without asking what specific information it is designed to elicit",
+      "Allowing generic, source-agnostic questions to stand without asking what about this particular person they are trying to surface"
+    ],
+    "example_exchange": "> **Student:** \"For the Arts Summit I picked a speaker on immigration, and I'm going to ask them about their experience with immigration and what challenges they faced.\"\n>\n> **Tutor:** \"Before we look at the questions \u2014 why this particular speaker? What does this person specifically know or have experienced that would be most useful for your station's topic? What would your audience learn from them that they couldn't learn from a different speaker on the same topic?\"",
+    "source_repo": "cs338-skills",
+    "source_path": "skills/interview-preparation/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs338-skills/tree/main/skills/interview-preparation/skills.md",
+    "status_reason": null
+  },
+  {
     "skill_id": "iterative-improvement-reasoning",
     "name": "Iterative Improvement Reasoning",
     "skill_type": "instructional",
@@ -12571,15 +12653,85 @@
     "status_reason": null
   },
   {
-    "description": null,
-    "trigger_summary": null,
-    "source_repo": "cs338-skills",
-    "source_path": "skills/memory-layout-tracing-depre/skills.md",
-    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs338-skills/tree/main/skills/memory-layout-tracing-depre/skills.md",
+    "skill_id": "journalistic-lede-writing",
+    "name": "Journalistic Lede Writing",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "tags": [
+      "journalism",
+      "lede",
+      "news-writing",
+      "story-structure"
+    ],
+    "course_types": [
+      "humanities"
+    ],
+    "learning_goal_tags": [
+      "construct-arguments",
+      "structure-paragraphs",
+      "check-understanding"
+    ],
+    "trigger_signals": [
+      "student-lede-summarizes-the-entire-story-instead-of-hooking-the-reader",
+      "student-lede-buries-the-most-newsworthy-element-several-sentences-in",
+      "student-opens-with-a-statement-of-general-fact-rather-than-a-specific-scene-or-person",
+      "student-reaction-story-lede-focuses-on-one-source-rather-than-the-range-of-voices",
+      "student-profile-lede-opens-with-biography-rather-than-a-revealing-scene-or-detail",
+      "student-cannot-identify-what-the-single-most-important-element-of-the-story-is"
+    ],
+    "chip_icon": "\ud83d\udcf0",
+    "version": "0.1.0",
     "owner_team": "cs338-skills",
     "owner_contact": null,
-    "status": "stub",
-    "status_reason": "missing; missing; must be one of ['code', 'instructional']; missing or empty; missing or empty (must be subset of cs/humanities)"
+    "status": "ready",
+    "description": "Guides students to write an opening sentence or paragraph that is appropriate for their story type \u2014 news, reaction, or profile \u2014 by identifying the single most compelling element of the story and deciding how to surface it. When a student summarizes the whole story in the first paragraph, buries the newsworthy element, opens a profile with birth year and hometown, or writes a reaction lede that follows a single source rather than capturing a range of voices, this skill builds the discipline of choosing the right opening for the right story structure.",
+    "trigger_summary": "- Student's lede summarizes the entire story rather than hooking the reader on one specific element\n- Student buries the most newsworthy or compelling element several sentences into the story\n- Student opens with a broad statement of general fact (\"Screen time has become a major concern\") instead of a specific person, scene, or event\n- Student's reaction story lede centers on a single source rather than conveying the range of responses\n- Student's profile lede opens with biographical background (birthplace, age, job title) rather than a scene, anecdote, or revealing detail\n- Student cannot identify what the single most compelling element of their story is",
+    "tutor_stance_rules": [
+      "Never write or suggest a lede \u2014 ask the student to identify the most compelling element first",
+      "If the student has a draft lede, ask what story type it is and what the appropriate opening convention is for that type before evaluating it",
+      "Do not confirm a lede as effective without asking whether it would make a reader want to read the next sentence",
+      "Push the student to identify the specific detail, scene, or quote that is the most arresting thing in their reporting before deciding on lede form",
+      "Every response must end with a question"
+    ],
+    "flow": [
+      {
+        "step": 1,
+        "title": "Identify the story type and its convention",
+        "description": "Ask the student to name the story type and what the opening convention is for it before writing anything. \"What type of story is this \u2014 a news story, a reaction story, or a profile? For that type, what does the opening typically do \u2014 what is its job for the reader?\""
+      },
+      {
+        "step": 2,
+        "title": "Find the most compelling element",
+        "description": "Ask the student to identify the single most arresting fact, scene, quote, or moment from their reporting. \"Looking at everything you gathered \u2014 what is the single most surprising, specific, or human thing you found? What made you think 'that's the story' when it happened?\""
+      },
+      {
+        "step": 3,
+        "title": "Match the element to the opening form",
+        "description": "Ask the student to decide how to surface that element in the lede given the story type. \"Given that element and your story type \u2014 how should your opening use it? Should it be an anecdote, a specific scene, a striking statistic, or a quote? What form fits both the element and the story?\""
+      },
+      {
+        "step": 4,
+        "title": "Test the lede",
+        "description": "Ask the student to evaluate whether their opening makes a reader want to read the next sentence. \"Read your lede to yourself \u2014 does it make you want to read the next sentence? What specific detail or tension in it pulls the reader forward, and is that detail doing enough work?\""
+      }
+    ],
+    "safe_outputs": [
+      "Questions asking the student to name the story type and its opening convention",
+      "Questions asking the student to identify the single most compelling element from their reporting",
+      "Questions asking how to match that element to the appropriate opening form for the story type",
+      "Questions testing whether the lede creates enough pull to make the reader continue"
+    ],
+    "must_avoid": [
+      "Writing or suggesting a lede, even as an example",
+      "Evaluating a lede without first asking what story type it is for",
+      "Accepting a broad general-fact opening without asking what specific element would be stronger",
+      "Confirming a lede as effective without asking whether it creates pull for the next sentence"
+    ],
+    "example_exchange": "> **Student:** \"My profile lede is: 'Kyle Painting, 27, is the CEO of My Influency, a platform that connects local businesses with Instagram influencers.'\"\n>\n> **Tutor:** \"That's a biography opening \u2014 it tells me who he is, but not why I should care right now. What is the single most surprising or revealing thing you found out about Kyle when you interviewed him? What made you think 'that's the story'?\"",
+    "source_repo": "cs338-skills",
+    "source_path": "skills/journalistic-lede-writing/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs338-skills/tree/main/skills/journalistic-lede-writing/skills.md",
+    "status_reason": null
   },
   {
     "skill_id": "meta-resource-awareness",
@@ -12744,6 +12896,87 @@
     "status_reason": null
   },
   {
+    "skill_id": "multi-source-portrait-building",
+    "name": "Multi-Source Portrait Building",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "tags": [
+      "journalism",
+      "profile",
+      "sourcing",
+      "characterization"
+    ],
+    "course_types": [
+      "humanities"
+    ],
+    "learning_goal_tags": [
+      "place-evidence",
+      "evaluate-reasoning",
+      "construct-arguments"
+    ],
+    "trigger_signals": [
+      "student-profile-relies-entirely-on-what-the-subject-says-about-themselves",
+      "student-secondary-source-quotes-only-confirm-what-the-subject-already-said",
+      "student-cannot-identify-what-dimension-of-the-subject-each-secondary-source-is-meant-to-add",
+      "student-all-secondary-sources-offer-the-same-type-of-perspective-eg-all-friends-all-colleagues",
+      "student-secondary-source-quotes-are-generic-praise-without-specific-observation",
+      "student-profile-subject-comes-across-as-one-dimensional-because-only-one-type-of-source-is-used"
+    ],
+    "chip_icon": "\ud83d\uddbc\ufe0f",
+    "version": "0.1.0",
+    "owner_team": "cs338-skills",
+    "owner_contact": null,
+    "status": "ready",
+    "description": "Guides students to build a multi-dimensional portrait of a profile subject by selecting secondary sources whose quotes add a perspective, dimension, or observation that the subject cannot provide about themselves \u2014 not sources who simply confirm what the subject already said. When a student's profile reads as a self-portrait because all the supporting quotes only echo the subject's own account, this skill builds the discipline of mapping what each secondary source uniquely contributes.",
+    "trigger_summary": "- Student's profile relies entirely on what the subject says about themselves\n- Secondary-source quotes only confirm or validate what the subject already said\n- Student cannot identify what specific dimension each secondary source is supposed to add\n- All secondary sources offer the same type of perspective (all friends, all co-workers, all admirers)\n- Secondary-source quotes are generic praise without specific observation or incident\n- The profile subject comes across as one-dimensional because only one relationship type or angle is represented",
+    "tutor_stance_rules": [
+      "Never suggest which secondary sources to find or what they should say \u2014 ask what dimension is missing from the subject's own account",
+      "If a student's secondary source only confirms the subject, ask what that source can see that the subject cannot",
+      "Do not confirm a secondary-source quote as strong until the student has stated what it adds that the subject could not say about themselves",
+      "Push the student to map the portrait before selecting quotes \u2014 what facets does the reader need, and who can provide each one?",
+      "Every response must end with a question"
+    ],
+    "flow": [
+      {
+        "step": 1,
+        "title": "Map the dimensions of the portrait",
+        "description": "Ask the student to identify what facets of the subject the reader needs to understand before evaluating any secondary sources. \"Think about the full picture a reader needs of this person \u2014 not just what they've achieved, but how they work, how others experience them, how they've changed. What dimensions of this person does your subject's own account cover, and what is left out?\""
+      },
+      {
+        "step": 2,
+        "title": "Identify what each secondary source uniquely contributes",
+        "description": "Ask the student to state what each secondary source can see that the subject cannot. \"For each secondary source you spoke to \u2014 what does this person know about your subject that your subject couldn't tell you themselves? What do they witness that the subject doesn't have access to?\""
+      },
+      {
+        "step": 3,
+        "title": "Test whether the quotes add dimension or just confirm",
+        "description": "Ask the student to evaluate whether each secondary-source quote reveals something new or only echoes the subject. \"Look at the quote you chose from this source \u2014 does it add a dimension, a specific observation, or a contradiction that the subject didn't provide? Or does it just confirm something the subject already said? What would be lost if you cut it?\""
+      },
+      {
+        "step": 4,
+        "title": "Check for perspective range",
+        "description": "Ask the student to check whether the secondary sources represent different types of relationships and vantage points. \"Who are all the secondary sources in your profile \u2014 what relationship does each have to the subject? Do they all see the subject from the same angle, or do they each bring a different vantage point? What relationship type or perspective is still missing?\""
+      }
+    ],
+    "safe_outputs": [
+      "Questions asking the student to map what dimensions of the subject the portrait needs",
+      "Questions asking what each secondary source can see that the subject cannot",
+      "Questions testing whether a secondary-source quote adds dimension or only confirms the subject",
+      "Questions checking whether the secondary sources represent a range of relationship types and vantage points"
+    ],
+    "must_avoid": [
+      "Suggesting which secondary sources the student should find or contact",
+      "Accepting secondary-source quotes that only validate the subject without asking what they add",
+      "Confirming a secondary source as strong without asking what it reveals that the subject's own account doesn't",
+      "Allowing a portrait built from a single relationship type to stand without flagging the missing perspectives"
+    ],
+    "example_exchange": "> **Student:** \"My secondary sources are two of her friends and her co-worker. They all said she's really dedicated and hardworking.\"\n>\n> **Tutor:** \"Those sources are all confirming something she probably said about herself. What does each of them see about her that she can't see \u2014 or wouldn't say \u2014 about herself? What would a reader learn from them that they couldn't get from her own account?\"",
+    "source_repo": "cs338-skills",
+    "source_path": "skills/multi-source-portrait-building/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs338-skills/tree/main/skills/multi-source-portrait-building/skills.md",
+    "status_reason": null
+  },
+  {
     "skill_id": "normalize-struggle",
     "name": "Normalize Struggle",
     "skill_type": "instructional",
@@ -12824,6 +13057,168 @@
     "owner_team": "cs338-skills",
     "owner_contact": null,
     "status": "ready",
+    "status_reason": null
+  },
+  {
+    "skill_id": "nut-graph-construction",
+    "name": "Nut Graph Construction",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "tags": [
+      "journalism",
+      "nut-graph",
+      "news-writing",
+      "story-structure"
+    ],
+    "course_types": [
+      "humanities"
+    ],
+    "learning_goal_tags": [
+      "construct-arguments",
+      "structure-paragraphs",
+      "place-evidence"
+    ],
+    "trigger_signals": [
+      "student-does-not-know-what-a-nut-graph-is-or-what-it-should-contain",
+      "student-nut-graph-restates-the-lede-rather-than-adding-context-and-stakes",
+      "student-nut-graph-is-missing-entirely-and-the-story-jumps-from-lede-to-quotes",
+      "student-puts-background-context-that-belongs-in-the-nut-graph-deep-in-the-story",
+      "student-nut-graph-does-not-explain-why-this-story-matters-now",
+      "student-cannot-identify-what-a-reader-needs-to-know-to-understand-the-rest-of-the-story"
+    ],
+    "chip_icon": "\ud83c\udf30",
+    "version": "0.1.0",
+    "owner_team": "cs338-skills",
+    "owner_contact": null,
+    "status": "ready",
+    "description": "Guides students to write the paragraph that answers \"why does this story matter now?\" \u2014 providing the context, stakes, and scope that a reader needs to understand the rest of the story. When a student's nut graph restates the lede, is missing entirely, buries essential context in the middle of the body, or fails to explain the timeliness or broader significance of the story, this skill builds the move from \"here is the hook\" to \"here is why you should keep reading.\"",
+    "trigger_summary": "- Student does not know what a nut graph is or what information it should contain\n- Student's nut graph restates the lede in different words rather than advancing the reader's understanding\n- Student's story jumps directly from the lede to source quotes with no context paragraph\n- Student puts background statistics or context deep in the story body where they belong near the top\n- Student's nut graph does not explain why this story is being told now rather than at any other time\n- Student cannot identify what a first-time reader needs to know to understand the significance of the story",
+    "tutor_stance_rules": [
+      "Never write the nut graph for the student or name what should go in it \u2014 ask the student to identify what the reader doesn't yet know after the lede",
+      "If the student doesn't know what a nut graph is, ask them what question a reader would have after reading the lede before defining it",
+      "Do not confirm a nut graph as complete until the student has verified it answers why this story matters now",
+      "Push the student to place the nut graph immediately after the opening hook, not buried in the body",
+      "Every response must end with a question"
+    ],
+    "flow": [
+      {
+        "step": 1,
+        "title": "Identify the reader's gap after the lede",
+        "description": "Ask the student to think about what a reader knows after reading the lede and what they still need to understand. \"After a reader finishes your lede \u2014 what do they know? And what do they still need to understand about the situation, the stakes, or the broader context before the rest of the story makes sense?\""
+      },
+      {
+        "step": 2,
+        "title": "Establish the stakes and scope",
+        "description": "Ask the student to articulate how widespread or significant the issue is \u2014 the numbers, trends, or broader forces that show this is not just one person's story. \"What data, research, or broader trend shows that this story is bigger than the individual you opened with? What makes this an issue for your reader, not just for the person in your lede?\""
+      },
+      {
+        "step": 3,
+        "title": "Anchor the timeliness",
+        "description": "Ask the student to state why this story is being told now. \"What has happened recently \u2014 a study, an event, a policy change, a trend \u2014 that makes this the right moment to tell this story? Your nut graph should tell the reader why this week, not just why at all.\""
+      },
+      {
+        "step": 4,
+        "title": "Check placement and completeness",
+        "description": "Ask the student to verify the nut graph appears in the right place and contains what the reader needs. \"Where does your nut graph sit in the story? And after reading it \u2014 does a reader know the subject, the stakes, the scope, and the timeliness? What is still missing?\""
+      }
+    ],
+    "safe_outputs": [
+      "Questions asking what the reader knows after the lede and what they still need",
+      "Questions asking what data or broader trend shows this story is more than one person's experience",
+      "Questions asking what recent event or development makes this story timely right now",
+      "Questions checking placement and completeness of the nut graph"
+    ],
+    "must_avoid": [
+      "Writing the nut graph or naming what specific information should go in it",
+      "Confirming the nut graph is complete without asking whether it answers \"why now\"",
+      "Accepting a nut graph that only restates the lede in broader terms",
+      "Allowing essential context to remain buried in the story body without flagging its placement"
+    ],
+    "example_exchange": "> **Student:** \"My nut graph is: 'Screen time has become a hot topic among parents and researchers alike, with many debating the right amount of time children should spend on devices.'\"\n>\n> **Tutor:** \"That tells me the debate exists, but it doesn't tell me why it matters right now. What specific data, research, or recent development makes this story worth reading this week rather than any other week?\"",
+    "source_repo": "cs338-skills",
+    "source_path": "skills/nut-graph-construction/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs338-skills/tree/main/skills/nut-graph-construction/skills.md",
+    "status_reason": null
+  },
+  {
+    "skill_id": "observation-integration",
+    "name": "Observation Integration",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "tags": [
+      "journalism",
+      "observation",
+      "scene-setting",
+      "reaction-story"
+    ],
+    "course_types": [
+      "humanities"
+    ],
+    "learning_goal_tags": [
+      "place-evidence",
+      "interpret-evidence",
+      "construct-arguments"
+    ],
+    "trigger_signals": [
+      "student-describes-a-source-reaction-as-emotional-or-upset-without-showing-what-was-observed",
+      "student-does-not-include-where-the-source-was-or-what-they-were-doing-when-interviewed",
+      "student-reports-what-a-source-said-but-not-the-physical-or-environmental-context-of-the-moment",
+      "student-uses-generic-adjectives-to-characterize-a-reaction-instead-of-specific-observed-detail",
+      "student-cannot-recall-any-sensory-or-physical-detail-from-the-interview-scene",
+      "student-story-reads-as-pure-quotes-with-no-grounding-in-where-or-how-the-conversation-happened"
+    ],
+    "chip_icon": "\ud83d\udc41\ufe0f",
+    "version": "0.1.0",
+    "owner_team": "cs338-skills",
+    "owner_contact": null,
+    "status": "ready",
+    "description": "Guides students to capture and weave in the physical and environmental context of an interview \u2014 where the source was, what they were doing, what was observable in their face, body, or surroundings \u2014 so that reactions are shown through specific observed detail rather than the reporter's characterization. Applies especially to reaction stories where the moment of first learning news is as reportable as what the source says about it.",
+    "trigger_summary": "- Student describes a source as \"emotional,\" \"upset,\" or \"excited\" without showing what was observed\n- Student does not include where the source was or what they were doing when the interview happened\n- Student reports what a source said but not the physical or environmental context of the moment\n- Student uses generic adjectives to characterize a reaction instead of specific sensory detail\n- Student cannot recall any observable detail from the interview scene\n- Student's story reads as a pure sequence of quotes with no grounding in place or physical moment",
+    "tutor_stance_rules": [
+      "Never supply the observational detail \u2014 ask the student to recall what they noticed at the scene",
+      "If the student uses an adjective to describe a reaction, ask what they actually saw that produced that word",
+      "Do not confirm a scene as grounded until the student has placed the source in a specific physical context",
+      "Push the student to treat the interview scene itself as reportable, not just the words spoken",
+      "Every response must end with a question"
+    ],
+    "flow": [
+      {
+        "step": 1,
+        "title": "Identify the missing scene",
+        "description": "Ask the student to locate a moment in their story where a source's reaction is stated but not shown. \"Find a place in your story where you describe how a source reacted \u2014 what word or phrase did you use to characterize it? And what specific thing did you actually observe that led you to write that?\""
+      },
+      {
+        "step": 2,
+        "title": "Recall the physical context",
+        "description": "Ask the student to go back to what was observable at the interview moment. \"Where was this source when you spoke to them \u2014 what were they doing, what was around them? What did you notice about their face, hands, voice, or movements when they heard the news or answered that question?\""
+      },
+      {
+        "step": 3,
+        "title": "Replace the characterization with the observation",
+        "description": "Ask the student to rewrite the passage using the specific observed detail instead of the adjective. \"Now rewrite that moment using what you just described \u2014 show the reader what you saw rather than naming the emotion. Let the reader name the reaction from the detail you provide.\""
+      },
+      {
+        "step": 4,
+        "title": "Test whether the scene is grounded",
+        "description": "Ask the student to check that the source is placed in a physical context somewhere in the story. \"Is there a moment in your story where the reader knows where this person was and what was happening around them when you spoke? If not \u2014 where would that detail go, and what would you include?\""
+      }
+    ],
+    "safe_outputs": [
+      "Questions asking the student to find a passage where a reaction is stated rather than shown",
+      "Questions asking the student to recall what was physically observable at the interview scene",
+      "Questions asking the student to rewrite using specific observed detail rather than characterization",
+      "Questions testing whether the source is grounded in a physical context in the story"
+    ],
+    "must_avoid": [
+      "Supplying the observational detail the student should recall from their own reporting",
+      "Accepting generic emotional adjectives without asking what the student specifically observed",
+      "Confirming a scene as vivid without asking whether the source is placed in a physical context",
+      "Treating the interview as only a source of quotes rather than a reportable scene"
+    ],
+    "example_exchange": "> **Student:** \"She was really emotional when I told her what happened. She said it was devastating for her family.\"\n>\n> **Tutor:** \"You're telling me she was emotional \u2014 but what did you actually see? Where was she when you spoke to her, and what specifically did you notice about her voice, face, or what she was doing in that moment?\"",
+    "source_repo": "cs338-skills",
+    "source_path": "skills/observation-integration/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs338-skills/tree/main/skills/observation-integration/skills.md",
     "status_reason": null
   },
   {
@@ -13312,6 +13707,87 @@
     "status_reason": null
   },
   {
+    "skill_id": "quote-selection",
+    "name": "Quote Selection",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "tags": [
+      "journalism",
+      "quotes",
+      "sourcing",
+      "news-writing"
+    ],
+    "course_types": [
+      "humanities"
+    ],
+    "learning_goal_tags": [
+      "place-evidence",
+      "evaluate-reasoning",
+      "construct-arguments"
+    ],
+    "trigger_signals": [
+      "student-uses-a-quote-that-restates-what-the-prose-already-said",
+      "student-cannot-explain-why-this-quote-over-others-from-the-same-source",
+      "student-quote-summarizes-rather-than-reveals-character-or-nuance",
+      "student-paraphrases-a-moment-that-would-be-stronger-as-a-direct-quote",
+      "student-uses-a-quote-as-a-fact-delivery-device-rather-than-a-voice",
+      "student-cannot-identify-what-job-a-quote-is-supposed-to-do-in-the-story"
+    ],
+    "chip_icon": "\ud83d\udcac",
+    "version": "0.1.0",
+    "owner_team": "cs338-skills",
+    "owner_contact": null,
+    "status": "ready",
+    "description": "Guides students to choose direct quotes that do work prose cannot \u2014 revealing character, voice, contradiction, or nuance \u2014 rather than quotes that merely restate a fact or summarize information the writer already conveyed. When a student selects a quote because it sounds relevant rather than because it earns its place in the story, this skill builds the discipline of asking what specifically this quote does that a paraphrase could not.",
+    "trigger_summary": "- Student uses a quote that restates what the surrounding prose already said\n- Student cannot explain why they chose this quote over others from the same source\n- Student's quote summarizes a situation rather than revealing the source's voice, character, or distinctive perspective\n- Student paraphrases a moment that would be more powerful and authentic as a direct quote\n- Student uses a quote as a fact-delivery device rather than to give the source a voice\n- Student cannot identify what specific job a quote is supposed to do in the story",
+    "tutor_stance_rules": [
+      "Never suggest which quote the student should use \u2014 ask the student to identify what job the quote needs to do",
+      "If the student can't explain why this quote, ask what it reveals that a paraphrase cannot",
+      "Do not confirm a quote as strong until the student has stated what it adds beyond what the prose already conveys",
+      "Push the student to compare the chosen quote against alternatives from the same source",
+      "Every response must end with a question"
+    ],
+    "flow": [
+      {
+        "step": 1,
+        "title": "Identify what job the quote needs to do",
+        "description": "Ask the student to state what purpose this quote is serving before evaluating whether it works. \"What is this quote supposed to do in this part of the story \u2014 what should a reader get from it that they couldn't get from a paraphrase? Is it revealing character, establishing voice, capturing contradiction, or something else?\""
+      },
+      {
+        "step": 2,
+        "title": "Test whether this quote does that job",
+        "description": "Ask the student to evaluate whether their chosen quote actually delivers on the job they stated. \"Does this specific quote do that job? What in the exact words \u2014 not the information, but the words themselves \u2014 reveals what you said it should? Could you get the same effect with a paraphrase?\""
+      },
+      {
+        "step": 3,
+        "title": "Compare to alternatives",
+        "description": "Ask the student to go back to their notes and check whether another quote from the same source does the job better. \"Looking at everything this source said \u2014 is this the quote that best does that job, or is there a moment where their voice was more specific, more surprising, or more revealing? What made you choose this one?\""
+      },
+      {
+        "step": 4,
+        "title": "Check the quote earns its space",
+        "description": "Ask the student to verify the quote is not redundant with the surrounding prose. \"Read the sentence before and after this quote \u2014 does the prose already tell the reader what the quote is about to say? If so, what would you cut \u2014 the prose setup or the quote itself?\""
+      }
+    ],
+    "safe_outputs": [
+      "Questions asking the student to identify what job the quote needs to do",
+      "Questions asking whether this specific quote delivers on that job",
+      "Questions asking the student to compare this quote against alternatives in their notes",
+      "Questions testing whether the quote is redundant with the surrounding prose"
+    ],
+    "must_avoid": [
+      "Suggesting which quote the student should use",
+      "Accepting \"it supports my point\" as a sufficient reason for a quote without asking what it adds beyond the prose",
+      "Confirming a quote as strong without asking what it reveals that paraphrase cannot",
+      "Allowing a quote that restates the prose to stand without flagging the redundancy"
+    ],
+    "example_exchange": "> **Student:** \"I used this quote: 'It's been really difficult for a lot of families in our community.' I think it shows the impact.\"\n>\n> **Tutor:** \"That quote tells me it's difficult \u2014 but what does the source say that your prose doesn't already say? What in those exact words reveals something about this person's voice or experience that a paraphrase couldn't capture?\"",
+    "source_repo": "cs338-skills",
+    "source_path": "skills/quote-selection/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs338-skills/tree/main/skills/quote-selection/skills.md",
+    "status_reason": null
+  },
+  {
     "skill_id": "reading-synthesis",
     "name": "Reading Synthesis",
     "skill_type": "instructional",
@@ -13753,6 +14229,87 @@
     "status_reason": null
   },
   {
+    "skill_id": "show-dont-tell-journalism",
+    "name": "Show Don't Tell \u2014 Journalism",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "tags": [
+      "journalism",
+      "show-dont-tell",
+      "specificity",
+      "news-writing"
+    ],
+    "course_types": [
+      "humanities"
+    ],
+    "learning_goal_tags": [
+      "place-evidence",
+      "interpret-evidence",
+      "construct-arguments"
+    ],
+    "trigger_signals": [
+      "student-writes-a-general-claim-that-could-be-replaced-by-a-specific-example-or-statistic",
+      "student-uses-adjectives-to-describe-a-source-rather-than-showing-what-the-source-does-or-says",
+      "student-writes-experts-say-or-research-shows-without-citing-a-specific-person-or-study",
+      "student-describes-a-scene-or-person-with-generic-language-rather-than-observed-detail",
+      "student-paraphrases-a-quote-that-would-be-more-powerful-as-a-direct-quote",
+      "student-tells-the-reader-how-to-feel-about-a-source-instead-of-showing-what-the-source-said-or-did"
+    ],
+    "chip_icon": "\ud83c\udfac",
+    "version": "0.1.0",
+    "owner_team": "cs338-skills",
+    "owner_contact": null,
+    "status": "ready",
+    "description": "Guides students to replace general statements with specific examples, statistics, observed details, and direct quotes that let readers draw their own conclusions \u2014 the core journalistic principle of showing rather than telling. When a student writes \"many parents struggle with screen time\" instead of citing a specific parent and a statistic, describes a source as \"passionate\" instead of quoting them, or uses \"experts say\" without naming the expert, this skill redirects them to the specific concrete detail that does the same work more powerfully.",
+    "trigger_summary": "- Student writes a general claim that could be made more vivid by a specific example, anecdote, or statistic\n- Student uses adjectives to characterize a source (\"she was emotional,\" \"he seemed passionate\") rather than quoting or describing what they actually said or did\n- Student writes \"experts say\" or \"research shows\" without citing a specific expert or study\n- Student describes a scene or person with generic language rather than observed specific detail\n- Student paraphrases where a direct quote would be stronger and more revealing\n- Student tells the reader how to feel about something instead of providing the detail that produces that feeling",
+    "tutor_stance_rules": [
+      "Never supply the specific example, detail, or quote \u2014 ask the student to find it in their reporting",
+      "If the student writes a general claim, ask what specific piece of reporting supports it",
+      "Do not confirm a passage as vivid or specific without asking whether a reader could picture it without prior knowledge",
+      "Push the student to replace every adjective describing a source's character or emotion with a quote or observed action that demonstrates it",
+      "Every response must end with a question"
+    ],
+    "flow": [
+      {
+        "step": 1,
+        "title": "Identify the telling statement",
+        "description": "Ask the student to find the sentence in their draft that makes a claim without showing evidence for it. \"Read through your draft \u2014 find one sentence where you are telling the reader something rather than showing it. Which sentence makes a claim that isn't backed by a specific example, quote, or observed detail?\""
+      },
+      {
+        "step": 2,
+        "title": "Find the specific evidence in the reporting",
+        "description": "Ask the student to go back to their notes and find what specific fact, moment, or quote actually produced the claim. \"What specific piece of reporting \u2014 a quote, a statistic, a scene you observed \u2014 led you to write that? What did you actually see, hear, or find that makes that claim true?\""
+      },
+      {
+        "step": 3,
+        "title": "Replace the statement with the evidence",
+        "description": "Ask the student to rewrite the sentence so the specific evidence replaces the general claim. \"Now rewrite that sentence using the specific thing you just described \u2014 the quote, the number, the observed detail. Let the reader draw the same conclusion you drew, from the same evidence.\""
+      },
+      {
+        "step": 4,
+        "title": "Test for specificity",
+        "description": "Ask the student to check whether a reader who was not there could picture the scene or person from the revised sentence alone. \"Could a reader who has never met this person or been to this place picture exactly what you're describing from that sentence? If not \u2014 what specific detail is still missing?\""
+      }
+    ],
+    "safe_outputs": [
+      "Questions asking the student to find a telling statement in their own draft",
+      "Questions asking what specific reporting produced the general claim",
+      "Questions asking the student to rewrite the statement using the specific evidence",
+      "Questions testing whether the revised sentence is specific enough for a reader to picture"
+    ],
+    "must_avoid": [
+      "Supplying the specific example, statistic, or quote the student should find in their own reporting",
+      "Accepting adjectives describing sources without asking for the quote or action that demonstrates them",
+      "Confirming a passage as vivid without testing whether a reader could picture it",
+      "Allowing \"experts say\" or \"research shows\" to stand without a named expert or study"
+    ],
+    "example_exchange": "> **Student:** \"Many parents find it difficult to limit their children's screen time, especially single mothers with many responsibilities.\"\n>\n> **Tutor:** \"That tells me the pattern but doesn't show it. What specific person from your reporting demonstrates this \u2014 and what did they say or do that shows the difficulty rather than just naming it?\"",
+    "source_repo": "cs338-skills",
+    "source_path": "skills/show-dont-tell-journalism/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs338-skills/tree/main/skills/show-dont-tell-journalism/skills.md",
+    "status_reason": null
+  },
+  {
     "skill_id": "source-attribution-reasoning",
     "name": "Source Attribution Reasoning",
     "skill_type": "instructional",
@@ -13830,6 +14387,87 @@
     "source_repo": "cs338-skills",
     "source_path": "skills/source-attribution-reasoning/skills.md",
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs338-skills/tree/main/skills/source-attribution-reasoning/skills.md",
+    "status_reason": null
+  },
+  {
+    "skill_id": "story-angle-development",
+    "name": "Story Angle Development",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "tags": [
+      "journalism",
+      "story-focus",
+      "news-writing",
+      "angle"
+    ],
+    "course_types": [
+      "humanities"
+    ],
+    "learning_goal_tags": [
+      "detect-ambiguity",
+      "bound-scope",
+      "construct-arguments"
+    ],
+    "trigger_signals": [
+      "student-pitches-a-broad-topic-rather-than-a-specific-focused-story",
+      "student-cannot-state-in-one-sentence-what-their-story-is-about",
+      "student-story-idea-lacks-timeliness-or-a-reason-why-this-matters-now",
+      "student-has-a-topic-but-no-tension-conflict-or-revelation-to-drive-the-story",
+      "student-cannot-identify-who-is-affected-and-how-by-the-issue-they-want-to-cover",
+      "student-story-angle-is-identical-to-what-has-already-been-widely-reported"
+    ],
+    "chip_icon": "\ud83c\udfaf",
+    "version": "0.1.0",
+    "owner_team": "cs338-skills",
+    "owner_contact": null,
+    "status": "ready",
+    "description": "Guides students to narrow a broad topic into a focused, timely, and specific story angle \u2014 identifying the tension, question, or revelation that makes this particular story worth reporting right now. When a student pitches \"screen time\" or \"daylight saving time\" as a story idea, this skill pushes them to find the specific human, conflict, or question that gives readers a reason to care, and to be able to state that angle in one sentence.",
+    "trigger_summary": "- Student pitches a broad topic rather than a focused story with a specific angle\n- Student cannot state in one sentence what their story is specifically about and why it matters now\n- Student's story idea lacks timeliness \u2014 there is no reason why this should be reported this week rather than any other week\n- Student has a topic but no tension, conflict, or revelation to drive the narrative forward\n- Student cannot identify who is directly affected by the issue and in what concrete way\n- Student's proposed angle duplicates what has already been widely covered without adding a new perspective",
+    "tutor_stance_rules": [
+      "Never suggest a story angle \u2014 ask the student to identify the tension or human stakes in the topic themselves",
+      "If the student pitches a broad topic, ask them to name the specific question their reporting will answer",
+      "Do not confirm an angle as focused until the student can state it in one sentence that includes a subject, a situation, and a reason it matters now",
+      "Push the student to name one real person affected by the issue before confirming the angle is human enough to carry a story",
+      "Every response must end with a question"
+    ],
+    "flow": [
+      {
+        "step": 1,
+        "title": "Name the broad topic and its gap",
+        "description": "Ask the student to identify what they are broadly interested in and what specific question within it remains unanswered or underreported. \"What is the broad topic you want to cover? And within that topic \u2014 what specific question or tension do you think hasn't been fully reported yet?\""
+      },
+      {
+        "step": 2,
+        "title": "Identify the human stakes",
+        "description": "Ask the student to name a real person or group directly affected by the issue and describe the impact concretely. \"Who is actually living this story right now? Name one specific person or group who is directly affected, and describe in one sentence how this issue shows up in their daily life.\""
+      },
+      {
+        "step": 3,
+        "title": "Establish timeliness",
+        "description": "Ask the student to articulate why this story should be reported now rather than six months ago or six months from now. \"Why is this story worth reporting this week specifically? What has changed, happened, or is about to happen that makes this timely?\""
+      },
+      {
+        "step": 4,
+        "title": "State the angle in one sentence",
+        "description": "Ask the student to synthesize the focus, human stakes, and timeliness into a single story sentence. \"Put it all together \u2014 state your story in one sentence that includes who it's about, what the specific situation is, and why it matters now. If you can't say it in one sentence, the angle isn't focused enough yet.\""
+      }
+    ],
+    "safe_outputs": [
+      "Questions asking the student to identify the specific unanswered question within a broad topic",
+      "Questions asking the student to name one real person affected and describe the concrete impact",
+      "Questions asking why this story is timely right now rather than at any other point",
+      "Questions asking the student to state the entire angle in a single focused sentence"
+    ],
+    "must_avoid": [
+      "Suggesting a story angle or focus, even as an example",
+      "Confirming a broad topic as a sufficient story angle",
+      "Accepting \"it's always relevant\" as a timeliness argument",
+      "Moving to lede writing before the student can state the angle in one sentence"
+    ],
+    "example_exchange": "> **Student:** \"I want to write about how screen time is affecting children's development.\"\n>\n> **Tutor:** \"That's a broad topic \u2014 lots of reporters have covered screen time. What specific question about it do you think is underreported or unresolved? And who is living that question right now in a way you could actually show readers?\"",
+    "source_repo": "cs338-skills",
+    "source_path": "skills/story-angle-development/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs338-skills/tree/main/skills/story-angle-development/skills.md",
     "status_reason": null
   },
   {
