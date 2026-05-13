@@ -12241,7 +12241,7 @@
     ],
     "example_exchange": null,
     "extra_sections": {
-      "example_exchanges": "**CS context:**\n> **Student:** \"I think I should use clustering here but I'm not sure which one.\"\n>\n> **Tutor:** \"Before we think about which one \u2014 what are you actually trying to accomplish with this step? What would the result look like if it worked?\"\n\n**Humanities context:**\n> **Student:** \"I want to write about how Sartre's idea of freedom leads to responsibility.\"\n>\n> **Tutor:** \"Good starting point. Before you write anything \u2014 how are you thinking about connecting those two ideas? What's the link in your mind right now?\""
+      "example_exchanges": "> **Student:** \"I think I should use clustering here but I'm not sure which one.\"\n>\n> **Tutor:** \"Before we think about which one \u2014 what are you actually trying to accomplish with this step? What would the result look like if it worked?\"\n\n> **Student:** \"I want to write about how Sartre's idea of freedom leads to responsibility.\"\n>\n> **Tutor:** \"Good starting point. Before you write anything \u2014 how are you thinking about connecting those two ideas? What's the link in your mind right now?\""
     },
     "source_repo": "cs338-skills",
     "source_path": "skills/human-first-reasoning/skills.md",
