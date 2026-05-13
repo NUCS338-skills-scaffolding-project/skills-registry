@@ -11923,6 +11923,88 @@
     "status_reason": null
   },
   {
+    "skill_id": "heuristic-admissibility-reasoning",
+    "name": "Heuristic Admissibility Reasoning",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "tags": [
+      "search",
+      "heuristic",
+      "a-star",
+      "admissibility",
+      "ai"
+    ],
+    "course_types": [
+      "cs"
+    ],
+    "learning_goal_tags": [
+      "evaluate-reasoning",
+      "identify-invariants",
+      "verify-claims"
+    ],
+    "trigger_signals": [
+      "student-does-not-know-what-admissibility-means-for-a-heuristic",
+      "student-proposes-a-heuristic-that-overestimates-the-true-cost",
+      "student-cannot-explain-why-their-heuristic-never-overestimates",
+      "student-confuses-the-heuristic-h-with-the-path-cost-g",
+      "student-cannot-connect-admissibility-to-the-optimality-guarantee-of-a-star",
+      "student-designs-a-heuristic-that-ignores-some-tiles-or-pieces-producing-a-systematic-undercount"
+    ],
+    "chip_icon": "\ud83e\udded",
+    "version": "0.1.0",
+    "owner_team": "cs338-skills",
+    "owner_contact": null,
+    "status": "ready",
+    "description": "Guides students to design and evaluate heuristics for informed search \u2014 understanding what admissibility means (never overestimating the true remaining cost), why it matters for optimality, and how to verify that a proposed heuristic satisfies the condition. When a student proposes a heuristic that overestimates, cannot explain why their heuristic is safe, or confuses h(n) with g(n), this skill builds the reasoning from the definition of admissibility to the design of a correct estimate.",
+    "trigger_summary": "- Student does not know what admissibility means for a heuristic\n- Student proposes a heuristic that overestimates the true remaining cost in at least one case\n- Student cannot explain why their heuristic never overestimates\n- Student confuses the heuristic estimate h(n) with the path cost already paid g(n)\n- Student cannot connect admissibility to A*'s optimality guarantee\n- Student's heuristic systematically undercounts by ignoring relevant pieces or tiles",
+    "tutor_stance_rules": [
+      "Never name an admissible heuristic for the student \u2014 ask what the heuristic is estimating before evaluating it",
+      "If the student proposes a heuristic, ask them to find a case where it might overestimate before accepting it",
+      "Do not confirm a heuristic as admissible until the student has explained why it can never exceed the true cost",
+      "Push the student to connect the property of the heuristic to what it means for the algorithm's output",
+      "Every response must end with a question"
+    ],
+    "flow": [
+      {
+        "step": 1,
+        "title": "Define what the heuristic is estimating",
+        "description": "Ask the student to state in plain terms what h(n) is supposed to measure. \"Before evaluating your heuristic \u2014 what is it estimating? What does h(n) represent in your problem \u2014 what cost are you trying to approximate, and from where to where?\""
+      },
+      {
+        "step": 2,
+        "title": "State the admissibility condition",
+        "description": "Ask the student to define admissibility in their own words before applying it. \"What does it mean for a heuristic to be admissible? In terms of the true cost to reach the goal \u2014 what constraint must h(n) satisfy at every node?\""
+      },
+      {
+        "step": 3,
+        "title": "Test for overestimation",
+        "description": "Ask the student to try to find a case where their heuristic overestimates. \"Can you construct a specific state \u2014 a particular board position or grid location \u2014 where your heuristic gives a higher value than the actual minimum cost to reach the goal? If you can't, why not?\""
+      },
+      {
+        "step": 4,
+        "title": "Connect admissibility to optimality",
+        "description": "Ask the student to explain what breaks if the heuristic overestimates. \"If your heuristic did overestimate in some state \u2014 what would that mean for A*'s output? Why does admissibility guarantee that A* finds the optimal solution?\""
+      }
+    ],
+    "safe_outputs": [
+      "Questions asking the student to define what h(n) is estimating in their specific problem",
+      "Questions asking the student to state the admissibility condition in their own words",
+      "Questions asking the student to find or rule out a case where their heuristic overestimates",
+      "Questions connecting admissibility to the optimality guarantee of A*"
+    ],
+    "must_avoid": [
+      "Naming an admissible heuristic for the student",
+      "Accepting a heuristic as admissible without asking the student to verify it cannot overestimate",
+      "Explaining why Manhattan distance is admissible before asking the student to reason through it",
+      "Confirming that A* is optimal without asking the student to connect that to admissibility"
+    ],
+    "example_exchange": "> **Student:** \"My heuristic is the number of tiles not in their goal position.\"\n>\n> **Tutor:** \"That's a reasonable starting point \u2014 but what is it estimating? Is the number of misplaced tiles ever greater than the actual minimum number of moves needed to reach the goal? Can you find a board where those two numbers differ?\"",
+    "source_repo": "cs338-skills",
+    "source_path": "skills/heuristic-admissibility-reasoning/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs338-skills/tree/main/skills/heuristic-admissibility-reasoning/skills.md",
+    "status_reason": null
+  },
+  {
     "skill_id": "historical-contextualization",
     "name": "Historical Contextualization",
     "skill_type": "instructional",
@@ -12731,6 +12813,88 @@
     "source_repo": "cs338-skills",
     "source_path": "skills/journalistic-lede-writing/skills.md",
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs338-skills/tree/main/skills/journalistic-lede-writing/skills.md",
+    "status_reason": null
+  },
+  {
+    "skill_id": "local-vs-global-optimum-reasoning",
+    "name": "Local vs Global Optimum Reasoning",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "tags": [
+      "search",
+      "local-search",
+      "hill-climbing",
+      "optimality",
+      "ai"
+    ],
+    "course_types": [
+      "cs"
+    ],
+    "learning_goal_tags": [
+      "evaluate-reasoning",
+      "identify-invariants",
+      "compare-strategies"
+    ],
+    "trigger_signals": [
+      "student-thinks-hill-climbing-always-finds-the-best-solution",
+      "student-conflates-no-better-neighbor-with-the-problem-being-solved",
+      "student-does-not-understand-why-the-algorithm-returns-false-when-stuck",
+      "student-cannot-construct-a-case-where-hill-climbing-fails-to-find-a-solution",
+      "student-cannot-explain-the-difference-between-a-local-minimum-and-a-global-minimum",
+      "student-does-not-connect-the-boolean-return-value-to-whether-a-solution-was-found"
+    ],
+    "chip_icon": "\u26f0\ufe0f",
+    "version": "0.1.0",
+    "owner_team": "cs338-skills",
+    "owner_contact": null,
+    "status": "ready",
+    "description": "Guides students to understand the distinction between a local optimum \u2014 a state with no better neighbors \u2014 and a global optimum \u2014 the actual best solution \u2014 and to reason about why hill-climbing and greedy local search can get stuck at local optima that are not solutions. When a student thinks a \"no better neighbor\" termination means the algorithm succeeded, or cannot construct a case where the algorithm fails, this skill builds the reasoning from the algorithm's termination condition to its correctness guarantee.",
+    "trigger_summary": "- Student believes hill-climbing always finds the globally optimal solution\n- Student conflates \"no better neighbor exists\" with \"the problem is solved\"\n- Student does not understand why the algorithm returns False (or equivalent failure signal) when it terminates without a solution\n- Student cannot construct or describe a concrete case where hill-climbing fails to find a solution\n- Student cannot explain the difference between a local minimum and a global minimum in their specific problem\n- Student does not connect the boolean return value to whether an actual solution was reached",
+    "tutor_stance_rules": [
+      "Never construct the counterexample for the student \u2014 ask them to find a configuration where hill-climbing gets stuck",
+      "If the student thinks hill-climbing always succeeds, ask what the algorithm does when no neighbor improves the score",
+      "Do not confirm the student understands the distinction until they can state what condition must hold for the termination state to be a solution",
+      "Push the student to connect the theoretical limitation to what it means for their specific problem and return value",
+      "Every response must end with a question"
+    ],
+    "flow": [
+      {
+        "step": 1,
+        "title": "Distinguish termination from success",
+        "description": "Ask the student to state what hill-climbing's termination condition is and whether it guarantees a solution. \"When does your hill-climbing algorithm stop? And when it stops \u2014 does that mean it found a solution, or just that it can't improve anymore? What is the difference between those two things?\""
+      },
+      {
+        "step": 2,
+        "title": "Define local vs global optimum",
+        "description": "Ask the student to define a local minimum in terms of their specific problem. \"In your problem \u2014 what would a local minimum look like? What would make a state a dead end for the algorithm even though it's not the goal?\""
+      },
+      {
+        "step": 3,
+        "title": "Construct a failing case",
+        "description": "Ask the student to find or construct a concrete configuration where hill-climbing gets stuck without solving the problem. \"Can you draw or describe a specific board configuration \u2014 or a small example \u2014 where your algorithm would terminate but the answer is False? Where would it get stuck and why?\""
+      },
+      {
+        "step": 4,
+        "title": "Connect to the return value",
+        "description": "Ask the student to explain what the boolean return value means in light of local optima. \"Given that hill-climbing can get stuck \u2014 what should your algorithm return when it terminates? And how do you know, at the termination state, whether you're at a solution or a local minimum that isn't one?\""
+      }
+    ],
+    "safe_outputs": [
+      "Questions asking the student to distinguish the termination condition from a success condition",
+      "Questions asking the student to define a local minimum in their specific problem",
+      "Questions asking the student to construct a concrete case where hill-climbing fails",
+      "Questions connecting the termination state to the boolean return value"
+    ],
+    "must_avoid": [
+      "Constructing the counterexample or failing configuration for the student",
+      "Accepting \"the algorithm finds the best solution\" without asking what happens at a local minimum",
+      "Explaining the local vs global distinction without first asking the student to reason through the termination condition",
+      "Confirming understanding without asking the student to connect it to the return value in their code"
+    ],
+    "example_exchange": "> **Student:** \"My hill-climbing stops when no queen move reduces the number of attacks, so it's at the minimum.\"\n>\n> **Tutor:** \"It's at a minimum \u2014 but what kind of minimum? Can you describe a queen configuration where no single move reduces attacks, but the board still isn't a valid solution? What would your algorithm return in that case?\"",
+    "source_repo": "cs338-skills",
+    "source_path": "skills/local-vs-global-optimum-reasoning/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs338-skills/tree/main/skills/local-vs-global-optimum-reasoning/skills.md",
     "status_reason": null
   },
   {
@@ -14150,6 +14314,87 @@
     "source_repo": "cs338-skills",
     "source_path": "skills/scheduling-selection-reasoning/skills.md",
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs338-skills/tree/main/skills/scheduling-selection-reasoning/skills.md",
+    "status_reason": null
+  },
+  {
+    "skill_id": "search-state-formulation",
+    "name": "Search State Formulation",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "tags": [
+      "search",
+      "state-space",
+      "problem-formulation",
+      "ai"
+    ],
+    "course_types": [
+      "cs"
+    ],
+    "learning_goal_tags": [
+      "trace-execution",
+      "identify-invariants",
+      "evaluate-reasoning"
+    ],
+    "trigger_signals": [
+      "student-conflates-the-raw-map-or-board-with-the-search-state",
+      "student-cannot-define-what-a-single-state-represents-in-their-problem",
+      "student-cannot-identify-what-constitutes-a-valid-successor-state",
+      "student-does-not-distinguish-start-state-goal-state-and-terminal-condition",
+      "student-generates-successors-that-violate-problem-constraints",
+      "student-cannot-say-when-the-search-should-stop"
+    ],
+    "chip_icon": "\ud83d\uddfa\ufe0f",
+    "version": "0.1.0",
+    "owner_team": "cs338-skills",
+    "owner_contact": null,
+    "status": "ready",
+    "description": "Guides students to translate a real-world problem into a formal search problem by precisely defining what a state is, what the start and goal states are, what valid transitions exist, and when the search terminates. When a student conflates the raw representation (a grid, a board) with the abstract state, cannot enumerate valid successors, or cannot articulate the terminal condition, this skill builds the discipline of formalizing the problem before writing any search code.",
+    "trigger_summary": "- Student conflates the raw map or board representation with the search state\n- Student cannot define what a single state represents in their specific problem\n- Student cannot identify what makes a successor state valid (in-bounds, not a wall, not yet explored, satisfies constraints)\n- Student does not distinguish between the start state, the goal state, and the terminal condition\n- Student generates successor states that violate problem constraints (e.g., moving through walls, breaking the one-queen-per-column rule)\n- Student cannot articulate when the search should stop",
+    "tutor_stance_rules": [
+      "Never define the state, transitions, or goal for the student \u2014 ask them to articulate each component before evaluating their code",
+      "If the student's code generates invalid successors, ask them to state in words what a valid successor is before looking at the code",
+      "Do not confirm a formulation as complete until the student has named all four components: state, start, goal, and valid transitions",
+      "Push the student to test their formulation on a concrete small example before implementing",
+      "Every response must end with a question"
+    ],
+    "flow": [
+      {
+        "step": 1,
+        "title": "Define the state",
+        "description": "Ask the student to state precisely what a single state represents in their problem, separate from the full map or board. \"Before writing any code \u2014 what is a single state in this problem? Not the whole map, but what information do you need to represent one position or configuration in the search space?\""
+      },
+      {
+        "step": 2,
+        "title": "Define start and goal",
+        "description": "Ask the student to identify the start state and goal state in terms of their state definition. \"Given that definition of a state \u2014 what is the start state in your problem, and what does the goal state look like? How will your algorithm know when it has reached the goal?\""
+      },
+      {
+        "step": 3,
+        "title": "Define valid transitions",
+        "description": "Ask the student to enumerate what makes a successor state valid before they code the successor function. \"From any given state \u2014 what are the possible next states? And what conditions must a successor satisfy to be valid \u2014 what would make you reject it?\""
+      },
+      {
+        "step": 4,
+        "title": "Test on a small example",
+        "description": "Ask the student to trace their formulation on a concrete minimal example before implementing. \"Take the simplest non-trivial version of this problem \u2014 a small grid, a 2-queen board. Starting from the start state, what are the valid successors? Trace it by hand and check your formulation produces what you expect.\""
+      }
+    ],
+    "safe_outputs": [
+      "Questions asking the student to define what a single state represents",
+      "Questions asking the student to identify the start state, goal state, and terminal condition",
+      "Questions asking what conditions a successor state must satisfy to be valid",
+      "Questions asking the student to trace their formulation on a small concrete example"
+    ],
+    "must_avoid": [
+      "Defining the state, transitions, or goal for the student",
+      "Accepting \"the grid\" or \"the board\" as a state definition without asking what specific information the state encodes",
+      "Confirming a formulation as complete before the student has named state, start, goal, and valid transitions",
+      "Letting the student jump to code before verifying the formulation on a small example"
+    ],
+    "example_exchange": "> **Student:** \"My state is the grid and I'm moving through it to find the goal.\"\n>\n> **Tutor:** \"The grid is the environment \u2014 but what is a single state within it? What specific information do you need to represent exactly where the search is at one moment in time?\"",
+    "source_repo": "cs338-skills",
+    "source_path": "skills/search-state-formulation/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs338-skills/tree/main/skills/search-state-formulation/skills.md",
     "status_reason": null
   },
   {

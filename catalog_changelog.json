@@ -1,19 +1,14 @@
 {
-  "generated_at": "2026-05-12T23:42:13.003187+00:00",
-  "previous_hash": "f06e3c3d607e5d4e",
-  "current_hash": "226abdb5f6810ca5",
+  "generated_at": "2026-05-13T00:57:02.072543+00:00",
+  "previous_hash": "226abdb5f6810ca5",
+  "current_hash": "ecc89290d242830d",
   "added": [
-    "interview-preparation",
-    "journalistic-lede-writing",
-    "multi-source-portrait-building",
-    "nut-graph-construction",
-    "observation-integration",
-    "quote-selection",
-    "show-dont-tell-journalism",
-    "story-angle-development"
+    "heuristic-admissibility-reasoning",
+    "local-vs-global-optimum-reasoning",
+    "search-state-formulation"
   ],
   "removed": [],
   "changed": [],
-  "unchanged_count": 178,
-  "summary": "8 added"
+  "unchanged_count": 186,
+  "summary": "3 added"
 }

@@ -1,6 +1,6 @@
 # Catalog build report
 
-**Total skills:** 190  ·  ready: 177, stub: 9, broken: 4
+**Total skills:** 193  ·  ready: 180, stub: 9, broken: 4
 
 ## ⚠ Duplicate skill_id rejections
 
@@ -22,7 +22,7 @@ The following skills were **rejected** because their `skill_id` was already clai
 | `cs-214-skills` | 11 | 10 | 0 | 1 |
 | `cs-343-skills` | 7 | 7 | 0 | 0 |
 | `cs-348-skills` | 12 | 12 | 0 | 0 |
-| `cs338-skills` | 56 | 56 | 0 | 0 |
+| `cs338-skills` | 59 | 59 | 0 | 0 |
 | `history-315-skills` | 9 | 9 | 0 | 0 |
 | `jour-201-1-skills` | 6 | 0 | 6 | 0 |
 | `ling-250-skills` | 14 | 14 | 0 | 0 |
@@ -124,6 +124,9 @@ The following skills were **rejected** because their `skill_id` was already clai
 ### `cs338-skills/skills/follow-up-question-deepening/skills.md`
 - **warn** [`skill_id`] length 28 > 18 chars — see Team-Guide §7
 
+### `cs338-skills/skills/heuristic-admissibility-reasoning/skills.md`
+- **warn** [`skill_id`] length 33 > 18 chars — see Team-Guide §7
+
 ### `cs338-skills/skills/historical-contextualization/skills.md`
 - **warn** [`skill_id`] length 28 > 18 chars — see Team-Guide §7
 
@@ -154,6 +157,9 @@ The following skills were **rejected** because their `skill_id` was already clai
 
 ### `cs338-skills/skills/journalistic-lede-writing/skills.md`
 - **warn** [`skill_id`] length 25 > 18 chars — see Team-Guide §7
+
+### `cs338-skills/skills/local-vs-global-optimum-reasoning/skills.md`
+- **warn** [`skill_id`] length 33 > 18 chars — see Team-Guide §7
 
 ### `cs338-skills/skills/meta-resource-awareness/skills.md`
 - **warn** [`skill_id`] length 23 > 18 chars — see Team-Guide §7
@@ -196,6 +202,9 @@ The following skills were **rejected** because their `skill_id` was already clai
 
 ### `cs338-skills/skills/scheduling-selection-reasoning/skills.md`
 - **warn** [`skill_id`] length 30 > 18 chars — see Team-Guide §7
+
+### `cs338-skills/skills/search-state-formulation/skills.md`
+- **warn** [`skill_id`] length 24 > 18 chars — see Team-Guide §7
 
 ### `cs338-skills/skills/show-dont-tell-journalism/skills.md`
 - **warn** [`skill_id`] length 25 > 18 chars — see Team-Guide §7
