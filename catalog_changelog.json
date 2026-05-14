@@ -1,81 +1,349 @@
 {
-  "generated_at": "2026-05-14T01:59:23.779794+00:00",
-  "previous_hash": "72c7812872773084",
-  "current_hash": "7e92d5a5cb4fe761",
-  "added": [
-    "bigger-picture"
-  ],
-  "removed": [
-    "examples-from-spec"
-  ],
+  "generated_at": "2026-05-14T20:59:01.583429+00:00",
+  "previous_hash": "7e92d5a5cb4fe761",
+  "current_hash": "a770300150509542",
+  "added": [],
+  "removed": [],
   "changed": [
     {
-      "skill_id": "asm-translation",
+      "skill_id": "adjust-to-level",
       "changes": {
         "version": {
-          "from": "0.1.0",
-          "to": "0.2.0"
-        },
-        "name": {
-          "from": "Assembly Translation",
-          "to": "Assembly \u2192 C Translation"
-        }
-      }
-    },
-    {
-      "skill_id": "c-debugger",
-      "changes": {
-        "version": {
-          "from": "0.1.0",
+          "from": null,
           "to": "0.2.0"
         }
       }
     },
     {
-      "skill_id": "example-skill",
-      "changes": {
-        "name": {
-          "from": "Example: Restate the Problem",
-          "to": "Example Identify Outputs"
-        },
-        "owner_team": {
-          "from": "CS-213",
-          "to": "CS-214"
-        },
-        "owner_contact": {
-          "from": "nikos@northwestern.edu",
-          "to": ""
-        },
-        "source_repo": {
-          "from": "CS-213-skills",
-          "to": "cs-214-skills"
-        }
-      }
-    },
-    {
-      "skill_id": "execution-trace",
-      "changes": {
-        "version": {
-          "from": "0.1.0",
-          "to": "0.2.0"
-        }
-      }
-    },
-    {
-      "skill_id": "select-passage",
+      "skill_id": "ai-explain",
       "changes": {
         "version": {
           "from": null,
           "to": "0.2.0"
         },
-        "name": {
-          "from": "Passage Identification",
-          "to": "Passage Selection"
+        "stance": {
+          "from": "hint",
+          "to": "meta"
         }
       }
     },
     {
-      "skill_id": "stack-visualizer",
+      "skill_id": "ai-memo",
+      "changes": {
+        "version": {
+          "from": null,
+          "to": "0.2.0"
+        }
+      }
+    },
+    {
+      "skill_id": "alt-designs",
+      "changes": {
+        "version": {
+          "from": null,
+          "to": "0.2.0"
+        }
+      }
+    },
+    {
+      "skill_id": "analyze-writing",
+      "changes": {
+        "version": {
+          "from": null,
+          "to": "0.2.0"
+        }
+      }
+    },
+    {
+      "skill_id": "ask-prediction",
+      "changes": {
+        "version": {
+          "from": null,
+          "to": "0.2.0"
+        }
+      }
+    },
+    {
+      "skill_id": "author-choices",
+      "changes": {
+        "version": {
+          "from": null,
+          "to": "0.2.0"
+        }
+      }
+    },
+    {
+      "skill_id": "cohesion-check",
+      "changes": {
+        "version": {
+          "from": null,
+          "to": "0.2.0"
+        }
+      }
+    },
+    {
+      "skill_id": "comp-check",
+      "changes": {
+        "version": {
+          "from": null,
+          "to": "0.2.0"
+        }
+      }
+    },
+    {
+      "skill_id": "compare-readings",
+      "changes": {
+        "version": {
+          "from": null,
+          "to": "0.2.0"
+        }
+      }
+    },
+    {
+      "skill_id": "concept-example",
+      "changes": {
+        "version": {
+          "from": null,
+          "to": "0.2.0"
+        }
+      }
+    },
+    {
+      "skill_id": "concept-hint",
+      "changes": {
+        "version": {
+          "from": null,
+          "to": "0.2.0"
+        }
+      }
+    },
+    {
+      "skill_id": "counter-example",
+      "changes": {
+        "version": {
+          "from": null,
+          "to": "0.2.0"
+        }
+      }
+    },
+    {
+      "skill_id": "critique-design",
+      "changes": {
+        "version": {
+          "from": null,
+          "to": "0.2.0"
+        }
+      }
+    },
+    {
+      "skill_id": "decompose-arg",
+      "changes": {
+        "version": {
+          "from": null,
+          "to": "0.2.0"
+        }
+      }
+    },
+    {
+      "skill_id": "design-skeleton",
+      "changes": {
+        "version": {
+          "from": null,
+          "to": "0.2.0"
+        }
+      }
+    },
+    {
+      "skill_id": "eval-ai-response",
+      "changes": {
+        "version": {
+          "from": null,
+          "to": "0.2.0"
+        }
+      }
+    },
+    {
+      "skill_id": "evidence-placement",
+      "changes": {
+        "version": {
+          "from": null,
+          "to": "0.2.0"
+        }
+      }
+    },
+    {
+      "skill_id": "explain-back-check",
+      "changes": {
+        "version": {
+          "from": null,
+          "to": "0.2.0"
+        }
+      }
+    },
+    {
+      "skill_id": "extract-syllabus",
+      "changes": {
+        "version": {
+          "from": null,
+          "to": "0.2.0"
+        }
+      }
+    },
+    {
+      "skill_id": "first-pass-orient",
+      "changes": {
+        "version": {
+          "from": null,
+          "to": "0.2.0"
+        }
+      }
+    },
+    {
+      "skill_id": "flow-check",
+      "changes": {
+        "version": {
+          "from": null,
+          "to": "0.2.0"
+        }
+      }
+    },
+    {
+      "skill_id": "form-critique",
+      "changes": {
+        "version": {
+          "from": null,
+          "to": "0.2.0"
+        }
+      }
+    },
+    {
+      "skill_id": "frame-hypothesis",
+      "changes": {
+        "version": {
+          "from": null,
+          "to": "0.2.0"
+        }
+      }
+    },
+    {
+      "skill_id": "inference-threats",
+      "changes": {
+        "version": {
+          "from": null,
+          "to": "0.2.0"
+        }
+      }
+    },
+    {
+      "skill_id": "map-design",
+      "changes": {
+        "version": {
+          "from": null,
+          "to": "0.2.0"
+        }
+      }
+    },
+    {
+      "skill_id": "method-align",
+      "changes": {
+        "version": {
+          "from": null,
+          "to": "0.2.0"
+        }
+      }
+    },
+    {
+      "skill_id": "op-check",
+      "changes": {
+        "version": {
+          "from": null,
+          "to": "0.2.0"
+        }
+      }
+    },
+    {
+      "skill_id": "orient-paper",
+      "changes": {
+        "version": {
+          "from": null,
+          "to": "0.2.0"
+        }
+      }
+    },
+    {
+      "skill_id": "pick-week-concept",
+      "changes": {
+        "version": {
+          "from": null,
+          "to": "0.2.0"
+        }
+      }
+    },
+    {
+      "skill_id": "play-reviewer",
+      "changes": {
+        "version": {
+          "from": null,
+          "to": "0.2.0"
+        }
+      }
+    },
+    {
+      "skill_id": "quiz-prep",
+      "changes": {
+        "version": {
+          "from": null,
+          "to": "0.2.0"
+        }
+      }
+    },
+    {
+      "skill_id": "quiz-triage",
+      "changes": {
+        "version": {
+          "from": null,
+          "to": "0.2.0"
+        }
+      }
+    },
+    {
+      "skill_id": "reasoning-check",
+      "changes": {
+        "version": {
+          "from": null,
+          "to": "0.2.0"
+        }
+      }
+    },
+    {
+      "skill_id": "reframe-trace",
+      "changes": {
+        "version": {
+          "from": null,
+          "to": "0.2.0"
+        }
+      }
+    },
+    {
+      "skill_id": "scaffold-writing",
+      "changes": {
+        "version": {
+          "from": null,
+          "to": "0.2.0"
+        }
+      }
+    },
+    {
+      "skill_id": "scope-check",
+      "changes": {
+        "version": {
+          "from": null,
+          "to": "0.2.0"
+        }
+      }
+    },
+    {
+      "skill_id": "session-opener",
       "changes": {
         "version": {
           "from": "0.1.0",
@@ -84,15 +352,51 @@
       }
     },
     {
-      "skill_id": "uncover-assumption",
+      "skill_id": "session-reflect",
       "changes": {
         "version": {
           "from": null,
-          "to": "0.1.0"
+          "to": "0.2.0"
+        }
+      }
+    },
+    {
+      "skill_id": "source-credibility",
+      "changes": {
+        "version": {
+          "from": null,
+          "to": "0.2.0"
+        }
+      }
+    },
+    {
+      "skill_id": "stat-intuition",
+      "changes": {
+        "version": {
+          "from": null,
+          "to": "0.2.0"
+        }
+      }
+    },
+    {
+      "skill_id": "tie-to-course",
+      "changes": {
+        "version": {
+          "from": null,
+          "to": "0.2.0"
+        }
+      }
+    },
+    {
+      "skill_id": "trace-evidence",
+      "changes": {
+        "version": {
+          "from": null,
+          "to": "0.2.0"
         }
       }
     }
   ],
-  "unchanged_count": 181,
-  "summary": "1 added, 1 removed, 7 changed"
+  "unchanged_count": 146,
+  "summary": "43 changed"
 }

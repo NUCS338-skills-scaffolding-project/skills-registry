@@ -202,6 +202,9 @@ The following skills were **rejected** because their `skill_id` was already clai
 ### `cs338-skills/skills/search-state-formulation/skills.md`
 - **warn** [`skill_id`] length 24 > 18 chars — see Team-Guide §7
 
+### `cs338-skills/skills/session-opener/skills.md`
+- **warn** [`example_exchange`] missing — strongly recommended
+
 ### `cs338-skills/skills/show-dont-tell-journalism/skills.md`
 - **warn** [`skill_id`] length 25 > 18 chars — see Team-Guide §7
 
@@ -266,8 +269,6 @@ The following skills were **rejected** because their `skill_id` was already clai
 - **ERROR** [`skill_id`] skill_id 'skill-name' is already claimed by repo 'jour-201-1-skills'. Repo 'poli_sci-210-skills' is rejected. Rename this skill or coordinate with the 'jour-201-1-skills' team.
 
 ### `poli_sci-210-skills/skills/extract-syllabus/skills.md`
-- **warn** [`learning_goal_tags`] missing — strongly recommended for orchestrator routing
-- **ERROR** [`when_to_trigger`] missing — add `## When to Trigger` section
 - **ERROR** [`usage`] missing — add `## Usage` section
 
 ### `poli_sci-210-skills/skills/play-reviewer/skills.md`

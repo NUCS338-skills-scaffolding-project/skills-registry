@@ -4231,6 +4231,7 @@
   {
     "skill_id": "adjust-to-level",
     "name": "Adjust to Level",
+    "owner_team": "POLISCI-210",
     "skill_type": "instructional",
     "stance": "meta",
     "tags": [
@@ -4249,8 +4250,13 @@
     ],
     "trigger_signals": [
       "student-confused-by-vocabulary",
-      "student-ahead-of-current-framing"
+      "student-ahead-of-current-framing",
+      "repeated-asks-for-clarification",
+      "this-is-too-basic",
+      "explain-it-more-simply"
     ],
+    "status": "ready",
+    "version": "0.2.0",
     "description": "Recalibrates the depth, vocabulary, and assumed prerequisites of an explanation when signals show the student is over- or under-challenged. This skill doesn't produce content itself \u2014 it changes how the active skill runs by moving the level dial.",
     "trigger_summary": "- Student repeatedly asks for clarification on basic terms or says \"I don't follow.\"\n- Student says explicitly that the level is wrong (\"can you explain it more simply?\", \"this is too basic\").\n- Student is breezing past the tutor's framing and asking ahead.\n- Tutor self-detects that the last explanation went over the student's head \u2014 they didn't engage with the substance, just nodded along.",
     "tutor_stance_rules": [
@@ -4291,16 +4297,14 @@
     "source_repo": "poli_sci-210-skills",
     "source_path": "skills/adjust-to-level/skills.md",
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/poli_sci-210-skills/tree/main/skills/adjust-to-level/skills.md",
-    "owner_team": "POLISCI-210",
     "owner_contact": "bryanmurray2026@u.northwestern.edu",
-    "status": "ready",
     "status_reason": null
   },
   {
     "skill_id": "ai-explain",
     "name": "Explore Concept with AI",
     "skill_type": "instructional",
-    "stance": "hint",
+    "stance": "meta",
     "tags": [
       "ai-memo",
       "rote-ai-mode",
@@ -4314,6 +4318,16 @@
       "interpret-evidence"
     ],
     "python_entry": "logic.py",
+    "trigger_signals": [
+      "working-on-ai-memo",
+      "student-requested-ai-source-mode",
+      "act-as-ai-for-memo",
+      "chatbot-source-needed",
+      "concept-explanation-for-memo",
+      "ai-memo-step-two"
+    ],
+    "status": "stub",
+    "version": "0.2.0",
     "description": "**This skill leaves tutor mode.** Claude plays the role of a generative-AI source \u2014 explaining the chosen concept directly and answering the student's follow-up questions in good faith. The student needs at least 5 follow-ups to satisfy the AI memo rubric. Every turn is captured to a transcript file the student can attach to their submission. After exit, the orchestrator returns Claude to tutor mode for evaluation.",
     "trigger_summary": "- Orchestrator (`ai-memo`) opens this skill as step 2 of the chain, with `{week, concept, ai_prompt}` already chosen.\n- A student explicitly says: \"act as the AI for my memo \u2014 explain X and let me ask follow-ups.\"",
     "tutor_stance_rules": [],
@@ -4359,7 +4373,7 @@
       "followups_log": "1. <followup question, my answer summary>\n2. ...",
       "open": "- <unaddressed threads \u2014 tutor will use this when we return to tutor mode>",
       "completion_notes": "```\n\nThe pre-read is for *you* to know the gap between what you're saying and what the slides actually say \u2014 so the post-skill evaluation step has somewhere to land. **Do not paste the pre-read at the student.** They'll evaluate what you said live, not your private notes.",
-      "transcript_capture": "This skill writes a transcript artifact the student attaches to their submission.\n\n**Default path** (resolved from `paths.student_ai_memo_transcript_pattern` in `metadata.yaml`):\n\n```\nstudents/<student>/ai-memos/week-<N>-<concept-slug>-transcript.md\n```\n\n**Adopter fallback ladder** \u2014 pick the highest tier that works in your host:\n\n1. If `students/<student>/ai-memos/` exists or can be created and `<student>` is set \u2192 use the default.\n2. Else if cwd is writable \u2192 write to `./ai-memo-transcripts/week-<N>-<concept-slug>-transcript.md` (creating the directory if needed).\n3. Else \u2192 write to `/tmp/ai-memo-week-<N>-<concept-slug>-<YYYY-MM-DD-HHMM>-transcript.md` and surface the path to the student so they know where it landed.\n\nSurface the resolved transcript path in your opening banner (Step 1).\n\nFormat:\n```markdown\n# AI Memo Transcript \u2014 Week <N>: <concept>\n\n**Student:** <name>\n**Concept:** <concept phrase>\n**Initial prompt:** <ai_prompt sentence>\n**Captured:** <YYYY-MM-DD HH:MM>\n**Source:** Claude (rote AI mode, POLI SCI 210 ai-memo skill)\n\n---",
+      "transcript_capture": "This skill writes a transcript artifact the student attaches to their submission.\n\n**Default path** (resolved from `paths.student_ai_memo_transcript_pattern` in `metadata.yaml`):\n\n```\nstudents/<student>/ai-memos/week-<N>-<concept-slug>-transcript.md\n```\n\n**Adopter fallback ladder** \u2014 pick the highest tier that works in your host:\n\n1. If `students/<student>/ai-memos/` exists or can be created and `<student>` is set \u2192 use the default.\n2. Else if cwd is writable \u2192 write to `./ai-memo-transcripts/week-<N>-<concept-slug>-transcript.md` (creating the directory if needed).\n3. Else \u2192 write to `/tmp/ai-memo-week-<N>-<concept-slug>-<YYYY-MM-DD-HHMM>-transcript.md` and surface the path to the student so they know where it landed.\n\nSurface the resolved transcript path in your opening banner (Step 1).\n\nFormat:\n```markdown\n# AI Memo Transcript \u2014 Week <N>: <concept>\n\n**Student:** <name>\n**Concept:** <concept phrase>\n**Initial prompt:** <ai_prompt sentence>\n**Captured:** <YYYY-MM-DD HH:MM>\n**Source:** Claude (rote AI mode, ai-memo chain)\n\n---",
       "initial_explanation": "<Claude's first substantive answer>",
       "follow_up_1": "**Student:** <text>\n\n**AI:** <Claude's reply>",
       "follow_up_2": "...\n```\n\nAppend to this file at the end of every turn during this skill \u2014 both Claude's text and the student's text. The student attaches this file to their Canvas submission.",
@@ -4370,7 +4384,6 @@
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/poli_sci-210-skills/tree/main/skills/ai-explain/skills.md",
     "owner_team": "POLISCI-210",
     "owner_contact": "bryanmurray2026@u.northwestern.edu",
-    "status": "stub",
     "status_reason": "missing \u2014 add a `## Tutor Stance` section with rules"
   },
   {
@@ -4392,7 +4405,16 @@
       "reflect-on-progress",
       "evaluate-reasoning"
     ],
+    "trigger_signals": [
+      "start-ai-memo",
+      "ai-memo-week-N",
+      "ai-memo-workflow",
+      "guided-ai-memo",
+      "ai-memo-assignment-open"
+    ],
     "python_entry": "logic.py",
+    "status": "ready",
+    "version": "0.2.0",
     "description": "Orchestrator that walks the student through a complete AI memo: pick a concept from a chosen week's slides, get an AI explanation with 5+ follow-ups (Claude in **rote AI mode**), evaluate that explanation against the course material (Claude back in tutor mode), and scaffold the 500\u20131000 word memo. Produces a transcript file the student can attach and a session log that pulls together the evaluation findings.",
     "trigger_summary": "- Student says \"I want to do an AI memo\" or \"let's start the week N AI memo.\"\n- Student wants the full guided AI memo workflow rather than picking sub-skills manually.\n- Student has the AI memo assignment open and is unsure where to start.\n\nIf the student only wants to evaluate an AI response they already collected from Copilot or another chatbot, route them directly to `eval-ai-response` instead \u2014 this orchestrator's value is the integrated rote-AI step.",
     "tutor_stance_rules": [
@@ -4431,7 +4453,7 @@
       {
         "step": 6,
         "title": "Run scaffold-writing (tutor mode, continued)",
-        "description": "After `eval-ai-response` closes and the student confirms the transition, open `scaffold-writing`. The relevant assignment is the AI memo (500\u20131000 words), and the structure should track the syllabus's evaluative questions:\n1. What did you ask the AI and what did it say?\n2. How does that compare to the course material?\n3. Why is it different / more or less helpful?\n4. Are the AI's recommended sources credible?\n\nPass these as section anchors to the sub-skill's pre-read."
+        "description": "After `eval-ai-response` closes and the student confirms the transition, open `scaffold-writing`. The relevant assignment is the AI memo (500\u20131000 words), and the structure should track the course's evaluative questions for this assignment.\n\n**Default questions** (resolved from `course_context.ai_memo_evaluative_questions` in `metadata.yaml`):\n1. What did you ask the AI and what did it say?\n2. How does that compare to the course material?\n3. Why is it different / more or less helpful?\n4. Are the AI's recommended sources credible?\n\n**Adopter fallback (no `ai_memo_evaluative_questions` key in metadata, or empty list):** use the four defaults above (POLI SCI 210's syllabus shape) and ask the student in your Step 6 opening whether their course has a different rubric for this assignment. If they say yes, swap the section anchors to their version before opening `scaffold-writing`.\n\nPass the resolved questions as section anchors to the sub-skill's pre-read."
       },
       {
         "step": 7,
@@ -4475,7 +4497,6 @@
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/poli_sci-210-skills/tree/main/skills/ai-memo/skills.md",
     "owner_team": "POLISCI-210",
     "owner_contact": "bryanmurray2026@u.northwestern.edu",
-    "status": "ready",
     "status_reason": null
   },
   {
@@ -4497,7 +4518,16 @@
       "engage-objections",
       "construct-arguments"
     ],
+    "trigger_signals": [
+      "form-critique-ran",
+      "inference-threats-ran",
+      "scope-check-ran",
+      "mid-critique-but-stuck",
+      "critiquing-design-of-experiment"
+    ],
     "python_entry": "logic.py",
+    "status": "ready",
+    "version": "0.2.0",
     "description": "Granular skill in Phase 3 (`form-critique`). The student proposes 1\u20132 concrete design changes that would address the highest-leverage critiques surfaced in the prior skills. Each change must be (a) specific, (b) feasible given the question, and (c) tied to a critique it addresses, with a one-sentence prediction of how the headline claim would move under the new design. The pedagogical move is *closing the assignment's central question*: \"what should we change if we were to conduct this study ourselves?\" \u2014 the rubric's load-bearing prompt.",
     "trigger_summary": "- Opened by the `form-critique` orchestrator as the third (and final) skill in its chain.\n- Direct invocation: a student says \"I have a critique but I don't know what I'd change\" or \"what would a better design look like?\"\n- Hard prerequisite: at least one critique from `inference-threats`, `scope-check`, or a Phase 2 operationalization vulnerability. An alternative without a critique to address is generic.",
     "tutor_stance_rules": [
@@ -4557,7 +4587,7 @@
     ],
     "example_exchange": "> **Tutor:** Pick a critique from prior skills. Give me a specific design change that addresses it.\n>\n> **Student:** From inference-threats \u2014 the fiscal-contract index conflates compliance and identity. The change: decompose the index into separate variables and run the analysis on each, then test whether the headline claim depends on both moving together.\n>\n> **Tutor:** Specific. Feasibility?\n>\n> **Student:** Their data already has the underlying items, so it's just re-coding \u2014 no new collection needed.\n>\n> **Tutor:** Predicted claim movement under the new design?\n>\n> **Student:** I'd guess the compliance dimension carries most of the result, and the identity-claim story attenuates. The headline claim becomes \"tax compliance maps to citizenship behavior\" \u2014 which is narrower and possibly weaker than what they argue.\n>\n> **Tutor:** Strong alternative \u2014 addresses the threat, feasible, predicts a specific direction. *(records, asks if they want a second; if not, finalize)*",
     "extra_sections": {
-      "method_aware_alternative_categories": "Use as nudge categories, not a closed list. The student picks; you nudge by category if they're stuck.\n\n- `theory-data`: additional empirical tests in different contexts; tighter scope conditions; an out-of-sample falsification test; refined operationalization of the theoretical concept.\n- `inference`: stronger identification (IV with a defensible exclusion restriction, RDD, DiD with parallel-trends evidence); placebo tests; alternative comparison group; subgroup analysis to localize the claim.\n- `surveys`: question-wording experiment; alternative sampling frame; mode comparison; measurement validation against an objective benchmark.\n- `experiments`: alternative randomization unit / level; dose-response variation; longer-duration outcome measurement; field replication of a lab study; pre-registration of a confirmatory replication.\n- `large-n`: alternative sample period / panel; specification-curve analysis; instrument or natural experiment for the IV; placebo outcomes.\n- `small-n`: paired comparison case (most-similar systems design); structured-focused comparison across additional cases; within-case process-tracing tests; explicit attention to disconfirming evidence.\n- `machine-learning`: stronger baseline; temporal hold-out; out-of-distribution evaluation; label-quality audit; ablation of feature families to isolate predictive content.",
+      "method_aware_alternative_categories": "Use as nudge categories, not a closed list. The student picks; you nudge by category if they're stuck.\n\n- `theory-data`: additional empirical tests in different contexts; tighter scope conditions; an out-of-sample falsification test; refined operationalization of the theoretical concept.\n- `inference`: stronger identification (IV with a defensible exclusion restriction, RDD, DiD with parallel-trends evidence); placebo tests; alternative comparison group; subgroup analysis to localize the claim.\n- `surveys`: question-wording experiment; alternative sampling frame; mode comparison; measurement validation against an objective benchmark.\n- `experiments`: alternative randomization unit / level; dose-response variation; longer-duration outcome measurement; field replication of a lab study; pre-registration of a confirmatory replication.\n- `large-n`: alternative sample period / panel; specification-curve analysis; instrument or natural experiment for the IV; placebo outcomes.\n- `small-n`: paired comparison case (most-similar systems design); structured-focused comparison across additional cases; within-case process-tracing tests; explicit attention to disconfirming evidence.\n- `machine-learning`: stronger baseline; temporal hold-out; out-of-distribution evaluation; label-quality audit; ablation of feature families to isolate predictive content.\n\n> **Adopter note:** The 7 categories above reflect POLI SCI 210's curriculum. The RDC chain itself is generic for any course teaching empirical paper critique, but the per-method nudge *content* below is not. **The method *list* is now metadata-driven** \u2014 `logic.py`'s `VALID_METHODS` reads from `metadata.yaml.course_context.research_methods` at module load, so adopters swap the tag set by editing `metadata.yaml` only. **The per-method prose content in this section, however, still hard-codes POLI SCI 210's coverage** and must be edited skill-by-skill to match an adopting course. A catalog-wide refactor parameterizing the prose content too is logged in `docs/audits/cross-cutting.md` entry CC-2.",
       "tutor_pre_read_notes": "Before Step 1, read both prior phase logs and the prior in-phase scratchpads (`inference-threats` and `scope-check`). For each load-bearing critique surfaced, silently propose one or two design changes that would address it. For each, note feasibility (what data, instrument, or access would be needed) and the predicted claim_movement.\n\nDo NOT reveal your alternatives. The student's pedagogical move is *generating* the alternative \u2014 that's the muscle the assignment grades.\n\n**Default scratchpad path** (resolved from `paths.scratch_pattern` in `metadata.yaml`):\n\n```\nskills/alt-designs/scratch/<YYYY-MM-DD-HHMM>-<student>-notes.md\n```\n\n**Adopter fallback** (when the host runtime can't write to the conventional path, no `<student>` token is set, or the skill is being used standalone): hold the pre-read in working memory across turns instead of writing to disk. Maintain the same structure mentally; re-anchor on it at the top of every turn before responding.\n\nStructure (whether on disk or in memory):\n```\n# alt-designs \u2014 <student> \u2014 <timestamp>",
       "my_pre_read": "- Critiques worth addressing (pulled from inference-threats + scope-check + Phase 2 operationalization gaps):\n  - <critique 1>\n  - <critique 2>\n- For each critique, candidate alternatives:\n  - { critique, alternative, feasibility, expected_claim_movement }\n  - ...",
       "student_s_take": "",
@@ -4572,7 +4602,6 @@
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/poli_sci-210-skills/tree/main/skills/alt-designs/skills.md",
     "owner_team": "POLISCI-210",
     "owner_contact": "bryanmurray2026@u.northwestern.edu",
-    "status": "ready",
     "status_reason": null
   },
   {
@@ -4594,7 +4623,17 @@
       "place-evidence",
       "evaluate-reasoning"
     ],
+    "trigger_signals": [
+      "student-working-on-writing",
+      "asks-for-help-analyzing-writing",
+      "student-starting-writing",
+      "look-at-my-paper",
+      "help-me-revise-this",
+      "help-me-edit-this"
+    ],
     "python_entry": "logic.py",
+    "status": "ready",
+    "version": "0.2.0",
     "description": "Orchestrator skill that takes a writing artifact, auto-classifies it as **plan mode** (no draft yet, just an outline or assignment prompt) or **draft mode** (revising existing prose), and walks the student through the appropriate chain of writing sub-skills in dialogue. Hides per-skill pre-read latency by dispatching subagents in the background. Produces a per-run session log with a ranked synthesis of revision targets across the chain.",
     "trigger_summary": "- Student supplies a writing artifact (path) and asks for help analyzing or revising it.\n- Student is starting a new writing assignment and wants help thinking through it before drafting.\n- Student says \"look at my paper\" or \"help me revise this\" without naming a specific skill.\n- A tutor wants to walk a student through the full writing workflow rather than picking sub-skills manually.",
     "tutor_stance_rules": [
@@ -4670,7 +4709,6 @@
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/poli_sci-210-skills/tree/main/skills/analyze-writing/skills.md",
     "owner_team": "POLISCI-210",
     "owner_contact": "bryanmurray2026@u.northwestern.edu",
-    "status": "ready",
     "status_reason": null
   },
   {
@@ -4695,8 +4733,12 @@
     "trigger_signals": [
       "about-to-run-without-prediction",
       "trial-and-error-debugging",
-      "about-to-reveal-result"
+      "about-to-reveal-result",
+      "computing-without-prediction",
+      "about-to-explain-result"
     ],
+    "status": "ready",
+    "version": "0.2.0",
     "description": "Before running code, performing a calculation, or revealing an outcome, asks the student to commit to a prediction first. Surfaces the mental model they're working from \u2014 which would stay invisible if they just observed the result.",
     "trigger_summary": "- Student is about to run code without articulating expected output.\n- Student is debugging by trial-and-error \u2014 pressing run, observing, pressing run again.\n- Student is about to read a study's findings, work through a calculation, or step through an experimental design.\n- Tutor is about to explain a result; pause and have the student predict it first.",
     "tutor_stance_rules": [
@@ -4745,7 +4787,6 @@
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/poli_sci-210-skills/tree/main/skills/ask-prediction/skills.md",
     "owner_team": "POLISCI-210",
     "owner_contact": "bryanmurray2026@u.northwestern.edu",
-    "status": "ready",
     "status_reason": null
   },
   {
@@ -4766,7 +4807,15 @@
       "evaluate-reasoning",
       "interpret-evidence"
     ],
+    "trigger_signals": [
+      "orient-paper-ran",
+      "first-pass-orient-ran",
+      "trace-evidence-ran",
+      "discussing-strength-of-authors"
+    ],
     "python_entry": "logic.py",
+    "status": "ready",
+    "version": "0.2.0",
     "description": "Granular skill in Phase 1 (`orient-paper`) of the research design critique. The student identifies 2\u20133 design choices the authors made that have plausible alternatives, names an alternative for each, and says one sentence on why the choice is non-trivial. The pedagogical move is *seeing the contestable scaffolding underneath the prose*: every empirical paper rests on choices the authors didn't have to make. Surfacing them is the prerequisite for Phase 2 (mapping the design) and Phase 3 (critiquing it).",
     "trigger_summary": "- Opened by the `orient-paper` orchestrator as the third skill in its chain (after `first-pass-orient` and `trace-evidence`).\n- Direct invocation: a student says \"I read the paper but I don't know what to critique\" or \"everything seems reasonable to me.\"\n- Not for forming a critique. Probing is *noticing* contestable choices; *judging* them is Phase 3.",
     "tutor_stance_rules": [
@@ -4821,7 +4870,7 @@
     ],
     "example_exchange": "> **Tutor:** Now we're surfacing choices, not critiquing them. Authors had to decide things: who to study, when, how to measure, what to compare to what. Find me 2\u20133 choices they made that they could have made differently. We'll come back to whether they were *right* in Phase 3. Pick one to start.\n>\n> **Student:** They defined \"billionaire politician\" as anyone with $1B+ who held elected office. They could have used a different wealth threshold, or included appointed positions.\n>\n> **Tutor:** Good \u2014 choice and two alternatives. In one sentence: why is that choice non-trivial?\n>\n> **Student:** Because the threshold and the office-type both shape who counts as a \"billionaire politician,\" and a different rule would change which countries dominate the dataset.\n>\n> **Tutor:** That bites. Pick another \u2014 different category. Not about the population definition.\n>\n> **Student:** They used cross-national data from 2000\u20132020. They could have started earlier, or focused on a single region.\n>\n> **Tutor:** Good. One sentence \u2014 why non-trivial?\n>\n> **Student:** The post-2000 window misses earlier waves of billionaire-politicians, and a single-region focus would catch institutional dynamics the global pool washes out.\n>\n> **Tutor:** Two solid choices logged. One more if there's an obvious one, otherwise we stop here.\n>\n> **Student:** I think that's it.\n>\n> **Tutor:** Good \u2014 two is enough. *(writes Completion Notes; phase orchestrator finalizes Phase 1 synthesis)*",
     "extra_sections": {
-      "tutor_pre_read_notes": "Before Step 1, silently identify 3\u20134 contestable design choices in the paper. For each, name 1\u20132 plausible alternatives the authors didn't take. Method-aware probes guide your nudges:\n\n- `theory-data`: how the dataset was assembled, which units were excluded, what counts as an instance of the phenomenon.\n- `inference`: comparison group, time window, measurement of treatment/outcome, identifying assumption.\n- `surveys`: sampling frame, recruitment method, question wording, response scale, mode (phone/online/in-person).\n- `experiments`: randomization unit, dose, control condition, outcome measurement timing, who delivers the manipulation.\n- `large-n`: sample period, country/case selection, model specification, fixed effects, clustering of standard errors.\n- `small-n`: case selection logic, level of analysis, what counts as a within-case observation, comparison cases (or absence thereof).\n- `machine-learning`: training data, label definition, evaluation metric, train/test split logic, baseline comparison.\n\n**Default scratchpad path** (resolved from `paths.scratch_pattern` in `metadata.yaml`):\n\n```\nskills/author-choices/scratch/<YYYY-MM-DD-HHMM>-<student>-notes.md\n```\n\n**Adopter fallback** (when the host runtime can't write to the conventional path, no `<student>` token is set, or the skill is being used standalone): hold the pre-read in working memory across turns instead of writing to disk. Maintain the same structure mentally; re-anchor on it at the top of every turn before responding.\n\nStructure (whether on disk or in memory):\n```\n# author-choices \u2014 <student> \u2014 <timestamp>",
+      "tutor_pre_read_notes": "Before Step 1, silently identify 3\u20134 contestable design choices in the paper. For each, name 1\u20132 plausible alternatives the authors didn't take. Method-aware probes guide your nudges:\n\n- `theory-data`: how the dataset was assembled, which units were excluded, what counts as an instance of the phenomenon.\n- `inference`: comparison group, time window, measurement of treatment/outcome, identifying assumption.\n- `surveys`: sampling frame, recruitment method, question wording, response scale, mode (phone/online/in-person).\n- `experiments`: randomization unit, dose, control condition, outcome measurement timing, who delivers the manipulation.\n- `large-n`: sample period, country/case selection, model specification, fixed effects, clustering of standard errors.\n- `small-n`: case selection logic, level of analysis, what counts as a within-case observation, comparison cases (or absence thereof).\n- `machine-learning`: training data, label definition, evaluation metric, train/test split logic, baseline comparison.\n\n> **Adopter note:** The 7 method categories above reflect POLI SCI 210's curriculum. The RDC chain itself is generic for any course teaching empirical paper critique, but the per-method probe *content* below is not. **The method *list* is now metadata-driven** \u2014 `logic.py`'s `VALID_METHODS` reads from `metadata.yaml.course_context.research_methods` at module load, so adopters swap the tag set by editing `metadata.yaml` only. **The per-method prose content in this section, however, still hard-codes POLI SCI 210's coverage** and must be edited skill-by-skill. A catalog-wide refactor parameterizing the prose content too is logged in `docs/audits/cross-cutting.md` entry CC-2.\n\n**Default scratchpad path** (resolved from `paths.scratch_pattern` in `metadata.yaml`):\n\n```\nskills/author-choices/scratch/<YYYY-MM-DD-HHMM>-<student>-notes.md\n```\n\n**Adopter fallback** (when the host runtime can't write to the conventional path, no `<student>` token is set, or the skill is being used standalone): hold the pre-read in working memory across turns instead of writing to disk. Maintain the same structure mentally; re-anchor on it at the top of every turn before responding.\n\nStructure (whether on disk or in memory):\n```\n# author-choices \u2014 <student> \u2014 <timestamp>",
       "my_pre_read": "- Choices the authors made (3\u20134 contestable ones, each with at least one alternative):\n  - { choice: \"<what they did>\", alternative: \"<what they could have done>\", why_non_trivial: \"<one sentence>\" }\n  - ...\n- Method-specific anchor: <which categories of choice are most load-bearing for a {method}-style paper>",
       "student_s_take": "",
       "divergences": "",
@@ -4835,7 +4884,6 @@
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/poli_sci-210-skills/tree/main/skills/author-choices/skills.md",
     "owner_team": "POLISCI-210",
     "owner_contact": "bryanmurray2026@u.northwestern.edu",
-    "status": "ready",
     "status_reason": null
   },
   {
@@ -4853,9 +4901,19 @@
     ],
     "learning_goal_tags": [
       "ensure-cohesion",
-      "structure-paragraphs"
+      "structure-paragraphs",
+      "place-evidence"
+    ],
+    "trigger_signals": [
+      "feels-choppy",
+      "writing-doesnt-flow",
+      "transitions-weak",
+      "ideas-dont-connect",
+      "improve-paragraph-flow"
     ],
     "python_entry": "logic.py",
+    "status": "ready",
+    "version": "0.2.0",
     "description": "Encourages students to examine how well their ideas connect across sentences and paragraphs, helping them identify where writing feels choppy or transitions are weak.",
     "trigger_summary": "- Student says their writing \"feels choppy\" or \"doesn't flow smoothly.\"\n- Student asks about transitions between sentences or paragraphs.\n- Student has paragraph-level structure but connections between ideas are unclear.\n- Feedback mentions weak transitions or lack of cohesion.",
     "tutor_stance_rules": [
@@ -4931,7 +4989,6 @@
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/poli_sci-210-skills/tree/main/skills/cohesion-check/skills.md",
     "owner_team": "POLISCI-210",
     "owner_contact": "bryanmurray2026@u.northwestern.edu",
-    "status": "ready",
     "status_reason": null
   },
   {
@@ -4941,7 +4998,9 @@
     "stance": "socratic",
     "tags": [
       "reading",
-      "comprehension"
+      "comprehension",
+      "paper",
+      "section-prep"
     ],
     "course_types": [
       "humanities"
@@ -4951,7 +5010,16 @@
       "interpret-evidence",
       "restate-the-problem"
     ],
+    "trigger_signals": [
+      "didnt-get-the-reading",
+      "what-was-the-reading-about",
+      "preparing-for-section",
+      "reading-comprehension-help",
+      "explain-this-paper"
+    ],
     "python_entry": "logic.py",
+    "status": "ready",
+    "version": "0.2.0",
     "description": "Ask targeted questions about a specific reading to surface gaps and deepen understanding \u2014 without summarizing the reading for the student.",
     "trigger_summary": "- Student mentions having read (or skimmed) a specific assigned reading and seems unsure about it.\n- Student asks \"what was that reading about?\" or says \"I didn't really get it.\"\n- Student is preparing for section discussion on a specific article.",
     "tutor_stance_rules": [
@@ -5015,7 +5083,6 @@
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/poli_sci-210-skills/tree/main/skills/comp-check/skills.md",
     "owner_team": "POLISCI-210",
     "owner_contact": "bryanmurray2026@u.northwestern.edu",
-    "status": "ready",
     "status_reason": null
   },
   {
@@ -5025,16 +5092,28 @@
     "stance": "socratic",
     "tags": [
       "reading",
-      "synthesis"
+      "synthesis",
+      "comparison",
+      "section-prep"
     ],
     "course_types": [
       "humanities"
     ],
     "learning_goal_tags": [
       "interpret-evidence",
-      "evaluate-reasoning"
+      "evaluate-reasoning",
+      "decompose-arguments"
+    ],
+    "trigger_signals": [
+      "compare-two-papers",
+      "are-they-the-same",
+      "which-is-better",
+      "comparing-articles",
+      "synthesize-two-readings"
     ],
     "python_entry": "logic.py",
+    "status": "ready",
+    "version": "0.2.0",
     "description": "Help the student articulate similarities, differences, and tensions between two sources without synthesizing it for them.",
     "trigger_summary": "- Student has read two papers and needs to discuss them together in section or in writing.\n- Student asks \"which of these is better?\" or \"are they saying the same thing?\"\n- Student is working on a critique or memo that references both.",
     "tutor_stance_rules": [
@@ -5096,7 +5175,6 @@
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/poli_sci-210-skills/tree/main/skills/compare-readings/skills.md",
     "owner_team": "POLISCI-210",
     "owner_contact": "bryanmurray2026@u.northwestern.edu",
-    "status": "ready",
     "status_reason": null
   },
   {
@@ -5106,16 +5184,28 @@
     "stance": "socratic",
     "tags": [
       "concepts",
-      "application"
+      "application",
+      "definition",
+      "quiz-prep"
     ],
     "course_types": [
       "humanities"
     ],
     "learning_goal_tags": [
       "verify-claims",
-      "surface-assumptions"
+      "surface-assumptions",
+      "evaluate-reasoning"
+    ],
+    "trigger_signals": [
+      "concept-not-applied",
+      "i-think-i-understand-but",
+      "quiz-prep-application",
+      "test-my-concept-grasp",
+      "give-me-an-example"
     ],
     "python_entry": "logic.py",
+    "status": "ready",
+    "version": "0.2.0",
     "description": "The student produces their own example of a concept; the tutor probes whether the example actually fits.",
     "trigger_summary": "- Student has a definition of a concept but hasn't used it.\n- Student says \"I think I understand it but I'm not sure.\"\n- Student is preparing for a quiz and needs to check application, not just recall.",
     "tutor_stance_rules": [
@@ -5178,7 +5268,6 @@
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/poli_sci-210-skills/tree/main/skills/concept-example/skills.md",
     "owner_team": "POLISCI-210",
     "owner_contact": "bryanmurray2026@u.northwestern.edu",
-    "status": "ready",
     "status_reason": null
   },
   {
@@ -5202,8 +5291,14 @@
     ],
     "trigger_signals": [
       "stuck-after-multiple-socratic-prompts",
-      "student-cant-name-applicable-concept"
+      "student-cant-name-applicable-concept",
+      "what-should-i-be-thinking-about",
+      "socratic-stalled",
+      "missing-conceptual-hook",
+      "needs-frame-not-answer"
     ],
+    "status": "ready",
+    "version": "0.2.0",
     "description": "When asking-back has stopped being productive, points the student toward the relevant principle, pattern, or framework \u2014 without solving for them. The hint names the lens, not the answer; it gives the student the conceptual hook they were missing and hands control back.",
     "trigger_summary": "- Student has been stuck for several turns despite Socratic prompts that aren't landing.\n- Student names the problem clearly but can't identify which course concept applies.\n- Tutor judges that the student is missing the conceptual hook the next move depends on \u2014 they have the data, they're just not framing it.\n- Student explicitly asks \"what should I be thinking about here?\" after a real attempt, not as an avoidance move.",
     "tutor_stance_rules": [
@@ -5246,7 +5341,6 @@
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/poli_sci-210-skills/tree/main/skills/concept-hint/skills.md",
     "owner_team": "POLISCI-210",
     "owner_contact": "bryanmurray2026@u.northwestern.edu",
-    "status": "ready",
     "status_reason": null
   },
   {
@@ -5271,8 +5365,12 @@
     "trigger_signals": [
       "student-overgeneralizes",
       "student-asserts-absolute",
-      "student-defending-first-position"
+      "student-defending-first-position",
+      "always-statement-made",
+      "student-hedging-on-claim"
     ],
+    "status": "ready",
+    "version": "0.2.0",
     "description": "When the student asserts an absolute claim or generalizes from one case, prompts them to find a case where the claim would *not* hold. Pressure-tests fragile reasoning by making the student do the falsification work themselves rather than handing them the objection.",
     "trigger_summary": "- Student asserts a claim in absolute terms: \"X always Y\", \"this proves Z\", \"every case of W is a case of V\".\n- Student generalizes from one example without engaging with edge cases.\n- Student is defending their first position without having stress-tested it.\n- An author's claim deserves a falsification check the student hasn't made.",
     "tutor_stance_rules": [
@@ -5321,7 +5419,6 @@
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/poli_sci-210-skills/tree/main/skills/counter-example/skills.md",
     "owner_team": "POLISCI-210",
     "owner_contact": "bryanmurray2026@u.northwestern.edu",
-    "status": "ready",
     "status_reason": null
   },
   {
@@ -5344,7 +5441,16 @@
       "surface-assumptions",
       "engage-objections"
     ],
+    "trigger_signals": [
+      "start-rdc",
+      "rdc-week-N",
+      "research-design-critique-assignment",
+      "need-to-critique-paper",
+      "starting-weekly-critique"
+    ],
     "python_entry": "logic.py",
+    "status": "ready",
+    "version": "0.2.0",
     "description": "Top-level orchestrator for the POLI SCI 210 research design critique assignment. Walks the student through three phase sub-orchestrators \u2014 `orient-paper`, `map-design`, `form-critique` \u2014 then hands off to `scaffold-writing` for the actual writing. Each phase has its own granular skills; the main orchestrator handles routing, week\u2192method resolution, cross-phase scratchpad linkage, and the final handoff. Produces a per-run session log capturing the critique kernel before any prose is written.",
     "trigger_summary": "- Student says they are starting one of the seven weekly research design critiques.\n- Student names a week (e.g., \"Week 6 RDC\") or one of the seven assigned articles.\n- Student supplies a published article path/PDF and asks for help critiquing it for class.\n- Student says \"I need to critique this paper\" without naming a specific skill.",
     "tutor_stance_rules": [
@@ -5358,7 +5464,7 @@
       {
         "step": 1,
         "title": "Identify the article and resolve method",
-        "description": "Ask the student which week they're working on, or which paper. Resolve week \u2192 method via the table in `logic.py`. If the student supplies a PDF that isn't one of the seven assigned articles, push back \u2014 the assignment specifies the seven papers.\n\nConfirm in one line: \"You're critiquing <paper_short> for Week <N> (<method>)? Path: <article_path>?\"\n\nCall `logic.py` with `week=None, article_path=None` first if the student hasn't supplied either, to confirm identification is needed. If the student can't name the week or doesn't have the PDF, end the skill \u2014 they need to consult the rubric and find their week's article first."
+        "description": "Ask the student which week they're working on, or which paper. Resolve week \u2192 method via the table in `logic.py`. If the student supplies a PDF that isn't one of the seven assigned articles, push back \u2014 the assignment specifies the seven papers.\n\nConfirm in one line: \"You're critiquing <paper_short> for Week <N> (<method>)? Path: <article_path>?\"\n\n> **Adopter note:** The `WEEK_METHOD` dictionary in `logic.py` now reads from `metadata.yaml.course_context.rdc_syllabus` at module load, with a hard-coded POLI SCI 210 default as a defensive fallback. An adopting team replaces the RDC schedule by editing `metadata.yaml` only \u2014 no `logic.py` edits required. Each `rdc_syllabus` entry has `{week, method, paper_short}`; `method` must be one of the `id` values in `course_context.research_methods` (also in `metadata.yaml`). The RDC chain (`orient-paper` \u2192 `map-design` \u2192 `form-critique` \u2192 `scaffold-writing`) is generic for any course teaching empirical paper critique; only the syllabus mapping is course-specific.\n\nCall `logic.py` with `week=None, article_path=None` first if the student hasn't supplied either, to confirm identification is needed. If the student can't name the week or doesn't have the PDF, end the skill \u2014 they need to consult the rubric and find their week's article first."
       },
       {
         "step": 2,
@@ -5421,7 +5527,6 @@
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/poli_sci-210-skills/tree/main/skills/critique-design/skills.md",
     "owner_team": "POLISCI-210",
     "owner_contact": "bryanmurray2026@u.northwestern.edu",
-    "status": "ready",
     "status_reason": null
   },
   {
@@ -5439,9 +5544,20 @@
     ],
     "learning_goal_tags": [
       "decompose-arguments",
-      "identify-evidence"
+      "identify-evidence",
+      "interpret-evidence",
+      "evaluate-reasoning"
+    ],
+    "trigger_signals": [
+      "lists-author-without-evidence",
+      "whats-the-argument",
+      "summary-flattens-argument",
+      "argument-hierarchy-needed",
+      "what-supports-the-thesis"
     ],
     "python_entry": "logic.py",
+    "status": "ready",
+    "version": "0.2.0",
     "description": "Leads students to see a complex argument as a hierarchy \u2014 a thesis sitting above main supporting claims, which sit above sub-claims and evidence \u2014 so they can locate what they're reading at the right level and trace how the levels hold each other up.",
     "trigger_summary": "- Student treats a complex argument as a single idea (\"the author says X\").\n- Student lists everything an author says without sorting it into thesis vs. support vs. evidence.\n- Student asks \"what's the argument?\" about a paper with layered or nested reasoning.\n- Student's summary flattens a multi-part argument into one sentence.",
     "tutor_stance_rules": [
@@ -5451,7 +5567,7 @@
       "One level at a time. Don't jump from thesis to evidence \u2014 walk down a step.",
       "Work from the student's initial understanding \u2014 even if incomplete, it's a starting point.",
       "If they haven't read the text carefully, send them back \u2014 this skill doesn't work on half-remembered readings.",
-      "Be concise. One short paragraph or one question per turn. No bulleted lectures. The goal is engagement, not exposition."
+      "Be concise. One sentence or one question per turn. No bulleted lectures. The goal is engagement, not exposition."
     ],
     "flow": [
       {
@@ -5519,7 +5635,6 @@
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/poli_sci-210-skills/tree/main/skills/decompose-arg/skills.md",
     "owner_team": "POLISCI-210",
     "owner_contact": "bryanmurray2026@u.northwestern.edu",
-    "status": "ready",
     "status_reason": null
   },
   {
@@ -5537,9 +5652,20 @@
     ],
     "learning_goal_tags": [
       "decompose-arguments",
-      "identify-evidence"
+      "identify-evidence",
+      "specify-io",
+      "evaluate-reasoning"
+    ],
+    "trigger_signals": [
+      "design-skeleton-needed",
+      "whats-the-design",
+      "cant-describe-methodology",
+      "map-design-step-1",
+      "seven-fields-skeleton"
     ],
     "python_entry": "logic.py",
+    "status": "ready",
+    "version": "0.2.0",
     "description": "Granular skill in Phase 2 (`map-design`) of the research design critique. The student fills in seven canonical research-design fields for the paper: research question, unit of analysis, sample, IV/treatment, DV/outcome, identification strategy, and comparison. The pedagogical move is *forcing the design into a structured form*: students who can paraphrase a paper often can't say what its unit of analysis is. Method-aware labels handle the cases where a field doesn't apply directly (e.g., a theory-only paper has no \"treatment\").",
     "trigger_summary": "- Opened by the `map-design` orchestrator as the first skill in its chain.\n- Direct invocation: a student says \"I don't know how to describe what they did methodologically\" or \"what's the design here?\"\n- Not for forming a critique. Filling the skeleton is description; judging it is Phase 3.",
     "tutor_stance_rules": [
@@ -5606,7 +5732,7 @@
     ],
     "example_exchange": "> **Tutor:** First field \u2014 research question. In one sentence, formal terms. You named the puzzle in Phase 1.\n>\n> **Student:** Whether having a billionaire's wealth concentrated in politically exposed sectors increases the probability that the billionaire enters formal politics.\n>\n> **Tutor:** Clear. Next \u2014 unit of analysis. What's each row in their data?\n>\n> **Student:** A billionaire-year, I think.\n>\n> **Tutor:** Good. Sample?\n>\n> *(continues field by field)*\n>\n> **Tutor:** Identification strategy?\n>\n> **Student:** Cross-national regression with country and year fixed effects.\n>\n> **Tutor:** That's the model \u2014 what's the *identifying* logic? What variation is doing the work?\n>\n> **Student:** Within-country, over-time variation in sectoral exposure of individual billionaires' wealth, after netting out country and year shocks.\n>\n> **Tutor:** Good \u2014 that's the identifying logic. *(records, advances)*",
     "extra_sections": {
-      "tutor_pre_read_notes": "Before Step 1, silently fill in your own version of the seven fields for THIS paper. Method-aware label translations:\n\n- `theory-data`: IV/treatment \u2192 \"key explanatory factor or theoretical predictor\"; identification \u2192 \"test logic\" (how the data could in principle have refuted the theory).\n- `inference`: all seven fields apply. Identification strategy is the central field \u2014 DID, IV, RDD, matching, selection-on-observables, etc.\n- `surveys`: IV/treatment \u2192 \"key independent variable\"; identification \u2192 \"regression / descriptive comparison / quasi-experimental survey design\"; comparison \u2192 respondent subgroups or counterfactual conditions in vignettes.\n- `experiments`: identification = \"randomization (level and procedure)\"; comparison = \"control condition.\" Both must be specific.\n- `large-n`: same as inference, plus model specification belongs in identification strategy.\n- `small-n`: sample \u2192 \"case selection logic\"; identification \u2192 \"process tracing / structured comparison\"; comparison \u2192 \"across cases\" or \"n/a \u2014 single case\" with rationale.\n- `machine-learning`: IV/treatment \u2192 \"input features / predictors\"; DV/outcome \u2192 \"label / target\"; identification \u2192 \"evaluation framework (train/test split, baselines)\"; comparison \u2192 \"baseline model(s) and the human/null counterfactual.\"\n\n**Default scratchpad path** (resolved from `paths.scratch_pattern` in `metadata.yaml`):\n\n```\nskills/design-skeleton/scratch/<YYYY-MM-DD-HHMM>-<student>-notes.md\n```\n\n**Adopter fallback** (when the host runtime can't write to the conventional path, no `<student>` token is set, or the skill is being used standalone): hold the pre-read in working memory across turns instead of writing to disk. Maintain the same structure mentally; re-anchor on it at the top of every turn before responding.\n\nStructure (whether on disk or in memory):\n```\n# design-skeleton \u2014 <student> \u2014 <timestamp>",
+      "tutor_pre_read_notes": "Before Step 1, silently fill in your own version of the seven fields for THIS paper. Method-aware label translations:\n\n- `theory-data`: IV/treatment \u2192 \"key explanatory factor or theoretical predictor\"; identification \u2192 \"test logic\" (how the data could in principle have refuted the theory).\n- `inference`: all seven fields apply. Identification strategy is the central field \u2014 DID, IV, RDD, matching, selection-on-observables, etc.\n- `surveys`: IV/treatment \u2192 \"key independent variable\"; identification \u2192 \"regression / descriptive comparison / quasi-experimental survey design\"; comparison \u2192 respondent subgroups or counterfactual conditions in vignettes.\n- `experiments`: identification = \"randomization (level and procedure)\"; comparison = \"control condition.\" Both must be specific.\n- `large-n`: same as inference, plus model specification belongs in identification strategy.\n- `small-n`: sample \u2192 \"case selection logic\"; identification \u2192 \"process tracing / structured comparison\"; comparison \u2192 \"across cases\" or \"n/a \u2014 single case\" with rationale.\n- `machine-learning`: IV/treatment \u2192 \"input features / predictors\"; DV/outcome \u2192 \"label / target\"; identification \u2192 \"evaluation framework (train/test split, baselines)\"; comparison \u2192 \"baseline model(s) and the human/null counterfactual.\"\n\n> **Adopter note:** The 7 method-aware label translations above reflect POLI SCI 210's curriculum. The seven canonical design fields themselves (research_question, unit_of_analysis, sample, IV, DV, identification, comparison) are general across empirical paper critique; the per-method translations are not. **The method *list* is now metadata-driven** \u2014 `logic.py`'s `VALID_METHODS` reads from `metadata.yaml.course_context.research_methods` at module load. **The per-method prose translations in this section still hard-code POLI SCI 210's coverage** and must be edited skill-by-skill. A catalog-wide refactor parameterizing the prose too is logged in `docs/audits/cross-cutting.md` entry CC-2.\n\n**Default scratchpad path** (resolved from `paths.scratch_pattern` in `metadata.yaml`):\n\n```\nskills/design-skeleton/scratch/<YYYY-MM-DD-HHMM>-<student>-notes.md\n```\n\n**Adopter fallback** (when the host runtime can't write to the conventional path, no `<student>` token is set, or the skill is being used standalone): hold the pre-read in working memory across turns instead of writing to disk. Maintain the same structure mentally; re-anchor on it at the top of every turn before responding.\n\nStructure (whether on disk or in memory):\n```\n# design-skeleton \u2014 <student> \u2014 <timestamp>",
       "my_pre_read": "- research_question: ...\n- unit_of_analysis: ...\n- sample: ...\n- iv_or_treatment: ...\n- dv_or_outcome: ...\n- identification_strategy: ...\n- comparison: ...\n- method-translation notes: <which fields needed re-labeling for {method}>",
       "student_s_take": "",
       "divergences": "",
@@ -5620,7 +5746,6 @@
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/poli_sci-210-skills/tree/main/skills/design-skeleton/skills.md",
     "owner_team": "POLISCI-210",
     "owner_contact": "bryanmurray2026@u.northwestern.edu",
-    "status": "ready",
     "status_reason": null
   },
   {
@@ -5630,7 +5755,9 @@
     "stance": "socratic",
     "tags": [
       "ai-literacy",
-      "critique"
+      "critique",
+      "ai-memo",
+      "evaluation"
     ],
     "course_types": [
       "humanities"
@@ -5640,7 +5767,16 @@
       "surface-assumptions",
       "reflect-on-progress"
     ],
+    "trigger_signals": [
+      "is-ai-answer-right",
+      "ai-explained-this-concept",
+      "evaluate-ai-response",
+      "ai-memo-step-3",
+      "compare-ai-to-course"
+    ],
     "python_entry": "logic.py",
+    "status": "ready",
+    "version": "0.2.0",
     "description": "Walk the student through critically evaluating an AI chatbot's explanation \u2014 credibility, gaps, and comparison to course material.",
     "trigger_summary": "- Student is writing the weekly AI memo assignment.\n- Student pastes or describes an AI chatbot's answer to a concept question.\n- Student says \"the AI gave me this explanation \u2014 is it right?\"",
     "tutor_stance_rules": [
@@ -5704,7 +5840,6 @@
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/poli_sci-210-skills/tree/main/skills/eval-ai-response/skills.md",
     "owner_team": "POLISCI-210",
     "owner_contact": "bryanmurray2026@u.northwestern.edu",
-    "status": "ready",
     "status_reason": null
   },
   {
@@ -5722,9 +5857,20 @@
     ],
     "learning_goal_tags": [
       "place-evidence",
-      "structure-paragraphs"
+      "structure-paragraphs",
+      "ensure-cohesion",
+      "evaluate-reasoning"
+    ],
+    "trigger_signals": [
+      "evidence-feels-misplaced",
+      "should-this-go-here",
+      "evidence-disconnected",
+      "evidence-placement-review",
+      "quote-out-of-place"
     ],
     "python_entry": "logic.py",
+    "status": "ready",
+    "version": "0.2.0",
     "description": "Guides students to assess whether evidence appears in the most effective location within their writing, helping them see when evidence feels misplaced or disconnected from the claims it supports.",
     "trigger_summary": "- Student says evidence \"feels out of place\" or \"disconnected.\"\n- Student has inserted quotes or data but isn't sure if they belong where they are.\n- Student asks \"should this evidence go here?\"\n- Reviewer or peer feedback mentions evidence placement issues.",
     "tutor_stance_rules": [
@@ -5793,7 +5939,6 @@
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/poli_sci-210-skills/tree/main/skills/evidence-placement/skills.md",
     "owner_team": "POLISCI-210",
     "owner_contact": "bryanmurray2026@u.northwestern.edu",
-    "status": "ready",
     "status_reason": null
   },
   {
@@ -5869,7 +6014,9 @@
     "stance": "socratic",
     "tags": [
       "concepts",
-      "metacognition"
+      "metacognition",
+      "feynman",
+      "quiz-prep"
     ],
     "course_types": [
       "humanities"
@@ -5879,7 +6026,16 @@
       "surface-assumptions",
       "reflect-on-progress"
     ],
+    "trigger_signals": [
+      "i-get-it-but-cant-explain",
+      "feynman-check",
+      "test-my-understanding",
+      "concept-quiz-self-check",
+      "explain-this-concept"
+    ],
     "python_entry": "logic.py",
+    "status": "ready",
+    "version": "0.2.0",
     "description": "Student explains a concept in their own words; tutor probes weak spots and asks for retries (Feynman technique).",
     "trigger_summary": "- Student says \"I get it\" but hasn't articulated anything yet.\n- Student is studying for a quiz and wants to test their understanding of a specific concept.\n- Student gave a thin answer about a concept and you want to probe whether it's real.",
     "tutor_stance_rules": [
@@ -5942,7 +6098,6 @@
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/poli_sci-210-skills/tree/main/skills/explain-back-check/skills.md",
     "owner_team": "POLISCI-210",
     "owner_contact": "bryanmurray2026@u.northwestern.edu",
-    "status": "ready",
     "status_reason": null
   },
   {
@@ -5958,16 +6113,27 @@
       "cs",
       "humanities"
     ],
-    "learning_goal_tags": [],
+    "learning_goal_tags": [
+      "extract-requirements",
+      "specify-io"
+    ],
+    "trigger_signals": [
+      "import-syllabus",
+      "extract-syllabus-text",
+      "bootstrap-course-from-syllabus",
+      "parse-syllabus-pdf"
+    ],
     "python_entry": "logic.py",
+    "status": "stub",
+    "version": "0.2.0",
     "description": "Extracts course metadata and an assignment list from raw syllabus text. Used by the orchestrator's `/syllabus/extract` endpoint to bootstrap a course's assignments from a PDF or pasted text.",
-    "trigger_summary": null,
+    "trigger_summary": "- The orchestrator's `/syllabus/extract` endpoint receives a PDF upload or pasted syllabus text and needs to bootstrap a course's structured assignments.\n- An adopter wants to extract `{course, assignments, warnings}` JSON from a syllabus standalone, outside the parent orchestrator (see \"Standalone Usage\" below).\n- An automated import pipeline needs to convert syllabi from many courses into the registry's structured format.",
     "inputs_schema_text": "The orchestrator substitutes `{syllabus_text}` (below) with the full extracted PDF text or pasted block before sending to the LLM.",
     "outputs_schema_text": "Strict JSON with three top-level fields: `course`, `assignments`, `warnings`.",
     "usage_example": null,
-    "code_notes": "The orchestrator's `syllabus_importer` service substitutes `{syllabus_text}`, sends this to litellm with `temperature=0`, then hands the raw response to `logic.parse_extraction()` which validates and normalizes the result.",
+    "code_notes": "The orchestrator's `syllabus_importer` service substitutes `{syllabus_text}`, sends this to litellm with `temperature=0`, then hands the raw response to `logic.parse_extraction()` which validates and normalizes the result.\n\n### Architectural note for adopters\n\nThis skill is consumed by the orchestrator via the `/syllabus/extract` endpoint backed by the `syllabus_importer` service, **not** via the standard `logic_loader.py` path used by most code skills. `logic.py` also exposes a thin `run(input: dict) -> dict` wrapper (delegating to `parse_extraction`) so that adopters and automated harnesses calling skills through the standard contract can invoke this one the same way. The wrapper expects `{\"llm_output\": <str>}` as input and returns the parsed `{course, assignments, warnings}` dict \u2014 see `INPUT_SCHEMA` in `logic.py`.",
     "extra_sections": {
-      "prompt_template": "You are extracting structured data from a course syllabus. Read the syllabus text below and output **valid JSON only** (no prose, no markdown fences) matching this exact shape:\n\n```json\n{\n  \"course\": {\n    \"code\": \"<short code like 'POLI SCI 210' \u2014 empty string if missing>\",\n    \"name\": \"<full course title \u2014 empty string if missing>\",\n    \"instructor\": \"<primary instructor name \u2014 empty string if missing>\",\n    \"term\": \"<e.g. 'Spring 2026' \u2014 empty string if missing>\"\n  },\n  \"assignments\": [\n    {\n      \"name\": \"<short assignment name>\",\n      \"type\": \"<one of: writing, code, quiz, homework>\",\n      \"due\": \"<verbatim due-date string from the syllabus>\",\n      \"prompt\": \"<1-2 sentence summary of what the student must do>\"\n    }\n  ],\n  \"warnings\": [\"<one sentence per ambiguity you couldn't resolve>\"]\n}\n```\n\n### Rules\n\n1. **`type` mapping.** Map syllabus terms to the allowed values:\n   - \"essay\", \"paper\", \"reflection\", \"critique\", \"memo\" \u2192 `writing`\n   - \"problem set\", \"lab\", \"implementation\", \"coding assignment\" \u2192 `code`\n   - \"quiz\", \"exam\", \"midterm\", \"final exam\" \u2192 `quiz`\n   - anything else \u2192 `homework`\n   Never invent a new type.\n\n2. **`due` is verbatim.** Copy the syllabus's date string exactly (e.g., `\"Week 8\"`, `\"Friday May 3\"`, `\"TBD\"`). Do not canonicalize.\n\n3. **`prompt` is short.** 1\u20132 sentences. If the syllabus only gives a title with no description, write `\"\"`.\n\n4. **All `course.*` fields are present.** If you cannot infer a field, return `\"\"` (empty string), not `null`, not omitted.\n\n5. **`warnings` is always present.** Empty array if everything was clear. Add one sentence per piece of ambiguity (e.g., `\"Couldn't parse a date for 'Final paper' \u2014 left as TBD\"`).\n\n6. **No extra fields.** Do not add commentary, examples, or fields outside this schema.\n\n### Syllabus\n\n```\n{syllabus_text}\n```",
+      "prompt_template": "You are extracting structured data from a course syllabus. Read the syllabus text below and output **valid JSON only** (no prose, no markdown fences) matching this exact shape:\n\n```json\n{\n  \"course\": {\n    \"code\": \"<short code like 'POLI SCI 210' \u2014 empty string if missing>\",\n    \"name\": \"<full course title \u2014 empty string if missing>\",\n    \"instructor\": \"<primary instructor name \u2014 empty string if missing>\",\n    \"term\": \"<e.g. 'Spring 2026' \u2014 empty string if missing>\",\n    \"term_start\": \"<YYYY-MM-DD of the first day of Week 1 \u2014 empty string if missing>\"\n  },\n  \"assignments\": [\n    {\n      \"name\": \"<short assignment name>\",\n      \"type\": \"<one of: writing, code, quiz, homework>\",\n      \"due\": \"<verbatim due-date string from the syllabus>\",\n      \"prompt\": \"<1-2 sentence summary of what the student must do>\",\n      \"recurrence\": null\n    }\n  ],\n  \"warnings\": [\"<one sentence per ambiguity you couldn't resolve>\"]\n}\n```\n\n### Rules\n\n1. **`type` mapping.** Map syllabus terms to the allowed values:\n   - \"essay\", \"paper\", \"reflection\", \"critique\", \"memo\" \u2192 `writing`\n   - \"problem set\", \"lab\", \"implementation\", \"coding assignment\" \u2192 `code`\n   - \"quiz\", \"exam\", \"midterm\", \"final exam\" \u2192 `quiz`\n   - anything else \u2192 `homework`\n   Never invent a new type.\n\n2. **`due` is verbatim.** Copy the syllabus's date string exactly (e.g., `\"Week 8\"`, `\"Friday May 3\"`, `\"TBD\"`). Do not canonicalize.\n\n3. **`prompt` is short.** 1\u20132 sentences. If the syllabus only gives a title with no description, write `\"\"`.\n\n4. **All `course.*` fields are present.** If you cannot infer a field, return `\"\"` (empty string), not `null`, not omitted. The `term_start` field is the date of the first day of Week 1; look for phrases like \"Week 1 (April 2)\" or \"Classes begin Monday, April 2\" in the schedule section. Format as `YYYY-MM-DD`. If you cannot find a Week-1 anchor, return `\"\"`.\n\n5. **`recurrence` is per-row.**\n   - For one-off assignments (e.g., \"Final Paper due May 12\"): `\"recurrence\": null`.\n   - For series that recur weekly (e.g., \"weekly quizzes\", \"research design critique each week \u00d7 7\"): emit an object:\n     ```json\n     {\n       \"kind\": \"weekly\",\n       \"count\": <total occurrences, integer 1..52>,\n       \"anchor_weekday\": \"<Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday>\",\n       \"first_week\": <1-indexed week of the term the series starts, default 1>,\n       \"skip_weeks\": [<term-week numbers to skip, default []>]\n     }\n     ```\n   - For a series like *\"Quizzes (10 points each \u00d7 7), due Fridays at 11:59 PM of the week they are assigned. Weekly assignments start the second week of class.\"*:\n     ```json\n     {\"kind\": \"weekly\", \"count\": 7, \"anchor_weekday\": \"Friday\", \"first_week\": 2, \"skip_weeks\": []}\n     ```\n   - Emit **one row per series**, not one row per occurrence. The orchestrator will expand it.\n   - The `name` for a recurring row is the singular form (\"Quiz\", not \"Quizzes\"). The `due` is the human description (\"Fridays of each week\"). The structured detail lives in `recurrence`.\n\n6. **`warnings` is always present.** Empty array if everything was clear. Add one sentence per piece of ambiguity (e.g., `\"Couldn't parse a date for 'Final paper' \u2014 left as TBD\"`).\n\n7. **No extra fields.** Do not add commentary, examples, or fields outside this schema.\n\n### Syllabus\n\n```\n{syllabus_text}\n```",
       "standalone_usage_adopters": "This skill is structurally a prompt template, not a tutor flow \u2014 it has no Socratic dialogue, no Tutor Stance section, no scratchpad. To use it without the parent orchestrator's `syllabus_importer` service:\n\n1. **Extract syllabus text.** PDF \u2192 text via `pdftotext`, `pypdf`, or paste the syllabus content directly into a string.\n2. **Substitute `{syllabus_text}`** in the **Prompt Template** section above with the extracted text. Everything between the \"You are extracting structured data...\" line and the closing ``` of the syllabus code fence is the prompt body.\n3. **Call any LLM with `temperature=0`** (the determinism matters for schema adherence). Anthropic, OpenAI, Gemini \u2014 all work. The skill is provider-agnostic.\n4. **Parse the response as JSON.** The model returns only the JSON object described in the schema; no markdown fences, no prose. If your runtime returns text wrapped in ```json fences anyway (some chat APIs do), strip them before parsing.\n5. **Validate.** Confirm `course`, `assignments`, and `warnings` are present; coerce types if needed.\n\nA minimal Python example:\n\n```python\nimport json\nfrom anthropic import Anthropic\n\nprompt_template = open(\"skills/extract-syllabus/skills.md\").read()\n# Extract the prompt-body section between \"## Prompt Template\" and \"## Notes\".\n# (You can also inline the prompt body directly to avoid the file read.)\nprompt = prompt_template.split(\"## Prompt Template\")[1].split(\"## Notes\")[0]\nprompt = prompt.replace(\"{syllabus_text}\", syllabus_text)\n\nclient = Anthropic()\nresponse = client.messages.create(\n    model=\"claude-sonnet-4-6\",\n    max_tokens=4096,\n    temperature=0,\n    messages=[{\"role\": \"user\", \"content\": prompt}],\n)\ndata = json.loads(response.content[0].text)\n```\n\nThere is no `logic.py` requirement for standalone use \u2014 the skill is a one-shot prompt."
     },
     "source_repo": "poli_sci-210-skills",
@@ -5975,8 +6141,7 @@
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/poli_sci-210-skills/tree/main/skills/extract-syllabus/skills.md",
     "owner_team": "POLISCI-210",
     "owner_contact": "bryanmurray2026@u.northwestern.edu",
-    "status": "stub",
-    "status_reason": "missing \u2014 add `## When to Trigger` section; missing \u2014 add `## Usage` section"
+    "status_reason": "missing \u2014 add `## Usage` section"
   },
   {
     "skill_id": "first-pass-orient",
@@ -5993,9 +6158,20 @@
     ],
     "learning_goal_tags": [
       "restate-the-problem",
-      "identify-evidence"
+      "identify-evidence",
+      "interpret-evidence",
+      "evaluate-reasoning"
+    ],
+    "trigger_signals": [
+      "whats-the-paper-about",
+      "whats-the-main-argument",
+      "phase-1-start",
+      "cant-summarize-paper",
+      "puzzle-and-answer"
     ],
     "python_entry": "logic.py",
+    "status": "ready",
+    "version": "0.2.0",
     "description": "Granular skill in Phase 1 (`orient-paper`) of the research design critique. Forces the student to articulate the paper's puzzle (what's it asking?) and answer (what does it claim/find?) in their own words, one sentence each. The pedagogical move is *synthesis under constraint*: parroting the abstract is the failure mode. Method-aware probing helps when the student is stuck.",
     "trigger_summary": "- Opened by the `orient-paper` orchestrator as the first skill in its chain.\n- Direct invocation: a student says \"I read the paper but I'm not sure what it's actually about\" or \"can you help me figure out the main argument?\"\n- Not for forming critique \u2014 that's Phase 3. Not for tracing evidence \u2014 that's the next skill in this phase.",
     "tutor_stance_rules": [
@@ -6009,12 +6185,12 @@
       {
         "step": 1,
         "title": "Ask for the puzzle in their own words",
-        "description": "Open with: \"If you had to tell a friend what this paper is about in one sentence \u2014 what would you say?\" Avoid the word \"puzzle\" until after they've answered, so they don't reach for textbook-shaped phrasing.\n- If they give a clean one-sentence puzzle that isn't abstract-parroting \u2192 Step 2.\n- If they parrot the abstract \u2192 \"That's the abstract talking. In your own words \u2014 what's the question they're chasing?\" One more attempt; if they parrot again, ask them to close the PDF and try again from memory.\n- If they hedge (\"I'm not sure...\") \u2192 method-aware probe. For example, for `experiments`: \"what did they manipulate, and what were they trying to learn from manipulating it?\" For `surveys`: \"who did they ask, and what were they trying to find out?\""
+        "description": "Open with: \"If you had to tell a friend what this paper is about in one sentence \u2014 what would you say?\" Avoid the word \"puzzle\" until after they've answered, so they don't reach for textbook-shaped phrasing.\n- If they give a clean one-sentence puzzle that isn't abstract-parroting \u2192 Step 2.\n- If they parrot the abstract \u2192 \"That's the abstract talking. In your own words \u2014 what's the question they're chasing?\" One more attempt; if they parrot again, ask them to close the PDF and try again from memory.\n- If they hedge (\"I'm not sure...\") \u2192 method-aware probe. For `experiments`: \"what did they manipulate, and what were they trying to learn from manipulating it?\" For `surveys`: \"who did they ask, and what were they trying to find out?\" For `inference`: \"what causal question are they trying to answer, and between what variables?\" For `large-n`: \"what relationship across what units are they tracing?\" For `machine-learning`: \"what are they trying to predict, and from what?\""
       },
       {
         "step": 2,
         "title": "Ask for the answer in their own words",
-        "description": "\"And in one sentence \u2014 what's their answer? What did they find or argue?\"\n- If they give a clean one-sentence answer \u2192 Step 3.\n- If they conflate puzzle and answer (\"they're studying X\") \u2192 \"That's the topic. What's the *finding*?\"\n- Method-aware probe if stuck. For `theory-data`: \"is the claim that the theory holds, or that the data show a particular pattern? Both?\" For `small-n`: \"what's the within-case mechanism they say is driving the outcome?\""
+        "description": "\"And in one sentence \u2014 what's their answer? What did they find or argue?\"\n- If they give a clean one-sentence answer \u2192 Step 3.\n- If they conflate puzzle and answer (\"they're studying X\") \u2192 \"That's the topic. What's the *finding*?\"\n- Method-aware probe if stuck. For `theory-data`: \"is the claim that the theory holds, or that the data show a particular pattern? Both?\" For `small-n`: \"what's the within-case mechanism they say is driving the outcome?\" For `inference`: \"what's the claimed causal effect \u2014 sign and rough magnitude?\" For `surveys`: \"what pattern in the responses are they highlighting, and how big is it?\" For `experiments`: \"what was the treatment effect \u2014 direction, size, and on which outcome?\" For `large-n`: \"what's the headline coefficient or correlation, and what does it say in substantive terms?\" For `machine-learning`: \"what's the headline performance number \u2014 and against what baseline?\""
       },
       {
         "step": 3,
@@ -6038,7 +6214,7 @@
     ],
     "example_exchange": "> **Tutor:** If you had to tell a friend what this paper is about in one sentence \u2014 what would you say?\n>\n> **Student:** Krcmaric, Nelson, and Roberts study why some billionaires become politicians and others don't.\n>\n> **Tutor:** Good \u2014 that's the question. In one sentence: what's their *answer*?\n>\n> **Student:** They find that billionaires from countries with weaker institutions are more likely to enter politics directly, especially when their wealth is in politically exposed sectors.\n>\n> **Tutor:** That's a clean one-sentence puzzle and one-sentence answer. Done with this step. *(writes Completion Notes; phase orchestrator advances to trace-evidence)*",
     "extra_sections": {
-      "tutor_pre_read_notes": "Before Step 1, silently form your own one-sentence puzzle and one-sentence answer for THIS paper. Note what's load-bearing for the method (e.g., for `experiments`: the manipulation; for `surveys`: the population sampled and the question wording; for `small-n`: the case selection logic; for `theory-data`: the theoretical claim being tested vs. the empirical pattern).\n\n**Default scratchpad path** (resolved from `paths.scratch_pattern` in `metadata.yaml`):\n\n```\nskills/first-pass-orient/scratch/<YYYY-MM-DD-HHMM>-<student>-notes.md\n```\n\n**Adopter fallback** (when the host runtime can't write to the conventional path, no `<student>` token is set, or the skill is being used standalone): hold the pre-read in working memory across turns instead of writing to disk. Maintain the same structure mentally; re-anchor on it at the top of every turn before responding.\n\nStructure (whether on disk or in memory):\n```\n# first-pass-orient \u2014 <student> \u2014 <timestamp>",
+      "tutor_pre_read_notes": "Before Step 1, silently form your own one-sentence puzzle and one-sentence answer for THIS paper. Note what's load-bearing for the method (e.g., for `experiments`: the manipulation; for `surveys`: the population sampled and the question wording; for `small-n`: the case selection logic; for `theory-data`: the theoretical claim being tested vs. the empirical pattern).\n\n> **Adopter note:** The method-aware anchors throughout this skill (`experiments`, `surveys`, `theory-data`, `small-n`, etc.) reflect POLI SCI 210's 7-method curriculum. The puzzle/answer move itself is general for any empirical paper. **The method *list* is now metadata-driven** \u2014 `logic.py`'s `VALID_METHODS` reads from `metadata.yaml.course_context.research_methods` at module load. **The per-method probes scattered through Flow Step 1 and Step 2 still hard-code POLI SCI 210's coverage** and must be edited skill-by-skill. A catalog-wide refactor parameterizing the prose too is logged in `docs/audits/cross-cutting.md` entry CC-2.\n\n**Default scratchpad path** (resolved from `paths.scratch_pattern` in `metadata.yaml`):\n\n```\nskills/first-pass-orient/scratch/<YYYY-MM-DD-HHMM>-<student>-notes.md\n```\n\n**Adopter fallback** (when the host runtime can't write to the conventional path, no `<student>` token is set, or the skill is being used standalone): hold the pre-read in working memory across turns instead of writing to disk. Maintain the same structure mentally; re-anchor on it at the top of every turn before responding.\n\nStructure (whether on disk or in memory):\n```\n# first-pass-orient \u2014 <student> \u2014 <timestamp>",
       "my_pre_read": "- puzzle (one sentence): ...\n- answer (one sentence): ...\n- method-specific anchor: <what's load-bearing for a {method}-style paper>\n- abstract phrasing (verbatim, 1\u20132 lines, so I can detect parroting): \"...\"",
       "student_s_take": "",
       "divergences": "",
@@ -6052,7 +6228,6 @@
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/poli_sci-210-skills/tree/main/skills/first-pass-orient/skills.md",
     "owner_team": "POLISCI-210",
     "owner_contact": "bryanmurray2026@u.northwestern.edu",
-    "status": "ready",
     "status_reason": null
   },
   {
@@ -6070,9 +6245,20 @@
     ],
     "learning_goal_tags": [
       "evaluate-reasoning",
-      "structure-paragraphs"
+      "structure-paragraphs",
+      "construct-arguments",
+      "ensure-cohesion"
+    ],
+    "trigger_signals": [
+      "essay-feels-disjointed",
+      "does-this-make-sense",
+      "section-order-unclear",
+      "logical-flow-broken",
+      "argument-progression"
     ],
     "python_entry": "logic.py",
+    "status": "ready",
+    "version": "0.2.0",
     "description": "Prompts students to evaluate whether ideas progress logically from one section to the next in their essay, helping them identify where argument order is unclear or disjointed.",
     "trigger_summary": "- Student says their essay \"feels disjointed\" or \"doesn't flow.\"\n- Student is unsure about the order of their argument sections.\n- Student asks \"does this make sense?\" about their draft structure.\n- Student has a draft but the logical progression between sections is unclear.",
     "tutor_stance_rules": [
@@ -6142,7 +6328,6 @@
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/poli_sci-210-skills/tree/main/skills/flow-check/skills.md",
     "owner_team": "POLISCI-210",
     "owner_contact": "bryanmurray2026@u.northwestern.edu",
-    "status": "ready",
     "status_reason": null
   },
   {
@@ -6165,7 +6350,16 @@
       "evaluate-reasoning",
       "place-evidence"
     ],
+    "trigger_signals": [
+      "form-critique-phase",
+      "help-me-form-critique",
+      "phase-3-start",
+      "have-design-map-need-critique",
+      "whats-my-argument"
+    ],
     "python_entry": "logic.py",
+    "status": "ready",
+    "version": "0.2.0",
     "description": "Phase 3 sub-orchestrator of `critique-design`. Walks the student through three granular skills \u2014 `inference-threats` \u2192 `scope-check` \u2192 `alt-designs` \u2014 to convert the design map from Phase 2 into the critique kernel the assignment ultimately grades on: load-bearing threats to the paper's inference, scope conditions where the claim might not hold, and concrete design alternatives that would address the strongest critiques. Hides per-skill pre-read latency by dispatching subagents in the background. The phase Synthesis IS the critique kernel the main orchestrator hands to `scaffold-writing`.",
     "trigger_summary": "- The main orchestrator (`critique-design`) opens this phase as Phase 3 of the chain (after `map-design`).\n- Direct invocation: a student says \"help me form the critique\" or \"I have the design map but I don't know what to argue.\"\n- Hard prerequisite: Phase 1 and Phase 2 logs must exist. Critique without the design map is generic complaining.",
     "tutor_stance_rules": [
@@ -6190,7 +6384,7 @@
       {
         "step": 3,
         "title": "Dispatch pre-read subagent for skill N+1",
-        "description": "Same pattern as earlier phases. Use `Agent` tool with `subagent_type=general-purpose` and `run_in_background=true`. Prompt template:\n\n```\nYou are doing a silent pre-read for the granular skill `<NEXT_SKILL_ID>` in\nthe form-critique phase of a POLI SCI 210 research design critique.\n\nInputs:\n- Article: <ABSOLUTE_PATH_TO_ARTICLE>\n- Week: <WEEK>     Method: <METHOD>     Paper: <PAPER_SHORT>\n- Skill spec (read this first): <ABSOLUTE_PATH_TO_NEXT_SKILL_SKILLS_MD>\n- Prior phase session logs (from main orchestrator):\n  - orient-paper: <PATH>\n  - map-design: <PATH>\n- Prior in-phase scratchpads (so your pre-read builds on prior sub-skills):\n  - <ABSOLUTE_PATH_TO_PRIOR_SCRATCHPAD_1>\n  - ...\n\nTask:\n1. Read the skill spec and follow its \"Tutor Pre-Read & Notes\" section\n   verbatim to form your own canonical answer for THIS article. Method-aware:\n   focus on what's load-bearing for a <METHOD>-style paper.\n2. Read both prior phase syntheses in full. Specifically:\n   - From Phase 1: headline_claim, evidence_locus, claim_evidence_match, non-trivial choices.\n   - From Phase 2: design map (especially identification_strategy), operationalization vulnerabilities (especially severity \u2265 moderate), method-week alignment items labeled `partially addressed` or `unaddressed`.\n   These are the seeds. Critiques that don't tie to one of these are generic and should be flagged.\n3. Write the pre-read scratchpad at the conventional path the skill spec\n   gives. Use the exact section headings the spec specifies.\n4. Do NOT engage the user. Return a one-line confirmation.\n\nConstraints:\n- Silent pre-read only.\n- Build on prior scratchpads.\n- This is the critique phase \u2014 verdict-with-evidence is in scope, but every critique must tie to a specific design element from Phase 2.\n```\n\nSubstitute the absolute paths. Do not block."
+        "description": "Same pattern as earlier phases. Use `Agent` tool with `subagent_type=general-purpose` and `run_in_background=true`. Prompt template:\n\n```\nYou are doing a silent pre-read for the granular skill `<NEXT_SKILL_ID>` in\nthe form-critique phase of a research design critique.\n\nInputs:\n- Article: <ABSOLUTE_PATH_TO_ARTICLE>\n- Week: <WEEK>     Method: <METHOD>     Paper: <PAPER_SHORT>\n- Skill spec (read this first): <ABSOLUTE_PATH_TO_NEXT_SKILL_SKILLS_MD>\n- Prior phase session logs (from main orchestrator):\n  - orient-paper: <PATH>\n  - map-design: <PATH>\n- Prior in-phase scratchpads (so your pre-read builds on prior sub-skills):\n  - <ABSOLUTE_PATH_TO_PRIOR_SCRATCHPAD_1>\n  - ...\n\nTask:\n1. Read the skill spec and follow its \"Tutor Pre-Read & Notes\" section\n   verbatim to form your own canonical answer for THIS article. Method-aware:\n   focus on what's load-bearing for a <METHOD>-style paper.\n2. Read both prior phase syntheses in full. Specifically:\n   - From Phase 1: headline_claim, evidence_locus, claim_evidence_match, non-trivial choices.\n   - From Phase 2: design map (especially identification_strategy), operationalization vulnerabilities (especially severity \u2265 moderate), method-week alignment items labeled `partially addressed` or `unaddressed`.\n   These are the seeds. Critiques that don't tie to one of these are generic and should be flagged.\n3. Write the pre-read scratchpad at the conventional path the skill spec\n   gives. Use the exact section headings the spec specifies.\n4. Do NOT engage the user. Return a one-line confirmation.\n\nConstraints:\n- Silent pre-read only.\n- Build on prior scratchpads.\n- This is the critique phase \u2014 verdict-with-evidence is in scope, but every critique must tie to a specific design element from Phase 2.\n```\n\nSubstitute the absolute paths. Do not block."
       },
       {
         "step": 4,
@@ -6237,7 +6431,6 @@
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/poli_sci-210-skills/tree/main/skills/form-critique/skills.md",
     "owner_team": "POLISCI-210",
     "owner_contact": "bryanmurray2026@u.northwestern.edu",
-    "status": "ready",
     "status_reason": null
   },
   {
@@ -6262,8 +6455,12 @@
     "trigger_signals": [
       "research-idea-without-prediction",
       "unfalsifiable-hypothesis",
-      "conflates-question-with-hypothesis"
+      "conflates-question-with-hypothesis",
+      "make-hypothesis-falsifiable",
+      "whats-my-prediction"
     ],
+    "status": "ready",
+    "version": "0.2.0",
     "description": "When the student has a research intuition but no testable hypothesis, presses them to specify what data, in what conditions, would count as evidence *for* vs. *against*. The skill closes when the hypothesis is falsifiable in principle \u2014 when the student can name a result that would make them say \"I was wrong.\"",
     "trigger_summary": "- Student has a research idea (\"I want to study how X affects Y\") but no specific prediction.\n- Student writes a hypothesis that can't be falsified (\"political polarization affects voting\").\n- Student conflates research question with hypothesis (\"does X cause Y?\" is a question, not a hypothesis).\n- Student is designing an experiment but hasn't specified expected direction or magnitude.",
     "tutor_stance_rules": [
@@ -6324,7 +6521,6 @@
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/poli_sci-210-skills/tree/main/skills/frame-hypothesis/skills.md",
     "owner_team": "POLISCI-210",
     "owner_contact": "bryanmurray2026@u.northwestern.edu",
-    "status": "ready",
     "status_reason": null
   },
   {
@@ -6346,7 +6542,16 @@
       "surface-assumptions",
       "engage-objections"
     ],
+    "trigger_signals": [
+      "inference-threat-spotting",
+      "whats-wrong-with-inference",
+      "causal-claim-shaky",
+      "phase-3-step-1",
+      "threats-to-validity"
+    ],
     "python_entry": "logic.py",
+    "status": "ready",
+    "version": "0.2.0",
     "description": "Granular skill in Phase 3 (`form-critique`). The student names 1\u20132 specific threats to the paper's inference *within its own sample*, ties each threat to a specific element of the design map from Phase 2, labels severity for the headline claim, and articulates how the headline claim would move if the threat held. The pedagogical move is *converting course concepts into a paper-specific verdict*: \"this paper has a confounding problem because of X\" is description-plus-judgment with evidence \u2014 that's what the assignment grades.",
     "trigger_summary": "- Opened by the `form-critique` orchestrator as the first skill in its chain.\n- Direct invocation: a student says \"what's wrong with this paper's inference?\" or \"I want to argue the causal claim is shaky.\"\n- Hard prerequisite: Phase 1 and Phase 2 logs must exist.",
     "tutor_stance_rules": [
@@ -6400,7 +6605,7 @@
     ],
     "example_exchange": "> **Tutor:** {Inference catalog displayed.} Pick a threat, tie it to a specific element of the Phase 2 design map.\n>\n> **Student:** Confounding. Their identification strategy is selection-on-observables, but they don't measure local state capacity, which would affect both fiscal-contract perceptions (the IV) and willingness to comply (the DV).\n>\n> **Tutor:** Good \u2014 confounding tied to identification_strategy + DV measurement. Severity?\n>\n> **Student:** Load-bearing.\n>\n> **Tutor:** In one sentence \u2014 how does the headline claim move?\n>\n> **Student:** If state capacity is the real driver, the SOO assumption fails, and the fiscal-contract effect could shrink to near-zero or even flip sign in high-capacity neighborhoods.\n>\n> **Tutor:** That defends `load-bearing`. *(records, asks if they want a second threat)*",
     "extra_sections": {
-      "method_specific_threat_catalogs": "The student picks from the catalog matching the paper's `method`. Each catalog is 5\u20137 items.\n\n### theory-data\n- Confounded empirical pattern (the data fit the theory and at least one rival).\n- Selection on outcome (the cases included are those where the theory worked).\n- Scope mis-specification (the empirical test isn't where the theory says it should hold).\n- Operationalization bleed-through (the measure tracks the theoretical concept loosely).\n- Falsifiability gap (no observation pattern would have refuted the theory).\n\n### inference\n- Confounding (an unmeasured variable affects both treatment and outcome).\n- Selection bias (treated and untreated differ in ways the strategy doesn't address).\n- Reverse causation (the outcome causes the treatment, not vice versa).\n- Measurement error in treatment or outcome (especially differential).\n- Identifying-assumption failure (parallel trends, exclusion restriction, conditional independence).\n- Spillovers / interference between units.\n\n### surveys\n- Non-response bias (who didn't answer differs systematically).\n- Social desirability / acquiescence on the key item.\n- Question wording or framing drives the result.\n- Mode effects (online respondents differ from phone respondents).\n- For causal claims: omitted variable bias, selection of who saw the treatment vignette.\n\n### experiments\n- Non-compliance (treatment uptake \u2260 assignment, with no LATE / TOT analysis).\n- Differential attrition (attrition rates differ by arm).\n- SUTVA violation / spillovers.\n- Hawthorne / demand effects (participants change behavior because they're observed).\n- Outcome measurement timing (effect measured before it should manifest, or after it decays).\n- External validity (sample, dose, setting, duration).\n- Manipulation didn't deliver the construct.\n\n### large-n\n- Omitted variable bias not handled by fixed effects.\n- Model dependence (results sensitive to specification).\n- Sample selection (panel restriction excludes load-bearing units).\n- Ecological inference fallacy (aggregate-level result driven by a subgroup).\n- Cross-sectional variation overwhelming within-unit variation.\n- Outliers / influential observations driving the coefficient.\n\n### small-n\n- Alternative explanations not addressed at the within-case level.\n- Case-selection bias (cases picked because the outcome was already known).\n- Insufficient within-case evidence for the claimed mechanism.\n- Overgeneralization from the case(s) studied.\n- Confirmation bias in source selection.\n\n### machine-learning\n- Data leakage (target information in features, or test info in training).\n- Label noise or non-representative labels.\n- Distribution shift between training and deployment / evaluation.\n- Weak baseline (the headline performance gap is against a straw model).\n- Metric mismatch (the metric doesn't operationalize the substantive question).\n- Overfitting via test-set tuning.",
+      "method_specific_threat_catalogs": "The student picks from the catalog matching the paper's `method`. Each catalog is 5\u20137 items.\n\n### theory-data\n- Confounded empirical pattern (the data fit the theory and at least one rival).\n- Selection on outcome (the cases included are those where the theory worked).\n- Scope mis-specification (the empirical test isn't where the theory says it should hold).\n- Operationalization bleed-through (the measure tracks the theoretical concept loosely).\n- Falsifiability gap (no observation pattern would have refuted the theory).\n\n### inference\n- Confounding (an unmeasured variable affects both treatment and outcome).\n- Selection bias (treated and untreated differ in ways the strategy doesn't address).\n- Reverse causation (the outcome causes the treatment, not vice versa).\n- Measurement error in treatment or outcome (especially differential).\n- Identifying-assumption failure (parallel trends, exclusion restriction, conditional independence).\n- Spillovers / interference between units.\n\n### surveys\n- Non-response bias (who didn't answer differs systematically).\n- Social desirability / acquiescence on the key item.\n- Question wording or framing drives the result.\n- Mode effects (online respondents differ from phone respondents).\n- For causal claims: omitted variable bias, selection of who saw the treatment vignette.\n\n### experiments\n- Non-compliance (treatment uptake \u2260 assignment, with no LATE / TOT analysis).\n- Differential attrition (attrition rates differ by arm).\n- SUTVA violation / spillovers.\n- Hawthorne / demand effects (participants change behavior because they're observed).\n- Outcome measurement timing (effect measured before it should manifest, or after it decays).\n- External validity (sample, dose, setting, duration).\n- Manipulation didn't deliver the construct.\n\n### large-n\n- Omitted variable bias not handled by fixed effects.\n- Model dependence (results sensitive to specification).\n- Sample selection (panel restriction excludes load-bearing units).\n- Ecological inference fallacy (aggregate-level result driven by a subgroup).\n- Cross-sectional variation overwhelming within-unit variation.\n- Outliers / influential observations driving the coefficient.\n\n### small-n\n- Alternative explanations not addressed at the within-case level.\n- Case-selection bias (cases picked because the outcome was already known).\n- Insufficient within-case evidence for the claimed mechanism.\n- Overgeneralization from the case(s) studied.\n- Confirmation bias in source selection.\n\n### machine-learning\n- Data leakage (target information in features, or test info in training).\n- Label noise or non-representative labels.\n- Distribution shift between training and deployment / evaluation.\n- Weak baseline (the headline performance gap is against a straw model).\n- Metric mismatch (the metric doesn't operationalize the substantive question).\n- Overfitting via test-set tuning.\n\n> **Adopter note:** The 7 method-specific threat catalogs above reflect POLI SCI 210's curriculum. This skill carries the **largest per-method content footprint** of any skill in the catalog \u2014 ~35-49 method-specific items across the 7 catalogs. The threat-spotting move itself is general for any empirical paper critique. **The method *list* is now metadata-driven** \u2014 `logic.py`'s `VALID_METHODS` reads from `metadata.yaml.course_context.research_methods` at module load. **The 7 threat catalogs themselves still hard-code POLI SCI 210's coverage**, and an adopting team must replace each catalog with threats appropriate to their course before this skill produces useful output for them. This skill is the heaviest candidate for the prose-content refactor logged in `docs/audits/cross-cutting.md` entry CC-2.",
       "tutor_pre_read_notes": "Before Step 1, read the article's discussion / limitations / robustness section so you know what the paper acknowledges. Read both prior phase logs. For each catalog item, silently note: does this threat plausibly apply? What design element ties it? How load-bearing is it for the headline claim?\n\nMethod-aware focus is the catalog above \u2014 but Phase 2's operationalization vulnerabilities and \"unaddressed method-week concerns\" are usually where the strongest threats live. Foreground them.\n\n**Default scratchpad path** (resolved from `paths.scratch_pattern` in `metadata.yaml`):\n\n```\nskills/inference-threats/scratch/<YYYY-MM-DD-HHMM>-<student>-notes.md\n```\n\n**Adopter fallback** (when the host runtime can't write to the conventional path, no `<student>` token is set, or the skill is being used standalone): hold the pre-read in working memory across turns instead of writing to disk. Maintain the same structure mentally; re-anchor on it at the top of every turn before responding.\n\nStructure (whether on disk or in memory):\n```\n# inference-threats \u2014 <student> \u2014 <timestamp>",
       "my_pre_read": "- Threats that plausibly apply (each with all fields):\n  - { threat, design_tie, severity, claim_movement, paper_self_addressed }\n  - ...\n- Phase 2 carry-forward to foreground:\n  - operationalization vulnerabilities: <list>\n  - unaddressed method-week concerns: <list>",
       "student_s_take": "",
@@ -6415,7 +6620,6 @@
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/poli_sci-210-skills/tree/main/skills/inference-threats/skills.md",
     "owner_team": "POLISCI-210",
     "owner_contact": "bryanmurray2026@u.northwestern.edu",
-    "status": "ready",
     "status_reason": null
   },
   {
@@ -6438,7 +6642,16 @@
       "identify-evidence",
       "interpret-evidence"
     ],
+    "trigger_signals": [
+      "map-design-phase",
+      "understand-methodology",
+      "phase-2-start",
+      "extract-research-design",
+      "whats-the-design-doing"
+    ],
     "python_entry": "logic.py",
+    "status": "ready",
+    "version": "0.2.0",
     "description": "Phase 2 sub-orchestrator of `critique-design`. Walks the student through three granular skills \u2014 `design-skeleton` \u2192 `op-check` \u2192 `method-align` \u2014 to build a structured map of what the paper actually does, where its measurement is vulnerable, and which course-specific concerns apply. Hides per-skill pre-read latency by dispatching subagents in the background. Produces a phase session log whose Synthesis is the design map + measurement vulnerabilities + alignment notes that Phase 3 (`form-critique`) consumes.",
     "trigger_summary": "- The main orchestrator (`critique-design`) opens this phase as Phase 2 of the chain (after `orient-paper`).\n- Direct invocation: a student says \"help me map the design\" or \"I want to understand what the paper is actually doing methodologically.\"\n- Not for forming a critique \u2014 that's Phase 3. Mapping is description; judging is judgment.",
     "tutor_stance_rules": [
@@ -6463,7 +6676,7 @@
       {
         "step": 3,
         "title": "Dispatch pre-read subagent for skill N+1",
-        "description": "Same pattern as `orient-paper`. Use `Agent` tool with `subagent_type=general-purpose` and `run_in_background=true`. Prompt template:\n\n```\nYou are doing a silent pre-read for the granular skill `<NEXT_SKILL_ID>` in\nthe map-design phase of a POLI SCI 210 research design critique.\n\nInputs:\n- Article: <ABSOLUTE_PATH_TO_ARTICLE>\n- Week: <WEEK>     Method: <METHOD>     Paper: <PAPER_SHORT>\n- Skill spec (read this first): <ABSOLUTE_PATH_TO_NEXT_SKILL_SKILLS_MD>\n- Prior phase session logs (from main orchestrator):\n  - orient-paper: <PATH>\n- Prior in-phase scratchpads (so your pre-read builds on prior sub-skills):\n  - <ABSOLUTE_PATH_TO_PRIOR_SCRATCHPAD_1>\n  - ...\n\nTask:\n1. Read the skill spec and follow its \"Tutor Pre-Read & Notes\" section\n   verbatim to form your own canonical answer for THIS article at THIS skill's\n   level. Method-aware: focus on what's load-bearing for a <METHOD>-style\n   paper.\n2. Read the Phase 1 synthesis (puzzle, answer, headline_claim, evidence_locus,\n   non-trivial choices) and reference it where relevant. Especially: if Phase 1\n   surfaced a measurement-category choice, the op-check\n   pre-read should foreground that exact concept.\n3. Write the pre-read scratchpad at the conventional path the skill spec\n   gives. Use the exact section headings the spec specifies.\n4. Do NOT engage the user. Do NOT modify any other files. Return a one-line\n   confirmation.\n\nConstraints:\n- Silent pre-read only.\n- Build on prior scratchpads where relevant.\n- Stay within Phase 2 scope: description and mapping, no critique.\n```\n\nSubstitute the absolute paths and the next skill's id. Do not block."
+        "description": "Same pattern as `orient-paper`. Use `Agent` tool with `subagent_type=general-purpose` and `run_in_background=true`. Prompt template:\n\n```\nYou are doing a silent pre-read for the granular skill `<NEXT_SKILL_ID>` in\nthe map-design phase of a research design critique.\n\nInputs:\n- Article: <ABSOLUTE_PATH_TO_ARTICLE>\n- Week: <WEEK>     Method: <METHOD>     Paper: <PAPER_SHORT>\n- Skill spec (read this first): <ABSOLUTE_PATH_TO_NEXT_SKILL_SKILLS_MD>\n- Prior phase session logs (from main orchestrator):\n  - orient-paper: <PATH>\n- Prior in-phase scratchpads (so your pre-read builds on prior sub-skills):\n  - <ABSOLUTE_PATH_TO_PRIOR_SCRATCHPAD_1>\n  - ...\n\nTask:\n1. Read the skill spec and follow its \"Tutor Pre-Read & Notes\" section\n   verbatim to form your own canonical answer for THIS article at THIS skill's\n   level. Method-aware: focus on what's load-bearing for a <METHOD>-style\n   paper.\n2. Read the Phase 1 synthesis (puzzle, answer, headline_claim, evidence_locus,\n   non-trivial choices) and reference it where relevant. Especially: if Phase 1\n   surfaced a measurement-category choice, the op-check\n   pre-read should foreground that exact concept.\n3. Write the pre-read scratchpad at the conventional path the skill spec\n   gives. Use the exact section headings the spec specifies.\n4. Do NOT engage the user. Do NOT modify any other files. Return a one-line\n   confirmation.\n\nConstraints:\n- Silent pre-read only.\n- Build on prior scratchpads where relevant.\n- Stay within Phase 2 scope: description and mapping, no critique.\n```\n\nSubstitute the absolute paths and the next skill's id. Do not block."
       },
       {
         "step": 4,
@@ -6509,7 +6722,6 @@
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/poli_sci-210-skills/tree/main/skills/map-design/skills.md",
     "owner_team": "POLISCI-210",
     "owner_contact": "bryanmurray2026@u.northwestern.edu",
-    "status": "ready",
     "status_reason": null
   },
   {
@@ -6527,10 +6739,21 @@
     ],
     "learning_goal_tags": [
       "reflect-on-progress",
-      "restate-the-problem"
+      "restate-the-problem",
+      "evaluate-reasoning",
+      "verify-claims"
+    ],
+    "trigger_signals": [
+      "method-alignment-check",
+      "which-course-concepts-apply",
+      "phase-2-step-3",
+      "course-concerns-for-paper",
+      "whats-the-method-checklist"
     ],
     "python_entry": "logic.py",
-    "description": "Granular skill in Phase 2 (`map-design`) of the research design critique. The student sweeps the paper's design against a method-specific checklist of concerns drawn from the week's course material. For each concern they pick, they tie it to a concrete element of the paper's design and label whether the paper addressed it (`addressed`, `partially addressed`, `unaddressed`). The pedagogical move is *applying course material to a specific paper*: this is the move that turns the critique from generic into POLI SCI 210 \u2014 coursework.",
+    "status": "ready",
+    "version": "0.2.0",
+    "description": "Granular skill in Phase 2 (`map-design`) of the research design critique. The student sweeps the paper's design against a method-specific checklist of concerns drawn from the week's course material. For each concern they pick, they tie it to a concrete element of the paper's design and label whether the paper addressed it (`addressed`, `partially addressed`, `unaddressed`). The pedagogical move is *applying course material to a specific paper*: this is the move that turns the critique from generic into course-grounded coursework.",
     "trigger_summary": "- Opened by the `map-design` orchestrator as the third skill in its chain (after `design-skeleton` and `op-check`).\n- Direct invocation: a student says \"what should I be looking at given that this is the surveys week?\" or \"I don't know which course concepts apply.\"\n- Not for forming a critique. Alignment is \"which concerns apply\"; judging adequacy is partly here (alignment label) but the *consequences* for the headline claim are Phase 3.",
     "tutor_stance_rules": [
       "Two minimum, four target. One concern is too few; six is over-stuffing.",
@@ -6584,7 +6807,7 @@
     ],
     "example_exchange": "> **Tutor:** Surveys week. Here's the checklist: sampling frame match, response rate / non-response, question wording, response scale, mode effects, weighting, pre-registration / question-variant robustness. Pick one, tie it to a specific element, label.\n>\n> **Student:** Question wording. Their item asks \"do you trust the government to deliver services\" with a five-point scale. I'd label it `partially addressed` \u2014 they show robustness to dropping the middle point but don't test wording variants.\n>\n> **Tutor:** Good. Different family \u2014 pick another.\n>\n> **Student:** Sampling frame match. They sample registered voters, but the puzzle is about all citizens including unregistered ones. `Partially addressed` \u2014 they discuss the limitation in a footnote but don't have data on the unregistered.\n>\n> **Tutor:** Two concerns, two different families, both with specific paper elements and partial labels. *(records, asks if they want a third)*",
     "extra_sections": {
-      "method_specific_checklists": "The student picks from the checklist matching the paper's `method` (passed in from the orchestrator). Each checklist is 5\u20137 items.\n\n### theory-data\n- Theoretical claim is falsifiable (not just descriptive).\n- Operationalization aligns with the theoretical concept.\n- Scope conditions are stated.\n- The empirical pattern would look different if the theory were wrong.\n- Data sourcing and quality transparency.\n- Alternative theoretical explanations are addressed.\n\n### inference\n- Identification strategy is named and method-appropriate (DID, IV, RDD, matching, selection-on-observables, etc.).\n- Comparison group / counterfactual is plausible.\n- Threats to inference (confounding, selection, reverse causation, measurement) discussed.\n- Scope of the causal claim (populations, conditions, time).\n- Robustness to alternative specifications.\n- Heterogeneous effects acknowledged or tested.\n\n### surveys\n- Sampling frame matches target population.\n- Response rate and non-response bias considered.\n- Question wording, order, and framing.\n- Response scale discriminates meaningfully.\n- Mode effects (phone / online / in-person).\n- Weighting / poststratification.\n- Pre-registration or robustness across question variants.\n\n### experiments\n- Randomization (level, procedure, balance check).\n- Compliance / treatment uptake.\n- Attrition and differential attrition.\n- SUTVA / spillovers / no-interference assumption.\n- External validity (sample, setting, dose, duration).\n- Outcome measurement timing and instrument.\n- Pre-registration of hypotheses and analyses.\n\n### large-n\n- Sample period justification.\n- Case / country selection (universe, panel, balanced/unbalanced).\n- Model specification (controls, fixed effects, interactions).\n- Standard errors (clustering, robust, bootstrap).\n- Robustness to alternative specifications.\n- Generalization beyond the sample.\n- Outliers and influential observations.\n\n### small-n\n- Case selection logic (typical, deviant, most-likely, least-likely, structured-focused).\n- Within-case evidence quality (process tracing, causal-process observations).\n- Comparative logic (or rationale for single case).\n- Alternative explanations addressed.\n- Generalization claims and their scope.\n- Source triangulation and bias.\n\n### machine-learning\n- Training data: representativeness, label provenance, leakage.\n- Evaluation metric matches the inferential target.\n- Train/test split logic (random / temporal / blocked / clustered).\n- Baseline comparison (random, simpler model, human).\n- Interpretation: does prediction quality answer the substantive question?\n- Out-of-sample generalization (across time, domains, populations).\n- Fairness / disparate performance across subgroups.",
+      "method_specific_checklists": "The student picks from the checklist matching the paper's `method` (passed in from the orchestrator). Each checklist is 5\u20137 items.\n\n### theory-data\n- Theoretical claim is falsifiable (not just descriptive).\n- Operationalization aligns with the theoretical concept.\n- Scope conditions are stated.\n- The empirical pattern would look different if the theory were wrong.\n- Data sourcing and quality transparency.\n- Alternative theoretical explanations are addressed.\n\n### inference\n- Identification strategy is named and method-appropriate (DID, IV, RDD, matching, selection-on-observables, etc.).\n- Comparison group / counterfactual is plausible.\n- Threats to inference (confounding, selection, reverse causation, measurement) discussed.\n- Scope of the causal claim (populations, conditions, time).\n- Robustness to alternative specifications.\n- Heterogeneous effects acknowledged or tested.\n\n### surveys\n- Sampling frame matches target population.\n- Response rate and non-response bias considered.\n- Question wording, order, and framing.\n- Response scale discriminates meaningfully.\n- Mode effects (phone / online / in-person).\n- Weighting / poststratification.\n- Pre-registration or robustness across question variants.\n\n### experiments\n- Randomization (level, procedure, balance check).\n- Compliance / treatment uptake.\n- Attrition and differential attrition.\n- SUTVA / spillovers / no-interference assumption.\n- External validity (sample, setting, dose, duration).\n- Outcome measurement timing and instrument.\n- Pre-registration of hypotheses and analyses.\n\n### large-n\n- Sample period justification.\n- Case / country selection (universe, panel, balanced/unbalanced).\n- Model specification (controls, fixed effects, interactions).\n- Standard errors (clustering, robust, bootstrap).\n- Robustness to alternative specifications.\n- Generalization beyond the sample.\n- Outliers and influential observations.\n\n### small-n\n- Case selection logic (typical, deviant, most-likely, least-likely, structured-focused).\n- Within-case evidence quality (process tracing, causal-process observations).\n- Comparative logic (or rationale for single case).\n- Alternative explanations addressed.\n- Generalization claims and their scope.\n- Source triangulation and bias.\n\n### machine-learning\n- Training data: representativeness, label provenance, leakage.\n- Evaluation metric matches the inferential target.\n- Train/test split logic (random / temporal / blocked / clustered).\n- Baseline comparison (random, simpler model, human).\n- Interpretation: does prediction quality answer the substantive question?\n- Out-of-sample generalization (across time, domains, populations).\n- Fairness / disparate performance across subgroups.\n\n> **Adopter note:** The 7 method-specific checklists above reflect POLI SCI 210's curriculum. Alongside `inference-threats`, this is one of the **two heaviest per-method content footprints in the catalog** (~35-42 items across the 7 checklists here). The method-alignment move itself is general for any course teaching empirical paper critique. **The method *list* is now metadata-driven** \u2014 `logic.py`'s `VALID_METHODS` reads from `metadata.yaml.course_context.research_methods` at module load. **The 7 checklists themselves still hard-code POLI SCI 210's coverage**, and an adopting team must replace each checklist with concerns appropriate to their course before this skill produces useful output. This skill and `inference-threats` are the two heaviest candidates for the prose-content refactor logged in `docs/audits/cross-cutting.md` entry CC-2.",
       "tutor_pre_read_notes": "Before Step 1, pull up the checklist matching the paper's `method`, then for each item silently note: did the paper address it, partially address it, or leave it unaddressed? Tie each to a concrete paper element. Read the Phase 1 and Phase 2 outputs to know what the student already surfaced \u2014 operationalization concerns from `op-check` may already have an alignment item that matches, in which case foreground it.\n\n**Default scratchpad path** (resolved from `paths.scratch_pattern` in `metadata.yaml`):\n\n```\nskills/method-align/scratch/<YYYY-MM-DD-HHMM>-<student>-notes.md\n```\n\n**Adopter fallback** (when the host runtime can't write to the conventional path, no `<student>` token is set, or the skill is being used standalone): hold the pre-read in working memory across turns instead of writing to disk. Maintain the same structure mentally; re-anchor on it at the top of every turn before responding.\n\nStructure (whether on disk or in memory):\n```\n# method-align \u2014 <student> \u2014 <timestamp>",
       "my_pre_read": "- Checklist for {method} (each item with my call):\n  - { concern, paper_element, alignment, note }\n  - ... (4\u20136 items)",
       "student_s_take": "",
@@ -6599,7 +6822,6 @@
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/poli_sci-210-skills/tree/main/skills/method-align/skills.md",
     "owner_team": "POLISCI-210",
     "owner_contact": "bryanmurray2026@u.northwestern.edu",
-    "status": "ready",
     "status_reason": null
   },
   {
@@ -6620,8 +6842,17 @@
       "surface-assumptions",
       "evaluate-reasoning"
     ],
+    "trigger_signals": [
+      "op-check-measurement",
+      "measure-feels-off",
+      "phase-2-step-2",
+      "concept-to-measure-gap",
+      "operationalization-gap"
+    ],
     "python_entry": "logic.py",
-    "description": "Granular skill in Phase 2 (`map-design`) of the research design critique. The student picks 1\u20132 of the design's key concepts and interrogates how the paper measures them: what the operationalization includes that arguably shouldn't be in, what it excludes that arguably should be in, and how load-bearing the gap is. The pedagogical move is *bridging concept to measure*: this is where the strongest empirical critiques almost always live, including Bryan's example \"the billionaire-politician definition feels loose.\"",
+    "status": "ready",
+    "version": "0.2.0",
+    "description": "Granular skill in Phase 2 (`map-design`) of the research design critique. The student picks 1\u20132 of the design's key concepts and interrogates how the paper measures them: what the operationalization includes that arguably shouldn't be in, what it excludes that arguably should be in, and how load-bearing the gap is. The pedagogical move is *bridging concept to measure*: this is where the strongest empirical critiques almost always live \u2014 definitions that are arguably-loose, indices that lump distinct constructs, measures whose includes/excludes don't track the concept.",
     "trigger_summary": "- Opened by the `map-design` orchestrator as the second skill in its chain (after `design-skeleton`).\n- Direct invocation: a student says \"their measure of X feels off\" or \"I'm not sure their variable captures the concept.\"\n- Not for forming a critique. Identifying a measurement gap is description; arguing it produced a wrong inference is Phase 3.",
     "tutor_stance_rules": [
       "One concept at a time. Pick before probing.",
@@ -6685,7 +6916,7 @@
     ],
     "example_exchange": "> **Tutor:** Pick a concept. Your Phase 1 list flagged the \"billionaire politician\" definition \u2014 start there if you want.\n>\n> **Student:** Yeah, that one.\n>\n> **Tutor:** How does the paper actually measure it? Variable, scale, coding rule.\n>\n> **Student:** Binary indicator: 1 if the person has $1B+ wealth and held an elected office between 2000 and 2020.\n>\n> **Tutor:** What does that include that arguably shouldn't be?\n>\n> **Student:** Honorary or ceremonial elected positions. Some elected councils have no policy authority \u2014 they're really patronage roles.\n>\n> **Tutor:** And what's excluded that should be in?\n>\n> **Student:** Appointed positions with significant policy authority \u2014 cabinet ministers, central bank governors. Those are politically powerful billionaires, just not elected.\n>\n> **Tutor:** Severity?\n>\n> **Student:** Load-bearing.\n>\n> **Tutor:** In one sentence \u2014 how does the headline claim move if the definition is fixed?\n>\n> **Student:** If we add appointed roles and drop ceremonial elected ones, the cross-country distribution shifts heavily \u2014 countries with weak institutions but strong patronage networks would jump up, possibly inverting the headline pattern.\n>\n> **Tutor:** That defends `load-bearing`. *(records, asks about a second concept)*",
     "extra_sections": {
-      "tutor_pre_read_notes": "Before Step 1, read the paper's measurement section(s) and the Phase 1 `author-choices` output. Identify 2\u20133 concepts whose operationalizations have plausible includes/excludes gaps. For each, name the operationalization (variable, scale, coding rules, source data), one thing arguably-included that shouldn't be, one thing arguably-excluded that should be, and an honest severity assessment.\n\nMethod-aware focus areas:\n- `theory-data`: how the concept is defined and operationalized to count instances (e.g., \"billionaire politician\").\n- `inference`: treatment and outcome measurement; pre-treatment covariates if the strategy depends on them.\n- `surveys`: question wording, response scale, ordering, what's lumped into a single index.\n- `experiments`: the manipulation (does it deliver the construct?), the outcome measure (does it capture what theory predicts?).\n- `large-n`: indices and composite measures, country-level proxies, time-aggregation choices.\n- `small-n`: what counts as evidence of a within-case mechanism; coding of the case as \"outcome present/absent.\"\n- `machine-learning`: label definition (what's labeled as positive/negative), feature definition.\n\n**Default scratchpad path** (resolved from `paths.scratch_pattern` in `metadata.yaml`):\n\n```\nskills/op-check/scratch/<YYYY-MM-DD-HHMM>-<student>-notes.md\n```\n\n**Adopter fallback** (when the host runtime can't write to the conventional path, no `<student>` token is set, or the skill is being used standalone): hold the pre-read in working memory across turns instead of writing to disk. Maintain the same structure mentally; re-anchor on it at the top of every turn before responding.\n\nStructure (whether on disk or in memory):\n```\n# op-check \u2014 <student> \u2014 <timestamp>",
+      "tutor_pre_read_notes": "Before Step 1, read the paper's measurement section(s) and the Phase 1 `author-choices` output. Identify 2\u20133 concepts whose operationalizations have plausible includes/excludes gaps. For each, name the operationalization (variable, scale, coding rules, source data), one thing arguably-included that shouldn't be, one thing arguably-excluded that should be, and an honest severity assessment.\n\nMethod-aware focus areas:\n- `theory-data`: how the concept is defined and operationalized to count instances (e.g., \"billionaire politician\").\n- `inference`: treatment and outcome measurement; pre-treatment covariates if the strategy depends on them.\n- `surveys`: question wording, response scale, ordering, what's lumped into a single index.\n- `experiments`: the manipulation (does it deliver the construct?), the outcome measure (does it capture what theory predicts?).\n- `large-n`: indices and composite measures, country-level proxies, time-aggregation choices.\n- `small-n`: what counts as evidence of a within-case mechanism; coding of the case as \"outcome present/absent.\"\n- `machine-learning`: label definition (what's labeled as positive/negative), feature definition.\n\n> **Adopter note:** The 7 method-aware focus areas above reflect POLI SCI 210's curriculum. The concept-to-measure bridging move is general for any empirical paper critique. **The method *list* is now metadata-driven** \u2014 `logic.py`'s `VALID_METHODS` reads from `metadata.yaml.course_context.research_methods` at module load. **The per-method focus areas in this section still hard-code POLI SCI 210's coverage** and must be edited skill-by-skill. A catalog-wide refactor parameterizing the prose too is logged in `docs/audits/cross-cutting.md` entry CC-2.\n\n**Default scratchpad path** (resolved from `paths.scratch_pattern` in `metadata.yaml`):\n\n```\nskills/op-check/scratch/<YYYY-MM-DD-HHMM>-<student>-notes.md\n```\n\n**Adopter fallback** (when the host runtime can't write to the conventional path, no `<student>` token is set, or the skill is being used standalone): hold the pre-read in working memory across turns instead of writing to disk. Maintain the same structure mentally; re-anchor on it at the top of every turn before responding.\n\nStructure (whether on disk or in memory):\n```\n# op-check \u2014 <student> \u2014 <timestamp>",
       "my_pre_read": "- Concepts with operationalization gaps (2\u20133, each with all four fields):\n  - { concept, operationalization, includes_but_shouldnt, excludes_but_should, severity }\n  - ...",
       "student_s_take": "",
       "divergences": "",
@@ -6699,7 +6930,6 @@
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/poli_sci-210-skills/tree/main/skills/op-check/skills.md",
     "owner_team": "POLISCI-210",
     "owner_contact": "bryanmurray2026@u.northwestern.edu",
-    "status": "ready",
     "status_reason": null
   },
   {
@@ -6722,7 +6952,16 @@
       "interpret-evidence",
       "restate-the-problem"
     ],
+    "trigger_signals": [
+      "orient-paper-phase",
+      "get-oriented-to-paper",
+      "phase-1-orchestrator",
+      "investigate-reading",
+      "understand-what-paper-does"
+    ],
     "python_entry": "logic.py",
+    "status": "ready",
+    "version": "0.2.0",
     "description": "Phase 1 sub-orchestrator of `critique-design`. Walks the student through three granular skills \u2014 `first-pass-orient` \u2192 `trace-evidence` \u2192 `author-choices` \u2014 to make sure they actually grasp what the paper does *before* mapping its design or forming a critique. Hides per-skill pre-read latency by dispatching subagents in the background. Produces a phase session log whose Synthesis is consumed by Phase 2 (`map-design`) as cross-phase context.",
     "trigger_summary": "- The main orchestrator (`critique-design`) opens this phase as Phase 1 of the chain.\n- Direct invocation: a student says \"help me get oriented to this paper\" or \"I read it but I'm not sure I got what they're doing.\"\n- Not for forming a critique \u2014 that's Phase 3. Investigation is grasp, not judgment.",
     "tutor_stance_rules": [
@@ -6747,7 +6986,7 @@
       {
         "step": 3,
         "title": "Dispatch pre-read subagent for skill N+1",
-        "description": "Whenever a sub-skill N opens for dialogue, dispatch a subagent in parallel to produce skill N+1's pre-read scratchpad. Use `Agent` tool with `subagent_type=general-purpose` and `run_in_background=true`. Prompt template:\n\n```\nYou are doing a silent pre-read for the granular skill `<NEXT_SKILL_ID>` in\nthe orient-paper phase of a POLI SCI 210 research design critique.\n\nInputs:\n- Article: <ABSOLUTE_PATH_TO_ARTICLE>\n- Week: <WEEK>     Method: <METHOD>     Paper: <PAPER_SHORT>\n- Skill spec (read this first): <ABSOLUTE_PATH_TO_NEXT_SKILL_SKILLS_MD>\n- Prior phase session logs (from main orchestrator; empty for Phase 1):\n  - <PATH or \"none\">\n- Prior sub-skill scratchpads in this phase (so your pre-read builds on what\n  has already been surfaced \u2014 do not re-do their work):\n  - <ABSOLUTE_PATH_TO_PRIOR_SCRATCHPAD_1>\n  - ...\n\nTask:\n1. Read the skill spec and follow its \"Tutor Pre-Read & Notes\" section\n   verbatim to form your own canonical answer for THIS article at THIS skill's\n   level (the orient, the claim trace, or the choice probe \u2014 whatever the\n   skill calls for). Method-aware: focus on what's load-bearing for a\n   <METHOD>-style paper.\n2. Write the pre-read scratchpad at the conventional path the skill spec\n   gives. Use the exact section headings the spec specifies.\n3. Do NOT engage the user. Do NOT modify any other files. Return a one-line\n   confirmation with the path you wrote.\n\nConstraints:\n- Silent pre-read only.\n- Build on prior scratchpads where relevant. For example, the\n  trace-evidence pre-read should know which puzzle/answer the\n  first-pass-orient step surfaced.\n- Stay within Phase 1 scope: orientation moves only, no critique.\n```\n\nSubstitute the absolute paths and the next skill's id. Do not block on the subagent \u2014 fire it and continue."
+        "description": "Whenever a sub-skill N opens for dialogue, dispatch a subagent in parallel to produce skill N+1's pre-read scratchpad. Use `Agent` tool with `subagent_type=general-purpose` and `run_in_background=true`. Prompt template:\n\n```\nYou are doing a silent pre-read for the granular skill `<NEXT_SKILL_ID>` in\nthe orient-paper phase of a research design critique.\n\nInputs:\n- Article: <ABSOLUTE_PATH_TO_ARTICLE>\n- Week: <WEEK>     Method: <METHOD>     Paper: <PAPER_SHORT>\n- Skill spec (read this first): <ABSOLUTE_PATH_TO_NEXT_SKILL_SKILLS_MD>\n- Prior phase session logs (from main orchestrator; empty for Phase 1):\n  - <PATH or \"none\">\n- Prior sub-skill scratchpads in this phase (so your pre-read builds on what\n  has already been surfaced \u2014 do not re-do their work):\n  - <ABSOLUTE_PATH_TO_PRIOR_SCRATCHPAD_1>\n  - ...\n\nTask:\n1. Read the skill spec and follow its \"Tutor Pre-Read & Notes\" section\n   verbatim to form your own canonical answer for THIS article at THIS skill's\n   level (the orient, the claim trace, or the choice probe \u2014 whatever the\n   skill calls for). Method-aware: focus on what's load-bearing for a\n   <METHOD>-style paper.\n2. Write the pre-read scratchpad at the conventional path the skill spec\n   gives. Use the exact section headings the spec specifies.\n3. Do NOT engage the user. Do NOT modify any other files. Return a one-line\n   confirmation with the path you wrote.\n\nConstraints:\n- Silent pre-read only.\n- Build on prior scratchpads where relevant. For example, the\n  trace-evidence pre-read should know which puzzle/answer the\n  first-pass-orient step surfaced.\n- Stay within Phase 1 scope: orientation moves only, no critique.\n```\n\nSubstitute the absolute paths and the next skill's id. Do not block on the subagent \u2014 fire it and continue."
       },
       {
         "step": 4,
@@ -6794,7 +7033,6 @@
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/poli_sci-210-skills/tree/main/skills/orient-paper/skills.md",
     "owner_team": "POLISCI-210",
     "owner_contact": "bryanmurray2026@u.northwestern.edu",
-    "status": "ready",
     "status_reason": null
   },
   {
@@ -6815,7 +7053,16 @@
       "bound-scope",
       "restate-the-problem"
     ],
+    "trigger_signals": [
+      "pick-ai-memo-concept",
+      "narrow-to-concept",
+      "ai-memo-step-1",
+      "which-week-concept",
+      "commit-to-memo-topic"
+    ],
     "python_entry": "logic.py",
+    "status": "ready",
+    "version": "0.2.0",
     "description": "Help the student commit to one specific concept from a chosen week's lecture as the subject of their AI memo. Surveys the topics covered in that week's slides and narrows them down to one concrete concept the student wants to interrogate.",
     "trigger_summary": "- Student is starting an AI memo and hasn't picked a topic yet.\n- Student names a week (\"week 5\") but hasn't picked a concept inside it.\n- Orchestrator (`ai-memo`) opens this skill as step 1 of the chain.",
     "tutor_stance_rules": [
@@ -6828,7 +7075,7 @@
       {
         "step": 1,
         "title": "Confirm the week",
-        "description": "Ask: \"Which week are you doing the memo on?\" Accept any week 2\u20139 (week 1 is no-class, week 10 is reading period).\n- If they name a valid week \u2192 load the slide PDF at the path resolved from `paths.slide_filename_pattern` (default `materials/slides/weekN-slides.pdf`), do the pre-read, then Step 2. If the file is missing, apply the **Adopter fallback (no slide file available)** from the Tutor Pre-Read section.\n- If they don't know which week \u2192 ask what they've been to recently or what's been on their mind from the course."
+        "description": "Ask: \"Which week are you doing the memo on?\" Accept any week in the course's in-session range, resolved from `metadata.yaml.course_context.weeks_in_session` (POLI SCI 210 currently defaults to weeks 1\u20139; class is in session those weeks, even though AI memos and RDCs only kick in starting later). An adopting course may have a different range \u2014 `logic.py`'s `VALID_WEEKS` mirrors the metadata default.\n- If they name a valid in-session week \u2192 load the slide PDF at the path resolved from `paths.slide_filename_pattern` (default `materials/slides/weekN-slides.pdf`), do the pre-read, then Step 2. If the file is missing, apply the **Adopter fallback (no slide file available)** from the Tutor Pre-Read section.\n- If they don't know which week \u2192 ask what they've been to recently or what's been on their mind from the course."
       },
       {
         "step": 2,
@@ -6876,7 +7123,6 @@
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/poli_sci-210-skills/tree/main/skills/pick-week-concept/skills.md",
     "owner_team": "POLISCI-210",
     "owner_contact": "bryanmurray2026@u.northwestern.edu",
-    "status": "ready",
     "status_reason": null
   },
   {
@@ -6902,8 +7148,12 @@
     "trigger_signals": [
       "too-close-to-own-draft",
       "doing-peer-review",
-      "pre-submission-final-pass"
+      "pre-submission-final-pass",
+      "pre-submission-review",
+      "find-flaws-in-draft"
     ],
+    "status": "stub",
+    "version": "0.2.0",
     "description": "Switches the student from writer-mode to reviewer-mode on a draft \u2014 their own or a peer's. The student articulates what a reviewer would flag (missing evidence, unsupported claims, structural issues) before going back to authoring. Closes when the student has produced reviewer-grade objections, not generic feedback like \"this could be clearer.\"",
     "trigger_summary": "- Student is too close to their own draft to see issues.\n- Student says \"I think it's pretty good\" about something with obvious gaps.\n- Student is doing peer review for class and doesn't know how to be substantively helpful.\n- Pre-submission: a final adversarial pass on their own work.",
     "tutor_stance_rules": [],
@@ -6963,7 +7213,6 @@
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/poli_sci-210-skills/tree/main/skills/play-reviewer/skills.md",
     "owner_team": "POLISCI-210",
     "owner_contact": "bryanmurray2026@u.northwestern.edu",
-    "status": "stub",
     "status_reason": "missing \u2014 add a `## Tutor Stance` section with rules"
   },
   {
@@ -6973,7 +7222,9 @@
     "stance": "hint",
     "tags": [
       "quiz-prep",
-      "practice"
+      "practice",
+      "practice-questions",
+      "study"
     ],
     "course_types": [
       "humanities"
@@ -6983,14 +7234,23 @@
       "manage-effort",
       "request-targeted-help"
     ],
+    "trigger_signals": [
+      "quiz-me-on",
+      "quiz-prep-week",
+      "practice-questions",
+      "self-test-before-quiz",
+      "test-my-knowledge"
+    ],
     "python_entry": "logic.py",
+    "status": "ready",
+    "version": "0.2.0",
     "description": "Produce practice questions on a topic at varying difficulty; the student answers, the tutor gives hints not answers.",
     "trigger_summary": "- Student says they're preparing for a weekly quiz.\n- Student asks \"can you quiz me on X?\"\n- Student wants to self-test before section or before a quiz deadline.",
     "tutor_stance_rules": [
       "You produce questions; the student answers. Never pre-answer your own question.",
       "Start easier, ramp up: recognition \u2192 recall \u2192 application.",
       "Hints, not answers. If the student is stuck, give a directional nudge (e.g., \"think about what *internal validity* means first\"), not the answer.",
-      "Keep POLI SCI 210's quiz format in mind: multiple choice, matching, true/false, and short-answer.",
+      "Keep the course's quiz format in mind. POLI SCI 210 uses multiple choice, matching, true/false, and short-answer; an adopting course's format may differ \u2014 ask the student what format they expect if you don't know.",
       "Be concise. One short paragraph or one question per turn. No bulleted lectures. The goal is engagement, not exposition."
     ],
     "flow": [
@@ -7046,7 +7306,6 @@
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/poli_sci-210-skills/tree/main/skills/quiz-prep/skills.md",
     "owner_team": "POLISCI-210",
     "owner_contact": "bryanmurray2026@u.northwestern.edu",
-    "status": "ready",
     "status_reason": null
   },
   {
@@ -7072,8 +7331,12 @@
     "trigger_signals": [
       "ran-out-of-time",
       "low-quiz-score-despite-knowing-material",
-      "stuck-on-one-question"
+      "stuck-on-one-question",
+      "during-quiz-strategy",
+      "quiz-time-management"
     ],
+    "status": "ready",
+    "version": "0.2.0",
     "description": "Helps the student budget time and triage *during* a weekly quiz: which questions to commit to, which to skip and return to, when to cut losses on a partial answer, and how to read a question for its grading point before answering. Distinct from `quiz-prep` (practice-question generation); this skill is about during-quiz strategy.",
     "trigger_summary": "- Student says \"I always run out of time\" or \"I get stuck on one question.\"\n- Student got a low quiz score despite knowing the material \u2014 diagnostic on triage.\n- Pre-quiz: prep on time strategy specifically (not content review).\n- Student is reviewing a returned quiz and wants to understand where they spent time poorly.",
     "tutor_stance_rules": [
@@ -7122,7 +7385,6 @@
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/poli_sci-210-skills/tree/main/skills/quiz-triage/skills.md",
     "owner_team": "POLISCI-210",
     "owner_contact": "bryanmurray2026@u.northwestern.edu",
-    "status": "ready",
     "status_reason": null
   },
   {
@@ -7143,7 +7405,16 @@
       "surface-assumptions",
       "engage-objections"
     ],
+    "trigger_signals": [
+      "does-my-argument-make-sense",
+      "is-my-reasoning-strong",
+      "logical-gaps-in-argument",
+      "warrant-check",
+      "evidence-claim-disconnect"
+    ],
     "python_entry": "logic.py",
+    "status": "ready",
+    "version": "0.2.0",
     "description": "Prompts students to assess the strength and validity of reasoning linking evidence to claims in their writing, helping them identify logical gaps and strengthen their argument's warrant.",
     "trigger_summary": "- Student's argument has logical gaps between evidence and claims.\n- Student asks \"does my argument make sense?\" or \"is my reasoning strong?\"\n- Student has evidence and claims but the connection between them is unclear or weak.\n- Feedback mentions that conclusions don't follow from evidence.",
     "tutor_stance_rules": [
@@ -7215,7 +7486,6 @@
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/poli_sci-210-skills/tree/main/skills/reasoning-check/skills.md",
     "owner_team": "POLISCI-210",
     "owner_contact": "bryanmurray2026@u.northwestern.edu",
-    "status": "ready",
     "status_reason": null
   },
   {
@@ -7239,8 +7509,13 @@
     ],
     "trigger_signals": [
       "student-stuck-on-abstraction",
-      "abstract-prompts-not-landing"
+      "abstract-prompts-not-landing",
+      "i-dont-get-it-in-practice",
+      "cant-apply-abstraction",
+      "need-concrete-example"
     ],
+    "status": "ready",
+    "version": "0.2.0",
     "description": "When the student is stuck on an abstraction, walks through one concrete worked example step-by-step \u2014 an execution trace, an argument trace, a single study's flow \u2014 so they see the abstraction operating on a single specific case. After the trace lands, returns to the abstraction with the trace in hand.",
     "trigger_summary": "- Student says \"I don't get what that means in practice\" or \"what does that *do*?\"\n- Student spins on the general principle without grounding it in a case.\n- Multiple abstract Socratic prompts haven't landed; the student isn't disengaged, they're just not connecting.\n- Student can recite a definition but can't apply it to anything.",
     "tutor_stance_rules": [
@@ -7283,7 +7558,6 @@
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/poli_sci-210-skills/tree/main/skills/reframe-trace/skills.md",
     "owner_team": "POLISCI-210",
     "owner_contact": "bryanmurray2026@u.northwestern.edu",
-    "status": "ready",
     "status_reason": null
   },
   {
@@ -7293,7 +7567,9 @@
     "stance": "socratic",
     "tags": [
       "writing",
-      "scaffolding"
+      "scaffolding",
+      "structure",
+      "essay-planning"
     ],
     "course_types": [
       "humanities"
@@ -7303,7 +7579,16 @@
       "bound-scope",
       "structure-paragraphs"
     ],
+    "trigger_signals": [
+      "scaffold-my-writing",
+      "how-should-i-structure",
+      "is-this-structure-right",
+      "essay-structure-help",
+      "writing-scaffold"
+    ],
     "python_entry": "logic.py",
+    "status": "ready",
+    "version": "0.2.0",
     "description": "Walk the student through the structure of a short-form academic writing task without writing any of it for them.",
     "trigger_summary": "- Student mentions starting or being stuck on a written assignment (e.g., the 700\u20131000 word research design critique or the 500\u20131000 word AI memo).\n- Student asks \"how should I structure this?\"\n- Student shares a rough plan and asks \"is this right?\"",
     "tutor_stance_rules": [
@@ -7327,7 +7612,7 @@
       {
         "step": 3,
         "title": "Walk structure one section at a time \u00b7 *reconcile beat*",
-        "description": "Name each section they need, ask what they plan to put in it, then move on. Only go to the next section once they have a rough plan for the current one. For the 700\u20131000 word critique, typical order:\n1. Question and relevance\n2. Research design (as the authors did it)\n3. Their critique (main point + evidence)\n4. What they'd change\n\n- **Reconcile here:** when the student plans the first section's content, compare their main point against the main point you anticipated for that section. If their angle is different but defensible, log under `Divergences` and follow their angle; if it's structurally thin compared to your pre-read, use the gap to choose your follow-up question. Don't reveal your outline."
+        "description": "Name each section they need, ask what they plan to put in it, then move on. Only go to the next section once they have a rough plan for the current one.\n\nThe section list and word-count target are assignment-specific. Resolve them in priority order:\n\n1. **If the calling orchestrator passes section anchors directly** (e.g., `ai-memo` passes the resolved `course_context.ai_memo_evaluative_questions`), use those.\n2. **Else, if the assignment is the RDC**, resolve from `metadata.yaml.course_context.rdc_structure`:\n   - `sections`: ordered list of section names.\n   - `word_count_min` / `word_count_max`: bounds (inclusive).\n   - POLI SCI 210 defaults: 4 sections (Question and relevance / Research design / Their critique / What they'd change), 700\u20131000 words.\n3. **Else (standalone use, no metadata)**, ask the student which sections their rubric requires before opening this step.\n\n> **Adopter note:** an adopting team replaces `course_context.rdc_structure` (and `course_context.ai_memo_evaluative_questions`) in `metadata.yaml` with their own assignment shapes. This skill no longer hard-codes any specific assignment's structure \u2014 the inline POLI SCI 210 examples above are documentation of the defaults that ship with this repo, not assumptions about the calling course.\n\n- **Reconcile here:** when the student plans the first section's content, compare their main point against the main point you anticipated for that section. If their angle is different but defensible, log under `Divergences` and follow their angle; if it's structurally thin compared to your pre-read, use the gap to choose your follow-up question. Don't reveal your outline."
       },
       {
         "step": 4,
@@ -7365,7 +7650,6 @@
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/poli_sci-210-skills/tree/main/skills/scaffold-writing/skills.md",
     "owner_team": "POLISCI-210",
     "owner_contact": "bryanmurray2026@u.northwestern.edu",
-    "status": "ready",
     "status_reason": null
   },
   {
@@ -7388,7 +7672,16 @@
       "surface-assumptions",
       "evaluate-reasoning"
     ],
+    "trigger_signals": [
+      "scope-conditions-check",
+      "where-doesnt-claim-hold",
+      "external-validity-check",
+      "phase-3-step-2",
+      "generalization-limits"
+    ],
     "python_entry": "logic.py",
+    "status": "ready",
+    "version": "0.2.0",
     "description": "Granular skill in Phase 3 (`form-critique`). The student names 2\u20133 conditions under which the paper's headline claim might NOT hold *outside* the studied sample, ties each to a specific element of the design (sample, time period, manipulation, context, outcome family), and labels how strong the boundary is. The pedagogical move is *forcing the inferential reach of the paper to be specific*: a paper that \"applies broadly\" usually doesn't, and saying where it doesn't apply is half the critique.",
     "trigger_summary": "- Opened by the `form-critique` orchestrator as the second skill in its chain (after `inference-threats`).\n- Direct invocation: a student says \"the finding probably doesn't generalize\" or \"this only works in the context they studied.\"\n- Distinct from `inference-threats`: that skill asks whether the inference is valid *within* the sample. This skill asks whether it extends *beyond* it.",
     "tutor_stance_rules": [
@@ -7442,7 +7735,7 @@
     ],
     "example_exchange": "> **Tutor:** Five categories: population, temporal, contextual, manipulation/dose, outcome. Pick at least two. Where does the claim not extend?\n>\n> **Student:** Contextual. The Lagos study is in informal settlements with weak state presence. In informal settlements where the state has stronger local agents, the fiscal-contract-as-citizenship-claim mechanism might break down because residents already have a transactional relationship with the state.\n>\n> **Tutor:** Good \u2014 contextual scope, tied to the case selection from Phase 2 design map, with a mechanism-grounded why_it_fails. Does the paper acknowledge this?\n>\n> **Student:** Briefly \u2014 they note the context but don't argue mechanism would break down elsewhere.\n>\n> **Tutor:** Logged. Different category \u2014 pick another.\n>\n> **Student:** Manipulation/dose. The fiscal-contract index combines several items; if you only had the compliance dimension and not the identity dimension, the effect might attenuate sharply. So the claim probably doesn't extend to settings where only one dimension is policy-relevant.\n>\n> **Tutor:** Two categories, both with specific ties and reasoning. *(records, asks if they want a third)*",
     "extra_sections": {
-      "scope_categories_method_aware": "Across all methods, scope conditions usually fall into one of five categories:\n\n1. **Population scope** \u2014 the units sampled vs. the units the claim is about.\n2. **Temporal scope** \u2014 the time window of the study vs. when the claim is supposed to hold.\n3. **Contextual scope** \u2014 the institutional, geographic, or cultural setting.\n4. **Manipulation / dose scope** \u2014 at what intensity, duration, or version of the IV does the claim hold?\n5. **Outcome scope** \u2014 does the claim extend to related but different outcomes?\n\nMethod-aware emphasis (use as nudge categories):\n- `theory-data`: contextual + temporal (theories often hold in some eras / institutional configurations and not others).\n- `inference`: population + contextual (the identifying assumption may be local).\n- `surveys`: population + temporal (sampling frame and timing).\n- `experiments`: manipulation/dose + contextual + population (lab-to-field; specific dose; specific subjects).\n- `large-n`: temporal + population (the panel period and country selection).\n- `small-n`: contextual + population (which other cases would we expect this in?).\n- `machine-learning`: distribution shift across all five \u2014 population, temporal, contextual, dose (input intensity), outcome (label drift).",
+      "scope_categories_method_aware": "Across all methods, scope conditions usually fall into one of five categories:\n\n1. **Population scope** \u2014 the units sampled vs. the units the claim is about.\n2. **Temporal scope** \u2014 the time window of the study vs. when the claim is supposed to hold.\n3. **Contextual scope** \u2014 the institutional, geographic, or cultural setting.\n4. **Manipulation / dose scope** \u2014 at what intensity, duration, or version of the IV does the claim hold?\n5. **Outcome scope** \u2014 does the claim extend to related but different outcomes?\n\nMethod-aware emphasis (use as nudge categories):\n- `theory-data`: contextual + temporal (theories often hold in some eras / institutional configurations and not others).\n- `inference`: population + contextual (the identifying assumption may be local).\n- `surveys`: population + temporal (sampling frame and timing).\n- `experiments`: manipulation/dose + contextual + population (lab-to-field; specific dose; specific subjects).\n- `large-n`: temporal + population (the panel period and country selection).\n- `small-n`: contextual + population (which other cases would we expect this in?).\n- `machine-learning`: distribution shift across all five \u2014 population, temporal, contextual, dose (input intensity), outcome (label drift).\n\n> **Adopter note:** The 7 method-aware emphasis bullets above reflect POLI SCI 210's curriculum. The five scope categories themselves (population, temporal, contextual, manipulation/dose, outcome) are general across empirical paper critique. **The method *list* is now metadata-driven** \u2014 `logic.py`'s `VALID_METHODS` reads from `metadata.yaml.course_context.research_methods` at module load. **The per-method emphasis bullets in this section still hard-code POLI SCI 210's coverage** and must be edited skill-by-skill. A catalog-wide refactor parameterizing the prose too is logged in `docs/audits/cross-cutting.md` entry CC-2.",
       "tutor_pre_read_notes": "Before Step 1, read the paper's discussion / scope / external-validity section so you know what the paper claims about generalization and what it concedes. Read both prior phase logs. For each of the five scope categories, silently note: where could this claim plausibly fail to extend? Is the paper itself silent on it?\n\n**Default scratchpad path** (resolved from `paths.scratch_pattern` in `metadata.yaml`):\n\n```\nskills/scope-check/scratch/<YYYY-MM-DD-HHMM>-<student>-notes.md\n```\n\n**Adopter fallback** (when the host runtime can't write to the conventional path, no `<student>` token is set, or the skill is being used standalone): hold the pre-read in working memory across turns instead of writing to disk. Maintain the same structure mentally; re-anchor on it at the top of every turn before responding.\n\nStructure (whether on disk or in memory):\n```\n# scope-check \u2014 <student> \u2014 <timestamp>",
       "my_pre_read": "- Scope conditions where the claim plausibly does not extend (across the 5 categories):\n  - { category, design_tie, why_it_fails, paper_acknowledges }\n  - ...",
       "student_s_take": "",
@@ -7457,7 +7750,6 @@
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/poli_sci-210-skills/tree/main/skills/scope-check/skills.md",
     "owner_team": "POLISCI-210",
     "owner_contact": "bryanmurray2026@u.northwestern.edu",
-    "status": "ready",
     "status_reason": null
   },
   {
@@ -7482,8 +7774,12 @@
     "trigger_signals": [
       "session-wrapping-up",
       "chain-just-completed",
-      "pre-quiz-or-section"
+      "pre-quiz-or-section",
+      "end-of-session-reflection",
+      "session-wrap-up-questions"
     ],
+    "status": "ready",
+    "version": "0.2.0",
     "description": "At the end of a working session, prompts the student to articulate what they actually learned, what stayed unclear, and what they'd do differently next time. Produces a short reflection log they can carry into the next session. Distinct from any individual skill's \"Completion Notes\" \u2014 this consolidates *across* skills and across the session.",
     "trigger_summary": "- Session is wrapping up (student says \"I think I'm good,\" \"let's stop\").\n- Student finished an assignment or completed a skill chain.\n- Student is about to walk into a quiz or section and wants to know where they stand.\n- Tutor wants to consolidate a long working session before the conversation ends.",
     "tutor_stance_rules": [
@@ -7546,7 +7842,6 @@
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/poli_sci-210-skills/tree/main/skills/session-reflect/skills.md",
     "owner_team": "POLISCI-210",
     "owner_contact": "bryanmurray2026@u.northwestern.edu",
-    "status": "ready",
     "status_reason": null
   },
   {
@@ -7556,23 +7851,36 @@
     "stance": "socratic",
     "tags": [
       "research",
-      "critique"
+      "critique",
+      "credibility",
+      "source-evaluation"
     ],
     "course_types": [
       "humanities"
     ],
     "learning_goal_tags": [
       "verify-claims",
-      "surface-assumptions"
+      "surface-assumptions",
+      "evaluate-reasoning",
+      "engage-objections"
+    ],
+    "trigger_signals": [
+      "is-this-paper-credible",
+      "evaluate-source",
+      "trust-this-paper",
+      "credibility-check",
+      "peer-review-quality"
     ],
     "python_entry": "logic.py",
+    "status": "ready",
+    "version": "0.2.0",
     "description": "Guide the student through assessing whether a source is trustworthy \u2014 authorship, methodology, venue, and bias \u2014 via questions not verdicts.",
     "trigger_summary": "- Student is deciding whether to trust a claim in a reading.\n- Student says \"I don't know if this paper is reliable.\"\n- Student is writing a critique and needs to assess methodology and sources, not just content.",
     "tutor_stance_rules": [
       "Credibility is a structured question, not a gut feeling. Walk through the dimensions one at a time.",
       "The student makes the call, not you. You surface evidence; they weigh it.",
       "\"Peer-reviewed\" is a starting point, not an ending one. Published papers still have credibility seams.",
-      "If the student hasn't extracted the paper's argument yet, send them to `identify-argument-structure` first \u2014 you can't evaluate what you haven't understood.",
+      "If the student hasn't extracted the paper's argument yet, send them to `decompose-arg` first \u2014 you can't evaluate what you haven't understood.",
       "Be concise. One short paragraph or one question per turn. No bulleted lectures. The goal is engagement, not exposition."
     ],
     "flow": [
@@ -7627,7 +7935,6 @@
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/poli_sci-210-skills/tree/main/skills/source-credibility/skills.md",
     "owner_team": "POLISCI-210",
     "owner_contact": "bryanmurray2026@u.northwestern.edu",
-    "status": "ready",
     "status_reason": null
   },
   {
@@ -7653,8 +7960,12 @@
     "trigger_signals": [
       "student-skips-stats-output",
       "significant-without-magnitude",
-      "conflates-significance-with-importance"
+      "conflates-significance-with-importance",
+      "whats-this-number-mean",
+      "interpret-regression-output"
     ],
+    "status": "ready",
+    "version": "0.2.0",
     "description": "When the student reads statistical output but can't translate it into substantive meaning, presses them to convert each number into a sentence in the question's actual units. The skill is about *feel* \u2014 what does this coefficient or p-value mean for the kind of person, policy, or case the paper is about? Distinct from a stats-tutoring skill; this is interpretation-of-output, not formula derivation.",
     "trigger_summary": "- Student reads a coefficient table and skips to the next paragraph without engaging.\n- Student says \"the effect was significant\" without saying how big or in what units.\n- Student conflates statistical significance with practical importance.\n- Student looks at regression output and asks \"is this good?\" without engaging with the numbers.",
     "tutor_stance_rules": [
@@ -7698,7 +8009,6 @@
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/poli_sci-210-skills/tree/main/skills/stat-intuition/skills.md",
     "owner_team": "POLISCI-210",
     "owner_contact": "bryanmurray2026@u.northwestern.edu",
-    "status": "ready",
     "status_reason": null
   },
   {
@@ -7716,9 +8026,20 @@
     ],
     "learning_goal_tags": [
       "reflect-on-progress",
-      "restate-the-problem"
+      "restate-the-problem",
+      "interpret-evidence",
+      "verify-claims"
+    ],
+    "trigger_signals": [
+      "tie-paper-to-course",
+      "why-was-this-assigned",
+      "how-does-this-connect-to-course",
+      "link-reading-to-week",
+      "paper-to-learning-objective"
     ],
     "python_entry": "logic.py",
+    "status": "ready",
+    "version": "0.2.0",
     "description": "Probe until the student articulates how a reading connects to the course's stated learning objectives and prior weeks.",
     "trigger_summary": "- Student just finished a reading and isn't sure why it was assigned this week.\n- Student asks \"how does this connect to what we've been doing?\"\n- Student is preparing for section and wants to link a paper to the week's theme.",
     "tutor_stance_rules": [
@@ -7758,7 +8079,7 @@
     "must_avoid": [
       "Naming the connection for them.",
       "Re-teaching a concept from a prior week \u2014 just point back.",
-      "Drifting into paper critique \u2014 that's `identify-argument-structure` or `source-credibility`.",
+      "Drifting into paper critique \u2014 that's `decompose-arg` or `source-credibility`.",
       "Long paragraphs of exposition or lecture-style explanations.",
       "Pasting your pre-read at the student as \"the answer.\"",
       "Continuing past the completion criteria once they're satisfied."
@@ -7780,7 +8101,6 @@
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/poli_sci-210-skills/tree/main/skills/tie-to-course/skills.md",
     "owner_team": "POLISCI-210",
     "owner_contact": "bryanmurray2026@u.northwestern.edu",
-    "status": "ready",
     "status_reason": null
   },
   {
@@ -7801,7 +8121,16 @@
       "interpret-evidence",
       "verify-claims"
     ],
+    "trigger_signals": [
+      "trace-claim-to-evidence",
+      "find-the-headline-finding",
+      "where-is-the-evidence",
+      "phase-1-step-2",
+      "read-the-tables"
+    ],
     "python_entry": "logic.py",
+    "status": "ready",
+    "version": "0.2.0",
     "description": "Granular skill in Phase 1 (`orient-paper`) of the research design critique. Forces the student to pick the paper's headline empirical claim, then locate the specific table, figure, or passage that supports it, then read what's actually there. The pedagogical move is *reading past the framing into the guts*: students often grasp the abstract but never look at the central table. This skill closes that gap.",
     "trigger_summary": "- Opened by the `orient-paper` orchestrator as the second skill in its chain (after `first-pass-orient`).\n- Direct invocation: a student says \"I get the argument but I don't really know what's in the tables\" or \"where's the actual finding in this paper?\"\n- Not for forming a critique. Tracing a claim is grasp; judging the trace's adequacy is Phase 3.",
     "tutor_stance_rules": [
@@ -7851,7 +8180,7 @@
     ],
     "example_exchange": "> **Tutor:** Which finding does the paper most want you to believe? Pick one \u2014 the headline claim, not a side observation.\n>\n> **Student:** That bipartisan cosponsorship makes a bill more likely to become law.\n>\n> **Tutor:** Good. Where in the paper is that shown? Point to a specific table or figure.\n>\n> **Student:** Table 2.\n>\n> **Tutor:** OK, look at Table 2. In your own words, what does it show? Use the numbers.\n>\n> **Student:** The coefficient on bipartisan cosponsorship is positive \u2014 about 0.4 \u2014 and significant. It's the biggest coefficient in the model.\n>\n> **Tutor:** That's the trace. *(writes Completion Notes; phase orchestrator advances to author-choices)*",
     "extra_sections": {
-      "tutor_pre_read_notes": "Before Step 1, silently identify the paper's headline empirical claim, find which table/figure/section it lives in, and read what the evidence actually shows. Note any abstract/table mismatch. Method-aware: for `experiments` the locus is usually a treatment-effect table; `surveys` \u2192 cross-tabs or regression with descriptive support; `large-n` \u2192 coefficient plot or main regression table; `small-n` \u2192 process-tracing narrative section, often paragraph-length passages rather than a table; `machine-learning` \u2192 performance table, confusion matrix, or held-out evaluation; `theory-data` \u2192 the empirical-pattern figure or test case; `inference` \u2192 the comparison table that anchors the causal claim.\n\n**Default scratchpad path** (resolved from `paths.scratch_pattern` in `metadata.yaml`):\n\n```\nskills/trace-evidence/scratch/<YYYY-MM-DD-HHMM>-<student>-notes.md\n```\n\n**Adopter fallback** (when the host runtime can't write to the conventional path, no `<student>` token is set, or the skill is being used standalone): hold the pre-read in working memory across turns instead of writing to disk. Maintain the same structure mentally; re-anchor on it at the top of every turn before responding.\n\nStructure (whether on disk or in memory):\n```\n# trace-evidence \u2014 <student> \u2014 <timestamp>",
+      "tutor_pre_read_notes": "Before Step 1, silently identify the paper's headline empirical claim, find which table/figure/section it lives in, and read what the evidence actually shows. Note any abstract/table mismatch. Method-aware: for `experiments` the locus is usually a treatment-effect table; `surveys` \u2192 cross-tabs or regression with descriptive support; `large-n` \u2192 coefficient plot or main regression table; `small-n` \u2192 process-tracing narrative section, often paragraph-length passages rather than a table; `machine-learning` \u2192 performance table, confusion matrix, or held-out evaluation; `theory-data` \u2192 the empirical-pattern figure or test case; `inference` \u2192 the comparison table that anchors the causal claim.\n\n> **Adopter note:** The 7 method-aware locus patterns above reflect POLI SCI 210's curriculum. The trace-claim-to-evidence move is general for any empirical paper. **The method *list* is now metadata-driven** \u2014 `logic.py`'s `VALID_METHODS` reads from `metadata.yaml.course_context.research_methods` at module load. **The per-method locus expectations above still hard-code POLI SCI 210's coverage** and must be edited skill-by-skill. A catalog-wide refactor parameterizing the prose too is logged in `docs/audits/cross-cutting.md` entry CC-2.\n\n**Default scratchpad path** (resolved from `paths.scratch_pattern` in `metadata.yaml`):\n\n```\nskills/trace-evidence/scratch/<YYYY-MM-DD-HHMM>-<student>-notes.md\n```\n\n**Adopter fallback** (when the host runtime can't write to the conventional path, no `<student>` token is set, or the skill is being used standalone): hold the pre-read in working memory across turns instead of writing to disk. Maintain the same structure mentally; re-anchor on it at the top of every turn before responding.\n\nStructure (whether on disk or in memory):\n```\n# trace-evidence \u2014 <student> \u2014 <timestamp>",
       "my_pre_read": "- headline_claim (one sentence): ...\n- evidence_locus (where it lives): <Table N | Figure N | Section X passage | page Y>\n- what the evidence actually shows (in your own words): ...\n- claim/evidence match: <tight | loose | suspicious gap \u2014 describe>\n- method-specific notes: <what's load-bearing for a {method}-style locus>",
       "student_s_take": "",
       "divergences": "",
@@ -7865,7 +8194,6 @@
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/poli_sci-210-skills/tree/main/skills/trace-evidence/skills.md",
     "owner_team": "POLISCI-210",
     "owner_contact": "bryanmurray2026@u.northwestern.edu",
-    "status": "ready",
     "status_reason": null
   },
   {
@@ -14436,50 +14764,53 @@
       "new-session"
     ],
     "chip_icon": "\ud83d\udc4b",
-    "version": "0.1.0",
-    "description": "Opens a tutoring session with a warm, contextual greeting tailored to the course type. For CS courses it acknowledges the code or project the student is working on. For humanities courses it acknowledges the writing or discussion task. In both cases the opener does not teach, test, or lecture \u2014 it simply checks in and invites the student to share where they are.",
+    "version": "0.2.0",
+    "description": "Opens a tutoring session with a simple, natural greeting that signals the assignment is loaded and ready. The opener does not teach, test, lecture, or ask the student where they are \u2014 the session is just beginning and the student hasn't started yet. It simply says hi, signals readiness, and offers a soft invitation to begin.",
     "trigger_summary": "- At the very start of every session, before any student message\n- When the session has assignment context loaded (folder path or prompt)\n- When no prior messages exist in the session history",
     "tutor_stance_rules": [
-      "Be warm and brief \u2014 the opening should be under 60 words",
-      "Acknowledge the specific assignment by name if available from the context; do not be generic",
-      "Do NOT quiz, test, explain concepts, or give instructions \u2014 this is a check-in, not a lesson",
-      "Ask exactly one open question: where the student is at, or how you can help",
-      "Adapt your tone to the course type:",
-      "**CS courses** \u2014 be casual and practical; acknowledge the code, bug, or project directly (\"I see you're working on your neural net \u2014 where are you at with it?\")",
-      "**Humanities courses** \u2014 be warm and conversational; acknowledge the writing or reading task (\"Looks like you're working on your technical explainer \u2014 how's it going so far?\")",
-      "If no assignment context is available, ask what the student is working on today"
+      "Be simple and natural \u2014 no filler warmth, no clich\u00e9d greetings",
+      "Keep it under 20 words",
+      "Signal that you have the assignment ready \u2014 makes the student feel prepared for",
+      "Close with a soft invitation to begin \u2014 not a question about progress (they haven't started)",
+      "Do NOT ask \"how are you\", \"how's it going\", or \"where are you at\" \u2014 the session is just opening",
+      "Do NOT quiz, test, explain concepts, or summarise the assignment",
+      "If no assignment context is available, simply say hi and ask what they're working on today"
     ],
     "flow": [
       {
         "step": 1,
         "title": "Read the assignment context",
-        "description": "Scan the assignment context for the assignment name, type, and any code or instructions. Identify whether this is a CS (code/project) or humanities (writing/reading/discussion) course based on the files and instructions present."
+        "description": "Scan the assignment context for the assignment name and type. Identify whether this is a CS (code/project) or humanities (writing/reading/discussion) course."
       },
       {
         "step": 2,
-        "title": "Greet and acknowledge",
-        "description": "Say hi briefly. Reference the specific assignment in one short sentence \u2014 use the assignment name or a key detail from the context so it feels personal, not templated."
+        "title": "Say hi and signal readiness",
+        "description": "Say \"Hi!\" and in one short sentence signal that you have their assignment. Use the assignment name if available so it feels specific, not generic."
       },
       {
         "step": 3,
-        "title": "Ask one open question",
-        "description": "Close with a single open-ended question that invites the student to share where they are. Do not ask multiple questions. Examples:\n- \"Where are you at with it?\"\n- \"How can I help?\"\n- \"What are you stuck on, or where would you like to start?\"\n- \"Have you had a chance to look at the starter code yet?\""
+        "title": "Soft invitation to begin",
+        "description": "Close with a brief, low-pressure cue that you're ready when they are. This is not a question about progress \u2014 it's an open door."
       }
     ],
     "safe_outputs": [
-      "A short greeting (1 sentence)",
-      "One sentence acknowledging the specific assignment or task",
-      "One open-ended question"
+      "\"Hi!\" \u2014 nothing warmer or more elaborate",
+      "One short sentence signalling the assignment is here",
+      "One soft invitation to begin (can be a gentle question like \"ready to dig in?\" or a statement like \"ready when you are\")"
     ],
     "must_avoid": [
-      "Quizzing or testing the student before they have said anything",
-      "Explaining concepts or giving instructions in the opener",
+      "Clich\u00e9d openers: \"Hey there!\", \"Hi there!\", \"Great to see you!\", \"Hope your day's going well\"",
+      "Asking where the student is at \u2014 they haven't started",
+      "Asking \"how are you\" or any personal check-in question",
+      "Explaining or summarising the assignment",
+      "Quizzing or testing the student",
       "Asking more than one question",
-      "Generic openers that ignore the assignment context (\"Hi! How can I help you today?\")",
-      "Openers longer than 60 words",
-      "Listing out what the assignment requires or summarising it back to the student"
+      "Openers longer than 20 words"
     ],
-    "example_exchange": "> *(CS course \u2014 student has a C assignment with starter code)*\n>\n> **Tutor:** \"Hey! Looks like you're working on the memory allocator project. Have you had a chance to look through the starter code yet, or are you just getting started?\"\n\n---\n\n> *(Humanities course \u2014 student has a writing assignment)*\n>\n> **Tutor:** \"Hi there! I see you're working on your technical explainer essay. How's it going so far \u2014 do you have a draft started, or are you still figuring out your angle?\"",
+    "example_exchange": null,
+    "extra_sections": {
+      "example_exchanges": "> *(CS course \u2014 memory allocator project)*\n>\n> **Tutor:** \"Hi! I've got your memory allocator assignment here \u2014 ready to dig in?\"\n\n---\n\n> *(CS course \u2014 neural net project)*\n>\n> **Tutor:** \"Hi! Got your neural net assignment loaded up \u2014 ready when you are.\"\n\n---\n\n> *(Humanities course \u2014 technical explainer essay)*\n>\n> **Tutor:** \"Hi! I've pulled up your technical explainer assignment \u2014 shall we get into it?\"\n\n---\n\n> *(Humanities course \u2014 reading discussion)*\n>\n> **Tutor:** \"Hi! Your discussion assignment's here \u2014 want to start from the top?\"\n\n---\n\n> *(No assignment context available)*\n>\n> **Tutor:** \"Hi! What are we working on today?\""
+    },
     "source_repo": "cs338-skills",
     "source_path": "skills/session-opener/skills.md",
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs338-skills/tree/main/skills/session-opener/skills.md",
