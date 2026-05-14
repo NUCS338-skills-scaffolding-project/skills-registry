@@ -202,9 +202,6 @@ The following skills were **rejected** because their `skill_id` was already clai
 ### `cs338-skills/skills/search-state-formulation/skills.md`
 - **warn** [`skill_id`] length 24 > 18 chars — see Team-Guide §7
 
-### `cs338-skills/skills/session-opener/skills.md`
-- **warn** [`example_exchange`] missing — strongly recommended
-
 ### `cs338-skills/skills/show-dont-tell-journalism/skills.md`
 - **warn** [`skill_id`] length 25 > 18 chars — see Team-Guide §7
 

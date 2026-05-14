@@ -14807,10 +14807,7 @@
       "Asking more than one question",
       "Openers longer than 20 words"
     ],
-    "example_exchange": null,
-    "extra_sections": {
-      "example_exchanges": "> *(CS course \u2014 memory allocator project)*\n>\n> **Tutor:** \"Hi! I've got your memory allocator assignment here \u2014 ready to dig in?\"\n\n---\n\n> *(CS course \u2014 neural net project)*\n>\n> **Tutor:** \"Hi! Got your neural net assignment loaded up \u2014 ready when you are.\"\n\n---\n\n> *(Humanities course \u2014 technical explainer essay)*\n>\n> **Tutor:** \"Hi! I've pulled up your technical explainer assignment \u2014 shall we get into it?\"\n\n---\n\n> *(Humanities course \u2014 reading discussion)*\n>\n> **Tutor:** \"Hi! Your discussion assignment's here \u2014 want to start from the top?\"\n\n---\n\n> *(No assignment context available)*\n>\n> **Tutor:** \"Hi! What are we working on today?\""
-    },
+    "example_exchange": "> *(CS course \u2014 memory allocator project)*\n>\n> **Tutor:** \"Hi! I've got your memory allocator assignment here \u2014 ready to dig in?\"\n\n---\n\n> *(CS course \u2014 neural net project)*\n>\n> **Tutor:** \"Hi! Got your neural net assignment loaded up \u2014 ready when you are.\"\n\n---\n\n> *(Humanities course \u2014 technical explainer essay)*\n>\n> **Tutor:** \"Hi! I've pulled up your technical explainer assignment \u2014 shall we get into it?\"\n\n---\n\n> *(Humanities course \u2014 reading discussion)*\n>\n> **Tutor:** \"Hi! Your discussion assignment's here \u2014 want to start from the top?\"\n\n---\n\n> *(No assignment context available)*\n>\n> **Tutor:** \"Hi! What are we working on today?\"",
     "source_repo": "cs338-skills",
     "source_path": "skills/session-opener/skills.md",
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs338-skills/tree/main/skills/session-opener/skills.md",
