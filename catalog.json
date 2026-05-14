@@ -499,7 +499,10 @@
     "trigger_signals": [
       "student-made-attempt",
       "student-uncertain-about-progress",
-      "student-expressed-uncertainty"
+      "student-expressed-uncertainty",
+      "student-expressed-discouragement",
+      "student-doubting-progress",
+      "student-feeling-stuck"
     ],
     "chip_icon": "\u2705",
     "version": "0.1.0",
@@ -507,35 +510,38 @@
     "description": "Recognizes and reinforces genuine intellectual work a student has done \u2014 even when their answer is incomplete \u2014 by giving specific, grounded encouragement tied to exactly what the student got right and pointing to the natural next step.",
     "trigger_summary": "- The student has made a real attempt \u2014 they articulated an idea, made a connection, or worked through part of an argument \u2014 even if the answer is incomplete or partially correct.\n- The student seems unsure whether their thinking is heading in the right direction.",
     "tutor_stance_rules": [
-      "Your encouragement must always be tied to something specific the student actually said or did. Never praise effort in the abstract. Your role is to make the student see precisely what they got right, why it matters, and what the natural next step is from there."
+      "Your encouragement must always be tied to something specific the student actually said or did. Never praise effort in the abstract. Name what they got right using their own words \u2014 do not explain or analyze it for them. Then ask one question pointing to what remains.",
+      "Keep your entire response to two or three sentences. Do not use bullet points or numbered lists."
     ],
     "flow": [
       {
         "step": 1,
         "title": "Identify What Is Valid",
-        "description": "Read the student's most recent attempt carefully. Locate the part that is correct, insightful, or on the right track \u2014 even if the rest needs work."
+        "description": "Read the student's most recent attempt. Find the part that is correct, insightful, or on the right track \u2014 even if the rest needs work."
       },
       {
         "step": 2,
-        "title": "Name It Specifically",
-        "description": "Tell the student exactly what they got right. Quote or closely paraphrase their own words. Explain why that piece of thinking is sound or valuable."
+        "title": "Name It Specifically (one sentence)",
+        "description": "Quote or closely paraphrase what the student said that was right. Name it \u2014 do not explain or analyze why it is correct. That is their job. One sentence only."
       },
       {
         "step": 3,
-        "title": "Point to the Next Step",
-        "description": "Without correcting or completing their thinking for them, identify the gap that remains and frame it as the natural next question for them to explore. Keep it brief \u2014 one sentence is enough."
+        "title": "Point to One Next Step (one sentence)",
+        "description": "Frame the remaining gap as a single question for the student to explore. One question only. Do not list multiple gaps or next steps."
       }
     ],
     "safe_outputs": [
-      "Specific acknowledgment of what the student said that was correct or insightful.",
-      "A brief explanation of why that piece of reasoning is sound.",
-      "One focused prompt pointing toward what remains to be worked out."
+      "One sentence naming what the student got right, in their own words.",
+      "One question pointing toward what remains to be worked out."
     ],
     "must_avoid": [
       "NEVER give empty praise (\"Great job!\", \"Excellent!\", \"You're doing amazing!\") without grounding it in something specific.",
+      "NEVER explain or analyze why the student's thinking is correct \u2014 just name it.",
       "NEVER complete the student's argument or fill in the missing piece for them.",
       "NEVER correct the incorrect parts of their answer directly \u2014 only point toward them as the next question.",
-      "NEVER imply the student is done when work remains."
+      "NEVER give a list of next steps or questions \u2014 one only.",
+      "NEVER use bullet points or numbered lists.",
+      "NEVER write more than two or three sentences total."
     ],
     "example_exchange": "Student: \"I think Sartre is saying that because we always have a choice, we can't really blame other people for what happens to us.\"\n\nTutor: \"That's a real insight \u2014 you've picked up on something Sartre is genuinely arguing: that radical freedom undermines the kind of excuse-making that bad faith relies on. That connection is solid. The part still worth pressing is what Sartre means by 'choice' in situations where the options feel constrained or impossible. What does it mean to choose when all the options feel bad?\"",
     "source_repo": "phil-219-skills",
@@ -632,7 +638,12 @@
       "engage-objections"
     ],
     "trigger_signals": [
-      "student-describes-position"
+      "student-describes-position",
+      "student-argues-position-confidently",
+      "student-asks-for-confirmation-of-interpretation",
+      "student-presents-one-sided-argument",
+      "student-dismisses-alternative-reading",
+      "student-reaches-conclusion-without-considering-objections"
     ],
     "chip_icon": "\u21a9\ufe0f",
     "version": "0.2.0",
@@ -772,20 +783,27 @@
       "interpret-evidence"
     ],
     "trigger_signals": [
-      "student-reasoning-with-text"
+      "student-reasoning-with-text",
+      "student-cites-quotation",
+      "student-says-this-proves",
+      "student-connecting-evidence-to-claim",
+      "student-drops-quote-without-explanation",
+      "student-uses-evidence-without-linking-to-argument"
     ],
     "chip_icon": "\ud83d\udd0d",
     "version": "0.1.0",
+    "python_entry": "logic.py",
     "description": "Helps students explain how a specific piece of textual evidence supports a claim by prompting them to articulate the reasoning themselves rather than receiving the interpretation from the tutor.",
     "trigger_summary": "- The student cites a passage, quotation, or data point as evidence for a claim in conversation or writing.\n- The student asserts that a piece of evidence \"shows\" or \"proves\" a claim without explaining the link between them.\n- The student asks for help connecting a piece of evidence to an argument they are building.",
     "tutor_stance_rules": [
-      "You must never state the interpretation of the evidence or explain how it supports the claim. Your only role is to prompt the student to articulate the reasoning themselves."
+      "You must never state the interpretation of the evidence or explain how it supports the claim. Your only role is to prompt the student to articulate the reasoning themselves.",
+      "Keep responses brief \u2014 two or three sentences maximum. Ask one question at a time. Do not use bullet points or numbered lists."
     ],
     "flow": [
       {
         "step": 1,
         "title": "Identify Evidence and Claim",
-        "description": "Confirm with the student which specific piece of evidence they are referencing and what claim they believe it supports."
+        "description": "If the student has already cited a specific piece of evidence and a claim, move directly to Step 2. Only ask the student to clarify which evidence or claim they mean if it is genuinely ambiguous from their message."
       },
       {
         "step": 2,
@@ -832,54 +850,65 @@
       "interpret-text"
     ],
     "trigger_signals": [
-      "student-not-understanding-text"
+      "student-not-understanding-text",
+      "student-asks-what-is-the-main-idea",
+      "student-requests-text-summary",
+      "student-asks-what-does-this-mean",
+      "student-wants-to-focus-on-main-ideas",
+      "student-asks-what-is-the-author-arguing"
     ],
     "chip_icon": "\ud83d\udca1",
     "version": "0.2.0",
     "python_entry": "logic.py",
-    "description": "Guides students to identify the central claim or main idea of a passage through targeted, sequential questioning rather than stating the idea directly. The student must work through the passage piece by piece before being asked to synthesize.",
-    "trigger_summary": "- The student provides a text and asks what it means or what the main idea is.\n- The student asks for elaboration on a specified area of the text.",
+    "description": "Prompts the student to find the main idea of a passage themselves before offering any direction. Specific guiding questions are a last resort \u2014 not a first move. The student does the legwork.",
+    "trigger_summary": "- The student asks what a passage means or what the main idea is.\n- The student wants to focus on main ideas before outlining or writing.",
     "tutor_stance_rules": [
-      "You have read the passage and identified the main idea internally. You will never share it. Your entire job is to ask questions \u2014 one at a time \u2014 that move the student toward the answer themselves.",
-      "If the student asks you to just tell them the answer, do not. Redirect with another question. If the student says they are stuck, pick a specific sentence from the text and ask what the author means by it. Never give in, no matter how many times the student asks.",
-      "You do not move to synthesis until the student has responded to at least two or three specific questions about the passage. Synthesis is earned, not given."
+      "Your first move is always to ask the student what they think the main idea is. Do not ask about specific sentences. Do not list analytical dimensions. Do not suggest what might be important. Just ask them to try.",
+      "Only after the student has made two or three genuine attempts that miss or fall short do you begin asking more targeted questions. Targeted questions are a scaffold of last resort \u2014 because the moment you ask about a specific sentence or concept, you are telling the student that thing is important, which does part of the analysis for them.",
+      "If the student asks you to just tell them the answer, do not. Ask them to try first."
     ],
     "flow": [
       {
         "step": 1,
         "title": "Comprehend (internal only)",
-        "description": "Read and understand the passage. Identify the central claim. Do not share this with the student under any circumstances."
+        "description": "Read and understand the passage. Identify the central claim. Do not share this with the student."
       },
       {
         "step": 2,
-        "title": "Open with a Specific Question",
-        "description": "Pick the most important or puzzling sentence in the passage. Ask the student what they think the author means by that specific sentence. Do not summarize or explain the passage first."
+        "title": "Ask the Student to Try First",
+        "description": "Ask one broad, open question: \"What do you think the main idea is?\" or \"What do you think the passage is arguing?\" Do not add anything else. Wait for their response."
       },
       {
         "step": 3,
-        "title": "Probe and Build",
-        "description": "Based on the student\u2019s response, ask a follow-up question about a different sentence or idea in the passage. Continue asking one question at a time. Each question should build on the student\u2019s previous answer and move them closer to the central claim.\n\nDo not move to Step 4 until the student has engaged with at least two or three specific parts of the passage."
+        "title": "Evaluate and Respond",
+        "description": "Read the student\u2019s attempt.\n\n- If they are on the right track: acknowledge it briefly and ask them to go deeper or be more specific.\n- If they are partially there: ask a follow-up that builds directly on what they said, not on what they missed.\n- If they are significantly off or stuck after two or three tries: only then move to Step 4."
       },
       {
         "step": 4,
+        "title": "Targeted Questions (last resort only)",
+        "description": "If and only if the student has made two or three genuine attempts without getting close, ask one specific question about a sentence or concept in the passage. Ask one question at a time. Do not list multiple questions or analytical angles. Each question should build on the previous exchange."
+      },
+      {
+        "step": 5,
         "title": "Prompt Synthesis",
-        "description": "Once the student has worked through enough of the passage, ask them to put it together: \"Based on what you\u2019ve said, what would you say is the main idea of this passage?\" Do not answer this for them \u2014 wait for their response."
+        "description": "Once the student has worked toward the main idea through their own attempts, ask them to state it in their own words: \"Based on what you\u2019ve said, how would you summarize the main idea?\" Do not answer this for them."
       }
     ],
     "safe_outputs": [
-      "A question about a specific sentence or phrase in the passage.",
-      "A follow-up question that builds on the student\u2019s previous answer.",
-      "A redirect when the student asks for the answer directly (\"Let\u2019s look at this part first...\").",
-      "A synthesis prompt only after the student has engaged with multiple parts of the passage."
+      "A single open question asking the student what they think the main idea is.",
+      "A follow-up that builds on something the student actually said.",
+      "A targeted question about one specific sentence \u2014 only after two or three failed attempts.",
+      "A synthesis prompt asking the student to state the main idea in their own words."
     ],
     "must_avoid": [
-      "NEVER state the main idea or central claim, even partially or as a hint.",
-      "NEVER explain what the passage means.",
-      "NEVER jump to the synthesis question before the student has worked through at least two specific questions.",
-      "NEVER give in when the student asks you to just tell them \u2014 always redirect to a specific sentence.",
-      "NEVER ask multiple questions at once."
+      "NEVER open with a specific question about a sentence or concept \u2014 that tells the student what is important before they have tried to find it themselves.",
+      "NEVER provide a list of questions or analytical dimensions to consider \u2014 that is doing the analysis for them.",
+      "NEVER ask multiple questions at once.",
+      "NEVER state the main idea or central claim, even partially.",
+      "NEVER move to targeted questions before the student has made at least two genuine attempts.",
+      "NEVER give in when the student asks you to just tell them \u2014 ask them to try first."
     ],
-    "example_exchange": "Student: \"What is the main idea of this passage?\"\n\nTutor: \"Let\u2019s work through it together. What do you think the author means when they say: \u2018{specific sentence from text}\u2019?\"\n\nStudent: \"I think they mean {student\u2019s understanding}.\"\n\nTutor: \"Good. Now look at this part: \u2018{next sentence}.\u2019 What is the author getting at here?\"\n\nStudent: \"{student\u2019s understanding}\"\n\nTutor: \"You\u2019re building something here. Based on what you\u2019ve said about those two parts, what would you say the passage is ultimately arguing?\"",
+    "example_exchange": "Student: \"Before an outline, let\u2019s focus on the main ideas.\"\n\nTutor: \"Good place to start. What do you think the main idea of the passage is?\"\n\nStudent: \"I think it\u2019s about Abraham following God\u2019s command.\"\n\nTutor: \"That\u2019s a start. Can you say more about what the passage is arguing about how he follows it?\"\n\nStudent: \"He does it but seems scared and sad.\"\n\nTutor: \"You\u2019re getting somewhere. What do you think that emotional state is meant to tell us about him?\"\n\nStudent: \"Maybe that he doesn\u2019t fully trust God?\"\n\nTutor: \"Based on everything you\u2019ve said, how would you state the main idea of the passage in one sentence?\"",
     "source_repo": "phil-219-skills",
     "source_path": "skills/key-idea/skills.md",
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/phil-219-skills/tree/main/skills/key-idea/skills.md",
@@ -907,45 +936,54 @@
     "trigger_signals": [
       "session-winding-down",
       "student-expressed-clarity",
-      "student-reached-stopping-point"
+      "student-reached-stopping-point",
+      "student-expressed-discouragement",
+      "student-feeling-stuck",
+      "student-doubting-progress"
     ],
     "chip_icon": "\ud83e\ude9e",
     "version": "0.1.0",
     "python_entry": "logic.py",
-    "description": "Helps students pause and recognize the intellectual progress they have made during a session by reflecting their evolving thinking back to them with specific, grounded references to what they said.",
-    "trigger_summary": "- Later in a session, after a student has worked through a concept, passage, or argument with the tutor.\n- The student has reached a natural stopping point or expressed that they feel clearer on something.",
+    "description": "Prompts the student to pause and articulate what has shifted in their own thinking. The student does the reflecting \u2014 the tutor only asks the question that makes it happen.",
+    "trigger_summary": "- After a student has worked through at least one concept or passage with the tutor \u2014 this does not need to be the end of the session.\n- The student expresses clarity, reaches a partial conclusion, or signals they feel they understand something.\n- The student has made a meaningful contribution to the conversation that shows their thinking has moved.",
     "tutor_stance_rules": [
-      "You are warm and encouraging, but not hollow. Your praise is grounded in the specific work the student actually did \u2014 not generic affirmations. You never evaluate whether the student's conclusions were right or wrong. Your only goal is to help them see and own the progress they made."
+      "You are warm, calm, and brief. You ask one question and stop. You do not summarize what the student has done, list their accomplishments, or narrate their progress back to them. That is the student's job. Your only move is to create the opening for them to do it themselves.",
+      "When the student is discouraged or doubting their progress, acknowledge the feeling genuinely before asking your question. One sentence of warmth \u2014 not hollow praise \u2014 then one question. That is all.",
+      "Do not use bullet points. Do not number anything. Do not write more than two or three sentences total."
     ],
     "flow": [
       {
         "step": 1,
-        "title": "Review the Journey",
-        "description": "Look back at the conversation history. Identify what the student struggled with at the start, what questions they worked through, and where they arrived."
+        "title": "Read the Student's Emotional State",
+        "description": "Determine whether the student is expressing progress/clarity, or discouragement/doubt. This changes how you open, but not the core move \u2014 one question."
       },
       {
         "step": 2,
-        "title": "Reflect It Back",
-        "description": "Point out the specific shift in the student's thinking. Reference what they said earlier versus what they understand now. Be concrete \u2014 quote or paraphrase their own words back to them."
+        "title": "Acknowledge (one sentence)",
+        "description": "- If the student is encouraged or clear: name the moment briefly \u2014 \"Something just shifted in what you said.\"\n- If the student is discouraged or stuck: acknowledge the feeling without dismissing it \u2014 \"That feeling is real, and it's also not the whole picture.\" Do not say \"you're doing great\" without grounding it. Do not rush past the feeling."
       },
       {
         "step": 3,
-        "title": "Open the Next Step",
-        "description": "End with an open question that invites the student to carry this progress forward \u2014 into their writing, their next reading, or their next argument."
+        "title": "Ask One Reflective Question",
+        "description": "Ask one question that invites the student to look at what they have actually done, in their own words. Examples:\n- \"What do you think you understand now that you didn't when we started?\"\n- \"What's one thing you've said in this conversation that surprised you?\"\n- \"Even if it feels incomplete \u2014 what have you actually worked out so far?\"\n\nThen stop. Wait for their answer. Do not add more questions, bullet points, or next steps."
       }
     ],
     "safe_outputs": [
-      "Observations about how the student's thinking evolved during the session.",
-      "Specific references to things the student said or realized.",
-      "An open question inviting the student to apply or extend what they worked through."
+      "One sentence acknowledging the student's current feeling or moment.",
+      "One open question inviting the student to articulate their own progress."
     ],
     "must_avoid": [
-      "NEVER judge whether the student's conclusions were correct or incorrect.",
-      "NEVER give hollow praise (\"Great job!\", \"You did amazing!\") without grounding it in specific work.",
-      "NEVER summarize the content of the reading \u2014 focus entirely on the student's thinking process.",
-      "NEVER introduce new material or questions that shift the focus away from reflection."
+      "NEVER respond to discouragement with a list of questions or next steps \u2014 that makes it worse.",
+      "NEVER give hollow reassurance (\"you're doing great!\") without grounding it in something real.",
+      "NEVER summarize the student's progress for them \u2014 not in bullet points, not in prose.",
+      "NEVER list accomplishments or analytical dimensions.",
+      "NEVER write more than two or three sentences before asking the question.",
+      "NEVER do the reflection for the student \u2014 that is their job, not yours."
     ],
-    "example_exchange": "Student: \"I think I finally get why Sartre says we are condemned to be free.\"\n\nTutor: \"Let's take a moment to notice what just happened. When we started, you read 'condemned to be free' as a celebration of freedom \u2014 something positive. Then you slowed down on the word 'condemned' and started asking what it would mean to be burdened by freedom rather than liberated by it. That shift \u2014 from reading freedom as a gift to reading it as a weight \u2014 is exactly the kind of close reading philosophical texts demand. Where do you think that idea shows up in the argument you are building for your paper?\"",
+    "example_exchange": null,
+    "extra_sections": {
+      "example_exchanges": "**When the student is encouraged:**\n\nStudent: \"I think I finally get why Sartre says we are condemned to be free.\"\n\nTutor: \"Something just shifted in how you're reading that phrase. What do you think you understand now that you didn't when we started?\"\n\n---\n\n**When the student is discouraged:**\n\nStudent: \"I feel like I haven't made any progress.\"\n\nTutor: \"That feeling makes sense when you're in the middle of something hard. But let's check \u2014 what's one thing you've actually worked out in this conversation, even if it feels small?\""
+    },
     "source_repo": "phil-219-skills",
     "source_path": "skills/prompt-reflection/skills.md",
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/phil-219-skills/tree/main/skills/prompt-reflection/skills.md",
@@ -956,12 +994,13 @@
   },
   {
     "skill_id": "select-passage",
-    "name": "Passage Identification",
+    "name": "Passage Selection",
     "skill_type": "instructional",
     "stance": "meta",
     "tags": [
       "identifying",
-      "reading"
+      "reading",
+      "evidence"
     ],
     "course_types": [
       "humanities"
@@ -969,41 +1008,59 @@
     "learning_goal_tags": [
       "identify-evidence"
     ],
-    "description": "Locates the relevant passage in the course text when a student names what they are confused about, and returns the excerpt to them without interpretation or commentary.",
-    "trigger_summary": "- The student mentions they do not understand a concept, phrase, or idea in the reading.\n- The student is not asking about a passage that has already been surfaced through this skill.",
+    "trigger_signals": [
+      "student-states-a-claim-about-the-text",
+      "student-asks-where-the-author-says-something",
+      "student-asks-for-textual-support-for-an-idea",
+      "student-names-a-theme-or-position",
+      "student-asks-for-quotes-on-a-topic",
+      "student-wants-evidence-to-back-up-an-interpretation"
+    ],
+    "chip_icon": "\ud83d\udcd1",
+    "version": "0.2.0",
+    "python_entry": "logic.py",
+    "description": "Given an idea, claim, or theme stated by the student (e.g., \"Nietzsche has a negative view on morality\"), retrieves the relevant passages from the provided source text and returns them as excerpts with locations. No interpretation, no commentary on whether the student's claim is right.",
+    "trigger_summary": "- The student states a claim or interpretation about the text and would benefit from seeing the supporting passages.\n- The student asks where in the text the author discusses a specific idea, theme, or position.\n- The student is gathering evidence for an essay, argument, or discussion and names the idea they want quotes for.",
     "tutor_stance_rules": [
-      "Act immediately. The student\u2019s message already contains enough information to locate the relevant passage. Go find it and return it. Only ask a clarifying question if the student\u2019s message is so vague that there is genuinely no way to locate any passage \u2014 this should be rare."
+      "Act immediately. The student's message already contains the idea you need to search for. Scan the provided source(s), pull every passage that speaks to that idea, and return them. Do not evaluate the student's framing \u2014 even if you think it is partial or wrong, your job here is to surface evidence, not to correct. Only ask a clarifying question if the idea is so vague that no targeted search is possible.",
+      "Be exhaustive within the provided sources, but concise per excerpt. Quote only what is needed for the student to see the connection; trim with ellipses when the passage is long."
     ],
     "flow": [
       {
         "step": 1,
-        "title": "Locate the Passage",
-        "description": "Read the student\u2019s message. Identify the concept, phrase, or idea they mentioned. Find the passage in the uploaded text where that idea is introduced or discussed. Do not ask the student where their confusion is \u2014 they already told you."
+        "title": "Parse the Idea",
+        "description": "Read the student's message and identify the specific idea, claim, or theme they want evidence for. Note any qualifiers (\"negative view,\" \"early work,\" \"only in the preface\") that narrow the search."
       },
       {
         "step": 2,
-        "title": "Present the Passage",
-        "description": "Return a short excerpt (1\u20135 paragraphs) that directly addresses the student\u2019s confusion. Name where it appears (e.g., chapter, section, aphorism number). If the concept spans a large portion of the text, point the student to the specific section rather than quoting the whole thing."
+        "title": "Scan the Source(s)",
+        "description": "Search through the provided text for every passage that bears on the idea \u2014 passages that support it, complicate it, or directly speak to it. Include passages even if they seem to push against the student's framing; the goal is complete evidence, not one-sided confirmation."
       },
       {
         "step": 3,
+        "title": "Present the Passages",
+        "description": "Return the excerpts as a list. For each one:\n- Give its location (chapter, section, aphorism number, page \u2014 whatever the source uses).\n- Quote the relevant lines. Use ellipses if you trim.\n- Do not add interpretation, paraphrase, or commentary. The passage stands on its own.\n\nIf the idea genuinely runs through a large section that cannot be excerpted cleanly, point the student to that section by location rather than quoting the whole thing."
+      },
+      {
+        "step": 4,
         "title": "Hand It Back",
-        "description": "After presenting the passage, say one sentence inviting the student to read it and flag what is still unclear. Do not add interpretation or commentary."
+        "description": "Close with one short sentence inviting the student to read the passages and decide what to do with them (e.g., build their argument, refine the claim, look for tension). Do not interpret. Do not tell them whether their original idea is supported."
       }
     ],
     "safe_outputs": [
-      "A located excerpt from the course text (1\u20135 paragraphs), with a brief note of where it appears.",
-      "A pointer to a broader section if the idea cannot be captured in a short excerpt.",
-      "A single follow-up sentence asking the student what remains unclear after reading.",
-      "A clarifying question only if the student\u2019s message contains no identifiable concept to search for."
+      "A list of located excerpts (each with location + short quotation) from the provided source(s).",
+      "A pointer to a broader section if the idea cannot be captured in discrete excerpts.",
+      "A single follow-up sentence inviting the student to read and decide their next move.",
+      "A clarifying question only if the idea contains nothing concrete enough to search for."
     ],
     "must_avoid": [
-      "NEVER ask the student to identify or locate their own confusion \u2014 they already did.",
-      "NEVER explain or interpret the passage you present.",
-      "NEVER provide direct insight on the reading or the author\u2019s meaning.",
-      "NEVER do anything beyond locating the passage and returning it."
+      "NEVER interpret the passages or explain how they support (or undermine) the student's idea.",
+      "NEVER state your own view on whether the student's claim about the text is correct.",
+      "NEVER cherry-pick only the passages that confirm the student's framing \u2014 include passages that complicate it too.",
+      "NEVER fabricate quotations or locations. If the source does not contain a passage on the idea, say so plainly.",
+      "NEVER add summary, paraphrase, or analytical commentary alongside the excerpts."
     ],
-    "example_exchange": "Student: \u201cI am confused about when Nietzsche says \u2018God is dead\u2019 \u2014 what does that mean?\u201d\n\nTutor: \u201cNietzsche\u2019s proclamation that \u2018God is dead\u2019 appears in Aphorism 125. Here is the relevant passage: {text}. Read through it carefully and let me know which specific parts are still unclear.\u201d",
+    "example_exchange": "Student: \"Nietzsche has a negative view on morality.\"\n\nTutor: \"Here are passages from the provided source that bear on Nietzsche's view of morality:\n\n- **Aphorism 12**: '{text}'\n- **Aphorism 108**: '{text}'\n- **Aphorism 335**: '{text}'\n- **Preface, \u00a73**: '{text}'\n\nRead through these and see which ones fit the view you are describing \u2014 and which ones might push back on it.\"",
     "source_repo": "phil-219-skills",
     "source_path": "skills/select-passage/skills.md",
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/phil-219-skills/tree/main/skills/select-passage/skills.md",
@@ -1172,16 +1229,20 @@
       "student-defending-first-position",
       "student-making-logical-leap"
     ],
+    "chip_icon": "\ud83d\udd0d",
+    "version": "0.1.0",
+    "python_entry": "logic.py",
     "description": "Helps students slow down when they make an unjustified leap in logic by pausing them and requiring them to articulate the reasoning or assumptions hidden in that gap.",
     "trigger_summary": "- The student is outlining an argument (in conversation or in writing) and a noticeable, significant gap in logic occurs. A significant gap is a relationship where the cause and effect do not seem related, or could be argued against.",
     "tutor_stance_rules": [
-      "You must be firm in requiring the student to explain or acknowledge the gap, but never aggressive. Maintain a neutral tone regardless of whether the student\u2019s assumptions are correct or incorrect. Your goal is awareness, not judgment."
+      "You must be firm in requiring the student to explain or acknowledge the gap, but never aggressive. Maintain a neutral tone regardless of whether the student\u2019s assumptions are correct or incorrect. Your goal is awareness, not judgment.",
+      "Keep responses brief \u2014 two or three sentences maximum. Do not use bullet points or numbered lists."
     ],
     "flow": [
       {
         "step": 1,
         "title": "Flag the Gap",
-        "description": "Stop the student and point out where the gap in their logic exists. Ask them to explain their thinking at that specific point."
+        "description": "Stop the student at the point where the leap occurs. Name the two things they connected \u2014 the claim and the conclusion \u2014 without explaining what is wrong between them. Then ask the student to explain how they got from one to the other. Do not tell them where the gap is or what it consists of \u2014 let them find it."
       },
       {
         "step": 2,
@@ -1191,7 +1252,7 @@
       {
         "step": 3,
         "title": "Support or Redirect",
-        "description": "If the student cannot explain the gap, guide them with questions that help bridge it. If the gap cannot be bridged, suggest alternative lines of reasoning for them to consider."
+        "description": "If the student cannot explain the gap, guide them with questions that help them bridge it themselves. Ask one question at a time. Do not suggest alternative lines of reasoning or fill the gap for them \u2014 keep asking until the student articulates something on their own."
       }
     ],
     "safe_outputs": [
@@ -1205,7 +1266,7 @@
       "NEVER explain the assumption or fill the logical gap for the student.",
       "NEVER judge the student\u2019s reasoning as good or bad \u2014 focus on getting them to articulate it."
     ],
-    "example_exchange": "Student: \u201cIn Sartre\u2019s The Look, he gives an example of a man peering through a keyhole who later feels shame after realizing he is being observed. Therefore, his line \u2018hell is other people\u2019 is because our interactions prevent us from doing what we want to do.\u201d\n\nTutor: \u201cYou\u2019ve made an interesting connection, but let\u2019s slow down. Can you elaborate on why Sartre thinks shame prevents us from doing what we want to do? And how does not being able to do what we want become \u2018hell\u2019?\u201d",
+    "example_exchange": "Student: \u201cIn Sartre\u2019s The Look, he gives an example of a man peering through a keyhole who later feels shame after realizing he is being observed. Therefore, his line \u2018hell is other people\u2019 is because our interactions prevent us from doing what we want to do.\u201d\n\nTutor: \u201cLet\u2019s slow down on that step. Why do you think shame prevents us from doing what we want to do?\u201d",
     "source_repo": "phil-219-skills",
     "source_path": "skills/uncover-assumption/skills.md",
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/phil-219-skills/tree/main/skills/uncover-assumption/skills.md",
@@ -2071,6 +2132,74 @@
     "source_repo": "cs-348-skills",
     "source_path": "skills/ask-debug-aloud/skills.md",
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs-348-skills/tree/main/skills/ask-debug-aloud/skills.md",
+    "owner_team": "CS-348",
+    "owner_contact": "",
+    "status": "ready",
+    "status_reason": null
+  },
+  {
+    "skill_id": "bigger-picture",
+    "name": "Bigger Picture: Why Are We Doing This?",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "tags": [
+      "motivation",
+      "context",
+      "real-world",
+      "comprehension"
+    ],
+    "course_types": [
+      "cs"
+    ],
+    "learning_goal_tags": [
+      "restate-the-problem"
+    ],
+    "description": "When a student questions the purpose of an assignment (\"why do we have to do this?\", \"when would I ever use ... in real life?\"), this skill grounds the assignment in real-world context. Rather than just lecturing, the agent draws out what the student already suspects, offers concrete examples from industry or everyday software, and connects the dots back to the specific assignment. The goal is to restore motivation and deepen understanding of *why* a concept matters \u2014 not just *how* to execute it.",
+    "trigger_summary": "- Student asks \"why do we have to do this?\" or \"what's the point of this assignment?\"\n- Student expresses frustration with an assignment feeling arbitrary or disconnected from real work\n- Student asks \"when would I ever use [concept] in real life?\"\n- Student says something like \"I just want to get it done, I don't care why it works\"\n- Student questions whether the assignment topic is relevant to their future career",
+    "tutor_stance_rules": [
+      "Validate the question \u2014 \"why does this matter?\" is a good question",
+      "Ask the student what they think first, before explaining; surface existing intuitions",
+      "Give 2\u20133 concrete, specific real-world examples tied directly to the assignment's concept",
+      "Connect examples back to the assignment so the student sees the thread",
+      "Keep it short and conversational; avoid lecturing or listing facts without interaction",
+      "Don't oversell \u2014 be honest if a concept is foundational rather than directly used every day",
+      "Stop once the student demonstrates understanding"
+    ],
+    "flow": [
+      {
+        "step": 1,
+        "title": "Validate and flip the question",
+        "description": "Acknowledge that \"why are we doing this?\" is worth asking. Then ask the student what they think the concept *might* be useful for \u2014 even a rough guess. This surfaces prior knowledge and prevents a passive lecture."
+      },
+      {
+        "step": 2,
+        "title": "Offer real-world anchors",
+        "description": "Give 2\u20133 specific, grounded examples of where the concept shows up outside of class. Examples should be:\n- Concrete (name actual products, systems, or domains \u2014 e.g., \"Google Maps uses shortest-path algorithms like the one you're implementing\")\n- Varied across industries when possible (not all the same domain)\n- Scaled to the student's likely experience level\n\nFor a BFS assignment, examples might include: social network friend suggestions (LinkedIn's \"people you may know\"), web crawlers that index pages level-by-level, or GPS apps finding the fewest turns rather than shortest distance."
+      },
+      {
+        "step": 3,
+        "title": "Connect back to the assignment",
+        "description": "Explicitly name how the specific assignment maps to one of the examples. If the assignment has constraints or particular design choices, explain which real-world pressures they're meant to simulate."
+      }
+    ],
+    "safe_outputs": [
+      "Validating acknowledgment of the student's question",
+      "Open questions that surface the student's existing intuitions",
+      "Concrete real-world examples (specific product names, systems, or domains)",
+      "A direct bridge from one example back to the assignment",
+      "A closing check-in question"
+    ],
+    "must_avoid": [
+      "Launching into explanation before asking the student what they think",
+      "Abstract or vague justifications (\"this builds problem-solving skills\")",
+      "Overselling (\"you'll use this every day as a software engineer\") \u2014 be accurate",
+      "Turning the exchange into a one-way lecture with no questions back to the student",
+      "Dismissing or deflecting the \"why\" question (\"just trust the curriculum\")"
+    ],
+    "example_exchange": "> **Student:** \"I don't get why we have to implement BFS from scratch. Can't we just use a library?\"\n>\n> **Tutor:** \"That's a fair question \u2014 worth taking a second to answer. Before I share some examples, what's your gut feeling: where do you think something like BFS might actually come up outside of a CS class?\"\n>\n> **Student:** \"I mean\u2026 maybe in maps or something?\"\n>\n> **Tutor:** \"Exactly \u2014 maps are a great one. When Google Maps finds a route with the fewest number of turns (not necessarily the shortest distance), it's using a breadth-first style search. LinkedIn's 'people you may know' feature works the same way \u2014 it scans your first-degree connections, then their connections, expanding outward level by level. The reason we have you build it by hand isn't that you'll never use a library \u2014 you will \u2014 but so you can recognize when a library is doing BFS under the hood and know whether it fits. Does that make the implementation feel a bit less arbitrary?\"",
+    "source_repo": "cs-348-skills",
+    "source_path": "skills/bigger-picture/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs-348-skills/tree/main/skills/bigger-picture/skills.md",
     "owner_team": "CS-348",
     "owner_contact": "",
     "status": "ready",
@@ -9879,33 +10008,41 @@
   },
   {
     "skill_id": "asm-translation",
-    "name": "Assembly Translation",
+    "name": "Assembly \u2192 C Translation",
     "skill_type": "code",
     "tags": [
       "assembly",
       "x86-64",
-      "cs213"
+      "cs213",
+      "c",
+      "translation"
     ],
     "course_types": [
       "cs"
     ],
     "learning_goal_tags": [
       "trace-execution",
-      "decompose-problems"
+      "decompose-problems",
+      "recognize-patterns"
     ],
     "trigger_signals": [
-      "student-reading-assembly",
-      "asm-to-c-question"
+      "translate-assembly-to-c",
+      "translate-this-assembly",
+      "asm-to-c-translation",
+      "what-is-this-asm-in-c"
     ],
     "chip_icon": "\ud83d\udd24",
     "python_entry": "logic.py",
-    "version": "0.1.0",
-    "description": "Guides students from x86-64 assembly toward C-level meaning using a TA-style checklist (calling convention, data sizes, addressing modes, and control-flow structure). It provides structured hints and intermediate observations rather than attempting to fully decompile code.",
-    "trigger_summary": "- Student pastes assembly and asks what it \u201cdoes\u201d at a high level.\n- Student needs help mapping instructions to variables, types, and control flow.",
-    "inputs_schema_text": "Describe what inputs the function expects.",
-    "outputs_schema_text": "Describe what the function returns.",
+    "version": "0.2.0",
+    "description": "Helps students map **x86-64 assembly (Intel or AT&T)** to **equivalent C structure**\u2014calling convention, types, memory access, and control flow\u2014without handing them a finished C program. The tutor works in **small chunks**: one instruction, one logical line, or a short block (e.g. prologue, one branch arm, loop header + body) that hangs together, then checks understanding before moving on.",
+    "trigger_summary": "- Student explicitly asks to **translate**, **convert**, or **rewrite** assembly into C (or \u201cwhat would this look like in C?\u201d).\n- Student pastes a routine and wants a **C-level reading** focused on translation, not a full decompilation in one shot.\n\nDo **not** prefer this skill when the student only wants a **register-by-register execution trace** with no C mapping\u2014that fits **execution-trace** better.",
+    "inputs_schema_text": "| Key | Meaning |\n|-----|--------|\n| `asm` | String: the assembly snippet (required). |\n| Optional: student\u2019s **current chunk** (line range or pasted subset) if they want to focus translation on part of the routine. |",
+    "outputs_schema_text": "`run` returns JSON: `ok`, `syntax` (`intel` \\| `att`), a **`checklist`** of steps with teaching hints (no C source), plus light **`detected`** metadata (labels, jumps, scales). The tutor **paraphrases** this into questions and partial scaffolds, not a full C listing.",
     "usage_example": "```python\nfrom logic import run\nprint(run({\"asm\": \"mov rax, rdi\\nret\\n\"}))\n```",
     "code_notes": null,
+    "extra_sections": {
+      "pedagogy_must_follow": "1. **No direct full solution.** Do not paste a complete translated C function as the first (or only) answer. It is fine to show **fragments** with placeholders (e.g. `if (/* what compares to what? */) { ... }`) after the student has reasoned partway.\n2. **Hint from what the assembly does.** Tie each hint to concrete instructions: which registers are args/return, what a `cmp`/`test` + `jcc` is guarding, what a scaled index suggests for element type, etc.\n3. **Line-by-line or by logical block.** Default to the **smallest meaningful unit**; escalate to a block when several instructions are one C idea (e.g. `lea` + `mov` setting up an address). Ask: \u201cWhich single instruction should we do next?\u201d or \u201cShould we treat these four lines as one `if`?\u201d\n4. **Socratic checks.** After hints, ask a short question (\u201cWhat C type fits a scale of 4 here?\u201d) or have them write one line before you confirm or nudge.\n5. **Optional tool use.** When useful, call `logic.py`\u2019s `run` for structured checklist hints (calling convention, scales, branches)\u2014still **you** turn that into questions, not a dump of answers."
+    },
     "source_repo": "CS-213-skills",
     "source_path": "skills/asm-translation/skills.md",
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/CS-213-skills/tree/main/skills/asm-translation/skills.md",
@@ -9930,19 +10067,24 @@
       "debug-systematically"
     ],
     "trigger_signals": [
+      "c-code-bug-question",
+      "whats-wrong-with-my-c",
       "compile-error",
       "segfault",
       "runtime-error"
     ],
     "chip_icon": "\ud83d\udc1b",
     "python_entry": "logic.py",
-    "version": "0.1.0",
-    "description": "Helps students debug C issues (compile errors, runtime errors, segfaults) by turning symptoms and output into a short, systematic triage plan. It provides likely root causes plus targeted questions and next steps rather than claiming a single definitive \u201cbug line.\u201d",
-    "trigger_summary": "- Student shares C code and compiler/runtime output and asks \u201cwhat\u2019s wrong?\u201d\n- Student reports a segfault or mysterious runtime behavior and needs a debugging plan.",
-    "inputs_schema_text": "Describe what inputs the function expects.",
-    "outputs_schema_text": "Describe what the function returns.",
+    "version": "0.2.0",
+    "description": "Supports **systematic C debugging** when the student has shared **C source** and is asking about **bugs, crashes, or wrong behavior**. The tutor turns symptoms and code into **investigation hints**: categories to consider, questions to ask themselves, and **process** next steps (warnings, sanitizers, narrowing the failure)\u2014not a ready-made patch.",
+    "trigger_summary": "- Student pastes **C code** and asks what is wrong, why it crashes, why the output is incorrect, or similar **bug-focused** questions.\n- Student shares **compiler or runtime output** (or a short symptom description) together with code and wants help **debugging**.\n\nPrefer a lighter skill if they only want generic study tips without code or errors.",
+    "inputs_schema_text": "| Key | Meaning |\n|-----|--------|\n| `c_code` | C source (recommended when debugging). |\n| `compiler_output` | Full compiler stderr (warnings help). |\n| `runtime_output` | Crash message, sanitizer snippet, or wrong output. |\n| `symptoms` | Short free-text if logs are incomplete. |\n| `constraints.tools_allowed` | Optional list, e.g. `[\"gdb\",\"asan\",\"valgrind\",\"ubsan\"]`, to tailor **process** suggestions. |",
+    "outputs_schema_text": "`run` returns JSON: `likely_root_causes` (each item is an **investigation angle** with `what_to_check` prompts, not a verdict), `questions_to_ask`, `next_steps`, optional `warnings` / `errors`, a human-readable `message`, and **`pedagogy`** metadata (`hints_only`). The agent must still **rephrase** toward questions, not line-level fixes.",
     "usage_example": "```python\nfrom logic import run\nprint(run({\"c_code\": \"int *p=NULL; *p=1;\", \"symptoms\": \"segfault\"}))\n```",
     "code_notes": null,
+    "extra_sections": {
+      "pedagogy_must_follow": "1. **No direct fix.** Do not spell out the exact code change (e.g. \u201cchange `i <= n` to `i < n`\u201d or \u201cadd `free` here\u201d) unless the student has already identified the issue and you are confirming or they explicitly ask for a minimal correction after working through it.\n2. **No \u201cthe bug is on line X.\u201d** Do not single out a line or variable as **the** answer. You may teach **how** to use tools that *they* use to locate a line (gdb, sanitizer output, bisecting), or ask which line *they* suspect and why.\n3. **Hints and questions.** Prefer: \u201cWhat must be true right before this dereference?\u201d \u201cWhat does the compiler warning point at\u2014prototype, type, or lifetime?\u201d \u201cIf you print or gdb-inspect these two values at this point, what would falsify your guess?\u201d\n4. **One layer at a time.** Offer a small next step; after they respond, narrow or deepen. Optional: call `logic.run` and **turn its structured items into Socratic prompts**, not a dump of \u201croot cause\u201d as fact.\n5. **Sanitizers and gdb** as *skills to practice*, not as commands that magically reveal the answer without their interpretation."
+    },
     "source_repo": "CS-213-skills",
     "source_path": "skills/c-debugging/skills.md",
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/CS-213-skills/tree/main/skills/c-debugging/skills.md",
@@ -9994,157 +10136,15 @@
     "status_reason": null
   },
   {
-    "skill_id": "example-skill",
-    "name": "Example: Restate the Problem",
-    "skill_type": "instructional",
-    "stance": "socratic",
-    "tags": [
-      "example",
-      "comprehension"
-    ],
-    "course_types": [
-      "cs",
-      "humanities"
-    ],
-    "learning_goal_tags": [
-      "restate-the-problem"
-    ],
-    "trigger_signals": [
-      "new-assignment-opened",
-      "student-jumping-to-solution"
-    ],
-    "chip_icon": "\ud83d\udd01",
-    "version": "0.1.0",
-    "description": "Asks the student to paraphrase the prompt or problem in their own words before they start working on it. Surfaces misunderstandings of the assignment early.",
-    "trigger_summary": "- Student has just opened an assignment and starts answering immediately\n- Student's first response suggests they may have misread part of the prompt\n- Student asks \"what is this asking?\"",
-    "tutor_stance_rules": [
-      "Never restate the prompt for the student",
-      "If the student paraphrases something close, point at the specific phrase and ask what's different from the original",
-      "Stay on the paraphrase step until the student demonstrates accurate understanding"
-    ],
-    "flow": [
-      {
-        "step": 1,
-        "title": "Ask for paraphrase",
-        "description": "Ask the student to put the prompt or problem in their own words. Be explicit that you're not looking for a solution yet."
-      },
-      {
-        "step": 2,
-        "title": "Probe the paraphrase",
-        "description": "If anything in the paraphrase is off, point at the specific phrase and ask what the prompt actually says about it. Don't correct directly."
-      },
-      {
-        "step": 3,
-        "title": "Confirm and move on",
-        "description": "When the paraphrase is accurate, briefly affirm and ask the student what step they'd take first."
-      }
-    ],
-    "safe_outputs": [
-      "Open questions",
-      "Pointers to specific phrases in the prompt",
-      "Brief affirmations once the paraphrase is accurate"
-    ],
-    "must_avoid": [
-      "Restating the prompt yourself",
-      "Giving an example paraphrase",
-      "Moving to the solution before the paraphrase is accurate"
-    ],
-    "example_exchange": "> **Student:** \"I'll just start coding the sort function.\"\n>\n> **Tutor:** \"Hold on \u2014 before you start, can you tell me in your own words what the prompt is asking you to produce? What are the inputs and what's the expected output?\"",
-    "source_repo": "CS-213-skills",
-    "source_path": "skills/example-skill/skills.md",
-    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/CS-213-skills/tree/main/skills/example-skill/skills.md",
-    "owner_team": "CS-213",
-    "owner_contact": "nikos@northwestern.edu",
-    "status": "broken",
-    "status_reason": "skill_id 'example-skill' is already claimed by repo 'cs-348-skills'. Repo 'CS-213-skills' is rejected. Rename this skill or coordinate with the 'cs-348-skills' team."
-  },
-  {
-    "skill_id": "examples-from-spec",
-    "name": "Build Examples from Spec",
-    "skill_type": "instructional",
-    "stance": "socratic",
-    "tags": [
-      "specification",
-      "examples",
-      "cs213"
-    ],
-    "course_types": [
-      "cs"
-    ],
-    "learning_goal_tags": [
-      "specify-io",
-      "handle-edge-cases"
-    ],
-    "trigger_signals": [
-      "student-has-spec-but-no-examples",
-      "function-signature-given"
-    ],
-    "chip_icon": "\ud83e\uddea",
-    "version": "0.1.0",
-    "description": "When a student has a function signature or problem statement but no concrete examples to reason from, this skill guides them to construct their own. In CS 213, specifications often describe behavior in terms of bit patterns, register states, or memory addresses \u2014 making concrete examples essential for building intuition before writing or tracing code.",
-    "trigger_summary": "- Student has a function signature or specification but is stuck before writing any code\n- Student is asking what a function \"should do\" without trying a case\n- Student is about to implement without being able to say what the output should be for a simple input\n- Student misunderstands the spec (often surfaced when they construct an example that doesn't match it)",
-    "tutor_stance_rules": [
-      "Never give the student an example directly \u2014 ask them to construct one",
-      "If the student picks a trivially easy case, push for a boundary or edge case next",
-      "If the student's example violates the spec, point to the specific part of the spec that's in tension \u2014 don't correct the example directly",
-      "Treat each example as a probe into the student's understanding, not just a mechanical step",
-      "Stay on example construction until the student can predict the output for at least two distinct inputs"
-    ],
-    "flow": [
-      {
-        "step": 1,
-        "title": "Establish the Signature",
-        "description": "Confirm with the student what the function takes and what it returns. If the spec uses types like `unsigned`, `int`, or a bit width (e.g., 32-bit two's complement), make sure those are concrete.\n\n> \"Before you write anything \u2014 what are the inputs to this function and what type does each one have? What does it return?\""
-      },
-      {
-        "step": 2,
-        "title": "Choose a Simple Case",
-        "description": "Ask the student to pick the simplest possible input \u2014 not zero necessarily, but whatever feels most obvious. Have them predict the output by reasoning through the spec, not by intuition.\n\n> \"Pick one input. Walk me through what the spec says should come out of it, step by step.\""
-      },
-      {
-        "step": 3,
-        "title": "Verify Against the Spec",
-        "description": "Ask the student to check whether their predicted output matches the specification. If it doesn't, ask which part of the spec their example conflicts with.\n\n> \"Does your output match what the spec says for that input? Point to the part of the spec that covers this case.\""
-      },
-      {
-        "step": 4,
-        "title": "Push to an Edge Case",
-        "description": "Once the simple case works, push to a boundary. For CS 213 topics, good edges include: 0, -1, `INT_MIN`, `INT_MAX`, all-zeros bit pattern, all-ones bit pattern, or a value where overflow would occur.\n\n> \"Now try an edge case \u2014 something at the boundary. What happens when you pass in [edge]? Walk through the spec again.\""
-      },
-      {
-        "step": 5,
-        "title": "Confirm and Move",
-        "description": "When the student can predict outputs for at least two cases (one normal, one edge), they have enough grounding to start implementing or tracing. Confirm this and hand off.\n\n> \"You've got two examples that check out against the spec. That's your test baseline \u2014 now what's the first thing your implementation needs to handle?\""
-      }
-    ],
-    "safe_outputs": [
-      "Questions prompting the student to name an input and predict its output",
-      "Pointers to specific parts of the spec when an example goes wrong",
-      "Requests for a second example once the first is correct"
-    ],
-    "must_avoid": [
-      "Supplying an example for the student, even a \"starter\" one",
-      "Letting the student move to implementation with only one untested case",
-      "Accepting \"I think it returns X\" without asking them to justify from the spec",
-      "Introducing multiple edge cases at once \u2014 one at a time only"
-    ],
-    "example_exchange": "> **Student:** \"I need to write a function that returns the sign bit of a 32-bit integer. I'm not sure where to start.\"\n\n> **Tutor:** \"Before you code anything \u2014 what does 'sign bit' mean precisely for a 32-bit int? Which bit is it, and what values can it have?\"\n\n> **Student:** \"It's bit 31, and it's 0 for positive and 1 for negative.\"\n\n> **Tutor:** \"Good. Pick a concrete value \u2014 any 32-bit integer \u2014 and tell me what your function should return for it. Reason it out from the bit representation, not just the sign.\"\n\n> **Student:** \"Okay, if I pick -1... in two's complement that's all 1s, so bit 31 is 1. The function should return 1.\"\n\n> **Tutor:** \"Right. Now try a value where it might be less obvious \u2014 what about 0? Is the sign bit 0 or 1, and what should your function return?\"",
-    "source_repo": "CS-213-skills",
-    "source_path": "skills/examples-from-spec/skills.md",
-    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/CS-213-skills/tree/main/skills/examples-from-spec/skills.md",
-    "owner_team": "CS-213",
-    "owner_contact": "nikos@northwestern.edu",
-    "status": "ready",
-    "status_reason": null
-  },
-  {
     "skill_id": "execution-trace",
     "name": "Execution Trace",
     "skill_type": "code",
     "tags": [
       "assembly",
       "trace",
-      "cs213"
+      "cs213",
+      "x86-64",
+      "registers"
     ],
     "course_types": [
       "cs"
@@ -10155,17 +10155,23 @@
     ],
     "trigger_signals": [
       "hand-trace-needed",
-      "register-state-question"
+      "register-state-question",
+      "step-through-assembly",
+      "what-are-registers-after",
+      "assembly-trace-line-by-line"
     ],
     "chip_icon": "\ud83d\udccb",
     "python_entry": "logic.py",
-    "version": "0.1.0",
-    "description": "Produces a step-by-step execution trace for small x86-64 snippets, showing register/memory state before and after each instruction. It\u2019s designed for hand-tracing practice (not full emulation), focusing on a limited set of common Intel-syntax instructions.",
-    "trigger_summary": "- Student needs help hand-tracing a short assembly snippet.\n- Student asks how a few instructions change registers/memory over time.",
-    "inputs_schema_text": "Describe what inputs the function expects.",
-    "outputs_schema_text": "Describe what the function returns.",
-    "usage_example": "```python\nfrom logic import run\nprint(run({\"asm\": \"mov rax, 5\\nadd rax, 3\\n\", \"initial_state\": {\"regs\": {\"rsp\": 0x1000}}}))\n```",
+    "version": "0.2.0",
+    "description": "Supports **hand-tracing small x86-64 snippets** (Intel-style `mov` / `add` / `sub` / `push` / `pop` and `qword ptr [...]` per `logic.py`). The focus is **register and memory state over time**, plus **choosing sensible initial inputs** (argument registers, `rsp`, stack/memory slots) so the snippet behaves as intended. The tutor goes **one instruction at a time**, checks the student\u2019s predicted state, then moves on.\n\nThis skill is for **execution / state**, not mapping assembly to C\u2014that is **asm-translation**.",
+    "trigger_summary": "- Student wants to **step through** assembly and understand **what lives in which register** after each line.\n- Student asks how **inputs** (e.g. `rdi`, `rsi`, `rdx`, stack, memory) should be set so the code does the right thing.\n- Student asks for a **hand trace** or **register values** over a short listing.",
+    "inputs_schema_text": "| Key | Meaning |\n|-----|--------|\n| `asm` | Assembly snippet (required), Intel-style subset as implemented in `logic.py`. |\n| `initial_state` | Optional `{\"regs\": {...}, \"mem\": {...}}` \u2014 64-bit values; `rsp` defaults if absent. |\n| `student_mode` | Optional `bool` (default `false`). When `true`, response omits per-step `after` / `delta` / full solution table so the agent does not leak the worked trace; includes light per-step hints instead. |",
+    "outputs_schema_text": "- **`student_mode: false`**: `steps` with `before` / `after` / `delta` / `delta_summary`, `walkthrough_table_md`, `final_state` when `ok` \u2014 suitable for **answer keys** or internal checks, **not** to paste wholesale at students.\n- **`student_mode: true`**: `steps` as **hint scaffolds** only; top-level `pedagogy` marks `hints_only`. Errors list unsupported instructions as today.",
+    "usage_example": "```python\nfrom logic import run\n\n# Student-facing scaffolding (no revealed after-states)\nprint(run({\"asm\": \"mov rax, 5\\nadd rax, 3\\n\", \"student_mode\": True}))\n\n# Full internal trace (do not dump verbatim to the student as \u201cthe solution\u201d)\nprint(run({\"asm\": \"mov rax, 5\\nadd rax, 3\\n\", \"initial_state\": {\"regs\": {\"rsp\": 0x1000}}}))\n```",
     "code_notes": null,
+    "extra_sections": {
+      "pedagogy_must_follow": "1. **No direct \u201canswer trace.\u201d** Do not dump the full sequence of final register values or paste the complete `after` / `delta` column for every line as your first move. Do not present the whole solution path as established fact before the student has worked each step.\n2. **Line by line.** Pick **one instruction**; ask what it **reads**, what it **writes**, and what the student predicts **before vs after** for the touched locations. Confirm or nudge only after they commit a prediction (or a partial prediction).\n3. **Inputs first when relevant.** If the snippet uses `rdi`/`rsi`/\u2026 or stack slots, ask what **concrete values** they want to assume (and why), and whether **`rsp`** / memory they model is consistent with `push`/`pop` and `qword` accesses. Help them **invent a test state** without choosing \u201cmagic\u201d values for them unless they are stuck\u2014then offer a **small example** as a hypothesis (\u201ctry arg0 = 0 and arg1 = 1\u2014what breaks?\u201d), not the only correct setup.\n4. **Hints toward the answer.** Use questions: \u201cWhich operand is destination?\u201d \u201cAfter `add rax, rbx`, which single register did you update?\u201d \u201cFor this `push`, what two places change?\u201d Optionally call `logic.run` with **`student_mode: true`** so the JSON gives **scaffolding** (mnemonic, read/write names, hint strings) **without** revealing simulated `after` states.\n5. **Optional verification.** Only after they trace a line (or a block), you may use full simulation **off-thread** or confirm their numbers\u2014still frame it as \u201cdoes that match what you get if you re-evaluate the source operand?\u201d rather than \u201cthe correct value is 0x\u2026\u201d unless they explicitly ask for a check after trying."
+    },
     "source_repo": "CS-213-skills",
     "source_path": "skills/execution-trace/skills.md",
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/CS-213-skills/tree/main/skills/execution-trace/skills.md",
@@ -10410,7 +10416,10 @@
     "skill_type": "code",
     "tags": [
       "stack",
-      "cs213"
+      "rsp",
+      "assembly",
+      "cs213",
+      "x86-64"
     ],
     "course_types": [
       "cs"
@@ -10421,17 +10430,23 @@
     ],
     "trigger_signals": [
       "stack-layout-question",
-      "rsp-rbp-confusion"
+      "rsp-rbp-confusion",
+      "assembly-with-rsp-given",
+      "where-does-push-write",
+      "how-does-rsp-change"
     ],
     "chip_icon": "\ud83d\udcda",
     "python_entry": "logic.py",
-    "version": "0.1.0",
-    "description": "Visualizes a slice of the stack around `rsp` (and optionally `rbp`) to help students understand stack frames and calling convention conventions. It formats addresses and qword values into a readable view and can add helpful labels (e.g., saved `rbp`, return address, locals) when enough context is provided.",
-    "trigger_summary": "- Student is confused about `rsp`/`rbp` and stack frame layout.\n- Student wants to interpret a stack memory dump around `rsp`.",
-    "inputs_schema_text": "Describe what inputs the function expects.",
-    "outputs_schema_text": "Describe what the function returns.",
-    "usage_example": "```python\nfrom logic import run\nprint(run({\"regs\": {\"rsp\": 0x1000, \"rbp\": 0x1010}, \"mem\": {0x1010: 1, 0x1018: 2}}))\n```",
+    "version": "0.2.0",
+    "description": "Helps students reason about the **stack**: where **`rsp`** points, how it **moves** instruction-by-instruction, and what **qwords** in memory sit above it\u2014especially for **Intel-syntax** snippets using `push` / `pop` / `mov` / `add` / `sub` (including **`add rsp, imm`** / **`sub rsp, imm`** frame adjustment). Two shapes:\n\n1. **Snapshot** \u2014 no `asm`: given **`rsp`** (and optional **`rbp`**, **`mem`**, **`label_hints`**), builds an address/value table for a window of stack slots.\n2. **Assembly timeline** \u2014 with **`asm`**: requires an explicit initial **`rsp`** (same register dict); simulates each line and returns per-step **`rsp_before` \u2192 `rsp_after`**, optional **`mem_write`** for `push`, a short note for `pop`, and a **stack window** (`slots` + `table_md`) after each instruction.\n\nThe tutor should **walk one instruction at a time**, ask the student to **predict** `rsp` and the relevant memory words, then confirm or nudge\u2014**not** lead with the full numeric timeline as a finished answer.",
+    "trigger_summary": "- Student pastes **assembly** and gives an initial **stack pointer** (`rsp`, optionally `rbp` / memory model) and wants to see **how the stack is used** or how **`rsp` changes**.\n- Student is confused about **`rsp` / `rbp`**, saved RBP, return address, locals, or **where `push` stores**.\n- Student wants help **drawing or checking** stack memory contents (addresses + values) **after** they have tried a layout.\n\nDo **not** prefer this skill when the student only wants a **non-stack execution trace** with no stack-pointer story\u2014**execution-trace** may fit better.",
+    "inputs_schema_text": "| Key | Meaning |\n|-----|--------|\n| `asm` | Optional. If non-empty, runs **timeline** mode (Intel-style subset in `logic.py`). |\n| `regs` / `mem` | Top-level register map and memory map **or** nested under `initial_state`. |\n| `regs.rsp` | **Required** for timeline mode and for snapshot mode. |\n| `regs.rbp` | Optional; enables **offset-from-rbp** labeling when `rbp` lies above `rsp` in the modeled window. |\n| `mem` | Optional address \u2192 qword values for stack (and other) cells. |\n| `label_hints` | Optional `addr \u2192 label` overrides for the table. |\n| `word_size`, `max_slots`, `max_steps` | Optional tuning (defaults 8, 16\u201332, 200). |\n| `student_mode` | Optional `bool`. When `true`, omits numeric solution traces (see Outputs). |",
+    "outputs_schema_text": "- **Snapshot, `student_mode: false`:** `frame`, `slots`, `table_md`, `warnings`, **`pedagogy`**.\n- **Snapshot, `student_mode: true`:** `slots` with addresses/labels but **`value` null** and a **`visualization_template_md`** ladder; **`initialization_hints`**.\n- **Timeline, `student_mode: false`:** `timeline` (each step: `change` with `rsp_before` / `rsp_after` / `mem_write` / `mem_note`, `slots`, `table_md`), **`final_*`**, **`pedagogy`**.\n- **Timeline, `student_mode: true`:** **`timeline_hints`** only (plus `visualization_template_md`, **`initialization_hints`**), **`pedagogy`** (`hints_only`); no per-step numeric `rsp` or memory answers in JSON.",
+    "usage_example": "```python\nfrom logic import run\n\n# Snapshot around rsp\nprint(run({\"regs\": {\"rsp\": 0x1000, \"rbp\": 0x1010}, \"mem\": {0x1010: 1, 0x1018: 2}}))\n\n# Assembly + rsp: full internal trace (use sparingly with students)\nprint(run({\"asm\": \"push rbx\\npop rax\\n\", \"initial_state\": {\"regs\": {\"rsp\": 0x1000, \"rbx\": 42}, \"mem\": {}}}))\n\n# Hint scaffold for tutoring (preferred with students)\nprint(run({\"asm\": \"push rbx\\n\", \"initial_state\": {\"regs\": {\"rsp\": 0x1000, \"rbx\": 1}}, \"student_mode\": True}))\n```",
     "code_notes": null,
+    "extra_sections": {
+      "pedagogy_must_follow": "1. **No direct \u201chere is the whole stack answer.\u201d** Do not dump the entire `timeline` or every `table_md` as the first reply. Prefer **`student_mode: true`** in `run` so the tool returns **`timeline_hints`** (roles + questions) and a **blank ladder** template without numeric solutions.\n2. **Anchor on their `rsp`.** If they have not fixed an initial `rsp` (and any modeled `mem` they care about), ask them to choose **concrete test values** and justify alignment (e.g. 8-byte slots for pushes).\n3. **Line by line.** For each instruction, ask: Does **`rsp` change**? By how many bytes and in which direction? Is a **qword written or read** at the stack top? How does that relate to **offsets from `rbp`** when `rbp` is meaningful?\n4. **Visualization.** Help them sketch ascending addresses vs stack growth; use **`table_md`** / slot lists **after** they predict, or use snapshot mode with **`student_mode: true`** to show **addresses and labels** with values elided (`value: null`) plus a markdown template they fill in.\n5. **Verification.** After they commit to a trace, they (or you) may rerun with **`student_mode: false`** to compare numbers\u2014frame it as checking their work, not replacing it."
+    },
     "source_repo": "CS-213-skills",
     "source_path": "skills/stack-visualizer/skills.md",
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/CS-213-skills/tree/main/skills/stack-visualizer/skills.md",

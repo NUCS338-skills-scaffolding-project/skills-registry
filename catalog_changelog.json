@@ -1,10 +1,98 @@
 {
-  "generated_at": "2026-05-13T01:57:09.544596+00:00",
+  "generated_at": "2026-05-14T01:59:23.779794+00:00",
   "previous_hash": "72c7812872773084",
-  "current_hash": "72c7812872773084",
-  "added": [],
-  "removed": [],
-  "changed": [],
-  "unchanged_count": 189,
-  "summary": "no changes"
+  "current_hash": "7e92d5a5cb4fe761",
+  "added": [
+    "bigger-picture"
+  ],
+  "removed": [
+    "examples-from-spec"
+  ],
+  "changed": [
+    {
+      "skill_id": "asm-translation",
+      "changes": {
+        "version": {
+          "from": "0.1.0",
+          "to": "0.2.0"
+        },
+        "name": {
+          "from": "Assembly Translation",
+          "to": "Assembly \u2192 C Translation"
+        }
+      }
+    },
+    {
+      "skill_id": "c-debugger",
+      "changes": {
+        "version": {
+          "from": "0.1.0",
+          "to": "0.2.0"
+        }
+      }
+    },
+    {
+      "skill_id": "example-skill",
+      "changes": {
+        "name": {
+          "from": "Example: Restate the Problem",
+          "to": "Example Identify Outputs"
+        },
+        "owner_team": {
+          "from": "CS-213",
+          "to": "CS-214"
+        },
+        "owner_contact": {
+          "from": "nikos@northwestern.edu",
+          "to": ""
+        },
+        "source_repo": {
+          "from": "CS-213-skills",
+          "to": "cs-214-skills"
+        }
+      }
+    },
+    {
+      "skill_id": "execution-trace",
+      "changes": {
+        "version": {
+          "from": "0.1.0",
+          "to": "0.2.0"
+        }
+      }
+    },
+    {
+      "skill_id": "select-passage",
+      "changes": {
+        "version": {
+          "from": null,
+          "to": "0.2.0"
+        },
+        "name": {
+          "from": "Passage Identification",
+          "to": "Passage Selection"
+        }
+      }
+    },
+    {
+      "skill_id": "stack-visualizer",
+      "changes": {
+        "version": {
+          "from": "0.1.0",
+          "to": "0.2.0"
+        }
+      }
+    },
+    {
+      "skill_id": "uncover-assumption",
+      "changes": {
+        "version": {
+          "from": null,
+          "to": "0.1.0"
+        }
+      }
+    }
+  ],
+  "unchanged_count": 181,
+  "summary": "1 added, 1 removed, 7 changed"
 }

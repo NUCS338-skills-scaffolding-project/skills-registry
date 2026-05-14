@@ -1,6 +1,6 @@
 # Catalog build report
 
-**Total skills:** 193  ·  ready: 180, stub: 9, broken: 4
+**Total skills:** 192  ·  ready: 180, stub: 9, broken: 3
 
 ## ⚠ Duplicate skill_id rejections
 
@@ -11,17 +11,16 @@ The following skills were **rejected** because their `skill_id` was already clai
 | `asian_am-225-skills` | `example-skill` | `cs-348-skills` |
 | `poli_sci-210-skills` | `skill-name` | `jour-201-1-skills` |
 | `cs-214-skills` | `example-skill` | `cs-348-skills` |
-| `CS-213-skills` | `example-skill` | `cs-348-skills` |
 
 ## By repo
 
 | Repo | Total | Ready | Stub | Broken |
 |------|------:|------:|-----:|-------:|
-| `CS-213-skills` | 10 | 9 | 0 | 1 |
+| `CS-213-skills` | 8 | 8 | 0 | 0 |
 | `asian_am-225-skills` | 11 | 10 | 0 | 1 |
 | `cs-214-skills` | 11 | 10 | 0 | 1 |
 | `cs-343-skills` | 7 | 7 | 0 | 0 |
-| `cs-348-skills` | 12 | 12 | 0 | 0 |
+| `cs-348-skills` | 13 | 13 | 0 | 0 |
 | `cs338-skills` | 59 | 59 | 0 | 0 |
 | `history-315-skills` | 9 | 9 | 0 | 0 |
 | `jour-201-1-skills` | 6 | 0 | 6 | 0 |
@@ -33,9 +32,6 @@ The following skills were **rejected** because their `skill_id` was already clai
 
 ### `CS-213-skills/skills/cache_optimized_code/skills.md`
 - **warn** [`skill_id`] length 20 > 18 chars — see Team-Guide §7
-
-### `CS-213-skills/skills/example-skill/skills.md`
-- **ERROR** [`skill_id`] skill_id 'example-skill' is already claimed by repo 'cs-348-skills'. Repo 'CS-213-skills' is rejected. Rename this skill or coordinate with the 'cs-348-skills' team.
 
 ### `CS-213-skills/skills/reframe_with_analogy/skills.md`
 - **warn** [`skill_id`] length 20 > 18 chars — see Team-Guide §7
@@ -259,6 +255,9 @@ The following skills were **rejected** because their `skill_id` was already clai
 - **warn** [`learning_goal_tags`] missing — strongly recommended for orchestrator routing
 - **ERROR** [`stance`] must be one of ['hint', 'meta', 'reframe', 'socratic']
 - **warn** [`skill_id`] length 23 > 18 chars — see Team-Guide §7
+
+### `phil-219-skills/skills/prompt-reflection/skills.md`
+- **warn** [`example_exchange`] missing — strongly recommended
 
 ### `poli_sci-210-skills/skills/ai-explain/skills.md`
 - **ERROR** [`tutor_stance`] missing — add a `## Tutor Stance` section with rules
