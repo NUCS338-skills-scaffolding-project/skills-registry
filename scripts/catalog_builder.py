@@ -142,6 +142,50 @@ def _local_repo_handle(repo_root: Path) -> RepoHandle:
     return RepoHandle(name=repo_root.name, read=read, exists=exists, list_files=list_files)
 
 
+# ---------- Package mode ----------
+
+def discover_from_package(skills_root: Path) -> list:
+    """
+    Read skills directly from the mentora_skills/skills/ package directory.
+
+    Each subdirectory is a single skill (underscore-named). We wrap each one
+    in a RepoHandle that pretends the skill lives at skills/skills.md inside
+    a repo — so the existing build_catalog pipeline works without modification.
+    """
+    repos = []
+    for skill_dir in sorted(d for d in skills_root.iterdir() if d.is_dir()):
+        if not (skill_dir / "skills.md").exists():
+            continue
+        repos.append(_package_skill_handle(skill_dir))
+    return repos
+
+def _package_skill_handle(skill_dir: Path) -> RepoHandle:
+    """
+    Wrap a single skill directory as a RepoHandle.
+
+    Maps the virtual path "skills/skills.md" → skill_dir/skills.md
+    and  "skills/logic.py"   → skill_dir/logic.py
+    so the existing pipeline (which expects skills/*/skills.md) works as-is.
+    """
+    def read(rel: str) -> str | None:
+        # rel will be e.g. "skills/skills.md" — map to skill_dir/skills.md
+        filename = rel.split("/")[-1]
+        p = skill_dir / filename
+        return p.read_text(encoding="utf-8") if p.is_file() else None
+
+    def exists(rel: str) -> bool:
+        filename = rel.split("/")[-1]
+        return (skill_dir / filename).exists()
+
+    def list_files(prefix: str) -> list:
+        # Return the single skills.md as if it's at skills/skills.md
+        if (skill_dir / "skills.md").exists():
+            return [f"{prefix.rstrip('/')}/skills.md"]
+        return []
+
+    return RepoHandle(name=skill_dir.name, read=read, exists=exists, list_files=list_files)
+
+
 # ---------- GitHub mode ----------
 
 def discover_github_repos(org: str, token: str) -> list:
@@ -632,6 +676,32 @@ def clean_catalog(catalog: list) -> list:
     return [{k: v for k, v in s.items() if k not in INTERNAL_FIELDS} for s in catalog]
 
 
+# Fields kept in the slim catalog (everything else is in skills.md at runtime).
+_SLIM_FIELDS = {
+    "skill_id", "name", "version", "status",
+    "skill_type", "stance",
+    "tags", "course_types", "learning_goal_tags", "trigger_signals",
+    "chip_icon", "has_logic", "owner_team",
+}
+
+def slim_catalog(catalog: list) -> list:
+    """
+    Strip body content from catalog entries — keep only selection-time fields.
+
+    Used when building from the mentora_skills package (--package mode).
+    The orchestrator loads the full skills.md at runtime after skill selection,
+    so duplicating flow/stance-rules/example-exchanges in catalog.json is waste.
+    """
+    result = []
+    for entry in catalog:
+        slim = {k: v for k, v in entry.items() if k in _SLIM_FIELDS}
+        # has_logic: True when a logic.py exists in the skill directory
+        # (already set during build_catalog via the code-skill logic.py check)
+        slim.setdefault("has_logic", entry.get("skill_type") == "code" and entry.get("status") != "broken")
+        result.append(slim)
+    return result
+
+
 # ---------------------------------------------------------------------------
 # CLI
 # ---------------------------------------------------------------------------
@@ -639,6 +709,15 @@ def clean_catalog(catalog: list) -> list:
 def main() -> int:
     ap = argparse.ArgumentParser(description="Build the Mentora skills catalog.")
     ap.add_argument("--local", help="Path to a local directory whose subdirs are team repos")
+    ap.add_argument(
+        "--package",
+        help=(
+            "Path to mentora_skills/skills/ package directory. "
+            "Reads skills directly from the master package and writes a slim catalog "
+            "(selection fields only — body content stays in skills.md). "
+            "Default: ../mentora-skills/mentora_skills/skills relative to this script."
+        ),
+    )
     ap.add_argument("--output", default="catalog.json", help="Catalog output path")
     ap.add_argument("--report", default="build_report.md", help="Build report output path")
     ap.add_argument(
@@ -659,7 +738,24 @@ def main() -> int:
     )
     args = ap.parse_args()
 
-    if args.local:
+    use_slim = False
+
+    if args.package is not None:
+        # Explicit path, or default to sibling mentora-skills
+        pkg_path = args.package if args.package else None
+        if pkg_path is None:
+            pkg_path = str(
+                Path(__file__).parent.parent.parent / "mentora-skills" / "mentora_skills" / "skills"
+            )
+        skills_root = Path(pkg_path).resolve()
+        if not skills_root.is_dir():
+            print(f"ERROR: {skills_root} is not a directory", file=sys.stderr)
+            print("Make sure mentora-skills is a sibling of skills-registry, or pass an explicit path.", file=sys.stderr)
+            return 2
+        print(f"Package mode — reading from: {skills_root}")
+        repos = discover_from_package(skills_root)
+        use_slim = True
+    elif args.local:
         root = Path(args.local).resolve()
         if not root.is_dir():
             print(f"ERROR: {root} is not a directory", file=sys.stderr)
@@ -670,12 +766,12 @@ def main() -> int:
         org = os.environ.get("GITHUB_ORG")
         token = os.environ.get("GITHUB_TOKEN")
         if not (org and token):
-            print("ERROR: set GITHUB_ORG and GITHUB_TOKEN, or use --local", file=sys.stderr)
+            print("ERROR: set GITHUB_ORG and GITHUB_TOKEN, or use --local or --package", file=sys.stderr)
             return 2
         print(f"Scanning GitHub org: {org}")
         repos = discover_github_repos(org, token)
 
-    print(f"Found {len(repos)} team repo(s)")
+    print(f"Found {len(repos)} skill(s)" if use_slim else f"Found {len(repos)} team repo(s)")
 
     # ── Load previous catalog for changelog computation ────────────────────
     old_catalog: list = []
@@ -692,10 +788,12 @@ def main() -> int:
     print(f"Built catalog with {len(result.catalog)} skills")
 
     cleaned = clean_catalog(result.catalog)
+    # In package mode, strip body content — orchestrator loads skills.md at runtime
+    catalog_to_write = slim_catalog(cleaned) if use_slim else cleaned
 
     # ── Write outputs ──────────────────────────────────────────────────────
-    output_path.write_text(json.dumps(cleaned, indent=2), encoding="utf-8")
-    print(f"Wrote {args.output}")
+    output_path.write_text(json.dumps(catalog_to_write, indent=2), encoding="utf-8")
+    print(f"Wrote {args.output}" + (" (slim — body content excluded)" if use_slim else ""))
 
     Path(args.report).write_text(render_report(result), encoding="utf-8")
     print(f"Wrote {args.report}")
