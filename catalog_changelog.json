@@ -1,10 +1,8 @@
 {
-  "generated_at": "2026-05-18T00:44:38.960971+00:00",
-  "previous_hash": "19e98739a14b03fa",
+  "generated_at": "2026-05-18T02:03:48.131657+00:00",
+  "previous_hash": "b1de5eb9e9c83547",
   "current_hash": "bbd102e4c2ecce19",
-  "added": [
-    "example-skill"
-  ],
+  "added": [],
   "removed": [],
   "changed": [
     {
@@ -571,6 +569,15 @@
         "source_repo": {
           "from": null,
           "to": "example_code"
+        }
+      }
+    },
+    {
+      "skill_id": "example-skill",
+      "changes": {
+        "source_repo": {
+          "from": null,
+          "to": "example_skill"
         }
       }
     },
@@ -1333,10 +1340,6 @@
     {
       "skill_id": "session-opener",
       "changes": {
-        "version": {
-          "from": "0.2.0",
-          "to": "0.3.0"
-        },
         "source_repo": {
           "from": null,
           "to": "session_opener"
@@ -1543,5 +1546,5 @@
     }
   ],
   "unchanged_count": 0,
-  "summary": "1 added, 170 changed"
+  "summary": "171 changed"
 }
