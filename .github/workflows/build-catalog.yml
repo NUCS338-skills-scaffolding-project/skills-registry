@@ -64,7 +64,7 @@ jobs:
         with:
           repository: ${{ github.repository_owner }}/mentora-skills
           path: mentora-skills
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.MENTORA_SKILLS_PAT }}
 
       # ── Python ────────────────────────────────────────────────────────────
       - name: Set up Python
