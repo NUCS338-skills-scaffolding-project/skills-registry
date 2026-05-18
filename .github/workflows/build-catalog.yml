@@ -63,7 +63,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: ${{ github.repository_owner }}/mentora-skills
-          path: ../mentora-skills
+          path: mentora-skills
           token: ${{ secrets.GITHUB_TOKEN }}
 
       # ── Python ────────────────────────────────────────────────────────────
@@ -98,7 +98,7 @@ jobs:
             STRICT_FLAG="--strict"
           fi
           python scripts/catalog_builder.py \
-            --package ../mentora-skills/mentora_skills/skills \
+            --package mentora-skills/mentora_skills/skills \
             --output catalog.json \
             --report build_report.md \
             --changelog catalog_changelog.json \
