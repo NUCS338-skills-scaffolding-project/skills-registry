@@ -1922,6 +1922,32 @@
     "has_logic": true
   },
   {
+    "skill_id": "example-skill",
+    "name": "Example: Restate the Problem",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "tags": [
+      "example",
+      "comprehension"
+    ],
+    "course_types": [
+      "cs",
+      "humanities"
+    ],
+    "learning_goal_tags": [
+      "restate-the-problem"
+    ],
+    "trigger_signals": [
+      "new-assignment-opened",
+      "student-jumping-to-solution"
+    ],
+    "chip_icon": "\ud83d\udd01",
+    "version": "0.1.0",
+    "owner_team": "example_skill",
+    "status": "ready",
+    "has_logic": false
+  },
+  {
     "skill_id": "execution-trace",
     "name": "Execution Trace",
     "skill_type": "code",
@@ -4557,14 +4583,15 @@
     ],
     "learning_goal_tags": [
       "engage-student",
-      "establish-rapport"
+      "establish-rapport",
+      "diagnostic"
     ],
     "trigger_signals": [
       "session-start",
       "new-session"
     ],
     "chip_icon": "\ud83d\udc4b",
-    "version": "0.2.0",
+    "version": "0.3.0",
     "owner_team": "session_opener",
     "status": "ready",
     "has_logic": false
