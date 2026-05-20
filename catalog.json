@@ -422,12 +422,18 @@
       "humanities"
     ],
     "learning_goal_tags": [
-      "check-understanding"
+      "check-understanding",
+      "philosophical-concepts"
     ],
     "trigger_signals": [
       "student-declares-understanding",
       "post-hint-confirmation",
-      "post-discussion-closure"
+      "post-discussion-closure",
+      "student-says-i-understand-without-explaining",
+      "student-says-that-makes-sense",
+      "student-ready-to-move-on-without-demonstrating-understanding",
+      "student-uses-philosophical-term-without-defining-it",
+      "student-paraphrases-using-authors-exact-language"
     ],
     "chip_icon": "\ud83d\udde3\ufe0f",
     "version": "0.1.0",
@@ -590,6 +596,37 @@
     "has_logic": false
   },
   {
+    "skill_id": "assumption-hint",
+    "name": "Assumption Hint",
+    "skill_type": "instructional",
+    "stance": "hint",
+    "tags": [
+      "argument",
+      "hint",
+      "assumption",
+      "reasoning"
+    ],
+    "course_types": [
+      "humanities"
+    ],
+    "learning_goal_tags": [
+      "surface-assumptions",
+      "argument-construction"
+    ],
+    "trigger_signals": [
+      "student-cannot-identify-logical-gap-after-attempts",
+      "student-stuck-on-explaining-their-reasoning-step",
+      "student-repeated-same-answer-without-bridging-gap",
+      "student-asks-for-more-help-with-their-argument",
+      "student-frustrated-after-being-asked-to-justify-claim"
+    ],
+    "chip_icon": "\ud83d\udd0e",
+    "version": "0.1.0",
+    "owner_team": "assumption_hint",
+    "status": "ready",
+    "has_logic": false
+  },
+  {
     "skill_id": "author-choices",
     "name": "Probe Author Choices",
     "skill_type": "instructional",
@@ -616,6 +653,33 @@
     "status": "ready",
     "version": "0.2.0",
     "owner_team": "author_choices",
+    "has_logic": false
+  },
+  {
+    "skill_id": "bigger-picture",
+    "name": "Bigger Picture: Why Are We Doing This?",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "tags": [
+      "motivation",
+      "context",
+      "real-world",
+      "comprehension"
+    ],
+    "course_types": [
+      "cs"
+    ],
+    "learning_goal_tags": [
+      "restate-the-problem"
+    ],
+    "trigger_signals": [
+      "why-do-we-have-to-implement-this",
+      "when-would-I-use-this",
+      "what-are-some-real-life-examples",
+      "why-is-this-useful"
+    ],
+    "owner_team": "bigger_picture",
+    "status": "ready",
     "has_logic": false
   },
   {
@@ -856,6 +920,33 @@
     "status": "ready",
     "version": "0.2.0",
     "owner_team": "comp_check",
+    "has_logic": false
+  },
+  {
+    "skill_id": "compare-algorithms",
+    "name": "Compare Algorithm Strategies",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "tags": [
+      "algorithms",
+      "planning",
+      "understanding",
+      "comparison"
+    ],
+    "course_types": [
+      "cs"
+    ],
+    "learning_goal_tags": [
+      "compare-strategies"
+    ],
+    "trigger_signals": [
+      "help-me-compare-these-algorithms",
+      "when-should-I-use-one-algorithm-or-another",
+      "what-are-the-tradeoffs-between-these-algorithms",
+      "give-me-the-pros-and-cons-of-these-approaches"
+    ],
+    "owner_team": "compare_algorithms",
+    "status": "ready",
     "has_logic": false
   },
   {
@@ -1246,7 +1337,9 @@
     ],
     "learning_goal_tags": [
       "construct-arguments",
-      "engage-objections"
+      "engage-objections",
+      "comparative-analysis",
+      "perspective-taking"
     ],
     "trigger_signals": [
       "student-describes-position",
@@ -1254,7 +1347,9 @@
       "student-asks-for-confirmation-of-interpretation",
       "student-presents-one-sided-argument",
       "student-dismisses-alternative-reading",
-      "student-reaches-conclusion-without-considering-objections"
+      "student-reaches-conclusion-without-considering-objections",
+      "student-dismisses-view-as-obviously-wrong",
+      "student-states-position-without-steelmanning-opposing-view"
     ],
     "chip_icon": "\u21a9\ufe0f",
     "version": "0.2.0",
@@ -1287,6 +1382,32 @@
       "code is correct but the logic is unclear to me"
     ],
     "owner_team": "crit_code_concept",
+    "status": "ready",
+    "has_logic": false
+  },
+  {
+    "skill_id": "crit-pseudocode",
+    "name": "Critique Pseudocode",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "tags": [
+      "pseudocode",
+      "design",
+      "clarity",
+      "correctness"
+    ],
+    "course_types": [
+      "cs"
+    ],
+    "learning_goal_tags": [
+      "evaluate-readability"
+    ],
+    "trigger_signals": [
+      "is-this-pseudocode-good",
+      "does-my-plan-sound-good",
+      "I-have-written-this-pseudocode"
+    ],
+    "owner_team": "crit_pseudocode",
     "status": "ready",
     "has_logic": false
   },
@@ -1500,6 +1621,38 @@
     "has_logic": false
   },
   {
+    "skill_id": "define-concept",
+    "name": "Define Concept",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "tags": [
+      "comprehension",
+      "vocabulary",
+      "concepts",
+      "philosophy"
+    ],
+    "course_types": [
+      "humanities"
+    ],
+    "learning_goal_tags": [
+      "philosophical-concepts",
+      "deep-reading"
+    ],
+    "trigger_signals": [
+      "student-uses-philosophical-term-without-defining-it",
+      "student-uses-term-loosely-or-colloquially",
+      "student-applies-concept-from-one-thinker-to-another-without-noting-difference",
+      "student-treats-technical-term-as-synonymous-with-everyday-meaning",
+      "student-uses-absurdity-alienation-anxiety-or-authenticity-vaguely",
+      "student-conflates-two-thinkers-use-of-the-same-term"
+    ],
+    "chip_icon": "\ud83d\udcd6",
+    "version": "0.1.0",
+    "owner_team": "define_concept",
+    "status": "ready",
+    "has_logic": false
+  },
+  {
     "skill_id": "design-alternative-reasoning",
     "name": "Design Alternative Reasoning",
     "skill_type": "instructional",
@@ -1596,7 +1749,7 @@
     "skill_id": "dx-prereq-gaps",
     "name": "Diagnose Prerequisite Gaps",
     "skill_type": "instructional",
-    "stance": "socratic",
+    "stance": "meta",
     "tags": [
       "phonetics",
       "diagnostic",
@@ -1614,12 +1767,14 @@
       "reflect-on-progress"
     ],
     "trigger_signals": [
-      "validate-prereqs-fail",
-      "cannot-localize-stuck-point",
-      "repeated-restart-without-progress",
-      "vague-references-to-named-concepts",
+      "student-says-dont-know-what-doing",
+      "student-says-im-lost",
+      "student-says-missing-something-basic",
+      "student-asks-where-to-start",
+      "student-asks-what-am-i-missing",
+      "student-says-need-to-start-over",
       "hint-failed-to-unblock",
-      "remediation-plan-requested"
+      "validate-prereqs-fail"
     ],
     "chip_icon": "\ud83d\udd0d",
     "version": "0.1.0",
@@ -1923,25 +2078,22 @@
   },
   {
     "skill_id": "example-skill",
-    "name": "Example: Restate the Problem",
+    "name": "Example Identify Outputs",
     "skill_type": "instructional",
     "stance": "socratic",
     "tags": [
-      "example",
-      "comprehension"
+      "topic1",
+      "topic2"
     ],
     "course_types": [
-      "cs",
-      "humanities"
+      "cs"
     ],
     "learning_goal_tags": [
-      "restate-the-problem"
+      "specify-io"
     ],
     "trigger_signals": [
-      "new-assignment-opened",
-      "student-jumping-to-solution"
+      "output-confusion"
     ],
-    "chip_icon": "\ud83d\udd01",
     "version": "0.1.0",
     "owner_team": "example_skill",
     "status": "ready",
@@ -2044,7 +2196,7 @@
     "skill_id": "explain-after-hint",
     "name": "Ask for Explanation After Hint",
     "skill_type": "instructional",
-    "stance": "socratic",
+    "stance": "hint",
     "tags": [
       "understanding",
       "reflection",
@@ -2060,7 +2212,10 @@
     "trigger_signals": [
       "student-acknowledged-hint",
       "student-claimed-understanding",
-      "understanding-not-yet-demonstrated"
+      "understanding-not-yet-demonstrated",
+      "student-says-i-get-it-after-hint",
+      "student-gives-vague-acknowledgment-after-hint",
+      "student-moves-on-without-explaining-hint"
     ],
     "chip_icon": "\ud83d\udcac",
     "version": "0.1.0",
@@ -2097,6 +2252,31 @@
     "status": "ready",
     "version": "0.2.0",
     "owner_team": "explain_back_check",
+    "has_logic": false
+  },
+  {
+    "skill_id": "explain-edge-cases",
+    "name": "Explain Edge Cases",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "tags": [
+      "testing",
+      "edge-cases",
+      "debugging"
+    ],
+    "course_types": [
+      "cs"
+    ],
+    "learning_goal_tags": [
+      "handle-edge-cases"
+    ],
+    "trigger_signals": [
+      "why-is-my-code-failing-on-this-weird-test",
+      "it-passed-a-single-test-am-I-done",
+      "this-should-work-in-the-common-case"
+    ],
+    "owner_team": "explain_edge_cases",
+    "status": "ready",
     "has_logic": false
   },
   {
@@ -2715,6 +2895,32 @@
     "has_logic": false
   },
   {
+    "skill_id": "identify-inputs",
+    "name": "Identify Inputs",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "tags": [
+      "problem-decomposition",
+      "inputs",
+      "parameters",
+      "design"
+    ],
+    "course_types": [
+      "cs"
+    ],
+    "learning_goal_tags": [
+      "specify-io"
+    ],
+    "trigger_signals": [
+      "what-parameters-do-I-need",
+      "what-should-this-function-take-in",
+      "what-format-is-the-input"
+    ],
+    "owner_team": "identify_inputs",
+    "status": "ready",
+    "has_logic": false
+  },
+  {
     "skill_id": "identify-inv",
     "name": "Identify Invariants",
     "skill_type": "instructional",
@@ -2755,7 +2961,8 @@
       "humanities"
     ],
     "learning_goal_tags": [
-      "interpret-text"
+      "interpret-text",
+      "deep-reading"
     ],
     "trigger_signals": [
       "student-not-understanding-text",
@@ -2875,7 +3082,8 @@
       "humanities"
     ],
     "learning_goal_tags": [
-      "interpret-evidence"
+      "interpret-evidence",
+      "exposition"
     ],
     "trigger_signals": [
       "student-reasoning-with-text",
@@ -2883,7 +3091,9 @@
       "student-says-this-proves",
       "student-connecting-evidence-to-claim",
       "student-drops-quote-without-explanation",
-      "student-uses-evidence-without-linking-to-argument"
+      "student-uses-evidence-without-linking-to-argument",
+      "student-evaluates-before-explaining",
+      "student-expresses-agreement-or-disagreement-before-stating-authors-claim"
     ],
     "chip_icon": "\ud83d\udd0d",
     "version": "0.1.0",
@@ -3026,6 +3236,36 @@
     "chip_icon": "\ud83d\udcf0",
     "version": "0.1.0",
     "owner_team": "journalistic_lede_writing",
+    "status": "ready",
+    "has_logic": false
+  },
+  {
+    "skill_id": "key-idea-hint",
+    "name": "Key Idea Hint",
+    "skill_type": "instructional",
+    "stance": "hint",
+    "tags": [
+      "reading",
+      "hint",
+      "main-idea"
+    ],
+    "course_types": [
+      "humanities"
+    ],
+    "learning_goal_tags": [
+      "interpret-text",
+      "deep-reading"
+    ],
+    "trigger_signals": [
+      "student-cannot-identify-main-idea-after-attempts",
+      "student-stuck-on-what-passage-is-arguing",
+      "student-repeated-wrong-answer-about-main-idea",
+      "student-asks-for-more-help-finding-main-idea",
+      "student-frustrated-with-text-comprehension"
+    ],
+    "chip_icon": "\ud83d\udca1",
+    "version": "0.1.0",
+    "owner_team": "key_idea_hint",
     "status": "ready",
     "has_logic": false
   },
@@ -4193,31 +4433,31 @@
     "has_logic": false
   },
   {
-    "skill_id": "reframe_with_analogy",
-    "name": "Reframe With Analogy",
+    "skill_id": "reframe-with-analogy",
+    "name": "Reframe with analogy",
     "skill_type": "instructional",
-    "stance": "reframe",
+    "stance": "socratic",
     "tags": [
+      "learning",
+      "concept-explanation",
       "analogy",
-      "reframe",
-      "comprehension",
-      "abstraction",
-      "humanities"
+      "education"
     ],
     "course_types": [
+      "cs",
       "humanities"
     ],
     "learning_goal_tags": [
-      "interpret-evidence",
-      "surface-assumptions",
-      "detect-ambiguity"
+      "build-mental-models",
+      "connect-abstract-to-concrete",
+      "understand-systems-concepts"
     ],
     "trigger_signals": [
-      "too-abstract",
-      "doesnt-get-the-concept",
-      "explain-like-im-five",
-      "need-different-angle"
+      "confused-about-concept",
+      "asks-what-does-this-mean",
+      "struggling-with-memory-or-cache"
     ],
+    "chip_icon": "\ud83e\udde9",
     "version": "0.1.0",
     "owner_team": "reframe_with_analogy",
     "status": "ready",
@@ -4257,6 +4497,41 @@
     "has_logic": false
   },
   {
+    "skill_id": "repair-miscons",
+    "name": "Repair Misconceptions",
+    "stance": "reframe",
+    "skill_type": "instructional",
+    "tags": [
+      "phonetics",
+      "misconceptions",
+      "socratic",
+      "repair"
+    ],
+    "course_types": [
+      "humanities"
+    ],
+    "learning_goal_tags": [
+      "verify-claims",
+      "surface-assumptions",
+      "interpret-evidence"
+    ],
+    "trigger_signals": [
+      "student-says-th-is-one-sound",
+      "student-says-y-always-vowel",
+      "student-says-just-sound-it-out",
+      "student-confuses-spelling-with-pronunciation",
+      "student-says-letters-equal-sounds",
+      "student-says-ph-is-puh-huh",
+      "claim-matches-known-misconception",
+      "student-confidently-wrong"
+    ],
+    "chip_icon": "\u26cf\ufe0f",
+    "version": "0.1.0",
+    "owner_team": "repair_miscons",
+    "status": "ready",
+    "has_logic": false
+  },
+  {
     "skill_id": "research-relevance-reasoning",
     "name": "Research Relevance Reasoning",
     "skill_type": "instructional",
@@ -4285,6 +4560,32 @@
     "chip_icon": "\ud83c\udf0d",
     "version": "0.1.0",
     "owner_team": "research_relevance_reasoning",
+    "status": "ready",
+    "has_logic": false
+  },
+  {
+    "skill_id": "restate-the-problem",
+    "name": "Restate the Problem",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "tags": [
+      "comprehension",
+      "problem-decomposition",
+      "planning"
+    ],
+    "course_types": [
+      "cs",
+      "humanities"
+    ],
+    "learning_goal_tags": [
+      "restate-the-problem"
+    ],
+    "trigger_signals": [
+      "what-do-I-do",
+      "I-don't-understand-what-this-is-saying",
+      "what-is-this-assignment-really-asking"
+    ],
+    "owner_team": "restate_the_problem",
     "status": "ready",
     "has_logic": false
   },
@@ -4513,7 +4814,7 @@
     "skill_id": "select-passage",
     "name": "Passage Selection",
     "skill_type": "instructional",
-    "stance": "meta",
+    "stance": "socratic",
     "tags": [
       "identifying",
       "reading",
@@ -4523,7 +4824,8 @@
       "humanities"
     ],
     "learning_goal_tags": [
-      "identify-evidence"
+      "identify-evidence",
+      "deep-reading"
     ],
     "trigger_signals": [
       "student-states-a-claim-about-the-text",
@@ -4531,7 +4833,9 @@
       "student-asks-for-textual-support-for-an-idea",
       "student-names-a-theme-or-position",
       "student-asks-for-quotes-on-a-topic",
-      "student-wants-evidence-to-back-up-an-interpretation"
+      "student-wants-evidence-to-back-up-an-interpretation",
+      "student-makes-claim-without-citing-text",
+      "student-makes-argument-without-textual-evidence"
     ],
     "chip_icon": "\ud83d\udcd1",
     "version": "0.2.0",
@@ -5049,6 +5353,31 @@
     "has_logic": false
   },
   {
+    "skill_id": "trace-an-algo",
+    "name": "Trace an Algorithm",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "tags": [
+      "algorithms",
+      "planning",
+      "understanding"
+    ],
+    "course_types": [
+      "cs"
+    ],
+    "learning_goal_tags": [
+      "trace-execution"
+    ],
+    "trigger_signals": [
+      "help-me-trace-an-algorithm",
+      "walk-though-an-example-of-an-algorithm-trace",
+      "why-is-this-the-correct-output-of-the-algorithm"
+    ],
+    "owner_team": "trace_an_algo",
+    "status": "ready",
+    "has_logic": false
+  },
+  {
     "skill_id": "trace-evidence",
     "name": "Trace Claim to Evidence",
     "skill_type": "instructional",
@@ -5122,12 +5451,14 @@
     ],
     "learning_goal_tags": [
       "construct-arguments",
-      "evaluate-options"
+      "evaluate-options",
+      "comparative-analysis"
     ],
     "trigger_signals": [
       "multiple-valid-approaches",
       "student-comparing-options",
-      "student-defending-single-approach"
+      "student-defending-single-approach",
+      "student-makes-global-judgment-about-which-thinker-is-correct"
     ],
     "chip_icon": "\u2696\ufe0f",
     "version": "0.1.0",
@@ -5181,11 +5512,16 @@
       "humanities"
     ],
     "learning_goal_tags": [
-      "surface-assumptions"
+      "surface-assumptions",
+      "argument-construction"
     ],
     "trigger_signals": [
       "student-defending-first-position",
-      "student-making-logical-leap"
+      "student-making-logical-leap",
+      "student-jumps-to-conclusion-without-justification",
+      "student-uses-therefore-without-explaining-connection",
+      "student-skips-a-reasoning-step",
+      "student-makes-unsupported-causal-claim"
     ],
     "chip_icon": "\ud83d\udd0d",
     "version": "0.1.0",

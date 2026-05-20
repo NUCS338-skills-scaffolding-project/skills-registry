@@ -1,9 +1,24 @@
 {
-  "generated_at": "2026-05-20T02:02:45.410420+00:00",
+  "generated_at": "2026-05-20T19:57:08.973982+00:00",
   "previous_hash": "b1de5eb9e9c83547",
-  "current_hash": "bbd102e4c2ecce19",
-  "added": [],
-  "removed": [],
+  "current_hash": "2ee7ae2705757552",
+  "added": [
+    "assumption-hint",
+    "bigger-picture",
+    "compare-algorithms",
+    "crit-pseudocode",
+    "define-concept",
+    "explain-edge-cases",
+    "identify-inputs",
+    "key-idea-hint",
+    "reframe-with-analogy",
+    "repair-miscons",
+    "restate-the-problem",
+    "trace-an-algo"
+  ],
+  "removed": [
+    "reframe_with_analogy"
+  ],
   "changed": [
     {
       "skill_id": "adjust-to-level",
@@ -476,6 +491,10 @@
     {
       "skill_id": "dx-prereq-gaps",
       "changes": {
+        "stance": {
+          "from": "socratic",
+          "to": "meta"
+        },
         "source_repo": {
           "from": null,
           "to": "dx_prereq_gaps"
@@ -575,6 +594,10 @@
     {
       "skill_id": "example-skill",
       "changes": {
+        "name": {
+          "from": "Example: Restate the Problem",
+          "to": "Example Identify Outputs"
+        },
         "source_repo": {
           "from": null,
           "to": "example_skill"
@@ -611,6 +634,10 @@
     {
       "skill_id": "explain-after-hint",
       "changes": {
+        "stance": {
+          "from": "socratic",
+          "to": "hint"
+        },
         "source_repo": {
           "from": null,
           "to": "explain_after_hint"
@@ -1230,15 +1257,6 @@
       }
     },
     {
-      "skill_id": "reframe_with_analogy",
-      "changes": {
-        "source_repo": {
-          "from": null,
-          "to": "reframe_with_analogy"
-        }
-      }
-    },
-    {
       "skill_id": "repair-miscon",
       "changes": {
         "source_repo": {
@@ -1322,6 +1340,10 @@
     {
       "skill_id": "select-passage",
       "changes": {
+        "stance": {
+          "from": "meta",
+          "to": "socratic"
+        },
         "source_repo": {
           "from": null,
           "to": "select_passage"
@@ -1546,5 +1568,5 @@
     }
   ],
   "unchanged_count": 0,
-  "summary": "171 changed"
+  "summary": "12 added, 1 removed, 170 changed"
 }
