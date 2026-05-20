@@ -1,24 +1,9 @@
 {
-  "generated_at": "2026-05-20T19:57:08.973982+00:00",
-  "previous_hash": "b1de5eb9e9c83547",
+  "generated_at": "2026-05-20T20:10:06.172235+00:00",
+  "previous_hash": "7b6e6ccca3478503",
   "current_hash": "2ee7ae2705757552",
-  "added": [
-    "assumption-hint",
-    "bigger-picture",
-    "compare-algorithms",
-    "crit-pseudocode",
-    "define-concept",
-    "explain-edge-cases",
-    "identify-inputs",
-    "key-idea-hint",
-    "reframe-with-analogy",
-    "repair-miscons",
-    "restate-the-problem",
-    "trace-an-algo"
-  ],
-  "removed": [
-    "reframe_with_analogy"
-  ],
+  "added": [],
+  "removed": [],
   "changed": [
     {
       "skill_id": "adjust-to-level",
@@ -192,11 +177,29 @@
       }
     },
     {
+      "skill_id": "assumption-hint",
+      "changes": {
+        "source_repo": {
+          "from": null,
+          "to": "assumption_hint"
+        }
+      }
+    },
+    {
       "skill_id": "author-choices",
       "changes": {
         "source_repo": {
           "from": null,
           "to": "author_choices"
+        }
+      }
+    },
+    {
+      "skill_id": "bigger-picture",
+      "changes": {
+        "source_repo": {
+          "from": null,
+          "to": "bigger_picture"
         }
       }
     },
@@ -269,6 +272,15 @@
         "source_repo": {
           "from": null,
           "to": "comp_check"
+        }
+      }
+    },
+    {
+      "skill_id": "compare-algorithms",
+      "changes": {
+        "source_repo": {
+          "from": null,
+          "to": "compare_algorithms"
         }
       }
     },
@@ -399,6 +411,15 @@
       }
     },
     {
+      "skill_id": "crit-pseudocode",
+      "changes": {
+        "source_repo": {
+          "from": null,
+          "to": "crit_pseudocode"
+        }
+      }
+    },
+    {
       "skill_id": "critique-design",
       "changes": {
         "source_repo": {
@@ -462,6 +483,15 @@
       }
     },
     {
+      "skill_id": "define-concept",
+      "changes": {
+        "source_repo": {
+          "from": null,
+          "to": "define_concept"
+        }
+      }
+    },
+    {
       "skill_id": "design-alternative-reasoning",
       "changes": {
         "source_repo": {
@@ -491,10 +521,6 @@
     {
       "skill_id": "dx-prereq-gaps",
       "changes": {
-        "stance": {
-          "from": "socratic",
-          "to": "meta"
-        },
         "source_repo": {
           "from": null,
           "to": "dx_prereq_gaps"
@@ -594,10 +620,6 @@
     {
       "skill_id": "example-skill",
       "changes": {
-        "name": {
-          "from": "Example: Restate the Problem",
-          "to": "Example Identify Outputs"
-        },
         "source_repo": {
           "from": null,
           "to": "example_skill"
@@ -634,10 +656,6 @@
     {
       "skill_id": "explain-after-hint",
       "changes": {
-        "stance": {
-          "from": "socratic",
-          "to": "hint"
-        },
         "source_repo": {
           "from": null,
           "to": "explain_after_hint"
@@ -650,6 +668,15 @@
         "source_repo": {
           "from": null,
           "to": "explain_back_check"
+        }
+      }
+    },
+    {
+      "skill_id": "explain-edge-cases",
+      "changes": {
+        "source_repo": {
+          "from": null,
+          "to": "explain_edge_cases"
         }
       }
     },
@@ -834,6 +861,15 @@
       }
     },
     {
+      "skill_id": "identify-inputs",
+      "changes": {
+        "source_repo": {
+          "from": null,
+          "to": "identify_inputs"
+        }
+      }
+    },
+    {
       "skill_id": "identify-inv",
       "changes": {
         "source_repo": {
@@ -920,6 +956,15 @@
         "source_repo": {
           "from": null,
           "to": "journalistic_lede_writing"
+        }
+      }
+    },
+    {
+      "skill_id": "key-idea-hint",
+      "changes": {
+        "source_repo": {
+          "from": null,
+          "to": "key_idea_hint"
         }
       }
     },
@@ -1257,6 +1302,15 @@
       }
     },
     {
+      "skill_id": "reframe-with-analogy",
+      "changes": {
+        "source_repo": {
+          "from": null,
+          "to": "reframe_with_analogy"
+        }
+      }
+    },
+    {
       "skill_id": "repair-miscon",
       "changes": {
         "source_repo": {
@@ -1266,11 +1320,29 @@
       }
     },
     {
+      "skill_id": "repair-miscons",
+      "changes": {
+        "source_repo": {
+          "from": null,
+          "to": "repair_miscons"
+        }
+      }
+    },
+    {
       "skill_id": "research-relevance-reasoning",
       "changes": {
         "source_repo": {
           "from": null,
           "to": "research_relevance_reasoning"
+        }
+      }
+    },
+    {
+      "skill_id": "restate-the-problem",
+      "changes": {
+        "source_repo": {
+          "from": null,
+          "to": "restate_the_problem"
         }
       }
     },
@@ -1340,10 +1412,6 @@
     {
       "skill_id": "select-passage",
       "changes": {
-        "stance": {
-          "from": "meta",
-          "to": "socratic"
-        },
         "source_repo": {
           "from": null,
           "to": "select_passage"
@@ -1495,6 +1563,15 @@
       }
     },
     {
+      "skill_id": "trace-an-algo",
+      "changes": {
+        "source_repo": {
+          "from": null,
+          "to": "trace_an_algo"
+        }
+      }
+    },
+    {
       "skill_id": "trace-evidence",
       "changes": {
         "source_repo": {
@@ -1568,5 +1645,5 @@
     }
   ],
   "unchanged_count": 0,
-  "summary": "12 added, 1 removed, 170 changed"
+  "summary": "182 changed"
 }
