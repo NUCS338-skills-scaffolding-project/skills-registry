@@ -612,11 +612,19 @@ def render_report(result: BuildResult) -> str:
     for s in result.catalog:
         st = s.get("status", "broken")
         counts[st] = counts.get(st, 0) + 1
-    lines.append(
-        f"**Total skills:** {len(result.catalog)}  ·  "
-        f"ready: {counts['ready']}, stub: {counts['stub']}, broken: {counts['broken']}"
-    )
-    lines.append("")
+
+    # ── Summary table ─────────────────────────────────────────────────────
+    lines += [
+        "## Summary",
+        "",
+        "| Metric | Count |",
+        "|--------|------:|",
+        f"| Total skills | {len(result.catalog)} |",
+        f"| Ready | {counts['ready']} |",
+        f"| Stub | {counts['stub']} |",
+        f"| Broken | {counts['broken']} |",
+        "",
+    ]
 
     # ── Duplicate rejections callout ─────────────────────────────────────
     if result.duplicate_rejections:
@@ -636,33 +644,50 @@ def render_report(result: BuildResult) -> str:
             )
         lines.append("")
 
-    by_repo = {}
-    for s in result.catalog:
-        by_repo.setdefault(s.get("source_repo", "?"), []).append(s)
-    if by_repo:
-        lines += ["## By repo", "", "| Repo | Total | Ready | Stub | Broken |",
-                  "|------|------:|------:|-----:|-------:|"]
-        for repo_name in sorted(by_repo):
-            ss = by_repo[repo_name]
-            r = sum(1 for s in ss if s.get("status") == "ready")
-            st = sum(1 for s in ss if s.get("status") == "stub")
-            b = sum(1 for s in ss if s.get("status") == "broken")
-            lines.append(f"| `{repo_name}` | {len(ss)} | {r} | {st} | {b} |")
-        lines.append("")
+    # ── By repo — only stub/broken skills ────────────────────────────────
+    non_ready = [s for s in result.catalog if s.get("status") in ("stub", "broken")]
+    lines += ["## By repo", ""]
+    if non_ready:
+        lines += [
+            "| Repo | Skill | Status | Error |",
+            "|------|-------|--------|-------|",
+        ]
+        for s in sorted(non_ready, key=lambda x: (x.get("source_repo", ""), x.get("source_path", ""))):
+            repo = s.get("source_repo", "?")
+            path = s.get("source_path", "?")
+            status = s.get("status", "?")
+            reason = s.get("status_reason") or ""
+            lines.append(f"| `{repo}` | `{path}` | {status} | {reason} |")
+    else:
+        lines.append("_All skills are ready — no stubs or broken skills._")
+    lines.append("")
 
+    # ── Issues — one table per repo/team ─────────────────────────────────
     lines += ["## Issues", ""]
-    any_issue = False
+
+    # Group issues by repo name (first segment of the path key "repo/path")
+    issues_by_repo: dict = {}
     for path, issues in sorted(result.issues_by_skill.items()):
         if not issues:
             continue
-        any_issue = True
-        lines.append(f"### `{path}`")
-        for i in issues:
-            mark = "ERROR" if i.severity == "error" else "warn"
-            lines.append(f"- **{mark}** [`{i.field}`] {i.message}")
-        lines.append("")
-    if not any_issue:
+        repo_name = path.split("/")[0]
+        issues_by_repo.setdefault(repo_name, []).append((path, issues))
+
+    if not issues_by_repo:
         lines.append("_All skills passed validation cleanly._")
+    else:
+        for repo_name in sorted(issues_by_repo):
+            lines.append(f"### `{repo_name}`")
+            lines.append("")
+            lines.append("| Skill | Error / Warning |")
+            lines.append("|-------|----------------|")
+            for path, issues in issues_by_repo[repo_name]:
+                for i in issues:
+                    mark = "**ERROR**" if i.severity == "error" else "**warn**"
+                    msg = f"`[{i.field}]` {i.message}"
+                    lines.append(f"| `{path}` | {mark} {msg} |")
+            lines.append("")
+
     return "\n".join(lines)
 
 
