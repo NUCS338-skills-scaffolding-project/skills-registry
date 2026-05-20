@@ -1,6 +1,6 @@
 # Catalog build report
 
-**Total skills:** 171  ·  ready: 168, stub: 3, broken: 0
+**Total skills:** 182  ·  ready: 179, stub: 3, broken: 0
 
 ## By repo
 
@@ -25,7 +25,9 @@
 | `asm_translation` | 1 | 1 | 0 | 0 |
 | `assembly_trace_reasoning` | 1 | 1 | 0 | 0 |
 | `assumption_checking` | 1 | 1 | 0 | 0 |
+| `assumption_hint` | 1 | 1 | 0 | 0 |
 | `author_choices` | 1 | 1 | 0 | 0 |
+| `bigger_picture` | 1 | 1 | 0 | 0 |
 | `bound_scope` | 1 | 1 | 0 | 0 |
 | `c_debugger` | 1 | 1 | 0 | 0 |
 | `cache_optimized_code` | 1 | 1 | 0 | 0 |
@@ -34,6 +36,7 @@
 | `claim_verification` | 1 | 1 | 0 | 0 |
 | `cohesion_check` | 1 | 1 | 0 | 0 |
 | `comp_check` | 1 | 1 | 0 | 0 |
+| `compare_algorithms` | 1 | 1 | 0 | 0 |
 | `compare_readings` | 1 | 1 | 0 | 0 |
 | `concept_distinction_reasoning` | 1 | 1 | 0 | 0 |
 | `concept_example` | 1 | 1 | 0 | 0 |
@@ -48,6 +51,7 @@
 | `counterevidence_engagement` | 1 | 1 | 0 | 0 |
 | `counterview_prompt` | 1 | 1 | 0 | 0 |
 | `crit_code_concept` | 1 | 1 | 0 | 0 |
+| `crit_pseudocode` | 1 | 1 | 0 | 0 |
 | `critique_design` | 1 | 1 | 0 | 0 |
 | `cross_author_comparison` | 1 | 1 | 0 | 0 |
 | `cross_event_cause` | 1 | 1 | 0 | 0 |
@@ -55,6 +59,7 @@
 | `debug_first_step` | 1 | 1 | 0 | 0 |
 | `decompose_arg` | 1 | 1 | 0 | 0 |
 | `decompose_the_prob` | 1 | 1 | 0 | 0 |
+| `define_concept` | 1 | 1 | 0 | 0 |
 | `design_alternative_reasoning` | 1 | 1 | 0 | 0 |
 | `design_skeleton` | 1 | 1 | 0 | 0 |
 | `detect_ambiguity` | 1 | 1 | 0 | 0 |
@@ -75,6 +80,7 @@
 | `experience_connect` | 1 | 1 | 0 | 0 |
 | `explain_after_hint` | 1 | 1 | 0 | 0 |
 | `explain_back_check` | 1 | 1 | 0 | 0 |
+| `explain_edge_cases` | 1 | 1 | 0 | 0 |
 | `explain_function_responsibilities` | 1 | 1 | 0 | 0 |
 | `explanation_nautilus_architecture` | 1 | 1 | 0 | 0 |
 | `extract_requirements` | 1 | 1 | 0 | 0 |
@@ -95,6 +101,7 @@
 | `hypothesis_formulation` | 1 | 1 | 0 | 0 |
 | `id_misconception` | 1 | 1 | 0 | 0 |
 | `id_natural_class` | 1 | 1 | 0 | 0 |
+| `identify_inputs` | 1 | 1 | 0 | 0 |
 | `identify_inv` | 1 | 1 | 0 | 0 |
 | `identify_key_idea` | 1 | 1 | 0 | 0 |
 | `identify_outputs` | 1 | 1 | 0 | 0 |
@@ -105,6 +112,7 @@
 | `interview_preparation` | 1 | 1 | 0 | 0 |
 | `iterative_improvement_reasoning` | 1 | 1 | 0 | 0 |
 | `journalistic_lede_writing` | 1 | 1 | 0 | 0 |
+| `key_idea_hint` | 1 | 1 | 0 | 0 |
 | `lecture_ingestion` | 1 | 1 | 0 | 0 |
 | `local_vs_global_optimum_reasoning` | 1 | 1 | 0 | 0 |
 | `map_design` | 1 | 1 | 0 | 0 |
@@ -144,7 +152,9 @@
 | `reframe_trace` | 1 | 1 | 0 | 0 |
 | `reframe_with_analogy` | 1 | 1 | 0 | 0 |
 | `repair_miscon` | 1 | 1 | 0 | 0 |
+| `repair_miscons` | 1 | 1 | 0 | 0 |
 | `research_relevance_reasoning` | 1 | 1 | 0 | 0 |
+| `restate_the_problem` | 1 | 1 | 0 | 0 |
 | `result_interpretation` | 1 | 1 | 0 | 0 |
 | `return_behavior` | 1 | 1 | 0 | 0 |
 | `rubric_scorer` | 1 | 1 | 0 | 0 |
@@ -169,6 +179,7 @@
 | `syllabify_word` | 1 | 1 | 0 | 0 |
 | `systematic_coverage_prompting` | 1 | 1 | 0 | 0 |
 | `tie_to_course` | 1 | 1 | 0 | 0 |
+| `trace_an_algo` | 1 | 1 | 0 | 0 |
 | `trace_evidence` | 1 | 1 | 0 | 0 |
 | `trace_state` | 1 | 1 | 0 | 0 |
 | `tradeoff_analysis` | 1 | 1 | 0 | 0 |
@@ -206,6 +217,9 @@
 
 ### `calling_convention_reasoning/skills/skills.md`
 - **warn** [`skill_id`] length 28 > 18 chars — see Team-Guide §7
+
+### `claim_verification/skills/skills.md`
+- **warn** [`example_exchange`] missing — strongly recommended
 
 ### `concept_distinction_reasoning/skills/skills.md`
 - **warn** [`skill_id`] length 29 > 18 chars — see Team-Guide §7
@@ -342,6 +356,9 @@
 
 ### `research_relevance_reasoning/skills/skills.md`
 - **warn** [`skill_id`] length 28 > 18 chars — see Team-Guide §7
+
+### `restate_the_problem/skills/skills.md`
+- **warn** [`skill_id`] length 19 > 18 chars — see Team-Guide §7
 
 ### `result_interpretation/skills/skills.md`
 - **warn** [`skill_id`] length 21 > 18 chars — see Team-Guide §7
