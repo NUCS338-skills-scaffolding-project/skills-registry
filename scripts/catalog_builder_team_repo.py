@@ -638,7 +638,7 @@ def main() -> int:
     )
     ap.add_argument("--local", help="Path to a local directory whose subdirs are team repos")
     ap.add_argument("--output", default="catalog.json", help="Catalog output path")
-    ap.add_argument("--report", default="build_report.md", help="Build report output path")
+    ap.add_argument("--report", default="scripts/team_build_report.md", help="Build report output path")
     ap.add_argument("--changelog", default="catalog_changelog.json", help="Changelog output path")
     ap.add_argument("--meta", default="catalog_meta.json", help="Catalog metadata output path")
     ap.add_argument(

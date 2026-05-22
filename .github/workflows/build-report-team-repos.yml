@@ -88,7 +88,7 @@ jobs:
           fi
           python scripts/catalog_builder_team_repo.py \
             --output catalog_team.json \
-            --report scripts/build_report.md \
+            --report scripts/team_build_report.md \
             --changelog catalog_changelog.json \
             --meta catalog_meta.json \
             $STRICT_FLAG
@@ -97,7 +97,7 @@ jobs:
         run: |
           git config --global user.name "catalog-bot"
           git config --global user.email "catalog-bot@skills-registry"
-          git add scripts/build_report.md catalog_team.json catalog_changelog.json catalog_meta.json
+          git add scripts/team_build_report.md catalog_team.json catalog_changelog.json catalog_meta.json
           git diff --staged --quiet || git commit -m \
             "chore: rebuild team report [trigger=${{ github.event_name }}]"
           git push
@@ -107,5 +107,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: build-report-team-repos
-          path: scripts/build_report.md
+          path: scripts/team_build_report.md
           retention-days: 30

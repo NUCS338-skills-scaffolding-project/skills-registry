@@ -110,7 +110,7 @@ jobs:
         run: |
           git config --global user.name "catalog-bot"
           git config --global user.email "catalog-bot@skills-registry"
-          git add catalog.json catalog_meta.json build_report.md catalog_changelog.json
+          git add catalog.json catalog_meta.json catalog_changelog.json
           git diff --staged --quiet || git commit -m \
             "chore: rebuild catalog [trigger=${{ github.event_name }}]"
           git push
