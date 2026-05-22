@@ -1261,33 +1261,33 @@
   },
   {
     "skill_id": "counter-example",
-    "name": "Counter-Example",
+    "name": "Counter- xample",
     "skill_type": "instructional",
     "stance": "socratic",
     "tags": [
-      "socratic",
-      "objections",
-      "claim-testing"
+      "argumentation",
+      "writing",
+      "logic",
+      "critical-thinking",
+      "rebuttal"
     ],
     "course_types": [
-      "cs",
       "humanities"
     ],
     "learning_goal_tags": [
+      "construct-arguments",
       "engage-objections",
       "surface-assumptions",
-      "evaluate-reasoning"
+      "identify-evidence",
+      "interpret-evidence"
     ],
     "trigger_signals": [
-      "student-overgeneralizes",
-      "student-asserts-absolute",
-      "student-defending-first-position",
-      "always-statement-made",
-      "student-hedging-on-claim"
+      "student-needs-counterexample",
+      "student-asks-for-opposing-view",
+      "student-wants-to-challenge-claim"
     ],
-    "status": "ready",
-    "version": "0.2.0",
     "owner_team": "counter_example",
+    "status": "ready",
     "has_logic": false
   },
   {

@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-05-22T02:03:58.254957+00:00",
+  "generated_at": "2026-05-22T02:23:45.420263+00:00",
   "previous_hash": "7b6e6ccca3478503",
-  "current_hash": "2ee7ae2705757552",
+  "current_hash": "713772a9017ea235",
   "added": [],
   "removed": [],
   "changed": [
@@ -377,6 +377,14 @@
     {
       "skill_id": "counter-example",
       "changes": {
+        "version": {
+          "from": "0.2.0",
+          "to": null
+        },
+        "name": {
+          "from": "Counter-Example",
+          "to": "Counter- xample"
+        },
         "source_repo": {
           "from": null,
           "to": "counter_example"
