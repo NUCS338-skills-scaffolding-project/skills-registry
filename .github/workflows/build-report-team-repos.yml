@@ -1,0 +1,111 @@
+# build-report-team-repos.yml
+#
+# Validates skills across all team repos and produces a per-team build
+# report (scripts/build_report.md) so each team can see exactly which
+# skills they need to fix.
+#
+# Triggers:
+#   - repository_dispatch "skills-updated"
+#     Team repos fire this after a push to skills/**.
+#     See skill-standard-template/.github/workflows/notify-registry.yml
+#     for the ready-made step that sends this event automatically.
+#   - Daily schedule at 06:00 UTC (safety-net catch-all)
+#   - Manual run via workflow_dispatch
+#
+# Secrets required:
+#   GITHUB_TOKEN        — default, used to commit the report back
+#   MENTORA_SKILLS_PAT  — PAT with repo scope on the GitHub org
+#                         (same secret used by build-catalog.yml)
+
+name: Build team-repo report
+
+on:
+  repository_dispatch:
+    types: [skills-updated]
+
+  schedule:
+    - cron: "0 6 * * *"
+
+  workflow_dispatch:
+    inputs:
+      strict:
+        description: "Fail the build if any skill is broken"
+        required: false
+        default: "false"
+        type: choice
+        options: ["true", "false"]
+
+permissions:
+  contents: write
+
+jobs:
+  build-team-report:
+    runs-on: ubuntu-latest
+    name: Validate team repos & produce per-team report
+
+    steps:
+      - name: Log trigger source
+        run: |
+          echo "Triggered by: ${{ github.event_name }}"
+          if [ "${{ github.event_name }}" = "repository_dispatch" ]; then
+            echo "  repo:   ${{ github.event.client_payload.repo }}"
+            echo "  ref:    ${{ github.event.client_payload.ref }}"
+            echo "  sender: ${{ github.event.client_payload.sender }}"
+          fi
+
+      - name: Checkout skills-registry
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install pyyaml requests
+
+      - name: Determine strict flag
+        id: strict
+        run: |
+          STRICT="false"
+          if [ "${{ github.event_name }}" = "repository_dispatch" ]; then
+            STRICT="true"
+          elif [ "${{ github.event.inputs.strict }}" = "true" ]; then
+            STRICT="true"
+          fi
+          echo "strict=$STRICT" >> "$GITHUB_OUTPUT"
+
+      - name: Build team-repo report
+        env:
+          GITHUB_TOKEN: ${{ secrets.MENTORA_SKILLS_PAT }}
+          GITHUB_ORG: ${{ github.repository_owner }}
+        run: |
+          STRICT_FLAG=""
+          if [ "${{ steps.strict.outputs.strict }}" = "true" ]; then
+            STRICT_FLAG="--strict"
+          fi
+          python scripts/catalog_builder_team_repo.py \
+            --output catalog_team.json \
+            --report scripts/build_report.md \
+            --changelog catalog_changelog.json \
+            --meta catalog_meta.json \
+            $STRICT_FLAG
+
+      - name: Commit updated report
+        run: |
+          git config --global user.name "catalog-bot"
+          git config --global user.email "catalog-bot@skills-registry"
+          git add scripts/build_report.md catalog_team.json catalog_changelog.json catalog_meta.json
+          git diff --staged --quiet || git commit -m \
+            "chore: rebuild team report [trigger=${{ github.event_name }}]"
+          git push
+
+      - name: Upload build report as artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-report-team-repos
+          path: scripts/build_report.md
+          retention-days: 30
