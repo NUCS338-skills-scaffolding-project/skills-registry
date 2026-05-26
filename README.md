@@ -11,9 +11,8 @@ Central registry and aggregated catalog for every skill in the Mentora skills pa
 | `catalog_changelog.json` | Diff between the previous and current catalog — added, removed, changed skills. Consumed by the orchestrator for selective cache invalidation. |
 | `catalog_meta.json` | Schema version, build timestamp, total skill count, and a hash of the catalog. |
 | `local/` | Local build outputs — gitignored. Put any locally generated catalogs and reports here. |
-| `scripts/catalog_builder_mentora_skills.py` | Builds the catalog from the `mentora_skills` package directory. No GitHub token needed. |
-| `scripts/catalog_builder_team_repo.py` | Validates skills across team repos via the GitHub API. Requires `GITHUB_TOKEN` and `GITHUB_ORG`. |
-| `scripts/fetch_skills.py` | CLI to fetch a single skill by ID into your working directory. |
+| `scripts/catalog_builder_mentora_skills.py` | Builds the catalog from the `mentora_skills` package directory. No GitHub token needed. Use this for local development. |
+| `scripts/catalog_builder_team_repo.py` | **Admin only.** Validates skills across team repos via the GitHub API. Only used by the GitHub Actions workflow — teams do not need to run or configure this. |
 | `vocab/learning_goals.yaml` | Controlled vocabulary for `learning_goal_tags`. Propose new tags via PR. |
 
 ---
@@ -152,16 +151,6 @@ After every build, `catalog_changelog.json` is written alongside `catalog.json`.
 ```
 
 The `previous_hash` / `current_hash` fields are short SHA-256 hashes of the full catalog, used by the orchestrator to decide whether to invalidate its in-memory skill cache after a refresh.
-
----
-
-## Fetching a skill
-
-```bash
-python scripts/fetch_skills.py --id counter-example
-```
-
-Copies the skill folder from the catalog's `source_path` into `./fetched-skills/<skill_id>`.
 
 ---
 
