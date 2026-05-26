@@ -2,3 +2,6 @@
 .vscode/settings.json
 
 local_skills
+
+# Local build outputs — never commit these
+local/

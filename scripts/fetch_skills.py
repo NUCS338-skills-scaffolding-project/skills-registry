@@ -17,21 +17,21 @@ def fetch_skill(skill_id):
     catalog = json.load(f)
 
   # Search for the skill
-    match = next((s for s in catalog if s.get("skill_id") == skill_id), None)
+  match = next((s for s in catalog if s.get("skill_id") == skill_id), None)
 
-    if not match:
-      print(f"ERROR:Skill '{skill_id}' not found in catalog.")
-      return
-    
-    source = match.get("source_path")
-    dest = os.path.join("./fetched-skills", skill_id)
+  if not match:
+    print(f"ERROR: Skill '{skill_id}' not found in catalog.")
+    return
 
-    if not os.path.exists(source):
-      print(f"ERROR:Source path not found: {source}")
-      return
+  source = match.get("source_path")
+  dest = os.path.join("./fetched-skills", skill_id)
 
-    shutil.copytree(os.path.dirname(source), dest, dirs_exist_ok=True)
-    print(f"SUCCESS: Skill '{skill_id}' fetched to {dest}")
+  if not os.path.exists(source):
+    print(f"ERROR: Source path not found: {source}")
+    return
+
+  shutil.copytree(os.path.dirname(source), dest, dirs_exist_ok=True)
+  print(f"SUCCESS: Skill '{skill_id}' fetched to {dest}")
 
 if __name__ == "__main__":
   parser = argparse.ArgumentParser()

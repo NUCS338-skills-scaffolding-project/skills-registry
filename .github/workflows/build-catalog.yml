@@ -97,7 +97,7 @@ jobs:
           if [ "${{ steps.strict.outputs.strict }}" = "true" ]; then
             STRICT_FLAG="--strict"
           fi
-          python scripts/catalog_builder.py \
+          python scripts/catalog_builder_mentora_skills.py \
             --package mentora-skills/mentora_skills/skills \
             --output catalog.json \
             --report build_report.md \
