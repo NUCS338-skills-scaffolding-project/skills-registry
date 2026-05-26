@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-05-26T05:12:17.916978+00:00",
-  "previous_hash": "1c753147bee8fed4",
+  "generated_at": "2026-05-26T05:18:17.368537+00:00",
+  "previous_hash": "cf606cd90cbce491",
   "current_hash": "576b7f3cb7eb8d34",
   "added": [],
   "removed": [],
@@ -8,10 +8,6 @@
     {
       "skill_id": "adjust-to-level",
       "changes": {
-        "owner_team": {
-          "from": "adjust_to_level",
-          "to": "POLISCI-210"
-        },
         "source_repo": {
           "from": null,
           "to": "adjust_to_level"
@@ -39,10 +35,6 @@
     {
       "skill_id": "ai-explanation-critique",
       "changes": {
-        "owner_team": {
-          "from": "ai_explanation_critique",
-          "to": "cs338-skills"
-        },
         "owner_contact": {
           "from": null,
           "to": "shubham.shahi@northwestern.edu"
@@ -74,10 +66,6 @@
     {
       "skill_id": "analytical-question-formulation",
       "changes": {
-        "owner_team": {
-          "from": "analytical_question_formulation",
-          "to": "cs338-skills"
-        },
         "owner_contact": {
           "from": null,
           "to": "shubham.shahi@northwestern.edu"
@@ -109,10 +97,6 @@
     {
       "skill_id": "answer-error-diagnosis",
       "changes": {
-        "owner_team": {
-          "from": "answer_error_diagnosis",
-          "to": "cs338-skills"
-        },
         "owner_contact": {
           "from": null,
           "to": "shubham.shahi@northwestern.edu"
@@ -189,10 +173,6 @@
     {
       "skill_id": "assembly-trace-reasoning",
       "changes": {
-        "owner_team": {
-          "from": "assembly_trace_reasoning",
-          "to": "cs338-skills"
-        },
         "owner_contact": {
           "from": null,
           "to": "shubham.shahi@northwestern.edu"
@@ -206,10 +186,6 @@
     {
       "skill_id": "assumption-checking",
       "changes": {
-        "owner_team": {
-          "from": "assumption_checking",
-          "to": "cs338-skills"
-        },
         "owner_contact": {
           "from": null,
           "to": "shubham.shahi@northwestern.edu"
@@ -277,10 +253,6 @@
     {
       "skill_id": "calling-convention-reasoning",
       "changes": {
-        "owner_team": {
-          "from": "calling_convention_reasoning",
-          "to": "cs338-skills"
-        },
         "owner_contact": {
           "from": null,
           "to": "shubham.shahi@northwestern.edu"
@@ -348,10 +320,6 @@
     {
       "skill_id": "concept-distinction-reasoning",
       "changes": {
-        "owner_team": {
-          "from": "concept_distinction_reasoning",
-          "to": "cs338-skills"
-        },
         "owner_contact": {
           "from": null,
           "to": "shubham.shahi@northwestern.edu"
@@ -383,10 +351,6 @@
     {
       "skill_id": "concurrency-failure-diagnosis",
       "changes": {
-        "owner_team": {
-          "from": "concurrency_failure_diagnosis",
-          "to": "cs338-skills"
-        },
         "owner_contact": {
           "from": null,
           "to": "shubham.shahi@northwestern.edu"
@@ -454,10 +418,6 @@
     {
       "skill_id": "counterevidence-engagement",
       "changes": {
-        "owner_team": {
-          "from": "counterevidence_engagement",
-          "to": "cs338-skills"
-        },
         "owner_contact": {
           "from": null,
           "to": "shubham.shahi@northwestern.edu"
@@ -507,10 +467,6 @@
     {
       "skill_id": "cross-author-comparison",
       "changes": {
-        "owner_team": {
-          "from": "cross_author_comparison",
-          "to": "cs338-skills"
-        },
         "owner_contact": {
           "from": null,
           "to": "shubham.shahi@northwestern.edu"
@@ -578,10 +534,6 @@
     {
       "skill_id": "design-alternative-reasoning",
       "changes": {
-        "owner_team": {
-          "from": "design_alternative_reasoning",
-          "to": "cs338-skills"
-        },
         "owner_contact": {
           "from": null,
           "to": "shubham.shahi@northwestern.edu"
@@ -640,10 +592,6 @@
     {
       "skill_id": "endianness-byte-ordering",
       "changes": {
-        "owner_team": {
-          "from": "endianness_byte_ordering",
-          "to": "cs338-skills"
-        },
         "owner_contact": {
           "from": null,
           "to": "shubham.shahi@northwestern.edu"
@@ -657,10 +605,6 @@
     {
       "skill_id": "ensemble-reasoning",
       "changes": {
-        "owner_team": {
-          "from": "ensemble_reasoning",
-          "to": "cs338-skills"
-        },
         "owner_contact": {
           "from": null,
           "to": "shubham.shahi@northwestern.edu"
@@ -854,10 +798,6 @@
     {
       "skill_id": "follow-up-question-deepening",
       "changes": {
-        "owner_team": {
-          "from": "follow_up_question_deepening",
-          "to": "cs338-skills"
-        },
         "owner_contact": {
           "from": null,
           "to": "shubham.shahi@northwestern.edu"
@@ -898,10 +838,6 @@
     {
       "skill_id": "heuristic-admissibility-reasoning",
       "changes": {
-        "owner_team": {
-          "from": "heuristic_admissibility_reasoning",
-          "to": "cs338-skills"
-        },
         "owner_contact": {
           "from": null,
           "to": "shubham.shahi@northwestern.edu"
@@ -915,10 +851,6 @@
     {
       "skill_id": "historical-contextualization",
       "changes": {
-        "owner_team": {
-          "from": "historical_contextualization",
-          "to": "cs338-skills"
-        },
         "owner_contact": {
           "from": null,
           "to": "shubham.shahi@northwestern.edu"
@@ -932,10 +864,6 @@
     {
       "skill_id": "historical-thesis-formulation",
       "changes": {
-        "owner_team": {
-          "from": "historical_thesis_formulation",
-          "to": "cs338-skills"
-        },
         "owner_contact": {
           "from": null,
           "to": "shubham.shahi@northwestern.edu"
@@ -958,10 +886,6 @@
     {
       "skill_id": "hyperparameter-impact-reasoning",
       "changes": {
-        "owner_team": {
-          "from": "hyperparameter_impact_reasoning",
-          "to": "cs338-skills"
-        },
         "owner_contact": {
           "from": null,
           "to": "shubham.shahi@northwestern.edu"
@@ -984,10 +908,6 @@
     {
       "skill_id": "hypothesis-formulation",
       "changes": {
-        "owner_team": {
-          "from": "hypothesis_formulation",
-          "to": "cs338-skills"
-        },
         "owner_contact": {
           "from": null,
           "to": "shubham.shahi@northwestern.edu"
@@ -1064,10 +984,6 @@
     {
       "skill_id": "integer-overflow-reasoning",
       "changes": {
-        "owner_team": {
-          "from": "integer_overflow_reasoning",
-          "to": "cs338-skills"
-        },
         "owner_contact": {
           "from": null,
           "to": "shubham.shahi@northwestern.edu"
@@ -1099,10 +1015,6 @@
     {
       "skill_id": "interview-preparation",
       "changes": {
-        "owner_team": {
-          "from": "interview_preparation",
-          "to": "cs338-skills"
-        },
         "owner_contact": {
           "from": null,
           "to": "shubham.shahi@northwestern.edu"
@@ -1116,10 +1028,6 @@
     {
       "skill_id": "iterative-improvement-reasoning",
       "changes": {
-        "owner_team": {
-          "from": "iterative_improvement_reasoning",
-          "to": "cs338-skills"
-        },
         "owner_contact": {
           "from": null,
           "to": "shubham.shahi@northwestern.edu"
@@ -1133,10 +1041,6 @@
     {
       "skill_id": "journalistic-lede-writing",
       "changes": {
-        "owner_team": {
-          "from": "journalistic_lede_writing",
-          "to": "cs338-skills"
-        },
         "owner_contact": {
           "from": null,
           "to": "shubham.shahi@northwestern.edu"
@@ -1168,10 +1072,6 @@
     {
       "skill_id": "local-vs-global-optimum-reasoning",
       "changes": {
-        "owner_team": {
-          "from": "local_vs_global_optimum_reasoning",
-          "to": "cs338-skills"
-        },
         "owner_contact": {
           "from": null,
           "to": "shubham.shahi@northwestern.edu"
@@ -1221,10 +1121,6 @@
     {
       "skill_id": "method-selection-reasoning",
       "changes": {
-        "owner_team": {
-          "from": "method_selection_reasoning",
-          "to": "cs338-skills"
-        },
         "owner_contact": {
           "from": null,
           "to": "shubham.shahi@northwestern.edu"
@@ -1238,10 +1134,6 @@
     {
       "skill_id": "multi-source-portrait-building",
       "changes": {
-        "owner_team": {
-          "from": "multi_source_portrait_building",
-          "to": "cs338-skills"
-        },
         "owner_contact": {
           "from": null,
           "to": "shubham.shahi@northwestern.edu"
@@ -1282,10 +1174,6 @@
     {
       "skill_id": "nut-graph-construction",
       "changes": {
-        "owner_team": {
-          "from": "nut_graph_construction",
-          "to": "cs338-skills"
-        },
         "owner_contact": {
           "from": null,
           "to": "shubham.shahi@northwestern.edu"
@@ -1308,10 +1196,6 @@
     {
       "skill_id": "observation-integration",
       "changes": {
-        "owner_team": {
-          "from": "observation_integration",
-          "to": "cs338-skills"
-        },
         "owner_contact": {
           "from": null,
           "to": "shubham.shahi@northwestern.edu"
@@ -1343,10 +1227,6 @@
     {
       "skill_id": "parallel-text-comparison",
       "changes": {
-        "owner_team": {
-          "from": "parallel_text_comparison",
-          "to": "cs338-skills"
-        },
         "owner_contact": {
           "from": null,
           "to": "shubham.shahi@northwestern.edu"
@@ -1387,10 +1267,6 @@
     {
       "skill_id": "pointer-address-reasoning",
       "changes": {
-        "owner_team": {
-          "from": "pointer_address_reasoning",
-          "to": "cs338-skills"
-        },
         "owner_contact": {
           "from": null,
           "to": "shubham.shahi@northwestern.edu"
@@ -1404,10 +1280,6 @@
     {
       "skill_id": "preemption-event-reasoning",
       "changes": {
-        "owner_team": {
-          "from": "preemption_event_reasoning",
-          "to": "cs338-skills"
-        },
         "owner_contact": {
           "from": null,
           "to": "shubham.shahi@northwestern.edu"
@@ -1421,10 +1293,6 @@
     {
       "skill_id": "preprocessing-impact-reasoning",
       "changes": {
-        "owner_team": {
-          "from": "preprocessing_impact_reasoning",
-          "to": "cs338-skills"
-        },
         "owner_contact": {
           "from": null,
           "to": "shubham.shahi@northwestern.edu"
@@ -1438,10 +1306,6 @@
     {
       "skill_id": "prior-knowledge-elicitation",
       "changes": {
-        "owner_team": {
-          "from": "prior_knowledge_elicitation",
-          "to": "cs338-skills"
-        },
         "owner_contact": {
           "from": null,
           "to": "shubham.shahi@northwestern.edu"
@@ -1491,10 +1355,6 @@
     {
       "skill_id": "quote-selection",
       "changes": {
-        "owner_team": {
-          "from": "quote_selection",
-          "to": "cs338-skills"
-        },
         "owner_contact": {
           "from": null,
           "to": "shubham.shahi@northwestern.edu"
@@ -1508,10 +1368,6 @@
     {
       "skill_id": "quote-selection-reasoning",
       "changes": {
-        "owner_team": {
-          "from": "quote_selection_reasoning",
-          "to": "cs338-skills"
-        },
         "owner_contact": {
           "from": null,
           "to": "shubham.shahi@northwestern.edu"
@@ -1552,10 +1408,6 @@
     {
       "skill_id": "reading-synthesis",
       "changes": {
-        "owner_team": {
-          "from": "reading_synthesis",
-          "to": "cs338-skills"
-        },
         "owner_contact": {
           "from": null,
           "to": "shubham.shahi@northwestern.edu"
@@ -1623,10 +1475,6 @@
     {
       "skill_id": "research-relevance-reasoning",
       "changes": {
-        "owner_team": {
-          "from": "research_relevance_reasoning",
-          "to": "cs338-skills"
-        },
         "owner_contact": {
           "from": null,
           "to": "shubham.shahi@northwestern.edu"
@@ -1649,10 +1497,6 @@
     {
       "skill_id": "result-interpretation",
       "changes": {
-        "owner_team": {
-          "from": "result_interpretation",
-          "to": "cs338-skills"
-        },
         "owner_contact": {
           "from": null,
           "to": "shubham.shahi@northwestern.edu"
@@ -1693,10 +1537,6 @@
     {
       "skill_id": "scheduling-selection-reasoning",
       "changes": {
-        "owner_team": {
-          "from": "scheduling_selection_reasoning",
-          "to": "cs338-skills"
-        },
         "owner_contact": {
           "from": null,
           "to": "shubham.shahi@northwestern.edu"
@@ -1719,10 +1559,6 @@
     {
       "skill_id": "search-state-formulation",
       "changes": {
-        "owner_team": {
-          "from": "search_state_formulation",
-          "to": "cs338-skills"
-        },
         "owner_contact": {
           "from": null,
           "to": "shubham.shahi@northwestern.edu"
@@ -1772,10 +1608,6 @@
     {
       "skill_id": "show-dont-tell-journalism",
       "changes": {
-        "owner_team": {
-          "from": "show_dont_tell_journalism",
-          "to": "cs338-skills"
-        },
         "owner_contact": {
           "from": null,
           "to": "shubham.shahi@northwestern.edu"
@@ -1789,10 +1621,6 @@
     {
       "skill_id": "source-attribution-reasoning",
       "changes": {
-        "owner_team": {
-          "from": "source_attribution_reasoning",
-          "to": "cs338-skills"
-        },
         "owner_contact": {
           "from": null,
           "to": "shubham.shahi@northwestern.edu"
@@ -1833,10 +1661,6 @@
     {
       "skill_id": "story-angle-development",
       "changes": {
-        "owner_team": {
-          "from": "story_angle_development",
-          "to": "cs338-skills"
-        },
         "owner_contact": {
           "from": null,
           "to": "shubham.shahi@northwestern.edu"
@@ -1850,10 +1674,6 @@
     {
       "skill_id": "struct-layout-reasoning",
       "changes": {
-        "owner_team": {
-          "from": "struct_layout_reasoning",
-          "to": "cs338-skills"
-        },
         "owner_contact": {
           "from": null,
           "to": "shubham.shahi@northwestern.edu"
@@ -1867,10 +1687,6 @@
     {
       "skill_id": "study-limitation-identification",
       "changes": {
-        "owner_team": {
-          "from": "study_limitation_identification",
-          "to": "cs338-skills"
-        },
         "owner_contact": {
           "from": null,
           "to": "shubham.shahi@northwestern.edu"
@@ -1965,10 +1781,6 @@
     {
       "skill_id": "trend-analysis-reasoning",
       "changes": {
-        "owner_team": {
-          "from": "trend_analysis_reasoning",
-          "to": "cs338-skills"
-        },
         "owner_contact": {
           "from": null,
           "to": "shubham.shahi@northwestern.edu"
