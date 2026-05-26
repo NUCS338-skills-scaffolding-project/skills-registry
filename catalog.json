@@ -2078,22 +2078,25 @@
   },
   {
     "skill_id": "example-skill",
-    "name": "Example Identify Outputs",
+    "name": "Example: Restate the Problem",
     "skill_type": "instructional",
     "stance": "socratic",
     "tags": [
-      "topic1",
-      "topic2"
+      "example",
+      "comprehension"
     ],
     "course_types": [
-      "cs"
+      "cs",
+      "humanities"
     ],
     "learning_goal_tags": [
-      "specify-io"
+      "restate-the-problem"
     ],
     "trigger_signals": [
-      "output-confusion"
+      "new-assignment-opened",
+      "student-jumping-to-solution"
     ],
+    "chip_icon": "\ud83d\udd01",
     "version": "0.1.0",
     "owner_team": "example_skill",
     "status": "ready",
@@ -4433,31 +4436,31 @@
     "has_logic": false
   },
   {
-    "skill_id": "reframe-with-analogy",
-    "name": "Reframe with analogy",
+    "skill_id": "reframe_with_analogy",
+    "name": "Reframe With Analogy",
     "skill_type": "instructional",
-    "stance": "socratic",
+    "stance": "reframe",
     "tags": [
-      "learning",
-      "concept-explanation",
       "analogy",
-      "education"
+      "reframe",
+      "comprehension",
+      "abstraction",
+      "humanities"
     ],
     "course_types": [
-      "cs",
       "humanities"
     ],
     "learning_goal_tags": [
-      "build-mental-models",
-      "connect-abstract-to-concrete",
-      "understand-systems-concepts"
+      "interpret-evidence",
+      "surface-assumptions",
+      "detect-ambiguity"
     ],
     "trigger_signals": [
-      "confused-about-concept",
-      "asks-what-does-this-mean",
-      "struggling-with-memory-or-cache"
+      "too-abstract",
+      "doesnt-get-the-concept",
+      "explain-like-im-five",
+      "need-different-angle"
     ],
-    "chip_icon": "\ud83e\udde9",
     "version": "0.1.0",
     "owner_team": "reframe_with_analogy",
     "status": "ready",

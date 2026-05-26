@@ -1,9 +1,13 @@
 {
-  "generated_at": "2026-05-26T01:59:07.140476+00:00",
+  "generated_at": "2026-05-26T02:29:51.460294+00:00",
   "previous_hash": "554c638926f9fed5",
-  "current_hash": "713772a9017ea235",
-  "added": [],
-  "removed": [],
+  "current_hash": "e8fa711ec39e8a36",
+  "added": [
+    "reframe_with_analogy"
+  ],
+  "removed": [
+    "reframe-with-analogy"
+  ],
   "changed": [
     {
       "skill_id": "adjust-to-level",
@@ -620,6 +624,10 @@
     {
       "skill_id": "example-skill",
       "changes": {
+        "name": {
+          "from": "Example Identify Outputs",
+          "to": "Example: Restate the Problem"
+        },
         "source_repo": {
           "from": null,
           "to": "example_skill"
@@ -1302,15 +1310,6 @@
       }
     },
     {
-      "skill_id": "reframe-with-analogy",
-      "changes": {
-        "source_repo": {
-          "from": null,
-          "to": "reframe_with_analogy"
-        }
-      }
-    },
-    {
       "skill_id": "repair-miscon",
       "changes": {
         "source_repo": {
@@ -1645,5 +1644,5 @@
     }
   ],
   "unchanged_count": 0,
-  "summary": "182 changed"
+  "summary": "1 added, 1 removed, 181 changed"
 }
