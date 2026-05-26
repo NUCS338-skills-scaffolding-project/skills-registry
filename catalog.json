@@ -2,7 +2,7 @@
   {
     "skill_id": "adjust-to-level",
     "name": "Adjust to Level",
-    "owner_team": "adjust_to_level",
+    "owner_team": "POLISCI-210",
     "skill_type": "instructional",
     "stance": "meta",
     "tags": [
@@ -118,7 +118,7 @@
     ],
     "chip_icon": "\ud83e\udd16",
     "version": "0.1.0",
-    "owner_team": "ai_explanation_critique",
+    "owner_team": "cs338-skills",
     "status": "ready",
     "has_logic": false
   },
@@ -213,7 +213,7 @@
     ],
     "chip_icon": "\u2753",
     "version": "0.1.0",
-    "owner_team": "analytical_question_formulation",
+    "owner_team": "cs338-skills",
     "status": "ready",
     "has_logic": false
   },
@@ -315,7 +315,7 @@
     ],
     "chip_icon": "\ud83e\ude7a",
     "version": "0.1.0",
-    "owner_team": "answer_error_diagnosis",
+    "owner_team": "cs338-skills",
     "status": "ready",
     "has_logic": false
   },
@@ -559,7 +559,7 @@
     ],
     "chip_icon": "\u2699\ufe0f",
     "version": "0.2.0",
-    "owner_team": "assembly_trace_reasoning",
+    "owner_team": "cs338-skills",
     "status": "ready",
     "has_logic": false
   },
@@ -591,7 +591,7 @@
     ],
     "chip_icon": "\u2714\ufe0f",
     "version": "0.1.0",
-    "owner_team": "assumption_checking",
+    "owner_team": "cs338-skills",
     "status": "ready",
     "has_logic": false
   },
@@ -801,7 +801,7 @@
     ],
     "chip_icon": "\ud83d\udccb",
     "version": "0.1.0",
-    "owner_team": "calling_convention_reasoning",
+    "owner_team": "cs338-skills",
     "status": "ready",
     "has_logic": false
   },
@@ -1008,7 +1008,7 @@
     ],
     "chip_icon": "\ud83d\udd00",
     "version": "0.1.0",
-    "owner_team": "concept_distinction_reasoning",
+    "owner_team": "cs338-skills",
     "status": "ready",
     "has_logic": false
   },
@@ -1103,7 +1103,7 @@
     ],
     "chip_icon": "\ud83d\udd00",
     "version": "0.1.0",
-    "owner_team": "concurrency_failure_diagnosis",
+    "owner_team": "cs338-skills",
     "status": "ready",
     "has_logic": false
   },
@@ -1319,7 +1319,7 @@
     ],
     "chip_icon": "\u2696\ufe0f",
     "version": "0.1.0",
-    "owner_team": "counterevidence_engagement",
+    "owner_team": "cs338-skills",
     "status": "ready",
     "has_logic": false
   },
@@ -1471,7 +1471,7 @@
     ],
     "chip_icon": "\u2696\ufe0f",
     "version": "0.1.0",
-    "owner_team": "cross_author_comparison",
+    "owner_team": "cs338-skills",
     "status": "ready",
     "has_logic": false
   },
@@ -1681,7 +1681,7 @@
     ],
     "chip_icon": "\ud83d\udd27",
     "version": "0.1.0",
-    "owner_team": "design_alternative_reasoning",
+    "owner_team": "cs338-skills",
     "status": "ready",
     "has_logic": false
   },
@@ -1868,7 +1868,7 @@
     ],
     "chip_icon": "\u2194\ufe0f",
     "version": "0.1.0",
-    "owner_team": "endianness_byte_ordering",
+    "owner_team": "cs338-skills",
     "status": "ready",
     "has_logic": false
   },
@@ -1901,7 +1901,7 @@
     ],
     "chip_icon": "\ud83c\udfad",
     "version": "0.1.0",
-    "owner_team": "ensemble_reasoning",
+    "owner_team": "cs338-skills",
     "status": "ready",
     "has_logic": false
   },
@@ -2508,7 +2508,7 @@
     ],
     "chip_icon": "\u2753",
     "version": "0.1.0",
-    "owner_team": "follow_up_question_deepening",
+    "owner_team": "cs338-skills",
     "status": "ready",
     "has_logic": false
   },
@@ -2632,7 +2632,7 @@
     ],
     "chip_icon": "\ud83e\udded",
     "version": "0.1.0",
-    "owner_team": "heuristic_admissibility_reasoning",
+    "owner_team": "cs338-skills",
     "status": "ready",
     "has_logic": false
   },
@@ -2665,7 +2665,7 @@
     ],
     "chip_icon": "\ud83c\udf9e\ufe0f",
     "version": "0.1.0",
-    "owner_team": "historical_contextualization",
+    "owner_team": "cs338-skills",
     "status": "ready",
     "has_logic": false
   },
@@ -2698,7 +2698,7 @@
     ],
     "chip_icon": "\ud83c\udfdb\ufe0f",
     "version": "0.1.0",
-    "owner_team": "historical_thesis_formulation",
+    "owner_team": "cs338-skills",
     "status": "ready",
     "has_logic": false
   },
@@ -2764,7 +2764,7 @@
     ],
     "chip_icon": "\ud83c\udf9b\ufe0f",
     "version": "0.1.0",
-    "owner_team": "hyperparameter_impact_reasoning",
+    "owner_team": "cs338-skills",
     "status": "ready",
     "has_logic": false
   },
@@ -2828,7 +2828,7 @@
     ],
     "chip_icon": "\ud83e\uddea",
     "version": "0.1.0",
-    "owner_team": "hypothesis_formulation",
+    "owner_team": "cs338-skills",
     "status": "ready",
     "has_logic": false
   },
@@ -3066,7 +3066,7 @@
     ],
     "chip_icon": "\ud83d\udd22",
     "version": "0.1.0",
-    "owner_team": "integer_overflow_reasoning",
+    "owner_team": "cs338-skills",
     "status": "ready",
     "has_logic": false
   },
@@ -3172,7 +3172,7 @@
     ],
     "chip_icon": "\ud83c\udfa4",
     "version": "0.1.0",
-    "owner_team": "interview_preparation",
+    "owner_team": "cs338-skills",
     "status": "ready",
     "has_logic": false
   },
@@ -3205,7 +3205,7 @@
     ],
     "chip_icon": "\ud83d\udcc8",
     "version": "0.1.0",
-    "owner_team": "iterative_improvement_reasoning",
+    "owner_team": "cs338-skills",
     "status": "ready",
     "has_logic": false
   },
@@ -3238,7 +3238,7 @@
     ],
     "chip_icon": "\ud83d\udcf0",
     "version": "0.1.0",
-    "owner_team": "journalistic_lede_writing",
+    "owner_team": "cs338-skills",
     "status": "ready",
     "has_logic": false
   },
@@ -3329,7 +3329,7 @@
     ],
     "chip_icon": "\u26f0\ufe0f",
     "version": "0.1.0",
-    "owner_team": "local_vs_global_optimum_reasoning",
+    "owner_team": "cs338-skills",
     "status": "ready",
     "has_logic": false
   },
@@ -3489,7 +3489,7 @@
     ],
     "chip_icon": "\u2696\ufe0f",
     "version": "0.1.0",
-    "owner_team": "method_selection_reasoning",
+    "owner_team": "cs338-skills",
     "status": "ready",
     "has_logic": false
   },
@@ -3522,7 +3522,7 @@
     ],
     "chip_icon": "\ud83d\uddbc\ufe0f",
     "version": "0.1.0",
-    "owner_team": "multi_source_portrait_building",
+    "owner_team": "cs338-skills",
     "status": "ready",
     "has_logic": false
   },
@@ -3643,7 +3643,7 @@
     ],
     "chip_icon": "\ud83c\udf30",
     "version": "0.1.0",
-    "owner_team": "nut_graph_construction",
+    "owner_team": "cs338-skills",
     "status": "ready",
     "has_logic": false
   },
@@ -3702,7 +3702,7 @@
     ],
     "chip_icon": "\ud83d\udc41\ufe0f",
     "version": "0.1.0",
-    "owner_team": "observation_integration",
+    "owner_team": "cs338-skills",
     "status": "ready",
     "has_logic": false
   },
@@ -3796,7 +3796,7 @@
     ],
     "chip_icon": "\ud83d\udcd6",
     "version": "0.1.0",
-    "owner_team": "parallel_text_comparison",
+    "owner_team": "cs338-skills",
     "status": "ready",
     "has_logic": false
   },
@@ -3917,7 +3917,7 @@
     ],
     "chip_icon": "\ud83d\udccd",
     "version": "0.1.0",
-    "owner_team": "pointer_address_reasoning",
+    "owner_team": "cs338-skills",
     "status": "ready",
     "has_logic": false
   },
@@ -3951,7 +3951,7 @@
     ],
     "chip_icon": "\u26a1",
     "version": "0.1.0",
-    "owner_team": "preemption_event_reasoning",
+    "owner_team": "cs338-skills",
     "status": "ready",
     "has_logic": false
   },
@@ -3984,7 +3984,7 @@
     ],
     "chip_icon": "\ud83d\udd27",
     "version": "0.1.0",
-    "owner_team": "preprocessing_impact_reasoning",
+    "owner_team": "cs338-skills",
     "status": "ready",
     "has_logic": false
   },
@@ -4018,7 +4018,7 @@
     ],
     "chip_icon": "\ud83e\ude9e",
     "version": "0.1.0",
-    "owner_team": "prior_knowledge_elicitation",
+    "owner_team": "cs338-skills",
     "status": "ready",
     "has_logic": false
   },
@@ -4178,7 +4178,7 @@
     ],
     "chip_icon": "\ud83d\udcac",
     "version": "0.1.0",
-    "owner_team": "quote_selection",
+    "owner_team": "cs338-skills",
     "status": "ready",
     "has_logic": false
   },
@@ -4210,7 +4210,7 @@
     ],
     "chip_icon": "\ud83d\udd0d",
     "version": "0.1.0",
-    "owner_team": "quote_selection_reasoning",
+    "owner_team": "cs338-skills",
     "status": "ready",
     "has_logic": false
   },
@@ -4345,7 +4345,7 @@
     ],
     "chip_icon": "\ud83d\udcda",
     "version": "0.1.0",
-    "owner_team": "reading_synthesis",
+    "owner_team": "cs338-skills",
     "status": "ready",
     "has_logic": false
   },
@@ -4562,7 +4562,7 @@
     ],
     "chip_icon": "\ud83c\udf0d",
     "version": "0.1.0",
-    "owner_team": "research_relevance_reasoning",
+    "owner_team": "cs338-skills",
     "status": "ready",
     "has_logic": false
   },
@@ -4620,7 +4620,7 @@
     ],
     "chip_icon": "\ud83d\udccb",
     "version": "0.1.0",
-    "owner_team": "result_interpretation",
+    "owner_team": "cs338-skills",
     "status": "ready",
     "has_logic": false
   },
@@ -4744,7 +4744,7 @@
     ],
     "chip_icon": "\ud83d\uddc2\ufe0f",
     "version": "0.1.0",
-    "owner_team": "scheduling_selection_reasoning",
+    "owner_team": "cs338-skills",
     "status": "ready",
     "has_logic": false
   },
@@ -4809,7 +4809,7 @@
     ],
     "chip_icon": "\ud83d\uddfa\ufe0f",
     "version": "0.1.0",
-    "owner_team": "search_state_formulation",
+    "owner_team": "cs338-skills",
     "status": "ready",
     "has_logic": false
   },
@@ -4963,7 +4963,7 @@
     ],
     "chip_icon": "\ud83c\udfac",
     "version": "0.1.0",
-    "owner_team": "show_dont_tell_journalism",
+    "owner_team": "cs338-skills",
     "status": "ready",
     "has_logic": false
   },
@@ -4995,7 +4995,7 @@
     ],
     "chip_icon": "\ud83d\udd75\ufe0f",
     "version": "0.1.0",
-    "owner_team": "source_attribution_reasoning",
+    "owner_team": "cs338-skills",
     "status": "ready",
     "has_logic": false
   },
@@ -5123,7 +5123,7 @@
     ],
     "chip_icon": "\ud83c\udfaf",
     "version": "0.1.0",
-    "owner_team": "story_angle_development",
+    "owner_team": "cs338-skills",
     "status": "ready",
     "has_logic": false
   },
@@ -5155,7 +5155,7 @@
     ],
     "chip_icon": "\ud83d\udcd0",
     "version": "0.1.0",
-    "owner_team": "struct_layout_reasoning",
+    "owner_team": "cs338-skills",
     "status": "ready",
     "has_logic": false
   },
@@ -5188,7 +5188,7 @@
     ],
     "chip_icon": "\ud83d\udd0d",
     "version": "0.1.0",
-    "owner_team": "study_limitation_identification",
+    "owner_team": "cs338-skills",
     "status": "ready",
     "has_logic": false
   },
@@ -5498,7 +5498,7 @@
     ],
     "chip_icon": "\ud83d\udcc9",
     "version": "0.1.0",
-    "owner_team": "trend_analysis_reasoning",
+    "owner_team": "cs338-skills",
     "status": "ready",
     "has_logic": false
   },
