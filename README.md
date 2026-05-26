@@ -11,8 +11,8 @@ Central registry and aggregated catalog for every skill in the Mentora skills pa
 | `catalog_changelog.json` | Diff between the previous and current catalog — added, removed, changed skills. Consumed by the orchestrator for selective cache invalidation. |
 | `catalog_meta.json` | Schema version, build timestamp, total skill count, and a hash of the catalog. |
 | `local/` | Local build outputs — gitignored. Put any locally generated catalogs and reports here. |
-| `scripts/catalog_builder_mentora_skills.py` | Builds the catalog from the `mentora_skills` package directory. No GitHub token needed. Use this for local development. |
-| `scripts/catalog_builder_team_repo.py` | **Admin only.** Validates skills across team repos via the GitHub API. Only used by the GitHub Actions workflow — teams do not need to run or configure this. |
+| `scripts/catalog_builder_mentora_skills.py` | Builds the runtime `catalog.json` used by the orchestrator from the `mentora_skills` package. No GitHub token needed. This is the script teams use for local development. |
+| `scripts/catalog_builder_team_repo.py` | **Admin only.** Validates skills directly in each team's GitHub repo and produces a per-team error report (`scripts/team_build_report.md`). This exists because the `mentora_skills` package flattens ownership — once a skill is merged in, there's no way to trace which team introduced a broken skill. This script goes back to the source repos to answer that question and hold the right team accountable. Requires `GITHUB_TOKEN` and `GITHUB_ORG`. Teams do not need to run this. |
 | `vocab/learning_goals.yaml` | Controlled vocabulary for `learning_goal_tags`. Propose new tags via PR. |
 
 ---
@@ -73,14 +73,7 @@ python scripts/catalog_builder_mentora_skills.py --strict \
 ## Iteration loop for skill development
 
 ```
-edit skills.md  →  python scripts/catalog_builder_mentora_skills.py [flags]  →  curl .../registry/refresh  →  test in UI
-```
-
-After rebuilding, tell the orchestrator to reload without restarting:
-
-```bash
-curl -X POST http://localhost:8080/registry/refresh \
-  -H "Authorization: Bearer changeme-dev-token"
+edit skills.md  →  python scripts/catalog_builder_mentora_skills.py [flags]  →  restart orchestrator  →  test in UI
 ```
 
 No push required at any step. Push to git when the skill is ready.
