@@ -4,8 +4,8 @@
 
 | Metric | Count |
 |--------|------:|
-| Total skills | 195 |
-| Ready | 182 |
+| Total skills | 204 |
+| Ready | 191 |
 | Stub | 9 |
 | Broken | 4 |
 

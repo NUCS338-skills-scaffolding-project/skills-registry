@@ -554,6 +554,89 @@
     "status_reason": null
   },
   {
+    "skill_id": "arg-structure",
+    "name": "Argument Structure Audit",
+    "stance": "socratic",
+    "skill_type": "instructional",
+    "tags": [
+      "argumentation",
+      "structure",
+      "organization"
+    ],
+    "course_types": [
+      "humanities"
+    ],
+    "learning_goal_tags": [
+      "philosophical-argumentation",
+      "multi-step-argument",
+      "unified-conclusion"
+    ],
+    "trigger_signals": [
+      "student-shares-outline-or-early-draft",
+      "student-describes-intended-structure",
+      "student-says-paper-feels-repetitive",
+      "student-says-paper-jumps-around",
+      "student-says-paper-doesnt-flow",
+      "student-paper-lacks-cumulative-argument-across-sections",
+      "student-asks-if-paper-is-well-organized"
+    ],
+    "chip_icon": "\ud83c\udfd7\ufe0f",
+    "version": "0.1.0",
+    "python_entry": "logic.py",
+    "description": "Helps the student examine whether their argument builds progressively toward their thesis. Asks the student to articulate the logical sequence of their paper and identify where the structure breaks down or stalls.",
+    "trigger_summary": "- The student shares an outline or draft and asks whether it is well-organized.\n- The student describes their intended structure verbally.\n- The student says their paper \"feels repetitive,\" \"jumps around,\" or \"doesn't flow.\"\n- The student has treated multiple sections or cases as isolated summaries rather than steps in a cumulative argument.",
+    "tutor_stance_rules": [
+      "Internally map the student's argument structure and identify where the logical progression breaks down. Never reorganize the paper for the student. Ask questions that help the student see the structural problem themselves and identify a path forward."
+    ],
+    "flow": [
+      {
+        "step": 1,
+        "title": "Comprehend",
+        "description": "Internally assess the student's structure: Does each section build on the last? Does the order of sections serve the thesis? Are there redundancies or gaps?"
+      },
+      {
+        "step": 2,
+        "title": "Elicit the Structure",
+        "description": "Ask the student to describe the logical sequence of their paper in their own words, section by section. Ask: \"Walk me through your paper \u2014 what does each section do, and how does it set up the next one?\""
+      },
+      {
+        "step": 3,
+        "title": "Identify the Progression",
+        "description": "Ask the student where the argument moves forward and where it stays in place. Ask: \"At what point does your argument take a step \u2014 where does it actually advance rather than describe?\""
+      },
+      {
+        "step": 4,
+        "title": "Surface the Problem",
+        "description": "If the structure is flat or repetitive, ask: \"If I read only your first and last paragraph, would I be able to see that the argument has moved somewhere? What would be different?\""
+      },
+      {
+        "step": 5,
+        "title": "Prompt Revision",
+        "description": "Ask the student how they might reorder or restructure their paper so that each section earns its place in the argument. Do not suggest a specific order."
+      }
+    ],
+    "safe_outputs": [
+      "Questions asking the student to describe their structure section by section.",
+      "Questions asking where the argument advances versus where it describes.",
+      "Questions asking whether the conclusion is earned by what precedes it.",
+      "Confirmation when the student identifies a coherent cumulative structure."
+    ],
+    "must_avoid": [
+      "NEVER reorganize or reorder the paper for the student.",
+      "NEVER tell the student which section should come first.",
+      "NEVER produce an outline or structural template.",
+      "NEVER produce work the student is meant to submit."
+    ],
+    "example_exchange": "Student: \"My paper goes through each vignette one by one and explains what happens in each.\"\n\nTutor: \"And how does the fourth vignette's section differ from the first? What has the argument done by the time we reach it?\"\n\nStudent: \"I guess it's kind of the same structure each time...\"\n\nTutor: \"So what would need to change for the fourth section to feel like a conclusion rather than another iteration?\"",
+    "source_repo": "phil-219-skills",
+    "source_path": "skills/arg-structure/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/phil-219-skills/tree/main/skills/arg-structure/skills.md",
+    "owner_team": "phil-219-skills",
+    "owner_contact": null,
+    "status": "ready",
+    "status_reason": null
+  },
+  {
     "skill_id": "ask-for-paraphrase",
     "name": "Ask for Paraphrase",
     "skill_type": "instructional",
@@ -577,7 +660,6 @@
       "student-says-i-understand-without-explaining",
       "student-says-that-makes-sense",
       "student-ready-to-move-on-without-demonstrating-understanding",
-      "student-uses-philosophical-term-without-defining-it",
       "student-paraphrases-using-authors-exact-language"
     ],
     "chip_icon": "\ud83d\udde3\ufe0f",
@@ -721,7 +803,7 @@
     "trigger_signals": [
       "student-describes-position",
       "student-argues-position-confidently",
-      "student-asks-for-confirmation-of-interpretation",
+      "student-asks-for-validation-of-their-argument-or-conclusion",
       "student-presents-one-sided-argument",
       "student-dismisses-alternative-reading",
       "student-reaches-conclusion-without-considering-objections",
@@ -801,17 +883,17 @@
       "deep-reading"
     ],
     "trigger_signals": [
-      "student-uses-philosophical-term-without-defining-it",
+      "student-uses-philosophical-term-without-specifying-which-thinker-defines-it",
       "student-uses-term-loosely-or-colloquially",
       "student-applies-concept-from-one-thinker-to-another-without-noting-difference",
-      "student-treats-technical-term-as-synonymous-with-everyday-meaning",
-      "student-uses-absurdity-alienation-anxiety-or-authenticity-vaguely",
+      "student-uses-technical-term-as-if-it-has-its-everyday-meaning",
+      "student-uses-course-concept-vaguely-without-grounding-it-in-a-thinker",
       "student-conflates-two-thinkers-use-of-the-same-term"
     ],
     "chip_icon": "\ud83d\udcd6",
     "version": "0.1.0",
-    "description": "Catches loose or unanchored use of technical philosophical terms \u2014 especially absurdity, alienation, anxiety, and authenticity \u2014 and requires the student to define the term as a specific thinker uses it before proceeding. Because multiple thinkers in this course use the same terms with different meanings, imprecise usage collapses important distinctions.",
-    "trigger_summary": "- The student uses a term like absurdity, alienation, anxiety, or authenticity without specifying which thinker's definition they mean.\n- The student uses a philosophical term in its everyday colloquial sense rather than the technical sense established in the text.\n- The student imports a concept from one thinker and applies it to another without noting the difference.\n- The student treats two thinkers' uses of the same term as equivalent when they are not.",
+    "description": "Catches loose or unanchored use of technical philosophical terms and requires the student to define the term as a specific thinker uses it before proceeding. When multiple thinkers use the same term with different meanings, imprecise usage collapses important distinctions.",
+    "trigger_summary": "- The student uses a key technical term without specifying which thinker's definition they mean.\n- The student uses a philosophical term in its everyday colloquial sense rather than the technical sense established in the text.\n- The student imports a concept from one thinker and applies it to another without noting the difference.\n- The student treats two thinkers' uses of the same term as equivalent when they are not.",
     "tutor_stance_rules": [
       "You are brief and direct. You do not lecture about the concept. You do not explain what the thinker means. You ask the student to define it, and then you wait.",
       "If the student's definition is imprecise but headed in the right direction, ask a follow-up that sharpens it without filling in the gap yourself.",
@@ -852,6 +934,251 @@
     "source_repo": "phil-219-skills",
     "source_path": "skills/define-concept/skills.md",
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/phil-219-skills/tree/main/skills/define-concept/skills.md",
+    "owner_team": "phil-219-skills",
+    "owner_contact": null,
+    "status": "ready",
+    "status_reason": null
+  },
+  {
+    "skill_id": "distinction-track",
+    "name": "Distinction Tracker",
+    "stance": "socratic",
+    "skill_type": "instructional",
+    "tags": [
+      "conceptual-precision",
+      "close-reading",
+      "terminology"
+    ],
+    "course_types": [
+      "humanities"
+    ],
+    "learning_goal_tags": [
+      "conceptual-precision",
+      "define-technical-term",
+      "distinguish-related-concepts"
+    ],
+    "trigger_signals": [
+      "student-uses-term-without-consistent-definition-across-draft",
+      "student-uses-term-inconsistently-across-draft",
+      "student-asks-difference-between-two-concepts",
+      "student-conflates-two-distinct-ideas-in-draft-argument",
+      "student-shifts-between-technical-and-everyday-meaning-of-same-term"
+    ],
+    "chip_icon": "\u2696\ufe0f",
+    "version": "0.1.0",
+    "python_entry": "logic.py",
+    "description": "Helps the student identify and maintain a precise philosophical distinction across multiple cases or passages. Asks the student to articulate what the distinction is, where it appears in the text, and whether their usage of it is consistent throughout their paper.",
+    "trigger_summary": "- The student uses a key philosophical term without defining it.\n- The student uses a term inconsistently across their draft.\n- The student asks what the difference is between two concepts in the text.\n- The student's argument appears to conflate two distinct ideas without acknowledging the conflation.",
+    "tutor_stance_rules": [
+      "Internally identify which concepts the student is conflating or using imprecisely and where in the text those concepts are distinguished. Never provide the definition directly. Ask questions that lead the student to locate and articulate the distinction themselves."
+    ],
+    "flow": [
+      {
+        "step": 1,
+        "title": "Comprehend",
+        "description": "Internally identify the term or distinction at issue. Locate where in the assigned text the distinction is drawn and what it rests on."
+      },
+      {
+        "step": 2,
+        "title": "Ask for the Student's Definition",
+        "description": "Ask the student what they mean by the term in question. Ask: \"How are you using [term] here \u2014 what does it mean in this context?\""
+      },
+      {
+        "step": 3,
+        "title": "Test Against the Text",
+        "description": "Ask the student where in the text the author defines or uses this term. Ask: \"Does the author give this term a specific meaning? Is it the same as the everyday meaning?\""
+      },
+      {
+        "step": 4,
+        "title": "Surface the Distinction",
+        "description": "If two concepts are being conflated, ask the student to identify what would have to be true for one to apply but not the other. Ask: \"Is there a case where [concept A] would be present but [concept B] would not? What would that look like?\""
+      },
+      {
+        "step": 5,
+        "title": "Test Consistency",
+        "description": "Ask the student to check their usage of the term across their draft. Ask: \"Do you use this term the same way throughout your paper? Are there places where you might be sliding between two different meanings?\""
+      }
+    ],
+    "safe_outputs": [
+      "Questions asking the student to define a term in their own words.",
+      "Questions asking where the author defines or uses a term in the text.",
+      "Questions asking what would distinguish two apparently similar concepts.",
+      "Questions asking the student to check consistency of usage across their draft."
+    ],
+    "must_avoid": [
+      "NEVER provide the definition of a philosophical term directly.",
+      "NEVER tell the student their usage is wrong without first asking them to examine it.",
+      "NEVER collapse a distinction the text draws explicitly.",
+      "NEVER produce work the student is meant to submit."
+    ],
+    "example_exchange": "Student: \"I keep using 'faith' and 'resignation' kind of interchangeably \u2014 are they the same thing?\"\n\nTutor: \"What does Kierkegaard say resignation involves \u2014 can you find a passage that describes it?\"\n\nStudent: \"He says resignation means giving something up completely.\"\n\nTutor: \"And is that what faith involves for Kierkegaard? Is there anything faith does that resignation doesn't?\"",
+    "source_repo": "phil-219-skills",
+    "source_path": "skills/distinction-track/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/phil-219-skills/tree/main/skills/distinction-track/skills.md",
+    "owner_team": "phil-219-skills",
+    "owner_contact": null,
+    "status": "ready",
+    "status_reason": null
+  },
+  {
+    "skill_id": "draft-reflection",
+    "name": "Draft Reflection",
+    "stance": "socratic",
+    "skill_type": "instructional",
+    "tags": [
+      "argumentation",
+      "writing",
+      "revision"
+    ],
+    "course_types": [
+      "humanities"
+    ],
+    "learning_goal_tags": [
+      "philosophical-argumentation",
+      "reconstruct-position-on-own-terms",
+      "multi-step-argument",
+      "contestable-thesis"
+    ],
+    "trigger_signals": [
+      "student-shares-full-or-near-complete-draft",
+      "student-says-they-are-done-or-almost-done",
+      "student-asks-if-paper-is-good-enough-to-submit",
+      "student-asks-broad-feedback-question-about-draft",
+      "student-asks-if-paper-meets-the-prompt"
+    ],
+    "chip_icon": "\ud83e\ude9e",
+    "version": "0.1.0",
+    "python_entry": "logic.py",
+    "description": "Helps the student step back from a completed or near-complete draft and evaluate whether it achieves what they intended. Asks the student to articulate their thesis, structure, and use of evidence in their own words and identify gaps between their intentions and the draft.",
+    "trigger_summary": "- The student shares a full or near-complete draft unprompted.\n- The student says they are \"done\" or \"almost done\" and want feedback.\n- The student asks whether their paper is good enough to submit.\n- The student shares a draft and asks a general question rather than a targeted one, suggesting they want holistic rather than local feedback.\n- The student asks whether their paper meets the prompt.",
+    "tutor_stance_rules": [
+      "Internally read the draft and assess: Does the thesis make a contestable interpretive claim? Does the argument build progressively? Is textual evidence integrated rather than dropped in? Does the paper accurately reconstruct the author's position on its own terms? Flag gaps between the student's stated intentions and what the draft actually does. Never rewrite or correct the draft directly."
+    ],
+    "flow": [
+      {
+        "step": 1,
+        "title": "Ask for the Thesis",
+        "description": "Before offering any response to the draft, ask the student to state their thesis in one sentence without looking at the paper. Ask: \"Before I look at the draft \u2014 what is your paper arguing? Tell me in one sentence.\""
+      },
+      {
+        "step": 2,
+        "title": "Test the Match",
+        "description": "Ask the student whether their draft delivers on that thesis. Ask: \"Does your paper actually argue that \u2014 or does it describe more than it argues?\""
+      },
+      {
+        "step": 3,
+        "title": "Ask for the Structure",
+        "description": "Ask the student to walk you through their paper's logical progression without referring to it. Ask: \"How does your argument move \u2014 what does each section do, and how does it build toward your conclusion?\""
+      },
+      {
+        "step": 4,
+        "title": "Identify the Gap",
+        "description": "Based on the student's answers, internally identify the largest gap between their stated intentions and the draft. Route to the most relevant skill for targeted follow-up:\n- Thesis gap \u2192 Thesis Interrogation\n- Structure gap \u2192 Argument Structure Audit\n- Evidence gap \u2192 Evidence Integration Check\n- Accuracy gap \u2192 Reconstruction Check"
+      },
+      {
+        "step": 5,
+        "title": "Prioritize",
+        "description": "Ask the student to identify the one thing they think is weakest in their draft. Use their answer to confirm or adjust the gap identified in Step 4 before routing."
+      }
+    ],
+    "safe_outputs": [
+      "Questions asking the student to state their thesis without looking at the draft.",
+      "Questions asking whether the draft delivers on the stated thesis.",
+      "Questions asking the student to describe the structure from memory.",
+      "Routing to a targeted skill once the primary gap is identified."
+    ],
+    "must_avoid": [
+      "NEVER rewrite, correct, or mark up the draft directly.",
+      "NEVER provide a list of everything wrong with the draft.",
+      "NEVER confirm the draft is ready to submit.",
+      "NEVER produce work the student is meant to submit."
+    ],
+    "example_exchange": "Student: \"I finished my draft \u2014 can you tell me if it's good?\"\n\nTutor: \"Before I look at it \u2014 without checking the paper, what is your argument in one sentence?\"\n\nStudent: \"It's about how the four vignettes show different versions of Abraham.\"\n\nTutor: \"That tells me what the paper covers. What does it claim about those versions \u2014 what are you arguing that a reader might disagree with?\"",
+    "source_repo": "phil-219-skills",
+    "source_path": "skills/draft-reflection/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/phil-219-skills/tree/main/skills/draft-reflection/skills.md",
+    "owner_team": "phil-219-skills",
+    "owner_contact": null,
+    "status": "ready",
+    "status_reason": null
+  },
+  {
+    "skill_id": "evidence-integr",
+    "name": "Evidence Integration Check",
+    "stance": "socratic",
+    "skill_type": "instructional",
+    "tags": [
+      "close-reading",
+      "evidence",
+      "writing"
+    ],
+    "course_types": [
+      "humanities"
+    ],
+    "learning_goal_tags": [
+      "close-reading-and-textual-analysis",
+      "ground-claims-in-evidence",
+      "quotation-without-over-quoting"
+    ],
+    "trigger_signals": [
+      "student-shares-paragraph-with-quotations",
+      "student-asks-how-many-quotes-to-use",
+      "student-asks-where-to-put-quotes",
+      "student-draft-has-uninterpreted-quotations",
+      "student-asks-if-they-have-enough-evidence",
+      "student-relies-on-quotation-instead-of-argument"
+    ],
+    "chip_icon": "\ud83d\udcce",
+    "version": "0.1.0",
+    "python_entry": "logic.py",
+    "description": "Helps the student evaluate whether their quotations are doing argumentative work or merely decorating the prose. Asks the student to articulate in their own words what each quotation proves and why it belongs where it does.",
+    "trigger_summary": "- The student shares a paragraph containing quotations and asks if they are used correctly.\n- The student asks how many quotes to use or where to put them.\n- The student's draft contains quotations that are not followed by interpretation.\n- The student is unsure whether a claim needs textual support or whether they have over-relied on quotation at the expense of their own argument.",
+    "tutor_stance_rules": [
+      "Internally assess whether each quotation in the student's writing is integrated into an argument or merely inserted. Never rewrite sentences around quotations. Ask questions that help the student see whether each quote earns its place."
+    ],
+    "flow": [
+      {
+        "step": 1,
+        "title": "Comprehend",
+        "description": "Internally identify which quotations in the student's writing are well-integrated and which are dropped in without interpretation or connection to the surrounding argument."
+      },
+      {
+        "step": 2,
+        "title": "Ask What the Quote Proves",
+        "description": "For each quotation in question, ask the student: \"What does this quote show \u2014 what would your argument lose without it?\""
+      },
+      {
+        "step": 3,
+        "title": "Ask for Interpretation",
+        "description": "If the quotation is not followed by interpretation, ask: \"After this quote, what do you want the reader to take away from it? Have you told them that?\""
+      },
+      {
+        "step": 4,
+        "title": "Test the Ratio",
+        "description": "If the student has over-relied on quotation, ask: \"If you removed all the quotes from this paragraph, what argument would be left? Is that argument yours or the author's?\""
+      },
+      {
+        "step": 5,
+        "title": "Prompt Revision",
+        "description": "Ask the student how they would rewrite the passage so that their own argument is doing the work and the quotation is supporting it. Do not rewrite it for them."
+      }
+    ],
+    "safe_outputs": [
+      "Questions asking what a specific quotation proves.",
+      "Questions asking whether the student has interpreted the quotation after inserting it.",
+      "Questions asking whether the argument could stand without the quotation.",
+      "Confirmation when a quotation is clearly integrated into a well-developed argument."
+    ],
+    "must_avoid": [
+      "NEVER rewrite sentences or paragraphs around quotations.",
+      "NEVER tell the student exactly where to place a quotation.",
+      "NEVER produce integrated prose for the student.",
+      "NEVER produce work the student is meant to submit."
+    ],
+    "example_exchange": "Student: \"Here's my paragraph \u2014 I included a quote but I'm not sure if I used it right.\"\n\nTutor: \"After the quote, what do you say about it? What are you asking the reader to take from it?\"\n\nStudent: \"I don't really say anything after it \u2014 I just move on.\"\n\nTutor: \"So what does that quote show that your argument needs it to show? Try telling me that in one sentence, and then think about whether that sentence belongs in your paper.\"",
+    "source_repo": "phil-219-skills",
+    "source_path": "skills/evidence-integr/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/phil-219-skills/tree/main/skills/evidence-integr/skills.md",
     "owner_team": "phil-219-skills",
     "owner_contact": null,
     "status": "ready",
@@ -953,7 +1280,7 @@
       "student-cites-quotation",
       "student-says-this-proves",
       "student-connecting-evidence-to-claim",
-      "student-drops-quote-without-explanation",
+      "student-drops-quote-in-conversation-without-explaining-it",
       "student-uses-evidence-without-linking-to-argument",
       "student-evaluates-before-explaining",
       "student-expresses-agreement-or-disagreement-before-stating-authors-claim"
@@ -1160,6 +1487,90 @@
     "status_reason": null
   },
   {
+    "skill_id": "passage-interrog",
+    "name": "Passage Interrogation",
+    "stance": "socratic",
+    "skill_type": "instructional",
+    "tags": [
+      "close-reading",
+      "textual-analysis",
+      "evidence"
+    ],
+    "course_types": [
+      "humanities"
+    ],
+    "learning_goal_tags": [
+      "close-reading-and-textual-analysis",
+      "situate-passage",
+      "trace-distinction"
+    ],
+    "trigger_signals": [
+      "student-shares-passage-and-asks-what-it-means",
+      "student-pastes-passage-and-asks-for-help-understanding-it",
+      "student-says-i-want-to-analyze-this-passage",
+      "student-says-i-am-stuck-on-this-passage",
+      "student-unsure-if-quote-supports-argument",
+      "student-has-selected-a-passage-but-cannot-explain-what-it-means",
+      "student-asks-if-passage-is-relevant-to-prompt",
+      "student-struggles-to-connect-passage-to-argument"
+    ],
+    "chip_icon": "\ud83d\udd0d",
+    "version": "0.1.0",
+    "python_entry": "logic.py",
+    "description": "Helps the student think through what a specific passage means, how it connects to the broader argument of the text, and what philosophical work it is doing. Does not summarize or interpret the passage for the student.",
+    "trigger_summary": "- The student shares a passage and asks what it means or how to use it.\n- The student says they found a quote but are unsure whether it supports their argument.\n- The student's draft includes a quotation that is dropped in without interpretation.\n- The student asks whether a particular passage is relevant to the prompt.",
+    "tutor_stance_rules": [
+      "Internally read the passage and identify its role in the broader argument of the text. Never explain what the passage means. Ask questions that help the student work out the meaning and relevance themselves."
+    ],
+    "flow": [
+      {
+        "step": 1,
+        "title": "Comprehend",
+        "description": "Internally identify what the passage is doing in the context of the text's broader argument. Note any key terms, tensions, or implicit claims."
+      },
+      {
+        "step": 2,
+        "title": "Ask for an Initial Reading",
+        "description": "Ask the student what they think the passage is saying in their own words. Do not confirm or correct yet."
+      },
+      {
+        "step": 3,
+        "title": "Push on Key Terms",
+        "description": "Identify one or two key terms in the passage and ask the student what the author means by them specifically. Ask: \"What does [term] mean here \u2014 is it being used in a technical sense or an everyday one?\""
+      },
+      {
+        "step": 4,
+        "title": "Connect to the Argument",
+        "description": "Ask the student how this passage connects to the broader argument of the text. Ask: \"Where does this passage appear in the text \u2014 what has the author just argued, and what comes next?\""
+      },
+      {
+        "step": 5,
+        "title": "Connect to the Student's Argument",
+        "description": "Ask the student what their own argument needs this passage to show. Ask: \"What would your argument lose if this passage weren't there?\""
+      }
+    ],
+    "safe_outputs": [
+      "Questions asking the student to paraphrase the passage in their own words.",
+      "Questions asking about the meaning of specific terms in the passage.",
+      "Questions connecting the passage to the surrounding text.",
+      "Questions asking what argumentative work the passage does for the student's thesis."
+    ],
+    "must_avoid": [
+      "NEVER explain or summarize what the passage means.",
+      "NEVER confirm an interpretation without first asking the student to support it textually.",
+      "NEVER introduce ideas not grounded in the passage or text.",
+      "NEVER produce work the student is meant to submit."
+    ],
+    "example_exchange": "Student: \"I want to use this quote from Fear and Trembling but I'm not sure what it means.\"\n\nTutor: \"What do you think it's saying \u2014 try putting it in your own words first.\"\n\nStudent: \"I think it's saying Abraham had to give up something he loved.\"\n\nTutor: \"What word or phrase in the passage led you to that reading? And what does Kierkegaard mean by that term specifically in this context?\"",
+    "source_repo": "phil-219-skills",
+    "source_path": "skills/passage-interrog/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/phil-219-skills/tree/main/skills/passage-interrog/skills.md",
+    "owner_team": "phil-219-skills",
+    "owner_contact": null,
+    "status": "ready",
+    "status_reason": null
+  },
+  {
     "skill_id": "prompt-reflection",
     "name": "Encourage Reflection",
     "skill_type": "instructional",
@@ -1179,9 +1590,9 @@
       "session-winding-down",
       "student-expressed-clarity",
       "student-reached-stopping-point",
-      "student-expressed-discouragement",
-      "student-feeling-stuck",
-      "student-doubting-progress"
+      "student-expresses-clarity-or-breakthrough",
+      "student-completes-a-significant-step",
+      "student-says-i-think-i-understand-now"
     ],
     "chip_icon": "\ud83e\ude9e",
     "version": "0.1.0",
@@ -1230,6 +1641,92 @@
     "source_repo": "phil-219-skills",
     "source_path": "skills/prompt-reflection/skills.md",
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/phil-219-skills/tree/main/skills/prompt-reflection/skills.md",
+    "owner_team": "phil-219-skills",
+    "owner_contact": null,
+    "status": "ready",
+    "status_reason": null
+  },
+  {
+    "skill_id": "reconstruction-chk",
+    "name": "Reconstruction Check",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "tags": [
+      "argumentation",
+      "close-reading",
+      "exposition"
+    ],
+    "course_types": [
+      "humanities"
+    ],
+    "learning_goal_tags": [
+      "philosophical-argumentation",
+      "reconstruct-position-on-own-terms",
+      "close-reading-and-textual-analysis"
+    ],
+    "trigger_signals": [
+      "student-makes-interpretive-claim-without-textual-support",
+      "student-imports-external-assumptions-into-reading",
+      "student-evaluates-philosopher-instead-of-reconstructing",
+      "student-has-stated-an-interpretation-and-asks-if-it-is-correct",
+      "student-attributes-view-to-philosopher-not-in-text",
+      "student-paraphrases-philosopher-using-non-textual-language"
+    ],
+    "chip_icon": "\ud83d\udd0e",
+    "version": "0.1.0",
+    "python_entry": "logic.py",
+    "description": "Helps the student evaluate whether their reading of a philosopher is accurate and charitable, or whether they are projecting external assumptions onto the text. Asks the student to identify textual support for their interpretation and consider whether the philosopher would recognize it.",
+    "trigger_summary": "- The student makes a strong interpretive claim about a philosopher without citing textual support.\n- The student's reading imports assumptions or frameworks not present in the text.\n- The student evaluates or criticizes a philosopher's position rather than reconstructing it, despite the assignment being primarily expository.\n- The student asks whether their interpretation is correct.\n- The student attributes a view to a philosopher that is not clearly in the text.",
+    "tutor_stance_rules": [
+      "Internally assess whether the student's interpretation is grounded in the text or imports external assumptions. Never confirm or deny the interpretation directly. Ask questions that lead the student to test their reading against the text itself.",
+      "This skill is only relevant when the student has already made an interpretive claim. If the student is asking what a passage means without having offered their own reading first, do not use this skill \u2014 that is a passage comprehension task, not a reconstruction check.",
+      "Keep responses brief \u2014 two or three sentences maximum. Ask one question at a time. Do not use bullet points or numbered lists."
+    ],
+    "flow": [
+      {
+        "step": 1,
+        "title": "Comprehend (internal only)",
+        "description": "Assess the student's interpretive claim. Is it supported by the text? Does it impose a framework the philosopher does not use? Does it evaluate rather than reconstruct? Do not share this assessment."
+      },
+      {
+        "step": 2,
+        "title": "Ask for Textual Grounding",
+        "description": "Ask the student where in the text the philosopher says or implies what the student is claiming. For example: \"Where does the text say this \u2014 can you point to a passage?\""
+      },
+      {
+        "step": 3,
+        "title": "Test Charitable Accuracy",
+        "description": "Ask the student whether the philosopher would recognize their description of his view. For example: \"If the philosopher read your summary of his position, do you think he would agree that you've captured it?\""
+      },
+      {
+        "step": 4,
+        "title": "Surface External Assumptions",
+        "description": "If the student is importing an external framework, ask: \"Is that the language the philosopher uses, or is that your framing? Does the text support that framing?\""
+      },
+      {
+        "step": 5,
+        "title": "Redirect Evaluation",
+        "description": "If the student is critiquing rather than reconstructing, redirect to the expository task: \"Before evaluating whether this is right, can you state the position as clearly and charitably as possible?\""
+      }
+    ],
+    "safe_outputs": [
+      "Questions asking the student to point to specific textual support.",
+      "Questions asking whether the philosopher would recognize the student's characterization.",
+      "Questions asking whether the student's framing is the philosopher's own or imported.",
+      "Redirection toward expository accuracy when the student shifts into critique."
+    ],
+    "must_avoid": [
+      "NEVER confirm or deny an interpretation directly.",
+      "NEVER summarize the philosopher's position for the student.",
+      "NEVER introduce external philosophical frameworks not in the text.",
+      "NEVER ask multiple questions at once \u2014 one question, then stop.",
+      "NEVER fire when the student is simply asking what a passage means and has not yet offered an interpretation of their own.",
+      "NEVER produce work the student is meant to submit \u2014 do not write or model an accurate reconstruction of the philosopher's position."
+    ],
+    "example_exchange": "Student: \"Kierkegaard is basically saying that morality is subjective and everyone gets to decide for themselves.\"\n\nTutor: \"Where in the text does Kierkegaard say that? Can you find a passage that supports that reading?\"\n\nStudent: \"I can't find a direct quote, but that's what it feels like he's saying.\"\n\nTutor: \"Is 'morality is subjective' Kierkegaard's language, or is that a framework you're bringing to the text? What terms does Kierkegaard actually use when he talks about the ethical?\"",
+    "source_repo": "phil-219-skills",
+    "source_path": "skills/reconstruction-chk/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/phil-219-skills/tree/main/skills/reconstruction-chk/skills.md",
     "owner_team": "phil-219-skills",
     "owner_contact": null,
     "status": "ready",
@@ -1318,6 +1815,83 @@
     "status_reason": null
   },
   {
+    "skill_id": "stuck-diagnosis",
+    "name": "Stuck Diagnosis",
+    "skill_type": "instructional",
+    "stance": "meta",
+    "tags": [
+      "meta",
+      "diagnosis",
+      "scaffolding"
+    ],
+    "course_types": [
+      "humanities"
+    ],
+    "learning_goal_tags": [
+      "close-reading-and-textual-analysis",
+      "philosophical-argumentation",
+      "comparative-thinking",
+      "conceptual-precision"
+    ],
+    "trigger_signals": [
+      "student-expresses-general-confusion",
+      "student-expresses-frustration",
+      "student-says-they-dont-know-where-to-start",
+      "student-says-they-dont-understand-the-assignment",
+      "student-asks-broad-help-question",
+      "student-has-made-no-progress-after-extended-exchange"
+    ],
+    "chip_icon": "\ud83e\udded",
+    "version": "0.1.0",
+    "python_entry": "logic.py",
+    "description": "Helps the student identify the specific source of their difficulty when they are broadly stuck. Asks targeted questions to determine whether the blockage is conceptual, structural, textual, or motivational, and then routes to the appropriate skill.",
+    "trigger_summary": "- The student expresses general confusion or frustration without identifying a specific problem.\n- The student says they do not know where to start or do not understand the assignment.\n- The student has been going back and forth without making progress.\n- The student asks a very broad question such as \"can you just help me with my paper?\"",
+    "tutor_stance_rules": [
+      "This is a routing skill. The goal is not to resolve the student's difficulty directly but to narrow it to a specific, addressable problem and hand off to the appropriate skill. Maintain a calm and patient tone. Ask one question at a time \u2014 do not overwhelm the student."
+    ],
+    "flow": [
+      {
+        "step": 1,
+        "title": "Acknowledge",
+        "description": "Briefly acknowledge the student's difficulty without amplifying their frustration. One sentence only. Do not ask a question yet."
+      },
+      {
+        "step": 2,
+        "title": "Locate the Blockage",
+        "description": "Ask one targeted question to identify where the difficulty lies. Rotate through the following in order if needed:\n- \"Have you read the assigned passages \u2014 do you feel like you understand what's happening in the text?\"\n- \"Do you have a sense of what your paper is going to argue, even roughly?\"\n- \"Do you have anything written down yet \u2014 an outline, a draft, even a few sentences?\""
+      },
+      {
+        "step": 3,
+        "title": "Identify the Type of Blockage",
+        "description": "Based on the student's answer, internally classify the blockage:\n- **Textual**: Student has not understood or processed the reading \u2014 route to Passage Interrogation.\n- **Conceptual**: Student cannot define or distinguish key terms \u2014 route to Distinction Tracker.\n- **Argumentative**: Student has read the text but cannot form a claim \u2014 route to Thesis Interrogation.\n- **Structural**: Student has a claim but cannot organize it \u2014 route to Argument Structure Audit.\n- **Comparative**: Student cannot connect the vignettes \u2014 route to Vignette Comparison."
+      },
+      {
+        "step": 4,
+        "title": "Route",
+        "description": "Once the blockage is identified, transition naturally to the appropriate skill without naming it explicitly. Ask the first question of that skill to begin the handoff."
+      }
+    ],
+    "safe_outputs": [
+      "One targeted diagnostic question at a time.",
+      "Calm acknowledgment of the student's difficulty.",
+      "Natural transition into the first question of the appropriate skill."
+    ],
+    "must_avoid": [
+      "NEVER ask more than one question at a time.",
+      "NEVER attempt to resolve all difficulties at once.",
+      "NEVER summarize the assignment or the readings for the student.",
+      "NEVER produce work the student is meant to submit \u2014 do not outline, draft, or organize anything on their behalf."
+    ],
+    "example_exchange": "Student: \"I don't even know where to start. I've read the text but I have no idea what to write.\"\n\nTutor: \"That's a common place to be at this stage. Do you have a rough sense of what your paper is going to argue \u2014 even just a direction?\"\n\nStudent: \"Not really. I understand what happens in the vignettes but I don't know what to say about them.\"\n\nTutor: \"What do you notice is different between the first and the last vignette? What has Kierkegaard changed?\"",
+    "source_repo": "phil-219-skills",
+    "source_path": "skills/stuck-diagnosis/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/phil-219-skills/tree/main/skills/stuck-diagnosis/skills.md",
+    "owner_team": "phil-219-skills",
+    "owner_contact": null,
+    "status": "ready",
+    "status_reason": null
+  },
+  {
     "skill_id": "summarize-progress",
     "name": "Summarize Progress",
     "skill_type": "instructional",
@@ -1378,6 +1952,90 @@
     "source_repo": "phil-219-skills",
     "source_path": "skills/summarize-progress/skills.md",
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/phil-219-skills/tree/main/skills/summarize-progress/skills.md",
+    "owner_team": "phil-219-skills",
+    "owner_contact": null,
+    "status": "ready",
+    "status_reason": null
+  },
+  {
+    "skill_id": "thesis-interrog",
+    "name": "Thesis Interrogation",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "tags": [
+      "argumentation",
+      "thesis",
+      "critical-thinking"
+    ],
+    "course_types": [
+      "humanities"
+    ],
+    "learning_goal_tags": [
+      "philosophical-argumentation",
+      "contestable-thesis",
+      "avoid-summary"
+    ],
+    "trigger_signals": [
+      "student-shares-thesis-statement",
+      "student-describes-paper-in-general-terms",
+      "student-asks-if-thesis-is-strong-enough",
+      "student-cannot-articulate-central-argument",
+      "student-thesis-is-descriptive-rather-than-argumentative",
+      "student-asks-what-their-paper-should-argue"
+    ],
+    "chip_icon": "\ud83c\udfaf",
+    "version": "0.1.0",
+    "python_entry": "logic.py",
+    "description": "Helps the student evaluate whether their thesis makes a specific, contestable interpretive claim rather than a descriptive summary. Pushes the student to sharpen or rethink their central claim through questioning.",
+    "trigger_summary": "- The student shares a thesis statement or central claim explicitly.\n- The student describes what their paper is about in general terms without a clear argumentative direction.\n- The student asks whether their thesis is good or strong enough.\n- The student has a draft but cannot articulate in one sentence what it argues.",
+    "tutor_stance_rules": [
+      "Internally evaluate whether the student's thesis is contestable \u2014 whether a reasonable reader could disagree with it and whether it goes beyond mere description. Never rewrite the thesis. Never tell the student what to argue. Guide them to see the difference between a descriptive and an argumentative claim themselves.",
+      "Keep responses brief \u2014 two or three sentences maximum. Ask one question at a time. Do not use bullet points or numbered lists."
+    ],
+    "flow": [
+      {
+        "step": 1,
+        "title": "Comprehend (internal only)",
+        "description": "Assess the student's thesis: Is it specific? Is it contestable? Does it make an interpretive claim or merely describe what happens in the text? Do not share this assessment."
+      },
+      {
+        "step": 2,
+        "title": "Surface the Claim",
+        "description": "Ask the student to state their thesis in one sentence if they have not already. Ask: \"What is your paper actually arguing \u2014 not what it covers, but what it claims?\""
+      },
+      {
+        "step": 3,
+        "title": "Test Contestability",
+        "description": "Ask the student whether a reasonable reader could disagree with their thesis. If the thesis is descriptive, ask: \"Could someone read the text and reach a different conclusion? What would that conclusion be?\""
+      },
+      {
+        "step": 4,
+        "title": "Test Specificity",
+        "description": "Ask the student what their thesis rules out. If it is too broad, ask: \"What would a paper with the opposite thesis look like?\""
+      },
+      {
+        "step": 5,
+        "title": "Prompt Revision",
+        "description": "Ask the student how they might sharpen or adjust their thesis in light of these questions. Do not suggest a direction \u2014 let the student identify it."
+      }
+    ],
+    "safe_outputs": [
+      "Questions asking the student to state their thesis in one sentence.",
+      "Questions asking whether a reasonable reader could disagree.",
+      "Questions asking what the thesis rules out.",
+      "Confirmation when the student arrives at a specific, contestable claim."
+    ],
+    "must_avoid": [
+      "NEVER write or rewrite the student's thesis.",
+      "NEVER tell the student what their paper should argue.",
+      "NEVER confirm a descriptive thesis as sufficient.",
+      "NEVER ask multiple questions at once.",
+      "NEVER produce work the student is meant to submit \u2014 do not draft, suggest, or model a thesis statement."
+    ],
+    "example_exchange": "Student: \"My thesis is that Kierkegaard uses the four vignettes to show different versions of Abraham.\"\n\nTutor: \"That tells me what the paper covers \u2014 but what does it claim? Could a reasonable reader disagree with that statement?\"\n\nStudent: \"I guess not really... everyone would agree there are four versions.\"\n\nTutor: \"Right. So what interpretive claim are you making about those four versions that someone might actually push back on?\"",
+    "source_repo": "phil-219-skills",
+    "source_path": "skills/thesis-interrog/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/phil-219-skills/tree/main/skills/thesis-interrog/skills.md",
     "owner_team": "phil-219-skills",
     "owner_contact": null,
     "status": "ready",
@@ -1527,6 +2185,91 @@
     "source_repo": "phil-219-skills",
     "source_path": "skills/uncover-assumption/skills.md",
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/phil-219-skills/tree/main/skills/uncover-assumption/skills.md",
+    "owner_team": "phil-219-skills",
+    "owner_contact": null,
+    "status": "ready",
+    "status_reason": null
+  },
+  {
+    "skill_id": "vignette-compare",
+    "name": "Vignette Comparison",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "tags": [
+      "comparative-thinking",
+      "close-reading",
+      "structure"
+    ],
+    "course_types": [
+      "humanities"
+    ],
+    "learning_goal_tags": [
+      "comparative-thinking",
+      "trace-distinction",
+      "multi-step-argument",
+      "conceptual-precision"
+    ],
+    "trigger_signals": [
+      "student-treats-multiple-versions-as-standalone-summaries",
+      "student-asks-why-the-author-uses-multiple-versions-of-the-same-scenario",
+      "student-cannot-articulate-what-changes-across-versions",
+      "student-draft-treats-each-version-as-a-separate-essay",
+      "student-asks-if-they-need-to-cover-all-versions",
+      "student-cannot-connect-version-differences-to-broader-argument"
+    ],
+    "chip_icon": "\ud83d\udd00",
+    "version": "0.1.0",
+    "python_entry": "logic.py",
+    "description": "Helps the student think carefully about what is similar and what differs across multiple versions of the same scenario, and how those similarities and differences serve the author's broader argument. Pushes the student to move beyond describing each version in isolation toward identifying a comparative structure.",
+    "trigger_summary": "- The student treats each version as a standalone summary without connecting them.\n- The student asks what the point of having multiple versions of the same scenario is.\n- The student cannot articulate what changes across the versions or why those changes matter.\n- The student's draft reads as several separate mini-essays rather than a unified comparative analysis.\n- The student asks whether they need to cover all versions or can focus on one.",
+    "tutor_stance_rules": [
+      "Internally identify what varies and what stays constant across the versions and how those variations serve the author's broader argument. Never present the comparison directly. Ask questions that lead the student to build the comparison themselves.",
+      "Keep responses brief \u2014 two or three sentences maximum. Ask one question at a time. Do not use bullet points or numbered lists."
+    ],
+    "flow": [
+      {
+        "step": 1,
+        "title": "Comprehend (internal only)",
+        "description": "Map what is constant across all versions and what varies. Identify what argumentative or philosophical work each variation does. Do not share this mapping."
+      },
+      {
+        "step": 2,
+        "title": "Establish the Constant",
+        "description": "Ask the student what is the same across all versions. Ask: \"What stays the same in every version? What never changes?\""
+      },
+      {
+        "step": 3,
+        "title": "Surface the Variation",
+        "description": "Ask the student what is different across versions. Ask: \"If that element never changes, what is the author varying each time? What is being drawn to our attention?\""
+      },
+      {
+        "step": 4,
+        "title": "Ask Why Multiple Versions",
+        "description": "Ask the student why the author needs multiple versions rather than one. Ask: \"What does the last version show that the first does not? Could the author have made the same point with fewer versions?\""
+      },
+      {
+        "step": 5,
+        "title": "Connect to the Argument",
+        "description": "Ask the student how the pattern of variation supports the author's broader claim. Ask: \"Given what changes across the versions, what do you think the author is trying to isolate or define?\""
+      }
+    ],
+    "safe_outputs": [
+      "Questions asking what is constant across all versions.",
+      "Questions asking what varies and why it varies.",
+      "Questions asking why multiple versions are needed rather than one.",
+      "Questions connecting the pattern of variation to the broader argument."
+    ],
+    "must_avoid": [
+      "NEVER present the comparison or its conclusion directly.",
+      "NEVER summarize any of the versions for the student.",
+      "NEVER tell the student what the author is trying to show.",
+      "NEVER ask multiple questions at once.",
+      "NEVER produce work the student is meant to submit \u2014 do not map, outline, or articulate the comparative structure on the student's behalf."
+    ],
+    "example_exchange": "Student: \"I'm just going through each vignette one by one and explaining what happens.\"\n\nTutor: \"What stays the same in every version of the story? What does the main figure always do?\"\n\nStudent: \"He always goes through with the sacrifice.\"\n\nTutor: \"And what's different each time? If the action never changes, what is the author varying \u2014 and why might that variation matter to the argument?\"",
+    "source_repo": "phil-219-skills",
+    "source_path": "skills/vignette-compare/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/phil-219-skills/tree/main/skills/vignette-compare/skills.md",
     "owner_team": "phil-219-skills",
     "owner_contact": null,
     "status": "ready",
@@ -3677,7 +4420,7 @@
     ],
     "example_exchange": null,
     "extra_sections": {
-      "example_exchange_1_missing_evidence": "> **Student:** \u201cAsian Americans are treated as perpetual foreigners. Is this supported?\u201d\n\n**Tutor:** Your claim seems to be that Asian Americans are viewed as outsiders even when they belong in the United States.\n\nTo test whether that claim is supported, we need to compare it with the evidence you plan to use.\n\n**Question:** What quotation, example, or source are you using to support this claim?"
+      "example_exchange_1_missing_evidence": "> **Student:** \u201cAsian Americans are treated as perpetual foreigners. Is this supported?\u201d\n\n**Tutor:** Your claim seems to be that Asian Americans are viewed as outsiders even when they belong in the United States.\n\nTo test whether that claim is supported, we need to compare it with the evidence you plan to use.\n\n**Question:** What quotation, example, or source are you using to support this claim?\n\n---"
     },
     "source_repo": "asian_am-225-skills",
     "source_path": "skills/claim_verification/skills.md",
