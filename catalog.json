@@ -559,6 +559,7 @@
     ],
     "chip_icon": "\ud83d\udd24",
     "version": "0.2.0",
+    "stance": "socratic",
     "owner_team": "asm_translation",
     "status": "ready",
     "has_logic": true
@@ -769,7 +770,70 @@
     ],
     "chip_icon": "\ud83d\udc1b",
     "version": "0.2.0",
+    "stance": "socratic",
     "owner_team": "c_debugger",
+    "status": "ready",
+    "has_logic": true
+  },
+  {
+    "skill_id": "cache-modeling",
+    "name": "Cache Modeling",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "tags": [
+      "cache",
+      "memory-hierarchy",
+      "cs",
+      "architecture"
+    ],
+    "course_types": [
+      "cs"
+    ],
+    "learning_goal_tags": [
+      "understand-cache-structure",
+      "map-addresses-to-cache",
+      "apply-hardware-models"
+    ],
+    "trigger_signals": [
+      "given-cache-specifications",
+      "compute-tag-index-offset",
+      "cache-organization-question"
+    ],
+    "chip_icon": "\ud83e\udde0",
+    "version": "0.1.0",
+    "owner_team": "cache_modeling",
+    "status": "stub",
+    "has_logic": false
+  },
+  {
+    "skill_id": "cache-opt-code",
+    "name": "Cache Optimized Code",
+    "skill_type": "code",
+    "tags": [
+      "cs213",
+      "c",
+      "performance",
+      "memory"
+    ],
+    "course_types": [
+      "cs"
+    ],
+    "learning_goal_tags": [
+      "understand-memory-hierarchy",
+      "optimize-performance",
+      "analyze-code-efficiency"
+    ],
+    "trigger_signals": [
+      "is my code optimized?",
+      "slow-code",
+      "loop-optimization",
+      "cache-miss",
+      "performance-issue"
+    ],
+    "chip_icon": "\ud83e\udde0",
+    "version": "0.1.0",
+    "stance": "socratic",
+    "owner_team": "cache_opt_code",
     "status": "ready",
     "has_logic": true
   },
@@ -803,6 +867,36 @@
     "owner_team": "cache_optimized_code",
     "status": "ready",
     "has_logic": true
+  },
+  {
+    "skill_id": "cache-perf",
+    "name": "Cache Performance Analysis",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "tags": [
+      "cache",
+      "miss-rate",
+      "performance",
+      "cs"
+    ],
+    "course_types": [
+      "cs"
+    ],
+    "learning_goal_tags": [
+      "compute-miss-rates",
+      "classify-cache-misses",
+      "evaluate-cache-efficiency"
+    ],
+    "trigger_signals": [
+      "cache-trace-analysis",
+      "miss-rate-calculation",
+      "performance-comparison"
+    ],
+    "chip_icon": "\ud83d\udcc9",
+    "version": "0.1.0",
+    "owner_team": "cache_perf",
+    "status": "stub",
+    "has_logic": false
   },
   {
     "skill_id": "calling-convention-reasoning",
@@ -1010,6 +1104,39 @@
     "status": "ready",
     "version": "0.2.0",
     "owner_team": "compare_readings",
+    "has_logic": false
+  },
+  {
+    "skill_id": "concept-check",
+    "name": "Conceptual Understanding Check",
+    "skill_type": "instructional",
+    "stance": "meta",
+    "tags": [
+      "understanding",
+      "metacognition",
+      "cs",
+      "memory-systems",
+      "learning"
+    ],
+    "course_types": [
+      "cs"
+    ],
+    "learning_goal_tags": [
+      "verify-conceptual-understanding",
+      "surface-misconceptions",
+      "connect-intuition-to-formal-models",
+      "improve-self-explanation"
+    ],
+    "trigger_signals": [
+      "after-solving-cache-or-memory-problem",
+      "student-requests-explanation-check",
+      "repeated-errors-in-similar-concepts",
+      "uncertain-or-guessing-answers"
+    ],
+    "chip_icon": "\ud83e\udded",
+    "version": "0.1.0",
+    "owner_team": "concept_check",
+    "status": "ready",
     "has_logic": false
   },
   {
@@ -1292,6 +1419,62 @@
     "has_logic": false
   },
   {
+    "skill_id": "coord-dedupe",
+    "name": "Category Coordinate Deduplication",
+    "skill_type": "instructional",
+    "stance": "hint",
+    "tags": [
+      "deduplication",
+      "coordinates",
+      "categories",
+      "sets"
+    ],
+    "course_types": [
+      "cs"
+    ],
+    "learning_goal_tags": [
+      "choose-data-structures",
+      "handle-edge-cases"
+    ],
+    "trigger_signals": [
+      "locate-all",
+      "deduplicate-coordinates",
+      "category-query"
+    ],
+    "version": "0.1.0",
+    "owner_team": "coord_dedupe",
+    "status": "ready",
+    "has_logic": false
+  },
+  {
+    "skill_id": "coord-rep",
+    "name": "Coordinate Representation",
+    "skill_type": "instructional",
+    "stance": "hint",
+    "tags": [
+      "coordinates",
+      "objects",
+      "precision",
+      "map"
+    ],
+    "course_types": [
+      "cs"
+    ],
+    "learning_goal_tags": [
+      "choose-data-structures",
+      "specify-io"
+    ],
+    "trigger_signals": [
+      "raw-position-coordinates",
+      "coordinate-object-representation",
+      "geographic-precision"
+    ],
+    "version": "0.1.0",
+    "owner_team": "coord_rep",
+    "status": "ready",
+    "has_logic": false
+  },
+  {
     "skill_id": "counter-example",
     "name": "Counter-Example",
     "skill_type": "instructional",
@@ -1320,6 +1503,37 @@
     "status": "ready",
     "version": "0.2.0",
     "owner_team": "counter_example",
+    "has_logic": false
+  },
+  {
+    "skill_id": "counter-example-interview-questions",
+    "name": "Counter Example Interview Questions",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "tags": [
+      "argumentation",
+      "writing",
+      "logic",
+      "critical-thinking",
+      "rebuttal"
+    ],
+    "course_types": [
+      "humanities"
+    ],
+    "learning_goal_tags": [
+      "construct-arguments",
+      "engage-objections",
+      "surface-assumptions",
+      "identify-evidence",
+      "interpret-evidence"
+    ],
+    "trigger_signals": [
+      "student-needs-counterexample",
+      "student-asks-for-opposing-view",
+      "student-wants-to-challenge-claim"
+    ],
+    "owner_team": "counter_example_interview_questions",
+    "status": "ready",
     "has_logic": false
   },
   {
@@ -1809,6 +2023,34 @@
     "has_logic": false
   },
   {
+    "skill_id": "domain-er",
+    "name": "Domain ER Diagram",
+    "skill_type": "instructional",
+    "stance": "reframe",
+    "tags": [
+      "diagram",
+      "architecture",
+      "entities",
+      "relationships"
+    ],
+    "course_types": [
+      "cs"
+    ],
+    "learning_goal_tags": [
+      "choose-data-structures",
+      "evaluate-modularity"
+    ],
+    "trigger_signals": [
+      "entity-relationship-diagram",
+      "domain-architecture",
+      "system-diagram"
+    ],
+    "version": "0.1.0",
+    "owner_team": "domain_er",
+    "status": "ready",
+    "has_logic": false
+  },
+  {
     "skill_id": "draft-reflection",
     "name": "Draft Reflection",
     "stance": "socratic",
@@ -1837,6 +2079,34 @@
     "chip_icon": "\ud83e\ude9e",
     "version": "0.1.0",
     "owner_team": "draft_reflection",
+    "status": "ready",
+    "has_logic": false
+  },
+  {
+    "skill_id": "ds-tradeoffs",
+    "name": "Data Structure Trade-off Analysis",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "tags": [
+      "data-structures",
+      "runtime",
+      "tradeoffs",
+      "report"
+    ],
+    "course_types": [
+      "cs"
+    ],
+    "learning_goal_tags": [
+      "compare-strategies",
+      "analyze-complexity"
+    ],
+    "trigger_signals": [
+      "runtime-tradeoffs",
+      "technical-report",
+      "compare-data-structures"
+    ],
+    "version": "0.1.0",
+    "owner_team": "ds_tradeoffs",
     "status": "ready",
     "has_logic": false
   },
@@ -2060,6 +2330,37 @@
     "has_logic": false
   },
   {
+    "skill_id": "escalate-support-level",
+    "name": "Escalate Support Level",
+    "skill_type": "instructional",
+    "stance": "meta",
+    "tags": [
+      "scaffolding",
+      "stuck",
+      "support-intensity",
+      "metacognition"
+    ],
+    "course_types": [
+      "cs",
+      "humanities"
+    ],
+    "learning_goal_tags": [
+      "manage-effort",
+      "request-targeted-help"
+    ],
+    "trigger_signals": [
+      "student-stuck-after-socratic",
+      "student-not-responding-to-questions",
+      "multiple-failed-attempts",
+      "student-silence-persists",
+      "socratic-approach-stalling"
+    ],
+    "version": "0.1.0",
+    "owner_team": "escalate_support_level",
+    "status": "ready",
+    "has_logic": false
+  },
+  {
     "skill_id": "eval-ai-response",
     "name": "Reflect on AI Response",
     "skill_type": "instructional",
@@ -2204,29 +2505,6 @@
     "has_logic": true
   },
   {
-    "skill_id": "example-skill",
-    "name": "Example Identify Outputs",
-    "skill_type": "instructional",
-    "stance": "socratic",
-    "tags": [
-      "topic1",
-      "topic2"
-    ],
-    "course_types": [
-      "cs"
-    ],
-    "learning_goal_tags": [
-      "specify-io"
-    ],
-    "trigger_signals": [
-      "output-confusion"
-    ],
-    "version": "0.1.0",
-    "owner_team": "example_skill",
-    "status": "ready",
-    "has_logic": false
-  },
-  {
     "skill_id": "execution-trace",
     "name": "Execution Trace",
     "skill_type": "code",
@@ -2253,6 +2531,7 @@
     ],
     "chip_icon": "\ud83d\udccb",
     "version": "0.2.0",
+    "stance": "socratic",
     "owner_team": "execution_trace",
     "status": "ready",
     "has_logic": true
@@ -2491,6 +2770,7 @@
     "skill_id": "extract-syllabus",
     "name": "Extract Syllabus",
     "skill_type": "code",
+    "stance": "socratic",
     "tags": [
       "import",
       "syllabus",
@@ -3022,6 +3302,32 @@
     "has_logic": false
   },
   {
+    "skill_id": "identify-deliverables",
+    "name": "Identify Deliverables",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "tags": [
+      "deliverables",
+      "requirements",
+      "planning",
+      "tutor"
+    ],
+    "course_types": [
+      "cs"
+    ],
+    "learning_goal_tags": [
+      "understand-assignment-requirements"
+    ],
+    "trigger_signals": [
+      "student-asks-what-counts-as-complete",
+      "student-unclear-on-submission-requirements",
+      "student-unsure-what-to-submit"
+    ],
+    "owner_team": "identify_deliverables",
+    "status": "ready",
+    "has_logic": false
+  },
+  {
     "skill_id": "identify-inputs",
     "name": "Identify Inputs",
     "skill_type": "instructional",
@@ -3521,6 +3827,66 @@
     "has_logic": false
   },
   {
+    "skill_id": "mem-access-pattern",
+    "name": "Memory Access Pattern Analysis",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "tags": [
+      "locality",
+      "loops",
+      "performance",
+      "cs"
+    ],
+    "course_types": [
+      "cs"
+    ],
+    "learning_goal_tags": [
+      "analyze-spatial-locality",
+      "analyze-temporal-locality",
+      "predict-cache-behavior"
+    ],
+    "trigger_signals": [
+      "loop-order-comparison",
+      "matrix-traversal-question",
+      "cache-performance-from-code"
+    ],
+    "chip_icon": "\ud83d\udcca",
+    "version": "0.1.0",
+    "owner_team": "mem_access_pattern",
+    "status": "stub",
+    "has_logic": false
+  },
+  {
+    "skill_id": "mem-opt",
+    "name": "Memory System Optimization",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "tags": [
+      "optimization",
+      "cache",
+      "performance",
+      "cs"
+    ],
+    "course_types": [
+      "cs"
+    ],
+    "learning_goal_tags": [
+      "improve-cache-efficiency",
+      "reduce-conflicts",
+      "evaluate-design-tradeoffs"
+    ],
+    "trigger_signals": [
+      "optimize-cache-performance",
+      "compare-cache-configurations",
+      "reduce-conflict-misses"
+    ],
+    "chip_icon": "\u2699\ufe0f",
+    "version": "0.1.0",
+    "owner_team": "mem_opt",
+    "status": "stub",
+    "has_logic": false
+  },
+  {
     "skill_id": "meta-resource-awareness",
     "name": "Meta-Resource Awareness",
     "skill_type": "instructional",
@@ -3674,6 +4040,34 @@
       "bug-location-unknown"
     ],
     "owner_team": "narrow_the_bug_location",
+    "status": "ready",
+    "has_logic": false
+  },
+  {
+    "skill_id": "nearest-pq",
+    "name": "Nearest Neighbor Priority Queue",
+    "skill_type": "instructional",
+    "stance": "hint",
+    "tags": [
+      "priority-queue",
+      "nearest-neighbor",
+      "distance",
+      "ranking"
+    ],
+    "course_types": [
+      "cs"
+    ],
+    "learning_goal_tags": [
+      "choose-data-structures",
+      "compare-strategies"
+    ],
+    "trigger_signals": [
+      "nearest-neighbor",
+      "priority-queue",
+      "spatial-distance-ranking"
+    ],
+    "version": "0.1.0",
+    "owner_team": "nearest_pq",
     "status": "ready",
     "has_logic": false
   },
@@ -4048,6 +4442,34 @@
     "has_logic": false
   },
   {
+    "skill_id": "poi-records",
+    "name": "POI Record Construction",
+    "skill_type": "instructional",
+    "stance": "hint",
+    "tags": [
+      "poi",
+      "records",
+      "locations",
+      "categories"
+    ],
+    "course_types": [
+      "cs"
+    ],
+    "learning_goal_tags": [
+      "choose-data-structures",
+      "specify-io"
+    ],
+    "trigger_signals": [
+      "point-of-interest",
+      "poi-record",
+      "structured-location-category-name"
+    ],
+    "version": "0.1.0",
+    "owner_team": "poi_records",
+    "status": "ready",
+    "has_logic": false
+  },
+  {
     "skill_id": "pointer-address-reasoning",
     "name": "Pointer Address Reasoning",
     "skill_type": "instructional",
@@ -4373,6 +4795,34 @@
     "has_logic": false
   },
   {
+    "skill_id": "ranking-ethics",
+    "name": "Spatial Ranking Ethics",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "tags": [
+      "ethics",
+      "ranking",
+      "recommendations",
+      "spatial-software"
+    ],
+    "course_types": [
+      "cs"
+    ],
+    "learning_goal_tags": [
+      "evaluate-reasoning",
+      "surface-assumptions"
+    ],
+    "trigger_signals": [
+      "commercialized-rankings",
+      "recommendation-ranking",
+      "spatial-software-ethics"
+    ],
+    "version": "0.1.0",
+    "owner_team": "ranking_ethics",
+    "status": "ready",
+    "has_logic": false
+  },
+  {
     "skill_id": "read-spectrogram",
     "name": "Read Spectrogram",
     "skill_type": "instructional",
@@ -4591,6 +5041,37 @@
       "student pastes code and asks for a fix without context"
     ],
     "owner_team": "redirect_direct",
+    "status": "ready",
+    "has_logic": false
+  },
+  {
+    "skill_id": "reframe-analogy",
+    "name": "Reframe with analogy",
+    "skill_type": "instructional",
+    "stance": "reframe",
+    "tags": [
+      "learning",
+      "concept-explanation",
+      "analogy",
+      "education"
+    ],
+    "course_types": [
+      "cs",
+      "humanities"
+    ],
+    "learning_goal_tags": [
+      "build-mental-models",
+      "connect-abstract-to-concrete",
+      "understand-systems-concepts"
+    ],
+    "trigger_signals": [
+      "confused-about-concept",
+      "asks-what-does-this-mean",
+      "struggling-with-memory-or-cache"
+    ],
+    "chip_icon": "\ud83e\udde9",
+    "version": "0.1.0",
+    "owner_team": "reframe_analogy",
     "status": "ready",
     "has_logic": false
   },
@@ -4840,6 +5321,34 @@
     ],
     "version": "0.1.0",
     "owner_team": "return_behavior",
+    "status": "ready",
+    "has_logic": false
+  },
+  {
+    "skill_id": "road-segments",
+    "name": "Road Segment Parsing",
+    "skill_type": "instructional",
+    "stance": "hint",
+    "tags": [
+      "graph",
+      "roads",
+      "parsing",
+      "topology"
+    ],
+    "course_types": [
+      "cs"
+    ],
+    "learning_goal_tags": [
+      "choose-data-structures",
+      "decompose-problems"
+    ],
+    "trigger_signals": [
+      "raw-road-segments",
+      "topological-map",
+      "road-vector-parsing"
+    ],
+    "version": "0.1.0",
+    "owner_team": "road_segments",
     "status": "ready",
     "has_logic": false
   },
@@ -5125,6 +5634,34 @@
     "has_logic": false
   },
   {
+    "skill_id": "shortest-route",
+    "name": "Shortest Route",
+    "skill_type": "instructional",
+    "stance": "hint",
+    "tags": [
+      "graph",
+      "routing",
+      "shortest-path",
+      "map"
+    ],
+    "course_types": [
+      "cs"
+    ],
+    "learning_goal_tags": [
+      "compare-strategies",
+      "recognize-patterns"
+    ],
+    "trigger_signals": [
+      "shortest-path",
+      "route-to-destination",
+      "named-destination"
+    ],
+    "version": "0.1.0",
+    "owner_team": "shortest_route",
+    "status": "ready",
+    "has_logic": false
+  },
+  {
     "skill_id": "show-dont-tell-journalism",
     "name": "Show Don't Tell \u2014 Journalism",
     "skill_type": "instructional",
@@ -5248,6 +5785,7 @@
     ],
     "chip_icon": "\ud83d\udcda",
     "version": "0.2.0",
+    "stance": "socratic",
     "owner_team": "stack_visualizer",
     "status": "ready",
     "has_logic": true
@@ -5876,6 +6414,34 @@
     "chip_icon": "\ud83d\udd00",
     "version": "0.1.0",
     "owner_team": "vignette_compare",
+    "status": "ready",
+    "has_logic": false
+  },
+  {
+    "skill_id": "workspace-link",
+    "name": "External Workspace Linking",
+    "skill_type": "instructional",
+    "stance": "hint",
+    "tags": [
+      "workspace",
+      "linking",
+      "paths",
+      "integration"
+    ],
+    "course_types": [
+      "cs"
+    ],
+    "learning_goal_tags": [
+      "extract-requirements",
+      "debug-systematically"
+    ],
+    "trigger_signals": [
+      "external-workspace",
+      "compiled-data-structure",
+      "workspace-file-path"
+    ],
+    "version": "0.1.0",
+    "owner_team": "workspace_link",
     "status": "ready",
     "has_logic": false
   },
