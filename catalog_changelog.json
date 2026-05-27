@@ -1,9 +1,22 @@
 {
-  "generated_at": "2026-05-27T02:08:01.878168+00:00",
+  "generated_at": "2026-05-27T04:03:27.084915+00:00",
   "previous_hash": "cf606cd90cbce491",
-  "current_hash": "576b7f3cb7eb8d34",
-  "added": [],
-  "removed": [],
+  "current_hash": "483445681503bcca",
+  "added": [
+    "arg-structure",
+    "distinction-track",
+    "draft-reflection",
+    "evidence-integr",
+    "passage-interrog",
+    "reconstruction-chk",
+    "reframe-with-analogy",
+    "stuck-diagnosis",
+    "thesis-interrog",
+    "vignette-compare"
+  ],
+  "removed": [
+    "reframe_with_analogy"
+  ],
   "changed": [
     {
       "skill_id": "adjust-to-level",
@@ -409,6 +422,14 @@
     {
       "skill_id": "counter-example",
       "changes": {
+        "version": {
+          "from": null,
+          "to": "0.2.0"
+        },
+        "name": {
+          "from": "Counter- xample",
+          "to": "Counter-Example"
+        },
         "source_repo": {
           "from": null,
           "to": "counter_example"
@@ -672,6 +693,10 @@
     {
       "skill_id": "example-skill",
       "changes": {
+        "name": {
+          "from": "Example: Restate the Problem",
+          "to": "Example Identify Outputs"
+        },
         "source_repo": {
           "from": null,
           "to": "example_skill"
@@ -1446,15 +1471,6 @@
       }
     },
     {
-      "skill_id": "reframe_with_analogy",
-      "changes": {
-        "source_repo": {
-          "from": null,
-          "to": "reframe_with_analogy"
-        }
-      }
-    },
-    {
       "skill_id": "repair-miscon",
       "changes": {
         "source_repo": {
@@ -1829,5 +1845,5 @@
     }
   ],
   "unchanged_count": 0,
-  "summary": "182 changed"
+  "summary": "10 added, 1 removed, 181 changed"
 }

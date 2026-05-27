@@ -356,6 +356,39 @@
     "has_logic": false
   },
   {
+    "skill_id": "arg-structure",
+    "name": "Argument Structure Audit",
+    "stance": "socratic",
+    "skill_type": "instructional",
+    "tags": [
+      "argumentation",
+      "structure",
+      "organization"
+    ],
+    "course_types": [
+      "humanities"
+    ],
+    "learning_goal_tags": [
+      "philosophical-argumentation",
+      "multi-step-argument",
+      "unified-conclusion"
+    ],
+    "trigger_signals": [
+      "student-shares-outline-or-early-draft",
+      "student-describes-intended-structure",
+      "student-says-paper-feels-repetitive",
+      "student-says-paper-jumps-around",
+      "student-says-paper-doesnt-flow",
+      "student-paper-lacks-cumulative-argument-across-sections",
+      "student-asks-if-paper-is-well-organized"
+    ],
+    "chip_icon": "\ud83c\udfd7\ufe0f",
+    "version": "0.1.0",
+    "owner_team": "arg_structure",
+    "status": "ready",
+    "has_logic": false
+  },
+  {
     "skill_id": "ask-debug-aloud",
     "name": "Ask Student to Debug Aloud",
     "skill_type": "instructional",
@@ -432,7 +465,6 @@
       "student-says-i-understand-without-explaining",
       "student-says-that-makes-sense",
       "student-ready-to-move-on-without-demonstrating-understanding",
-      "student-uses-philosophical-term-without-defining-it",
       "student-paraphrases-using-authors-exact-language"
     ],
     "chip_icon": "\ud83d\udde3\ufe0f",
@@ -1261,33 +1293,33 @@
   },
   {
     "skill_id": "counter-example",
-    "name": "Counter- xample",
+    "name": "Counter-Example",
     "skill_type": "instructional",
     "stance": "socratic",
     "tags": [
-      "argumentation",
-      "writing",
-      "logic",
-      "critical-thinking",
-      "rebuttal"
+      "socratic",
+      "objections",
+      "claim-testing"
     ],
     "course_types": [
+      "cs",
       "humanities"
     ],
     "learning_goal_tags": [
-      "construct-arguments",
       "engage-objections",
       "surface-assumptions",
-      "identify-evidence",
-      "interpret-evidence"
+      "evaluate-reasoning"
     ],
     "trigger_signals": [
-      "student-needs-counterexample",
-      "student-asks-for-opposing-view",
-      "student-wants-to-challenge-claim"
+      "student-overgeneralizes",
+      "student-asserts-absolute",
+      "student-defending-first-position",
+      "always-statement-made",
+      "student-hedging-on-claim"
     ],
-    "owner_team": "counter_example",
     "status": "ready",
+    "version": "0.2.0",
+    "owner_team": "counter_example",
     "has_logic": false
   },
   {
@@ -1344,7 +1376,7 @@
     "trigger_signals": [
       "student-describes-position",
       "student-argues-position-confidently",
-      "student-asks-for-confirmation-of-interpretation",
+      "student-asks-for-validation-of-their-argument-or-conclusion",
       "student-presents-one-sided-argument",
       "student-dismisses-alternative-reading",
       "student-reaches-conclusion-without-considering-objections",
@@ -1639,11 +1671,11 @@
       "deep-reading"
     ],
     "trigger_signals": [
-      "student-uses-philosophical-term-without-defining-it",
+      "student-uses-philosophical-term-without-specifying-which-thinker-defines-it",
       "student-uses-term-loosely-or-colloquially",
       "student-applies-concept-from-one-thinker-to-another-without-noting-difference",
-      "student-treats-technical-term-as-synonymous-with-everyday-meaning",
-      "student-uses-absurdity-alienation-anxiety-or-authenticity-vaguely",
+      "student-uses-technical-term-as-if-it-has-its-everyday-meaning",
+      "student-uses-course-concept-vaguely-without-grounding-it-in-a-thinker",
       "student-conflates-two-thinkers-use-of-the-same-term"
     ],
     "chip_icon": "\ud83d\udcd6",
@@ -1742,6 +1774,69 @@
     ],
     "version": "0.1.0",
     "owner_team": "detect_ambiguity",
+    "status": "ready",
+    "has_logic": false
+  },
+  {
+    "skill_id": "distinction-track",
+    "name": "Distinction Tracker",
+    "stance": "socratic",
+    "skill_type": "instructional",
+    "tags": [
+      "conceptual-precision",
+      "close-reading",
+      "terminology"
+    ],
+    "course_types": [
+      "humanities"
+    ],
+    "learning_goal_tags": [
+      "conceptual-precision",
+      "define-technical-term",
+      "distinguish-related-concepts"
+    ],
+    "trigger_signals": [
+      "student-uses-term-without-consistent-definition-across-draft",
+      "student-uses-term-inconsistently-across-draft",
+      "student-asks-difference-between-two-concepts",
+      "student-conflates-two-distinct-ideas-in-draft-argument",
+      "student-shifts-between-technical-and-everyday-meaning-of-same-term"
+    ],
+    "chip_icon": "\u2696\ufe0f",
+    "version": "0.1.0",
+    "owner_team": "distinction_track",
+    "status": "ready",
+    "has_logic": false
+  },
+  {
+    "skill_id": "draft-reflection",
+    "name": "Draft Reflection",
+    "stance": "socratic",
+    "skill_type": "instructional",
+    "tags": [
+      "argumentation",
+      "writing",
+      "revision"
+    ],
+    "course_types": [
+      "humanities"
+    ],
+    "learning_goal_tags": [
+      "philosophical-argumentation",
+      "reconstruct-position-on-own-terms",
+      "multi-step-argument",
+      "contestable-thesis"
+    ],
+    "trigger_signals": [
+      "student-shares-full-or-near-complete-draft",
+      "student-says-they-are-done-or-almost-done",
+      "student-asks-if-paper-is-good-enough-to-submit",
+      "student-asks-broad-feedback-question-about-draft",
+      "student-asks-if-paper-meets-the-prompt"
+    ],
+    "chip_icon": "\ud83e\ude9e",
+    "version": "0.1.0",
+    "owner_team": "draft_reflection",
     "status": "ready",
     "has_logic": false
   },
@@ -2023,6 +2118,38 @@
     "has_logic": false
   },
   {
+    "skill_id": "evidence-integr",
+    "name": "Evidence Integration Check",
+    "stance": "socratic",
+    "skill_type": "instructional",
+    "tags": [
+      "close-reading",
+      "evidence",
+      "writing"
+    ],
+    "course_types": [
+      "humanities"
+    ],
+    "learning_goal_tags": [
+      "close-reading-and-textual-analysis",
+      "ground-claims-in-evidence",
+      "quotation-without-over-quoting"
+    ],
+    "trigger_signals": [
+      "student-shares-paragraph-with-quotations",
+      "student-asks-how-many-quotes-to-use",
+      "student-asks-where-to-put-quotes",
+      "student-draft-has-uninterpreted-quotations",
+      "student-asks-if-they-have-enough-evidence",
+      "student-relies-on-quotation-instead-of-argument"
+    ],
+    "chip_icon": "\ud83d\udcce",
+    "version": "0.1.0",
+    "owner_team": "evidence_integr",
+    "status": "ready",
+    "has_logic": false
+  },
+  {
     "skill_id": "evidence-placement",
     "name": "Evidence Placement Review",
     "skill_type": "instructional",
@@ -2078,25 +2205,22 @@
   },
   {
     "skill_id": "example-skill",
-    "name": "Example: Restate the Problem",
+    "name": "Example Identify Outputs",
     "skill_type": "instructional",
     "stance": "socratic",
     "tags": [
-      "example",
-      "comprehension"
+      "topic1",
+      "topic2"
     ],
     "course_types": [
-      "cs",
-      "humanities"
+      "cs"
     ],
     "learning_goal_tags": [
-      "restate-the-problem"
+      "specify-io"
     ],
     "trigger_signals": [
-      "new-assignment-opened",
-      "student-jumping-to-solution"
+      "output-confusion"
     ],
-    "chip_icon": "\ud83d\udd01",
     "version": "0.1.0",
     "owner_team": "example_skill",
     "status": "ready",
@@ -3093,7 +3217,7 @@
       "student-cites-quotation",
       "student-says-this-proves",
       "student-connecting-evidence-to-claim",
-      "student-drops-quote-without-explanation",
+      "student-drops-quote-in-conversation-without-explaining-it",
       "student-uses-evidence-without-linking-to-argument",
       "student-evaluates-before-explaining",
       "student-expresses-agreement-or-disagreement-before-stating-authors-claim"
@@ -3801,6 +3925,40 @@
     "has_logic": false
   },
   {
+    "skill_id": "passage-interrog",
+    "name": "Passage Interrogation",
+    "stance": "socratic",
+    "skill_type": "instructional",
+    "tags": [
+      "close-reading",
+      "textual-analysis",
+      "evidence"
+    ],
+    "course_types": [
+      "humanities"
+    ],
+    "learning_goal_tags": [
+      "close-reading-and-textual-analysis",
+      "situate-passage",
+      "trace-distinction"
+    ],
+    "trigger_signals": [
+      "student-shares-passage-and-asks-what-it-means",
+      "student-pastes-passage-and-asks-for-help-understanding-it",
+      "student-says-i-want-to-analyze-this-passage",
+      "student-says-i-am-stuck-on-this-passage",
+      "student-unsure-if-quote-supports-argument",
+      "student-has-selected-a-passage-but-cannot-explain-what-it-means",
+      "student-asks-if-passage-is-relevant-to-prompt",
+      "student-struggles-to-connect-passage-to-argument"
+    ],
+    "chip_icon": "\ud83d\udd0d",
+    "version": "0.1.0",
+    "owner_team": "passage_interrog",
+    "status": "ready",
+    "has_logic": false
+  },
+  {
     "skill_id": "pick-one-gap",
     "name": "Pick One Gap",
     "skill_type": "instructional",
@@ -4076,9 +4234,9 @@
       "session-winding-down",
       "student-expressed-clarity",
       "student-reached-stopping-point",
-      "student-expressed-discouragement",
-      "student-feeling-stuck",
-      "student-doubting-progress"
+      "student-expresses-clarity-or-breakthrough",
+      "student-completes-a-significant-step",
+      "student-says-i-think-i-understand-now"
     ],
     "chip_icon": "\ud83e\ude9e",
     "version": "0.1.0",
@@ -4380,6 +4538,38 @@
     "has_logic": false
   },
   {
+    "skill_id": "reconstruction-chk",
+    "name": "Reconstruction Check",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "tags": [
+      "argumentation",
+      "close-reading",
+      "exposition"
+    ],
+    "course_types": [
+      "humanities"
+    ],
+    "learning_goal_tags": [
+      "philosophical-argumentation",
+      "reconstruct-position-on-own-terms",
+      "close-reading-and-textual-analysis"
+    ],
+    "trigger_signals": [
+      "student-makes-interpretive-claim-without-textual-support",
+      "student-imports-external-assumptions-into-reading",
+      "student-evaluates-philosopher-instead-of-reconstructing",
+      "student-has-stated-an-interpretation-and-asks-if-it-is-correct",
+      "student-attributes-view-to-philosopher-not-in-text",
+      "student-paraphrases-philosopher-using-non-textual-language"
+    ],
+    "chip_icon": "\ud83d\udd0e",
+    "version": "0.1.0",
+    "owner_team": "reconstruction_chk",
+    "status": "ready",
+    "has_logic": false
+  },
+  {
     "skill_id": "redirect-direct",
     "name": "Redirect Direct Solution Requests",
     "skill_type": "instructional",
@@ -4436,31 +4626,31 @@
     "has_logic": false
   },
   {
-    "skill_id": "reframe_with_analogy",
-    "name": "Reframe With Analogy",
+    "skill_id": "reframe-with-analogy",
+    "name": "Reframe with analogy",
     "skill_type": "instructional",
-    "stance": "reframe",
+    "stance": "socratic",
     "tags": [
+      "learning",
+      "concept-explanation",
       "analogy",
-      "reframe",
-      "comprehension",
-      "abstraction",
-      "humanities"
+      "education"
     ],
     "course_types": [
+      "cs",
       "humanities"
     ],
     "learning_goal_tags": [
-      "interpret-evidence",
-      "surface-assumptions",
-      "detect-ambiguity"
+      "build-mental-models",
+      "connect-abstract-to-concrete",
+      "understand-systems-concepts"
     ],
     "trigger_signals": [
-      "too-abstract",
-      "doesnt-get-the-concept",
-      "explain-like-im-five",
-      "need-different-angle"
+      "confused-about-concept",
+      "asks-what-does-this-mean",
+      "struggling-with-memory-or-cache"
     ],
+    "chip_icon": "\ud83e\udde9",
     "version": "0.1.0",
     "owner_team": "reframe_with_analogy",
     "status": "ready",
@@ -5160,6 +5350,39 @@
     "has_logic": false
   },
   {
+    "skill_id": "stuck-diagnosis",
+    "name": "Stuck Diagnosis",
+    "skill_type": "instructional",
+    "stance": "meta",
+    "tags": [
+      "meta",
+      "diagnosis",
+      "scaffolding"
+    ],
+    "course_types": [
+      "humanities"
+    ],
+    "learning_goal_tags": [
+      "close-reading-and-textual-analysis",
+      "philosophical-argumentation",
+      "comparative-thinking",
+      "conceptual-precision"
+    ],
+    "trigger_signals": [
+      "student-expresses-general-confusion",
+      "student-expresses-frustration",
+      "student-says-they-dont-know-where-to-start",
+      "student-says-they-dont-understand-the-assignment",
+      "student-asks-broad-help-question",
+      "student-has-made-no-progress-after-extended-exchange"
+    ],
+    "chip_icon": "\ud83e\udded",
+    "version": "0.1.0",
+    "owner_team": "stuck_diagnosis",
+    "status": "ready",
+    "has_logic": false
+  },
+  {
     "skill_id": "study-limitation-identification",
     "name": "Study Limitation Identification",
     "skill_type": "instructional",
@@ -5321,6 +5544,38 @@
     "chip_icon": "\u2705",
     "version": "0.1.0",
     "owner_team": "systematic_coverage_prompting",
+    "status": "ready",
+    "has_logic": false
+  },
+  {
+    "skill_id": "thesis-interrog",
+    "name": "Thesis Interrogation",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "tags": [
+      "argumentation",
+      "thesis",
+      "critical-thinking"
+    ],
+    "course_types": [
+      "humanities"
+    ],
+    "learning_goal_tags": [
+      "philosophical-argumentation",
+      "contestable-thesis",
+      "avoid-summary"
+    ],
+    "trigger_signals": [
+      "student-shares-thesis-statement",
+      "student-describes-paper-in-general-terms",
+      "student-asks-if-thesis-is-strong-enough",
+      "student-cannot-articulate-central-argument",
+      "student-thesis-is-descriptive-rather-than-argumentative",
+      "student-asks-what-their-paper-should-argue"
+    ],
+    "chip_icon": "\ud83c\udfaf",
+    "version": "0.1.0",
+    "owner_team": "thesis_interrog",
     "status": "ready",
     "has_logic": false
   },
@@ -5588,6 +5843,39 @@
       "concept-about-to-be-built-on"
     ],
     "owner_team": "validate_prereqs",
+    "status": "ready",
+    "has_logic": false
+  },
+  {
+    "skill_id": "vignette-compare",
+    "name": "Vignette Comparison",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "tags": [
+      "comparative-thinking",
+      "close-reading",
+      "structure"
+    ],
+    "course_types": [
+      "humanities"
+    ],
+    "learning_goal_tags": [
+      "comparative-thinking",
+      "trace-distinction",
+      "multi-step-argument",
+      "conceptual-precision"
+    ],
+    "trigger_signals": [
+      "student-treats-multiple-versions-as-standalone-summaries",
+      "student-asks-why-the-author-uses-multiple-versions-of-the-same-scenario",
+      "student-cannot-articulate-what-changes-across-versions",
+      "student-draft-treats-each-version-as-a-separate-essay",
+      "student-asks-if-they-need-to-cover-all-versions",
+      "student-cannot-connect-version-differences-to-broader-argument"
+    ],
+    "chip_icon": "\ud83d\udd00",
+    "version": "0.1.0",
+    "owner_team": "vignette_compare",
     "status": "ready",
     "has_logic": false
   },
