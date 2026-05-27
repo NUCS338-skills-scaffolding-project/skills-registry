@@ -1,20 +1,59 @@
 {
-  "generated_at": "2026-05-27T04:04:36.351252+00:00",
-  "previous_hash": "26ad5e5a2b61511a",
-  "current_hash": "6655e5156ff9e4bd",
+  "generated_at": "2026-05-27T08:58:10.035128+00:00",
+  "previous_hash": "6655e5156ff9e4bd",
+  "current_hash": "44690984adf4b6ec",
   "added": [
-    "arg-structure",
-    "distinction-track",
-    "draft-reflection",
-    "evidence-integr",
-    "passage-interrog",
-    "reconstruction-chk",
-    "stuck-diagnosis",
-    "thesis-interrog",
-    "vignette-compare"
+    "cache-modeling",
+    "cache-opt-code",
+    "cache-perf",
+    "concept-check",
+    "escalate-support-level",
+    "mem-access-pattern",
+    "mem-opt",
+    "reframe-analogy"
   ],
-  "removed": [],
-  "changed": [],
-  "unchanged_count": 191,
-  "summary": "9 added"
+  "removed": [
+    "cache-optimized-code",
+    "reframe-with-analogy"
+  ],
+  "changed": [
+    {
+      "skill_id": "asm-translation",
+      "changes": {
+        "stance": {
+          "from": null,
+          "to": "socratic"
+        }
+      }
+    },
+    {
+      "skill_id": "c-debugger",
+      "changes": {
+        "stance": {
+          "from": null,
+          "to": "socratic"
+        }
+      }
+    },
+    {
+      "skill_id": "execution-trace",
+      "changes": {
+        "stance": {
+          "from": null,
+          "to": "socratic"
+        }
+      }
+    },
+    {
+      "skill_id": "stack-visualizer",
+      "changes": {
+        "stance": {
+          "from": null,
+          "to": "socratic"
+        }
+      }
+    }
+  ],
+  "unchanged_count": 194,
+  "summary": "8 added, 2 removed, 4 changed"
 }

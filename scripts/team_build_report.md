@@ -4,9 +4,9 @@
 
 | Metric | Count |
 |--------|------:|
-| Total skills | 204 |
-| Ready | 191 |
-| Stub | 9 |
+| Total skills | 210 |
+| Ready | 193 |
+| Stub | 13 |
 | Broken | 4 |
 
 ## ⚠ Duplicate skill_id rejections
@@ -25,6 +25,10 @@ The following skills were **rejected** because their `skill_id` was already clai
 | Team / Repo | Skill | Status | Error |
 |-------------|-------|--------|-------|
 | `ASIAN_AM 225` | `skills/example-skill/skills.md` | broken | skill_id 'example-skill' is already claimed by repo 'cs-348-skills'. Repo 'asian_am-225-skills' is rejected. Rename this skill or coordinate with the 'cs-348-skills' team. |
+| `CS-213` | `skills/cache-modeling/skills.md` | stub | missing — add a `## Flow` section with `### Step N` subsections |
+| `CS-213` | `skills/cache-performance-analysis/skills.md` | stub | missing — add a `## Flow` section with `### Step N` subsections |
+| `CS-213` | `skills/memory-access-pattern-analysis/skills.md` | stub | missing — add a `## Flow` section with `### Step N` subsections |
+| `CS-213` | `skills/memory-system-optimization/skills.md` | stub | missing — add a `## Flow` section with `### Step N` subsections |
 | `CS-214` | `skills/example-skill/skills.md` | broken | skill_id 'example-skill' is already claimed by repo 'cs-348-skills'. Repo 'cs-214-skills' is rejected. Rename this skill or coordinate with the 'cs-348-skills' team. |
 | `JOUR-201-1` | `skills/ask-for-example/skills.md` | stub | missing or empty (must be subset of cs/humanities); must be one of ['hint', 'meta', 'reframe', 'socratic'] |
 | `JOUR-201-1` | `skills/depth-of-interviewing/skills.md` | stub | missing or empty (must be subset of cs/humanities); must be one of ['hint', 'meta', 'reframe', 'socratic'] |
@@ -54,8 +58,15 @@ The following skills were **rejected** because their `skill_id` was already clai
 
 | Repo | Skill | Severity | Field | Message |
 |------|-------|----------|-------|---------|
-| `CS-213-skills` | `CS-213-skills/skills/cache_optimized_code/skills.md` | **warn** | `skill_id` | length 20 > 18 chars — see Team-Guide §7 |
-| `CS-213-skills` | `CS-213-skills/skills/reframe_with_analogy/skills.md` | **warn** | `skill_id` | length 20 > 18 chars — see Team-Guide §7 |
+| `CS-213-skills` | `CS-213-skills/skills/asm-translation/skills.md` | **warn** | `stance` | stance is for instructional skills only; remove for code |
+| `CS-213-skills` | `CS-213-skills/skills/c-debugging/skills.md` | **warn** | `stance` | stance is for instructional skills only; remove for code |
+| `CS-213-skills` | `CS-213-skills/skills/cache-modeling/skills.md` | **ERROR** | `flow` | missing — add a `## Flow` section with `### Step N` subsections |
+| `CS-213-skills` | `CS-213-skills/skills/cache-performance-analysis/skills.md` | **ERROR** | `flow` | missing — add a `## Flow` section with `### Step N` subsections |
+| `CS-213-skills` | `CS-213-skills/skills/cache_optimized_code/skills.md` | **warn** | `stance` | stance is for instructional skills only; remove for code |
+| `CS-213-skills` | `CS-213-skills/skills/execution-trace/skills.md` | **warn** | `stance` | stance is for instructional skills only; remove for code |
+| `CS-213-skills` | `CS-213-skills/skills/memory-access-pattern-analysis/skills.md` | **ERROR** | `flow` | missing — add a `## Flow` section with `### Step N` subsections |
+| `CS-213-skills` | `CS-213-skills/skills/memory-system-optimization/skills.md` | **ERROR** | `flow` | missing — add a `## Flow` section with `### Step N` subsections |
+| `CS-213-skills` | `CS-213-skills/skills/stack-visualizer/skills.md` | **warn** | `stance` | stance is for instructional skills only; remove for code |
 
 ### CS-214
 
@@ -134,6 +145,7 @@ The following skills were **rejected** because their `skill_id` was already clai
 | `cs338-skills` | `cs338-skills/skills/cross-author-comparison/skills.md` | **warn** | `skill_id` | length 23 > 18 chars — see Team-Guide §7 |
 | `cs338-skills` | `cs338-skills/skills/design-alternative-reasoning/skills.md` | **warn** | `skill_id` | length 28 > 18 chars — see Team-Guide §7 |
 | `cs338-skills` | `cs338-skills/skills/endianness-byte-ordering/skills.md` | **warn** | `skill_id` | length 24 > 18 chars — see Team-Guide §7 |
+| `cs338-skills` | `cs338-skills/skills/escalate-support-level/skills.md` | **warn** | `skill_id` | length 22 > 18 chars — see Team-Guide §7 |
 | `cs338-skills` | `cs338-skills/skills/expectation_elicitation/skills.md` | **warn** | `skill_id` | length 23 > 18 chars — see Team-Guide §7 |
 | `cs338-skills` | `cs338-skills/skills/follow-up-question-deepening/skills.md` | **warn** | `skill_id` | length 28 > 18 chars — see Team-Guide §7 |
 | `cs338-skills` | `cs338-skills/skills/heuristic-admissibility-reasoning/skills.md` | **warn** | `skill_id` | length 33 > 18 chars — see Team-Guide §7 |

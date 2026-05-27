@@ -11432,9 +11432,10 @@
     "chip_icon": "\ud83d\udd24",
     "python_entry": "logic.py",
     "version": "0.2.0",
+    "stance": "socratic",
     "description": "Helps students map **x86-64 assembly (Intel or AT&T)** to **equivalent C structure**\u2014calling convention, types, memory access, and control flow\u2014without handing them a finished C program. The tutor works in **small chunks**: one instruction, one logical line, or a short block (e.g. prologue, one branch arm, loop header + body) that hangs together, then checks understanding before moving on.",
     "trigger_summary": "- Student explicitly asks to **translate**, **convert**, or **rewrite** assembly into C (or \u201cwhat would this look like in C?\u201d).\n- Student pastes a routine and wants a **C-level reading** focused on translation, not a full decompilation in one shot.\n\nDo **not** prefer this skill when the student only wants a **register-by-register execution trace** with no C mapping\u2014that fits **execution-trace** better.",
-    "inputs_schema_text": "| Key | Meaning |\n|-----|--------|\n| `asm` | String: the assembly snippet (required). |\n| Optional: student\u2019s **current chunk** (line range or pasted subset) if they want to focus translation on part of the routine. |",
+    "inputs_schema_text": "| Key                                                                                                                           | Meaning                                  |\n| ----------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------- |\n| `asm`                                                                                                                         | String: the assembly snippet (required). |\n| Optional: student\u2019s **current chunk** (line range or pasted subset) if they want to focus translation on part of the routine. |",
     "outputs_schema_text": "`run` returns JSON: `ok`, `syntax` (`intel` \\| `att`), a **`checklist`** of steps with teaching hints (no C source), plus light **`detected`** metadata (labels, jumps, scales). The tutor **paraphrases** this into questions and partial scaffolds, not a full C listing.",
     "usage_example": "```python\nfrom logic import run\nprint(run({\"asm\": \"mov rax, rdi\\nret\\n\"}))\n```",
     "code_notes": null,
@@ -11474,14 +11475,15 @@
     "chip_icon": "\ud83d\udc1b",
     "python_entry": "logic.py",
     "version": "0.2.0",
+    "stance": "socratic",
     "description": "Supports **systematic C debugging** when the student has shared **C source** and is asking about **bugs, crashes, or wrong behavior**. The tutor turns symptoms and code into **investigation hints**: categories to consider, questions to ask themselves, and **process** next steps (warnings, sanitizers, narrowing the failure)\u2014not a ready-made patch.",
     "trigger_summary": "- Student pastes **C code** and asks what is wrong, why it crashes, why the output is incorrect, or similar **bug-focused** questions.\n- Student shares **compiler or runtime output** (or a short symptom description) together with code and wants help **debugging**.\n\nPrefer a lighter skill if they only want generic study tips without code or errors.",
-    "inputs_schema_text": "| Key | Meaning |\n|-----|--------|\n| `c_code` | C source (recommended when debugging). |\n| `compiler_output` | Full compiler stderr (warnings help). |\n| `runtime_output` | Crash message, sanitizer snippet, or wrong output. |\n| `symptoms` | Short free-text if logs are incomplete. |\n| `constraints.tools_allowed` | Optional list, e.g. `[\"gdb\",\"asan\",\"valgrind\",\"ubsan\"]`, to tailor **process** suggestions. |",
+    "inputs_schema_text": "| Key                         | Meaning                                                                                     |\n| --------------------------- | ------------------------------------------------------------------------------------------- |\n| `c_code`                    | C source (recommended when debugging).                                                      |\n| `compiler_output`           | Full compiler stderr (warnings help).                                                       |\n| `runtime_output`            | Crash message, sanitizer snippet, or wrong output.                                          |\n| `symptoms`                  | Short free-text if logs are incomplete.                                                     |\n| `constraints.tools_allowed` | Optional list, e.g. `[\"gdb\",\"asan\",\"valgrind\",\"ubsan\"]`, to tailor **process** suggestions. |",
     "outputs_schema_text": "`run` returns JSON: `likely_root_causes` (each item is an **investigation angle** with `what_to_check` prompts, not a verdict), `questions_to_ask`, `next_steps`, optional `warnings` / `errors`, a human-readable `message`, and **`pedagogy`** metadata (`hints_only`). The agent must still **rephrase** toward questions, not line-level fixes.",
     "usage_example": "```python\nfrom logic import run\nprint(run({\"c_code\": \"int *p=NULL; *p=1;\", \"symptoms\": \"segfault\"}))\n```",
     "code_notes": null,
     "extra_sections": {
-      "pedagogy_must_follow": "1. **No direct fix.** Do not spell out the exact code change (e.g. \u201cchange `i <= n` to `i < n`\u201d or \u201cadd `free` here\u201d) unless the student has already identified the issue and you are confirming or they explicitly ask for a minimal correction after working through it.\n2. **No \u201cthe bug is on line X.\u201d** Do not single out a line or variable as **the** answer. You may teach **how** to use tools that *they* use to locate a line (gdb, sanitizer output, bisecting), or ask which line *they* suspect and why.\n3. **Hints and questions.** Prefer: \u201cWhat must be true right before this dereference?\u201d \u201cWhat does the compiler warning point at\u2014prototype, type, or lifetime?\u201d \u201cIf you print or gdb-inspect these two values at this point, what would falsify your guess?\u201d\n4. **One layer at a time.** Offer a small next step; after they respond, narrow or deepen. Optional: call `logic.run` and **turn its structured items into Socratic prompts**, not a dump of \u201croot cause\u201d as fact.\n5. **Sanitizers and gdb** as *skills to practice*, not as commands that magically reveal the answer without their interpretation."
+      "pedagogy_must_follow": "1. **No direct fix.** Do not spell out the exact code change (e.g. \u201cchange `i <= n` to `i < n`\u201d or \u201cadd `free` here\u201d) unless the student has already identified the issue and you are confirming or they explicitly ask for a minimal correction after working through it.\n2. **No \u201cthe bug is on line X.\u201d** Do not single out a line or variable as **the** answer. You may teach **how** to use tools that _they_ use to locate a line (gdb, sanitizer output, bisecting), or ask which line _they_ suspect and why.\n3. **Hints and questions.** Prefer: \u201cWhat must be true right before this dereference?\u201d \u201cWhat does the compiler warning point at\u2014prototype, type, or lifetime?\u201d \u201cIf you print or gdb-inspect these two values at this point, what would falsify your guess?\u201d\n4. **One layer at a time.** Offer a small next step; after they respond, narrow or deepen. Optional: call `logic.run` and **turn its structured items into Socratic prompts**, not a dump of \u201croot cause\u201d as fact.\n5. **Sanitizers and gdb** as _skills to practice_, not as commands that magically reveal the answer without their interpretation."
     },
     "source_repo": "CS-213-skills",
     "source_path": "skills/c-debugging/skills.md",
@@ -11492,7 +11494,112 @@
     "status_reason": null
   },
   {
-    "skill_id": "cache-optimized-code",
+    "skill_id": "cache-modeling",
+    "name": "Cache Modeling",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "tags": [
+      "cache",
+      "memory-hierarchy",
+      "cs",
+      "architecture"
+    ],
+    "course_types": [
+      "cs"
+    ],
+    "learning_goal_tags": [
+      "understand-cache-structure",
+      "map-addresses-to-cache",
+      "apply-hardware-models"
+    ],
+    "trigger_signals": [
+      "given-cache-specifications",
+      "compute-tag-index-offset",
+      "cache-organization-question"
+    ],
+    "chip_icon": "\ud83e\udde0",
+    "version": "0.1.0",
+    "description": "Analyzes how a cache is structured and how memory addresses map into cache components like sets, blocks, and tags.",
+    "trigger_summary": "- When cache parameters are given\n- When computing index/tag/offset fields\n- When analyzing address-to-cache mapping",
+    "tutor_stance_rules": [
+      "Ground reasoning in cache structure step-by-step",
+      "Encourage explicit breakdown of address fields",
+      "Reinforce mapping between binary address and cache layout"
+    ],
+    "flow": [],
+    "safe_outputs": [
+      "Address breakdowns",
+      "Cache mapping diagrams (textual)",
+      "Bit-field computations"
+    ],
+    "must_avoid": [
+      "Skipping bit-level reasoning",
+      "Guessing mappings without structure",
+      "Ignoring cache configuration details"
+    ],
+    "example_exchange": "> Student: \u201cHow does this address map into the cache?\u201d  \n> Tutor: \u201cLet\u2019s compute how many offset bits we need first based on the block size.\u201d",
+    "source_repo": "CS-213-skills",
+    "source_path": "skills/cache-modeling/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/CS-213-skills/tree/main/skills/cache-modeling/skills.md",
+    "owner_team": "CS-213",
+    "owner_contact": "nikos@northwestern.edu",
+    "status": "stub",
+    "status_reason": "missing \u2014 add a `## Flow` section with `### Step N` subsections"
+  },
+  {
+    "skill_id": "cache-perf",
+    "name": "Cache Performance Analysis",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "tags": [
+      "cache",
+      "miss-rate",
+      "performance",
+      "cs"
+    ],
+    "course_types": [
+      "cs"
+    ],
+    "learning_goal_tags": [
+      "compute-miss-rates",
+      "classify-cache-misses",
+      "evaluate-cache-efficiency"
+    ],
+    "trigger_signals": [
+      "cache-trace-analysis",
+      "miss-rate-calculation",
+      "performance-comparison"
+    ],
+    "chip_icon": "\ud83d\udcc9",
+    "version": "0.1.0",
+    "description": "Evaluates cache performance by identifying miss types and computing miss rates from access patterns or traces.",
+    "trigger_summary": "- Given cache access traces\n- When computing miss rates\n- When comparing cache designs",
+    "tutor_stance_rules": [
+      "Classify misses explicitly (compulsory, conflict, capacity)",
+      "Encourage structured counting",
+      "Tie misses to structural causes"
+    ],
+    "flow": [],
+    "safe_outputs": [
+      "Trace simulations",
+      "Miss classification tables",
+      "Rate calculations"
+    ],
+    "must_avoid": [
+      "Skipping step-by-step simulation",
+      "Assuming miss types without evidence"
+    ],
+    "example_exchange": "> Student: \u201cWhat\u2019s the miss rate here?\u201d  \n> Tutor: \u201cLet\u2019s go access by access and mark hits and misses first.\u201d",
+    "source_repo": "CS-213-skills",
+    "source_path": "skills/cache-performance-analysis/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/CS-213-skills/tree/main/skills/cache-performance-analysis/skills.md",
+    "owner_team": "CS-213",
+    "owner_contact": "nikos@northwestern.edu",
+    "status": "stub",
+    "status_reason": "missing \u2014 add a `## Flow` section with `### Step N` subsections"
+  },
+  {
+    "skill_id": "cache-opt-code",
     "name": "Cache Optimized Code",
     "skill_type": "code",
     "tags": [
@@ -11519,6 +11626,7 @@
     "chip_icon": "\ud83e\udde0",
     "python_entry": "logic.py",
     "version": "0.1.0",
+    "stance": "socratic",
     "description": "Acts like a TA by guiding students to understand how their code interacts with the cache. Uses Socratic questioning, hints, and step-by-step reasoning to help students discover optimizations related to spatial and temporal locality instead of directly giving answers.",
     "trigger_summary": "- User asks why their code is slow or inefficient\n- User provides loop-heavy or array-based code\n- User mentions cache, memory locality, or performance optimization",
     "inputs_schema_text": "- C/C++ code snippet (loops, arrays, matrix operations)\n- Optional description of the performance issue\n- Optional: user skill level (to adjust hint depth)",
@@ -11528,6 +11636,93 @@
     "source_repo": "CS-213-skills",
     "source_path": "skills/cache_optimized_code/skills.md",
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/CS-213-skills/tree/main/skills/cache_optimized_code/skills.md",
+    "owner_team": "CS-213",
+    "owner_contact": "nikos@northwestern.edu",
+    "status": "ready",
+    "status_reason": null
+  },
+  {
+    "skill_id": "concept-check",
+    "name": "Conceptual Understanding Check",
+    "skill_type": "instructional",
+    "stance": "meta",
+    "tags": [
+      "understanding",
+      "metacognition",
+      "cs",
+      "memory-systems",
+      "learning"
+    ],
+    "course_types": [
+      "cs"
+    ],
+    "learning_goal_tags": [
+      "verify-conceptual-understanding",
+      "surface-misconceptions",
+      "connect-intuition-to-formal-models",
+      "improve-self-explanation"
+    ],
+    "trigger_signals": [
+      "after-solving-cache-or-memory-problem",
+      "student-requests-explanation-check",
+      "repeated-errors-in-similar-concepts",
+      "uncertain-or-guessing-answers"
+    ],
+    "chip_icon": "\ud83e\udded",
+    "version": "0.1.0",
+    "description": "Evaluates whether the student truly understands memory-system concepts (cache, paging, TLB, virtual memory, etc.) by asking targeted questions that test both technical reasoning and intuitive understanding. Focuses on identifying misconceptions, gaps in mental models, and over-reliance on memorization.",
+    "trigger_summary": "- After a student completes a problem involving cache, memory, or paging\n- When answers are correct but reasoning is unclear or inconsistent\n- When the student shows repeated mistakes across similar concepts\n- When the student asks \u201cdo I understand this right?\u201d or similar meta-questions",
+    "tutor_stance_rules": [
+      "Act like a diagnostic interviewer, not a solver",
+      "Prioritize uncovering reasoning over correctness",
+      "Mix technical and intuitive questions",
+      "Encourage students to explain in their own words",
+      "Gently surface misconceptions without judgment"
+    ],
+    "flow": [
+      {
+        "step": 1,
+        "title": "Identify target concept(s)",
+        "description": "Determine which system concept(s) the student just worked on (e.g., cache mapping, TLB, virtual memory)."
+      },
+      {
+        "step": 2,
+        "title": "Ask layered understanding questions",
+        "description": "Use a mix of:\n\n- \u201cExplain it in your own words\u201d\n- \u201cWhy does this happen?\u201d\n- \u201cWhat would change if we modify X?\u201d\n- \u201cCan you give an analogy or intuition?\u201d\n- \u201cWhat part still feels unclear?\u201d"
+      },
+      {
+        "step": 3,
+        "title": "Probe for misconceptions",
+        "description": "If answers are vague or incorrect, narrow in:\n\n- Identify specific misunderstanding\n- Contrast correct vs incorrect reasoning gently"
+      },
+      {
+        "step": 4,
+        "title": "Reinforce or repair mental model",
+        "description": "Summarize correct concept in a way aligned with their explanation style."
+      },
+      {
+        "step": 5,
+        "title": "Confirm understanding",
+        "description": "Ask a final quick check question to validate clarity."
+      }
+    ],
+    "safe_outputs": [
+      "Concept-check questions",
+      "Intuition-based prompts",
+      "Misconception identification",
+      "Short explanatory corrections",
+      "Self-explanation requests"
+    ],
+    "must_avoid": [
+      "Turning into a full lecture",
+      "Solving new problems instead of checking understanding",
+      "Assuming misunderstanding without evidence",
+      "Overloading with too many questions at once"
+    ],
+    "example_exchange": "> Student: \u201cI got the cache mapping question right.\u201d\n>\n> Tutor: \u201cGood \u2014 let me check your understanding. In your own words, what does the index in a cache address actually _do_?\u201d\n>\n> Student: \u201cIt picks where it goes?\u201d\n>\n> Tutor: \u201cRight \u2014 now here\u2019s a deeper check: if we doubled the cache size but kept block size the same, what do you think happens to the index bits, and why?\u201d\n>\n> Student: \u201cI\u2019m not sure.\u201d\n>\n> Tutor: \u201cThat\u2019s the key point we should clarify\u2014let\u2019s walk through it together.\u201d",
+    "source_repo": "CS-213-skills",
+    "source_path": "skills/conceptual-understanding-check/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/CS-213-skills/tree/main/skills/conceptual-understanding-check/skills.md",
     "owner_team": "CS-213",
     "owner_contact": "nikos@northwestern.edu",
     "status": "ready",
@@ -11561,9 +11756,10 @@
     "chip_icon": "\ud83d\udccb",
     "python_entry": "logic.py",
     "version": "0.2.0",
+    "stance": "socratic",
     "description": "Supports **hand-tracing small x86-64 snippets** (Intel-style `mov` / `add` / `sub` / `push` / `pop` and `qword ptr [...]` per `logic.py`). The focus is **register and memory state over time**, plus **choosing sensible initial inputs** (argument registers, `rsp`, stack/memory slots) so the snippet behaves as intended. The tutor goes **one instruction at a time**, checks the student\u2019s predicted state, then moves on.\n\nThis skill is for **execution / state**, not mapping assembly to C\u2014that is **asm-translation**.",
     "trigger_summary": "- Student wants to **step through** assembly and understand **what lives in which register** after each line.\n- Student asks how **inputs** (e.g. `rdi`, `rsi`, `rdx`, stack, memory) should be set so the code does the right thing.\n- Student asks for a **hand trace** or **register values** over a short listing.",
-    "inputs_schema_text": "| Key | Meaning |\n|-----|--------|\n| `asm` | Assembly snippet (required), Intel-style subset as implemented in `logic.py`. |\n| `initial_state` | Optional `{\"regs\": {...}, \"mem\": {...}}` \u2014 64-bit values; `rsp` defaults if absent. |\n| `student_mode` | Optional `bool` (default `false`). When `true`, response omits per-step `after` / `delta` / full solution table so the agent does not leak the worked trace; includes light per-step hints instead. |",
+    "inputs_schema_text": "| Key             | Meaning                                                                                                                                                                                             |\n| --------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |\n| `asm`           | Assembly snippet (required), Intel-style subset as implemented in `logic.py`.                                                                                                                       |\n| `initial_state` | Optional `{\"regs\": {...}, \"mem\": {...}}` \u2014 64-bit values; `rsp` defaults if absent.                                                                                                                 |\n| `student_mode`  | Optional `bool` (default `false`). When `true`, response omits per-step `after` / `delta` / full solution table so the agent does not leak the worked trace; includes light per-step hints instead. |",
     "outputs_schema_text": "- **`student_mode: false`**: `steps` with `before` / `after` / `delta` / `delta_summary`, `walkthrough_table_md`, `final_state` when `ok` \u2014 suitable for **answer keys** or internal checks, **not** to paste wholesale at students.\n- **`student_mode: true`**: `steps` as **hint scaffolds** only; top-level `pedagogy` marks `hints_only`. Errors list unsupported instructions as today.",
     "usage_example": "```python\nfrom logic import run\n\n# Student-facing scaffolding (no revealed after-states)\nprint(run({\"asm\": \"mov rax, 5\\nadd rax, 3\\n\", \"student_mode\": True}))\n\n# Full internal trace (do not dump verbatim to the student as \u201cthe solution\u201d)\nprint(run({\"asm\": \"mov rax, 5\\nadd rax, 3\\n\", \"initial_state\": {\"regs\": {\"rsp\": 0x1000}}}))\n```",
     "code_notes": null,
@@ -11577,6 +11773,112 @@
     "owner_contact": "nikos@northwestern.edu",
     "status": "ready",
     "status_reason": null
+  },
+  {
+    "skill_id": "mem-access-pattern",
+    "name": "Memory Access Pattern Analysis",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "tags": [
+      "locality",
+      "loops",
+      "performance",
+      "cs"
+    ],
+    "course_types": [
+      "cs"
+    ],
+    "learning_goal_tags": [
+      "analyze-spatial-locality",
+      "analyze-temporal-locality",
+      "predict-cache-behavior"
+    ],
+    "trigger_signals": [
+      "loop-order-comparison",
+      "matrix-traversal-question",
+      "cache-performance-from-code"
+    ],
+    "chip_icon": "\ud83d\udcca",
+    "version": "0.1.0",
+    "description": "Analyzes how program memory access patterns interact with hardware memory layout and cache behavior.",
+    "trigger_summary": "- Comparing loop orders\n- Evaluating matrix traversal efficiency\n- Reasoning about locality",
+    "tutor_stance_rules": [
+      "Focus on access order and stride",
+      "Relate code structure to memory layout",
+      "Highlight locality effects explicitly"
+    ],
+    "flow": [],
+    "safe_outputs": [
+      "Loop traversal explanations",
+      "Locality reasoning",
+      "Cache behavior predictions"
+    ],
+    "must_avoid": [
+      "Ignoring memory layout",
+      "Treating all loops as equivalent",
+      "Overgeneralizing performance"
+    ],
+    "example_exchange": "> Student: \u201cWhy is this loop slower?\u201d  \n> Tutor: \u201cLet\u2019s see how it walks through memory\u2014are we jumping across rows or staying contiguous?\u201d",
+    "source_repo": "CS-213-skills",
+    "source_path": "skills/memory-access-pattern-analysis/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/CS-213-skills/tree/main/skills/memory-access-pattern-analysis/skills.md",
+    "owner_team": "CS-213",
+    "owner_contact": "nikos@northwestern.edu",
+    "status": "stub",
+    "status_reason": "missing \u2014 add a `## Flow` section with `### Step N` subsections"
+  },
+  {
+    "skill_id": "mem-opt",
+    "name": "Memory System Optimization",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "tags": [
+      "optimization",
+      "cache",
+      "performance",
+      "cs"
+    ],
+    "course_types": [
+      "cs"
+    ],
+    "learning_goal_tags": [
+      "improve-cache-efficiency",
+      "reduce-conflicts",
+      "evaluate-design-tradeoffs"
+    ],
+    "trigger_signals": [
+      "optimize-cache-performance",
+      "compare-cache-configurations",
+      "reduce-conflict-misses"
+    ],
+    "chip_icon": "\u2699\ufe0f",
+    "version": "0.1.0",
+    "description": "Analyzes how changes to code, data layout, or hardware configuration affect memory system performance.",
+    "trigger_summary": "- When optimizing cache performance\n- When comparing architectures\n- When modifying data layout or associativity",
+    "tutor_stance_rules": [
+      "Compare baseline vs modified system",
+      "Focus on cause-effect relationships",
+      "Quantify tradeoffs where possible"
+    ],
+    "flow": [],
+    "safe_outputs": [
+      "Tradeoff comparisons",
+      "Optimization reasoning",
+      "Cache behavior predictions"
+    ],
+    "must_avoid": [
+      "Claiming improvements without justification",
+      "Ignoring tradeoffs",
+      "Treating optimizations as universally beneficial"
+    ],
+    "example_exchange": "> Student: \u201cWhy does padding help?\u201d  \n> Tutor: \u201cIt reduces conflict misses by changing how addresses map into sets.\u201d",
+    "source_repo": "CS-213-skills",
+    "source_path": "skills/memory-system-optimization/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/CS-213-skills/tree/main/skills/memory-system-optimization/skills.md",
+    "owner_team": "CS-213",
+    "owner_contact": "nikos@northwestern.edu",
+    "status": "stub",
+    "status_reason": "missing \u2014 add a `## Flow` section with `### Step N` subsections"
   },
   {
     "skill_id": "next-step-nudge",
@@ -11654,10 +11956,10 @@
     "status_reason": null
   },
   {
-    "skill_id": "reframe-with-analogy",
+    "skill_id": "reframe-analogy",
     "name": "Reframe with analogy",
     "skill_type": "instructional",
-    "stance": "socratic",
+    "stance": "reframe",
     "tags": [
       "learning",
       "concept-explanation",
@@ -11836,9 +12138,10 @@
     "chip_icon": "\ud83d\udcda",
     "python_entry": "logic.py",
     "version": "0.2.0",
+    "stance": "socratic",
     "description": "Helps students reason about the **stack**: where **`rsp`** points, how it **moves** instruction-by-instruction, and what **qwords** in memory sit above it\u2014especially for **Intel-syntax** snippets using `push` / `pop` / `mov` / `add` / `sub` (including **`add rsp, imm`** / **`sub rsp, imm`** frame adjustment). Two shapes:\n\n1. **Snapshot** \u2014 no `asm`: given **`rsp`** (and optional **`rbp`**, **`mem`**, **`label_hints`**), builds an address/value table for a window of stack slots.\n2. **Assembly timeline** \u2014 with **`asm`**: requires an explicit initial **`rsp`** (same register dict); simulates each line and returns per-step **`rsp_before` \u2192 `rsp_after`**, optional **`mem_write`** for `push`, a short note for `pop`, and a **stack window** (`slots` + `table_md`) after each instruction.\n\nThe tutor should **walk one instruction at a time**, ask the student to **predict** `rsp` and the relevant memory words, then confirm or nudge\u2014**not** lead with the full numeric timeline as a finished answer.",
     "trigger_summary": "- Student pastes **assembly** and gives an initial **stack pointer** (`rsp`, optionally `rbp` / memory model) and wants to see **how the stack is used** or how **`rsp` changes**.\n- Student is confused about **`rsp` / `rbp`**, saved RBP, return address, locals, or **where `push` stores**.\n- Student wants help **drawing or checking** stack memory contents (addresses + values) **after** they have tried a layout.\n\nDo **not** prefer this skill when the student only wants a **non-stack execution trace** with no stack-pointer story\u2014**execution-trace** may fit better.",
-    "inputs_schema_text": "| Key | Meaning |\n|-----|--------|\n| `asm` | Optional. If non-empty, runs **timeline** mode (Intel-style subset in `logic.py`). |\n| `regs` / `mem` | Top-level register map and memory map **or** nested under `initial_state`. |\n| `regs.rsp` | **Required** for timeline mode and for snapshot mode. |\n| `regs.rbp` | Optional; enables **offset-from-rbp** labeling when `rbp` lies above `rsp` in the modeled window. |\n| `mem` | Optional address \u2192 qword values for stack (and other) cells. |\n| `label_hints` | Optional `addr \u2192 label` overrides for the table. |\n| `word_size`, `max_slots`, `max_steps` | Optional tuning (defaults 8, 16\u201332, 200). |\n| `student_mode` | Optional `bool`. When `true`, omits numeric solution traces (see Outputs). |",
+    "inputs_schema_text": "| Key                                   | Meaning                                                                                           |\n| ------------------------------------- | ------------------------------------------------------------------------------------------------- |\n| `asm`                                 | Optional. If non-empty, runs **timeline** mode (Intel-style subset in `logic.py`).                |\n| `regs` / `mem`                        | Top-level register map and memory map **or** nested under `initial_state`.                        |\n| `regs.rsp`                            | **Required** for timeline mode and for snapshot mode.                                             |\n| `regs.rbp`                            | Optional; enables **offset-from-rbp** labeling when `rbp` lies above `rsp` in the modeled window. |\n| `mem`                                 | Optional address \u2192 qword values for stack (and other) cells.                                      |\n| `label_hints`                         | Optional `addr \u2192 label` overrides for the table.                                                  |\n| `word_size`, `max_slots`, `max_steps` | Optional tuning (defaults 8, 16\u201332, 200).                                                         |\n| `student_mode`                        | Optional `bool`. When `true`, omits numeric solution traces (see Outputs).                        |",
     "outputs_schema_text": "- **Snapshot, `student_mode: false`:** `frame`, `slots`, `table_md`, `warnings`, **`pedagogy`**.\n- **Snapshot, `student_mode: true`:** `slots` with addresses/labels but **`value` null** and a **`visualization_template_md`** ladder; **`initialization_hints`**.\n- **Timeline, `student_mode: false`:** `timeline` (each step: `change` with `rsp_before` / `rsp_after` / `mem_write` / `mem_note`, `slots`, `table_md`), **`final_*`**, **`pedagogy`**.\n- **Timeline, `student_mode: true`:** **`timeline_hints`** only (plus `visualization_template_md`, **`initialization_hints`**), **`pedagogy`** (`hints_only`); no per-step numeric `rsp` or memory answers in JSON.",
     "usage_example": "```python\nfrom logic import run\n\n# Snapshot around rsp\nprint(run({\"regs\": {\"rsp\": 0x1000, \"rbp\": 0x1010}, \"mem\": {0x1010: 1, 0x1018: 2}}))\n\n# Assembly + rsp: full internal trace (use sparingly with students)\nprint(run({\"asm\": \"push rbx\\npop rax\\n\", \"initial_state\": {\"regs\": {\"rsp\": 0x1000, \"rbx\": 42}, \"mem\": {}}}))\n\n# Hint scaffold for tutoring (preferred with students)\nprint(run({\"asm\": \"push rbx\\n\", \"initial_state\": {\"regs\": {\"rsp\": 0x1000, \"rbx\": 1}}, \"student_mode\": True}))\n```",
     "code_notes": null,
@@ -13171,6 +13474,108 @@
     "source_repo": "cs338-skills",
     "source_path": "skills/ensemble-reasoning/skills.md",
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs338-skills/tree/main/skills/ensemble-reasoning/skills.md",
+    "status_reason": null
+  },
+  {
+    "skill_id": "escalate-support-level",
+    "name": "Escalate Support Level",
+    "skill_type": "instructional",
+    "stance": "meta",
+    "tags": [
+      "scaffolding",
+      "stuck",
+      "support-intensity",
+      "metacognition"
+    ],
+    "course_types": [
+      "cs",
+      "humanities"
+    ],
+    "learning_goal_tags": [
+      "manage-effort",
+      "request-targeted-help"
+    ],
+    "trigger_signals": [
+      "student-stuck-after-socratic",
+      "student-not-responding-to-questions",
+      "multiple-failed-attempts",
+      "student-silence-persists",
+      "socratic-approach-stalling"
+    ],
+    "version": "0.1.0",
+    "description": "When Socratic questioning is no longer moving a stuck student forward, shifts the tutoring approach to more direct support \u2014 from asking back to giving targeted hints, examples, or scaffolding. Manages the intensity of tutoring intervention without jumping to answers. Recognizes when the student needs *direction* rather than *discovery*, and provides a pathway through escalating levels of support.",
+    "trigger_summary": "### Fires when:\n- Student has received multiple Socratic questions but is still stuck (answering \"I don't know,\" staying silent, or repeating the same wrong answer)\n- The student's struggle has shifted from \"I need to think harder\" to \"I need help understanding where to start\"\n- Probing and asking back has reached diminishing returns in the current turn or across multiple turns\n- Student explicitly requests more direct help (\"Can you just tell me...?\")\n\n### Does NOT fire when:\n- Student is still actively thinking or attempting after a question \u2014 give them time first\n- Student's wrong answer reveals a misconception that needs `repair-miscon`, not support escalation\n- Student lacks prerequisite knowledge entirely \u2014 use `dx-prereq-gaps` instead\n- Student needs emotional support or normalization of struggle \u2014 coordinate with `normalize-struggle`\n\n### Boundary cases:\n- **First escalation in a session**: Student has tried Socratic, it's not landing. Time to shift.\n- **Multiple escalations across turns**: Orchestrator tracks which support level has been tried; this skill guides the next move up.\n- **At max support level**: If direct hints and examples still don't unblock, consider switching skills entirely or acknowledging the need for a different kind of help.",
+    "tutor_stance_rules": [
+      "**Acknowledge the shift explicitly.** Don't pretend you're still asking questions when you're pivoting to hints. \"Let me be more direct here...\"",
+      "**Support is not surrender.** Escalating to hints doesn't mean giving the answer. It means being more specific about where to look or what to try.",
+      "**Match intensity to struggle.** A student stuck on step 1 needs a lighter hint than a student stuck on step 5. Calibrate.",
+      "**Normalize the pivot.** Frame escalating support as a natural next move, not a sign of failure. \"This is a hard one \u2014 let me give you something more concrete to work with.\"",
+      "**Preserve some cognitive work.** Even at higher support levels, the student should still be doing *something* \u2014 applying a hint, testing an example, filling in a gap \u2014 not passively receiving.",
+      "**Don't layer hints.** One hint per turn. Let them try. If they're still stuck, escalate further next turn.",
+      "**Know when to stop.** If max-level support (detailed example, structured scaffolding) doesn't move them, that's a signal to step back: either diagnose a gap, try a reframe, or acknowledge this isn't the right skill."
+    ],
+    "flow": [
+      {
+        "step": 1,
+        "title": "Recognize the stall",
+        "description": "After a question or two, notice that Socratic is not landing:\n- Student gives non-answers (\"I don't know,\" \"I'm not sure\")\n- Student repeats the same wrong answer despite probing\n- Student goes silent or asks you to just tell them\n- Multiple turns have passed with no progress"
+      },
+      {
+        "step": 2,
+        "title": "Acknowledge the struggle and the shift",
+        "description": "Explicitly name what's happening. Don't just suddenly switch tone.\n\nUseful language:\n- \"I can see you're stuck. Let me shift approaches and give you something more concrete.\"\n- \"Asking questions isn't getting us there. Let me point you in a direction instead.\"\n- \"This is a tricky one. Rather than keep asking, let me show you where to focus.\"\n\nOptionally weave in normalization:\n- \"Struggling here is normal \u2014 this is the kind of problem that needs some scaffolding.\"\n- \"You're in the right ballpark. Let me give you a firmer foothold.\""
+      },
+      {
+        "step": 3,
+        "title": "Deliver the first-level hint or scaffold",
+        "description": "Move to a more direct form of support. This might be:\n- A **directional hint** (\"The answer involves X, not Y\")\n- A **structural scaffold** (\"Break this into three parts: first do X, then Y, then Z\")\n- A **concrete example** from the domain (\"Here's how you'd approach a similar problem...\")\n- A **focused observation** (\"Notice that when you X, Y happens \u2014 what does that tell you?\")\n\nDo not give the answer. Do not explain the full solution. Give enough to unblock the next step."
+      },
+      {
+        "step": 4,
+        "title": "Set expectations for the next turn",
+        "description": "Make clear that you're handing the work back to them:\n- \"Now try applying that to your problem.\"\n- \"See if that structure helps you organize your thinking.\"\n- \"Take another pass with that hint in mind.\""
+      },
+      {
+        "step": 5,
+        "title": "Wait for their attempt",
+        "description": "Let them work with the hint. Don't add more support preemptively."
+      },
+      {
+        "step": 6,
+        "title": "If still stuck, escalate further",
+        "description": "If the hint doesn't land:\n- **Next escalation:** More specificity in the same direction (Step 3 hint \u2192 Step 4 hint)\n- **Or:** Shift to a different form of support (directional hint \u2192 structured example)\n- **Or:** Consider exiting the skill and trying a different approach (reframe, repair misconception, diagnose gap)\n\nUse judgment: don't keep escalating the same hint ladder forever. After 2\u20133 escalation attempts with no progress, it's time to step back and try a different strategy."
+      }
+    ],
+    "safe_outputs": [
+      "Explicit acknowledgments of the shift in approach (\"Let me be more direct...\")",
+      "Directional hints that point without solving",
+      "Structural scaffolds (numbered steps, frameworks)",
+      "Concrete examples or analogies from the domain",
+      "Focused observations (\"Have you noticed...?\")",
+      "Restatements of the problem in clearer terms",
+      "Brief affirmations when the student makes progress with a hint",
+      "Guidance on what to try next",
+      "Transitions between support levels"
+    ],
+    "must_avoid": [
+      "**Giving away the answer.** Even at max escalation, the student should do some work.",
+      "**Jumping multiple levels at once.** If a light hint might work, don't jump to a full example. Escalate gradually.",
+      "**Stacking multiple hints in one turn.** One hint, then wait. Let them try.",
+      "**Pretending you're still asking questions when you're giving hints.** Be explicit about the shift in stance.",
+      "**Escalating support on a misconception.** If the student's wrong answer reveals a flawed mental model, use `repair-miscon`, not escalating hints.",
+      "**Continuing to escalate after max level.** If structured examples and scaffolding aren't unblocking, exit the skill. Try a different skill or acknowledge the need for a different kind of help.",
+      "**Removing all cognitive work.** Even with direct hints, the student should still apply, test, or reason through something."
+    ],
+    "example_exchange": "> **Student:** \"I have no idea how to start this problem.\"\n>\n> **Tutor:** *(Socratic attempt)* \"What do you notice about the structure of the input? What are the constraints telling you?\"\n>\n> **Student:** \"Um... I'm not sure. It's just confusing.\"\n>\n> **Tutor:** *(Second Socratic attempt)* \"OK, let's narrow it down. Forget the whole problem for a second. What do you think the first step should be \u2014 reading the input, checking edge cases, or something else?\"\n>\n> **Student:** \"I really don't know where to even begin.\"\n>\n> **Tutor:** *(Recognize stall, escalate)* \"I can see you're stuck at the starting line. Rather than keep asking, let me give you a structure to work with. Most problems like this break into three phases: (1) parse or understand the input, (2) identify the core logic, (3) build and test. Try reading through the problem and labeling which phase each sentence fits into. What do you find?\"\n>\n> **Student:** \"Oh, OK. So the first two sentences are about the input, the next paragraph is the logic, and the last bit is about output?\"\n>\n> **Tutor:** \"Exactly. Now that you've mapped the structure, what does the core logic paragraph actually ask you to do in plain English?\"\n\n---",
+    "extra_sections": {
+      "disambiguation_from_other_skills": "- **`normalize-struggle`** acknowledges and validates the emotional experience of being stuck. **This skill** provides concrete support escalation. They work well together \u2014 normalize the struggle, then escalate support.\n- **`repair-miscon`** fires when the student's stuckness is caused by a wrong mental model. **This skill** fires when the model is sound but the student needs direction. Check first: is it a gap or a misconception?\n- **`dx-prereq-gaps`** fires when hints aren't landing because foundational knowledge is missing. **This skill** assumes prerequisites are in place; it's about intensity of tutoring, not filling knowledge gaps.\n- **`reframe`** changes *how* the student thinks about the problem. **This skill** changes *how much help* they're getting. Different moves."
+    },
+    "source_repo": "cs338-skills",
+    "source_path": "skills/escalate-support-level/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs338-skills/tree/main/skills/escalate-support-level/skills.md",
+    "owner_team": "cs338-skills",
+    "owner_contact": null,
+    "status": "ready",
     "status_reason": null
   },
   {
