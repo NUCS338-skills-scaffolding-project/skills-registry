@@ -407,6 +407,78 @@
     "status_reason": null
   },
   {
+    "skill_id": "identify-deliverables",
+    "name": "Identify Deliverables",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "tags": [
+      "deliverables",
+      "requirements",
+      "planning",
+      "tutor"
+    ],
+    "course_types": [
+      "cs"
+    ],
+    "learning_goal_tags": [
+      "understand-assignment-requirements"
+    ],
+    "trigger_signals": [
+      "student-asks-what-counts-as-complete",
+      "student-unclear-on-submission-requirements",
+      "student-unsure-what-to-submit"
+    ],
+    "description": "Guides students to identify what must be submitted for the assignment to be\ncomplete. Rather than listing deliverables directly, this skill uses leading\nquestions to prompt the student to read the assignment and surface requirements\nthemselves.",
+    "trigger_summary": "- Student asks what counts as complete for the assignment.\n- Student is unsure what to submit or what the assignment requires.\n- Student needs clarity on submission requirements before starting or finishing.\n\n---",
+    "tutor_stance_rules": [
+      "NEVER list deliverables for the student. NEVER produce a checklist or\nenumerate submission requirements directly. Ask one focused question at a time\nthat directs the student back to the assignment text to find the answer\nthemselves. Every response MUST end with a question. If the student shares a\ndeliverable they found, confirm it and ask whether the assignment mentions\nanything else."
+    ],
+    "flow": [
+      {
+        "step": 1,
+        "title": "Gather the assignment text",
+        "description": "If the student has not shared the assignment description, ask them to paste the\nrelevant section before proceeding."
+      },
+      {
+        "step": 2,
+        "title": "Prompt the student to read for requirements",
+        "description": "Ask a leading question that directs them to scan the assignment text for\nexplicit submission requirements. One question only. Examples:\n- \"Looking at the assignment description, what does it say you need to hand in?\"\n- \"Can you find any sentence in the spec that mentions what to submit?\"\n- \"What does the assignment say is required for full credit?\""
+      },
+      {
+        "step": 3,
+        "title": "Confirm and probe for completeness",
+        "description": "When the student names a deliverable, confirm it in one sentence, then ask\nwhether they see any other requirements mentioned. Repeat until the student\nbelieves they have found everything."
+      },
+      {
+        "step": 4,
+        "title": "Close with ownership",
+        "description": "Ask the student to summarize what they need to submit in their own words.\nDo not produce the list yourself \u2014 let their summary stand."
+      }
+    ],
+    "safe_outputs": [
+      "Single leading questions directed at the assignment text.",
+      "One-sentence confirmations of student-identified deliverables.",
+      "Short clarifying questions if the assignment text is missing or unclear."
+    ],
+    "must_avoid": [
+      "Listing or enumerating deliverables for the student.",
+      "Producing a submission checklist directly.",
+      "Filling in missing work or completing any part of the assignment.",
+      "Asking more than one question at a time."
+    ],
+    "example_exchange": "> **Student:** \"What do I need to submit for this assignment to be considered\n> complete?\"\n>\n> **Tutor:** \"Good question \u2014 take a look at the assignment description. What\n> does it say you need to hand in?\"\n>\n> **Student:** \"It says I need to submit a report and the source code.\"\n>\n> **Tutor:** \"Exactly right. Does the assignment mention anything else, like\n> specific file formats or additional artifacts?\"",
+    "extra_sections": {
+      "skill_type": "- **Type:** instructional\n- **Course Focus:** CS343"
+    },
+    "source_repo": "cs-343-skills",
+    "source_path": "skills/identify_deliverables/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs-343-skills/tree/main/skills/identify_deliverables/skills.md",
+    "owner_team": "CS-343",
+    "owner_contact": "admin@example.com",
+    "status": "ready",
+    "status_reason": null
+  },
+  {
     "skill_id": "narrow-the-bug-location",
     "name": "Narrow the Bug Location",
     "skill_type": "instructional",
@@ -4603,8 +4675,8 @@
     "status_reason": null
   },
   {
-    "skill_id": "counter-example",
-    "name": "Counter- xample",
+    "skill_id": "counter-example-interview-questions",
+    "name": "Counter Example Interview Questions",
     "skill_type": "instructional",
     "stance": "socratic",
     "tags": [
@@ -4720,71 +4792,6 @@
     "owner_contact": "michaelcapriotti2028@u.northwestern.edu",
     "status": "ready",
     "status_reason": null
-  },
-  {
-    "skill_id": "example-skill",
-    "name": "Example: Restate the Problem",
-    "skill_type": "instructional",
-    "stance": "socratic",
-    "tags": [
-      "example",
-      "comprehension"
-    ],
-    "course_types": [
-      "cs",
-      "humanities"
-    ],
-    "learning_goal_tags": [
-      "restate-the-problem"
-    ],
-    "trigger_signals": [
-      "new-assignment-opened",
-      "student-jumping-to-solution"
-    ],
-    "chip_icon": "\ud83d\udd01",
-    "version": "0.1.0",
-    "description": "Asks the student to paraphrase the prompt or problem in their own words before they start working on it. Surfaces misunderstandings of the assignment early.",
-    "trigger_summary": "- Student has just opened an assignment and starts answering immediately\n- Student's first response suggests they may have misread part of the prompt\n- Student asks \"what is this asking?\"",
-    "tutor_stance_rules": [
-      "Never restate the prompt for the student",
-      "If the student paraphrases something close, point at the specific phrase and ask what's different from the original",
-      "Stay on the paraphrase step until the student demonstrates accurate understanding"
-    ],
-    "flow": [
-      {
-        "step": 1,
-        "title": "Ask for paraphrase",
-        "description": "Ask the student to put the prompt or problem in their own words. Be explicit that you're not looking for a solution yet."
-      },
-      {
-        "step": 2,
-        "title": "Probe the paraphrase",
-        "description": "If anything in the paraphrase is off, point at the specific phrase and ask what the prompt actually says about it. Don't correct directly."
-      },
-      {
-        "step": 3,
-        "title": "Confirm and move on",
-        "description": "When the paraphrase is accurate, briefly affirm and ask the student what step they'd take first."
-      }
-    ],
-    "safe_outputs": [
-      "Open questions",
-      "Pointers to specific phrases in the prompt",
-      "Brief affirmations once the paraphrase is accurate"
-    ],
-    "must_avoid": [
-      "Restating the prompt yourself",
-      "Giving an example paraphrase",
-      "Moving to the solution before the paraphrase is accurate"
-    ],
-    "example_exchange": "> **Student:** \"I'll just start coding the sort function.\"\n>\n> **Tutor:** \"Hold on \u2014 before you start, can you tell me in your own words what the prompt is asking you to produce? What are the inputs and what's the expected output?\"",
-    "source_repo": "asian_am-225-skills",
-    "source_path": "skills/example-skill/skills.md",
-    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/asian_am-225-skills/tree/main/skills/example-skill/skills.md",
-    "owner_team": "ASIAN_AM 225",
-    "owner_contact": "michaelcapriotti2028@u.northwestern.edu",
-    "status": "broken",
-    "status_reason": "skill_id 'example-skill' is already claimed by repo 'cs-348-skills'. Repo 'asian_am-225-skills' is rejected. Rename this skill or coordinate with the 'cs-348-skills' team."
   },
   {
     "skill_id": "experience_connect",
@@ -6435,7 +6442,7 @@
       "always-statement-made",
       "student-hedging-on-claim"
     ],
-    "status": "broken",
+    "status": "ready",
     "version": "0.2.0",
     "description": "When the student asserts an absolute claim or generalizes from one case, prompts them to find a case where the claim would *not* hold. Pressure-tests fragile reasoning by making the student do the falsification work themselves rather than handing them the objection.",
     "trigger_summary": "- Student asserts a claim in absolute terms: \"X always Y\", \"this proves Z\", \"every case of W is a case of V\".\n- Student generalizes from one example without engaging with edge cases.\n- Student is defending their first position without having stress-tested it.\n- An author's claim deserves a falsification check the student hasn't made.",
@@ -6485,7 +6492,7 @@
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/poli_sci-210-skills/tree/main/skills/counter-example/skills.md",
     "owner_team": "POLISCI-210",
     "owner_contact": "bryanmurray2026@u.northwestern.edu",
-    "status_reason": "skill_id 'counter-example' is already claimed by repo 'asian_am-225-skills'. Repo 'poli_sci-210-skills' is rejected. Rename this skill or coordinate with the 'asian_am-225-skills' team."
+    "status_reason": null
   },
   {
     "skill_id": "critique-design",
@@ -7170,6 +7177,7 @@
     "skill_id": "extract-syllabus",
     "name": "Extract Syllabus",
     "skill_type": "code",
+    "stance": "socratic",
     "tags": [
       "import",
       "syllabus",
@@ -10730,6 +10738,150 @@
     "status_reason": null
   },
   {
+    "skill_id": "coord-dedupe",
+    "name": "Category Coordinate Deduplication",
+    "skill_type": "instructional",
+    "stance": "hint",
+    "tags": [
+      "deduplication",
+      "coordinates",
+      "categories",
+      "sets"
+    ],
+    "course_types": [
+      "cs"
+    ],
+    "learning_goal_tags": [
+      "choose-data-structures",
+      "handle-edge-cases"
+    ],
+    "trigger_signals": [
+      "locate-all",
+      "deduplicate-coordinates",
+      "category-query"
+    ],
+    "python_entry": "logic.py",
+    "version": "0.1.0",
+    "description": "Helps students formulate deduplicated coordinate collections for locate-all queries by category. The tutor guides students to distinguish duplicate POIs from duplicate returned coordinates.",
+    "trigger_summary": "- Student is implementing locate-all or category lookup.\n- Student needs unique coordinates for all POIs in a category.\n- Student mentions duplicate locations, repeated categories, or set-like behavior.\n- Student is deciding how to collect query results.",
+    "tutor_stance_rules": [
+      "Provide hints about uniqueness and equality, not final data structure code.",
+      "Ask the student to define what counts as a duplicate coordinate.",
+      "Keep the returned collection tied to the category query contract."
+    ],
+    "flow": [
+      {
+        "step": 1,
+        "title": "Clarify the query output",
+        "description": "Ask what locate-all must return for a category: POI records, names, or coordinates."
+      },
+      {
+        "step": 2,
+        "title": "Define duplicate equality",
+        "description": "Have the student state when two coordinates should be considered the same."
+      },
+      {
+        "step": 3,
+        "title": "Choose a deduplication strategy",
+        "description": "Prompt the student to compare collecting all matches first versus maintaining uniqueness as matches are found."
+      }
+    ],
+    "safe_outputs": [
+      "Questions about result shape and coordinate equality.",
+      "Hints about set-like uniqueness.",
+      "Edge-case prompts involving multiple POIs at the same location."
+    ],
+    "must_avoid": [
+      "Returning POI records when the assignment asks for coordinates.",
+      "Removing distinct coordinates only because they share a category.",
+      "Assuming string formatting is the best equality strategy.",
+      "Writing the full locate-all implementation."
+    ],
+    "example_exchange": "> **Student:** \"Locate all restaurants returns duplicates because two places have the same coordinate.\"\n>\n> **Tutor:** \"What exactly is the output supposed to contain: every POI, or every distinct coordinate? Once you answer that, what rule tells you two coordinates are the same?\"",
+    "extra_sections": {
+      "skill_type": "- **Type:** instructional\n- **Course Focus:** CS"
+    },
+    "source_repo": "cs-214-skills",
+    "source_path": "skills/coord-dedupe/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs-214-skills/tree/main/skills/coord-dedupe/skills.md",
+    "owner_team": "CS-214",
+    "owner_contact": "",
+    "status": "ready",
+    "status_reason": null
+  },
+  {
+    "skill_id": "coord-rep",
+    "name": "Coordinate Representation",
+    "skill_type": "instructional",
+    "stance": "hint",
+    "tags": [
+      "coordinates",
+      "objects",
+      "precision",
+      "map"
+    ],
+    "course_types": [
+      "cs"
+    ],
+    "learning_goal_tags": [
+      "choose-data-structures",
+      "specify-io"
+    ],
+    "trigger_signals": [
+      "raw-position-coordinates",
+      "coordinate-object-representation",
+      "geographic-precision"
+    ],
+    "python_entry": "logic.py",
+    "version": "0.1.0",
+    "description": "Helps students map raw position coordinates to internal object-oriented representations without losing geographic precision. The tutor focuses attention on exact field meaning, ordering, and preserving numeric values.",
+    "trigger_summary": "- Student is converting latitude/longitude or coordinate pairs into objects.\n- Student is unsure how to represent a position internally.\n- Student mentions rounding, truncating, swapping, or normalizing coordinates.\n- Student needs to preserve geographic precision across parsing and storage.",
+    "tutor_stance_rules": [
+      "Give a directional hint about preserving the input contract, but do not write the class or constructor for the student.",
+      "Keep the student focused on the exact meaning of each coordinate field.",
+      "Ask the student to verify that object construction is a lossless transformation."
+    ],
+    "flow": [
+      {
+        "step": 1,
+        "title": "Identify the raw coordinate contract",
+        "description": "Ask the student to name the coordinate fields in order and state what each value represents."
+      },
+      {
+        "step": 2,
+        "title": "Match fields to object state",
+        "description": "Have the student map each raw field to one internal field without changing type, order, or precision."
+      },
+      {
+        "step": 3,
+        "title": "Check for loss",
+        "description": "Prompt the student to describe how they would test that the object returns the same coordinate values that were parsed."
+      }
+    ],
+    "safe_outputs": [
+      "Conceptual hints about field mapping and precision.",
+      "Questions about coordinate order, numeric type, and object invariants.",
+      "Small checklists for verifying lossless conversion."
+    ],
+    "must_avoid": [
+      "Writing the student's coordinate class or constructor.",
+      "Choosing exact field names unless the assignment already specifies them.",
+      "Suggesting rounding or truncation unless explicitly required by the prompt.",
+      "Treating latitude and longitude as interchangeable."
+    ],
+    "example_exchange": "> **Student:** \"I have raw coordinates and need to make location objects, but I am not sure what to store.\"\n>\n> **Tutor:** \"Start with the input contract: which value is latitude, which value is longitude, and what numeric type preserves them exactly enough for the assignment's comparisons?\"",
+    "extra_sections": {
+      "skill_type": "- **Type:** instructional\n- **Course Focus:** CS"
+    },
+    "source_repo": "cs-214-skills",
+    "source_path": "skills/coord-rep/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs-214-skills/tree/main/skills/coord-rep/skills.md",
+    "owner_team": "CS-214",
+    "owner_contact": "",
+    "status": "ready",
+    "status_reason": null
+  },
+  {
     "skill_id": "data-rep-choice",
     "name": "Choose Data Representation",
     "skill_type": "instructional",
@@ -10889,6 +11041,155 @@
     "source_repo": "cs-214-skills",
     "source_path": "skills/detect-ambiguity/skills.md",
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs-214-skills/tree/main/skills/detect-ambiguity/skills.md",
+    "owner_team": "CS-214",
+    "owner_contact": "",
+    "status": "ready",
+    "status_reason": null
+  },
+  {
+    "skill_id": "domain-er",
+    "name": "Domain ER Diagram",
+    "skill_type": "instructional",
+    "stance": "reframe",
+    "tags": [
+      "diagram",
+      "architecture",
+      "entities",
+      "relationships"
+    ],
+    "course_types": [
+      "cs"
+    ],
+    "learning_goal_tags": [
+      "choose-data-structures",
+      "evaluate-modularity"
+    ],
+    "trigger_signals": [
+      "entity-relationship-diagram",
+      "domain-architecture",
+      "system-diagram"
+    ],
+    "python_entry": "logic.py",
+    "version": "0.1.0",
+    "description": "Helps students model complete system architectures visually through concrete domain entity-relationship diagrams. The tutor reframes abstract architecture into entities like coordinates, roads, POIs, categories, graph nodes, and queries.",
+    "trigger_summary": "- Student needs to draw or explain a system architecture diagram.\n- Student is using abstract boxes instead of domain entities.\n- Student mentions ER diagrams, architecture, entities, or relationships.\n- Student needs to show how map, route, and POI concepts relate.",
+    "tutor_stance_rules": [
+      "Reframe abstract components into concrete domain entities.",
+      "Ask the student to name relationships before drawing arrows.",
+      "Avoid producing the finished diagram unless the student is reviewing their own draft."
+    ],
+    "flow": [
+      {
+        "step": 1,
+        "title": "List domain entities",
+        "description": "Ask the student to list concrete nouns from the assignment, such as coordinate, road segment, POI, category, graph node, and route query."
+      },
+      {
+        "step": 2,
+        "title": "Name relationships",
+        "description": "Have the student describe relationships in verbs: contains, connects, labels, resolves to, or queries."
+      },
+      {
+        "step": 3,
+        "title": "Check diagram completeness",
+        "description": "Prompt the student to trace one user query through the diagram and identify any missing entity or relationship."
+      }
+    ],
+    "safe_outputs": [
+      "Prompts for identifying entities and relationships.",
+      "Feedback on whether a diagram is too abstract.",
+      "Textual descriptions of relationships without drawing the final diagram from scratch."
+    ],
+    "must_avoid": [
+      "Creating an abstract diagram with generic boxes like \"system\" or \"data\".",
+      "Drawing the entire final deliverable for the student without their attempt.",
+      "Ignoring cardinality or relationship direction when it matters.",
+      "Mixing implementation functions with domain entities unless the assignment asks for both."
+    ],
+    "example_exchange": "> **Student:** \"My diagram just has Parser, Map, and Router.\"\n>\n> **Tutor:** \"Can you replace at least two of those abstract boxes with domain entities from the assignment, such as road segment, coordinate, POI, or route query?\"",
+    "extra_sections": {
+      "skill_type": "- **Type:** instructional\n- **Course Focus:** CS"
+    },
+    "source_repo": "cs-214-skills",
+    "source_path": "skills/domain-er/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs-214-skills/tree/main/skills/domain-er/skills.md",
+    "owner_team": "CS-214",
+    "owner_contact": "",
+    "status": "ready",
+    "status_reason": null
+  },
+  {
+    "skill_id": "ds-tradeoffs",
+    "name": "Data Structure Trade-off Analysis",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "tags": [
+      "data-structures",
+      "runtime",
+      "tradeoffs",
+      "report"
+    ],
+    "course_types": [
+      "cs"
+    ],
+    "learning_goal_tags": [
+      "compare-strategies",
+      "analyze-complexity"
+    ],
+    "trigger_signals": [
+      "runtime-tradeoffs",
+      "technical-report",
+      "compare-data-structures"
+    ],
+    "python_entry": "logic.py",
+    "version": "0.1.0",
+    "description": "Helps students contrast alternative data structures in a written technical report using explicit runtime trade-offs. The tutor asks students to connect operations to time and space costs rather than making unsupported claims.",
+    "trigger_summary": "- Student is writing the technical report.\n- Student needs to compare multiple possible data structures.\n- Student mentions runtime, Big-O, memory, trade-offs, or design justification.\n- Student has chosen a structure but has not justified it with operations.",
+    "tutor_stance_rules": [
+      "Use Socratic prompts to make the student supply the trade-off reasoning.",
+      "Require explicit operations and costs for each candidate structure.",
+      "Do not write the report paragraph for the student."
+    ],
+    "flow": [
+      {
+        "step": 1,
+        "title": "Name the candidate structures",
+        "description": "Ask the student which two or three structures they are comparing."
+      },
+      {
+        "step": 2,
+        "title": "Identify key operations",
+        "description": "Have the student list the operations that matter most for the assignment, such as lookup, insertion, iteration, deduplication, or shortest-path updates."
+      },
+      {
+        "step": 3,
+        "title": "Attach runtime costs",
+        "description": "Prompt the student to state time and space trade-offs for each candidate under those operations."
+      },
+      {
+        "step": 4,
+        "title": "Justify the final choice",
+        "description": "Ask the student to connect the chosen structure to the most important operation and acknowledge one downside."
+      }
+    ],
+    "safe_outputs": [
+      "Questions that elicit operations, Big-O costs, and trade-offs.",
+      "Report-outline prompts.",
+      "Feedback on whether a claim needs a runtime justification."
+    ],
+    "must_avoid": [
+      "Writing the student's technical report section.",
+      "Saying one data structure is best without reference to operations.",
+      "Accepting vague phrases like \"more efficient\" without time or space detail.",
+      "Ignoring memory costs when the comparison asks for trade-offs."
+    ],
+    "example_exchange": "> **Student:** \"I wrote that a hash map is better because it is faster.\"\n>\n> **Tutor:** \"Faster for which operation: lookup by coordinate, iteration over all POIs, insertion, or sorting by distance? What is the runtime for that operation in each structure you considered?\"",
+    "extra_sections": {
+      "skill_type": "- **Type:** instructional\n- **Course Focus:** CS"
+    },
+    "source_repo": "cs-214-skills",
+    "source_path": "skills/ds-tradeoffs/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs-214-skills/tree/main/skills/ds-tradeoffs/skills.md",
     "owner_team": "CS-214",
     "owner_contact": "",
     "status": "ready",
@@ -11157,6 +11458,227 @@
     "status_reason": null
   },
   {
+    "skill_id": "nearest-pq",
+    "name": "Nearest Neighbor Priority Queue",
+    "skill_type": "instructional",
+    "stance": "hint",
+    "tags": [
+      "priority-queue",
+      "nearest-neighbor",
+      "distance",
+      "ranking"
+    ],
+    "course_types": [
+      "cs"
+    ],
+    "learning_goal_tags": [
+      "choose-data-structures",
+      "compare-strategies"
+    ],
+    "trigger_signals": [
+      "nearest-neighbor",
+      "priority-queue",
+      "spatial-distance-ranking"
+    ],
+    "python_entry": "logic.py",
+    "version": "0.1.0",
+    "description": "Helps students integrate a priority queue to track and sort spatial distances for nearest-neighbor calculations. The tutor focuses on what the queue prioritizes and when candidates are inserted or removed.",
+    "trigger_summary": "- Student is implementing closest-location or nearest-neighbor behavior.\n- Student mentions a priority queue, heap, or sorted distances.\n- Student is ranking candidate POIs or coordinates by spatial distance.\n- Student is unsure what data belongs in each queue entry.",
+    "tutor_stance_rules": [
+      "Provide implementation direction at the algorithm-design level only.",
+      "Ask the student to define the priority value before choosing queue contents.",
+      "Keep distance calculation separate from queue ordering."
+    ],
+    "flow": [
+      {
+        "step": 1,
+        "title": "Define the priority",
+        "description": "Ask what numeric distance determines which candidate should come out first."
+      },
+      {
+        "step": 2,
+        "title": "Decide the queue entry shape",
+        "description": "Have the student identify what must be stored with each distance so the result can be returned."
+      },
+      {
+        "step": 3,
+        "title": "Handle ties and stopping",
+        "description": "Prompt the student to consider equal distances, requested result counts, and when the search is complete."
+      }
+    ],
+    "safe_outputs": [
+      "Questions about priority values and queue entries.",
+      "Hints about heap behavior and distance sorting.",
+      "Edge-case prompts for ties and empty candidate sets."
+    ],
+    "must_avoid": [
+      "Writing heap or priority queue code for the student.",
+      "Recomputing distance in a way that changes ordering unpredictably.",
+      "Sorting by name or category when the query asks for nearest distance.",
+      "Ignoring the result count or stopping condition."
+    ],
+    "example_exchange": "> **Student:** \"I know I need a priority queue for nearby places, but what goes in it?\"\n>\n> **Tutor:** \"Start with the priority: what distance value should decide the next item removed, and what extra information do you need alongside that distance to return the right place?\"",
+    "extra_sections": {
+      "skill_type": "- **Type:** instructional\n- **Course Focus:** CS"
+    },
+    "source_repo": "cs-214-skills",
+    "source_path": "skills/nearest-pq/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs-214-skills/tree/main/skills/nearest-pq/skills.md",
+    "owner_team": "CS-214",
+    "owner_contact": "",
+    "status": "ready",
+    "status_reason": null
+  },
+  {
+    "skill_id": "poi-records",
+    "name": "POI Record Construction",
+    "skill_type": "instructional",
+    "stance": "hint",
+    "tags": [
+      "poi",
+      "records",
+      "locations",
+      "categories"
+    ],
+    "course_types": [
+      "cs"
+    ],
+    "learning_goal_tags": [
+      "choose-data-structures",
+      "specify-io"
+    ],
+    "trigger_signals": [
+      "point-of-interest",
+      "poi-record",
+      "structured-location-category-name"
+    ],
+    "python_entry": "logic.py",
+    "version": "0.1.0",
+    "description": "Helps students construct point-of-interest records with structured locations, semantic categories, and unique names. The tutor emphasizes clear fields and searchable records.",
+    "trigger_summary": "- Student is parsing or storing points of interest.\n- Student needs to decide what fields a POI record contains.\n- Student mentions location, category, and name data together.\n- Student is unsure how POIs relate to map coordinates.",
+    "tutor_stance_rules": [
+      "Give structural hints about record fields without implementing the record.",
+      "Ask the student to connect each field to a later query.",
+      "Keep unique names and categories conceptually separate."
+    ],
+    "flow": [
+      {
+        "step": 1,
+        "title": "Name the required fields",
+        "description": "Ask the student to identify the location, category, and name in one POI input record."
+      },
+      {
+        "step": 2,
+        "title": "Connect fields to future queries",
+        "description": "Have the student explain which queries use the name, which use the category, and which use the coordinate."
+      },
+      {
+        "step": 3,
+        "title": "Check record uniqueness",
+        "description": "Prompt the student to decide what must be unique and what may repeat across multiple POIs."
+      }
+    ],
+    "safe_outputs": [
+      "Field-identification prompts.",
+      "Conceptual record diagrams described in words.",
+      "Questions about lookup by name, category filtering, and stored coordinates."
+    ],
+    "must_avoid": [
+      "Writing the POI class or struct.",
+      "Treating category as a unique identifier.",
+      "Treating display name and internal key as identical without assignment support.",
+      "Losing the structured coordinate by storing only text."
+    ],
+    "example_exchange": "> **Student:** \"For POIs, should I just store strings?\"\n>\n> **Tutor:** \"Which later operation needs the coordinate, which one needs the category, and which one needs the unique name? That tells you which fields belong in each POI record.\"",
+    "extra_sections": {
+      "skill_type": "- **Type:** instructional\n- **Course Focus:** CS"
+    },
+    "source_repo": "cs-214-skills",
+    "source_path": "skills/poi-records/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs-214-skills/tree/main/skills/poi-records/skills.md",
+    "owner_team": "CS-214",
+    "owner_contact": "",
+    "status": "ready",
+    "status_reason": null
+  },
+  {
+    "skill_id": "ranking-ethics",
+    "name": "Spatial Ranking Ethics",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "tags": [
+      "ethics",
+      "ranking",
+      "recommendations",
+      "spatial-software"
+    ],
+    "course_types": [
+      "cs"
+    ],
+    "learning_goal_tags": [
+      "evaluate-reasoning",
+      "surface-assumptions"
+    ],
+    "trigger_signals": [
+      "commercialized-rankings",
+      "recommendation-ranking",
+      "spatial-software-ethics"
+    ],
+    "python_entry": "logic.py",
+    "version": "0.1.0",
+    "description": "Helps students analyze societal and economic trade-offs of commercializing recommendation rankings within spatial software features. The tutor prompts students to consider paid placement, user trust, competition, accessibility, and bias.",
+    "trigger_summary": "- Student is discussing recommendation rankings in maps or spatial software.\n- Student mentions paid placement, commercialization, sponsored results, or ranking fairness.\n- Student needs to analyze societal or economic trade-offs.\n- Student is writing an ethics or impact section about spatial recommendations.",
+    "tutor_stance_rules": [
+      "Use Socratic prompts to surface stakeholders and trade-offs.",
+      "Ask for both benefits and harms rather than a one-sided conclusion.",
+      "Keep the analysis tied to spatial software behavior, not generic technology ethics."
+    ],
+    "flow": [
+      {
+        "step": 1,
+        "title": "Identify stakeholders",
+        "description": "Ask who is affected by commercialized ranking: users, businesses, platforms, neighborhoods, and competitors."
+      },
+      {
+        "step": 2,
+        "title": "Separate economic incentives from user value",
+        "description": "Have the student identify what the platform gains and what the user may gain or lose."
+      },
+      {
+        "step": 3,
+        "title": "Analyze ranking harms",
+        "description": "Prompt the student to consider visibility bias, unfair competition, accessibility, trust, and geographic inequality."
+      },
+      {
+        "step": 4,
+        "title": "Form a balanced claim",
+        "description": "Ask the student to state a claim that includes both a potential benefit and a concrete risk."
+      }
+    ],
+    "safe_outputs": [
+      "Stakeholder questions.",
+      "Prompts about incentives, fairness, and trust.",
+      "Feedback on whether an ethical claim is balanced and specific."
+    ],
+    "must_avoid": [
+      "Writing the student's ethics response.",
+      "Treating commercialization as automatically good or bad.",
+      "Discussing recommendation ethics without tying it back to spatial ranking behavior.",
+      "Ignoring businesses or users with less money, mobility, or visibility."
+    ],
+    "example_exchange": "> **Student:** \"I need to discuss whether paid map rankings are a problem.\"\n>\n> **Tutor:** \"Who benefits if a business can pay to appear first, and who might be harmed if the ranking no longer reflects distance, relevance, or quality?\"",
+    "extra_sections": {
+      "skill_type": "- **Type:** instructional\n- **Course Focus:** CS"
+    },
+    "source_repo": "cs-214-skills",
+    "source_path": "skills/ranking-ethics/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs-214-skills/tree/main/skills/ranking-ethics/skills.md",
+    "owner_team": "CS-214",
+    "owner_contact": "",
+    "status": "ready",
+    "status_reason": null
+  },
+  {
     "skill_id": "return-behavior",
     "name": "Decide Return Behavior",
     "skill_type": "instructional",
@@ -11234,6 +11756,150 @@
     "source_repo": "cs-214-skills",
     "source_path": "skills/return-behavior/skills.md",
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs-214-skills/tree/main/skills/return-behavior/skills.md",
+    "owner_team": "CS-214",
+    "owner_contact": "",
+    "status": "ready",
+    "status_reason": null
+  },
+  {
+    "skill_id": "road-segments",
+    "name": "Road Segment Parsing",
+    "skill_type": "instructional",
+    "stance": "hint",
+    "tags": [
+      "graph",
+      "roads",
+      "parsing",
+      "topology"
+    ],
+    "course_types": [
+      "cs"
+    ],
+    "learning_goal_tags": [
+      "choose-data-structures",
+      "decompose-problems"
+    ],
+    "trigger_signals": [
+      "raw-road-segments",
+      "topological-map",
+      "road-vector-parsing"
+    ],
+    "python_entry": "logic.py",
+    "version": "0.1.0",
+    "description": "Helps students parse input vectors containing raw road segments into an internal topological map structure. The tutor guides them to identify endpoints, connections, and graph relationships before implementation.",
+    "trigger_summary": "- Student is loading road segments from an input vector.\n- Student is unsure how road endpoints become graph nodes or edges.\n- Student needs to populate an internal map or graph from raw segment data.\n- Student is confused about topology versus coordinate storage.",
+    "tutor_stance_rules": [
+      "Provide hints about graph modeling, not complete parsing code.",
+      "Keep the student focused on endpoints, adjacency, and connection meaning.",
+      "Encourage a small example segment trace before generalizing."
+    ],
+    "flow": [
+      {
+        "step": 1,
+        "title": "Identify each segment's parts",
+        "description": "Ask the student to name what one raw road segment contains: start point, end point, and any road metadata."
+      },
+      {
+        "step": 2,
+        "title": "Convert segments into topology",
+        "description": "Have the student decide which pieces become nodes, which become edges, and how adjacent roads are discovered."
+      },
+      {
+        "step": 3,
+        "title": "Trace one insertion",
+        "description": "Prompt the student to walk one road segment through the map-building process before handling the whole vector."
+      }
+    ],
+    "safe_outputs": [
+      "Questions about endpoints, edges, and adjacency.",
+      "High-level descriptions of graph population.",
+      "Small tracing prompts using one road segment."
+    ],
+    "must_avoid": [
+      "Writing the parser loop for the student.",
+      "Assuming roads are directed or undirected without checking the assignment.",
+      "Ignoring duplicate endpoints that should represent the same map node.",
+      "Blending POI records into the road topology unless the prompt requires it."
+    ],
+    "example_exchange": "> **Student:** \"I have a vector of road segments and don't know how to make the map.\"\n>\n> **Tutor:** \"Take one segment first: what are its two endpoint coordinates, and in your internal structure should those become nodes, an edge, or both?\"",
+    "extra_sections": {
+      "skill_type": "- **Type:** instructional\n- **Course Focus:** CS"
+    },
+    "source_repo": "cs-214-skills",
+    "source_path": "skills/road-segments/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs-214-skills/tree/main/skills/road-segments/skills.md",
+    "owner_team": "CS-214",
+    "owner_contact": "",
+    "status": "ready",
+    "status_reason": null
+  },
+  {
+    "skill_id": "shortest-route",
+    "name": "Shortest Route",
+    "skill_type": "instructional",
+    "stance": "hint",
+    "tags": [
+      "graph",
+      "routing",
+      "shortest-path",
+      "map"
+    ],
+    "course_types": [
+      "cs"
+    ],
+    "learning_goal_tags": [
+      "compare-strategies",
+      "recognize-patterns"
+    ],
+    "trigger_signals": [
+      "shortest-path",
+      "route-to-destination",
+      "named-destination"
+    ],
+    "python_entry": "logic.py",
+    "version": "0.1.0",
+    "description": "Helps students formulate graph routing routines that isolate the absolute shortest path from a starting coordinate to a named destination. The tutor emphasizes graph state, destination lookup, and distance optimality.",
+    "trigger_summary": "- Student is implementing route finding or shortest path behavior.\n- Student needs to route from a coordinate to a named POI.\n- Student mentions Dijkstra, graph distances, path reconstruction, or destination lookup.\n- Student is unsure how the named destination connects to the road graph.",
+    "tutor_stance_rules": [
+      "Give algorithmic direction without writing the routing routine.",
+      "Ask the student to separate destination lookup from graph search.",
+      "Keep the student focused on proving the returned path is globally shortest."
+    ],
+    "flow": [
+      {
+        "step": 1,
+        "title": "Resolve the destination",
+        "description": "Ask how the named destination maps to a coordinate or graph node before routing begins."
+      },
+      {
+        "step": 2,
+        "title": "Identify graph costs",
+        "description": "Have the student state what edge weight represents and how path distance accumulates."
+      },
+      {
+        "step": 3,
+        "title": "Track path evidence",
+        "description": "Prompt the student to decide what predecessor or parent information is needed to reconstruct the final route."
+      }
+    ],
+    "safe_outputs": [
+      "Hints about shortest-path graph algorithms.",
+      "Questions about edge weights, start state, destination state, and predecessors.",
+      "Small hand traces on a tiny graph."
+    ],
+    "must_avoid": [
+      "Writing Dijkstra or path reconstruction code for the student.",
+      "Treating the named destination search as the same step as graph traversal.",
+      "Returning the first path found unless the graph conditions justify it.",
+      "Ignoring unreachable destinations."
+    ],
+    "example_exchange": "> **Student:** \"I can find the destination name, but I don't know how to route to it.\"\n>\n> **Tutor:** \"Separate those steps: after the name gives you a destination coordinate, what graph node does that coordinate correspond to, and what edge weights define shortest?\"",
+    "extra_sections": {
+      "skill_type": "- **Type:** instructional\n- **Course Focus:** CS"
+    },
+    "source_repo": "cs-214-skills",
+    "source_path": "skills/shortest-route/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs-214-skills/tree/main/skills/shortest-route/skills.md",
     "owner_team": "CS-214",
     "owner_contact": "",
     "status": "ready",
@@ -11399,6 +12065,78 @@
     "source_repo": "cs-214-skills",
     "source_path": "skills/unit-test-plan/skills.md",
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs-214-skills/tree/main/skills/unit-test-plan/skills.md",
+    "owner_team": "CS-214",
+    "owner_contact": "",
+    "status": "ready",
+    "status_reason": null
+  },
+  {
+    "skill_id": "workspace-link",
+    "name": "External Workspace Linking",
+    "skill_type": "instructional",
+    "stance": "hint",
+    "tags": [
+      "workspace",
+      "linking",
+      "paths",
+      "integration"
+    ],
+    "course_types": [
+      "cs"
+    ],
+    "learning_goal_tags": [
+      "extract-requirements",
+      "debug-systematically"
+    ],
+    "trigger_signals": [
+      "external-workspace",
+      "compiled-data-structure",
+      "workspace-file-path"
+    ],
+    "python_entry": "logic.py",
+    "version": "0.1.0",
+    "description": "Helps students link compiled external data structures from prior workspaces using exact workspace file-path syntax. The tutor emphasizes path accuracy, build-system expectations, and distinguishing source paths from compiled artifacts.",
+    "trigger_summary": "- Student is importing or linking code from a previous workspace.\n- Student is unsure what exact path syntax the assignment or build system expects.\n- Student mentions compiled artifacts, libraries, object files, or workspace-relative paths.\n- Student has a path or linking error.",
+    "tutor_stance_rules": [
+      "Provide path-debugging guidance without inventing paths.",
+      "Ask the student to inspect the actual file location and the expected build syntax.",
+      "Keep source files, compiled files, and workspace roots distinct."
+    ],
+    "flow": [
+      {
+        "step": 1,
+        "title": "Identify the expected artifact",
+        "description": "Ask what compiled file or external data structure the assignment says to link."
+      },
+      {
+        "step": 2,
+        "title": "Locate the workspace root",
+        "description": "Have the student determine the path relative to the required workspace root, not the current shell by accident."
+      },
+      {
+        "step": 3,
+        "title": "Compare actual and expected paths",
+        "description": "Prompt the student to compare the exact path they wrote with the exact path where the artifact exists."
+      }
+    ],
+    "safe_outputs": [
+      "Questions about actual file location and required path syntax.",
+      "Hints about absolute versus workspace-relative paths.",
+      "Debugging prompts for missing-file and linker errors."
+    ],
+    "must_avoid": [
+      "Guessing a file path not shown by the student or assignment.",
+      "Recommending broad path rewrites before confirming the workspace root.",
+      "Confusing source code imports with compiled artifact linking.",
+      "Ignoring spaces or platform-specific path syntax."
+    ],
+    "example_exchange": "> **Student:** \"My previous data structure won't link from the other workspace.\"\n>\n> **Tutor:** \"What exact compiled artifact are you supposed to link, and from which workspace root is the path supposed to be interpreted?\"",
+    "extra_sections": {
+      "skill_type": "- **Type:** instructional\n- **Course Focus:** CS"
+    },
+    "source_repo": "cs-214-skills",
+    "source_path": "skills/workspace-link/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs-214-skills/tree/main/skills/workspace-link/skills.md",
     "owner_team": "CS-214",
     "owner_contact": "",
     "status": "ready",
@@ -16947,5 +17685,524 @@
     "source_path": "skills/trend-analysis-reasoning/skills.md",
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs338-skills/tree/main/skills/trend-analysis-reasoning/skills.md",
     "status_reason": null
+  },
+  {
+    "skill_id": "ap-style-check",
+    "name": "AP Style Check",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "tags": [
+      "journalism",
+      "AP-style",
+      "editing",
+      "grammar",
+      "style"
+    ],
+    "course_types": [
+      "humanities"
+    ],
+    "learning_goal_tags": [
+      "evaluate-readability",
+      "verify-claims"
+    ],
+    "trigger_signals": [
+      "student-submitting-draft",
+      "student-asking-style-feedback"
+    ],
+    "chip_icon": "\ud83d\udcdd",
+    "version": "0.1.0",
+    "description": "Reviews student drafts for AP style compliance. Flags that errors exist and how many, but does not reveal what they are \u2014 the student must find and fix them first.",
+    "trigger_summary": "- Student submits a draft for feedback\n- Student asks about AP style rules\n- Draft contains likely AP style violations",
+    "tutor_stance_rules": [
+      "Keep responses short \u2014 tell the student how many errors exist and where (sentence/graf number), but not what they are.",
+      "Only reveal what the error is if the student has made a genuine attempt to fix it themselves.",
+      "Don't rewrite sentences."
+    ],
+    "flow": [],
+    "safe_outputs": [],
+    "must_avoid": [
+      "Naming what the error is before the student attempts to fix it",
+      "Giving more than a category hint after failed attempts",
+      "Rewriting sentences"
+    ],
+    "example_exchange": "> **Student:** \"Illinois Governor J.B. Pritzker, 56, announced the new policy on March 3rd.\"\n>\n> **Tutor:** \"I found 2 AP style errors \u2014 both in this sentence. Can you find and fix them?\"\n>\n> **Student:** \"Is it 'March 3rd'?\"\n>\n> **Tutor:** \"Yes \u2014 fix that one. One more in the same sentence.\"",
+    "extra_sections": {
+      "common_ap_style_rules_to_check": "- **Titles:** Capitalize formal titles before a name, lowercase after\n- **Numbers:** Spell out one through nine; digits for 10 and above; always digits for ages, percentages, money\n- **Dates:** *Jan. 5* \u2014 no ordinal suffixes; never abbreviate March, April, May, June, July\n- **Abbreviations:** Spell out state names in text; last name only on second reference\n- **Punctuation:** No Oxford comma; periods and commas go inside quotation marks"
+    },
+    "source_repo": "jour-201-skills",
+    "source_path": "skills/ap-style-check/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/jour-201-skills/tree/main/skills/ap-style-check/skills.md",
+    "owner_team": "JOUR-201",
+    "owner_contact": "karacho2025@u.northwestern.edu",
+    "status": "stub",
+    "status_reason": "missing \u2014 add a `## Flow` section with `### Step N` subsections; missing \u2014 add a `## Safe Output Types` section"
+  },
+  {
+    "skill_id": "ask-for-example",
+    "name": "Ask for Example",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "tags": [
+      "pedagogy",
+      "abstract-thinking",
+      "concrete-reasoning",
+      "Socratic"
+    ],
+    "course_types": [
+      "humanities"
+    ],
+    "learning_goal_tags": [
+      "construct-arguments",
+      "surface-assumptions"
+    ],
+    "trigger_signals": [
+      "student-abstract-claim",
+      "student-vague-answer"
+    ],
+    "chip_icon": "\ud83d\udca1",
+    "python_entry": "logic.py",
+    "version": "0.1.0",
+    "description": "Forces concrete reasoning by asking students to ground abstract claims in a specific example.",
+    "trigger_summary": "- Student makes a claim in abstract or vague terms\n- Student uses broad generalizations without grounding them",
+    "tutor_stance_rules": [
+      "Don't engage with abstraction until a concrete example exists.",
+      "Never provide the example \u2014 the student must generate it."
+    ],
+    "flow": [],
+    "safe_outputs": [],
+    "must_avoid": [
+      "Providing an example for the student",
+      "Accepting a hypothetical as a concrete example"
+    ],
+    "example_exchange": "> **Student:** \"Society doesn't value education the way it used to.\"\n>\n> **Tutor:** \"Give me a specific example of that.\"\n>\n> **Student:** \"My school cut its art program last year because of budget pressure.\"\n>\n> **Tutor:** \"Good. Now restate your claim using that as your evidence.\"",
+    "source_repo": "jour-201-skills",
+    "source_path": "skills/ask-for-example/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/jour-201-skills/tree/main/skills/ask-for-example/skills.md",
+    "owner_team": "JOUR-201",
+    "owner_contact": "karacho2025@u.northwestern.edu",
+    "status": "broken",
+    "status_reason": "skill_id 'ask-for-example' is already claimed by repo 'jour-201-1-skills'. Repo 'jour-201-skills' is rejected. Rename this skill or coordinate with the 'jour-201-1-skills' team."
+  },
+  {
+    "skill_id": "depth-of-interviewing",
+    "name": "Depth of Interviewing",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "tags": [
+      "journalism",
+      "interviewing",
+      "open-ended-questions",
+      "listening",
+      "quotes"
+    ],
+    "course_types": [
+      "humanities"
+    ],
+    "learning_goal_tags": [
+      "identify-evidence",
+      "construct-arguments"
+    ],
+    "trigger_signals": [
+      "student-weak-interview",
+      "student-closed-questions"
+    ],
+    "chip_icon": "\ud83c\udf99\ufe0f",
+    "python_entry": "logic.py",
+    "version": "0.1.0",
+    "description": "Coaches students to ask strong, open-ended questions and get usable quotes and narrative detail. Guides students to generate questions that open stories, surface specific moments, and produce quotable responses \u2014 not just yes/no answers.",
+    "trigger_summary": "- Student's planned questions are closed or leading\n- Interview transcript has only surface-level responses\n- Student asks how to get better quotes",
+    "tutor_stance_rules": [
+      "Never write questions for the student \u2014 prompt them to generate and improve their own.",
+      "Push for questions that open a scene, surface a specific moment, or invite an opinion \u2014 not questions that can be answered in one word.",
+      "Ask: \"Would this question make your source tell you a story, or just give you a fact?\""
+    ],
+    "flow": [],
+    "safe_outputs": [],
+    "must_avoid": [
+      "Writing interview questions for the student",
+      "Rewriting or paraphrasing the source's words"
+    ],
+    "example_exchange": "> **Student:** \"'Do you think the policy is unfair?' \u2014 they just said yes.\"\n>\n> **Tutor:** \"That's closed and leading. How would you rewrite it so they have to explain their experience?\"\n>\n> **Student:** \"'How has this policy affected you personally?'\"\n>\n> **Tutor:** \"Good. What follow-up would you ask if they gave you a vague answer?\"",
+    "source_repo": "jour-201-skills",
+    "source_path": "skills/depth-of-interviewing/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/jour-201-skills/tree/main/skills/depth-of-interviewing/skills.md",
+    "owner_team": "JOUR-201",
+    "owner_contact": "karacho2025@u.northwestern.edu",
+    "status": "broken",
+    "status_reason": "skill_id 'depth-of-interviewing' is already claimed by repo 'jour-201-1-skills'. Repo 'jour-201-skills' is rejected. Rename this skill or coordinate with the 'jour-201-1-skills' team."
+  },
+  {
+    "skill_id": "example-code",
+    "name": "Example: Length Validator",
+    "skill_type": "code",
+    "tags": [
+      "example",
+      "validation"
+    ],
+    "course_types": [
+      "cs"
+    ],
+    "learning_goal_tags": [
+      "specify-io"
+    ],
+    "trigger_signals": [
+      "input-bounds-needed"
+    ],
+    "chip_icon": "\ud83d\udccf",
+    "python_entry": "logic.py",
+    "version": "0.1.0",
+    "description": "Validates that a string input falls within a configurable length range. A simple stand-in to demonstrate the code-skill folder structure and the `run(input)` contract.",
+    "trigger_summary": "- A skill needs to enforce input length bounds before further processing\n- A submission requires a min/max character check",
+    "inputs_schema_text": "A dict with keys:\n- `text` (str): the input to validate\n- `min_len` (int, optional, default 1): minimum allowed length\n- `max_len` (int, optional, default 10000): maximum allowed length",
+    "outputs_schema_text": "A dict with keys:\n- `ok` (bool): whether the input passed\n- `reason` (str | None): a short failure reason if `ok` is `False`, otherwise `None`",
+    "usage_example": "```python\nfrom logic import run\n\nresult = run({\"text\": \"hello\", \"min_len\": 1, \"max_len\": 100})\n# result == {\"ok\": True, \"reason\": None}\n\nresult = run({\"text\": \"\", \"min_len\": 1})\n# result == {\"ok\": False, \"reason\": \"below min_len (1)\"}\n```",
+    "code_notes": "Pure function. No side effects. Safe to call repeatedly with the same input.",
+    "source_repo": "jour-201-skills",
+    "source_path": "skills/example-code/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/jour-201-skills/tree/main/skills/example-code/skills.md",
+    "owner_team": "JOUR-201",
+    "owner_contact": "karacho2025@u.northwestern.edu",
+    "status": "broken",
+    "status_reason": "skill_id 'example-code' is already claimed by repo 'cs-348-skills'. Repo 'jour-201-skills' is rejected. Rename this skill or coordinate with the 'cs-348-skills' team."
+  },
+  {
+    "skill_id": "give-structural-hint",
+    "name": "Give Structural Hint",
+    "skill_type": "instructional",
+    "stance": "hint",
+    "tags": [
+      "pedagogy",
+      "structure",
+      "decomposition",
+      "overwhelmed",
+      "scaffolding"
+    ],
+    "course_types": [
+      "humanities"
+    ],
+    "learning_goal_tags": [
+      "decompose-problems",
+      "manage-effort"
+    ],
+    "trigger_signals": [
+      "student-overwhelmed",
+      "student-stuck"
+    ],
+    "chip_icon": "\ud83d\uddfa\ufe0f",
+    "python_entry": "logic.py",
+    "version": "0.1.0",
+    "description": "Offers one structural nudge when a student is overwhelmed \u2014 not a roadmap, just the next step.",
+    "trigger_summary": "- Student doesn't know where to start\n- Student is stuck between steps",
+    "tutor_stance_rules": [
+      "Give the smallest useful nudge only.",
+      "Ask what they've already done before suggesting anything.",
+      "Never provide a full outline or more than one hint at a time."
+    ],
+    "flow": [],
+    "safe_outputs": [],
+    "must_avoid": [
+      "Giving more than one hint at a time",
+      "Doing the decomposition for the student"
+    ],
+    "example_exchange": "> **Student:** \"I don't know where to start. This feels impossible.\"\n>\n> **Tutor:** \"What have you done so far?\"\n>\n> **Student:** \"Nothing, I just read the prompt.\"\n>\n> **Tutor:** \"What's the smallest piece you could complete in the next 15 minutes \u2014 without it needing to be good?\"",
+    "source_repo": "jour-201-skills",
+    "source_path": "skills/give-structural-hint/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/jour-201-skills/tree/main/skills/give-structural-hint/skills.md",
+    "owner_team": "JOUR-201",
+    "owner_contact": "karacho2025@u.northwestern.edu",
+    "status": "broken",
+    "status_reason": "skill_id 'give-structural-hint' is already claimed by repo 'jour-201-1-skills'. Repo 'jour-201-skills' is rejected. Rename this skill or coordinate with the 'jour-201-1-skills' team."
+  },
+  {
+    "skill_id": "interview-para",
+    "name": "Interview Paraphraser",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "tags": [
+      "journalism",
+      "quotes",
+      "paraphrase",
+      "attribution",
+      "transcripts"
+    ],
+    "course_types": [
+      "humanities"
+    ],
+    "learning_goal_tags": [
+      "identify-evidence",
+      "interpret-evidence"
+    ],
+    "trigger_signals": [
+      "student-has-raw-notes",
+      "student-unsure-which-quotes-to-use"
+    ],
+    "chip_icon": "\u2702\ufe0f",
+    "version": "0.1.0",
+    "description": "Guides students to identify strong quotes, tighten paraphrases, and catch attribution gaps \u2014 through questions, not corrections.",
+    "trigger_summary": "- Student has interview notes or a transcript and doesn't know what to use\n- Student's draft has weak, long, or unattributed quotes\n- Student asks \"is this a good quote?\" or \"how do I paraphrase this?\"",
+    "tutor_stance_rules": [
+      "Keep responses short \u2014 one question at a time.",
+      "Never identify the best quote or write a paraphrase \u2014 ask questions that lead the student there.",
+      "Flag missing attribution immediately before anything else."
+    ],
+    "flow": [],
+    "safe_outputs": [],
+    "must_avoid": [
+      "Identifying the strongest quote for the student",
+      "Writing or suggesting a paraphrase",
+      "Commenting on more than one quote at a time"
+    ],
+    "example_exchange": "> **Student:** \"My source said: 'I think, you know, it's just really hard for a lot of people in the community, especially those who don't have a lot of resources, to really access the kinds of services that they need on a regular basis.'\"\n>\n> **Tutor:** \"If you had to keep only one clause from that quote to use directly, which part would it be and why?\"",
+    "source_repo": "jour-201-skills",
+    "source_path": "skills/interview-para/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/jour-201-skills/tree/main/skills/interview-para/skills.md",
+    "owner_team": "JOUR-201",
+    "owner_contact": "karacho2025@u.northwestern.edu",
+    "status": "stub",
+    "status_reason": "missing \u2014 add a `## Flow` section with `### Step N` subsections; missing \u2014 add a `## Safe Output Types` section"
+  },
+  {
+    "skill_id": "news-judgement",
+    "name": "News Judgement",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "tags": [
+      "journalism",
+      "newsworthiness",
+      "story-angle",
+      "5W1H",
+      "reporting"
+    ],
+    "course_types": [
+      "humanities"
+    ],
+    "learning_goal_tags": [
+      "identify-evidence",
+      "detect-ambiguity"
+    ],
+    "trigger_signals": [
+      "student-broad-story-idea",
+      "student-unclear-angle"
+    ],
+    "chip_icon": "\ud83d\udcf0",
+    "python_entry": "logic.py",
+    "version": "0.1.0",
+    "description": "Helps students identify a newsworthy, focused story angle. Triggers when a pitch is too broad, vague, or lacks audience relevance.",
+    "trigger_summary": "- Student's story idea is too broad or unclear\n- Student can't say who would care and why",
+    "tutor_stance_rules": [
+      "Act as a skeptical editor who needs to be convinced.",
+      "Never choose the angle for the student.",
+      "Vague answers get follow-up questions, not validation."
+    ],
+    "flow": [],
+    "safe_outputs": [],
+    "must_avoid": [
+      "Choosing the angle for the student",
+      "Approving a vague pitch without pressing for specifics"
+    ],
+    "example_exchange": "> **Student:** \"I want to write about how college students are stressed.\"\n>\n> **Tutor:** \"That's a topic, not a story. What's the timely news hook that makes this worth publishing *this week*?\"\n>\n> **Student:** \"I don't know, it's always relevant.\"\n>\n> **Tutor:** \"Always relevant usually means never urgent. What specific event or person anchors this to right now?\"",
+    "source_repo": "jour-201-skills",
+    "source_path": "skills/news-judgement/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/jour-201-skills/tree/main/skills/news-judgement/skills.md",
+    "owner_team": "JOUR-201",
+    "owner_contact": "karacho2025@u.northwestern.edu",
+    "status": "broken",
+    "status_reason": "skill_id 'news-judgement' is already claimed by repo 'jour-201-1-skills'. Repo 'jour-201-skills' is rejected. Rename this skill or coordinate with the 'jour-201-1-skills' team."
+  },
+  {
+    "skill_id": "nut-graf-coach",
+    "name": "Nut Graf Coach",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "tags": [
+      "journalism",
+      "nut-graf",
+      "lede",
+      "structure",
+      "so-what"
+    ],
+    "course_types": [
+      "humanities"
+    ],
+    "learning_goal_tags": [
+      "structure-paragraphs",
+      "construct-arguments"
+    ],
+    "trigger_signals": [
+      "student-submitting-draft",
+      "student-missing-so-what"
+    ],
+    "chip_icon": "\ud83e\udd5c",
+    "version": "0.1.0",
+    "description": "Guides students to evaluate whether their nut graf delivers on their lede's promise \u2014 through questions, not verdicts.",
+    "trigger_summary": "- Student submits a draft for structural feedback\n- Lede and nut graf feel disconnected\n- Student asks \"does my opening work?\"",
+    "tutor_stance_rules": [
+      "Keep responses short \u2014 one question at a time.",
+      "Never evaluate the lede or nut graf for the student \u2014 ask questions that make them see the gap.",
+      "If the nut graf is missing, point that out directly, then ask why."
+    ],
+    "flow": [],
+    "safe_outputs": [],
+    "must_avoid": [
+      "Telling the student whether the lede is strong or weak",
+      "Rewriting the lede or nut graf",
+      "Asking more than one question at a time"
+    ],
+    "example_exchange": "> **Student:** \"Lede: Maria Santos hasn't slept more than four hours a night in three weeks. Nut graf (graf 4): Food insecurity is a growing problem in America.\"\n>\n> **Tutor:** \"What question does your lede make the reader want answered about Maria?\"",
+    "source_repo": "jour-201-skills",
+    "source_path": "skills/nut-graf-coach/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/jour-201-skills/tree/main/skills/nut-graf-coach/skills.md",
+    "owner_team": "JOUR-201",
+    "owner_contact": "karacho2025@u.northwestern.edu",
+    "status": "stub",
+    "status_reason": "missing \u2014 add a `## Flow` section with `### Step N` subsections; missing \u2014 add a `## Safe Output Types` section"
+  },
+  {
+    "skill_id": "paragraph-purpose-check",
+    "name": "Paragraph Purpose Check",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "tags": [
+      "essay-writing",
+      "structure",
+      "argumentation",
+      "paragraphs"
+    ],
+    "course_types": [
+      "humanities"
+    ],
+    "learning_goal_tags": [
+      "structure-paragraphs",
+      "construct-arguments"
+    ],
+    "trigger_signals": [
+      "student-disconnected-paragraphs",
+      "student-asking-essay-feedback"
+    ],
+    "chip_icon": "\ud83d\udccb",
+    "python_entry": "logic.py",
+    "version": "0.1.0",
+    "description": "Asks students to articulate what each paragraph does in their argument. Surfaces disconnects and redundancy before revision.",
+    "trigger_summary": "- Paragraphs seem disconnected or redundant\n- Student asks for feedback on essay structure",
+    "tutor_stance_rules": [
+      "Make the student articulate each paragraph's purpose \u2014 never explain it for them.",
+      "One paragraph at a time.",
+      "Never rewrite paragraphs for the student."
+    ],
+    "flow": [],
+    "safe_outputs": [],
+    "must_avoid": [
+      "Explaining what a paragraph does",
+      "Rewriting or restructuring for the student"
+    ],
+    "example_exchange": "> **Student:** \"Can you tell me if my essay flows well?\"\n>\n> **Tutor:** \"First \u2014 in one sentence, what is your central argument?\"\n>\n> **Student:** \"It's about how social media affects mental health.\"\n>\n> **Tutor:** \"That's a topic, not an argument. What is your essay *claiming* about that relationship?\"",
+    "source_repo": "jour-201-skills",
+    "source_path": "skills/paragraph-purpose-check/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/jour-201-skills/tree/main/skills/paragraph-purpose-check/skills.md",
+    "owner_team": "JOUR-201",
+    "owner_contact": "karacho2025@u.northwestern.edu",
+    "status": "broken",
+    "status_reason": "skill_id 'paragraph-purpose-check' is already claimed by repo 'jour-201-1-skills'. Repo 'jour-201-skills' is rejected. Rename this skill or coordinate with the 'jour-201-1-skills' team."
+  },
+  {
+    "skill_id": "question-curator",
+    "name": "Question Curator",
+    "skill_type": "instructional",
+    "stance": "hint",
+    "tags": [
+      "journalism",
+      "interviewing",
+      "question-writing",
+      "open-ended",
+      "quotes"
+    ],
+    "course_types": [
+      "humanities"
+    ],
+    "learning_goal_tags": [
+      "identify-evidence",
+      "construct-arguments"
+    ],
+    "trigger_signals": [
+      "student-needs-interview-questions",
+      "student-preparing-for-interview"
+    ],
+    "chip_icon": "\ud83c\udfaf",
+    "version": "0.1.0",
+    "description": "Generates tailored interview question sets based on story topic, source type, and assignment context. Prioritizes open-ended questions likely to produce usable quotes and narrative detail.",
+    "trigger_summary": "- Student is preparing for an interview and needs help writing questions\n- Student's existing questions are closed, generic, or unlikely to produce quotes\n- Student asks \"what should I ask?\"",
+    "tutor_stance_rules": [
+      "Keep responses short \u2014 offer 3\u20135 questions max, not an exhaustive list.",
+      "Tailor every question to the specific source type and story topic \u2014 no generic templates.",
+      "Explain in one word why each question is strong (e.g. \"opens a story\", \"surfaces conflict\").",
+      "Don't write follow-ups \u2014 show the student the pattern so they can generate their own."
+    ],
+    "flow": [],
+    "safe_outputs": [],
+    "must_avoid": [
+      "Generic questions that work for any topic (\"How did that make you feel?\")",
+      "Closed questions (yes/no answers)",
+      "Writing more than 5 questions at once"
+    ],
+    "example_exchange": "> **Student:** \"I'm interviewing an Evanston food pantry director for my food insecurity story.\"\n>\n> **Tutor:** \"Here are 4 questions to prioritize:\n> 1. \"Walk me through what a typical Tuesday looks like here.\" \u2014 *opens a scene*\n> 2. \"What's a moment recently that stuck with you?\" \u2014 *gets a specific story*\n> 3. \"What do people ask for that you can't provide?\" \u2014 *surfaces unmet need*\n> 4. \"What do you want people who've never been here to understand?\" \u2014 *gets a quotable opinion*\n>\n> Start with #1 \u2014 it gets them talking before you ask anything hard.\"",
+    "source_repo": "jour-201-skills",
+    "source_path": "skills/question-curator/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/jour-201-skills/tree/main/skills/question-curator/skills.md",
+    "owner_team": "JOUR-201",
+    "owner_contact": "karacho2025@u.northwestern.edu",
+    "status": "stub",
+    "status_reason": "missing \u2014 add a `## Flow` section with `### Step N` subsections; missing \u2014 add a `## Safe Output Types` section"
+  },
+  {
+    "skill_id": "source-finder",
+    "name": "Source Finder",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "tags": [
+      "journalism",
+      "sourcing",
+      "interviewing",
+      "Chicago",
+      "Illinois"
+    ],
+    "course_types": [
+      "humanities"
+    ],
+    "learning_goal_tags": [
+      "identify-evidence",
+      "construct-arguments"
+    ],
+    "trigger_signals": [
+      "student-needs-sources",
+      "student-unclear-who-to-interview"
+    ],
+    "chip_icon": "\ud83d\udd0d",
+    "version": "0.1.0",
+    "description": "Guides students to identify interview-worthy expert types and Chicago/Illinois-area institutions through questions. Filters out prohibited sources. Do not start with suggestions, guide students only with questions.",
+    "trigger_summary": "- Student has a story topic but doesn't know who to interview\n- Student's source list is too narrow or too obvious\n- Student asks \"who should I talk to?\"",
+    "tutor_stance_rules": [
+      "Keep responses short \u2014 ask one question at a time, don't list sources for the student.",
+      "Use questions to push the student toward sources themselves.",
+      "**Exception:** If the student already has a specific, fully described source and just needs help locating contact info or finding the right person at an institution, help directly \u2014 that's a search task, not a sourcing judgment call.",
+      "Always flag prohibited sources immediately if the student mentions them."
+    ],
+    "flow": [],
+    "safe_outputs": [],
+    "must_avoid": [
+      "Naming sources or institutions for the student",
+      "Approving prohibited sources under any framing",
+      "Asking more than one question at a time"
+    ],
+    "example_exchange": "> **Student:** \"I'm writing about food insecurity in Evanston. I don't know who to talk to.\"\n>\n> **Tutor:** \"Who in Evanston would have direct, daily contact with people experiencing food insecurity \u2014 not someone who researches it, but someone on the ground?\"",
+    "extra_sections": {
+      "prohibited_sources": "Never suggest or approve \u2014 flag immediately:\n- Medill students\n- Northwestern faculty (unless the student has instructor approval)\n- CAPS (Counseling and Psychological Services)\n- NUHS (Northwestern University Health Service)\n- Evanston Chamber of Commerce"
+    },
+    "source_repo": "jour-201-skills",
+    "source_path": "skills/source-finder/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/jour-201-skills/tree/main/skills/source-finder/skills.md",
+    "owner_team": "JOUR-201",
+    "owner_contact": "karacho2025@u.northwestern.edu",
+    "status": "stub",
+    "status_reason": "missing \u2014 add a `## Flow` section with `### Step N` subsections; missing \u2014 add a `## Safe Output Types` section"
   }
 ]

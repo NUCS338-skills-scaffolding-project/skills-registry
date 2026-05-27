@@ -4,10 +4,10 @@
 
 | Metric | Count |
 |--------|------:|
-| Total skills | 210 |
-| Ready | 193 |
-| Stub | 13 |
-| Broken | 4 |
+| Total skills | 231 |
+| Ready | 205 |
+| Stub | 18 |
+| Broken | 8 |
 
 ## ⚠ Duplicate skill_id rejections
 
@@ -15,21 +15,35 @@ The following skills were **rejected** because their `skill_id` was already clai
 
 | Rejected team / repo | `skill_id` | First claimed by |
 |---|---|---|
-| `asian_am-225-skills` | `example-skill` | `cs-348-skills` |
-| `poli_sci-210-skills` | `counter-example` | `asian_am-225-skills` |
 | `poli_sci-210-skills` | `skill-name` | `jour-201-1-skills` |
 | `cs-214-skills` | `example-skill` | `cs-348-skills` |
+| `jour-201-skills` | `ask-for-example` | `jour-201-1-skills` |
+| `jour-201-skills` | `depth-of-interviewing` | `jour-201-1-skills` |
+| `jour-201-skills` | `example-code` | `cs-348-skills` |
+| `jour-201-skills` | `give-structural-hint` | `jour-201-1-skills` |
+| `jour-201-skills` | `news-judgement` | `jour-201-1-skills` |
+| `jour-201-skills` | `paragraph-purpose-check` | `jour-201-1-skills` |
 
 ## Skills needing attention
 
 | Team / Repo | Skill | Status | Error |
 |-------------|-------|--------|-------|
-| `ASIAN_AM 225` | `skills/example-skill/skills.md` | broken | skill_id 'example-skill' is already claimed by repo 'cs-348-skills'. Repo 'asian_am-225-skills' is rejected. Rename this skill or coordinate with the 'cs-348-skills' team. |
 | `CS-213` | `skills/cache-modeling/skills.md` | stub | missing — add a `## Flow` section with `### Step N` subsections |
 | `CS-213` | `skills/cache-performance-analysis/skills.md` | stub | missing — add a `## Flow` section with `### Step N` subsections |
 | `CS-213` | `skills/memory-access-pattern-analysis/skills.md` | stub | missing — add a `## Flow` section with `### Step N` subsections |
 | `CS-213` | `skills/memory-system-optimization/skills.md` | stub | missing — add a `## Flow` section with `### Step N` subsections |
 | `CS-214` | `skills/example-skill/skills.md` | broken | skill_id 'example-skill' is already claimed by repo 'cs-348-skills'. Repo 'cs-214-skills' is rejected. Rename this skill or coordinate with the 'cs-348-skills' team. |
+| `JOUR-201` | `skills/ap-style-check/skills.md` | stub | missing — add a `## Flow` section with `### Step N` subsections; missing — add a `## Safe Output Types` section |
+| `JOUR-201` | `skills/ask-for-example/skills.md` | broken | skill_id 'ask-for-example' is already claimed by repo 'jour-201-1-skills'. Repo 'jour-201-skills' is rejected. Rename this skill or coordinate with the 'jour-201-1-skills' team. |
+| `JOUR-201` | `skills/depth-of-interviewing/skills.md` | broken | skill_id 'depth-of-interviewing' is already claimed by repo 'jour-201-1-skills'. Repo 'jour-201-skills' is rejected. Rename this skill or coordinate with the 'jour-201-1-skills' team. |
+| `JOUR-201` | `skills/example-code/skills.md` | broken | skill_id 'example-code' is already claimed by repo 'cs-348-skills'. Repo 'jour-201-skills' is rejected. Rename this skill or coordinate with the 'cs-348-skills' team. |
+| `JOUR-201` | `skills/give-structural-hint/skills.md` | broken | skill_id 'give-structural-hint' is already claimed by repo 'jour-201-1-skills'. Repo 'jour-201-skills' is rejected. Rename this skill or coordinate with the 'jour-201-1-skills' team. |
+| `JOUR-201` | `skills/interview-para/skills.md` | stub | missing — add a `## Flow` section with `### Step N` subsections; missing — add a `## Safe Output Types` section |
+| `JOUR-201` | `skills/news-judgement/skills.md` | broken | skill_id 'news-judgement' is already claimed by repo 'jour-201-1-skills'. Repo 'jour-201-skills' is rejected. Rename this skill or coordinate with the 'jour-201-1-skills' team. |
+| `JOUR-201` | `skills/nut-graf-coach/skills.md` | stub | missing — add a `## Flow` section with `### Step N` subsections; missing — add a `## Safe Output Types` section |
+| `JOUR-201` | `skills/paragraph-purpose-check/skills.md` | broken | skill_id 'paragraph-purpose-check' is already claimed by repo 'jour-201-1-skills'. Repo 'jour-201-skills' is rejected. Rename this skill or coordinate with the 'jour-201-1-skills' team. |
+| `JOUR-201` | `skills/question-curator/skills.md` | stub | missing — add a `## Flow` section with `### Step N` subsections; missing — add a `## Safe Output Types` section |
+| `JOUR-201` | `skills/source-finder/skills.md` | stub | missing — add a `## Flow` section with `### Step N` subsections; missing — add a `## Safe Output Types` section |
 | `JOUR-201-1` | `skills/ask-for-example/skills.md` | stub | missing or empty (must be subset of cs/humanities); must be one of ['hint', 'meta', 'reframe', 'socratic'] |
 | `JOUR-201-1` | `skills/depth-of-interviewing/skills.md` | stub | missing or empty (must be subset of cs/humanities); must be one of ['hint', 'meta', 'reframe', 'socratic'] |
 | `JOUR-201-1` | `skills/example-skill/skills.md` | stub | missing or empty (must be subset of cs/humanities); must be one of ['hint', 'meta', 'reframe', 'socratic'] |
@@ -37,7 +51,6 @@ The following skills were **rejected** because their `skill_id` was already clai
 | `JOUR-201-1` | `skills/news-judgement/skills.md` | stub | missing or empty (must be subset of cs/humanities); must be one of ['hint', 'meta', 'reframe', 'socratic'] |
 | `JOUR-201-1` | `skills/paragraph-purpose-check/skills.md` | stub | missing or empty (must be subset of cs/humanities); must be one of ['hint', 'meta', 'reframe', 'socratic'] |
 | `POLISCI-210` | `skills/ai-explain/skills.md` | stub | missing — add a `## Tutor Stance` section with rules |
-| `POLISCI-210` | `skills/counter-example/skills.md` | broken | skill_id 'counter-example' is already claimed by repo 'asian_am-225-skills'. Repo 'poli_sci-210-skills' is rejected. Rename this skill or coordinate with the 'asian_am-225-skills' team. |
 | `POLISCI-210` | `skills/example-skill/skills.md` | broken | skill_id 'skill-name' is already claimed by repo 'jour-201-1-skills'. Repo 'poli_sci-210-skills' is rejected. Rename this skill or coordinate with the 'jour-201-1-skills' team. |
 | `POLISCI-210` | `skills/extract-syllabus/skills.md` | stub | missing — add `## Usage` section |
 | `POLISCI-210` | `skills/play-reviewer/skills.md` | stub | missing — add a `## Tutor Stance` section with rules |
@@ -50,7 +63,7 @@ The following skills were **rejected** because their `skill_id` was already clai
 |------|-------|----------|-------|---------|
 | `asian_am-225-skills` | `asian_am-225-skills/skills/claim_verification/skills.md` | **warn** | `example_exchange` | missing — strongly recommended |
 | `asian_am-225-skills` | `asian_am-225-skills/skills/convert_request_into_safe_help_mode/skills.md` | **warn** | `skill_id` | length 35 > 18 chars — see Team-Guide §7 |
-| `asian_am-225-skills` | `asian_am-225-skills/skills/example-skill/skills.md` | **ERROR** | `skill_id` | skill_id 'example-skill' is already claimed by repo 'cs-348-skills'. Repo 'asian_am-225-skills' is rejected. Rename this skill or coordinate with the 'cs-348-skills' team. |
+| `asian_am-225-skills` | `asian_am-225-skills/skills/counterexample_improver/skills.md` | **warn** | `skill_id` | length 35 > 18 chars — see Team-Guide §7 |
 | `asian_am-225-skills` | `asian_am-225-skills/skills/map_to_learning_goals/skills.md` | **warn** | `skill_id` | length 21 > 18 chars — see Team-Guide §7 |
 | `asian_am-225-skills` | `asian_am-225-skills/skills/reframe_with_analogy/skills.md` | **warn** | `skill_id` | length 20 > 18 chars — see Team-Guide §7 |
 
@@ -84,6 +97,7 @@ The following skills were **rejected** because their `skill_id` was already clai
 | `cs-343-skills` | `cs-343-skills/skills/explain_function_responsibilities/skills.md` | **warn** | `skill_id` | length 33 > 18 chars — see Team-Guide §7 |
 | `cs-343-skills` | `cs-343-skills/skills/explanation_nautilus_architecture/skills.md` | **warn** | `skill_id` | length 33 > 18 chars — see Team-Guide §7 |
 | `cs-343-skills` | `cs-343-skills/skills/extract_requirements/skills.md` | **warn** | `skill_id` | length 20 > 18 chars — see Team-Guide §7 |
+| `cs-343-skills` | `cs-343-skills/skills/identify_deliverables/skills.md` | **warn** | `skill_id` | length 21 > 18 chars — see Team-Guide §7 |
 | `cs-343-skills` | `cs-343-skills/skills/narrow_the_bug_location/skills.md` | **warn** | `skill_id` | length 23 > 18 chars — see Team-Guide §7 |
 
 ### CS-348
@@ -91,6 +105,27 @@ The following skills were **rejected** because their `skill_id` was already clai
 | Repo | Skill | Severity | Field | Message |
 |------|-------|----------|-------|---------|
 | `cs-348-skills` | `cs-348-skills/skills/restate-the-problem/skills.md` | **warn** | `skill_id` | length 19 > 18 chars — see Team-Guide §7 |
+
+### JOUR-201
+
+| Repo | Skill | Severity | Field | Message |
+|------|-------|----------|-------|---------|
+| `jour-201-skills` | `jour-201-skills/skills/ap-style-check/skills.md` | **ERROR** | `flow` | missing — add a `## Flow` section with `### Step N` subsections |
+| `jour-201-skills` | `jour-201-skills/skills/ap-style-check/skills.md` | **ERROR** | `safe_output_types` | missing — add a `## Safe Output Types` section |
+| `jour-201-skills` | `jour-201-skills/skills/ask-for-example/skills.md` | **ERROR** | `skill_id` | skill_id 'ask-for-example' is already claimed by repo 'jour-201-1-skills'. Repo 'jour-201-skills' is rejected. Rename this skill or coordinate with the 'jour-201-1-skills' team. |
+| `jour-201-skills` | `jour-201-skills/skills/depth-of-interviewing/skills.md` | **ERROR** | `skill_id` | skill_id 'depth-of-interviewing' is already claimed by repo 'jour-201-1-skills'. Repo 'jour-201-skills' is rejected. Rename this skill or coordinate with the 'jour-201-1-skills' team. |
+| `jour-201-skills` | `jour-201-skills/skills/example-code/skills.md` | **ERROR** | `skill_id` | skill_id 'example-code' is already claimed by repo 'cs-348-skills'. Repo 'jour-201-skills' is rejected. Rename this skill or coordinate with the 'cs-348-skills' team. |
+| `jour-201-skills` | `jour-201-skills/skills/give-structural-hint/skills.md` | **ERROR** | `skill_id` | skill_id 'give-structural-hint' is already claimed by repo 'jour-201-1-skills'. Repo 'jour-201-skills' is rejected. Rename this skill or coordinate with the 'jour-201-1-skills' team. |
+| `jour-201-skills` | `jour-201-skills/skills/interview-para/skills.md` | **ERROR** | `flow` | missing — add a `## Flow` section with `### Step N` subsections |
+| `jour-201-skills` | `jour-201-skills/skills/interview-para/skills.md` | **ERROR** | `safe_output_types` | missing — add a `## Safe Output Types` section |
+| `jour-201-skills` | `jour-201-skills/skills/news-judgement/skills.md` | **ERROR** | `skill_id` | skill_id 'news-judgement' is already claimed by repo 'jour-201-1-skills'. Repo 'jour-201-skills' is rejected. Rename this skill or coordinate with the 'jour-201-1-skills' team. |
+| `jour-201-skills` | `jour-201-skills/skills/nut-graf-coach/skills.md` | **ERROR** | `flow` | missing — add a `## Flow` section with `### Step N` subsections |
+| `jour-201-skills` | `jour-201-skills/skills/nut-graf-coach/skills.md` | **ERROR** | `safe_output_types` | missing — add a `## Safe Output Types` section |
+| `jour-201-skills` | `jour-201-skills/skills/paragraph-purpose-check/skills.md` | **ERROR** | `skill_id` | skill_id 'paragraph-purpose-check' is already claimed by repo 'jour-201-1-skills'. Repo 'jour-201-skills' is rejected. Rename this skill or coordinate with the 'jour-201-1-skills' team. |
+| `jour-201-skills` | `jour-201-skills/skills/question-curator/skills.md` | **ERROR** | `flow` | missing — add a `## Flow` section with `### Step N` subsections |
+| `jour-201-skills` | `jour-201-skills/skills/question-curator/skills.md` | **ERROR** | `safe_output_types` | missing — add a `## Safe Output Types` section |
+| `jour-201-skills` | `jour-201-skills/skills/source-finder/skills.md` | **ERROR** | `flow` | missing — add a `## Flow` section with `### Step N` subsections |
+| `jour-201-skills` | `jour-201-skills/skills/source-finder/skills.md` | **ERROR** | `safe_output_types` | missing — add a `## Safe Output Types` section |
 
 ### JOUR-201-1
 
@@ -123,8 +158,8 @@ The following skills were **rejected** because their `skill_id` was already clai
 | Repo | Skill | Severity | Field | Message |
 |------|-------|----------|-------|---------|
 | `poli_sci-210-skills` | `poli_sci-210-skills/skills/ai-explain/skills.md` | **ERROR** | `tutor_stance` | missing — add a `## Tutor Stance` section with rules |
-| `poli_sci-210-skills` | `poli_sci-210-skills/skills/counter-example/skills.md` | **ERROR** | `skill_id` | skill_id 'counter-example' is already claimed by repo 'asian_am-225-skills'. Repo 'poli_sci-210-skills' is rejected. Rename this skill or coordinate with the 'asian_am-225-skills' team. |
 | `poli_sci-210-skills` | `poli_sci-210-skills/skills/example-skill/skills.md` | **ERROR** | `skill_id` | skill_id 'skill-name' is already claimed by repo 'jour-201-1-skills'. Repo 'poli_sci-210-skills' is rejected. Rename this skill or coordinate with the 'jour-201-1-skills' team. |
+| `poli_sci-210-skills` | `poli_sci-210-skills/skills/extract-syllabus/skills.md` | **warn** | `stance` | stance is for instructional skills only; remove for code |
 | `poli_sci-210-skills` | `poli_sci-210-skills/skills/extract-syllabus/skills.md` | **ERROR** | `usage` | missing — add `## Usage` section |
 | `poli_sci-210-skills` | `poli_sci-210-skills/skills/play-reviewer/skills.md` | **ERROR** | `tutor_stance` | missing — add a `## Tutor Stance` section with rules |
 
