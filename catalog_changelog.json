@@ -1,9 +1,14 @@
 {
-  "generated_at": "2026-05-29T02:00:20.703270+00:00",
+  "generated_at": "2026-05-29T02:23:18.356764+00:00",
   "previous_hash": "6457556c865f5ebb",
-  "current_hash": "2dfc8c7f1d0a20fa",
-  "added": [],
-  "removed": [],
+  "current_hash": "f44a2ffc3212c55f",
+  "added": [
+    "example-skill",
+    "reframe_with_analogy"
+  ],
+  "removed": [
+    "reframe-with-analogy"
+  ],
   "changed": [
     {
       "skill_id": "adjust-to-level",
@@ -1644,15 +1649,6 @@
       }
     },
     {
-      "skill_id": "reframe-with-analogy",
-      "changes": {
-        "source_repo": {
-          "from": null,
-          "to": "reframe_with_analogy"
-        }
-      }
-    },
-    {
       "skill_id": "repair-miscon",
       "changes": {
         "source_repo": {
@@ -2081,5 +2077,5 @@
     }
   ],
   "unchanged_count": 0,
-  "summary": "210 changed"
+  "summary": "2 added, 1 removed, 209 changed"
 }
