@@ -407,9 +407,9 @@
       "evaluate-reasoning"
     ],
     "trigger_signals": [
-      "my code has a bug and I don't know where it is",
-      "this isn't working and I don't know why",
-      "I'm getting wrong output but I can't figure out what's wrong"
+      "my-code-has-a-bug-and-I-do-not-know-where-it-is",
+      "this-isn't-working-and-I-do-not-know-why",
+      "my-code-is-giving-an-answer-I-do-not-expect"
     ],
     "owner_team": "ask_debug_aloud",
     "status": "ready",
@@ -1623,9 +1623,9 @@
       "surface-assumptions"
     ],
     "trigger_signals": [
-      "my code works but I don't know why",
-      "it passes the tests but I'm not sure what this part is doing",
-      "code is correct but the logic is unclear to me"
+      "my-code-works-but-I-don't-know-why",
+      "it-passes-the-tests-but-I'm-not-sure-what-this-part-is-doing",
+      "code-is-correct-but-the-logic-is-unclear-to-me"
     ],
     "owner_team": "crit_code_concept",
     "status": "ready",
@@ -2480,29 +2480,6 @@
     "version": "0.2.0",
     "owner_team": "evidence_placement",
     "has_logic": false
-  },
-  {
-    "skill_id": "example-code",
-    "name": "Example: Length Validator",
-    "skill_type": "code",
-    "tags": [
-      "example",
-      "validation"
-    ],
-    "course_types": [
-      "cs"
-    ],
-    "learning_goal_tags": [
-      "specify-io"
-    ],
-    "trigger_signals": [
-      "input-bounds-needed"
-    ],
-    "chip_icon": "\ud83d\udccf",
-    "version": "0.1.0",
-    "owner_team": "example_code",
-    "status": "ready",
-    "has_logic": true
   },
   {
     "skill_id": "example-skill",

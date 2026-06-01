@@ -1,9 +1,11 @@
 {
-  "generated_at": "2026-06-01T02:31:15.678500+00:00",
+  "generated_at": "2026-06-01T03:58:47.893101+00:00",
   "previous_hash": "0029fcce87f34e23",
-  "current_hash": "f44a2ffc3212c55f",
+  "current_hash": "57f711d0a8c81302",
   "added": [],
-  "removed": [],
+  "removed": [
+    "example-code"
+  ],
   "changed": [
     {
       "skill_id": "adjust-to-level",
@@ -783,15 +785,6 @@
         "source_repo": {
           "from": null,
           "to": "evidence_placement"
-        }
-      }
-    },
-    {
-      "skill_id": "example-code",
-      "changes": {
-        "source_repo": {
-          "from": null,
-          "to": "example_code"
         }
       }
     },
@@ -2090,5 +2083,5 @@
     }
   ],
   "unchanged_count": 0,
-  "summary": "211 changed"
+  "summary": "1 removed, 210 changed"
 }
