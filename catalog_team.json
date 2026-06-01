@@ -16954,6 +16954,89 @@
     "status_reason": null
   },
   {
+    "skill_id": "session-resumer",
+    "name": "Session Resumer",
+    "skill_type": "instructional",
+    "stance": "meta",
+    "tags": [
+      "resumer",
+      "greeting",
+      "session-resume",
+      "returning"
+    ],
+    "course_types": [
+      "cs",
+      "humanities"
+    ],
+    "learning_goal_tags": [
+      "engage-student",
+      "establish-rapport",
+      "resume-progress"
+    ],
+    "trigger_signals": [
+      "session-resume",
+      "returning-session"
+    ],
+    "chip_icon": "\ud83d\udd04",
+    "version": "0.1.0",
+    "context_requires": [
+      "assignment_doc",
+      "conversation_history"
+    ],
+    "logic": "logic.py",
+    "description": "Welcomes a returning student back to an assignment they have already started. Uses the conversation history to identify where the student left off, then opens with a brief recap and one concrete forward-looking question to re-engage them. The resumer does not re-introduce the assignment \u2014 the student already knows it. It picks up the thread.",
+    "trigger_summary": "- When a student reopens an assignment they have previously worked on\n- When the session has existing messages in its history (i.e. `resumed: true`)\n- Always invoked explicitly via `POST /sessions/{id}/open` \u2014 never selected by the skill selector",
+    "tutor_stance_rules": [
+      "Acknowledge the return warmly but briefly \u2014 one sentence maximum",
+      "Name the specific concept or problem they left off on \u2014 never generic",
+      "Ask one forward-looking question that re-engages them at the exact point they stopped",
+      "Do NOT re-introduce the assignment or re-explain its goals",
+      "Do NOT summarise the whole conversation \u2014 only the last meaningful moment",
+      "Do NOT ask \"where did we leave off?\" \u2014 the tutor already knows",
+      "Keep the entire opener to two short sentences maximum"
+    ],
+    "flow": [
+      {
+        "step": 1,
+        "title": "Load context via logic.py",
+        "description": "Call `build_resumer_context(assignment_text, conversation_history)` to get:\n- `assignment_name`\n- `last_topic`\n- `last_student_message`\n- `resumer_prompt`"
+      },
+      {
+        "step": 2,
+        "title": "Use or adapt the resumer prompt",
+        "description": "Use `resumer_prompt` directly if it fits. If more specificity is needed, form a question using `last_topic` as the anchor. The question must re-engage \u2014 not quiz or re-explain."
+      },
+      {
+        "step": 3,
+        "title": "Output the resumer",
+        "description": "Two sentences maximum. No preamble."
+      }
+    ],
+    "safe_outputs": [
+      "\"Welcome back! Last time you were working on [specific topic] \u2014 [one forward-looking question]\"",
+      "\"Good to see you again \u2014 you were in the middle of [specific moment] \u2014 [one question to re-engage]\""
+    ],
+    "must_avoid": [
+      "Generic openings: \"Welcome back!\", \"Good to see you!\", \"Hope you're ready to continue!\"",
+      "\"Where did we leave off?\" \u2014 the tutor already has the history",
+      "Re-introducing or summarising the assignment",
+      "Asking more than one question",
+      "Mentioning the number of messages or sessions",
+      "Openers longer than two sentences"
+    ],
+    "example_exchange": "> *(CS \u2014 Memory Allocator, student was debugging a segfault in free())*\n>\n> **Tutor:** \"Welcome back! Last time you were tracking down a segfault in your `free()` implementation \u2014 did you get a chance to look at what happens when you free an already-freed pointer?\"\n\n---\n\n> *(Humanities \u2014 Close Reading essay, student was selecting textual evidence)*\n>\n> **Tutor:** \"Good to see you again \u2014 you were working on finding a strong anchor quote for your second argument \u2014 have you found one that feels solid?\"\n\n---\n\n> *(Social Science \u2014 Research Methods, student was refining their hypothesis)*\n>\n> **Tutor:** \"Welcome back! You were refining your hypothesis last time \u2014 does it still feel like the right question to investigate, or has it shifted?\"\n\n---\n\n> *(No clear last topic in history)*\n>\n> **Tutor:** \"Welcome back to the [assignment name] \u2014 what's on your mind as you pick this up again?\"",
+    "extra_sections": {
+      "context_required": "Before generating the resume opener, the skill calls `logic.py` to read the session context:\n\n1. **`get_last_topic(conversation_history)`** \u2014 scans the tail of the conversation to identify the last concept or problem the student was working on\n2. **`get_last_student_message(conversation_history)`** \u2014 returns the student's final message to understand where they stopped\n3. **`build_resumer_context(assignment_text, conversation_history)`** \u2014 returns a ready-to-use `resumer_prompt`"
+    },
+    "source_repo": "cs338-skills",
+    "source_path": "skills/session_resumer/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs338-skills/tree/main/skills/session_resumer/skills.md",
+    "owner_team": "cs338-skills",
+    "owner_contact": null,
+    "status": "ready",
+    "status_reason": null
+  },
+  {
     "skill_id": "show-dont-tell-journalism",
     "name": "Show Don't Tell \u2014 Journalism",
     "skill_type": "instructional",
