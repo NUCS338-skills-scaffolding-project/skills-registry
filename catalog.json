@@ -5634,6 +5634,36 @@
     "has_logic": false
   },
   {
+    "skill_id": "session-resumer",
+    "name": "Session Resumer",
+    "skill_type": "instructional",
+    "stance": "meta",
+    "tags": [
+      "resumer",
+      "greeting",
+      "session-resume",
+      "returning"
+    ],
+    "course_types": [
+      "cs",
+      "humanities"
+    ],
+    "learning_goal_tags": [
+      "engage-student",
+      "establish-rapport",
+      "resume-progress"
+    ],
+    "trigger_signals": [
+      "session-resume",
+      "returning-session"
+    ],
+    "chip_icon": "\ud83d\udd04",
+    "version": "0.1.0",
+    "owner_team": "session_resumer",
+    "status": "ready",
+    "has_logic": false
+  },
+  {
     "skill_id": "shortest-route",
     "name": "Shortest Route",
     "skill_type": "instructional",
