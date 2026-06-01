@@ -1,12 +1,109 @@
 {
-  "generated_at": "2026-06-01T04:59:19.473641+00:00",
-  "previous_hash": "fef8214ef6f52cd6",
-  "current_hash": "abf0e8fd197d885b",
+  "generated_at": "2026-06-01T11:06:26.375618+00:00",
+  "previous_hash": "abf0e8fd197d885b",
+  "current_hash": "ab32290550d322fe",
   "added": [
-    "session-resumer"
+    "converge-ideas",
+    "convert-safe-help",
+    "examples-from-spec",
+    "experience-connect",
+    "idea-organizer",
+    "map-to-learning-goals",
+    "reading-discussor",
+    "reframe-with-analogy"
   ],
-  "removed": [],
-  "changed": [],
-  "unchanged_count": 223,
-  "summary": "1 added"
+  "removed": [
+    "converge_ideas",
+    "convert_request_into_safe_help_mode",
+    "experience_connect",
+    "idea_organizer",
+    "map_to_learning_goals",
+    "reading_discussor",
+    "reframe_with_analogy"
+  ],
+  "changed": [
+    {
+      "skill_id": "cache-modeling",
+      "changes": {
+        "status": {
+          "from": "stub",
+          "to": "ready"
+        }
+      }
+    },
+    {
+      "skill_id": "cache-opt-code",
+      "changes": {
+        "stance": {
+          "from": "socratic",
+          "to": "hint"
+        }
+      }
+    },
+    {
+      "skill_id": "cache-perf",
+      "changes": {
+        "status": {
+          "from": "stub",
+          "to": "ready"
+        }
+      }
+    },
+    {
+      "skill_id": "claim-verification",
+      "changes": {
+        "version": {
+          "from": null,
+          "to": "0.1.0"
+        }
+      }
+    },
+    {
+      "skill_id": "counter-example-interview-questions",
+      "changes": {
+        "version": {
+          "from": null,
+          "to": "0.1.0"
+        }
+      }
+    },
+    {
+      "skill_id": "mem-access-pattern",
+      "changes": {
+        "status": {
+          "from": "stub",
+          "to": "ready"
+        }
+      }
+    },
+    {
+      "skill_id": "mem-opt",
+      "changes": {
+        "status": {
+          "from": "stub",
+          "to": "ready"
+        }
+      }
+    },
+    {
+      "skill_id": "reframe-analogy",
+      "changes": {
+        "name": {
+          "from": "Reframe with analogy",
+          "to": "Reframe with Analogy"
+        }
+      }
+    },
+    {
+      "skill_id": "specifier",
+      "changes": {
+        "version": {
+          "from": null,
+          "to": "0.1.0"
+        }
+      }
+    }
+  ],
+  "unchanged_count": 208,
+  "summary": "8 added, 7 removed, 9 changed"
 }

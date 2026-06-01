@@ -4,9 +4,9 @@
 
 | Metric | Count |
 |--------|------:|
-| Total skills | 230 |
-| Ready | 206 |
-| Stub | 18 |
+| Total skills | 231 |
+| Ready | 211 |
+| Stub | 14 |
 | Broken | 6 |
 
 ## ⚠ Duplicate skill_id rejections
@@ -26,10 +26,6 @@ The following skills were **rejected** because their `skill_id` was already clai
 
 | Team / Repo | Skill | Status | Error |
 |-------------|-------|--------|-------|
-| `CS-213` | `skills/cache-modeling/skills.md` | stub | missing — add a `## Flow` section with `### Step N` subsections |
-| `CS-213` | `skills/cache-performance-analysis/skills.md` | stub | missing — add a `## Flow` section with `### Step N` subsections |
-| `CS-213` | `skills/memory-access-pattern-analysis/skills.md` | stub | missing — add a `## Flow` section with `### Step N` subsections |
-| `CS-213` | `skills/memory-system-optimization/skills.md` | stub | missing — add a `## Flow` section with `### Step N` subsections |
 | `JOUR-201` | `skills/ap-style-check/skills.md` | stub | missing — add a `## Flow` section with `### Step N` subsections; missing — add a `## Safe Output Types` section |
 | `JOUR-201` | `skills/ask-for-example/skills.md` | broken | skill_id 'ask-for-example' is already claimed by repo 'jour-201-1-skills'. Repo 'jour-201-skills' is rejected. Rename this skill or coordinate with the 'jour-201-1-skills' team. |
 | `JOUR-201` | `skills/depth-of-interviewing/skills.md` | broken | skill_id 'depth-of-interviewing' is already claimed by repo 'jour-201-1-skills'. Repo 'jour-201-skills' is rejected. Rename this skill or coordinate with the 'jour-201-1-skills' team. |
@@ -57,8 +53,6 @@ The following skills were **rejected** because their `skill_id` was already clai
 
 | Repo | Skill | Severity | Field | Message |
 |------|-------|----------|-------|---------|
-| `asian_am-225-skills` | `asian_am-225-skills/skills/claim_verification/skills.md` | **warn** | `example_exchange` | missing — strongly recommended |
-| `asian_am-225-skills` | `asian_am-225-skills/skills/convert_request_into_safe_help_mode/skills.md` | **warn** | `skill_id` | length 35 > 18 chars — see Team-Guide §7 |
 | `asian_am-225-skills` | `asian_am-225-skills/skills/counterexample_improver/skills.md` | **warn** | `skill_id` | length 35 > 18 chars — see Team-Guide §7 |
 | `asian_am-225-skills` | `asian_am-225-skills/skills/map_to_learning_goals/skills.md` | **warn** | `skill_id` | length 21 > 18 chars — see Team-Guide §7 |
 | `asian_am-225-skills` | `asian_am-225-skills/skills/reframe_with_analogy/skills.md` | **warn** | `skill_id` | length 20 > 18 chars — see Team-Guide §7 |
@@ -68,13 +62,9 @@ The following skills were **rejected** because their `skill_id` was already clai
 | Repo | Skill | Severity | Field | Message |
 |------|-------|----------|-------|---------|
 | `CS-213-skills` | `CS-213-skills/skills/asm-translation/skills.md` | **warn** | `stance` | stance is for instructional skills only; remove for code |
-| `CS-213-skills` | `CS-213-skills/skills/c-debugging/skills.md` | **warn** | `stance` | stance is for instructional skills only; remove for code |
-| `CS-213-skills` | `CS-213-skills/skills/cache-modeling/skills.md` | **ERROR** | `flow` | missing — add a `## Flow` section with `### Step N` subsections |
-| `CS-213-skills` | `CS-213-skills/skills/cache-performance-analysis/skills.md` | **ERROR** | `flow` | missing — add a `## Flow` section with `### Step N` subsections |
-| `CS-213-skills` | `CS-213-skills/skills/cache_optimized_code/skills.md` | **warn** | `stance` | stance is for instructional skills only; remove for code |
+| `CS-213-skills` | `CS-213-skills/skills/c-debugger/skills.md` | **warn** | `stance` | stance is for instructional skills only; remove for code |
+| `CS-213-skills` | `CS-213-skills/skills/cache-opt-code/skills.md` | **warn** | `stance` | stance is for instructional skills only; remove for code |
 | `CS-213-skills` | `CS-213-skills/skills/execution-trace/skills.md` | **warn** | `stance` | stance is for instructional skills only; remove for code |
-| `CS-213-skills` | `CS-213-skills/skills/memory-access-pattern-analysis/skills.md` | **ERROR** | `flow` | missing — add a `## Flow` section with `### Step N` subsections |
-| `CS-213-skills` | `CS-213-skills/skills/memory-system-optimization/skills.md` | **ERROR** | `flow` | missing — add a `## Flow` section with `### Step N` subsections |
 | `CS-213-skills` | `CS-213-skills/skills/stack-visualizer/skills.md` | **warn** | `stance` | stance is for instructional skills only; remove for code |
 
 ### CS-343
