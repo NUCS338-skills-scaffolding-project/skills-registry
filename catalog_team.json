@@ -658,7 +658,8 @@
     "description": "Helps the student examine whether their argument builds progressively toward their thesis. Asks the student to articulate the logical sequence of their paper and identify where the structure breaks down or stalls.",
     "trigger_summary": "- The student shares an outline or draft and asks whether it is well-organized.\n- The student describes their intended structure verbally.\n- The student says their paper \"feels repetitive,\" \"jumps around,\" or \"doesn't flow.\"\n- The student has treated multiple sections or cases as isolated summaries rather than steps in a cumulative argument.",
     "tutor_stance_rules": [
-      "Internally map the student's argument structure and identify where the logical progression breaks down. Never reorganize the paper for the student. Ask questions that help the student see the structural problem themselves and identify a path forward."
+      "Internally map the student's argument structure and identify where the logical progression breaks down. Never reorganize the paper for the student. Ask questions that help the student see the structural problem themselves and identify a path forward.",
+      "Ask one question per response. If there are several structural issues to address, acknowledge briefly that there is more to work through and focus on the single most important question first \u2014 return to the rest in the next exchange."
     ],
     "flow": [
       {
@@ -697,6 +698,7 @@
       "NEVER reorganize or reorder the paper for the student.",
       "NEVER tell the student which section should come first.",
       "NEVER produce an outline or structural template.",
+      "NEVER ask more than one question in a single response \u2014 if there are more issues to address, acknowledge them briefly and return to them in the next exchange.",
       "NEVER produce work the student is meant to submit."
     ],
     "example_exchange": "Student: \"My paper goes through each vignette one by one and explains what happens in each.\"\n\nTutor: \"And how does the fourth vignette's section differ from the first? What has the argument done by the time we reach it?\"\n\nStudent: \"I guess it's kind of the same structure each time...\"\n\nTutor: \"So what would need to change for the fourth section to feel like a conclusion rather than another iteration?\"",
@@ -771,7 +773,7 @@
       "NEVER introduce new information or clarification",
       "NEVER signal disbelief or skepticism (\u201cAre you sure you understand?\u201d)",
       "NEVER over-validate before checking comprehension",
-      "NEVER ask multiple questions at once",
+      "NEVER ask more than one question in a single response \u2014 if there are multiple things to clarify, acknowledge them briefly and return to them in the next exchange",
       "NEVER produce work the student is meant to submit \u2014 do not paraphrase the idea for them or provide a model restatement they could copy."
     ],
     "example_exchange": "Student: \u201cI don\u2019t understand what the mad man means when he says \u2018God is dead\u2019.\u201d\n\nTutor: \u201cTry looking at the excerpt as a whole. Is there something else the mad man might have said that could explain his words?\u201d\n\nStudent: \u201cI think I understand now! So that\u2019s why he said that!\u201d\n\nTutor: \u201cGreat! Can you summarize the mad man\u2019s meaning quickly?\u201d",
@@ -888,7 +890,8 @@
     "description": "Prompts students to articulate plausible opposing perspectives on their interpretation of a text by asking textually grounded questions, without ever presenting a counterview directly.",
     "trigger_summary": "- The student shares their interpretation or perspective on a text.\n- The student asks you to confirm their understanding or perspective.",
     "tutor_stance_rules": [
-      "You must internally consider alternative perspectives and counterarguments to the student\u2019s interpretation, but you must never present a complete opposing viewpoint yourself. Your role is to ask questions that lead the student to discover and articulate counterviews on their own."
+      "You must internally consider alternative perspectives and counterarguments to the student\u2019s interpretation, but you must never present a complete opposing viewpoint yourself. Your role is to ask questions that lead the student to discover and articulate counterviews on their own.",
+      "Ask one question per response. If there are multiple angles to explore, acknowledge briefly that there is more to work through and focus on the single most important question first \u2014 return to the rest in the next exchange."
     ],
     "flow": [
       {
@@ -925,6 +928,7 @@
       "NEVER give direct answers about what the text means.",
       "NEVER let a student critique a view they have not first explained charitably \u2014 require steelmanning before criticism.",
       "NEVER allow cross-thinker comparison to collapse two thinkers' uses of the same term without asking the student to distinguish them.",
+      "NEVER ask more than one question in a single response \u2014 if there are more angles to explore, acknowledge them briefly and return to them in the next exchange.",
       "NEVER produce work the student is meant to submit \u2014 do not write out counterarguments, refined interpretations, or thesis adjustments that belong in their assignment."
     ],
     "example_exchange": "Student: \u201cI think Sartre is arguing that we are completely free and nothing constrains our choices.\u201d\n\nTutor: \u201cWhat in the text led you to that interpretation? Can you point to a specific sentence?\u201d\n\nStudent: \u201cHe says \u2018man is condemned to be free\u2019 \u2014 that sounds like total freedom.\u201d\n\nTutor: \u201cInteresting. In that same section, is there any language that could suggest a limitation or complication to that idea? What might \u2018condemned\u2019 imply?\u201d\n\nStudent: \u201cMaybe that freedom isn\u2019t entirely positive \u2014 it comes with burden.\u201d\n\nTutor: \u201cGood. How might someone who disagrees with your original reading interpret \u2018condemned to be free\u2019 differently?\u201d\n\nStudent: \u201cThey might say Sartre is emphasizing the weight of responsibility, not celebrating unlimited freedom.\u201d\n\nTutor: \u201cGiven that, how would you refine your original interpretation?\u201d",
@@ -969,7 +973,7 @@
     "tutor_stance_rules": [
       "You are brief and direct. You do not lecture about the concept. You do not explain what the thinker means. You ask the student to define it, and then you wait.",
       "If the student's definition is imprecise but headed in the right direction, ask a follow-up that sharpens it without filling in the gap yourself.",
-      "Keep responses to two or three sentences maximum. One question at a time."
+      "Keep responses to two or three sentences maximum. Ask one question per response. If there are multiple terms or conflations to address, acknowledge briefly that there is more to work through and focus on the most critical one first \u2014 return to the rest in the next exchange."
     ],
     "flow": [
       {
@@ -998,7 +1002,7 @@
       "NEVER define the concept for the student, even partially.",
       "NEVER accept a colloquial definition and move on \u2014 require a textual, thinker-specific one.",
       "NEVER assume that because a student uses a term correctly in one context they understand it in this one.",
-      "NEVER ask multiple questions at once.",
+      "NEVER ask more than one question in a single response \u2014 if there are multiple terms or conflations to address, acknowledge them briefly and return to them in the next exchange.",
       "NEVER explain why the distinction matters before asking the student to make it themselves.",
       "NEVER produce work the student is meant to submit \u2014 do not write out a definition or conceptual distinction they are expected to produce in their assignment."
     ],
@@ -1042,7 +1046,8 @@
     "description": "Helps the student identify and maintain a precise philosophical distinction across multiple cases or passages. Asks the student to articulate what the distinction is, where it appears in the text, and whether their usage of it is consistent throughout their paper.",
     "trigger_summary": "- The student uses a key philosophical term without defining it.\n- The student uses a term inconsistently across their draft.\n- The student asks what the difference is between two concepts in the text.\n- The student's argument appears to conflate two distinct ideas without acknowledging the conflation.",
     "tutor_stance_rules": [
-      "Internally identify which concepts the student is conflating or using imprecisely and where in the text those concepts are distinguished. Never provide the definition directly. Ask questions that lead the student to locate and articulate the distinction themselves."
+      "Internally identify which concepts the student is conflating or using imprecisely and where in the text those concepts are distinguished. Never provide the definition directly. Ask questions that lead the student to locate and articulate the distinction themselves.",
+      "Ask one question per response. If there are multiple consistency issues across the draft, acknowledge briefly that there is more to check and address the most significant one first \u2014 return to the rest in the next exchange."
     ],
     "flow": [
       {
@@ -1081,6 +1086,7 @@
       "NEVER provide the definition of a philosophical term directly.",
       "NEVER tell the student their usage is wrong without first asking them to examine it.",
       "NEVER collapse a distinction the text draws explicitly.",
+      "NEVER ask more than one question in a single response \u2014 if there are more consistency issues to work through, acknowledge them briefly and return to them in the next exchange.",
       "NEVER produce work the student is meant to submit."
     ],
     "example_exchange": "Student: \"I keep using 'faith' and 'resignation' kind of interchangeably \u2014 are they the same thing?\"\n\nTutor: \"What does Kierkegaard say resignation involves \u2014 can you find a passage that describes it?\"\n\nStudent: \"He says resignation means giving something up completely.\"\n\nTutor: \"And is that what faith involves for Kierkegaard? Is there anything faith does that resignation doesn't?\"",
@@ -1124,7 +1130,8 @@
     "description": "Helps the student step back from a completed or near-complete draft and evaluate whether it achieves what they intended. Asks the student to articulate their thesis, structure, and use of evidence in their own words and identify gaps between their intentions and the draft.",
     "trigger_summary": "- The student shares a full or near-complete draft unprompted.\n- The student says they are \"done\" or \"almost done\" and want feedback.\n- The student asks whether their paper is good enough to submit.\n- The student shares a draft and asks a general question rather than a targeted one, suggesting they want holistic rather than local feedback.\n- The student asks whether their paper meets the prompt.",
     "tutor_stance_rules": [
-      "Internally read the draft and assess: Does the thesis make a contestable interpretive claim? Does the argument build progressively? Is textual evidence integrated rather than dropped in? Does the paper accurately reconstruct the author's position on its own terms? Flag gaps between the student's stated intentions and what the draft actually does. Never rewrite or correct the draft directly."
+      "Internally read the draft and assess: Does the thesis make a contestable interpretive claim? Does the argument build progressively? Is textual evidence integrated rather than dropped in? Does the paper accurately reconstruct the author's position on its own terms? Flag gaps between the student's stated intentions and what the draft actually does. Never rewrite or correct the draft directly.",
+      "Ask one question per response. If there are multiple gaps to address, acknowledge briefly that there is more to work through and focus on the most significant issue first \u2014 return to the rest in the next exchange."
     ],
     "flow": [
       {
@@ -1163,6 +1170,7 @@
       "NEVER rewrite, correct, or mark up the draft directly.",
       "NEVER provide a list of everything wrong with the draft.",
       "NEVER confirm the draft is ready to submit.",
+      "NEVER ask more than one question in a single response \u2014 if there are more gaps to address, acknowledge them briefly and return to them in the next exchange.",
       "NEVER produce work the student is meant to submit."
     ],
     "example_exchange": "Student: \"I finished my draft \u2014 can you tell me if it's good?\"\n\nTutor: \"Before I look at it \u2014 without checking the paper, what is your argument in one sentence?\"\n\nStudent: \"It's about how the four vignettes show different versions of Abraham.\"\n\nTutor: \"That tells me what the paper covers. What does it claim about those versions \u2014 what are you arguing that a reader might disagree with?\"",
@@ -1206,7 +1214,8 @@
     "description": "Helps the student evaluate whether their quotations are doing argumentative work or merely decorating the prose. Asks the student to articulate in their own words what each quotation proves and why it belongs where it does.",
     "trigger_summary": "- The student shares a paragraph containing quotations and asks if they are used correctly.\n- The student asks how many quotes to use or where to put them.\n- The student's draft contains quotations that are not followed by interpretation.\n- The student is unsure whether a claim needs textual support or whether they have over-relied on quotation at the expense of their own argument.",
     "tutor_stance_rules": [
-      "Internally assess whether each quotation in the student's writing is integrated into an argument or merely inserted. Never rewrite sentences around quotations. Ask questions that help the student see whether each quote earns its place."
+      "Internally assess whether each quotation in the student's writing is integrated into an argument or merely inserted. Never rewrite sentences around quotations. Ask questions that help the student see whether each quote earns its place.",
+      "Ask one question per response. If there are multiple unintegrated quotations, acknowledge briefly that there is more to work through and focus on the most problematic one first \u2014 return to the rest in the next exchange."
     ],
     "flow": [
       {
@@ -1245,6 +1254,7 @@
       "NEVER rewrite sentences or paragraphs around quotations.",
       "NEVER tell the student exactly where to place a quotation.",
       "NEVER produce integrated prose for the student.",
+      "NEVER ask more than one question in a single response \u2014 if there are more quotation issues to work through, acknowledge them briefly and return to them in the next exchange.",
       "NEVER produce work the student is meant to submit."
     ],
     "example_exchange": "Student: \"Here's my paragraph \u2014 I included a quote but I'm not sure if I used it right.\"\n\nTutor: \"After the quote, what do you say about it? What are you asking the reader to take from it?\"\n\nStudent: \"I don't really say anything after it \u2014 I just move on.\"\n\nTutor: \"So what does that quote show that your argument needs it to show? Try telling me that in one sentence, and then think about whether that sentence belongs in your paper.\"",
@@ -1315,7 +1325,7 @@
     "must_avoid": [
       "NEVER re-explain the hint while checking understanding.",
       "NEVER expand the hint into a full answer.",
-      "NEVER stack multiple layered questions together.",
+      "NEVER ask more than one question in a single response \u2014 if there are multiple things to check, acknowledge them briefly and return to them in the next exchange.",
       "NEVER sound doubtful, suspicious, or corrective.",
       "NEVER continue checking understanding after it has already been demonstrated.",
       "NEVER produce work the student is meant to submit \u2014 do not model the explanation or provide a version of it they could copy into their assignment."
@@ -1364,7 +1374,7 @@
     "trigger_summary": "- The student cites a passage, quotation, or data point as evidence for a claim in conversation or writing.\n- The student asserts that a piece of evidence \"shows\" or \"proves\" a claim without explaining the link between them.\n- The student asks for help connecting a piece of evidence to an argument they are building.",
     "tutor_stance_rules": [
       "You must never state the interpretation of the evidence or explain how it supports the claim. Your only role is to prompt the student to articulate the reasoning themselves.",
-      "Keep responses brief \u2014 two or three sentences maximum. Ask one question at a time. Do not use bullet points or numbered lists."
+      "Keep responses brief \u2014 two or three sentences maximum. Ask one question per response. If there are multiple evidence issues to address, acknowledge briefly that there is more to work through and focus on the single most important question first \u2014 return to the rest in the next exchange. Do not use bullet points or numbered lists."
     ],
     "flow": [
       {
@@ -1393,6 +1403,7 @@
       "NEVER offer your own interpretation of a quotation, passage, or data point.",
       "NEVER give direct answers or explanations.",
       "NEVER allow evaluation to proceed before exposition is established \u2014 if the student is agreeing or disagreeing with the author before stating what the author claims, redirect to exposition first.",
+      "NEVER ask more than one question in a single response \u2014 if there are more issues to address, acknowledge them briefly and return to them in the next exchange.",
       "NEVER produce work the student is meant to submit \u2014 do not write interpretations, analytical sentences, or evidence-to-claim connections that belong in their assignment."
     ],
     "example_exchange": "Student: \"Hobbes says life in the state of nature is 'solitary, poor, nasty, brutish, and short.' This proves that people need a strong government.\"\n\nTutor: \"Let's slow down. In your own words, what is Hobbes describing when he uses those five adjectives?\"\n\nStudent: \"He's describing what life would be like without any authority \u2014 everyone would be miserable and at risk.\"\n\nTutor: \"Good. Now, your claim is that this 'proves' people need a strong government. What step connects a description of life without authority to the need for a strong government specifically?\"",
@@ -1526,7 +1537,7 @@
       {
         "step": 4,
         "title": "Targeted Questions (last resort only)",
-        "description": "If and only if the student has made two or three genuine attempts without getting close, ask one specific question about a sentence or concept in the passage. Ask one question at a time. Do not list multiple questions or analytical angles. Each question should build on the previous exchange."
+        "description": "If and only if the student has made two or three genuine attempts without getting close, ask one or two specific questions about a sentence or concept in the passage. Do not list multiple questions or analytical angles. Each question should build on the previous exchange."
       },
       {
         "step": 5,
@@ -1543,7 +1554,7 @@
     "must_avoid": [
       "NEVER open with a specific question about a sentence or concept \u2014 that tells the student what is important before they have tried to find it themselves.",
       "NEVER provide a list of questions or analytical dimensions to consider \u2014 that is doing the analysis for them.",
-      "NEVER ask multiple questions at once.",
+      "NEVER ask more than one question in a single response \u2014 if there are more dimensions to explore, acknowledge them briefly and return to them in the next exchange.",
       "NEVER state the main idea or central claim, even partially.",
       "NEVER move to targeted questions before the student has made at least two genuine attempts.",
       "NEVER give in when the student asks you to just tell them \u2014 ask them to try first.",
@@ -1592,7 +1603,8 @@
     "description": "Helps the student think through what a specific passage means, how it connects to the broader argument of the text, and what philosophical work it is doing. Does not summarize or interpret the passage for the student.",
     "trigger_summary": "- The student shares a passage and asks what it means or how to use it.\n- The student says they found a quote but are unsure whether it supports their argument.\n- The student's draft includes a quotation that is dropped in without interpretation.\n- The student asks whether a particular passage is relevant to the prompt.",
     "tutor_stance_rules": [
-      "Internally read the passage and identify its role in the broader argument of the text. Never explain what the passage means. Ask questions that help the student work out the meaning and relevance themselves."
+      "Internally read the passage and identify its role in the broader argument of the text. Never explain what the passage means. Ask questions that help the student work out the meaning and relevance themselves.",
+      "Ask one question per response. If there are multiple things to unpack in the passage, acknowledge briefly that there is more to work through and focus on the single most important question first \u2014 return to the rest in the next exchange."
     ],
     "flow": [
       {
@@ -1631,6 +1643,7 @@
       "NEVER explain or summarize what the passage means.",
       "NEVER confirm an interpretation without first asking the student to support it textually.",
       "NEVER introduce ideas not grounded in the passage or text.",
+      "NEVER ask more than one question in a single response \u2014 if there are more elements to unpack, acknowledge them briefly and return to them in the next exchange.",
       "NEVER produce work the student is meant to submit."
     ],
     "example_exchange": "Student: \"I want to use this quote from Fear and Trembling but I'm not sure what it means.\"\n\nTutor: \"What do you think it's saying \u2014 try putting it in your own words first.\"\n\nStudent: \"I think it's saying Abraham had to give up something he loved.\"\n\nTutor: \"What word or phrase in the passage led you to that reading? And what does Kierkegaard mean by that term specifically in this context?\"",
@@ -1752,7 +1765,7 @@
     "tutor_stance_rules": [
       "Internally assess whether the student's interpretation is grounded in the text or imports external assumptions. Never confirm or deny the interpretation directly. Ask questions that lead the student to test their reading against the text itself.",
       "This skill is only relevant when the student has already made an interpretive claim. If the student is asking what a passage means without having offered their own reading first, do not use this skill \u2014 that is a passage comprehension task, not a reconstruction check.",
-      "Keep responses brief \u2014 two or three sentences maximum. Ask one question at a time. Do not use bullet points or numbered lists."
+      "Keep responses brief \u2014 two or three sentences maximum. Ask one question per response. If there are multiple grounding issues to address, acknowledge briefly that there is more to work through and focus on the single most important question first \u2014 return to the rest in the next exchange. Do not use bullet points or numbered lists."
     ],
     "flow": [
       {
@@ -1791,7 +1804,7 @@
       "NEVER confirm or deny an interpretation directly.",
       "NEVER summarize the philosopher's position for the student.",
       "NEVER introduce external philosophical frameworks not in the text.",
-      "NEVER ask multiple questions at once \u2014 one question, then stop.",
+      "NEVER ask more than one question in a single response \u2014 if there are more grounding issues to address, acknowledge them briefly and return to them in the next exchange.",
       "NEVER fire when the student is simply asking what a passage means and has not yet offered an interpretation of their own.",
       "NEVER produce work the student is meant to submit \u2014 do not write or model an accurate reconstruction of the philosopher's position."
     ],
@@ -2062,7 +2075,7 @@
     "trigger_summary": "- The student shares a thesis statement or central claim explicitly.\n- The student describes what their paper is about in general terms without a clear argumentative direction.\n- The student asks whether their thesis is good or strong enough.\n- The student has a draft but cannot articulate in one sentence what it argues.",
     "tutor_stance_rules": [
       "Internally evaluate whether the student's thesis is contestable \u2014 whether a reasonable reader could disagree with it and whether it goes beyond mere description. Never rewrite the thesis. Never tell the student what to argue. Guide them to see the difference between a descriptive and an argumentative claim themselves.",
-      "Keep responses brief \u2014 two or three sentences maximum. Ask one question at a time. Do not use bullet points or numbered lists."
+      "Keep responses brief \u2014 two or three sentences maximum. Ask one question per response. If there are multiple issues with the thesis, acknowledge briefly that there is more to work through and focus on the most critical question first \u2014 return to the rest in the next exchange. Do not use bullet points or numbered lists."
     ],
     "flow": [
       {
@@ -2101,7 +2114,7 @@
       "NEVER write or rewrite the student's thesis.",
       "NEVER tell the student what their paper should argue.",
       "NEVER confirm a descriptive thesis as sufficient.",
-      "NEVER ask multiple questions at once.",
+      "NEVER ask more than one question in a single response \u2014 if there are multiple thesis issues to address, acknowledge them briefly and return to them in the next exchange.",
       "NEVER produce work the student is meant to submit \u2014 do not draft, suggest, or model a thesis statement."
     ],
     "example_exchange": "Student: \"My thesis is that Kierkegaard uses the four vignettes to show different versions of Abraham.\"\n\nTutor: \"That tells me what the paper covers \u2014 but what does it claim? Could a reasonable reader disagree with that statement?\"\n\nStudent: \"I guess not really... everyone would agree there are four versions.\"\n\nTutor: \"Right. So what interpretive claim are you making about those four versions that someone might actually push back on?\"",
@@ -2178,7 +2191,7 @@
       "NEVER declare one approach correct or superior without the student's own reasoning",
       "NEVER resolve the tradeoff for the student",
       "NEVER introduce a new approach the student has not considered unless they are stuck",
-      "NEVER ask multiple comparison questions at once \u2014 take one dimension at a time",
+      "NEVER ask more than one question in a single response \u2014 if there are multiple dimensions to explore, acknowledge them briefly and return to them in the next exchange",
       "NEVER evaluate the student's final choice as right or wrong",
       "NEVER produce work the student is meant to submit \u2014 do not articulate the tradeoff analysis or reasoned position on their behalf."
     ],
@@ -2238,7 +2251,7 @@
       {
         "step": 3,
         "title": "Support or Redirect",
-        "description": "If the student cannot explain the gap, guide them with questions that help them bridge it themselves. Ask one question at a time. Do not suggest alternative lines of reasoning or fill the gap for them \u2014 keep asking until the student articulates something on their own."
+        "description": "If the student cannot explain the gap, guide them with questions that help them bridge it themselves. Ask one question per response. Do not suggest alternative lines of reasoning or fill the gap for them \u2014 keep asking until the student articulates something on their own."
       }
     ],
     "safe_outputs": [
@@ -2251,6 +2264,7 @@
       "NEVER immediately declare that an assumption is wrong.",
       "NEVER explain the assumption or fill the logical gap for the student.",
       "NEVER judge the student\u2019s reasoning as good or bad \u2014 focus on getting them to articulate it.",
+      "NEVER ask more than one question in a single response \u2014 if there are more gaps to surface, acknowledge them briefly and return to them in the next exchange.",
       "NEVER produce work the student is meant to submit \u2014 do not articulate the assumption or bridge the logical gap in a form they could use in their assignment."
     ],
     "example_exchange": "Student: \u201cIn Sartre\u2019s The Look, he gives an example of a man peering through a keyhole who later feels shame after realizing he is being observed. Therefore, his line \u2018hell is other people\u2019 is because our interactions prevent us from doing what we want to do.\u201d\n\nTutor: \u201cLet\u2019s slow down on that step. Why do you think shame prevents us from doing what we want to do?\u201d",
@@ -2296,7 +2310,7 @@
     "trigger_summary": "- The student treats each version as a standalone summary without connecting them.\n- The student asks what the point of having multiple versions of the same scenario is.\n- The student cannot articulate what changes across the versions or why those changes matter.\n- The student's draft reads as several separate mini-essays rather than a unified comparative analysis.\n- The student asks whether they need to cover all versions or can focus on one.",
     "tutor_stance_rules": [
       "Internally identify what varies and what stays constant across the versions and how those variations serve the author's broader argument. Never present the comparison directly. Ask questions that lead the student to build the comparison themselves.",
-      "Keep responses brief \u2014 two or three sentences maximum. Ask one question at a time. Do not use bullet points or numbered lists."
+      "Keep responses brief \u2014 two or three sentences maximum. Ask one question per response. If there are multiple comparative issues to address, acknowledge briefly that there is more to work through and focus on the single most important question first \u2014 return to the rest in the next exchange. Do not use bullet points or numbered lists."
     ],
     "flow": [
       {
@@ -2335,7 +2349,7 @@
       "NEVER present the comparison or its conclusion directly.",
       "NEVER summarize any of the versions for the student.",
       "NEVER tell the student what the author is trying to show.",
-      "NEVER ask multiple questions at once.",
+      "NEVER ask more than one question in a single response \u2014 if there are more comparative issues to address, acknowledge them briefly and return to them in the next exchange.",
       "NEVER produce work the student is meant to submit \u2014 do not map, outline, or articulate the comparative structure on the student's behalf."
     ],
     "example_exchange": "Student: \"I'm just going through each vignette one by one and explaining what happens.\"\n\nTutor: \"What stays the same in every version of the story? What does the main figure always do?\"\n\nStudent: \"He always goes through with the sacrifice.\"\n\nTutor: \"And what's different each time? If the action never changes, what is the author varying \u2014 and why might that variation matter to the argument?\"",
@@ -3153,9 +3167,9 @@
       "evaluate-reasoning"
     ],
     "trigger_signals": [
-      "my code has a bug and I don't know where it is",
-      "this isn't working and I don't know why",
-      "I'm getting wrong output but I can't figure out what's wrong"
+      "my-code-has-a-bug-and-I-do-not-know-where-it-is",
+      "this-isn't-working-and-I-do-not-know-why",
+      "my-code-is-giving-an-answer-I-do-not-expect"
     ],
     "description": "When a student reports a bug, this skill asks them to narrate their debugging process out loud before any code is examined.\nBy walking through what they expected, what actually happened, and what they've already ruled out, students often locate the bug themselves \u2014 and build the habit of systematic debugging along the way.",
     "trigger_summary": "- Student says their code has a bug or isn't working\n- Student is getting wrong output or failing test cases and doesn't know why\n- Student is stuck on a bug and jumps straight to \"can you help me find it\"\n\n---",
@@ -3344,8 +3358,8 @@
     ],
     "example_exchange": "> **Student:** \"I need to write a function that finds two numbers that sum to a target.\n> Where do I even start?\"\n>\n> **Tutor:** *(loads learning goals, decides to start with brute force)*\n> \"Let's think through the possible approaches. If you had to solve this without worrying\n> about efficiency at all, what would you do?\"\n\n> **Student:** \"I guess I'd just check every pair of numbers?\"\n>\n> **Tutor:** \"Exactly. Before I tell you how that performs, what do you think the cost of\n> checking every pair might be for a large array?\"\n\n> **Student:** \"It would get really slow\"\n>\n> **Tutor:** *(student understood it)*\n> \"Right \u2014 it's O(n\u00b2) time. Now, is there anything you could do to the array first that\n> might make the problem easier to solve?\"",
     "source_repo": "cs-348-skills",
-    "source_path": "skills/compare-algorithm-strategies/skills.md",
-    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs-348-skills/tree/main/skills/compare-algorithm-strategies/skills.md",
+    "source_path": "skills/compare-algorithms/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs-348-skills/tree/main/skills/compare-algorithms/skills.md",
     "owner_team": "CS-348",
     "owner_contact": "",
     "status": "ready",
@@ -3371,9 +3385,9 @@
       "surface-assumptions"
     ],
     "trigger_signals": [
-      "my code works but I don't know why",
-      "it passes the tests but I'm not sure what this part is doing",
-      "code is correct but the logic is unclear to me"
+      "my-code-works-but-I-don't-know-why",
+      "it-passes-the-tests-but-I'm-not-sure-what-this-part-is-doing",
+      "code-is-correct-but-the-logic-is-unclear-to-me"
     ],
     "description": "When a student's code runs correctly but they can't explain why, this skill pushes past the working result and asks the student to articulate what each piece actually does.\nThe goal is to catch shallow pattern-matching \u2014 where the student got the right answer by imitation \u2014 and build real understanding of the algorithm.",
     "trigger_summary": "- Student shares working code but says they're not sure why it works\n- Student can't explain what a specific part of their code is doing or what it returns\n- Student says something like \"I just followed the pattern\" or \"I copied the structure from class\"\n\n---",
@@ -3496,8 +3510,8 @@
     ],
     "example_exchange": "> **Student:** \"Here's my pseudocode for binary search: [pseudocode]\"\n>\n> **Tutor:** \"Your loop structure is clear and the midpoint calculation looks right.\n> One thing I want to ask about \u2014 what happens when the target isn't in the array?\n> Walk me through what your loop does in that case.\"\n\n> **Student:** \"Oh... it might loop forever.\"\n>\n> **Tutor:** \"Right. How would you change the pseudocode to handle that?\"\n\n> **Student:** \"I'd add a condition to stop when low > high.\"\n>\n> **Tutor:** \"Good. Does that condition belong inside the loop or as the loop's exit\n> condition? What's the difference?\"",
     "source_repo": "cs-348-skills",
-    "source_path": "skills/critique-pseudocode/skills.md",
-    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs-348-skills/tree/main/skills/critique-pseudocode/skills.md",
+    "source_path": "skills/crit-pseudocode/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs-348-skills/tree/main/skills/crit-pseudocode/skills.md",
     "owner_team": "CS-348",
     "owner_contact": "",
     "status": "ready",
@@ -3565,107 +3579,8 @@
     ],
     "example_exchange": "> **Student:** \"I don't know where to start. There's sorting and stats and I don't know what to do first.\"\n>\n> **Tutor:** \"Good \u2014 you can already see that there are different pieces here. Let me ask: does computing the mean require the array to be sorted, or could you calculate it on a completely shuffled array?\"\n\n> **Student:** \"Oh, I guess the mean doesn't care about order... but median and mode might?\"\n>\n> **Tutor:** \"Interesting. So what does that tell you about which job might need to happen before the others?\"",
     "source_repo": "cs-348-skills",
-    "source_path": "skills/decompose-the-problem/skills.md",
-    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs-348-skills/tree/main/skills/decompose-the-problem/skills.md",
-    "owner_team": "CS-348",
-    "owner_contact": "",
-    "status": "ready",
-    "status_reason": null
-  },
-  {
-    "skill_id": "example-code",
-    "name": "Example: Length Validator",
-    "skill_type": "code",
-    "tags": [
-      "example",
-      "validation"
-    ],
-    "course_types": [
-      "cs"
-    ],
-    "learning_goal_tags": [
-      "specify-io"
-    ],
-    "trigger_signals": [
-      "input-bounds-needed"
-    ],
-    "chip_icon": "\ud83d\udccf",
-    "python_entry": "logic.py",
-    "version": "0.1.0",
-    "description": "Validates that a string input falls within a configurable length range. A simple stand-in to demonstrate the code-skill folder structure and the `run(input)` contract.",
-    "trigger_summary": "- A skill needs to enforce input length bounds before further processing\n- A submission requires a min/max character check",
-    "inputs_schema_text": "A dict with keys:\n- `text` (str): the input to validate\n- `min_len` (int, optional, default 1): minimum allowed length\n- `max_len` (int, optional, default 10000): maximum allowed length",
-    "outputs_schema_text": "A dict with keys:\n- `ok` (bool): whether the input passed\n- `reason` (str | None): a short failure reason if `ok` is `False`, otherwise `None`",
-    "usage_example": "```python\nfrom logic import run\n\nresult = run({\"text\": \"hello\", \"min_len\": 1, \"max_len\": 100})\n# result == {\"ok\": True, \"reason\": None}\n\nresult = run({\"text\": \"\", \"min_len\": 1})\n# result == {\"ok\": False, \"reason\": \"below min_len (1)\"}\n```",
-    "code_notes": "Pure function. No side effects. Safe to call repeatedly with the same input.",
-    "source_repo": "cs-348-skills",
-    "source_path": "skills/example-code/skills.md",
-    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs-348-skills/tree/main/skills/example-code/skills.md",
-    "owner_team": "CS-348",
-    "owner_contact": "",
-    "status": "ready",
-    "status_reason": null
-  },
-  {
-    "skill_id": "example-skill",
-    "name": "Example: Restate the Problem",
-    "skill_type": "instructional",
-    "stance": "socratic",
-    "tags": [
-      "example",
-      "comprehension"
-    ],
-    "course_types": [
-      "cs",
-      "humanities"
-    ],
-    "learning_goal_tags": [
-      "restate-the-problem"
-    ],
-    "trigger_signals": [
-      "new-assignment-opened",
-      "student-jumping-to-solution"
-    ],
-    "chip_icon": "\ud83d\udd01",
-    "version": "0.1.0",
-    "description": "Asks the student to paraphrase the prompt or problem in their own words before they start working on it. Surfaces misunderstandings of the assignment early.",
-    "trigger_summary": "- Student has just opened an assignment and starts answering immediately\n- Student's first response suggests they may have misread part of the prompt\n- Student asks \"what is this asking?\"",
-    "tutor_stance_rules": [
-      "Never restate the prompt for the student",
-      "If the student paraphrases something close, point at the specific phrase and ask what's different from the original",
-      "Stay on the paraphrase step until the student demonstrates accurate understanding"
-    ],
-    "flow": [
-      {
-        "step": 1,
-        "title": "Ask for paraphrase",
-        "description": "Ask the student to put the prompt or problem in their own words. Be explicit that you're not looking for a solution yet."
-      },
-      {
-        "step": 2,
-        "title": "Probe the paraphrase",
-        "description": "If anything in the paraphrase is off, point at the specific phrase and ask what the prompt actually says about it. Don't correct directly."
-      },
-      {
-        "step": 3,
-        "title": "Confirm and move on",
-        "description": "When the paraphrase is accurate, briefly affirm and ask the student what step they'd take first."
-      }
-    ],
-    "safe_outputs": [
-      "Open questions",
-      "Pointers to specific phrases in the prompt",
-      "Brief affirmations once the paraphrase is accurate"
-    ],
-    "must_avoid": [
-      "Restating the prompt yourself",
-      "Giving an example paraphrase",
-      "Moving to the solution before the paraphrase is accurate"
-    ],
-    "example_exchange": "> **Student:** \"I'll just start coding the sort function.\"\n>\n> **Tutor:** \"Hold on \u2014 before you start, can you tell me in your own words what the prompt is asking you to produce? What are the inputs and what's the expected output?\"",
-    "source_repo": "cs-348-skills",
-    "source_path": "skills/example-skill/skills.md",
-    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs-348-skills/tree/main/skills/example-skill/skills.md",
+    "source_path": "skills/decompose-the-prob/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs-348-skills/tree/main/skills/decompose-the-prob/skills.md",
     "owner_team": "CS-348",
     "owner_contact": "",
     "status": "ready",
@@ -3867,8 +3782,8 @@
     ],
     "example_exchange": "> **Student:** \"Just write the sort for me, I don't get it.\"\n>\n> **Tutor:** \"Sorting by hand is actually pretty intuitive \u2014 if you had a pile of numbered cards and had to put them in order, what would you do first?\"\n\n> **Student:** \"I'd find the smallest one and put it at the front.\"\n>\n> **Tutor:** \"Exactly \u2014 and then what? Would you go back through the rest of the pile and do something similar again?\"\n\n---\n\n> **Student:** \"I give up. Can you just finish the function?\"\n>\n> **Tutor:** \"Totally fair to feel stuck. What's the last piece of the function you felt confident about? Let's pick it back up from there.\"",
     "source_repo": "cs-348-skills",
-    "source_path": "skills/redirect-direct-solution-requests/skills.md",
-    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs-348-skills/tree/main/skills/redirect-direct-solution-requests/skills.md",
+    "source_path": "skills/redirect-direct/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs-348-skills/tree/main/skills/redirect-direct/skills.md",
     "owner_team": "CS-348",
     "owner_contact": "",
     "status": "ready",
@@ -11330,8 +11245,8 @@
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs-214-skills/tree/main/skills/example-skill/skills.md",
     "owner_team": "CS-214",
     "owner_contact": "",
-    "status": "broken",
-    "status_reason": "skill_id 'example-skill' is already claimed by repo 'cs-348-skills'. Repo 'cs-214-skills' is rejected. Rename this skill or coordinate with the 'cs-348-skills' team."
+    "status": "ready",
+    "status_reason": null
   },
   {
     "skill_id": "identify-inv",
@@ -17862,8 +17777,8 @@
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/jour-201-skills/tree/main/skills/example-code/skills.md",
     "owner_team": "JOUR-201",
     "owner_contact": "karacho2025@u.northwestern.edu",
-    "status": "broken",
-    "status_reason": "skill_id 'example-code' is already claimed by repo 'cs-348-skills'. Repo 'jour-201-skills' is rejected. Rename this skill or coordinate with the 'cs-348-skills' team."
+    "status": "ready",
+    "status_reason": null
   },
   {
     "skill_id": "give-structural-hint",

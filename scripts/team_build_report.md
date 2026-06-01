@@ -4,10 +4,10 @@
 
 | Metric | Count |
 |--------|------:|
-| Total skills | 231 |
+| Total skills | 229 |
 | Ready | 205 |
 | Stub | 18 |
-| Broken | 8 |
+| Broken | 6 |
 
 ## ⚠ Duplicate skill_id rejections
 
@@ -16,10 +16,8 @@ The following skills were **rejected** because their `skill_id` was already clai
 | Rejected team / repo | `skill_id` | First claimed by |
 |---|---|---|
 | `poli_sci-210-skills` | `skill-name` | `jour-201-1-skills` |
-| `cs-214-skills` | `example-skill` | `cs-348-skills` |
 | `jour-201-skills` | `ask-for-example` | `jour-201-1-skills` |
 | `jour-201-skills` | `depth-of-interviewing` | `jour-201-1-skills` |
-| `jour-201-skills` | `example-code` | `cs-348-skills` |
 | `jour-201-skills` | `give-structural-hint` | `jour-201-1-skills` |
 | `jour-201-skills` | `news-judgement` | `jour-201-1-skills` |
 | `jour-201-skills` | `paragraph-purpose-check` | `jour-201-1-skills` |
@@ -32,11 +30,9 @@ The following skills were **rejected** because their `skill_id` was already clai
 | `CS-213` | `skills/cache-performance-analysis/skills.md` | stub | missing — add a `## Flow` section with `### Step N` subsections |
 | `CS-213` | `skills/memory-access-pattern-analysis/skills.md` | stub | missing — add a `## Flow` section with `### Step N` subsections |
 | `CS-213` | `skills/memory-system-optimization/skills.md` | stub | missing — add a `## Flow` section with `### Step N` subsections |
-| `CS-214` | `skills/example-skill/skills.md` | broken | skill_id 'example-skill' is already claimed by repo 'cs-348-skills'. Repo 'cs-214-skills' is rejected. Rename this skill or coordinate with the 'cs-348-skills' team. |
 | `JOUR-201` | `skills/ap-style-check/skills.md` | stub | missing — add a `## Flow` section with `### Step N` subsections; missing — add a `## Safe Output Types` section |
 | `JOUR-201` | `skills/ask-for-example/skills.md` | broken | skill_id 'ask-for-example' is already claimed by repo 'jour-201-1-skills'. Repo 'jour-201-skills' is rejected. Rename this skill or coordinate with the 'jour-201-1-skills' team. |
 | `JOUR-201` | `skills/depth-of-interviewing/skills.md` | broken | skill_id 'depth-of-interviewing' is already claimed by repo 'jour-201-1-skills'. Repo 'jour-201-skills' is rejected. Rename this skill or coordinate with the 'jour-201-1-skills' team. |
-| `JOUR-201` | `skills/example-code/skills.md` | broken | skill_id 'example-code' is already claimed by repo 'cs-348-skills'. Repo 'jour-201-skills' is rejected. Rename this skill or coordinate with the 'cs-348-skills' team. |
 | `JOUR-201` | `skills/give-structural-hint/skills.md` | broken | skill_id 'give-structural-hint' is already claimed by repo 'jour-201-1-skills'. Repo 'jour-201-skills' is rejected. Rename this skill or coordinate with the 'jour-201-1-skills' team. |
 | `JOUR-201` | `skills/interview-para/skills.md` | stub | missing — add a `## Flow` section with `### Step N` subsections; missing — add a `## Safe Output Types` section |
 | `JOUR-201` | `skills/news-judgement/skills.md` | broken | skill_id 'news-judgement' is already claimed by repo 'jour-201-1-skills'. Repo 'jour-201-skills' is rejected. Rename this skill or coordinate with the 'jour-201-1-skills' team. |
@@ -81,12 +77,6 @@ The following skills were **rejected** because their `skill_id` was already clai
 | `CS-213-skills` | `CS-213-skills/skills/memory-system-optimization/skills.md` | **ERROR** | `flow` | missing — add a `## Flow` section with `### Step N` subsections |
 | `CS-213-skills` | `CS-213-skills/skills/stack-visualizer/skills.md` | **warn** | `stance` | stance is for instructional skills only; remove for code |
 
-### CS-214
-
-| Repo | Skill | Severity | Field | Message |
-|------|-------|----------|-------|---------|
-| `cs-214-skills` | `cs-214-skills/skills/example-skill/skills.md` | **ERROR** | `skill_id` | skill_id 'example-skill' is already claimed by repo 'cs-348-skills'. Repo 'cs-214-skills' is rejected. Rename this skill or coordinate with the 'cs-348-skills' team. |
-
 ### CS-343
 
 | Repo | Skill | Severity | Field | Message |
@@ -114,7 +104,6 @@ The following skills were **rejected** because their `skill_id` was already clai
 | `jour-201-skills` | `jour-201-skills/skills/ap-style-check/skills.md` | **ERROR** | `safe_output_types` | missing — add a `## Safe Output Types` section |
 | `jour-201-skills` | `jour-201-skills/skills/ask-for-example/skills.md` | **ERROR** | `skill_id` | skill_id 'ask-for-example' is already claimed by repo 'jour-201-1-skills'. Repo 'jour-201-skills' is rejected. Rename this skill or coordinate with the 'jour-201-1-skills' team. |
 | `jour-201-skills` | `jour-201-skills/skills/depth-of-interviewing/skills.md` | **ERROR** | `skill_id` | skill_id 'depth-of-interviewing' is already claimed by repo 'jour-201-1-skills'. Repo 'jour-201-skills' is rejected. Rename this skill or coordinate with the 'jour-201-1-skills' team. |
-| `jour-201-skills` | `jour-201-skills/skills/example-code/skills.md` | **ERROR** | `skill_id` | skill_id 'example-code' is already claimed by repo 'cs-348-skills'. Repo 'jour-201-skills' is rejected. Rename this skill or coordinate with the 'cs-348-skills' team. |
 | `jour-201-skills` | `jour-201-skills/skills/give-structural-hint/skills.md` | **ERROR** | `skill_id` | skill_id 'give-structural-hint' is already claimed by repo 'jour-201-1-skills'. Repo 'jour-201-skills' is rejected. Rename this skill or coordinate with the 'jour-201-1-skills' team. |
 | `jour-201-skills` | `jour-201-skills/skills/interview-para/skills.md` | **ERROR** | `flow` | missing — add a `## Flow` section with `### Step N` subsections |
 | `jour-201-skills` | `jour-201-skills/skills/interview-para/skills.md` | **ERROR** | `safe_output_types` | missing — add a `## Safe Output Types` section |
