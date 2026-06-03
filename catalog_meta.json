@@ -1,11 +1,11 @@
 {
   "schema_version": "1.0.0",
-  "generated_at": "2026-06-02T09:59:45.777785+00:00",
-  "catalog_hash": "5d39e0036e12f5fd",
-  "total_skills": 230,
+  "generated_at": "2026-06-03T02:36:17.787193+00:00",
+  "catalog_hash": "595b94ced3f96a57",
+  "total_skills": 211,
   "by_status": {
-    "ready": 210,
-    "stub": 14,
-    "broken": 6
+    "ready": 204,
+    "stub": 7,
+    "broken": 0
   }
 }
