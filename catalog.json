@@ -422,6 +422,7 @@
     "stance": "socratic",
     "tags": [
       "decomposition",
+      "decompose",
       "planning",
       "problem-solving",
       "tutor"
@@ -435,7 +436,11 @@
     "trigger_signals": [
       "student-stuck-starting",
       "student-skipping-planning",
-      "direct-solution-request"
+      "direct-solution-request",
+      "student-asking-to-decompose",
+      "help-decompose-problem",
+      "break-down-lab",
+      "where-to-start-lab"
     ],
     "owner_team": "ask_for_decomposition",
     "status": "ready",
@@ -552,10 +557,11 @@
       "recognize-patterns"
     ],
     "trigger_signals": [
-      "translate-assembly-to-c",
-      "translate-this-assembly",
-      "asm-to-c-translation",
-      "what-is-this-asm-in-c"
+      "student-asks-translate-assembly-to-c",
+      "student-pastes-assembly-wants-c-equivalent",
+      "student-asks-what-assembly-line-means-in-c",
+      "student-confused-about-calling-convention-in-asm",
+      "student-wants-c-reading-not-full-decompile"
     ],
     "chip_icon": "\ud83d\udd24",
     "version": "0.2.0",
@@ -762,11 +768,11 @@
       "debug-systematically"
     ],
     "trigger_signals": [
-      "c-code-bug-question",
-      "whats-wrong-with-my-c",
-      "compile-error",
-      "segfault",
-      "runtime-error"
+      "student-pastes-c-code-asks-what-is-wrong",
+      "student-reports-segfault-with-code-snippet",
+      "student-pastes-compiler-warning-with-code",
+      "student-says-output-is-wrong-not-crashing",
+      "student-asks-how-to-debug-with-gdb-or-sanitizer"
     ],
     "chip_icon": "\ud83d\udc1b",
     "version": "0.2.0",
@@ -795,14 +801,16 @@
       "apply-hardware-models"
     ],
     "trigger_signals": [
-      "given-cache-specifications",
-      "compute-tag-index-offset",
-      "cache-organization-question"
+      "student-given-cache-size-and-block-size",
+      "student-asks-how-address-maps-to-set",
+      "student-computing-tag-index-offset-bits",
+      "student-confused-tag-vs-index-vs-offset",
+      "student-has-binary-address-and-cache-params"
     ],
     "chip_icon": "\ud83e\udde0",
     "version": "0.1.0",
     "owner_team": "cache_modeling",
-    "status": "stub",
+    "status": "ready",
     "has_logic": false
   },
   {
@@ -824,47 +832,16 @@
       "analyze-code-efficiency"
     ],
     "trigger_signals": [
-      "is my code optimized?",
-      "slow-code",
-      "loop-optimization",
-      "cache-miss",
-      "performance-issue"
+      "student-asks-why-matrix-or-loop-is-slow",
+      "student-pastes-nested-loops-asks-locality",
+      "student-stuck-after-tried-one-loop-order",
+      "student-mentions-cache-misses-in-their-code",
+      "student-wants-nudge-on-loop-reorder-not-rewrite"
     ],
     "chip_icon": "\ud83e\udde0",
     "version": "0.1.0",
-    "stance": "socratic",
+    "stance": "hint",
     "owner_team": "cache_opt_code",
-    "status": "ready",
-    "has_logic": true
-  },
-  {
-    "skill_id": "cache-optimized-code",
-    "name": "Cache Optimized Code",
-    "skill_type": "code",
-    "tags": [
-      "cs213",
-      "c",
-      "performance",
-      "memory"
-    ],
-    "course_types": [
-      "cs"
-    ],
-    "learning_goal_tags": [
-      "understand-memory-hierarchy",
-      "optimize-performance",
-      "analyze-code-efficiency"
-    ],
-    "trigger_signals": [
-      "is my code optimized?",
-      "slow-code",
-      "loop-optimization",
-      "cache-miss",
-      "performance-issue"
-    ],
-    "chip_icon": "\ud83e\udde0",
-    "version": "0.1.0",
-    "owner_team": "cache_optimized_code",
     "status": "ready",
     "has_logic": true
   },
@@ -888,14 +865,16 @@
       "evaluate-cache-efficiency"
     ],
     "trigger_signals": [
-      "cache-trace-analysis",
-      "miss-rate-calculation",
-      "performance-comparison"
+      "student-given-cache-access-trace",
+      "student-asks-miss-rate-on-homework-trace",
+      "student-labeling-compulsory-conflict-capacity",
+      "student-comparing-two-cache-configurations",
+      "student-simulating-hits-and-misses-step-by-step"
     ],
     "chip_icon": "\ud83d\udcc9",
     "version": "0.1.0",
     "owner_team": "cache_perf",
-    "status": "stub",
+    "status": "ready",
     "has_logic": false
   },
   {
@@ -964,25 +943,26 @@
     "skill_type": "instructional",
     "stance": "socratic",
     "tags": [
-      "argumentation",
       "evidence",
-      "writing",
-      "thesis",
-      "critical-thinking",
-      "readings"
+      "citation",
+      "accountability",
+      "social-science"
     ],
     "course_types": [
       "humanities"
     ],
     "learning_goal_tags": [
       "verify-claims",
+      "identify-evidence",
       "interpret-evidence"
     ],
     "trigger_signals": [
-      "student-asks-if-claim-is-good",
-      "evidence-claim-mismatch",
-      "thesis-feedback-request"
+      "student-citing-vague-studies",
+      "student-asserting-without-evidence",
+      "student-using-research-shows-without-citation"
     ],
+    "chip_icon": "\u2705",
+    "version": "0.1.0",
     "owner_team": "claim_verification",
     "status": "ready",
     "has_logic": false
@@ -1128,10 +1108,11 @@
       "improve-self-explanation"
     ],
     "trigger_signals": [
-      "after-solving-cache-or-memory-problem",
-      "student-requests-explanation-check",
-      "repeated-errors-in-similar-concepts",
-      "uncertain-or-guessing-answers"
+      "student-got-right-answer-unclear-reasoning",
+      "student-asks-do-i-understand-this",
+      "student-repeats-same-mistake-on-cache-or-vm",
+      "student-guessing-without-justification",
+      "student-finished-problem-wants-concept-check"
     ],
     "chip_icon": "\ud83e\udded",
     "version": "0.1.0",
@@ -1275,7 +1256,12 @@
       "prior-knowledge",
       "analogy",
       "bridge",
-      "tutor"
+      "tutor",
+      "similar",
+      "familiar",
+      "remember",
+      "connect",
+      "reminds"
     ],
     "course_types": [
       "cs"
@@ -1287,7 +1273,11 @@
     "trigger_signals": [
       "student-knows-related-concept",
       "new-concept-confusion",
-      "prior-course-reference"
+      "prior-course-reference",
+      "reminds-me-of-prior",
+      "seems-familiar-but-different",
+      "looks-like-prior-concept",
+      "student-already-knows-related"
     ],
     "owner_team": "connect_prior_knowledge",
     "status": "ready",
@@ -1355,31 +1345,30 @@
     "has_logic": false
   },
   {
-    "skill_id": "converge_ideas",
+    "skill_id": "converge-ideas",
     "name": "Converge Ideas",
     "skill_type": "instructional",
     "stance": "socratic",
     "tags": [
       "synthesis",
-      "readings",
-      "themes",
-      "comparison",
-      "humanities"
+      "cross-reading",
+      "scholarly-dialogue",
+      "comparison"
     ],
     "course_types": [
       "humanities"
     ],
     "learning_goal_tags": [
-      "identify-evidence",
-      "interpret-evidence",
-      "construct-arguments"
+      "decompose-arguments",
+      "construct-arguments",
+      "evaluate-reasoning"
     ],
     "trigger_signals": [
-      "readings-dont-connect",
-      "find-common-themes",
-      "synthesis-across-texts",
-      "week-has-multiple-readings"
+      "student-summarizing-two-readings-in-parallel",
+      "student-treating-readings-as-separate-information",
+      "student-asked-to-synthesize-but-comparing-instead"
     ],
+    "chip_icon": "\ud83d\udd00",
     "version": "0.1.0",
     "owner_team": "converge_ideas",
     "status": "ready",
@@ -1415,6 +1404,36 @@
     ],
     "version": "0.1.0",
     "owner_team": "convert_request_into_safe_help_mode",
+    "status": "ready",
+    "has_logic": false
+  },
+  {
+    "skill_id": "convert-safe-help",
+    "name": "Convert Request into Safe Help Mode",
+    "skill_type": "instructional",
+    "stance": "meta",
+    "tags": [
+      "help-seeking",
+      "meta-tutoring",
+      "redirect",
+      "productive-struggle"
+    ],
+    "course_types": [
+      "humanities"
+    ],
+    "learning_goal_tags": [
+      "request-targeted-help",
+      "manage-effort",
+      "reflect-on-progress"
+    ],
+    "trigger_signals": [
+      "student-asking-tutor-to-write-for-them",
+      "student-requesting-output-directly",
+      "student-asking-for-example-to-copy"
+    ],
+    "chip_icon": "\u21aa\ufe0f",
+    "version": "0.1.0",
+    "owner_team": "convert_safe_help",
     "status": "ready",
     "has_logic": false
   },
@@ -1511,27 +1530,26 @@
     "skill_type": "instructional",
     "stance": "socratic",
     "tags": [
-      "argumentation",
-      "writing",
-      "logic",
-      "critical-thinking",
-      "rebuttal"
+      "argument",
+      "question-design",
+      "rigor",
+      "tension"
     ],
     "course_types": [
       "humanities"
     ],
     "learning_goal_tags": [
-      "construct-arguments",
       "engage-objections",
-      "surface-assumptions",
-      "identify-evidence",
-      "interpret-evidence"
+      "construct-arguments",
+      "surface-assumptions"
     ],
     "trigger_signals": [
-      "student-needs-counterexample",
-      "student-asks-for-opposing-view",
-      "student-wants-to-challenge-claim"
+      "student-drafting-leading-question",
+      "student-defending-position-without-considering-objections",
+      "student-question-has-embedded-right-answer"
     ],
+    "chip_icon": "\u21a9\ufe0f",
+    "version": "0.1.0",
     "owner_team": "counter_example_interview_questions",
     "status": "ready",
     "has_logic": false
@@ -1858,9 +1876,10 @@
       "extract-requirements"
     ],
     "trigger_signals": [
-      "student says 'I don't know where to start'",
-      "student expresses overwhelm or says 'this is too much'",
-      "student asks what to do first without having attempted a breakdown"
+      "where-do-I-even-start",
+      "I-am-overwhelmed",
+      "what-do-I-do",
+      "there-is-too-much-to-do"
     ],
     "owner_team": "decompose_the_prob",
     "status": "ready",
@@ -2400,7 +2419,12 @@
       "readability",
       "code-review",
       "feedback",
-      "tutor"
+      "tutor",
+      "variable",
+      "naming",
+      "names",
+      "clean",
+      "submitting"
     ],
     "course_types": [
       "cs"
@@ -2412,7 +2436,10 @@
     "trigger_signals": [
       "code-review-request",
       "readability-question",
-      "pre-submission-feedback"
+      "pre-submission-feedback",
+      "confusing-variable-names",
+      "naming-convention-unclear",
+      "clean-up-before-submitting"
     ],
     "owner_team": "evaluate_readability_on_code",
     "status": "ready",
@@ -2505,6 +2532,36 @@
     "has_logic": false
   },
   {
+    "skill_id": "examples-from-spec",
+    "name": "Build Examples from Spec",
+    "skill_type": "instructional",
+    "stance": "reframe",
+    "tags": [
+      "specification",
+      "examples",
+      "cs213"
+    ],
+    "course_types": [
+      "cs"
+    ],
+    "learning_goal_tags": [
+      "specify-io",
+      "handle-edge-cases"
+    ],
+    "trigger_signals": [
+      "student-has-signature-but-no-test-inputs",
+      "student-stuck-before-writing-any-code",
+      "student-cannot-predict-output-from-spec",
+      "student-misread-bit-width-or-type-in-spec",
+      "student-needs-edge-case-for-homework-spec"
+    ],
+    "chip_icon": "\ud83e\uddea",
+    "version": "0.2.0",
+    "owner_team": "examples_from_spec",
+    "status": "ready",
+    "has_logic": false
+  },
+  {
     "skill_id": "execution-trace",
     "name": "Execution Trace",
     "skill_type": "code",
@@ -2523,11 +2580,11 @@
       "identify-invariants"
     ],
     "trigger_signals": [
-      "hand-trace-needed",
-      "register-state-question",
-      "step-through-assembly",
-      "what-are-registers-after",
-      "assembly-trace-line-by-line"
+      "student-wants-hand-trace-assembly-homework",
+      "student-asks-register-values-after-instruction",
+      "student-stepping-through-assembly-line-by-line",
+      "student-asks-what-rdi-rax-contain-after-line",
+      "student-needs-initial-register-values-for-trace"
     ],
     "chip_icon": "\ud83d\udccb",
     "version": "0.2.0",
@@ -2571,28 +2628,29 @@
     "has_logic": false
   },
   {
-    "skill_id": "experience_connect",
+    "skill_id": "experience-connect",
     "name": "Experience Connect",
     "skill_type": "instructional",
     "stance": "socratic",
     "tags": [
-      "personal-experience",
-      "connection",
-      "reflection"
+      "positionality",
+      "personal-connection",
+      "entry-point",
+      "reflexivity"
     ],
     "course_types": [
       "humanities"
     ],
     "learning_goal_tags": [
-      "construct-arguments",
-      "interpret-evidence",
-      "surface-assumptions"
+      "surface-assumptions",
+      "reflect-on-progress"
     ],
     "trigger_signals": [
-      "student-sharing-personal-story",
-      "wants-experience-to-relate-to-reading",
-      "bridge-life-to-course-concept"
+      "student-claiming-no-personal-connection",
+      "student-overclaiming-lived-expertise",
+      "student-disengaging-from-topic"
     ],
+    "chip_icon": "\ud83d\udd17",
     "version": "0.1.0",
     "owner_team": "experience_connect",
     "status": "ready",
@@ -2694,7 +2752,10 @@
       "modularity",
       "decomposition",
       "code-quality",
-      "tutor"
+      "tutor",
+      "function",
+      "split",
+      "logic"
     ],
     "course_types": [
       "cs"
@@ -2706,7 +2767,8 @@
     "trigger_signals": [
       "monolithic-function",
       "mixed-responsibilities",
-      "unclear-separation-of-concerns"
+      "unclear-separation-of-concerns",
+      "where-to-put-this-logic"
     ],
     "owner_team": "explain_function_responsibilities",
     "status": "ready",
@@ -2747,7 +2809,15 @@
       "requirements",
       "spec",
       "planning",
-      "tutor"
+      "tutor",
+      "implement",
+      "assignment",
+      "confused",
+      "understand",
+      "rubric",
+      "constraints",
+      "build",
+      "coding"
     ],
     "course_types": [
       "cs",
@@ -2760,7 +2830,11 @@
     "trigger_signals": [
       "spec-confusion",
       "missing-requirements",
-      "starting-without-plan"
+      "starting-without-plan",
+      "confused-about-assignment-requirements",
+      "dont-understand-spec",
+      "what-to-build-or-implement",
+      "rubric-requirements-unclear"
     ],
     "owner_team": "extract_requirements",
     "status": "ready",
@@ -3302,6 +3376,36 @@
     "has_logic": false
   },
   {
+    "skill_id": "idea-organizer",
+    "name": "Idea Organizer",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "tags": [
+      "structure",
+      "argument",
+      "organization",
+      "drafting"
+    ],
+    "course_types": [
+      "humanities"
+    ],
+    "learning_goal_tags": [
+      "construct-arguments",
+      "structure-paragraphs",
+      "ensure-cohesion"
+    ],
+    "trigger_signals": [
+      "student-sharing-draft-or-outline",
+      "student-has-organized-but-hollow-structure",
+      "student-asking-if-structure-is-right"
+    ],
+    "chip_icon": "\ud83d\uddc2\ufe0f",
+    "version": "0.1.0",
+    "owner_team": "idea_organizer",
+    "status": "ready",
+    "has_logic": false
+  },
+  {
     "skill_id": "identify-deliverables",
     "name": "Identify Deliverables",
     "skill_type": "instructional",
@@ -3310,7 +3414,15 @@
       "deliverables",
       "requirements",
       "planning",
-      "tutor"
+      "tutor",
+      "submit",
+      "submission",
+      "complete",
+      "done",
+      "required",
+      "finished",
+      "turn",
+      "hand"
     ],
     "course_types": [
       "cs"
@@ -3321,7 +3433,10 @@
     "trigger_signals": [
       "student-asks-what-counts-as-complete",
       "student-unclear-on-submission-requirements",
-      "student-unsure-what-to-submit"
+      "student-unsure-what-to-submit",
+      "what-files-to-turn-in",
+      "required-for-full-credit",
+      "student-unsure-when-done"
     ],
     "owner_team": "identify_deliverables",
     "status": "ready",
@@ -3796,31 +3911,30 @@
     "has_logic": false
   },
   {
-    "skill_id": "map_to_learning_goals",
+    "skill_id": "map-to-learning-goals",
     "name": "Map to Learning Goals",
     "skill_type": "instructional",
-    "stance": "hint",
+    "stance": "socratic",
     "tags": [
-      "learning-goals",
-      "alignment",
-      "assignment",
-      "focus",
-      "humanities"
+      "theoretical-grounding",
+      "course-concepts",
+      "intellectual-stakes",
+      "topic-choice"
     ],
     "course_types": [
       "humanities"
     ],
     "learning_goal_tags": [
-      "extract-requirements",
-      "bound-scope",
+      "construct-arguments",
+      "decompose-arguments",
       "reflect-on-progress"
     ],
     "trigger_signals": [
-      "why-this-assignment",
-      "goal-aligned-help",
-      "what-should-i-focus-on",
-      "confused-by-rubric"
+      "student-choosing-topic-on-general-interest",
+      "student-disconnected-from-course-framework",
+      "student-cannot-explain-intellectual-significance"
     ],
+    "chip_icon": "\ud83d\uddfa\ufe0f",
     "version": "0.1.0",
     "owner_team": "map_to_learning_goals",
     "status": "ready",
@@ -3846,14 +3960,16 @@
       "predict-cache-behavior"
     ],
     "trigger_signals": [
-      "loop-order-comparison",
-      "matrix-traversal-question",
-      "cache-performance-from-code"
+      "student-compares-row-major-vs-column-loop",
+      "student-asks-why-one-loop-order-is-slower",
+      "student-pastes-matrix-code-asks-locality",
+      "student-reasoning-about-stride-through-memory",
+      "student-predicting-cache-behavior-from-loop"
     ],
     "chip_icon": "\ud83d\udcca",
     "version": "0.1.0",
     "owner_team": "mem_access_pattern",
-    "status": "stub",
+    "status": "ready",
     "has_logic": false
   },
   {
@@ -3876,14 +3992,16 @@
       "evaluate-design-tradeoffs"
     ],
     "trigger_signals": [
-      "optimize-cache-performance",
-      "compare-cache-configurations",
-      "reduce-conflict-misses"
+      "student-asks-why-array-padding-helps",
+      "student-comparing-baseline-vs-optimized-layout",
+      "student-wants-reduce-conflict-misses",
+      "student-evaluating-blocking-or-tiling-idea",
+      "student-asks-tradeoff-of-larger-cache-vs-associativity"
     ],
     "chip_icon": "\u2699\ufe0f",
     "version": "0.1.0",
     "owner_team": "mem_opt",
-    "status": "stub",
+    "status": "ready",
     "has_logic": false
   },
   {
@@ -4025,7 +4143,15 @@
       "debugging",
       "divide-and-conquer",
       "code-quality",
-      "tutor"
+      "tutor",
+      "bug",
+      "crash",
+      "error",
+      "broken",
+      "wrong",
+      "narrow",
+      "find",
+      "locate"
     ],
     "course_types": [
       "cs"
@@ -4037,7 +4163,13 @@
     "trigger_signals": [
       "large-codebase",
       "unclear-bug-cause",
-      "bug-location-unknown"
+      "bug-location-unknown",
+      "program-crashes-dont-know-where",
+      "cant-find-the-error",
+      "output-is-wrong-dont-know-why",
+      "checking-random-lines-no-progress",
+      "broken-but-dont-know-which-part",
+      "unexpected-behavior-no-idea-why"
     ],
     "owner_team": "narrow_the_bug_location",
     "status": "ready",
@@ -4090,8 +4222,11 @@
       "manage-effort"
     ],
     "trigger_signals": [
-      "conversation-wrapping-up",
-      "student-unsure-what-to-do-next"
+      "tutor-response-needs-concrete-closing-action",
+      "student-says-ok-but-no-next-step",
+      "student-finished-explanation-still-unsure",
+      "session-ending-without-specific-task",
+      "student-asks-what-should-i-do-now"
     ],
     "chip_icon": "\u27a1\ufe0f",
     "version": "0.1.0",
@@ -4924,6 +5059,36 @@
     "has_logic": false
   },
   {
+    "skill_id": "reading-discussor",
+    "name": "Reading Discussor",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "tags": [
+      "analytical-reading",
+      "argument",
+      "evidence",
+      "social-science"
+    ],
+    "course_types": [
+      "humanities"
+    ],
+    "learning_goal_tags": [
+      "decompose-arguments",
+      "interpret-evidence",
+      "identify-evidence"
+    ],
+    "trigger_signals": [
+      "student-describing-topic-instead-of-argument",
+      "student-summarizing-reading",
+      "student-saying-reading-is-about-x"
+    ],
+    "chip_icon": "\ud83d\udcd6",
+    "version": "0.1.0",
+    "owner_team": "reading_discussor",
+    "status": "ready",
+    "has_logic": false
+  },
+  {
     "skill_id": "reading-synthesis",
     "name": "Reading Synthesis",
     "skill_type": "instructional",
@@ -5036,9 +5201,9 @@
       "manage-effort"
     ],
     "trigger_signals": [
-      "student asks tutor to write or complete code",
-      "student says 'just show me' or 'what's the answer'",
-      "student pastes code and asks for a fix without context"
+      "just-do-it-for-me",
+      "just-write-the-code-for-me'",
+      "can-you-just-show-me-the-right-answer"
     ],
     "owner_team": "redirect_direct",
     "status": "ready",
@@ -5046,7 +5211,7 @@
   },
   {
     "skill_id": "reframe-analogy",
-    "name": "Reframe with analogy",
+    "name": "Reframe with Analogy",
     "skill_type": "instructional",
     "stance": "reframe",
     "tags": [
@@ -5065,9 +5230,11 @@
       "understand-systems-concepts"
     ],
     "trigger_signals": [
-      "confused-about-concept",
-      "asks-what-does-this-mean",
-      "struggling-with-memory-or-cache"
+      "student-says-i-dont-get-cache-or-memory",
+      "student-asks-what-does-this-concept-mean",
+      "student-stuck-on-abstract-systems-idea",
+      "student-needs-intuition-before-formal-model",
+      "student-confused-virtual-memory-or-tlb"
     ],
     "chip_icon": "\ud83e\udde9",
     "version": "0.1.0",
@@ -5107,31 +5274,30 @@
     "has_logic": false
   },
   {
-    "skill_id": "reframe_with_analogy",
-    "name": "Reframe With Analogy",
+    "skill_id": "reframe-with-analogy",
+    "name": "Reframe with Analogy",
     "skill_type": "instructional",
     "stance": "reframe",
     "tags": [
+      "conceptual-transfer",
       "analogy",
-      "reframe",
-      "comprehension",
-      "abstraction",
-      "humanities"
+      "stuck-student",
+      "abstraction"
     ],
     "course_types": [
       "humanities"
     ],
     "learning_goal_tags": [
-      "interpret-evidence",
+      "decompose-arguments",
       "surface-assumptions",
-      "detect-ambiguity"
+      "reflect-on-progress"
     ],
     "trigger_signals": [
-      "too-abstract",
-      "doesnt-get-the-concept",
-      "explain-like-im-five",
-      "need-different-angle"
+      "student-stuck-on-abstract-concept",
+      "student-cannot-explain-concept-in-own-words",
+      "socratic-questioning-has-stopped-being-productive"
     ],
+    "chip_icon": "\ud83d\udd04",
     "version": "0.1.0",
     "owner_team": "reframe_with_analogy",
     "status": "ready",
@@ -5563,8 +5729,11 @@
       "restate-the-problem"
     ],
     "trigger_signals": [
-      "student-feeling-overwhelmed",
-      "student-doesnt-know-where-to-start"
+      "student-overwhelmed-by-assembly-and-stack",
+      "student-doesnt-know-where-to-start-topic",
+      "student-jumping-between-unrelated-213-concepts",
+      "student-cannot-order-prerequisites-themselves",
+      "student-read-material-cannot-connect-pieces"
     ],
     "chip_icon": "\ud83d\uddc2\ufe0f",
     "version": "0.1.0",
@@ -5789,6 +5958,36 @@
     "has_logic": false
   },
   {
+    "skill_id": "specifier",
+    "name": "Specifier",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "tags": [
+      "positionality",
+      "belief",
+      "concreteness",
+      "prior-knowledge"
+    ],
+    "course_types": [
+      "humanities"
+    ],
+    "learning_goal_tags": [
+      "surface-assumptions",
+      "identify-evidence",
+      "reflect-on-progress"
+    ],
+    "trigger_signals": [
+      "student-making-broad-generalization",
+      "student-stating-vague-belief",
+      "student-using-always-never-everyone"
+    ],
+    "chip_icon": "\ud83d\udd0d",
+    "version": "0.1.0",
+    "owner_team": "specifier",
+    "status": "ready",
+    "has_logic": false
+  },
+  {
     "skill_id": "stack-visualizer",
     "name": "Stack Visualizer",
     "skill_type": "code",
@@ -5807,11 +6006,11 @@
       "specify-io"
     ],
     "trigger_signals": [
-      "stack-layout-question",
-      "rsp-rbp-confusion",
-      "assembly-with-rsp-given",
-      "where-does-push-write",
-      "how-does-rsp-change"
+      "student-confused-about-rsp-and-rbp",
+      "student-asks-where-push-writes-on-stack",
+      "student-given-rsp-wants-stack-layout",
+      "student-asks-how-rsp-changes-each-instruction",
+      "student-drawing-stack-frame-for-assembly"
     ],
     "chip_icon": "\ud83d\udcda",
     "version": "0.2.0",
@@ -6411,39 +6610,6 @@
       "concept-about-to-be-built-on"
     ],
     "owner_team": "validate_prereqs",
-    "status": "ready",
-    "has_logic": false
-  },
-  {
-    "skill_id": "vignette-compare",
-    "name": "Vignette Comparison",
-    "skill_type": "instructional",
-    "stance": "socratic",
-    "tags": [
-      "comparative-thinking",
-      "close-reading",
-      "structure"
-    ],
-    "course_types": [
-      "humanities"
-    ],
-    "learning_goal_tags": [
-      "comparative-thinking",
-      "trace-distinction",
-      "multi-step-argument",
-      "conceptual-precision"
-    ],
-    "trigger_signals": [
-      "student-treats-multiple-versions-as-standalone-summaries",
-      "student-asks-why-the-author-uses-multiple-versions-of-the-same-scenario",
-      "student-cannot-articulate-what-changes-across-versions",
-      "student-draft-treats-each-version-as-a-separate-essay",
-      "student-asks-if-they-need-to-cover-all-versions",
-      "student-cannot-connect-version-differences-to-broader-argument"
-    ],
-    "chip_icon": "\ud83d\udd00",
-    "version": "0.1.0",
-    "owner_team": "vignette_compare",
     "status": "ready",
     "has_logic": false
   },
