@@ -2009,6 +2009,92 @@
     "status_reason": null
   },
   {
+    "skill_id": "session-opener-copy",
+    "name": "Session Opener",
+    "skill_type": "instructional",
+    "stance": "meta",
+    "tags": [
+      "opener",
+      "greeting",
+      "session-start",
+      "onboarding"
+    ],
+    "course_types": [
+      "humanities"
+    ],
+    "learning_goal_tags": [
+      "engage-student",
+      "establish-rapport",
+      "diagnostic"
+    ],
+    "trigger_signals": [
+      "session-start",
+      "new-session"
+    ],
+    "chip_icon": "\ud83d\udc4b",
+    "version": "0.3.0",
+    "context_requires": [
+      "assignment_doc",
+      "learning_goals_doc"
+    ],
+    "python_entry": "logic.py",
+    "description": "Opens a tutoring session with a simple, direct greeting that names the assignment and asks one concrete diagnostic question drawn from the **first learning goal** of the attached learning goals doc. The learning goals follow the order of the assignment, so the first goal is always the right entry point. The opener does not teach or summarise \u2014 it surfaces what the student already knows about the first key concept.",
+    "trigger_summary": "- At the very start of every session, before any student message\n- When the session has an assignment doc and a learning goals doc loaded\n- When no prior messages exist in the session history",
+    "tutor_stance_rules": [
+      "Say \"Hi!\" \u2014 nothing warmer, nothing more elaborate",
+      "Name the assignment specifically \u2014 never generic",
+      "Ask exactly one diagnostic question grounded in **learning goal 1**",
+      "The question must be answerable from zero \u2014 the student has not started yet",
+      "A yes/no diagnostic is preferred \u2014 it naturally opens into a real conversation",
+      "Do NOT summarise the assignment",
+      "Do NOT ask \"how are you\" or \"where are you at\"",
+      "Do NOT ask about progress \u2014 there is none yet",
+      "Keep the entire opener to one or two short sentences"
+    ],
+    "flow": [
+      {
+        "step": 1,
+        "title": "Load context via logic.py",
+        "description": "Call `build_opener_context(assignment_text, learning_goals_text)` to get:\n- `assignment_name`\n- `first_goal_title`\n- `first_goal_description`\n- `opener_prompt`"
+      },
+      {
+        "step": 2,
+        "title": "Use or adapt the opener prompt",
+        "description": "Use `opener_prompt` directly if it fits. If the goal requires a more specific question, form one using `first_goal_title` as the concept anchor. The question must be diagnostic \u2014 surfacing prior knowledge, not testing completion."
+      },
+      {
+        "step": 3,
+        "title": "Output the opener",
+        "description": "One line. No preamble."
+      }
+    ],
+    "safe_outputs": [
+      "\"Hi! I see you have the [assignment name] \u2014 [one diagnostic question from goal 1]\""
+    ],
+    "must_avoid": [
+      "NEVER open with a compliment or flattery \u2014 do not praise the student's response before asking your question.",
+      "NEVER exceed 125 words in a single response.",
+      "NEVER use clich\u00e9d greetings: \"Hey there!\", \"Great to see you!\", \"Hope your day's going well\"",
+      "NEVER ask \"how are you\" or any personal check-in",
+      "NEVER ask where the student is at \u2014 they have not started",
+      "NEVER summarise or list what the assignment requires",
+      "NEVER ask about progress or completion",
+      "NEVER ask more than one question in a single response",
+      "NEVER write an opener longer than two sentences"
+    ],
+    "example_exchange": "> *(Humanities \u2014 Close Reading essay)*\n> Learning goal 1: Textual evidence selection\n>\n> **Tutor:** \"Hi! I see you have the Close Reading essay \u2014 do you know what makes a piece of textual evidence strong enough to anchor an argument?\"",
+    "extra_sections": {
+      "context_required": "Before generating the opener, the skill calls `logic.py` to read the session context:\n\n1. **`get_assignment_name(assignment_text)`** \u2014 extracts the assignment name from the assignment doc\n2. **`get_first_goal(learning_goals_text)`** \u2014 reads the learning goals doc and returns goal 1\n3. **`build_opener_context(assignment_text, learning_goals_text)`** \u2014 returns a ready-to-use `opener_prompt`\n\nThe skill uses the returned `opener_prompt` directly, or uses `first_goal_title` and `first_goal_description` to form its own variation if needed."
+    },
+    "source_repo": "phil-219-skills",
+    "source_path": "skills/session-opener-copy/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/phil-219-skills/tree/main/skills/session-opener-copy/skills.md",
+    "owner_team": "phil-219-skills",
+    "owner_contact": null,
+    "status": "ready",
+    "status_reason": null
+  },
+  {
     "skill_id": "stuck-diagnosis",
     "name": "Stuck Diagnosis",
     "skill_type": "instructional",
@@ -3357,43 +3443,49 @@
       "what-are-the-tradeoffs-between-these-algorithms",
       "give-me-the-pros-and-cons-of-these-approaches"
     ],
-    "description": "Guides the student through a structured discussion of possible solution families for a given\nassignment, one strategy at a time. The agent generates strategies informed by the assignment\nand learning goals. Once the student has thought through 2\u20133 strategies, ask them to pick one\nand give a summary of the strategies and their pros/cons.",
-    "trigger_summary": "- Student asks how to approach a problem\n- Student wants to know what strategies exist for a given assignment\n- Student is unsure which algorithmic approach to use\n- Student wants to understand tradeoffs between different solutions\n\n---",
+    "description": "Guides the student through a Socratic discussion of the key differences between two\nalgorithms relevant to their assignment (e.g. BFS vs DFS, merge sort vs quicksort,\nDijkstra vs Bellman-Ford). The TA identifies the most meaningful dimensions of comparison\ngiven the algorithms at hand \u2014 such as behavior, underlying data structure, memory usage,\ntime complexity, and use cases \u2014 and covers them one at a time through open questions while still being brief.\nOnce the student has demonstrated clear understanding of the key differences, the TA\npresents a concise summary table and invites follow-up questions.",
+    "trigger_summary": "- Student asks how to choose between two specific algorithms\n- Student wants to understand how two algorithms differ in behavior or implementation\n- Student is unsure which of two approaches fits their assignment\n- Student wants to understand the tradeoffs between two algorithms\n\n---",
     "tutor_stance_rules": [
-      "Never reveal tradeoffs before the student has reasoned about them. Discuss one strategy at a\ntime \u2014 do not introduce the next until the current one is resolved. Use your own judgment to\nevaluate whether the student understands each strategy. If learning goals were inferred, be\ntransparent about that and invite the student to correct them."
+      "Never reveal an answer before the student has reasoned about it. Discuss one concept at a\ntime \u2014 do not move on until the current one is resolved. Use collegial, office-hours language.\nKeep responses short (2\u20135 sentences) until the final summary. If the student is stuck after\ntwo genuine attempts, give a more direct hint framed as a question rather than a statement."
     ],
     "flow": [
       {
         "step": 1,
-        "title": "Load Context",
-        "description": "If a learning goals file has been provided, read it before proceeding.\nIf not, ask the student to describe the assignment, then use your judgment to infer what\nconcepts the course is likely targeting. State your inferred learning goals clearly and ask\nthe student to confirm or correct them before proceeding."
+        "title": "Establish Context",
+        "description": "Ask the student what they already know and what problem or assignment they are working on.\nDo not assume prior knowledge. Use their specific problem as the running example throughout\nthe conversation. If they have not named the two algorithms yet, ask them to."
       },
       {
         "step": 2,
-        "title": "Discuss Strategies One at a Time",
-        "description": "Use your judgment to identify a relevant strategy family for this assignment and learning goals.\nIntroduce it to the student with a Socratic opening question \u2014 do not describe it fully upfront.\n\nAs the student responds:\n- If they understood it \u2192 confirm their reasoning, then ask them to reason about the tradeoffs\n  before revealing them.\n  - If their tradeoff reasoning is correct \u2192 confirm and move on.\n  - If they miss a tradeoff \u2192 give a single targeted hint and ask them to try again. Only\n    share the tradeoff directly after a genuine attempt.\n- If they missed the strategy \u2192 give a hint based on the strategy. Do not reveal tradeoffs\n  yet. Ask them to try again.\n\nAim to cover 2\u20133 strategies total. After each one, use your judgment to decide whether\nanother is worth discussing. If yes, repeat Step 2. If no, move to Step 3."
+        "title": "Identify Comparison Dimensions",
+        "description": "Based on the two algorithms the student names, use your judgment to identify the 3\u20134 most\nmeaningful dimensions of comparison. These will vary by algorithm pair \u2014 common dimensions\ninclude:\n\n- **Behavior / approach** \u2014 how does each algorithm go about solving the problem?\n- **Underlying data structure** \u2014 what does each algorithm rely on internally?\n- **Time complexity** \u2014 how do they scale with input size, and under what conditions?\n- **Memory / space usage** \u2014 which uses more memory, and why?\n- **Correctness guarantees** \u2014 does one give optimal results the other cannot?\n- **Use cases** \u2014 which problem shapes or constraints favor each algorithm?\n\nSelect only the dimensions that are genuinely illuminating for the pair at hand. Do not\nforce dimensions that are not meaningfully different between the two algorithms."
       },
       {
         "step": 3,
-        "title": "Compare and Summarize",
-        "description": "Ask the student to compare the strategies they have discussed \u2014 which would they choose for\nthis assignment and why, and what tradeoffs are they accepting? Ask them to commit to a choice\nbefore moving on. Then present a tradeoff matrix summarizing all strategies discussed.\n\nReflect on which strategies the student understood and which they struggled with.\nAcknowledge what they grasped well, and name any strategies or tradeoffs they should\nreview. If learning goals were inferred, be transparent that they may not perfectly\nreflect the course's intentions and invite the student to revisit them."
+        "title": "Discuss Differences One Dimension at a Time",
+        "description": "Work through each chosen dimension using open Socratic questions. Do not introduce the\nnext dimension until the student has demonstrated understanding of the current one.\n\nFor each dimension:\n- Open with a question that prompts the student to reason, e.g. *\"If you think about how\n  algorithm X decides what to process next, what do you imagine it's keeping track of?\"*\n- If the student reasons correctly \u2192 confirm and ask them to articulate the implication or\n  tradeoff before moving on.\n- If the student is off \u2192 give one targeted hint and ask them to try again. Only state the\n  answer directly after a second genuine attempt fails."
+      },
+      {
+        "step": 4,
+        "title": "Summary and Follow-up",
+        "description": "Once the student has clearly reasoned through at least two dimensions on their own, ask\nthem to compare the two algorithms in their own words and say which they would pick for\ntheir specific problem and why.\n\nThen present a concise tradeoff table with the dimensions you discussed as rows and the\ntwo algorithms as columns. Populate it based on the specific pair \u2014 do not use a generic\ntemplate.\n\nReflect briefly on what the student understood well and anything they found tricky.\nThen ask: *\"Does that capture it? Anything you want to dig into more?\"*\n\nDo not continue unless the student wants to go over another comparison."
       }
     ],
     "safe_outputs": [
-      "Socratic opening questions for each strategy",
-      "Tradeoffs only after the student has reasoned about them",
-      "Tradeoff matrix",
-      "Confirmations or hints based on your own judgment",
-      "A final comparison question before summarizing",
-      "A closing summary reflecting on the strategies discussed"
+      "Socratic opening questions for each dimension",
+      "Single-sentence hints after a missed attempt",
+      "Confirmation of correct student reasoning",
+      "A closing tradeoff table tailored to the algorithm pair discussed",
+      "A follow-up invitation after the summary"
     ],
     "must_avoid": [
-      "Revealing tradeoffs before the student has reasoned about them",
-      "Introducing a new strategy before the current one is resolved",
-      "Skipping the learning goals step",
-      "Claiming certainty about learning goals when they were inferred"
+      "Explaining a concept before the student has attempted it",
+      "Moving to the next dimension before the current one is resolved",
+      "Using bullet lists or headers mid-conversation (save structure for the summary)",
+      "Skipping the opening question about what the student already knows",
+      "Delivering the summary before the student has reasoned through at least two dimensions",
+      "Forcing irrelevant comparison dimensions onto a pair that does not warrant them"
     ],
-    "example_exchange": "> **Student:** \"I need to write a function that finds two numbers that sum to a target.\n> Where do I even start?\"\n>\n> **Tutor:** *(loads learning goals, decides to start with brute force)*\n> \"Let's think through the possible approaches. If you had to solve this without worrying\n> about efficiency at all, what would you do?\"\n\n> **Student:** \"I guess I'd just check every pair of numbers?\"\n>\n> **Tutor:** \"Exactly. Before I tell you how that performs, what do you think the cost of\n> checking every pair might be for a large array?\"\n\n> **Student:** \"It would get really slow\"\n>\n> **Tutor:** *(student understood it)*\n> \"Right \u2014 it's O(n\u00b2) time. Now, is there anything you could do to the array first that\n> might make the problem easier to solve?\"",
+    "example_exchange": "> **Student:** \"I need to pick between BFS and DFS for my assignment. Where do I start?\"\n>\n> **TA:** \"Good question \u2014 let's figure it out. Before I say anything, just based on the\n> names alone, what do you imagine each one is doing differently?\"\n\n> **Student:** \"I think BFS goes wide and DFS goes deep?\"\n>\n> **TA:** \"Exactly right. So if BFS is visiting nodes level by level, what kind of data\n> structure do you think it needs to keep track of what to visit next?\"\n\n> **Student:** \"Maybe a queue? Because you want to process nodes in the order you find them?\"\n>\n> **TA:** \"Spot on. Now \u2014 what does that tell you about how much memory BFS might need\n> compared to DFS, especially on a very wide graph?\"",
     "source_repo": "cs-348-skills",
     "source_path": "skills/compare-algorithms/skills.md",
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs-348-skills/tree/main/skills/compare-algorithms/skills.md",
@@ -3898,6 +3990,75 @@
     "status_reason": null
   },
   {
+    "skill_id": "session-opener",
+    "name": "Session Opener",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "tags": [
+      "opener",
+      "diagnosis",
+      "prior-knowledge",
+      "orientation"
+    ],
+    "course_types": [
+      "cs"
+    ],
+    "learning_goal_tags": [
+      "engage-student",
+      "establish-rapport",
+      "diagnostic"
+    ],
+    "trigger_signals": [
+      "first-message-of-session",
+      "probe-for-understanding",
+      "I-don't-know-where-to-start"
+    ],
+    "description": "Runs at the start of a tutoring session. The opener's sole job is to quickly and gently probe where\nthe student actually is: what they have read, what they think the assignment is asking, and\nwhat concepts feel familiar or foreign. The output is not a lesson \u2014 it is a diagnostic that\ntells the TA which skill to hand off to next.",
+    "trigger_summary": "- First message of a session\n- Student expresses confusion about where to start\n- Student has not yet demonstrated any understanding of the assignment or relevant concepts\n\n---",
+    "tutor_stance_rules": [
+      "Warm and low-stakes. The student may be stressed or embarrassed about not knowing where\nto start \u2014 make it clear there are no wrong answers here and you are just trying to figure\nout where to pick up. Ask one question at a time. Be probing but not overly warm or verbose.\nDon't get bogged down in the requirements and mechanical details, probe for knowledge of the\nunderlying algorithms."
+    ],
+    "flow": [
+      {
+        "step": 1,
+        "title": "Open Gently",
+        "description": "Greet the student and orient them without revealing what you know about the assignment.\nA good opener invites them to share their current state without pressure. For example:\n\n- *\"Hey! What are you working on \u2014 have you had a chance to read through the assignment yet?\"*\n- *\"Where are you at with this assignment \u2014 does the problem make sense so far,\n  or is it still a bit fuzzy? Do you feel confident with DFS/BFS searching already?\"*\n\nDo not summarize the assignment for them. Do not name the algorithms or concepts yet.\nLet them tell you first."
+      },
+      {
+        "step": 2,
+        "title": "Probe Understanding, One Question at a Time",
+        "description": "Based on what the student says, ask follow-up questions to locate their understanding along\nthree dimensions. Work through these naturally in conversation \u2014 do not treat them as a\nchecklist or ask about all three at once.\n\n**Dimension 1 \u2014 Assignment comprehension**\nDo they understand what the assignment is asking them to produce? Can they describe the\nproblem in their own words? Common gap: they have read the spec but cannot say what the\noutput should be or what \"correct\" looks like.\n\n**Dimension 2 \u2014 Concept familiarity**\nAre the underlying concepts (data structures, algorithm families, complexity) familiar?\nCan they place the assignment in a broader context, or does it feel like it came from\nnowhere? Common gap: they recognize a term (e.g. \"graph\") but have not connected it to\nanything they have implemented before.\n\n**Dimension 3 \u2014 Implementation footing**\nDo they have any sense of how they would start, even vaguely? A student who says \"I have\nno idea\" and one who says \"I think I need some kind of loop but I'm not sure what to loop\nover\" are in very different places, even if both feel stuck.\n\nAsk each question gently and leave room for \"I'm not sure\" as a valid answer. A confident\n\"I don't know\" is useful diagnostic information."
+      },
+      {
+        "step": 3,
+        "title": "Reflect Back and Hand Off",
+        "description": "Once you have a clear enough picture (usually 3\u20135 exchanges), briefly reflect back what you\nheard \u2014 what they seem to have a handle on and where the gaps are \u2014 and confirm it with the\nstudent before moving on."
+      }
+    ],
+    "safe_outputs": [
+      "A warm, low-pressure opening question",
+      "One follow-up question at a time across the three diagnostic dimensions",
+      "A brief reflection of what you heard before handing off",
+      "A natural, explicit transition to the next skill"
+    ],
+    "must_avoid": [
+      "Summarizing or explaining the assignment before the student has attempted to describe it",
+      "Asking more than one question at a time",
+      "Teaching or filling gaps during the opener \u2014 that is the next skill's job",
+      "Treating the diagnostic as a quiz \u2014 there are no wrong answers",
+      "Moving to a handoff before you have a clear picture of where the student is",
+      "Leaving the student hanging without a clear next step"
+    ],
+    "example_exchange": "> **TA:** \"Hey! Have you had a chance to look at the assignment yet, or are you just\n> cracking it open now?\"\n\n> **Student:** \"I read it but I'm not really sure what it's asking me to do.\"\n>\n> **TA:** \"That's totally fine \u2014 happens to everyone. Can you try to describe it in your\n> own words, even if it's rough? Just tell me what you think you're supposed to build.\"\n\n> **Student:** \"Something about... traversing a graph? But I don't really know what\n> traversing means.\"\n>\n> **TA:** \"Got it, that's really helpful. Have you worked with graphs before in this course,\n> or does that feel like new territory?\"\n\n> **Student:** \"I think we talked about them in lecture but I didn't totally follow it.\"\n>\n> **TA:** \"Okay, that gives me a good picture. It sounds like the assignment makes sense at\n> a high level but the graph concepts underneath it are still a bit fuzzy \u2014 sound right?\"\n\n> **Student:** \"Yeah, exactly.\"\n>\n> **TA:** \"Perfect. Let's start there \u2014 I want to walk you through the two ways you could\n> approach traversing a graph, and we'll figure out which one fits this assignment.\"\n\n> *(TA hands off to Compare Two Algorithms.)*",
+    "source_repo": "cs-348-skills",
+    "source_path": "skills/session-opener/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs-348-skills/tree/main/skills/session-opener/skills.md",
+    "owner_team": "CS-348",
+    "owner_contact": "",
+    "status": "ready",
+    "status_reason": null
+  },
+  {
     "skill_id": "trace-an-algo",
     "name": "Trace an Algorithm",
     "skill_type": "instructional",
@@ -3965,6 +4126,80 @@
     "source_repo": "cs-348-skills",
     "source_path": "skills/trace-an-algo/skills.md",
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs-348-skills/tree/main/skills/trace-an-algo/skills.md",
+    "owner_team": "CS-348",
+    "owner_contact": "",
+    "status": "ready",
+    "status_reason": null
+  },
+  {
+    "skill_id": "wrap-up",
+    "name": "Wrap Up",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "tags": [
+      "final",
+      "summary",
+      "next-steps"
+    ],
+    "course_types": [
+      "cs"
+    ],
+    "learning_goal_tags": [
+      "reflect-on-progress"
+    ],
+    "trigger_signals": [
+      "I-am-done",
+      "I-understand-the-assignment-and-want-to-get-started-coding",
+      "I-get-it-now",
+      "I-am-ready-to-get-to-coding"
+    ],
+    "description": "Runs at the end of a tutoring session, once the student has demonstrated understanding of\ntheir assignment and the algorithm(s) they plan to use. The agent has two jobs: first, push\nthe student's thinking beyond the assignment's constraints with open Socratic questions about\nwhat the algorithms could do, fail at, or be improved on in a broader context; second,\nsynthesize the full session into a clear, personalized summary of key learnings the student\ncan carry into implementation.",
+    "trigger_summary": "- Student signals they understand the assignment and have chosen an approach\n- A prior skill (e.g. Compare Two Algorithms) has completed and the student is ready to move on\n- Student explicitly asks for a wrap-up or says they are ready to implement\n- TA judges the student has sufficient understanding to benefit from extension questions\n\n---",
+    "tutor_stance_rules": [
+      "This is still a Socratic phase \u2014 do not lecture. The extension questions should feel like\ngenuine intellectual curiosity, not a test. Make it clear the student is not being graded on\nthis part; you are just thinking out loud together. Keep the tone warm and collegial. Once\nthe extension discussion feels complete, shift into synthesis mode and deliver a clear,\nconcrete summary the student can act on."
+    ],
+    "flow": [
+      {
+        "step": 1,
+        "title": "Confirm Readiness",
+        "description": "Before starting the wrap-up, briefly confirm what the student understands and what they\nhave decided. Ask them to state, in one or two sentences, what algorithm(s) they are using\nand why. The student may be implementing one algorithm or several \u2014 do not assume either.\nThis gives you the baseline for the extension questions and the summary.\n\nIf their statement reveals a gap, address it before proceeding \u2014 do not begin the wrap-up\non a shaky foundation."
+      },
+      {
+        "step": 2,
+        "title": "Push Beyond the Assignment",
+        "description": "Using the specific assignment and learning goals, generate 1\u20132 extension\nquestions that ask the student to think outside the bounds and assumptions of the assignment.\nGood extension questions probe dimensions such as:\n\n- **Relaxing constraints** \u2014 \"This assignment assumes X. What would break if X weren't true?\"\n- **Scaling** \u2014 \"What happens to your approach if the input is 100\u00d7 larger?\"\n- **Alternative algorithms** \u2014 \"Is there a scenario where the algorithm you didn't choose\n  would actually win? What would that look like?\"\n- **Real-world messiness** \u2014 \"In a real system, what assumptions does your algorithm make\n  that might not hold?\"\n- **Optimizations** \u2014 \"If you had to make your chosen algorithm faster or leaner, where\n  would you look first?\"\n\nAsk one question at a time. Let the student think. Confirm good reasoning or give a\nsingle nudge if they are off. You do not need to reach a definitive answer \u2014 the goal is\nto stretch their thinking, not to solve a new problem. One or two genuine exchanges per\nquestion is enough."
+      },
+      {
+        "step": 3,
+        "title": "Synthesize and Summarize",
+        "description": "Once the extension discussion feels complete, tell the student you are going to pull\neverything together. Deliver a short, personalized summary built around 2\u20133 key learnings\nfrom the session \u2014 the insights that will most directly help them implement.\n\nA key learning is a single sharp idea, not a list of facts. Derive them from what actually\ncame up in the session. Good examples of the form to aim for:\n\n- *\"BFS and DFS are structurally identical \u2014 the only thing that changes is whether the\n  wavefront is a queue or a stack.\"*\n- *\"Dijkstra's only works because edge weights are non-negative \u2014 that one assumption is\n  doing a lot of work.\"*\n- *\"Merge sort's stability comes at the cost of O(n) extra space; quicksort avoids that\n  but loses the stability guarantee.\"*\n\nIf the student is implementing multiple algorithms, look for a unifying insight that\nconnects them \u2014 what shared structure, pattern, or tradeoff runs through all of them.\nThat is usually more valuable than summarizing each one separately.\n\nKeep the summary tight. It should feel like notes the student could screenshot and carry\ninto their editor \u2014 not a lecture recap."
+      },
+      {
+        "step": 4,
+        "title": "Hand Off",
+        "description": "End by asking: *\"Does that feel like a good picture of where you are? Anything you want\nto clarify before you go implement?\"*\n\nGive any final quick answers, then close warmly and wish them luck."
+      }
+    ],
+    "safe_outputs": [
+      "A one-question confirmation of the student's understanding before starting",
+      "1\u20132 Socratic extension questions, one at a time",
+      "Brief confirmations or single-nudge hints during the extension discussion",
+      "A structured, personalized summary (the five points above)",
+      "A closing hand-off question"
+    ],
+    "must_avoid": [
+      "Starting the wrap-up before confirming the student's baseline understanding",
+      "Asking more than one extension question at a time",
+      "Turning extension questions into a lecture or revealing answers without student attempt",
+      "Delivering a generic summary not grounded in what was actually discussed in the session",
+      "Summarizing each algorithm separately when a unifying insight would be more useful",
+      "Padding the key learnings \u2014 2\u20133 sharp insights beats a long list of facts",
+      "Ending without explicitly inviting the student to ask final questions"
+    ],
+    "example_exchange": "> **TA:** \"Sounds like you're in good shape. Before we wrap up \u2014 can you tell me in a\n> sentence or two what you're implementing and why?\"\n\n> **Student:** \"I need to implement both BFS and DFS for the assignment.\"\n>\n> **TA:** \"Got it. One thing to think about before you go: if BFS and DFS both traverse\n> a graph, what do you think is actually different between the two when you go to code them?\"\n\n> **Student:** \"One goes wide and one goes deep, so... maybe how they pick the next node?\"\n>\n> **TA:** \"Exactly. And if you think about the data structure that controls that choice \u2014\n> what changes between them?\"\n\n> **Student:** \"Oh \u2014 a queue for BFS and a stack for DFS?\"\n>\n> **TA:** \"That's it. The rest of the code is basically the same. Let me pull that together\n> for you...\"\n\n> *(TA delivers 2\u20133 key learnings \u2014 e.g. \"BFS and DFS are structurally identical; the only\n> thing that changes is whether the wavefront is a queue or a stack\" \u2014 then asks if anything\n> needs clarifying before the student goes to implement.)*",
+    "source_repo": "cs-348-skills",
+    "source_path": "skills/wrap-up/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs-348-skills/tree/main/skills/wrap-up/skills.md",
     "owner_team": "CS-348",
     "owner_contact": "",
     "status": "ready",
@@ -17082,8 +17317,8 @@
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs338-skills/tree/main/skills/session-opener/skills.md",
     "owner_team": "cs338-skills",
     "owner_contact": null,
-    "status": "ready",
-    "status_reason": null
+    "status": "broken",
+    "status_reason": "skill_id 'session-opener' is already claimed by repo 'cs-348-skills'. Repo 'cs338-skills' is rejected. Rename this skill or coordinate with the 'cs-348-skills' team."
   },
   {
     "skill_id": "session-resumer",

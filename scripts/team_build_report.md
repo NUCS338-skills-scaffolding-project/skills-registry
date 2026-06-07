@@ -4,10 +4,10 @@
 
 | Metric | Count |
 |--------|------:|
-| Total skills | 230 |
-| Ready | 210 |
+| Total skills | 233 |
+| Ready | 212 |
 | Stub | 14 |
-| Broken | 6 |
+| Broken | 7 |
 
 ## ⚠ Duplicate skill_id rejections
 
@@ -16,6 +16,7 @@ The following skills were **rejected** because their `skill_id` was already clai
 | Rejected team / repo | `skill_id` | First claimed by |
 |---|---|---|
 | `poli_sci-210-skills` | `skill-name` | `jour-201-1-skills` |
+| `cs338-skills` | `session-opener` | `cs-348-skills` |
 | `jour-201-skills` | `ask-for-example` | `jour-201-1-skills` |
 | `jour-201-skills` | `depth-of-interviewing` | `jour-201-1-skills` |
 | `jour-201-skills` | `give-structural-hint` | `jour-201-1-skills` |
@@ -46,6 +47,7 @@ The following skills were **rejected** because their `skill_id` was already clai
 | `POLISCI-210` | `skills/example-skill/skills.md` | broken | skill_id 'skill-name' is already claimed by repo 'jour-201-1-skills'. Repo 'poli_sci-210-skills' is rejected. Rename this skill or coordinate with the 'jour-201-1-skills' team. |
 | `POLISCI-210` | `skills/extract-syllabus/skills.md` | stub | missing — add `## Usage` section |
 | `POLISCI-210` | `skills/play-reviewer/skills.md` | stub | missing — add a `## Tutor Stance` section with rules |
+| `cs338-skills` | `skills/session-opener/skills.md` | broken | skill_id 'session-opener' is already claimed by repo 'cs-348-skills'. Repo 'cs338-skills' is rejected. Rename this skill or coordinate with the 'cs-348-skills' team. |
 
 ## Issues by team
 
@@ -190,6 +192,7 @@ The following skills were **rejected** because their `skill_id` was already clai
 | `cs338-skills` | `cs338-skills/skills/result-interpretation/skills.md` | **warn** | `skill_id` | length 21 > 18 chars — see Team-Guide §7 |
 | `cs338-skills` | `cs338-skills/skills/scheduling-selection-reasoning/skills.md` | **warn** | `skill_id` | length 30 > 18 chars — see Team-Guide §7 |
 | `cs338-skills` | `cs338-skills/skills/search-state-formulation/skills.md` | **warn** | `skill_id` | length 24 > 18 chars — see Team-Guide §7 |
+| `cs338-skills` | `cs338-skills/skills/session-opener/skills.md` | **ERROR** | `skill_id` | skill_id 'session-opener' is already claimed by repo 'cs-348-skills'. Repo 'cs338-skills' is rejected. Rename this skill or coordinate with the 'cs-348-skills' team. |
 | `cs338-skills` | `cs338-skills/skills/show-dont-tell-journalism/skills.md` | **warn** | `skill_id` | length 25 > 18 chars — see Team-Guide §7 |
 | `cs338-skills` | `cs338-skills/skills/source-attribution-reasoning/skills.md` | **warn** | `skill_id` | length 28 > 18 chars — see Team-Guide §7 |
 | `cs338-skills` | `cs338-skills/skills/story-angle-development/skills.md` | **warn** | `skill_id` | length 23 > 18 chars — see Team-Guide §7 |
@@ -203,3 +206,4 @@ The following skills were **rejected** because their `skill_id` was already clai
 | Repo | Skill | Severity | Field | Message |
 |------|-------|----------|-------|---------|
 | `phil-219-skills` | `phil-219-skills/skills/prompt-reflection/skills.md` | **warn** | `example_exchange` | missing — strongly recommended |
+| `phil-219-skills` | `phil-219-skills/skills/session-opener-copy/skills.md` | **warn** | `skill_id` | length 19 > 18 chars — see Team-Guide §7 |
