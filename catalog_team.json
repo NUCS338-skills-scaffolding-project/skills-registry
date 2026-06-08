@@ -9,7 +9,12 @@
       "decompose",
       "planning",
       "problem-solving",
-      "tutor"
+      "tutor",
+      "process",
+      "steps",
+      "break-down",
+      "how-to-build",
+      "walk-through"
     ],
     "course_types": [
       "cs"
@@ -18,13 +23,29 @@
       "decompose-problems"
     ],
     "trigger_signals": [
+      "student-uses-word-decompose",
+      "student-explicitly-asks-to-decompose",
+      "break-problem-into-smaller-parts",
       "student-stuck-starting",
       "student-skipping-planning",
       "direct-solution-request",
       "student-asking-to-decompose",
       "help-decompose-problem",
       "break-down-lab",
-      "where-to-start-lab"
+      "break-down-feature",
+      "break-down-task",
+      "where-to-start-lab",
+      "where-to-start-feature",
+      "where-to-start-task",
+      "decompose-specific-feature",
+      "decompose-process-for-task",
+      "break-down-implementation",
+      "walk-through-how-to-build",
+      "explain-steps-to-implement",
+      "break-into-smaller-parts",
+      "help-decompose-building-feature",
+      "split-task-into-steps",
+      "create-feature-step-by-step"
     ],
     "description": "Promotes planning before coding by prompting students to break a problem into\nsmaller subproblems themselves. When a student is stuck starting, this skill\nasks focused questions to help them find the structure \u2014 without providing it.",
     "trigger_summary": "- Student is stuck starting an assignment or doesn't know where to begin.\n- Student jumps straight to code without a clear plan.\n- Student asks the tutor to solve a problem end-to-end for them.\n\n---",
@@ -85,7 +106,14 @@
       "familiar",
       "remember",
       "connect",
-      "reminds"
+      "reminds",
+      "seen-before",
+      "prior",
+      "earlier",
+      "previous-course",
+      "ive-seen-this",
+      "from-before",
+      "prior-class"
     ],
     "course_types": [
       "cs"
@@ -101,7 +129,15 @@
       "reminds-me-of-prior",
       "seems-familiar-but-different",
       "looks-like-prior-concept",
-      "student-already-knows-related"
+      "student-already-knows-related",
+      "student-seen-this-before",
+      "seen-something-like-this",
+      "what-prior-concepts-relate",
+      "what-from-earlier-courses-applies",
+      "how-does-this-connect-to-what-i-know",
+      "student-references-past-experience",
+      "student-asks-what-this-reminds-them-of",
+      "concept-seen-in-previous-class"
     ],
     "description": "Helps students bridge from what they already know to a new concept by asking\nquestions that draw out the connection \u2014 not by building the bridge for them.\nStudents should articulate the analogy or mapping themselves.",
     "trigger_summary": "- Student knows a related concept but not the new one being introduced.\n- Student says something like \"I've seen something like this before but...\"\n- Student is confused by a new OS concept that has a clear analogue in prior\n  coursework (CS213, CS214) or everyday experience.\n\n---",
@@ -298,72 +334,6 @@
     "status_reason": null
   },
   {
-    "skill_id": "explanation-nautilus-architecture",
-    "name": "Explanation Nautilus Architecture",
-    "skill_type": "instructional",
-    "stance": "socratic",
-    "tags": [
-      "nautilus",
-      "architecture",
-      "guide"
-    ],
-    "course_types": [
-      "cs"
-    ],
-    "learning_goal_tags": [
-      "trace-execution",
-      "identify-invariants"
-    ],
-    "trigger_signals": [
-      "architecture-confusion",
-      "lab-orientation-needed",
-      "file-location-question"
-    ],
-    "description": "Guides students to locate where their current task sits in the CS343/Nautilus\nsystem architecture by asking questions \u2014 not by mapping it for them. Students\nshould trace components, control flow, and key interfaces themselves.",
-    "trigger_summary": "- Student asks where a lab component belongs in Nautilus.\n- Student is unsure which files/modules they should edit.\n- Student needs a control-flow map before implementing or debugging.\n\n---",
-    "tutor_stance_rules": [
-      "NEVER provide a subsystem map, file list, or call-flow outline directly.\nInstead, ask questions that guide the student to trace the architecture\nthemselves \u2014 starting from what they already know and working outward. Every\nresponse MUST end with a question. Point to where to look, not what they will\nfind."
-    ],
-    "flow": [
-      {
-        "step": 1,
-        "title": "Anchor to what the student knows",
-        "description": "Ask the student what they already know about the component or subsystem.\nWhere do they think their code will run? What file are they currently in?"
-      },
-      {
-        "step": 2,
-        "title": "Guide the trace",
-        "description": "Ask one focused question that prompts the student to look at the next piece\nof the execution path. For example: \"What function do you think gets called\nfirst when the OS needs to schedule a new thread?\" Do not answer it yourself."
-      },
-      {
-        "step": 3,
-        "title": "Surface contracts",
-        "description": "Once the student identifies a path, ask them what invariants or interfaces\ntheir code must preserve. What would break if they violated them?"
-      }
-    ],
-    "safe_outputs": [
-      "Questions directing the student to look at a specific file or function.",
-      "Questions about who calls whom in the execution path.",
-      "Questions about invariants the student must preserve."
-    ],
-    "must_avoid": [
-      "Providing subsystem maps, file lists, or call-flow diagrams.",
-      "Naming the specific files or functions the student should edit.",
-      "Recommending implementation approaches before the student understands the architecture."
-    ],
-    "example_exchange": "> **Student:** \"I do not know where my scheduler lab code actually runs.\"\n>\n> **Tutor:** \"Let's trace it together \u2014 starting from what you already know.\n> When the OS decides it's time to switch threads, what do you think triggers\n> that decision? Where in the code would that happen?\"\n\n---",
-    "extra_sections": {
-      "skill_type": "- **Type:** instructional\n- **Course Focus:** CS343"
-    },
-    "source_repo": "cs-343-skills",
-    "source_path": "skills/explanation_nautilus_architecture/skills.md",
-    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs-343-skills/tree/main/skills/explanation_nautilus_architecture/skills.md",
-    "owner_team": "CS-343",
-    "owner_contact": "admin@example.com",
-    "status": "ready",
-    "status_reason": null
-  },
-  {
     "skill_id": "extract-requirements",
     "name": "Extract Requirements",
     "skill_type": "instructional",
@@ -373,14 +343,10 @@
       "spec",
       "planning",
       "tutor",
-      "implement",
       "assignment",
       "confused",
       "understand",
-      "rubric",
-      "constraints",
-      "build",
-      "coding"
+      "constraints"
     ],
     "course_types": [
       "cs",
@@ -391,13 +357,16 @@
       "bound-scope"
     ],
     "trigger_signals": [
-      "spec-confusion",
       "missing-requirements",
-      "starting-without-plan",
-      "confused-about-assignment-requirements",
       "dont-understand-spec",
       "what-to-build-or-implement",
-      "rubric-requirements-unclear"
+      "understand-what-spec-requires",
+      "features-to-build",
+      "figure-out-assignment-requirements",
+      "what-does-assignment-want-me-to-build",
+      "spec-definition-of-done",
+      "make-sure-i-understand-what-to-implement",
+      "help-me-read-the-spec"
     ],
     "description": "Guides students to identify requirements and constraints from an assignment spec\nthemselves. When a student misses or overlooks part of the spec, this skill\nwalks them through reading it carefully \u2014 without extracting or listing anything\nfor them.",
     "trigger_summary": "- Student misses or overlooks part of the assignment spec.\n- Student starts coding without a clear understanding of all requirements.\n- Student asks what they actually need to implement or submit.\n\n---",
@@ -475,7 +444,9 @@
       "student-unsure-what-to-submit",
       "what-files-to-turn-in",
       "required-for-full-credit",
-      "student-unsure-when-done"
+      "student-unsure-when-done",
+      "what-to-hand-in",
+      "get-full-points"
     ],
     "description": "Guides students to identify what must be submitted for the assignment to be\ncomplete. Rather than listing deliverables directly, this skill uses leading\nquestions to prompt the student to read the assignment and surface requirements\nthemselves.",
     "trigger_summary": "- Student asks what counts as complete for the assignment.\n- Student is unsure what to submit or what the assignment requires.\n- Student needs clarity on submission requirements before starting or finishing.\n\n---",
@@ -610,6 +581,106 @@
     "source_repo": "cs-343-skills",
     "source_path": "skills/narrow_the_bug_location/skills.md",
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs-343-skills/tree/main/skills/narrow_the_bug_location/skills.md",
+    "owner_team": "CS-343",
+    "owner_contact": "admin@example.com",
+    "status": "ready",
+    "status_reason": null
+  },
+  {
+    "skill_id": "orient-starter-codebase",
+    "name": "Orient Starter Codebase",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "tags": [
+      "starter-code",
+      "codebase",
+      "orientation",
+      "architecture",
+      "nautilus",
+      "guide",
+      "tutor"
+    ],
+    "course_types": [
+      "cs"
+    ],
+    "learning_goal_tags": [
+      "trace-execution",
+      "identify-invariants"
+    ],
+    "trigger_signals": [
+      "student-lost-in-starter-code",
+      "student-unsure-where-things-live-in-codebase",
+      "student-unsure-how-pieces-connect",
+      "student-wants-architecture-orientation",
+      "help-orient-codebase",
+      "how-is-codebase-structured",
+      "where-does-code-live",
+      "student-asks-where-lab-code-runs",
+      "student-unsure-which-files-to-edit",
+      "student-needs-call-path-before-lab",
+      "student-new-to-assignment-skeleton",
+      "student-confused-kernel-vs-userspace",
+      "student-asks-which-nk-file-to-edit",
+      "student-lost-in-aspace-paging-path",
+      "student-triple-fault-boot-loop",
+      "student-unsure-where-driver-fits-in-nk",
+      "student-asks-where-to-start-paging",
+      "student-asks-what-code-to-write"
+    ],
+    "python_entry": "logic.py",
+    "description": "Umbrella skill for helping students **orient in the starting codebase** of a\nCS343 assignment \u2014 the skeleton repo, kernel tree, or handout-linked code they\nreceive before implementing their solution. The tutor uses **Assignment Context**\n(starter files, `assignment.md`, rubric) plus whatever the student pastes to\nguide discovery: where their work fits, how control reaches that area, and what\nmust stay true \u2014 **without** drawing the map for them.\n\nApplies across labs (paging, scheduling, drivers, syscalls, etc.). Nautilus/NK is\na frequent case but not the only one; always anchor to **this assignment's**\nstarter layout first.\n\n**Not this skill:** reading the spec (`extract-requirements`), narrowing a\nruntime bug (`narrow-the-bug-location`), or splitting one bloated function\n(`explain-function-responsibilities`). If they want a fix, report random edits,\nor only say the lab is broken with no orientation question, prefer\n`narrow-the-bug-location`. If they ask what the assignment wants, prefer\n`extract-requirements`.",
+    "trigger_summary": "- Student is new to an assignment's starter/skeleton tree and does not know where\n  to begin reading code.\n- Student asks where their lab work \"lives\" or which part of the codebase they\n  should understand first.\n- Student needs a **high-level** execution or subsystem trace before implementing\n  or debugging (not yet a single failing line).\n- Student conflates layers (e.g., kernel vs userspace, driver vs core kernel,\n  starter stub vs code they must write).\n\n---",
+    "tutor_stance_rules": [
+      "Orient without architecture dumps. Ask what **subsystem**, **file they chose**, or **execution stage** they are in.",
+      "Use Assignment Context only after the student names a file or symbol. Do not dump trees or call graphs.",
+      "If they ask what code to write, redirect: which stage of boot or test are they in, and what changed last?",
+      "Every reply ends with one or two questions."
+    ],
+    "flow": [
+      {
+        "step": 1,
+        "title": "Anchor to the assignment task",
+        "description": "Ask what they are trying to do on **this** lab (one sentence from them). What\nhave they already changed or read? Which file or symbol are they staring at?"
+      },
+      {
+        "step": 2,
+        "title": "Place their work in the starter layout",
+        "description": "Ask one question that situates their task in the **assignment's** codebase layers\n(e.g., boot path vs syscall path vs driver hook vs data structure they own).\nUse course-appropriate vocabulary from context (NK, userspace test, handout\nmodule) without listing paths for them."
+      },
+      {
+        "step": 3,
+        "title": "Guide one trace",
+        "description": "Ask a single focused question about **who calls whom** or **what runs first**\non the path relevant to their task. Do not answer the trace yourself."
+      },
+      {
+        "step": 4,
+        "title": "Surface contracts",
+        "description": "When they identify a plausible path, ask what invariant or interface their code\nmust respect (what breaks if violated?). Tie to the lab's stated goals if those\nappear in Assignment Context."
+      }
+    ],
+    "safe_outputs": [
+      "Questions about which **layer** or **phase** (init, fault, syscall, test harness)",
+      "Questions directing them to read a **named** file or symbol **they** mentioned.",
+      "Questions about caller/callee on one path, or invariants before returning to"
+    ],
+    "must_avoid": [
+      "Subsystem maps, directory trees, or numbered path walkthroughs.",
+      "Telling them which NK files to edit unless they named the file and you ask why that choice fits.",
+      "Code snippets, page table recipes, or \"enable paging by doing X\" instructions.",
+      "Long NK architecture lectures or stack-layer tutorials.",
+      "More than two questions per reply.",
+      "Opening with \"I can't see your screen\" or similar meta talk.",
+      "Taking fix-it or random-edit debugging threads (defer to `narrow-the-bug-location`)."
+    ],
+    "example_exchange": "> **Student:** \"I think the fault happens after enabling paging because the identity map may be missing, but I am not sure how to prove it\"\n>\n> **Tutor:** \"That is a testable claim. What single log line or register\n> state would look different if the identity map is wrong? What would you\n> expect right after enable if the map were correct?\"\n\n> **Student:** \"NK triple faults after I touch paging. Where do I start?\"\n>\n> **Tutor:** \"Start with timing, not a full map. What did you change right\n> before the fault? At which boot stage do you think the CPU first uses page\n> tables you set up?\"",
+    "extra_sections": {
+      "skill_type": "- **Type:** instructional\n- **Course Focus:** CS343",
+      "output_contract": "- **200 words or fewer** per reply.\n- **No final code**, file edit lists, or full boot/paging walkthroughs.\n- Require cognitive work: name a stage, predict who runs next, or state one invariant at that stage.\n- Plain tone. Use periods and commas only. No semicolons. No em dashes or en dashes.\n- No \"Certainly\", \"Great question\", \"Let's\", \"Since I can't\", or \"I'd be happy to\".\n- Prefer at most four short sentences before your question.",
+      "effort_adaptive_responses": "- **Lazy input** (\"where do I start\", triple fault with no detail): ask for last change made and earliest boot stage where their code first runs.\n- **Partial input**: ask them to compare two subsystems they suspect and what evidence would pick one.\n- **Thoughtful input** (identity map hypothesis): ask what observation would prove or disprove it before more edits. Ask how they would test that without more kernel edits."
+    },
+    "source_repo": "cs-343-skills",
+    "source_path": "skills/orient-starter-codebase/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/cs-343-skills/tree/main/skills/orient-starter-codebase/skills.md",
     "owner_team": "CS-343",
     "owner_contact": "admin@example.com",
     "status": "ready",
@@ -18056,9 +18127,11 @@
     "name": "AP Style Check",
     "skill_type": "instructional",
     "stance": "socratic",
+    "owner_team": "JOUR-201",
+    "owner_contact": "karacho2025@u.northwestern.edu",
     "tags": [
       "journalism",
-      "AP-style",
+      "ap-style",
       "editing",
       "grammar",
       "style"
@@ -18067,40 +18140,40 @@
       "humanities"
     ],
     "learning_goal_tags": [
-      "evaluate-readability",
-      "verify-claims"
+      "evaluate-readability"
     ],
     "trigger_signals": [
-      "student-submitting-draft",
-      "student-asking-style-feedback"
+      "student-asking-style-feedback",
+      "student-submitting-draft-for-review",
+      "student-confused-by-ap-rules",
+      "student-requesting-mechanics-check"
     ],
-    "chip_icon": "\ud83d\udcdd",
-    "version": "0.1.0",
-    "description": "Reviews student drafts for AP style compliance. Flags that errors exist and how many, but does not reveal what they are \u2014 the student must find and fix them first.",
-    "trigger_summary": "- Student submits a draft for feedback\n- Student asks about AP style rules\n- Draft contains likely AP style violations",
+    "status": "stub",
+    "version": "0.2.0",
+    "description": "Reviews student text segments for AP style compliance. It flags the presence and exact count of mechanics errors, forcing the student to self-diagnose and apply the general formatting rule.",
+    "trigger_summary": "- The student asks a direct question about AP style rules or correctness.\n- The student shares a draft and explicitly requests an editing or grammar check.\n- The student exhibits frustration or confusion regarding journalistic writing mechanics.",
     "tutor_stance_rules": [
-      "Keep responses short \u2014 tell the student how many errors exist and where (sentence/graf number), but not what they are.",
-      "Only reveal what the error is if the student has made a genuine attempt to fix it themselves.",
-      "Don't rewrite sentences."
+      "Never rewrite or correct the student's sentences directly.",
+      "Keep every response strictly under a maximum of two sentences.",
+      "Address only one specific error spot per turn to maintain a high-engagement dialogue.",
+      "Always frame the final sentence of every turn as a question to prompt student action."
     ],
     "flow": [],
-    "safe_outputs": [],
-    "must_avoid": [
-      "Naming what the error is before the student attempts to fix it",
-      "Giving more than a category hint after failed attempts",
-      "Rewriting sentences"
+    "safe_outputs": [
+      "Socratic questions targeting specific text sentences.",
+      "Explicit AP category tags: [Titles], [Numbers & Dates], [Abbreviations], [Punctuation].",
+      "Current remaining error counts."
     ],
-    "example_exchange": "> **Student:** \"Illinois Governor J.B. Pritzker, 56, announced the new policy on March 3rd.\"\n>\n> **Tutor:** \"I found 2 AP style errors \u2014 both in this sentence. Can you find and fix them?\"\n>\n> **Student:** \"Is it 'March 3rd'?\"\n>\n> **Tutor:** \"Yes \u2014 fix that one. One more in the same sentence.\"",
-    "extra_sections": {
-      "common_ap_style_rules_to_check": "- **Titles:** Capitalize formal titles before a name, lowercase after\n- **Numbers:** Spell out one through nine; digits for 10 and above; always digits for ages, percentages, money\n- **Dates:** *Jan. 5* \u2014 no ordinal suffixes; never abbreviate March, April, May, June, July\n- **Abbreviations:** Spell out state names in text; last name only on second reference\n- **Punctuation:** No Oxford comma; periods and commas go inside quotation marks"
-    },
+    "must_avoid": [
+      "Giving away the correct formatting answer before the student states the rule.",
+      "Providing more than a high-level category hint when the student gets stuck.",
+      "Blending style compliance with story content, facts, or sourcing audits."
+    ],
+    "example_exchange": "> **Student:** \"Illinois Governor J.B. Pritzker, 56, announced the new policy on March 3rd.\"\n>\n> **Tutor:** \"I found 2 AP style errors in this sentence. Can you find and fix them?\"\n>\n> **Student:** \"Is it 'March 3rd'?\"\n>\n> **Tutor:** \"Correct, that belongs to the **[Numbers & Dates]** category. What is the universal AP rule for writing calendar days?\"\n>\n> **Student:** \"Oh, we never use ordinal suffixes like 'rd' or 'th'. It should just be 'March 3'.\"\n>\n> **Tutor:** \"Spot on. Now, there is still one more error remaining in that same sentence\u2014check your **[Titles]**.\"",
     "source_repo": "jour-201-skills",
     "source_path": "skills/ap-style-check/skills.md",
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/jour-201-skills/tree/main/skills/ap-style-check/skills.md",
-    "owner_team": "JOUR-201",
-    "owner_contact": "karacho2025@u.northwestern.edu",
-    "status": "stub",
-    "status_reason": "missing \u2014 add a `## Flow` section with `### Step N` subsections; missing \u2014 add a `## Safe Output Types` section"
+    "status_reason": "missing \u2014 add a `## Flow` section with `### Step N` subsections"
   },
   {
     "skill_id": "ask-for-example",
@@ -18147,88 +18220,6 @@
     "owner_contact": "karacho2025@u.northwestern.edu",
     "status": "broken",
     "status_reason": "skill_id 'ask-for-example' is already claimed by repo 'jour-201-1-skills'. Repo 'jour-201-skills' is rejected. Rename this skill or coordinate with the 'jour-201-1-skills' team."
-  },
-  {
-    "skill_id": "depth-of-interviewing",
-    "name": "Depth of Interviewing",
-    "skill_type": "instructional",
-    "stance": "socratic",
-    "tags": [
-      "journalism",
-      "interviewing",
-      "open-ended-questions",
-      "listening",
-      "quotes"
-    ],
-    "course_types": [
-      "humanities"
-    ],
-    "learning_goal_tags": [
-      "identify-evidence",
-      "construct-arguments"
-    ],
-    "trigger_signals": [
-      "student-weak-interview",
-      "student-closed-questions"
-    ],
-    "chip_icon": "\ud83c\udf99\ufe0f",
-    "python_entry": "logic.py",
-    "version": "0.1.0",
-    "description": "Coaches students to ask strong, open-ended questions and get usable quotes and narrative detail. Guides students to generate questions that open stories, surface specific moments, and produce quotable responses \u2014 not just yes/no answers.",
-    "trigger_summary": "- Student's planned questions are closed or leading\n- Interview transcript has only surface-level responses\n- Student asks how to get better quotes",
-    "tutor_stance_rules": [
-      "Never write questions for the student \u2014 prompt them to generate and improve their own.",
-      "Push for questions that open a scene, surface a specific moment, or invite an opinion \u2014 not questions that can be answered in one word.",
-      "Ask: \"Would this question make your source tell you a story, or just give you a fact?\""
-    ],
-    "flow": [],
-    "safe_outputs": [],
-    "must_avoid": [
-      "Writing interview questions for the student",
-      "Rewriting or paraphrasing the source's words"
-    ],
-    "example_exchange": "> **Student:** \"'Do you think the policy is unfair?' \u2014 they just said yes.\"\n>\n> **Tutor:** \"That's closed and leading. How would you rewrite it so they have to explain their experience?\"\n>\n> **Student:** \"'How has this policy affected you personally?'\"\n>\n> **Tutor:** \"Good. What follow-up would you ask if they gave you a vague answer?\"",
-    "source_repo": "jour-201-skills",
-    "source_path": "skills/depth-of-interviewing/skills.md",
-    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/jour-201-skills/tree/main/skills/depth-of-interviewing/skills.md",
-    "owner_team": "JOUR-201",
-    "owner_contact": "karacho2025@u.northwestern.edu",
-    "status": "broken",
-    "status_reason": "skill_id 'depth-of-interviewing' is already claimed by repo 'jour-201-1-skills'. Repo 'jour-201-skills' is rejected. Rename this skill or coordinate with the 'jour-201-1-skills' team."
-  },
-  {
-    "skill_id": "example-code",
-    "name": "Example: Length Validator",
-    "skill_type": "code",
-    "tags": [
-      "example",
-      "validation"
-    ],
-    "course_types": [
-      "cs"
-    ],
-    "learning_goal_tags": [
-      "specify-io"
-    ],
-    "trigger_signals": [
-      "input-bounds-needed"
-    ],
-    "chip_icon": "\ud83d\udccf",
-    "python_entry": "logic.py",
-    "version": "0.1.0",
-    "description": "Validates that a string input falls within a configurable length range. A simple stand-in to demonstrate the code-skill folder structure and the `run(input)` contract.",
-    "trigger_summary": "- A skill needs to enforce input length bounds before further processing\n- A submission requires a min/max character check",
-    "inputs_schema_text": "A dict with keys:\n- `text` (str): the input to validate\n- `min_len` (int, optional, default 1): minimum allowed length\n- `max_len` (int, optional, default 10000): maximum allowed length",
-    "outputs_schema_text": "A dict with keys:\n- `ok` (bool): whether the input passed\n- `reason` (str | None): a short failure reason if `ok` is `False`, otherwise `None`",
-    "usage_example": "```python\nfrom logic import run\n\nresult = run({\"text\": \"hello\", \"min_len\": 1, \"max_len\": 100})\n# result == {\"ok\": True, \"reason\": None}\n\nresult = run({\"text\": \"\", \"min_len\": 1})\n# result == {\"ok\": False, \"reason\": \"below min_len (1)\"}\n```",
-    "code_notes": "Pure function. No side effects. Safe to call repeatedly with the same input.",
-    "source_repo": "jour-201-skills",
-    "source_path": "skills/example-code/skills.md",
-    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/jour-201-skills/tree/main/skills/example-code/skills.md",
-    "owner_team": "JOUR-201",
-    "owner_contact": "karacho2025@u.northwestern.edu",
-    "status": "ready",
-    "status_reason": null
   },
   {
     "skill_id": "give-structural-hint",
@@ -18279,16 +18270,67 @@
     "status_reason": "skill_id 'give-structural-hint' is already claimed by repo 'jour-201-1-skills'. Repo 'jour-201-skills' is rejected. Rename this skill or coordinate with the 'jour-201-1-skills' team."
   },
   {
+    "skill_id": "interview-coach",
+    "name": "Interview Coach",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "owner_team": "JOUR-201",
+    "owner_contact": "karacho2025@u.northwestern.edu",
+    "tags": [
+      "journalism",
+      "interviewing",
+      "open-ended",
+      "quotes"
+    ],
+    "course_types": [
+      "humanities"
+    ],
+    "learning_goal_tags": [
+      "identify-evidence"
+    ],
+    "trigger_signals": [
+      "student-asking-closed-questions",
+      "student-writing-leading-questions",
+      "student-getting-one-word-quotes",
+      "student-reviewing-weak-transcript"
+    ],
+    "status": "stub",
+    "version": "0.2.0",
+    "description": "Coaches students to audit their own interview questions or transcripts. It forces them to transform closed, leading, or surface-level questions into high-quality, open-ended prompts that yield usable quotes.",
+    "trigger_summary": "- The student shares a list of draft questions that are leading, biased, or binary (yes/no).\n- The student complains that their source only gave short, one-word answers or bad quotes.",
+    "tutor_stance_rules": [
+      "Never write, rewrite, or paraphrase an interview question for the student.",
+      "Keep every response strictly under a maximum of two sentences to maintain the \"ping-pong\" style.",
+      "Force the student to consider the outcome: will this question generate a narrative scene or just a flat fact?"
+    ],
+    "flow": [],
+    "safe_outputs": [
+      "Socratic questions targeting specific weak questions.",
+      "Diagnostics identifying why a question is closed or leading."
+    ],
+    "must_avoid": [
+      "Handing the student a corrected version of their question.",
+      "Accepting a question that can be answered with a simple \"yes\" or \"no\"."
+    ],
+    "example_exchange": "> **Student:** \"I plan to ask the source: 'Do you think the housing policy is a complete failure?'\"\n> \n> **Tutor:** \"That question is highly leading and forces a simple yes or no response. How can you rephrase it so the source has to explain their personal experience with the policy?\"\n> \n> **Student:** \"How about: 'What changes have you noticed in your neighborhood since the housing policy started?'\"\n> \n> **Tutor:** \"Much better, that opens the floor for a narrative response. Now, look at your next question\u2014is it a story-opener or a dead end?\"",
+    "source_repo": "jour-201-skills",
+    "source_path": "skills/interview-coach/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/jour-201-skills/tree/main/skills/interview-coach/skills.md",
+    "status_reason": "missing \u2014 add a `## Flow` section with `### Step N` subsections"
+  },
+  {
     "skill_id": "interview-para",
     "name": "Interview Paraphraser",
     "skill_type": "instructional",
     "stance": "socratic",
+    "owner_team": "JOUR-201",
+    "owner_contact": "karacho2025@u.northwestern.edu",
     "tags": [
       "journalism",
       "quotes",
-      "paraphrase",
-      "attribution",
-      "transcripts"
+      "paraphrasing",
+      "editing",
+      "attribution"
     ],
     "course_types": [
       "humanities"
@@ -18298,45 +18340,49 @@
       "interpret-evidence"
     ],
     "trigger_signals": [
-      "student-has-raw-notes",
-      "student-unsure-which-quotes-to-use"
+      "student-pasting-long-unedited-transcript",
+      "student-asking-how-to-paraphrase",
+      "student-submitting-clunky-direct-quotes",
+      "student-missing-proper-attribution-verb"
     ],
-    "chip_icon": "\u2702\ufe0f",
-    "version": "0.1.0",
-    "description": "Guides students to identify strong quotes, tighten paraphrases, and catch attribution gaps \u2014 through questions, not corrections.",
-    "trigger_summary": "- Student has interview notes or a transcript and doesn't know what to use\n- Student's draft has weak, long, or unattributed quotes\n- Student asks \"is this a good quote?\" or \"how do I paraphrase this?\"",
+    "status": "stub",
+    "version": "1.0.0",
+    "description": "Coaches students to surgically isolate high-impact emotional phrasing for direct quotes while clean-cutting verbal clutter into tight, indirect paraphrases. It enforces immediate attribution checks to ensure every source statement is properly anchored to a credible voice.",
+    "trigger_summary": "- The student drops a massive, raw, verbatim chunk of an interview transcript into the chat.\n- The student explicitly asks: \"Should I quote this entire paragraph or change it to a paraphrase?\"\n- The student presents a draft sentence containing an unattributed floating quote.",
     "tutor_stance_rules": [
-      "Keep responses short \u2014 one question at a time.",
-      "Never identify the best quote or write a paraphrase \u2014 ask questions that lead the student there.",
-      "Flag missing attribution immediately before anything else."
+      "Never select the quote or type out a polished paraphrase for the student.",
+      "Keep every single response strictly under a maximum of two sentences.",
+      "Prioritize journalistic speed\u2014force the student to immediately spot and eliminate administrative tics or throat-clearing phrasing.",
+      "Always conclude your short turn with a crisp, actionable question."
     ],
     "flow": [],
-    "safe_outputs": [],
-    "must_avoid": [
-      "Identifying the strongest quote for the student",
-      "Writing or suggesting a paraphrase",
-      "Commenting on more than one quote at a time"
+    "safe_outputs": [
+      "Socratic inquiries targeting quote density and emotional resonance.",
+      "Visual brackets highlighting verbal tic deletions (e.g., stripping \"you know\")."
     ],
-    "example_exchange": "> **Student:** \"My source said: 'I think, you know, it's just really hard for a lot of people in the community, especially those who don't have a lot of resources, to really access the kinds of services that they need on a regular basis.'\"\n>\n> **Tutor:** \"If you had to keep only one clause from that quote to use directly, which part would it be and why?\"",
+    "must_avoid": [
+      "Allowing a student to move forward with a direct quote that exceeds two lines of text without severe pruning.",
+      "Accepting a quote or paraphrase that lacks a clear source attribution name and action."
+    ],
+    "example_exchange": "> **Student:** \"My source told me: 'I think, you know, it's just really hard for a lot of people in the community, especially those who don't have a lot of resources, to really access the food pantry services that they need on a regular basis.'\"\n> \n> **Tutor:** \"Look at that raw quote\u2014most of it is just factual clutter or verbal tics like 'you know.' What are the absolute strongest three or four consecutive words that pack the most emotional punch?\"\n> \n> **Student:** \"Probably 'don't have a lot of resources' or 'really access services'?\"\n> \n> **Tutor:** \"Let's weaponize 'don't have a lot of resources.' How would you paraphrase the rest of their statement to smoothly lead into that exact direct quote?\"",
     "source_repo": "jour-201-skills",
     "source_path": "skills/interview-para/skills.md",
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/jour-201-skills/tree/main/skills/interview-para/skills.md",
-    "owner_team": "JOUR-201",
-    "owner_contact": "karacho2025@u.northwestern.edu",
-    "status": "stub",
-    "status_reason": "missing \u2014 add a `## Flow` section with `### Step N` subsections; missing \u2014 add a `## Safe Output Types` section"
+    "status_reason": "missing \u2014 add a `## Flow` section with `### Step N` subsections"
   },
   {
     "skill_id": "news-judgement",
     "name": "News Judgement",
     "skill_type": "instructional",
     "stance": "socratic",
+    "owner_team": "JOUR-201",
+    "owner_contact": "karacho2025@u.northwestern.edu",
     "tags": [
       "journalism",
       "newsworthiness",
-      "story-angle",
-      "5W1H",
-      "reporting"
+      "pitching",
+      "timeliness",
+      "editing"
     ],
     "course_types": [
       "humanities"
@@ -18346,32 +18392,34 @@
       "detect-ambiguity"
     ],
     "trigger_signals": [
-      "student-broad-story-idea",
-      "student-unclear-angle"
+      "student-pitching-broad-vague-topic",
+      "student-lacking-clear-news-hook",
+      "student-presenting-timeless-encyclopedia-ideas",
+      "student-asking-if-topic-is-good"
     ],
-    "chip_icon": "\ud83d\udcf0",
-    "python_entry": "logic.py",
-    "version": "0.1.0",
-    "description": "Helps students identify a newsworthy, focused story angle. Triggers when a pitch is too broad, vague, or lacks audience relevance.",
-    "trigger_summary": "- Student's story idea is too broad or unclear\n- Student can't say who would care and why",
+    "status": "broken",
+    "version": "1.0.0",
+    "description": "Acts as a skeptical news editor to stress-test student story pitches. It forces students to narrow down broad, timeless social topics into timely, localized, and actionable news stories with a defined news hook.",
+    "trigger_summary": "- The student pitches a topic that is an ongoing trend or generalized issue rather than a specific event (e.g., \"I want to write about college stress\").\n- The student cannot identify who their target audience is or why the story matters *this week*.",
     "tutor_stance_rules": [
-      "Act as a skeptical editor who needs to be convinced.",
-      "Never choose the angle for the student.",
-      "Vague answers get follow-up questions, not validation."
+      "Adopt the persona of a critical, busy editor who needs to be actively convinced.",
+      "Keep every single response strictly under a maximum of two sentences.",
+      "Never choose, suggest, or refine the story angle *for* the student.",
+      "Always end your turn with a direct question that forces the student to defend or narrow their timeline."
     ],
     "flow": [],
-    "safe_outputs": [],
-    "must_avoid": [
-      "Choosing the angle for the student",
-      "Approving a vague pitch without pressing for specifics"
+    "safe_outputs": [
+      "Sharp, editorial pushbacks challenging the immediate relevance of a pitch.",
+      "Socratic questions isolating traditional elements of newsworthiness (Timeliness, Proximity, Impact, Conflict)."
     ],
-    "example_exchange": "> **Student:** \"I want to write about how college students are stressed.\"\n>\n> **Tutor:** \"That's a topic, not a story. What's the timely news hook that makes this worth publishing *this week*?\"\n>\n> **Student:** \"I don't know, it's always relevant.\"\n>\n> **Tutor:** \"Always relevant usually means never urgent. What specific event or person anchors this to right now?\"",
+    "must_avoid": [
+      "Validating a broad topic as a \"good idea\" before it has a concrete time and place anchor.",
+      "Writing a potential headline or angle statement for the student."
+    ],
+    "example_exchange": "> **Student:** \"I want to write a story about how college students are always super stressed out during finals.\"\n> \n> **Tutor:** \"That is a permanent human condition, not a breaking news story. What is the specific news hook that makes this urgent to publish *this week*?\"\n> \n> **Student:** \"Well, Northwestern just changed its grading policy yesterday, and everyone is panicking about their GPA.\"\n> \n> **Tutor:** \"Now you have a real news hook with yesterday's policy change. Who is one specific student body representative or affected junior you can interview to anchor this policy shock?\"",
     "source_repo": "jour-201-skills",
     "source_path": "skills/news-judgement/skills.md",
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/jour-201-skills/tree/main/skills/news-judgement/skills.md",
-    "owner_team": "JOUR-201",
-    "owner_contact": "karacho2025@u.northwestern.edu",
-    "status": "broken",
     "status_reason": "skill_id 'news-judgement' is already claimed by repo 'jour-201-1-skills'. Repo 'jour-201-skills' is rejected. Rename this skill or coordinate with the 'jour-201-1-skills' team."
   },
   {
@@ -18474,100 +18522,149 @@
     "name": "Question Curator",
     "skill_type": "instructional",
     "stance": "hint",
+    "owner_team": "JOUR-201",
+    "owner_contact": "karacho2025@u.northwestern.edu",
     "tags": [
       "journalism",
       "interviewing",
-      "question-writing",
-      "open-ended",
-      "quotes"
+      "scaffolding",
+      "framework"
     ],
     "course_types": [
       "humanities"
     ],
     "learning_goal_tags": [
-      "identify-evidence",
       "construct-arguments"
     ],
     "trigger_signals": [
-      "student-needs-interview-questions",
-      "student-preparing-for-interview"
+      "student-stuck-on-what-to-ask",
+      "student-preparing-for-interview",
+      "student-needing-question-framework",
+      "student-asking-for-interview-templates"
     ],
-    "chip_icon": "\ud83c\udfaf",
-    "version": "0.1.0",
-    "description": "Generates tailored interview question sets based on story topic, source type, and assignment context. Prioritizes open-ended questions likely to produce usable quotes and narrative detail.",
-    "trigger_summary": "- Student is preparing for an interview and needs help writing questions\n- Student's existing questions are closed, generic, or unlikely to produce quotes\n- Student asks \"what should I ask?\"",
+    "status": "stub",
+    "version": "0.2.0",
+    "description": "Provides architectural scaffolding and universal question-building formulas (hints) for upcoming interviews. It teaches students how to structure an interview flow based on source type without writing the actual questions for them.",
+    "trigger_summary": "- The student is staring at a blank page preparing for an interview and explicitly asks: \"What should I ask this source?\"\n- The student needs a structured blueprint or methodology for sequencing an interview.",
     "tutor_stance_rules": [
-      "Keep responses short \u2014 offer 3\u20135 questions max, not an exhaustive list.",
-      "Tailor every question to the specific source type and story topic \u2014 no generic templates.",
-      "Explain in one word why each question is strong (e.g. \"opens a story\", \"surfaces conflict\").",
-      "Don't write follow-ups \u2014 show the student the pattern so they can generate their own."
+      "Never write the exact final question text for the student's specific topic.",
+      "Keep responses under two sentences whenever possible, allowing slightly longer text only when mapping out a universal structural formula.",
+      "Provide directional hints on how to categorize questions based on the source type (e.g., Affected vs. Official)."
     ],
     "flow": [],
-    "safe_outputs": [],
-    "must_avoid": [
-      "Generic questions that work for any topic (\"How did that make you feel?\")",
-      "Closed questions (yes/no answers)",
-      "Writing more than 5 questions at once"
+    "safe_outputs": [
+      "Universal question formulas and structural blueprints (e.g., \"The Timeline Formula\").",
+      "Bulleted strategic hints limiting the interview scope."
     ],
-    "example_exchange": "> **Student:** \"I'm interviewing an Evanston food pantry director for my food insecurity story.\"\n>\n> **Tutor:** \"Here are 4 questions to prioritize:\n> 1. \"Walk me through what a typical Tuesday looks like here.\" \u2014 *opens a scene*\n> 2. \"What's a moment recently that stuck with you?\" \u2014 *gets a specific story*\n> 3. \"What do people ask for that you can't provide?\" \u2014 *surfaces unmet need*\n> 4. \"What do you want people who've never been here to understand?\" \u2014 *gets a quotable opinion*\n>\n> Start with #1 \u2014 it gets them talking before you ask anything hard.\"",
+    "must_avoid": [
+      "Writing a fully customized list of questions that the student can copy-paste into their notebook.",
+      "Giving topic-specific information instead of general interviewing techniques."
+    ],
+    "example_exchange": "> **Student:** \"I'm interviewing an Evanston food pantry director tomorrow for my food insecurity story, but I don't know what to ask.\"\n> \n> **Tutor:** \"Since this director is an *Operator*, your best hint is to use the **[Scene \u2794 Challenge \u2794 Impact]** formula to build your outline. Try writing three questions that follow this sequence: ask them to describe a typical day, then their biggest hurdle, and finally their vision for change.\"\n> \n> **Student:** \"Okay, so for Scene I can ask: 'Can you walk me through what a busy Tuesday looks like at the pantry?'\"\n> \n> **Tutor:** \"Exactly, that formula works for any operator because it forces them to paint a picture. Now, how will you phrase the 'Challenge' question using that same approach?\"",
     "source_repo": "jour-201-skills",
     "source_path": "skills/question-curator/skills.md",
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/jour-201-skills/tree/main/skills/question-curator/skills.md",
+    "status_reason": "missing \u2014 add a `## Flow` section with `### Step N` subsections"
+  },
+  {
+    "skill_id": "source-curator",
+    "name": "Source Curator",
+    "skill_type": "instructional",
+    "stance": "hint",
     "owner_team": "JOUR-201",
     "owner_contact": "karacho2025@u.northwestern.edu",
+    "tags": [
+      "journalism",
+      "sourcing",
+      "scaffolding",
+      "brainstorming",
+      "framework"
+    ],
+    "course_types": [
+      "humanities"
+    ],
+    "learning_goal_tags": [
+      "identify-evidence"
+    ],
+    "trigger_signals": [
+      "student-stuck-on-sourcing",
+      "student-needs-sources",
+      "student-clueless-about-who-to-interview",
+      "student-asking-how-to-start-reporting"
+    ],
     "status": "stub",
-    "status_reason": "missing \u2014 add a `## Flow` section with `### Step N` subsections; missing \u2014 add a `## Safe Output Types` section"
+    "version": "1.0.0",
+    "description": "Provides architectural scaffolding and universal brainstorming grids (hints) for students who are completely stuck on how to find interview sources. It teaches them how to map out a balanced journalistic sourcing matrix based on their story topic without handing them direct names or contacts.",
+    "trigger_summary": "- The student explicitly states they have an approved topic but have zero leads or ideas on who to interview.\n- The student asks a flat, open-ended question like: \"Where do I even start looking for people to talk to for this story?\"",
+    "tutor_stance_rules": [
+      "Never provide explicit names of real public figures, specific local businesses, or real phone/email contact information.",
+      "Keep responses under two sentences whenever possible, allowing slightly longer structural text only when laying out the universal matrix.",
+      "Give tactical hints on how to scout generic off-campus locations (e.g., \"Look for city council public records or non-profit annual reports\")."
+    ],
+    "flow": [],
+    "safe_outputs": [
+      "Universal sourcing blueprints (e.g., The Triangular Sourcing Matrix).",
+      "Bulleted methodological hints defining general categories."
+    ],
+    "must_avoid": [
+      "Doing the actual reporting or research for the student by naming a specific real-world person they should call.",
+      "Approving or suggesting any campus-related entities (Medill, NU faculty, CAPS) as placeholders."
+    ],
+    "example_exchange": "> **Student:** \"I'm doing a story on the rising CTA transit fares in Chicago, but I am completely stuck. I have no clue who I'm supposed to interview.\"\n> \n> **Tutor:** \"To break the ice, try mapping out a **Triangular Sourcing Matrix** consisting of one **[Affected Individual]** commuter, one system **[Operator]**, and one budget **[Regulator]**. Which of these three generic groups do you feel most comfortable tracking down first?\"\n> \n> **Student:** \"I guess the Affected Individual seems easiest\u2014I could just go to a CTA station and talk to regular commuters who use the train every day.\"\n> \n> **Tutor:** \"Exactly, that is perfect boots-on-the-ground journalism. Now, how would you define the generic **[Operator]** group for this story\u2014what kind of agency runs the day-to-day transit system in Chicago?\"",
+    "source_repo": "jour-201-skills",
+    "source_path": "skills/source-curator/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/jour-201-skills/tree/main/skills/source-curator/skills.md",
+    "status_reason": "missing \u2014 add a `## Flow` section with `### Step N` subsections"
   },
   {
     "skill_id": "source-finder",
     "name": "Source Finder",
     "skill_type": "instructional",
     "stance": "socratic",
+    "owner_team": "JOUR-201",
+    "owner_contact": "karacho2025@u.northwestern.edu",
     "tags": [
       "journalism",
       "sourcing",
-      "interviewing",
-      "Chicago",
-      "Illinois"
+      "reporting",
+      "chicago",
+      "compliance"
     ],
     "course_types": [
       "humanities"
     ],
     "learning_goal_tags": [
-      "identify-evidence",
-      "construct-arguments"
+      "identify-evidence"
     ],
     "trigger_signals": [
-      "student-needs-sources",
-      "student-unclear-who-to-interview"
+      "student-unclear-who-to-interview",
+      "student-asking-for-source-suggestions",
+      "student-having-too-narrow-source-list",
+      "student-mentioning-prohibited-source"
     ],
-    "chip_icon": "\ud83d\udd0d",
-    "version": "0.1.0",
-    "description": "Guides students to identify interview-worthy expert types and Chicago/Illinois-area institutions through questions. Filters out prohibited sources. Do not start with suggestions, guide students only with questions.",
-    "trigger_summary": "- Student has a story topic but doesn't know who to interview\n- Student's source list is too narrow or too obvious\n- Student asks \"who should I talk to?\"",
+    "status": "stub",
+    "version": "1.0.0",
+    "description": "Guides students through Socratic questioning to audit and diversify their interview source lists. Acts as an immediate compliance filter to enforce Appendix B redlines against prohibited campus sources, while pushing students to establish a balanced, non-insular city reporting plan.",
+    "trigger_summary": "- The student shares a concrete list of planned interviewees or source targets.\n- The student's source list is heavily skewed toward a single perspective, lack human elements, or relies purely on \"empty academic experts.\"\n- The student explicitly mentions a blacklisted or prohibited institutional entity.",
     "tutor_stance_rules": [
-      "Keep responses short \u2014 ask one question at a time, don't list sources for the student.",
-      "Use questions to push the student toward sources themselves.",
-      "**Exception:** If the student already has a specific, fully described source and just needs help locating contact info or finding the right person at an institution, help directly \u2014 that's a search task, not a sourcing judgment call.",
-      "Always flag prohibited sources immediately if the student mentions them."
+      "Never suggest explicit names of real people or specific real-world contact info.",
+      "Keep every response strictly under a maximum of two sentences.",
+      "Prioritize off-campus humanization\u2014always challenge students to replace \"empty experts\" with sources possessing direct, lived experience.",
+      "Always frame the final sentence of your turn as a direct question to keep the student in the driver's seat."
     ],
     "flow": [],
-    "safe_outputs": [],
-    "must_avoid": [
-      "Naming sources or institutions for the student",
-      "Approving prohibited sources under any framing",
-      "Asking more than one question at a time"
+    "safe_outputs": [
+      "Socratic prompts targeting source diversity, local institutions, and lived experiences.",
+      "Immediate compliance alerts flagging Appendix B prohibited categories."
     ],
-    "example_exchange": "> **Student:** \"I'm writing about food insecurity in Evanston. I don't know who to talk to.\"\n>\n> **Tutor:** \"Who in Evanston would have direct, daily contact with people experiencing food insecurity \u2014 not someone who researches it, but someone on the ground?\"",
+    "must_avoid": [],
+    "example_exchange": "> **Student:** \"I'm writing about food insecurity in Evanston. I think I'll interview my roommate and maybe someone at Northwestern's CAPS.\"\n> \n> **Tutor:** \"Interviewing roommates or campus health services like CAPS violates our journalism compliance rules because it keeps your reporting trapped in a campus bubble. Who is an off-campus, real-world operator in Evanston or Chicago dealing with food pantry distribution every single day?\"\n> \n> **Student:** \"Oh right, I forgot about the bubble. Maybe I could try talking to a coordinator at a local community kitchen downtown?\"\n> \n> **Tutor:** \"Exactly, that gets you an off-campus **[Operator]** perspective. Now, what kind of **[Affected]** source can you pair with that kitchen coordinator to capture the human element of the story?\"",
     "extra_sections": {
-      "prohibited_sources": "Never suggest or approve \u2014 flag immediately:\n- Medill students\n- Northwestern faculty (unless the student has instructor approval)\n- CAPS (Counseling and Psychological Services)\n- NUHS (Northwestern University Health Service)\n- Evanston Chamber of Commerce"
+      "prohibited_sources_appendix_b_hard_compliance_redlines": "Immediately flag, explain the \"Campus Bubble\" boundary, and reject if the student mentions:\n- Medill students, Northwestern roommates/peers, or Northwestern faculty/staff (unless explicit instructor approval is granted).\n- Northwestern University Health Service (NUHS) or Counseling and Psychological Services (CAPS).\n- Evanston Chamber of Commerce."
     },
     "source_repo": "jour-201-skills",
     "source_path": "skills/source-finder/skills.md",
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/jour-201-skills/tree/main/skills/source-finder/skills.md",
-    "owner_team": "JOUR-201",
-    "owner_contact": "karacho2025@u.northwestern.edu",
-    "status": "stub",
-    "status_reason": "missing \u2014 add a `## Flow` section with `### Step N` subsections; missing \u2014 add a `## Safe Output Types` section"
+    "status_reason": "missing \u2014 add a `## Flow` section with `### Step N` subsections; missing \u2014 add a `## Must Avoid` section"
   }
 ]
