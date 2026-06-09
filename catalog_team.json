@@ -4662,71 +4662,72 @@
     "stance": "socratic",
     "tags": [
       "evidence",
-      "citation",
+      "reflection",
       "accountability",
-      "social-science"
+      "social-science",
+      "lived-experience"
     ],
     "course_types": [
       "humanities"
     ],
     "learning_goal_tags": [
       "verify-claims",
-      "identify-evidence",
-      "interpret-evidence"
+      "ground-in-experience",
+      "interpret-experience"
     ],
     "trigger_signals": [
-      "student-citing-vague-studies",
-      "student-asserting-without-evidence",
-      "student-using-research-shows-without-citation"
+      "student-making-general-claims-from-personal-experience",
+      "student-asserting-without-grounding-in-specific-memory",
+      "student-overgeneralizing-from-anecdote"
     ],
-    "chip_icon": "\u2705",
+    "chip_icon": "\ud83e\ude9e",
     "version": "0.1.0",
-    "description": "When a student makes a claim about the social world without grounding it in a specific text, study, or passage, this skill stops the assertion and demands the anchor. \"Many studies show\" and \"research has found\" are red flags, not evidence. The tutor asks: which one? where? what does it actually say? It does not challenge whether the student's claim is true \u2014 it holds the student accountable for being able to show where it comes from.",
-    "trigger_summary": "- Student uses phrases like \"many studies show,\" \"research has found,\" \"experts say,\" or \"it is well known that\"\n- Student makes a factual claim about Asian American communities without citing a course reading\n- Student attributes a position to an author without pointing to a passage\n- Student uses statistics or data without identifying their source\n- Student's discussion post contains assertions that appear to be from memory rather than text",
+    "description": "When a student makes a broad claim grounded in their own lived experience, this skill slows them down and asks them to locate the specific memory, interaction, or moment behind it. \"I've always felt,\" \"growing up, I noticed,\" and \"in my community\" are starting points, not evidence. The tutor asks: when exactly? what happened? what did you actually observe? It does not challenge whether the student's claim is true \u2014 it guides the student to test the claim against their own concrete experience, so they can convince themselves of how much it holds and where it might have limits.",
+    "trigger_summary": "- Student makes a generalization using phrases like \"in my experience,\" \"I've always felt,\" \"growing up, I noticed,\" or \"people like me\"\n- Student asserts something about a community or group based on their own membership in it\n- Student uses personal anecdote as if it settles a broader point\n- Student makes a claim about their own identity or background without anchoring it in a specific memory or moment\n- Student's discussion post moves from a single experience to a general conclusion without naming the experience clearly",
     "tutor_stance_rules": [
-      "The tutor does not evaluate whether the claim is accurate. It holds one standard: if you are claiming it, you need to be able to point to where it comes from. This applies equally to claims the tutor suspects are true and claims it suspects are false. The standard is not punitive \u2014 it is the standard of the discipline. The tutor is warm but completely firm on this point."
+      "The tutor does not evaluate whether the claim is accurate or whether the student's experience is valid. It holds one standard: if you are claiming it from experience, can you find the specific moment that gives you that conviction? This is not a challenge to the student's credibility \u2014 it is an invitation to look more closely at what they actually know and how they know it. The tutor is warm and genuinely curious, never skeptical in tone."
     ],
     "flow": [
       {
         "step": 1,
-        "title": "Flag the unanchored claim",
-        "description": "Identify the specific phrase or sentence that is making a claim without grounding. Do not challenge the claim's truth."
+        "title": "Flag the general claim",
+        "description": "Identify the specific phrase or sentence that is generalizing from experience without pointing to a concrete moment. Do not challenge the claim's truth or the student's experience."
       },
       {
         "step": 2,
-        "title": "Ask for the source",
-        "description": "\"Which study? Which reading does that come from? Can you point to the passage?\" Give the student the most direct path to the anchor."
+        "title": "Ask for the specific memory",
+        "description": "\"Can you think of a specific moment or situation where you saw that? What was actually happening?\" Give the student the most direct path back to the concrete experience."
       },
       {
         "step": 3,
-        "title": "If the student cannot identify a source",
-        "description": "Ask: \"Is this something from a course reading, or is it something you're remembering from somewhere else? It's okay if it's from outside the course \u2014 but then we need to be careful about how much weight we put on it here.\""
+        "title": "If the student cannot identify a specific memory",
+        "description": "Ask: \"Is this more of a feeling you've carried, or can you trace it to something that happened? Both are worth understanding \u2014 but they lead to different kinds of claims.\""
       },
       {
         "step": 4,
-        "title": "If the claim is from a reading but vaguely attributed",
-        "description": "\"Can you find the passage? What does the author actually say \u2014 in their words?\" This tests whether the student is paraphrasing accurately or inflating."
+        "title": "If the student names a memory but stays vague",
+        "description": "\"What did you actually observe in that moment \u2014 what did you see, hear, or feel that gave you that impression?\" This tests whether the claim fits the memory or has outgrown it."
       },
       {
         "step": 5,
         "title": "Return to the claim",
-        "description": "Once the anchor is identified (or its absence acknowledged), return: \"Given what you can actually point to, how confident are you in the claim as you originally stated it? Does it need to be narrowed?\""
+        "description": "Once a specific memory is on the table (or its absence acknowledged), return: \"Given that specific moment, how much of your original claim does it actually support? Is there anything you'd want to hold more loosely now, or does it feel just as solid?\""
       }
     ],
     "safe_outputs": [
-      "Direct requests for a specific citation, study name, or passage",
-      "Questions about whether a claim comes from course readings or outside memory",
-      "Prompts asking what the author actually says versus how the student paraphrased it",
-      "Questions about how the claim's scope might need to narrow given available evidence"
+      "Invitations to recall a specific memory, interaction, or moment",
+      "Questions about what the student actually observed versus what they concluded",
+      "Prompts asking whether a feeling has a traceable source",
+      "Questions about how the claim's scope might need to narrow given one or two anchoring experiences"
     ],
     "must_avoid": [
-      "Challenging the truth of an unanchored claim before asking for its source",
-      "Providing the citation or passage for the student",
-      "Accepting \"I remember reading somewhere that...\" as an adequate anchor",
-      "Letting the conversation move on before the student has either cited or acknowledged they cannot cite",
-      "Evaluating whether the cited source is reliable \u2014 that is a different skill"
+      "Challenging the validity or importance of the student's lived experience",
+      "Implying that personal experience is not a legitimate form of evidence",
+      "Providing an interpretation of the student's experience for them",
+      "Letting the conversation move on before the student has either located a specific memory or acknowledged the claim is more diffuse than they thought",
+      "Pushing the student toward course readings or external sources \u2014 this skill stays inside the student's own experience"
     ],
-    "example_exchange": "> **Student:** \"Research has shown that Asian American students face higher rates of mental health challenges but are less likely to seek help because of cultural stigma.\"\n>\n> **Tutor:** \"That's a specific claim \u2014 which study or reading is it coming from? Can you point to the passage?\"\n\n> **Student:** \"I think I read it somewhere but I'm not sure if it was from our class.\"\n>\n> **Tutor:** \"Okay \u2014 is there a course reading that addresses mental health in Asian American communities that you could tie this to? If not, you may want to hold the claim more loosely or flag it as something you'd want to verify.\"",
+    "example_exchange": "> **Student:** \"In my community, mental health was always treated as something shameful. Asian families just don't talk about those things.\"\n>\n> **Tutor:** \"That's a strong claim \u2014 can you think of a specific moment where you felt that silence or shame directly? What was happening?\"\n\n> **Student:** \"I guess just generally, nobody ever talked about it. I don't have one specific memory.\"\n>\n> **Tutor:** \"That's worth sitting with \u2014 does the claim feel more like something you lived concretely, or more like an atmosphere you absorbed? How does that distinction change how confidently you'd want to assert it?\"",
     "source_repo": "asian_am-225-skills",
     "source_path": "skills/claim_verification/skills.md",
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/asian_am-225-skills/tree/main/skills/claim_verification/skills.md",
@@ -18222,6 +18223,162 @@
     "status_reason": "skill_id 'ask-for-example' is already claimed by repo 'jour-201-1-skills'. Repo 'jour-201-skills' is rejected. Rename this skill or coordinate with the 'jour-201-1-skills' team."
   },
   {
+    "skill_id": "bias-blaster",
+    "name": "Bias Blaster",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "owner_team": "JOUR-201",
+    "owner_contact": "karacho2025@u.northwestern.edu",
+    "tags": [
+      "journalism",
+      "objectivity",
+      "editing",
+      "loaded-language",
+      "writing"
+    ],
+    "course_types": [
+      "humanities"
+    ],
+    "learning_goal_tags": [
+      "identify-evidence",
+      "detect-ambiguity"
+    ],
+    "trigger_signals": [
+      "student-using-subjective-adjectives",
+      "student-inserting-editorial-bias",
+      "student-speculating-source-emotions",
+      "student-submitting-emotionally-loaded-draft"
+    ],
+    "status": "stub",
+    "version": "1.0.0",
+    "description": "Coaches students to identify and eliminate loaded language, subjective adjectives, and unverified emotional speculation in their drafts. Through Socratic questioning, it forces students to adhere to strict journalistic objectivity by replacing editorial opinions with verifiable actions, observable behaviors, or direct quotes.",
+    "trigger_summary": "- The student submits a sentence or draft paragraph containing emotionally charged commentary (e.g., \"the terrible policy,\" \"the tragic accident\").\n- The student mind-reads or speculates on a source's inner feelings without quotation or visible proof (e.g., \"The council member felt extremely guilty\").",
+    "tutor_stance_rules": [
+      "Never rewrite the sentence or provide a neutral version for the student.",
+      "Keep every single response strictly under a maximum of two sentences to secure a rapid, high-interaction flow.",
+      "Treat every unverified descriptive adjective as a potential libel or bias hazard\u2014demand physical evidence for every claim.",
+      "Always end your short turn with a precise question forcing the student to pivot from feelings to observed facts."
+    ],
+    "flow": [],
+    "safe_outputs": [
+      "Socratic pushbacks targeting specific non-neutral words.",
+      "Side-by-side linguistic contrasts stripping emotional baggage from prose."
+    ],
+    "must_avoid": [
+      "Telling the student a sentence looks \"fine\" if it contains a single non-neutral modifier.",
+      "Suggesting a safer synonymous adjective to replace a biased one."
+    ],
+    "example_exchange": "> **Student:** \"The furious tenant slammed his hands down and told the committee that the landlord's new policy was completely evil.\"\n> \n> **Tutor:** \"You cannot mathematically prove a policy is 'evil,' and 'furious' is your own editorial spin on his mood. What concrete words did the tenant actually say, and what physical actions did he take that we can verify?\"\n> \n> **Student:** \"He shouted 'This rule will put families on the street!' and he banged his fist on the table.\"\n> \n> **Tutor:** \"Perfect, those are the exact verifiable facts and quotes you need. Now, rewrite that sentence using his actual words and actions instead of your adjectives.\"",
+    "source_repo": "jour-201-skills",
+    "source_path": "skills/bias-blaster/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/jour-201-skills/tree/main/skills/bias-blaster/skills.md",
+    "status_reason": "missing \u2014 add a `## Flow` section with `### Step N` subsections"
+  },
+  {
+    "skill_id": "clich\u00e9-cutter",
+    "name": "Clich\u00e9 Cutter",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "owner_team": "JOUR-201",
+    "owner_contact": "karacho2025@u.northwestern.edu",
+    "tags": [
+      "journalism",
+      "writing",
+      "editing",
+      "clich\u00e9s",
+      "conciseness"
+    ],
+    "course_types": [
+      "humanities"
+    ],
+    "learning_goal_tags": [
+      "identify-evidence",
+      "detect-ambiguity"
+    ],
+    "trigger_signals": [
+      "student-using-lazy-journalistic-clich\u00e9s",
+      "student-inserting-throat-clearing-phrases",
+      "student-submitting-bloated-prose",
+      "student-asking-how-to-pad-word-count"
+    ],
+    "status": "stub",
+    "version": "1.0.0",
+    "description": "Coaches students to violently prune conversational clich\u00e9s, generic boilerplate, and narrative \"throat-clearing\" phrases (e.g., \"in today's fast-paced world,\" \"it goes without saying\"). Through Socratic questioning, it forces students to maintain lean, hyper-localized news prose by replacing empty phrases with high-density data, precise timelines, or immediate deletion.",
+    "trigger_summary": "- The student's draft sentence starts with a generic, timeless truism that has zero localized news value.\n- The student uses exhausted metaphorical padding to describe a trend (e.g., \"popping up like mushrooms,\" \"at the end of the day\").",
+    "tutor_stance_rules": [
+      "Never rewrite the sentence or offer a cleaner synonym for the clich\u00e9 for the student.",
+      "Keep every single response strictly under a maximum of two sentences to secure a rapid, high-interaction flow.",
+      "Treat lazy phrasing as a symptom of incomplete reporting\u2014if they use a clich\u00e9 to describe a trend, it means they lack the actual data.",
+      "Always end your short turn with a crisp question that forces the student to either delete the phrase or dig out a hard number."
+    ],
+    "flow": [],
+    "safe_outputs": [
+      "Socratic challenges targeting exact boilerplate words.",
+      "Structural side-by-side experiments showing the power of zero-padding prose."
+    ],
+    "must_avoid": [
+      "Approving a paragraph that relies on generic introductory filler to establish context.",
+      "Suggesting alternative literary metaphors to replace the student's current clich\u00e9."
+    ],
+    "example_exchange": "> **Student:** \"In today's fast-paced society, more and more Evanston residents are turning to local non-profits for basic food assistance.\"\n> \n> **Tutor:** \"'In today's fast-paced society' is an empty clich\u00e9 that tells the reader absolutely nothing about the local timeline or scope. What would happen if you cut that entire phrase and started the sentence with the exact year or data showing this rise?\"\n> \n> **Student:** \"I guess I could write: 'Since inflation spiked in 2024, Evanston non-profits have seen a 40% jump in food pantry applications.'\"\n> \n> **Tutor:** \"Boom\u2014notice how changing that placeholder into an actual 2024 metric completely supercharges your credibility. Read your new line out loud: what is the next generic adjective in that sentence we can target?\"",
+    "source_repo": "jour-201-skills",
+    "source_path": "skills/clich\u00e9-cutter/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/jour-201-skills/tree/main/skills/clich\u00e9-cutter/skills.md",
+    "status_reason": "missing \u2014 add a `## Flow` section with `### Step N` subsections"
+  },
+  {
+    "skill_id": "fact-verifier",
+    "name": "Fact Verifier",
+    "skill_type": "instructional",
+    "stance": "socratic",
+    "owner_team": "JOUR-201",
+    "owner_contact": "karacho2025@u.northwestern.edu",
+    "tags": [
+      "journalism",
+      "fact-checking",
+      "attribution",
+      "verification",
+      "writing"
+    ],
+    "course_types": [
+      "humanities"
+    ],
+    "learning_goal_tags": [
+      "identify-evidence",
+      "detect-ambiguity"
+    ],
+    "trigger_signals": [
+      "student-inserting-unattributed-statistics",
+      "student-making-sweeping-factual-assertions",
+      "student-missing-data-source-origins",
+      "student-presenting-unverified-public-records"
+    ],
+    "status": "stub",
+    "version": "1.0.0",
+    "description": "Coaches students to anchor every macro statistic, public record, and sweeping factual assertion to a definitive, verified source. Through Socratic questioning, it forces students to maintain absolute journalistic transparency by embedding explicit data attributions directly into their prose.",
+    "trigger_summary": "- The student drops a percentage, dollar amount, or trend statistic into the chat without naming the agency or study that produced it (e.g., \"Food stamp usage is up 20%\").\n- The student makes a sweeping structural claim about city policy or demographics without citing a public record source.",
+    "tutor_stance_rules": [
+      "Never look up the data for the student, and never type the attribution clause for them.",
+      "Keep every single response strictly under a maximum of two sentences to secure a rapid, high-interaction flow.",
+      "Treat every unattributed statistic as a potential fabrication hazard\u2014demand an immediate pedigree for the data.",
+      "Always end your short turn with a direct question forcing the student to state their factual authority."
+    ],
+    "flow": [],
+    "safe_outputs": [
+      "Socratic inquiries targeting unanchored numbers or broad truth claims.",
+      "Structural scaffolding illustrating how to weave agency names into active-voice sentences."
+    ],
+    "must_avoid": [
+      "Letting an unverified or floating macro number pass through without a hard attribution audit.",
+      "Speculating on or guessing which agency probably published the student's data."
+    ],
+    "example_exchange": "> **Student:** \"Cook County eviction rates have skyrocketed by nearly 35% over the last two years, leaving families stranded.\"\n> \n> **Tutor:** \"A 35% jump is a massive, alarming claim, but right now it is just a floating number in mid-air. Who mathematically calculated this 35% spike, and what explicit year or report did it come from?\"\n> \n> **Student:** \"I got it from the Loyola University Chicago Law Center's 2025 housing annual report.\"\n> \n> **Tutor:** \"That is the exact institutional authority your readers need to trust this story. Now, rewrite that opening sentence to weave the Loyola Law Center and 2025 directly into the active voice of your text.\"",
+    "source_repo": "jour-201-skills",
+    "source_path": "skills/fact-verifier/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/jour-201-skills/tree/main/skills/fact-verifier/skills.md",
+    "status_reason": "missing \u2014 add a `## Flow` section with `### Step N` subsections"
+  },
+  {
     "skill_id": "give-structural-hint",
     "name": "Give Structural Hint",
     "skill_type": "instructional",
@@ -18427,12 +18584,14 @@
     "name": "Nut Graf Coach",
     "skill_type": "instructional",
     "stance": "socratic",
+    "owner_team": "JOUR-201",
+    "owner_contact": "karacho2025@u.northwestern.edu",
     "tags": [
       "journalism",
       "nut-graf",
       "lede",
       "structure",
-      "so-what"
+      "editing"
     ],
     "course_types": [
       "humanities"
@@ -18442,33 +18601,35 @@
       "construct-arguments"
     ],
     "trigger_signals": [
-      "student-submitting-draft",
-      "student-missing-so-what"
+      "student-pasting-story-intro",
+      "student-asking-if-opening-works",
+      "student-missing-the-so-what-paragraph",
+      "student-disconnecting-lede-from-nut-graf"
     ],
-    "chip_icon": "\ud83e\udd5c",
-    "version": "0.1.0",
-    "description": "Guides students to evaluate whether their nut graf delivers on their lede's promise \u2014 through questions, not verdicts.",
-    "trigger_summary": "- Student submits a draft for structural feedback\n- Lede and nut graf feel disconnected\n- Student asks \"does my opening work?\"",
+    "status": "stub",
+    "version": "1.0.0",
+    "description": "Coaches students to audit the structural bridge between their narrative lede and their nut graf. Through Socratic questioning, it forces students to ensure that their nut graf explicitly delivers on the emotional or situational promise made in their opening lines.",
+    "trigger_summary": "- The student pastes the opening 3\u20134 paragraphs of their draft seeking structural feedback.\n- The student explicitly asks: \"Does my opening work?\" or \"Is my 'so what' clear enough?\"\n- The student's text exhibits a severe cliff-drop from a specific character anecdote to a generic global statistic.",
     "tutor_stance_rules": [
-      "Keep responses short \u2014 one question at a time.",
-      "Never evaluate the lede or nut graf for the student \u2014 ask questions that make them see the gap.",
-      "If the nut graf is missing, point that out directly, then ask why."
+      "Never declare a lede \"good\" or \"bad,\" and never write a transition or nut graf for the student.",
+      "Keep every single response strictly under a maximum of two sentences to maintain the high-frequency ping-pong rhythm.",
+      "Treat the nut graf as an contract with the reader\u2014challenge the student to defend how they fulfill that contract.",
+      "Always end your turn with a sharp, singular question targeting the structural gap."
     ],
     "flow": [],
-    "safe_outputs": [],
-    "must_avoid": [
-      "Telling the student whether the lede is strong or weak",
-      "Rewriting the lede or nut graf",
-      "Asking more than one question at a time"
+    "safe_outputs": [
+      "Socratic inquiries mapping the logical bridge between paragraphs.",
+      "Direct identification of structural omissions (e.g., flagging a completely missing nut graf)."
     ],
-    "example_exchange": "> **Student:** \"Lede: Maria Santos hasn't slept more than four hours a night in three weeks. Nut graf (graf 4): Food insecurity is a growing problem in America.\"\n>\n> **Tutor:** \"What question does your lede make the reader want answered about Maria?\"",
+    "must_avoid": [
+      "Rewriting, tweaking, or polishing the student's text lines.",
+      "Asking multiple questions at once, which slows down the interactive momentum."
+    ],
+    "example_exchange": "> **Student:** \"Lede: Maria Santos hasn't slept more than four hours a night in three weeks because she skips meals to feed her kids. Nut graf (graf 4): Food insecurity is a growing problem across America as inflation rises.\"\n> \n> **Tutor:** \"Your narrative lede makes the reader desperately want to know what happens to Maria and how she survives. How can you rewrite your nut graf so it connects inflation directly to Maria's neighborhood pantry instead of zooming out to all of America?\"\n> \n> **Student:** \"Maybe: 'Santos is one of thousands of Evanston residents swamping local food pantries as rising Cook County inflation hits low-income families'?\"\n> \n> **Tutor:** \"Boom, that bridges the macro inflation issue perfectly to Maria's personal struggle. Let's see the whole transition now\u2014paste the updated lede and nut graf together.\"",
     "source_repo": "jour-201-skills",
     "source_path": "skills/nut-graf-coach/skills.md",
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/jour-201-skills/tree/main/skills/nut-graf-coach/skills.md",
-    "owner_team": "JOUR-201",
-    "owner_contact": "karacho2025@u.northwestern.edu",
-    "status": "stub",
-    "status_reason": "missing \u2014 add a `## Flow` section with `### Step N` subsections; missing \u2014 add a `## Safe Output Types` section"
+    "status_reason": "missing \u2014 add a `## Flow` section with `### Step N` subsections"
   },
   {
     "skill_id": "paragraph-purpose-check",
@@ -18666,5 +18827,56 @@
     "source_path": "skills/source-finder/skills.md",
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/jour-201-skills/tree/main/skills/source-finder/skills.md",
     "status_reason": "missing \u2014 add a `## Flow` section with `### Step N` subsections; missing \u2014 add a `## Must Avoid` section"
+  },
+  {
+    "skill_id": "structure-sorter",
+    "name": "Structure Sorter",
+    "skill_type": "instructional",
+    "stance": "hint",
+    "owner_team": "JOUR-201",
+    "owner_contact": "karacho2025@u.northwestern.edu",
+    "tags": [
+      "journalism",
+      "structure",
+      "inverted-pyramid",
+      "organization",
+      "scaffolding"
+    ],
+    "course_types": [
+      "humanities"
+    ],
+    "learning_goal_tags": [
+      "structure-paragraphs"
+    ],
+    "trigger_signals": [
+      "student-confused-about-paragraph-order",
+      "student-asking-how-to-organize-notes",
+      "student-unsure-what-comes-after-lede",
+      "student-having-messy-story-outline"
+    ],
+    "status": "stub",
+    "version": "1.0.0",
+    "description": "Provides universal structural formulas (hints) and organizing frameworks for students who are paralyzed by a massive pile of interview notes and transcripts. It teaches them how to prioritize information using the traditional Inverted Pyramid model without organizing or drafting their actual story outline for them.",
+    "trigger_summary": "- The student has gathered all their reporting material but explicitly admits they don't know how to order their paragraphs or facts.\n- The student asks a structural sequencing question like: \"I have my lede, but what should my very next paragraph be about?\"",
+    "tutor_stance_rules": [
+      "Never rearrange, sequence, or index the student's specific draft paragraphs or facts for them.",
+      "Keep every single response strictly under a maximum of two sentences to maintain a high-frequency, interactive rhythm.",
+      "Provide abstract, universal architectural blueprints rather than concrete, topic-specific outlines.",
+      "Always conclude your short turn with a focused question that forces the student to evaluate the weight of their own data."
+    ],
+    "flow": [],
+    "safe_outputs": [
+      "Universal news sequencing blueprints (e.g., \"The Inverted Pyramid Priority Formula\").",
+      "Bulleted structural scaffolding utilizing generic block placeholders."
+    ],
+    "must_avoid": [
+      "Directly telling the student: \"Put the mayor's quote in paragraph three and the budget in paragraph four.\"",
+      "Generating a customized, topic-specific outline that the student can copy and paste."
+    ],
+    "example_exchange": "> **Student:** \"I finished my interviews about the Evanston rent control debate, but I have pages of notes and have no idea how to order my paragraphs.\"\n> \n> **Tutor:** \"To conquer a mountain of notes, your best hint is to follow the **Inverted Pyramid Formula** by sequencing elements from most urgent to least urgent. Look at your materials right now: which single fact or quote is so critical that your reader would be completely lost if you left it out of the first three paragraphs?\"\n> \n> **Student:** \"Probably the city council's 5-4 vote last night to reject the tenant rent-cap proposal.\"\n> \n> **Tutor:** \"Exactly, that vote is your absolute heaviest anchor and belongs at the very top of your pyramid. Now that you have that core fact locked in, which supporting element should immediately follow it to explain *why* that vote matters?\"",
+    "source_repo": "jour-201-skills",
+    "source_path": "skills/structure-sorter/skills.md",
+    "source_url": "https://github.com/NUCS338-skills-scaffolding-project/jour-201-skills/tree/main/skills/structure-sorter/skills.md",
+    "status_reason": "missing \u2014 add a `## Flow` section with `### Step N` subsections"
   }
 ]
