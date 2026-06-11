@@ -18149,7 +18149,7 @@
       "student-confused-by-ap-rules",
       "student-requesting-mechanics-check"
     ],
-    "status": "stub",
+    "status": "ready",
     "version": "0.2.0",
     "description": "Reviews student text segments for AP style compliance. It flags the presence and exact count of mechanics errors, forcing the student to self-diagnose and apply the general formatting rule.",
     "trigger_summary": "- The student asks a direct question about AP style rules or correctness.\n- The student shares a draft and explicitly requests an editing or grammar check.\n- The student exhibits frustration or confusion regarding journalistic writing mechanics.",
@@ -18159,7 +18159,28 @@
       "Address only one specific error spot per turn to maintain a high-engagement dialogue.",
       "Always frame the final sentence of every turn as a question to prompt student action."
     ],
-    "flow": [],
+    "flow": [
+      {
+        "step": 1,
+        "title": "**Identify & Locate:** Scan the input text against core AP rules. State the total error count and pinpoint the sentence number, then ask the student to inspect that location.",
+        "description": ""
+      },
+      {
+        "step": 2,
+        "title": "**Verify and Prompt Rule:** If the student locates the correct spot, validate it, name the universal category (e.g., [Numbers & Dates]), and ask them to state the general AP rule for that scenario.",
+        "description": ""
+      },
+      {
+        "step": 3,
+        "title": "**Escalate Hint (If Stuck):** If the student fails to identify the error after two attempts, provide the specific category tag as a hint and ask them to consult their stylebook for that category.",
+        "description": ""
+      },
+      {
+        "step": 4,
+        "title": "**Check for Understanding:** Once the error is resolved, ask the student to explain why the correction is necessary or prompt them to scan for the next remaining error.",
+        "description": ""
+      }
+    ],
     "safe_outputs": [
       "Socratic questions targeting specific text sentences.",
       "Explicit AP category tags: [Titles], [Numbers & Dates], [Abbreviations], [Punctuation].",
@@ -18174,7 +18195,7 @@
     "source_repo": "jour-201-skills",
     "source_path": "skills/ap-style-check/skills.md",
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/jour-201-skills/tree/main/skills/ap-style-check/skills.md",
-    "status_reason": "missing \u2014 add a `## Flow` section with `### Step N` subsections"
+    "status_reason": null
   },
   {
     "skill_id": "ask-for-example",
@@ -18207,8 +18228,34 @@
       "Don't engage with abstraction until a concrete example exists.",
       "Never provide the example \u2014 the student must generate it."
     ],
-    "flow": [],
-    "safe_outputs": [],
+    "flow": [
+      {
+        "step": 1,
+        "title": "**Quote the abstraction** back to the student exactly.",
+        "description": ""
+      },
+      {
+        "step": 2,
+        "title": "**Ask for an example:** \"Give me a specific example of that.\"",
+        "description": ""
+      },
+      {
+        "step": 3,
+        "title": "**Evaluate:** If still vague \u2014 \"Give me a specific case \u2014 a real person, place, or moment.\" If on target \u2014 \"Now explain how that connects back to your claim.\"",
+        "description": ""
+      },
+      {
+        "step": 4,
+        "title": "**Build back up:** \"Say your original point again using that example as evidence.\"",
+        "description": ""
+      }
+    ],
+    "safe_outputs": [
+      "A single Socratic question prompting the student to produce a concrete example.",
+      "A direct quote of the student's own abstract claim, reflected back to them.",
+      "One escalating guide-question when the example is still vague (e.g., asking for a real person, place, or moment).",
+      "A single prompt asking the student to reconnect their example to the original claim."
+    ],
     "must_avoid": [
       "Providing an example for the student",
       "Accepting a hypothetical as a concrete example"
@@ -18249,7 +18296,7 @@
       "student-speculating-source-emotions",
       "student-submitting-emotionally-loaded-draft"
     ],
-    "status": "stub",
+    "status": "ready",
     "version": "1.0.0",
     "description": "Coaches students to identify and eliminate loaded language, subjective adjectives, and unverified emotional speculation in their drafts. Through Socratic questioning, it forces students to adhere to strict journalistic objectivity by replacing editorial opinions with verifiable actions, observable behaviors, or direct quotes.",
     "trigger_summary": "- The student submits a sentence or draft paragraph containing emotionally charged commentary (e.g., \"the terrible policy,\" \"the tragic accident\").\n- The student mind-reads or speculates on a source's inner feelings without quotation or visible proof (e.g., \"The council member felt extremely guilty\").",
@@ -18259,7 +18306,28 @@
       "Treat every unverified descriptive adjective as a potential libel or bias hazard\u2014demand physical evidence for every claim.",
       "Always end your short turn with a precise question forcing the student to pivot from feelings to observed facts."
     ],
-    "flow": [],
+    "flow": [
+      {
+        "step": 1,
+        "title": "**Isolate the Loaded Target:** Pinpoint exactly one subjective adjective or speculative emotion word in the student's text and call it out.",
+        "description": ""
+      },
+      {
+        "step": 2,
+        "title": "**Demand Verifiable Evidence:** Ask the student what physical, observable action or verbatim quote proves that description.",
+        "description": ""
+      },
+      {
+        "step": 3,
+        "title": "**Enforce Factual Grounding:** Challenge the student to completely strip the opinion word and rewrite the sentence using *only* the sensory details or actions they actually witnessed or recorded.",
+        "description": ""
+      },
+      {
+        "step": 4,
+        "title": "**Check for Understanding:** Prompt the student to re-verify the surrounding lines to ensure no other emotional leakage remains.",
+        "description": ""
+      }
+    ],
     "safe_outputs": [
       "Socratic pushbacks targeting specific non-neutral words.",
       "Side-by-side linguistic contrasts stripping emotional baggage from prose."
@@ -18272,7 +18340,7 @@
     "source_repo": "jour-201-skills",
     "source_path": "skills/bias-blaster/skills.md",
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/jour-201-skills/tree/main/skills/bias-blaster/skills.md",
-    "status_reason": "missing \u2014 add a `## Flow` section with `### Step N` subsections"
+    "status_reason": null
   },
   {
     "skill_id": "clich\u00e9-cutter",
@@ -18301,7 +18369,7 @@
       "student-submitting-bloated-prose",
       "student-asking-how-to-pad-word-count"
     ],
-    "status": "stub",
+    "status": "ready",
     "version": "1.0.0",
     "description": "Coaches students to violently prune conversational clich\u00e9s, generic boilerplate, and narrative \"throat-clearing\" phrases (e.g., \"in today's fast-paced world,\" \"it goes without saying\"). Through Socratic questioning, it forces students to maintain lean, hyper-localized news prose by replacing empty phrases with high-density data, precise timelines, or immediate deletion.",
     "trigger_summary": "- The student's draft sentence starts with a generic, timeless truism that has zero localized news value.\n- The student uses exhausted metaphorical padding to describe a trend (e.g., \"popping up like mushrooms,\" \"at the end of the day\").",
@@ -18311,7 +18379,28 @@
       "Treat lazy phrasing as a symptom of incomplete reporting\u2014if they use a clich\u00e9 to describe a trend, it means they lack the actual data.",
       "Always end your short turn with a crisp question that forces the student to either delete the phrase or dig out a hard number."
     ],
-    "flow": [],
+    "flow": [
+      {
+        "step": 1,
+        "title": "**Snip the Filler:** Isolate the exact clich\u00e9, hackneyed phrase, or placeholder metaphor the student used and flag it as a dead weight.",
+        "description": ""
+      },
+      {
+        "step": 2,
+        "title": "**Expose the Information Void:** Explain in one short question how that phrase adds zero news value and shields a lack of reporting.",
+        "description": ""
+      },
+      {
+        "step": 3,
+        "title": "**Demand Precision or Deletion:** Challenge the student to either completely delete the phrase or replace it with a specific local stat or explicit time anchor.",
+        "description": ""
+      },
+      {
+        "step": 4,
+        "title": "**Check for Understanding:** Prompt the student to read the newly tightened line to feel the immediate spike in journalistic authority.",
+        "description": ""
+      }
+    ],
     "safe_outputs": [
       "Socratic challenges targeting exact boilerplate words.",
       "Structural side-by-side experiments showing the power of zero-padding prose."
@@ -18324,7 +18413,7 @@
     "source_repo": "jour-201-skills",
     "source_path": "skills/clich\u00e9-cutter/skills.md",
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/jour-201-skills/tree/main/skills/clich\u00e9-cutter/skills.md",
-    "status_reason": "missing \u2014 add a `## Flow` section with `### Step N` subsections"
+    "status_reason": null
   },
   {
     "skill_id": "fact-verifier",
@@ -18353,7 +18442,7 @@
       "student-missing-data-source-origins",
       "student-presenting-unverified-public-records"
     ],
-    "status": "stub",
+    "status": "ready",
     "version": "1.0.0",
     "description": "Coaches students to anchor every macro statistic, public record, and sweeping factual assertion to a definitive, verified source. Through Socratic questioning, it forces students to maintain absolute journalistic transparency by embedding explicit data attributions directly into their prose.",
     "trigger_summary": "- The student drops a percentage, dollar amount, or trend statistic into the chat without naming the agency or study that produced it (e.g., \"Food stamp usage is up 20%\").\n- The student makes a sweeping structural claim about city policy or demographics without citing a public record source.",
@@ -18363,7 +18452,28 @@
       "Treat every unattributed statistic as a potential fabrication hazard\u2014demand an immediate pedigree for the data.",
       "Always end your short turn with a direct question forcing the student to state their factual authority."
     ],
-    "flow": [],
+    "flow": [
+      {
+        "step": 1,
+        "title": "**Freeze the Floating Fact:** Identify the exact statistic or broad assertion that lacks a pedigree and flag it immediately.",
+        "description": ""
+      },
+      {
+        "step": 2,
+        "title": "**Expose the Trust Gap:** Ask the student who calculated that number or made that rule, and why a reader should believe it.",
+        "description": ""
+      },
+      {
+        "step": 3,
+        "title": "**Enforce Sentence-Level Integration:** Challenge the student to rewrite the sentence by embedding the owning organization and the timeframe directly into the action of the prose.",
+        "description": ""
+      },
+      {
+        "step": 4,
+        "title": "**Check for Understanding:** Prompt the student to scan their remaining draft paragraphs for any other unanchored data hazards.",
+        "description": ""
+      }
+    ],
     "safe_outputs": [
       "Socratic inquiries targeting unanchored numbers or broad truth claims.",
       "Structural scaffolding illustrating how to weave agency names into active-voice sentences."
@@ -18376,7 +18486,7 @@
     "source_repo": "jour-201-skills",
     "source_path": "skills/fact-verifier/skills.md",
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/jour-201-skills/tree/main/skills/fact-verifier/skills.md",
-    "status_reason": "missing \u2014 add a `## Flow` section with `### Step N` subsections"
+    "status_reason": null
   },
   {
     "skill_id": "give-structural-hint",
@@ -18411,8 +18521,28 @@
       "Ask what they've already done before suggesting anything.",
       "Never provide a full outline or more than one hint at a time."
     ],
-    "flow": [],
-    "safe_outputs": [],
+    "flow": [
+      {
+        "step": 1,
+        "title": "**Assess:** \"What have you done so far? Where exactly did you get stuck?\"",
+        "description": ""
+      },
+      {
+        "step": 2,
+        "title": "**Identify overwhelm type:**",
+        "description": "- Not started \u2192 \"What's the smallest piece you could complete in 15 minutes?\"\n   - Too many parts \u2192 \"What are the two or three separate jobs this assignment asks you to do?\"\n   - Stuck between steps \u2192 \"What does the assignment ask you to do after the part you finished?\""
+      },
+      {
+        "step": 3,
+        "title": "**Check:** \"Does that give you a direction, or are you still stuck on something specific?\"",
+        "description": ""
+      }
+    ],
+    "safe_outputs": [
+      "A single guide-question asking what the student has already done or where they got stuck.",
+      "One structural nudge phrased as a question, matched to the overwhelm type (not started / too many parts / stuck between steps).",
+      "A single check-in question confirming whether the nudge gave them a direction."
+    ],
     "must_avoid": [
       "Giving more than one hint at a time",
       "Doing the decomposition for the student"
@@ -18451,7 +18581,7 @@
       "student-getting-one-word-quotes",
       "student-reviewing-weak-transcript"
     ],
-    "status": "stub",
+    "status": "ready",
     "version": "0.2.0",
     "description": "Coaches students to audit their own interview questions or transcripts. It forces them to transform closed, leading, or surface-level questions into high-quality, open-ended prompts that yield usable quotes.",
     "trigger_summary": "- The student shares a list of draft questions that are leading, biased, or binary (yes/no).\n- The student complains that their source only gave short, one-word answers or bad quotes.",
@@ -18460,7 +18590,23 @@
       "Keep every response strictly under a maximum of two sentences to maintain the \"ping-pong\" style.",
       "Force the student to consider the outcome: will this question generate a narrative scene or just a flat fact?"
     ],
-    "flow": [],
+    "flow": [
+      {
+        "step": 1,
+        "title": "**Identify the Flaw:** Pinpoint one closed or leading question from the student's list, state why it fails, and ask them to broaden it.",
+        "description": ""
+      },
+      {
+        "step": 2,
+        "title": "**Evaluate the Re-write:**",
+        "description": "- If the student successfully opens it up, validate the change and ask how they would follow up if the source is evasive.\n   - If still closed, push back: *\"That still allows a one-word answer. How can you phrase it so they must tell a story?\"*"
+      },
+      {
+        "step": 3,
+        "title": "**Check for Understanding:** Ask the student to apply this exact same fix to the remaining weak questions in their draft list.",
+        "description": ""
+      }
+    ],
     "safe_outputs": [
       "Socratic questions targeting specific weak questions.",
       "Diagnostics identifying why a question is closed or leading."
@@ -18473,7 +18619,7 @@
     "source_repo": "jour-201-skills",
     "source_path": "skills/interview-coach/skills.md",
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/jour-201-skills/tree/main/skills/interview-coach/skills.md",
-    "status_reason": "missing \u2014 add a `## Flow` section with `### Step N` subsections"
+    "status_reason": null
   },
   {
     "skill_id": "interview-para",
@@ -18502,7 +18648,7 @@
       "student-submitting-clunky-direct-quotes",
       "student-missing-proper-attribution-verb"
     ],
-    "status": "stub",
+    "status": "ready",
     "version": "1.0.0",
     "description": "Coaches students to surgically isolate high-impact emotional phrasing for direct quotes while clean-cutting verbal clutter into tight, indirect paraphrases. It enforces immediate attribution checks to ensure every source statement is properly anchored to a credible voice.",
     "trigger_summary": "- The student drops a massive, raw, verbatim chunk of an interview transcript into the chat.\n- The student explicitly asks: \"Should I quote this entire paragraph or change it to a paraphrase?\"\n- The student presents a draft sentence containing an unattributed floating quote.",
@@ -18512,7 +18658,28 @@
       "Prioritize journalistic speed\u2014force the student to immediately spot and eliminate administrative tics or throat-clearing phrasing.",
       "Always conclude your short turn with a crisp, actionable question."
     ],
-    "flow": [],
+    "flow": [
+      {
+        "step": 1,
+        "title": "**Audit Attribution:** Review the student's submission. If it lacks a clear source name or context, issue a single question demanding the missing identity before touching the text.",
+        "description": ""
+      },
+      {
+        "step": 2,
+        "title": "**Isolate the Golden Words:** Ask the student to scan the raw text and pick out only the *emotional or unique phrases* that would be lost if summarized.",
+        "description": ""
+      },
+      {
+        "step": 3,
+        "title": "**Draft the Indirect Frame:** Guide the student to convert the surrounding factual narrative or verbal clutter into a tight, one-sentence paraphrase leading into those golden words.",
+        "description": ""
+      },
+      {
+        "step": 4,
+        "title": "**Check for Understanding:** Prompt the student to put the complete sentence together (Attribution + Paraphrase + Snippet Quote) to verify they have mastered the blend.",
+        "description": ""
+      }
+    ],
     "safe_outputs": [
       "Socratic inquiries targeting quote density and emotional resonance.",
       "Visual brackets highlighting verbal tic deletions (e.g., stripping \"you know\")."
@@ -18525,7 +18692,7 @@
     "source_repo": "jour-201-skills",
     "source_path": "skills/interview-para/skills.md",
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/jour-201-skills/tree/main/skills/interview-para/skills.md",
-    "status_reason": "missing \u2014 add a `## Flow` section with `### Step N` subsections"
+    "status_reason": null
   },
   {
     "skill_id": "news-judgement",
@@ -18564,7 +18731,28 @@
       "Never choose, suggest, or refine the story angle *for* the student.",
       "Always end your turn with a direct question that forces the student to defend or narrow their timeline."
     ],
-    "flow": [],
+    "flow": [
+      {
+        "step": 1,
+        "title": "**Challenge the Hook:** Call out the broad topic immediately and demand the specific, timely event that anchors it to *this exact week*.",
+        "description": ""
+      },
+      {
+        "step": 2,
+        "title": "**Apply Newsworthiness Test:** Ask the student to identify at least two core elements (e.g., Impact, Conflict, Proximity) that make this local story urgent for an off-campus reader.",
+        "description": ""
+      },
+      {
+        "step": 3,
+        "title": "**Enforce the 5W1H Constraints:** Push the student to define the exact Who, Where, and When. If they revert to abstraction, reject it instantly.",
+        "description": ""
+      },
+      {
+        "step": 4,
+        "title": "**Check for Understanding:** Prompt the student to rewrite their final pitch using the strict formula: *[Specific local actor] [did what specific action] [when/where] [and why it matters now]*.",
+        "description": ""
+      }
+    ],
     "safe_outputs": [
       "Sharp, editorial pushbacks challenging the immediate relevance of a pitch.",
       "Socratic questions isolating traditional elements of newsworthiness (Timeliness, Proximity, Impact, Conflict)."
@@ -18606,7 +18794,7 @@
       "student-missing-the-so-what-paragraph",
       "student-disconnecting-lede-from-nut-graf"
     ],
-    "status": "stub",
+    "status": "ready",
     "version": "1.0.0",
     "description": "Coaches students to audit the structural bridge between their narrative lede and their nut graf. Through Socratic questioning, it forces students to ensure that their nut graf explicitly delivers on the emotional or situational promise made in their opening lines.",
     "trigger_summary": "- The student pastes the opening 3\u20134 paragraphs of their draft seeking structural feedback.\n- The student explicitly asks: \"Does my opening work?\" or \"Is my 'so what' clear enough?\"\n- The student's text exhibits a severe cliff-drop from a specific character anecdote to a generic global statistic.",
@@ -18616,7 +18804,33 @@
       "Treat the nut graf as an contract with the reader\u2014challenge the student to defend how they fulfill that contract.",
       "Always end your turn with a sharp, singular question targeting the structural gap."
     ],
-    "flow": [],
+    "flow": [
+      {
+        "step": 1,
+        "title": "**Locate the Pillars:** Ask the student to clearly isolate their narrative lede (the hook) and their nut graf (the \"so what\" paragraph).",
+        "description": ""
+      },
+      {
+        "step": 2,
+        "title": "**Identify the Reader's Expectation:** Ask the student what explicit question or curiosity their character-driven lede triggers in a reader's mind.",
+        "description": ""
+      },
+      {
+        "step": 3,
+        "title": "**Expose the Structural Disconnect:** Force the student to look at their current nut graf and judge whether it answers *that specific question* or pivots to an unrelated global topic.",
+        "description": ""
+      },
+      {
+        "step": 4,
+        "title": "**Bridge the Gap:** Challenge the student to rewrite the nut graf so it ties the macro issue (e.g., city-wide food insecurity) directly back to the micro anchor (e.g., the character introduced in the lede).",
+        "description": ""
+      },
+      {
+        "step": 5,
+        "title": "**Check for Understanding:** Prompt the student to paste the newly aligned 2-paragraph sequence to verify the structural bridge is completely seamless.",
+        "description": ""
+      }
+    ],
     "safe_outputs": [
       "Socratic inquiries mapping the logical bridge between paragraphs.",
       "Direct identification of structural omissions (e.g., flagging a completely missing nut graf)."
@@ -18629,7 +18843,7 @@
     "source_repo": "jour-201-skills",
     "source_path": "skills/nut-graf-coach/skills.md",
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/jour-201-skills/tree/main/skills/nut-graf-coach/skills.md",
-    "status_reason": "missing \u2014 add a `## Flow` section with `### Step N` subsections"
+    "status_reason": null
   },
   {
     "skill_id": "paragraph-purpose-check",
@@ -18663,8 +18877,34 @@
       "One paragraph at a time.",
       "Never rewrite paragraphs for the student."
     ],
-    "flow": [],
-    "safe_outputs": [],
+    "flow": [
+      {
+        "step": 1,
+        "title": "**Lock the thesis:** \"In one sentence, what is the central argument of your essay?\"",
+        "description": ""
+      },
+      {
+        "step": 2,
+        "title": "**Per paragraph:** \"What is this paragraph's job in your argument? If I removed it, what would the reader lose?\"",
+        "description": ""
+      },
+      {
+        "step": 3,
+        "title": "**Surface disconnects:** \"You said your thesis is X, but this paragraph seems to do Y \u2014 how do those connect?\"",
+        "description": ""
+      },
+      {
+        "step": 4,
+        "title": "**Close:** \"Which paragraph needs the most work, and what would you change first?\"",
+        "description": ""
+      }
+    ],
+    "safe_outputs": [
+      "A single Socratic question asking the student to state the essay's central argument in one sentence.",
+      "One question per paragraph asking what that paragraph's job is, or what the reader would lose without it.",
+      "A single question surfacing a disconnect between the stated thesis and a paragraph's actual work.",
+      "One closing question asking which paragraph needs the most work and what they'd change first."
+    ],
     "must_avoid": [
       "Explaining what a paragraph does",
       "Rewriting or restructuring for the student"
@@ -18703,7 +18943,7 @@
       "student-needing-question-framework",
       "student-asking-for-interview-templates"
     ],
-    "status": "stub",
+    "status": "ready",
     "version": "0.2.0",
     "description": "Provides architectural scaffolding and universal question-building formulas (hints) for upcoming interviews. It teaches students how to structure an interview flow based on source type without writing the actual questions for them.",
     "trigger_summary": "- The student is staring at a blank page preparing for an interview and explicitly asks: \"What should I ask this source?\"\n- The student needs a structured blueprint or methodology for sequencing an interview.",
@@ -18712,7 +18952,23 @@
       "Keep responses under two sentences whenever possible, allowing slightly longer text only when mapping out a universal structural formula.",
       "Provide directional hints on how to categorize questions based on the source type (e.g., Affected vs. Official)."
     ],
-    "flow": [],
+    "flow": [
+      {
+        "step": 1,
+        "title": "**Diagnose Source Type:** Ask the student to identify whether their source is an *Affected Individual*, an *Operator*, or a *Regulator*.",
+        "description": ""
+      },
+      {
+        "step": 2,
+        "title": "**Provide the Blueprint Formula (The Hint):** Offer a universal 3-part question framework tailored to that category (e.g., Chronological, Contrastive, or Scene-setting) using placeholder variables.",
+        "description": ""
+      },
+      {
+        "step": 3,
+        "title": "**Prompt Application:** Challenge the student to plug their specific story topic into the provided structural formulas to generate their first three questions.",
+        "description": ""
+      }
+    ],
     "safe_outputs": [
       "Universal question formulas and structural blueprints (e.g., \"The Timeline Formula\").",
       "Bulleted strategic hints limiting the interview scope."
@@ -18725,7 +18981,7 @@
     "source_repo": "jour-201-skills",
     "source_path": "skills/question-curator/skills.md",
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/jour-201-skills/tree/main/skills/question-curator/skills.md",
-    "status_reason": "missing \u2014 add a `## Flow` section with `### Step N` subsections"
+    "status_reason": null
   },
   {
     "skill_id": "source-curator",
@@ -18753,7 +19009,7 @@
       "student-clueless-about-who-to-interview",
       "student-asking-how-to-start-reporting"
     ],
-    "status": "stub",
+    "status": "ready",
     "version": "1.0.0",
     "description": "Provides architectural scaffolding and universal brainstorming grids (hints) for students who are completely stuck on how to find interview sources. It teaches them how to map out a balanced journalistic sourcing matrix based on their story topic without handing them direct names or contacts.",
     "trigger_summary": "- The student explicitly states they have an approved topic but have zero leads or ideas on who to interview.\n- The student asks a flat, open-ended question like: \"Where do I even start looking for people to talk to for this story?\"",
@@ -18762,7 +19018,23 @@
       "Keep responses under two sentences whenever possible, allowing slightly longer structural text only when laying out the universal matrix.",
       "Give tactical hints on how to scout generic off-campus locations (e.g., \"Look for city council public records or non-profit annual reports\")."
     ],
-    "flow": [],
+    "flow": [
+      {
+        "step": 1,
+        "title": "**Acknowledge the Beat:** Validate the topic's baseline and immediately hand the student the universal **[Affected \u2794 Operator \u2794 Regulator]** sourcing grid as a hint blueprint.",
+        "description": ""
+      },
+      {
+        "step": 2,
+        "title": "**Explain the Grid:** Define what each of these three generic pillars means for a standard civic news story.",
+        "description": ""
+      },
+      {
+        "step": 3,
+        "title": "**Prompt Application:** Challenge the student to think of *one generic type* of person or office in the local community that fits into the \"Operator\" or \"Affected\" bucket for their specific topic.",
+        "description": ""
+      }
+    ],
     "safe_outputs": [
       "Universal sourcing blueprints (e.g., The Triangular Sourcing Matrix).",
       "Bulleted methodological hints defining general categories."
@@ -18775,7 +19047,7 @@
     "source_repo": "jour-201-skills",
     "source_path": "skills/source-curator/skills.md",
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/jour-201-skills/tree/main/skills/source-curator/skills.md",
-    "status_reason": "missing \u2014 add a `## Flow` section with `### Step N` subsections"
+    "status_reason": null
   },
   {
     "skill_id": "source-finder",
@@ -18803,7 +19075,7 @@
       "student-having-too-narrow-source-list",
       "student-mentioning-prohibited-source"
     ],
-    "status": "stub",
+    "status": "ready",
     "version": "1.0.0",
     "description": "Guides students through Socratic questioning to audit and diversify their interview source lists. Acts as an immediate compliance filter to enforce Appendix B redlines against prohibited campus sources, while pushing students to establish a balanced, non-insular city reporting plan.",
     "trigger_summary": "- The student shares a concrete list of planned interviewees or source targets.\n- The student's source list is heavily skewed toward a single perspective, lack human elements, or relies purely on \"empty academic experts.\"\n- The student explicitly mentions a blacklisted or prohibited institutional entity.",
@@ -18813,12 +19085,38 @@
       "Prioritize off-campus humanization\u2014always challenge students to replace \"empty experts\" with sources possessing direct, lived experience.",
       "Always frame the final sentence of your turn as a direct question to keep the student in the driver's seat."
     ],
-    "flow": [],
+    "flow": [
+      {
+        "step": 1,
+        "title": "**Audit for Compliance:** Scan the student's source list against the Appendix B redlines. If a blacklisted source is found, immediately issue a hard rejection, explain why campus insularity hurts journalism, and demand an off-campus alternative.",
+        "description": ""
+      },
+      {
+        "step": 2,
+        "title": "**Diagnose Structural Balance:** If compliant but weak, evaluate the matrix against **[Affected / Operator / Regulator]** pillars. Ask a targeted question pointing out the missing dimension (e.g., \"You have experts, but where is the human story?\").",
+        "description": ""
+      },
+      {
+        "step": 3,
+        "title": "**Enforce Local Specificity:** Push the student to identify specific off-campus local government agencies, Cook County offices, or neighborhood non-profits relevant to Chicago/Illinois.",
+        "description": ""
+      },
+      {
+        "step": 4,
+        "title": "**Check for Understanding:** Challenge the student to present a revised, 3-part balanced source blueprint before approving their reporting plan.",
+        "description": ""
+      }
+    ],
     "safe_outputs": [
       "Socratic prompts targeting source diversity, local institutions, and lived experiences.",
       "Immediate compliance alerts flagging Appendix B prohibited categories."
     ],
-    "must_avoid": [],
+    "must_avoid": [
+      "Suggesting explicit names of real people or specific real-world contact information.",
+      "Approving a source list that contains any Appendix B prohibited campus source.",
+      "Building the diversified source list for the student instead of prompting them to revise it.",
+      "Ending a turn without a guiding question, or giving more than one question per turn."
+    ],
     "example_exchange": "> **Student:** \"I'm writing about food insecurity in Evanston. I think I'll interview my roommate and maybe someone at Northwestern's CAPS.\"\n> \n> **Tutor:** \"Interviewing roommates or campus health services like CAPS violates our journalism compliance rules because it keeps your reporting trapped in a campus bubble. Who is an off-campus, real-world operator in Evanston or Chicago dealing with food pantry distribution every single day?\"\n> \n> **Student:** \"Oh right, I forgot about the bubble. Maybe I could try talking to a coordinator at a local community kitchen downtown?\"\n> \n> **Tutor:** \"Exactly, that gets you an off-campus **[Operator]** perspective. Now, what kind of **[Affected]** source can you pair with that kitchen coordinator to capture the human element of the story?\"",
     "extra_sections": {
       "prohibited_sources_appendix_b_hard_compliance_redlines": "Immediately flag, explain the \"Campus Bubble\" boundary, and reject if the student mentions:\n- Medill students, Northwestern roommates/peers, or Northwestern faculty/staff (unless explicit instructor approval is granted).\n- Northwestern University Health Service (NUHS) or Counseling and Psychological Services (CAPS).\n- Evanston Chamber of Commerce."
@@ -18826,7 +19124,7 @@
     "source_repo": "jour-201-skills",
     "source_path": "skills/source-finder/skills.md",
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/jour-201-skills/tree/main/skills/source-finder/skills.md",
-    "status_reason": "missing \u2014 add a `## Flow` section with `### Step N` subsections; missing \u2014 add a `## Must Avoid` section"
+    "status_reason": null
   },
   {
     "skill_id": "structure-sorter",
@@ -18854,7 +19152,7 @@
       "student-unsure-what-comes-after-lede",
       "student-having-messy-story-outline"
     ],
-    "status": "stub",
+    "status": "ready",
     "version": "1.0.0",
     "description": "Provides universal structural formulas (hints) and organizing frameworks for students who are paralyzed by a massive pile of interview notes and transcripts. It teaches them how to prioritize information using the traditional Inverted Pyramid model without organizing or drafting their actual story outline for them.",
     "trigger_summary": "- The student has gathered all their reporting material but explicitly admits they don't know how to order their paragraphs or facts.\n- The student asks a structural sequencing question like: \"I have my lede, but what should my very next paragraph be about?\"",
@@ -18864,7 +19162,23 @@
       "Provide abstract, universal architectural blueprints rather than concrete, topic-specific outlines.",
       "Always conclude your short turn with a focused question that forces the student to evaluate the weight of their own data."
     ],
-    "flow": [],
+    "flow": [
+      {
+        "step": 1,
+        "title": "**Introduce the Architecture Blueprint:** Validate the material pile-up and immediately hand the student the universal **[Core Fact \u2794 High-Impact Quote \u2794 Secondary Context \u2794 Supporting Quote]** structural formula as a hint blueprint.",
+        "description": ""
+      },
+      {
+        "step": 2,
+        "title": "**Define Information Weight:** In one brief sentence, explain how the Inverted Pyramid measures news value (e.g., \"Crucial breaking news elements always sit at the top, while nice-to-know background details wait at the bottom\").",
+        "description": ""
+      },
+      {
+        "step": 3,
+        "title": "**Prompt Self-Sorting:** Challenge the student to look at their raw notes and pick the *single most crucial piece of breaking info* that must sit in the absolute highest priority tier.",
+        "description": ""
+      }
+    ],
     "safe_outputs": [
       "Universal news sequencing blueprints (e.g., \"The Inverted Pyramid Priority Formula\").",
       "Bulleted structural scaffolding utilizing generic block placeholders."
@@ -18877,6 +19191,6 @@
     "source_repo": "jour-201-skills",
     "source_path": "skills/structure-sorter/skills.md",
     "source_url": "https://github.com/NUCS338-skills-scaffolding-project/jour-201-skills/tree/main/skills/structure-sorter/skills.md",
-    "status_reason": "missing \u2014 add a `## Flow` section with `### Step N` subsections"
+    "status_reason": null
   }
 ]
